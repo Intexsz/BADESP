@@ -1,77 +1,85 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='cadastro.css')}}">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <title>Cadastrar</title>
-    <script>
-        function formatarCPF(cpf) {
-            cpf = cpf.replace(/\D/g, ""); 
-            cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2");
-            cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2");
-            cpf = cpf.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
-            return cpf;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+  <title>Login</title>
+
+  <!-- Google API -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+  <script>
+    function formatarCPF(cpf) {
+      cpf = cpf.replace(/\D/g, "");
+      cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2");
+      cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2");
+      cpf = cpf.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+      return cpf;
+    }
+
+    function mascaraCPF(event) {
+      let cpf = event.target.value;
+      cpf = formatarCPF(cpf);
+      event.target.value = cpf;
+    }
+
+    function handleCredentialResponse(response) {
+      fetch("/login/callback", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ credential: response.credential })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === "ok") {
+          window.location.href = "/Inicio";
+        } else {
+          alert("Erro no login Google.");
         }
+      });
+    }
 
-        function mascaraCPF(event) {
-            let cpf = event.target.value;
-            cpf = formatarCPF(cpf);
-            event.target.value = cpf;
-        }
+    window.onload = function () {
+      google.accounts.id.initialize({
+        client_id: "334998652961-c43b5pt422pnfqk98t56pu4d6aphi5fe.apps.googleusercontent.com",
+        callback: handleCredentialResponse
+      });
 
-        function googleSignIn() {
-     gapi.auth2.getAuthInstance().signIn().then(function(googleUser) {
-        var profile = googleUser.getBasicProfile();
-        console.log("ID: " + profile.getId());
-        console.log("Nome: " + profile.getName());
-        console.log("Email: " + profile.getEmail());
-       });
-     }
-
-     function initGoogleSignIn() {
-         gapi.load('auth2', function() {
-         gapi.auth2.init({
-            client_id: 'S334998652961-c43b5pt422pnfqk98t56pu4d6aphi5fe.apps.googleusercontent.com'
-           });
-        });
-     }
-
-     window.onload = initGoogleSignIn;
-    </script>
+      google.accounts.id.renderButton(
+        document.getElementById("googleSignInBtn"),
+        { theme: "outline", size: "large" }
+      );
+    };
+  </script>
 </head>
 <body>
-    <div class="container">
-        <form>
-            <h1>Cadastro</h1>
+  <div class="container">
+    <form action="{{ url_for('login') }}" method="POST">
+      <h1>Login</h1>
 
-            <div class="input-container">
-                <input id="cpf" placeholder="CPF" type="text" oninput="mascaraCPF(event)" maxlength="14" required>
-                <img width="15" height="15" src="user.png" alt="user"/>
-            </div>
+      <div class="input-container">
+        <input name="nome" id="cpf" placeholder="CPF" type="text" oninput="mascaraCPF(event)" maxlength="14" required>
+        <img width="15" height="15" src="{{ url_for('static', filename='img/user.png') }}" alt="user"/>
+      </div>
 
-            <div class="input-container">
-                <input placeholder="Senha" type="password" required>
-                <img width="15" height="15" src="lock--v1.png" alt="lock"/>
-            </div>
+      <div class="input-container">
+        <input name="senha" placeholder="Senha" type="password" required>
+        <img width="15" height="15" src="{{ url_for('static', filename='img/lock--v1.png') }}" alt="lock"/>
+        <a href="#">Esqueci minha senha</a>
+      </div>
 
-            <div class="input-container">
-                <input placeholder="Confirmar Senha" type="password" required>
-                <img width="15" height="15" src="lock--v1.png" alt="lock"/>
-            </div>
-            <button type="submit" class="submit-button">Entrar</button>
-            <br>
-            <br>
-            <button class="custom-google-btn" onclick="googleSignIn()">
-                <img src="Logo-Google-G.png" alt="Google Logo">
-                Login com Google
-            </button>
+      <button type="submit" class="submit-button">Entrar</button>
 
-            <div class="input-container">
-                <a href="Login.html">Já tem uma conta?</a>
-            </div>
-        </form>
-    </div>
+      <br><br>
+      <div id="googleSignInBtn"></div>
+
+      <div class="input-container">
+        <a href="{{ url_for('cadastro') }}">Cadastrar</a>
+      </div>
+    </form>
+  </div>
 </body>
 </html>

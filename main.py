@@ -14,10 +14,6 @@ CLIENT_ID = "334998652961-c43b5pt422pnfqk98t56pu4d6aphi5fe.apps.googleuserconten
 # Arquivo de usuários locais (CPF + senha)
 user_file = 'usuarios.txt'
 
-# =========================== #
-#       UTILITÁRIOS          #
-# =========================== #
-
 def validar_cpf(cpf):
     cpf = cpf.replace(".", "").replace("-", "")
     if len(cpf) != 11 or cpf == cpf[0] * 11:
@@ -61,10 +57,6 @@ def buscar_usuario(user_id):
 
 init_db()
 
-# =========================== #
-#       GOOGLE OAUTH         #
-# =========================== #
-
 oauth = OAuth(app)
 google = oauth.register(
     name='google',
@@ -78,29 +70,13 @@ google = oauth.register(
 
 @app.route('/')
 def homepage():
-    user = session.get('user')
-    if user:
-        return f"Olá, {user['name']} (<a href='/logout'>Sair</a>)"
-    return '<a href="/login/google">Entrar com Google</a> | <a href="/Cadastro">Cadastro</a>'
+    if "user_id" in session:
+        return redirect(url_for('inicio'))
+    return redirect(url_for('cadastro'))
 
-@app.route('/login/google')
-def login_google():
-    redirect_uri = url_for('auth', _external=True)
-    return google.authorize_redirect(redirect_uri)
-
-@app.route('/auth')
-def auth():
-    token = google.authorize_access_token()
-    resp = google.get('userinfo')
-    user_info = resp.json()
-    session['user'] = user_info
-    session["user_id"] = user_info["id"]
-    salvar_usuario(user_info)
-    return redirect('/Inicio')
 @app.route('/login/callback', methods=["POST", "GET"])
 def callback():
     token = None
-
     if request.is_json:
         token = request.json.get("credential")
     elif "credential" in request.form:
@@ -130,10 +106,6 @@ def logout():
     session.clear()
     return redirect(url_for("homepage"))
 
-# =========================== #
-#     LOGIN LOCAL (TXT)      #
-# =========================== #
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     mensagem = ""
@@ -156,12 +128,10 @@ def login():
 
     return render_template("login.html", mensagem=mensagem)
 
-# =========================== #
-#         CADASTRO           #
-# =========================== #
-
 @app.route('/Cadastro', methods=['GET', 'POST'])
 def cadastro():
+    if "user_id" in session:
+        return redirect(url_for('inicio'))
     mensagem = ''
     if request.method == 'POST':
         cpf = request.form['cpf']
@@ -188,10 +158,6 @@ def cadastro():
             return redirect(url_for('inicio'))
 
     return render_template('cadastro.html', mensagem=mensagem)
-
-# =========================== #
-#       PÁGINAS EXTRAS       #
-# =========================== #
 
 @app.route('/Inicio')
 def inicio():
@@ -220,10 +186,6 @@ def hack():
         linhas = arquivo.readlines()
         usuarios = [linha.strip() for linha in linhas]
         return render_template('hacks.html', usuarios=usuarios)
-
-# =========================== #
-#         EXECUÇÃO           #
-# =========================== #
 
 if __name__ == '__main__':
     app.run(debug=True)
