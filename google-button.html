@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login com Google - Botão Personalizado</title>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <style>
+        .custom-google-btn img { 
+            width: 30px; 
+            height: 30px; 
+        } 
+        
+        .custom-google-btn { 
+            border: 2px solid rgba(255, 255, 255, 0.3); 
+            border-radius: 15px; 
+            padding: 5px; 
+            display: flex; 
+            flex-direction: row; 
+            justify-content: center; 
+            align-items: center; 
+            background-color: rgb(255, 255, 255); 
+            width: 150px; 
+            backdrop-filter: blur(15px); 
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
+            z-index: 1;
+        }
+
+        .custom-google-btn:hover {
+            background-color: #357AE8;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Botão personalizado -->
+    <button class="custom-google-btn" onclick="googleSignIn()">
+        <img src="Logo-Google-G.png" alt="Google Logo">
+        oogle
+    </button>
+
+    <script>
+        // Função que inicia o login do Google
+        function googleSignIn() {
+            gapi.auth2.getAuthInstance().signIn().then(function(googleUser) {
+                var profile = googleUser.getBasicProfile();
+                console.log("ID: " + profile.getId());
+                console.log("Nome: " + profile.getName());
+                console.log("Email: " + profile.getEmail());
+                // Aqui você pode enviar as informações para o seu servidor ou fazer o que precisar
+            });
+        }
+
+        // Função para inicializar o Google Sign-In
+        function initGoogleSignIn() {
+            gapi.load('auth2', function() {
+                gapi.auth2.init({
+                    client_id: 'SUA_CLIENT_ID_AQUI.apps.googleusercontent.com'
+                });
+            });
+        }
+
+        // Inicializa o Google Sign-In ao carregar a página
+        window.onload = initGoogleSignIn;
+    </script>
+</body>
+</html>
