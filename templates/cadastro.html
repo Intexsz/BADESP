@@ -15,7 +15,6 @@
             return cpf;
         }
 
-        
         function mascaraCPF(event) {
             let cpf = event.target.value;
             cpf = formatarCPF(cpf);
@@ -31,7 +30,6 @@
        });
      }
 
-
      function initGoogleSignIn() {
          gapi.load('auth2', function() {
          gapi.auth2.init({
@@ -39,7 +37,6 @@
            });
         });
      }
-
 
      window.onload = initGoogleSignIn;
     </script>
