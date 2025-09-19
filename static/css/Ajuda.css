@@ -195,6 +195,7 @@ footer {
   color: #23c5c7;
   margin: 0 0 8px 0;
   font-size: 20px;
+  display: block;
 }
 
 #ajuda .faq p {
