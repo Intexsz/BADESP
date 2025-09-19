@@ -1,0 +1,252 @@
+/* Reset e corpo */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(90deg, #29387f, black);
+  min-height: 100vh;
+}
+
+/* Botão estilo hambúrguer */
+.menu-btn {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  font-size: 20px;
+  padding: 8px 12px;
+  background: linear-gradient(90deg, #29387f, #25337a);
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  z-index: 1001;
+  transition: background 0.3s;
+}
+
+.menu-btn:hover {
+  background: #302f9f;
+}
+
+/* Menu lateral */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translateX(-100%);
+  width: 200px;
+  height: 100%;
+  background: linear-gradient(135deg, #25337a, #111);
+  box-shadow: 3px 0 15px rgba(0,0,0,0.5);
+  padding-top: 80px; 
+  transition: transform 0.5s ease;
+  z-index: 100;
+  border-radius: 10px;
+}
+
+.sidebar.active {
+  transform: translateX(0);
+}
+
+/* Links do menu */
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar ul li {
+  margin: 15px 0;
+}
+
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 8px 15px;
+  display: block;
+  transition: transform 0.2s, color 0.3s;
+}
+
+.sidebar ul li a:hover {
+  color: #23c5c7;
+  transform: translateX(8px);
+}
+
+/* Cabeçalho */
+.Cabecalho {
+  background: linear-gradient(90deg, #29387f, black);
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: sticky;
+  padding: 15px 0;
+  text-align: center;
+}
+
+.nome {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 35px;
+  color: white;
+  margin: 0;
+}
+
+/* Main */
+main {
+  background: linear-gradient(90deg, #29387f, black);
+  text-align: center;
+  color: white;
+  padding: 50px 20px;
+}
+
+/* Footer */
+footer {
+  background: linear-gradient(90deg, #29387f, black);
+  color: white;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  box-shadow: 0 -2px 4px rgba(0,0,0,0.2);
+}
+
+.rodadecapoeira {
+  text-align: center;
+  font-size: 15px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin: 0;
+  padding: 10px 0;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+  .menu-btn {
+    font-size: 18px;
+    padding: 6px 10px;
+  }
+
+  .sidebar {
+    width: 180px;
+    height: 85%;
+    padding-top: 60px;
+  }
+
+  .sidebar ul li a {
+    font-size: 14px;
+    padding: 6px 12px;
+  }
+
+  .nome {
+    font-size: 28px;
+  }
+}
+
+/* Página de ajuda */
+#ajuda {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 40px 20px;
+}
+
+/* Painel centralizado */
+#ajuda .painel {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  padding: 25px 30px;
+  border-radius: 12px;
+  max-width: 700px;
+  width: 100%;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Título da página */
+#ajuda .nome {
+  color: white;
+  font-size: 35px;
+  margin-bottom: 10px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+/* Sessões FAQ */
+#ajuda .faq {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 15px 20px;
+  border-radius: 10px;
+  text-align: left;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  transition: transform 0.3s, background 0.3s;
+  cursor: pointer;
+}
+
+#ajuda .faq:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Perguntas e respostas */
+#ajuda .faq h3 {
+  color: #23c5c7;
+  margin: 0 0 8px 0;
+  font-size: 20px;
+}
+
+#ajuda .faq p {
+  color: white;
+  font-size: 16px;
+  margin: 0;
+  line-height: 1.5;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+  padding: 0;
+}
+
+#ajuda .faq.active p {
+  max-height: 500px;
+  padding: 10px 0;
+}
+
+/* Botões de ação */
+#ajuda button {
+  background: linear-gradient(90deg, #29387f, #25337a);
+  color: #ffffff;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+#ajuda button:hover {
+  background: linear-gradient(90deg, #29387f, black);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+  #ajuda .painel {
+    padding: 20px 15px;
+  }
+
+  #ajuda .faq h3 {
+    font-size: 18px;
+  }
+
+  #ajuda .faq p {
+    font-size: 14px;
+  }
+
+  #ajuda .nome {
+    font-size: 28px;
+  }
+}
