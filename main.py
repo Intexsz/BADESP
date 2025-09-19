@@ -3,7 +3,7 @@ from flask import Flask
 from authlib.integrations.flask_client import OAuth
 from app.bancodedados import init_db
 from app.rotas import rotas_bp  # Importa a instância do Blueprint
-
+from app.bancodedados import criar_tabela
 app = Flask(__name__)
 app.secret_key = "AGOCSPX-as9HxMU0xYAbQQlwiNZMpB73irZ7"
 
@@ -26,4 +26,5 @@ app.register_blueprint(rotas_bp)
 
 if __name__ == '__main__':
     init_db()
-    app.run(debug=True)
+    criar_tabela()
+    app.run(debug=True, use_reloader=False)

@@ -3,27 +3,14 @@ from google.oauth2 import id_token
 from google.auth.transport import requests
 from authlib.integrations.flask_client import OAuth
 from app.bancodedados import salvar_usuario, buscar_usuario
+from app.bancodedados import criar_denuncia, mostrar_denuncias, apagar_denuncia
+from datetime import datetime
+
 
 app = Flask(__name__)
 rotas_bp = Blueprint('rotas', __name__)
 
 CLIENT_ID = "334998652961-c43b5pt422pnfqk98t56pu4d6aphi5fe.apps.googleusercontent.com"
-
-# Arquivo de usuários local (Mudar isso o quanto antes)
-user_file = 'usuarios.txt'
-
-def validar_cpf(cpf):
-    cpf = cpf.replace(".", "").replace("-", "")
-    if len(cpf) != 11 or cpf == cpf[0] * 11:
-        return False
-
-    soma1 = sum(int(cpf[i]) * (10 - i) for i in range(9))
-    dig1 = (soma1 * 10 % 11) % 10
-
-    soma2 = sum(int(cpf[i]) * (11 - i) for i in range(10))
-    dig2 = (soma2 * 10 % 11) % 10
-
-    return dig1 == int(cpf[9]) and dig2 == int(cpf[10])
 
 oauth = OAuth(app)
 google = oauth.register(
@@ -85,14 +72,34 @@ def inicio():
     if "user_id" in session:
         usuario = buscar_usuario(session["user_id"])
         if usuario:
+            denuncias = mostrar_denuncias()
             return render_template("inicio.html", usuario={
                 "id": usuario[0],
                 "name": usuario[1],
                 "email": usuario[2],
                 "picture": usuario[3]
-            })
+            }, denuncias=denuncias)
+
     return redirect(url_for('rotas.cadastro'))
 
 @rotas_bp.route('/Ajuda')
 def ajuda():
     return render_template('ajuda.html')
+
+@rotas_bp.route('/Denuncia', methods=['GET', 'POST'])
+def denuncia():
+    if request.method == 'POST':
+        titulo = request.form.get('titulo')
+        gravidade = request.form.get('gravidade')
+        descricao = request.form.get('descricao')
+        data = datetime.now().strftime('%d/%m/%Y %H:%M')
+
+        criar_denuncia(titulo, gravidade, descricao, data)
+
+    return render_template('denuncia.html')
+
+@rotas_bp.route('/Inicio/delete/<int:id>', methods=['POST'])
+def excluir_denuncia(id):
+    apagar_denuncia(id)
+    return render_template('inicio.html')
+
