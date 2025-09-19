@@ -9,12 +9,8 @@
 <body>
     <p><b>Nome:</b> {{ usuario.name }}</p>
     <p><b>Email:</b> {{ usuario.email }}</p>
-    {% if usuario.picture %}
-        <img src="{{ usuario.picture }}" alt="Foto" style="border-radius:50%">
-    {% else %}
-        <img src="https://thumbs.dreamstime.com/b/default-profile-picture-avatar-photo-placeholder-vector-illustration-default-profile-picture-avatar-photo-placeholder-vector-189495158.jpg" alt="Foto" style="border-radius:50%">
+    <img src="{{ usuario.picture }}" alt="Foto" style="border-radius:50%">
     <br><br>
-    {% endif %}
     <a href="/logout">Sair</a>
 </body>
 </html>

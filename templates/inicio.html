@@ -12,7 +12,7 @@
 <body>
   <header class="Cabecalho">
  <nav>
-    <h1 class="nome">Denúncias F.P.S.F.</h1>
+    <h1 class="nome">Segurança Nas Escolas Públicas</h1>
     <div class="menu-perfil" onclick="toggledropdonw()">
     <img src></img>
     </div>
@@ -40,9 +40,9 @@
       <div id="denuncias-container"></div>
     </div>
 
-    
-
-
+    <h2>Bem Vindo {{ usuario.name }}!</h2>
+    <p><b>Email:</b> {{ usuario.email }}</p>
+    <img src="{{ usuario.picture }}" alt="Foto" style="border-radius:50%">
 
 
     

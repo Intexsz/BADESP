@@ -85,10 +85,14 @@ def inicio():
     if "user_id" in session:
         usuario = buscar_usuario(session["user_id"])
         if usuario:
-            return render_template("concluido.html", usuario={
+            return render_template("inicio.html", usuario={
                 "id": usuario[0],
                 "name": usuario[1],
                 "email": usuario[2],
                 "picture": usuario[3]
             })
     return redirect(url_for('rotas.cadastro'))
+
+@rotas_bp.route('/Ajuda')
+def ajuda():
+    return render_template('ajuda.html')
