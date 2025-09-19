@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Denúncias F.P.S.F</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/inicio.css') }}">
+  <script src="{{ url_for('static', filename='js/inicio.js') }}" defer></script>
+</head>
+
+<body>
+  <header class="Cabecalho">
+ <nav>
+    <h1 class="nome">Denúncias F.P.S.F.</h1>
+    <div class="menu-perfil" onclick="toggledropdonw()">
+    <img src></img>
+    </div>
+  </nav>
+       
+     
+    <button class="menu-btn">☰</button>
+
+    <!-- Menu lateral -->
+    <nav class="sidebar">
+      <ul>
+        <li><a href="/Inicio">Início</a></li>
+        <li><a href="/Ajuda">Ajuda</a></li>
+        <li><a href="/Denuncia">perfil</a></li>
+      </ul>
+    </nav>
+    
+  </header>
+
+  <main>
+
+
+    <div class="painel-container">
+      <h1>Painel de Denúncias</h1>
+      <div id="denuncias-container"></div>
+    </div>
+
+    
+
+
+
+
+    
+  </main>
+
+
+<footer>
+
+
+
+</footer>
+
+  
+   <script>
+     const btn = document.querySelector('.menu-btn');
+     const sidebar = document.querySelector('.sidebar');
+
+     btn.addEventListener('click', () => {
+       sidebar.classList.toggle('active');
+     });
+   </script>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+   <script src="denuncia.js"></script>
+  
+</body>
+</html>
