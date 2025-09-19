@@ -1,24 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title> SNEP</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>SNEP - Painel de Denúncias</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/inicio.css') }}">
   <script src="{{ url_for('static', filename='js/inicio.js') }}" defer></script>
 </head>
 
 <body>
   <header class="Cabecalho">
- <nav>
-    <h1 class="nome">Segurança Nas Escolas Públicas</h1>
-    <div class="menu-perfil" onclick="toggledropdonw()">
-    <img src></img>
-    </div>
-  </nav>
-       
-     
+    <nav>
+      <h1 class="nome">Segurança Nas Escolas Públicas</h1>
+    </nav>
+
     <button class="menu-btn">☰</button>
 
     <!-- Menu lateral -->
@@ -26,44 +22,67 @@
       <ul>
         <li><a href="/Inicio">Início</a></li>
         <li><a href="/Ajuda">Ajuda</a></li>
-        <li><a href="/Denuncia">perfil</a></li>
+        <li><a href="/Denuncia">Perfil</a></li>
       </ul>
     </nav>
-    
   </header>
 
   <main>
-
-
-    <div class="painel-container">
-      <h1>Painel de Denúncias</h1>
-      <div id="denuncias-container"></div>
-    </div>
-
     <h2>Bem Vindo {{ usuario.name }}!</h2>
     <p><b>Email:</b> {{ usuario.email }}</p>
-    <img src="{{ usuario.picture }}" alt="Foto" style="border-radius:50%">
-
+    <img src="{{ usuario.picture }}" alt="Foto do usuário" style="border-radius:50%">
   </main>
 
+  <div class="painel-container">
+    <h1>Painel de Denúncias</h1>
+    <div id="denuncias-container">
+      {% if denuncias %}
+        {% for d in denuncias %}
+          <div class="denuncia-card" id="denuncia-{{ d[0] }}">
+            <h3>{{ d[1] }}</h3>
+            <p>Ocorrido: {{ d[2] }}</p>
+            <p>Denúncia: {{ d[3] }}</p>
+            <p>Data: {{ d[4] }}</p>
+            <form class="apagar-form" action="{{ url_for('rotas.excluir_denuncia', id=d[0]) }}" method="POST">
+              <button type="submit">Apagar</button>
+            </form>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p>Nenhuma denúncia cadastrada.</p>
+      {% endif %}
+    </div>
+  </div>
 
-<footer>
+  <footer></footer>
 
+  <script>
+    // Toggle menu lateral
+    const btn = document.querySelector('.menu-btn');
+    const sidebar = document.querySelector('.sidebar');
 
+    btn.addEventListener('click', () => {
+      sidebar.classList.toggle('active');
+    });
 
-</footer>
+    // Excluir denúncia sem recarregar a página
+    document.querySelectorAll('.apagar-form').forEach(form => {
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        const card = form.closest('.denuncia-card');
 
-  
-   <script>
-     const btn = document.querySelector('.menu-btn');
-     const sidebar = document.querySelector('.sidebar');
+        fetch(form.action, { method: 'POST' })
+          .then(response => {
+            if (response.ok) {
+              card.remove(); // remove o card da tela
+            } else {
+              console.error('Erro ao apagar denúncia');
+            }
+          })
+          .catch(err => console.error(err));
+      });
+    });
+  </script>
 
-     btn.addEventListener('click', () => {
-       sidebar.classList.toggle('active');
-     });
-   </script>
-  <script src="{{ url_for('static', filename='script.js') }}"></script>
-   <script src="denuncia.js"></script>
-  
 </body>
 </html>
