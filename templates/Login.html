@@ -3,28 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
-  <title>Login</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/cadastro.css') }}">
+  <title>SNEPS - Entrar</title>
 
+  <!-- Google API -->
   <script src="https://accounts.google.com/gsi/client" async defer></script>
 
   <script>
-    function formatarCPF(cpf) {
-      cpf = cpf.replace(/\D/g, "");
-      cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2");
-      cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2");
-      cpf = cpf.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
-      return cpf;
-    }
-
-    function mascaraCPF(event) {
-      let cpf = event.target.value;
-      cpf = formatarCPF(cpf);
-      event.target.value = cpf;
-    }
 
     function handleCredentialResponse(response) {
-      fetch("/login/callback", {
+      fetch("/Login/callback", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -36,7 +24,7 @@
         if (data.status === "ok") {
           window.location.href = "/Inicio";
         } else {
-          alert("Erro no login com Google.");
+          alert("Erro no login Google.");
         }
       });
     }
@@ -56,28 +44,11 @@
 </head>
 <body>
   <div class="container">
-    <form action="{{ url_for('login') }}" method="POST">
-      <h1>Login</h1>
-
-      <div class="input-container">
-        <input name="nome" id="cpf" placeholder="CPF" type="text" oninput="mascaraCPF(event)" maxlength="14" required>
-        <img width="15" height="15" src="{{ url_for('static', filename='img/user.png') }}" alt="user"/>
-      </div>
-
-      <div class="input-container">
-        <input name="senha" placeholder="Senha" type="password" required>
-        <img width="15" height="15" src="{{ url_for('static', filename='img/lock--v1.png') }}" alt="lock"/>
-        <a href="EsqueciMinhaSenha.html">Esqueci minha senha</a>
-      </div>
-
-      <button type="submit" class="submit-button">Entrar</button>
+    <form action="{{ url_for('rotas.cadastro') }}" method="POST">
+      <h1>Entrar</h1>
 
       <br><br>
       <div id="googleSignInBtn"></div>
-
-      <div class="input-container">
-        <a href="{{ url_for('cadastro') }}">Cadastrar</a>
-      </div>
     </form>
   </div>
 </body>

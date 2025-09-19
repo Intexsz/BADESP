@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Painel de Denúncias</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/denuncia.css') }}">
+  <script src="{{ url_for('static', filename='js/denuncias.js') }}" defer></script>
+</head>
+<body>
+
+   <header class="Cabecalho">
+  
+    <h1 class="nome">Denúncias F.P.S.F.</h1>
+
+      <button class="menu-btn">☰</button>
+
+      <!-- Menu lateral -->
+      <nav class="sidebar">
+        <ul>
+          <li><a href="/Inicio">Início</a></li>
+          <li><a href="/Ajuda">Ajuda</a></li>
+          <li><a href="/Denuncia">perfil</a></li>
+        </ul>
+      </nav>
+    </header>
+  
+  <div class="form-container">
+    <h1>Enviar Denúncia</h1>
+    <form id="form-denuncia">
+      <input type="text" id="titulo" placeholder="Título da denúncia" required>
+      <select id="gravidade" required>
+        <option value="">Ocorrido</option>
+        <option value="Agressão">Agressão (física, verbal, psicológica, moral e sexual)</option>
+        <option value="Destruição Patrimônial">Destruição Patrimônial </option>
+        <option value="Falta de Recursos">Falta de Recursos</option>
+        <option value="Atitudes Inadequadas">Atitudes Inadequadas</option>
+        <option value="Outros">Outros</option>
+      </select>
+      
+      <textarea id="resposta" placeholder="Denúncia:"></textarea>
+      <button type="submit">Enviar Denúncia</button>
+    </form>
+  </div>
+
+  <div class="painel-container">
+    <h1>Painel de Denúncias</h1>
+    <div id="denuncias-container"></div>
+  </div>
+
+  <script src="inicio.js"></script>
+</body>
+</html>
