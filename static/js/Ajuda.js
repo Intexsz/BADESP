@@ -10,10 +10,10 @@ const faqs = document.querySelectorAll('.painel .faq');
 
 faqs.forEach(faq => {
   faq.addEventListener('click', () => {
+    faq.classList.toggle('active');
     faqs.forEach(f => {
       if (f !== faq) f.classList.remove('active');
     });
-    faq.classList.toggle('active');
   });
 });
 
