@@ -1,10 +1,12 @@
 # main.py
 from flask import Flask
 from authlib.integrations.flask_client import OAuth
-from app.bancodedados import init_db
-from app.rotas import rotas_bp  # Importa a instância do Blueprint
+from app.bancodedadosusuario import init_db
+from app.rotas import rotas_bp
+from app.rotasecretaria import rota_secretaria
 from app.rotalogin import rota_login
-from app.bancodedados import criar_tabela
+from app.bancodedadosdenuncia import criar_tabela
+
 app = Flask(__name__)
 app.secret_key = "AGOCSPX-as9HxMU0xYAbQQlwiNZMpB73irZ7"
 
@@ -25,6 +27,7 @@ google = oauth.register(
 # Registra a instância do Blueprint
 app.register_blueprint(rotas_bp)
 app.register_blueprint(rota_login)
+app.register_blueprint(rota_secretaria)
 
 if __name__ == '__main__':
     init_db()

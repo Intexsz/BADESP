@@ -2,6 +2,6 @@ A fazer:
 
  ~~Lista de denuncias individuais a cada usuario~~
  
-	Somente poder apagar após a secretaria ver;
+	Somente poder apagar antes da secretaria ver;
  
 	Melhorar o visual do site
