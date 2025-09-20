@@ -58,6 +58,18 @@ button {
   transition: all 0.3s;
 }
 
+button:disabled {
+    cursor: not-allowed; /* muda o cursor */
+    opacity: 0.5;         /* deixa mais claro que está desativado */
+    padding: 12px;
+    border: 1px solid;
+    border-radius: 8px;
+    background: #29387f;
+    color: #ADD8E6;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
 button:hover {
   background: #394cac;
   transform: translateY(-2px);

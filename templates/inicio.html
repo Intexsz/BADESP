@@ -44,9 +44,18 @@
             <p>Ocorrido: {{ d[2] }}</p>
             <p>Denúncia: {{ d[3] }}</p>
             <p>Data: {{ d[4] }}</p>
-            <form class="apagar-form" action="{{ url_for('rotas.excluir_denuncia', id=d[0]) }}" method="POST">
-              <button type="submit">Apagar</button>
-            </form>
+            <p>Situação: {{ d[5] }}</p>
+            {% if d[5] == 'Em Análise.' or d[5] == 'Expirada.' %}
+              <form class="apagar-form" action="{{ url_for('rotas.excluir_denuncia', id=d[0]) }}" method="POST">
+                <button type="submit">Apagar</button>
+              </form>
+            {% else %}
+            <div class="botãooff">
+              <form class="apagar-form" action="{{ url_for('rotas.excluir_denuncia', id=d[0]) }}" method="POST">
+                <button type="submit" disabled>Apagar</button>
+              </form>
+            </div>
+            {% endif %}
           </div>
         {% endfor %}
       {% else %}

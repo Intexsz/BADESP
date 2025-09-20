@@ -52,7 +52,7 @@
     event.preventDefault(); // Impede o envio automático
 
     // Pergunta de confirmação
-    const confirmado = confirm("Você tem certeza que quer enviar esta denúncia? Após enviar você não pode editar e se você enviar, só poderá APAGAR ANTES DA SECRETARIA ABRIR sua denuncia, caso seja aberta você NÃO PODERÁ MAIS APAGAR SUA DENUNCIA.");
+    const confirmado = confirm("Você tem certeza que quer enviar esta denúncia? Após enviar você não poderá editar, se você enviar, só poderá APAGAR ANTES DA SECRETARIA ABRIR sua denuncia, caso seja visualizada você NÃO PODERÁ MAIS APAGAR SUA DENUNCIA.");
     if (!confirmado) {
       return;
     }
