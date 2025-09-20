@@ -1,6 +1,6 @@
 import sqlite3
+from datetime import datetime
 
-# Função para criar tabela se não existir
 def criar_tabela():
     conn = sqlite3.connect('denuncias.db')
     cursor = conn.cursor()
@@ -10,7 +10,8 @@ def criar_tabela():
             titulo TEXT NOT NULL,
             gravidade TEXT NOT NULL,
             descricao TEXT NOT NULL,
-            data TEXT NOT NULL
+            data TEXT NOT NULL,
+            user_id TEXT NOT NULL
         )
     ''')
     conn.commit()
@@ -34,8 +35,10 @@ def salvar_usuario(user_data):
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM usuarios WHERE id = ?", (user_data["id"],))
         if not cursor.fetchone():
-            cursor.execute("INSERT INTO usuarios (id, nome, email, foto) VALUES (?, ?, ?, ?)",
-                           (user_data["id"], user_data["name"], user_data["email"], user_data["picture"]))
+            cursor.execute(
+                "INSERT INTO usuarios (id, nome, email, foto) VALUES (?, ?, ?, ?)",
+                (user_data["id"], user_data["name"], user_data["email"], user_data["picture"])
+            )
             conn.commit()
 
 def buscar_usuario(user_id):
@@ -43,32 +46,34 @@ def buscar_usuario(user_id):
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM usuarios WHERE id = ?", (user_id,))
         return cursor.fetchone()
-    
-def apagar_denuncia(id):
+
+def criar_denuncia(titulo, gravidade, descricao, user_id):
+    data = datetime.now().strftime("%d/%m/%Y %H:%M")
     conn = sqlite3.connect('denuncias.db')
     cursor = conn.cursor()
-    cursor.execute('DELETE FROM denuncias WHERE id = ?', (id,))
-    conn.commit()
-    conn.close()
-
-def criar_denuncia(titulo,gravidade,descricao,data):
-    conn = sqlite3.connect('denuncias.db')
-    cursor = conn.cursor()
-
     cursor.execute('''
-            INSERT INTO denuncias (titulo, gravidade, descricao, data)
-            VALUES (?, ?, ?, ?)
-        ''', (titulo, gravidade, descricao, data))
+        INSERT INTO denuncias (titulo, gravidade, descricao, data, user_id)
+        VALUES (?, ?, ?, ?, ?)
+    ''', (titulo, gravidade, descricao, data, user_id))
     conn.commit()
     conn.close()
 
-def mostrar_denuncias():
+def mostrar_denuncias(user_id):
     conn = sqlite3.connect('denuncias.db')
     cursor = conn.cursor()
-    cursor.execute('SELECT id, titulo, gravidade, descricao, data FROM denuncias ORDER BY id DESC')
+    cursor.execute('''
+        SELECT id, titulo, gravidade, descricao, data
+        FROM denuncias
+        WHERE user_id = ?
+        ORDER BY id DESC
+    ''', (user_id,))
     denuncias = cursor.fetchall()
     conn.close()
-    
     return denuncias
 
-
+def apagar_denuncia(id, user_id):
+    conn = sqlite3.connect('denuncias.db')
+    cursor = conn.cursor()
+    cursor.execute('DELETE FROM denuncias WHERE id = ? AND user_id = ?', (id, user_id))
+    conn.commit()
+    conn.close()
