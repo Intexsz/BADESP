@@ -1,5 +1,5 @@
 import sqlite3
-from datetime import datetime
+from datetime import datetime, timedelta
 
 def criar_tabela():
     conn = sqlite3.connect('denuncias.db')
@@ -11,7 +11,8 @@ def criar_tabela():
             gravidade TEXT NOT NULL,
             descricao TEXT NOT NULL,
             data TEXT NOT NULL,
-            user_id TEXT NOT NULL
+            user_id TEXT NOT NULL,
+            status TEXT NOT NULL
         )
     ''')
     conn.commit()
@@ -47,14 +48,14 @@ def buscar_usuario(user_id):
         cursor.execute("SELECT * FROM usuarios WHERE id = ?", (user_id,))
         return cursor.fetchone()
 
-def criar_denuncia(titulo, gravidade, descricao, user_id):
+def criar_denuncia(titulo, gravidade, descricao, user_id, status):
     data = datetime.now().strftime("%d/%m/%Y %H:%M")
     conn = sqlite3.connect('denuncias.db')
     cursor = conn.cursor()
     cursor.execute('''
-        INSERT INTO denuncias (titulo, gravidade, descricao, data, user_id)
-        VALUES (?, ?, ?, ?, ?)
-    ''', (titulo, gravidade, descricao, data, user_id))
+        INSERT INTO denuncias (titulo, gravidade, descricao, data, user_id, status)
+        VALUES (?, ?, ?, ?, ?, ?)
+    ''', (titulo, gravidade, descricao, data, user_id, status))
     conn.commit()
     conn.close()
 
@@ -62,7 +63,7 @@ def mostrar_denuncias(user_id):
     conn = sqlite3.connect('denuncias.db')
     cursor = conn.cursor()
     cursor.execute('''
-        SELECT id, titulo, gravidade, descricao, data
+        SELECT id, titulo, gravidade, descricao, data, status
         FROM denuncias
         WHERE user_id = ?
         ORDER BY id DESC
@@ -75,5 +76,32 @@ def apagar_denuncia(id, user_id):
     conn = sqlite3.connect('denuncias.db')
     cursor = conn.cursor()
     cursor.execute('DELETE FROM denuncias WHERE id = ? AND user_id = ?', (id, user_id))
+    conn.commit()
+    conn.close()
+
+def buscar_status_denuncia(id, user_id):
+    conn = sqlite3.connect('denuncias.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT status FROM denuncias WHERE id = ? AND user_id = ?', (id, user_id))
+    resultado = cursor.fetchone()
+    conn.close()
+    return resultado[0] if resultado else None
+
+def expirar():
+    conn = sqlite3.connect('denuncias.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT id, data, status FROM denuncias')
+    denuncias = cursor.fetchall()
+    for d in denuncias:
+        id_denuncia, data_str, status = d
+        if status != "Em Análise.":
+            continue
+
+        created_at = datetime.strptime(data_str, "%d/%m/%Y %H:%M")
+        if datetime.now() > created_at + timedelta(days=7):
+            cursor.execute(
+                'UPDATE denuncias SET status = ? WHERE id = ?',
+                ("Expirada.", id_denuncia)
+            )
     conn.commit()
     conn.close()
