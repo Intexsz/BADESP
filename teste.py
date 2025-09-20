@@ -10,6 +10,5 @@ def casinha():
 def ajuda():
     return render_template('ajuda.html')
 
-#oi
 if __name__ == '__main__':
     app.run(debug=True)
