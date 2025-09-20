@@ -22,7 +22,8 @@
       <ul>
         <li><a href="/Inicio">Início</a></li>
         <li><a href="/Ajuda">Ajuda</a></li>
-        <li><a href="/Denuncia">Perfil</a></li>
+        <li><a href="/Denuncia">Fazer Denúncia</a></li>
+        <li><a href="/Logout" onclick="return confirmarLogout()">Deslogar</a></li>
       </ul>
     </nav>
   </header>
@@ -65,24 +66,14 @@
       sidebar.classList.toggle('active');
     });
 
-    // Excluir denúncia sem recarregar a página
-    document.querySelectorAll('.apagar-form').forEach(form => {
-      form.addEventListener('submit', e => {
-        e.preventDefault();
-        const card = form.closest('.denuncia-card');
 
-        fetch(form.action, { method: 'POST' })
-          .then(response => {
-            if (response.ok) {
-              card.remove(); // remove o card da tela
-            } else {
-              console.error('Erro ao apagar denúncia');
-            }
-          })
-          .catch(err => console.error(err));
-      });
-    });
+    function confirmarLogout() {
+      
+    return confirm("Você tem certeza que quer deslogar?");
+    }
+
   </script>
+
 
 </body>
 </html>

@@ -11,7 +11,7 @@
 
    <header class="Cabecalho">
   
-    <h1 class="nome">Denúncias F.P.S.F.</h1>
+    <h1 class="nome">Segurança Nas Escolas Públicas</h1>
 
       <button class="menu-btn">☰</button>
 
@@ -20,7 +20,8 @@
         <ul>
           <li><a href="/Inicio">Início</a></li>
           <li><a href="/Ajuda">Ajuda</a></li>
-          <li><a href="/Denuncia">perfil</a></li>
+          <li><a href="/Denuncia">Fazer Denúncia</a></li>
+          <li><a href="/Logout" onclick="return confirmarLogout()">Deslogar</a></li>
         </ul>
       </nav>
     </header>
@@ -43,7 +44,29 @@
       <button type="submit">Enviar Denúncia</button>
     </form>
   </div>
-  
-  
+
+  <script>
+  const form = document.getElementById('form-denuncia');
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault(); // Impede o envio automático
+
+    // Pergunta de confirmação
+    const confirmado = confirm("Você tem certeza que quer enviar esta denúncia? Após enviar você não pode editar e se você enviar, só poderá APAGAR ANTES DA SECRETARIA ABRIR sua denuncia, caso seja aberta você NÃO PODERÁ MAIS APAGAR SUA DENUNCIA.");
+    if (!confirmado) {
+      return;
+    }
+
+    alert("Sua denúncia foi enviada com sucesso!");
+
+    form.submit();
+
+    function confirmarLogout() {
+
+    return confirm("Você tem certeza que quer deslogar?");
+    }
+  });
+</script>
+
 </body>
 </html>

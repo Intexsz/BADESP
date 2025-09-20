@@ -22,7 +22,8 @@
             <ul>
                 <li><a href="/Inicio">Início</a></li>
                 <li><a href="/Ajuda">Ajuda</a></li>
-                <li><a href="/Denuncia">Perfil</a></li>
+                <li><a href="/Denuncia">Fazer Denúncia</a></li>
+                <li><a href="/Logout" onclick="return confirmarLogout()">Deslogar</a></li>
             </ul>
         </nav>
     </header>
@@ -35,19 +36,18 @@
             <div class="faq">
                 <h3>Como enviar uma denúncia?</h3>
                 <p>Para enviar uma denúncia, clique no botão "Fazer Denúncia" na página inicial, preencha seu nome,
-                    Gmail istitucional e descreva sua denúncia. Em seguida, clique em "Enviar Denúncia".</p>
+                    Gmail institucional e descreva sua denúncia. Em seguida, clique em "Enviar Denúncia".</p>
             </div>
 
             <div class="faq">
                 <h3>Preciso usar meu Gmail institucional?</h3>
-                <p>O Gmail institucional é opcional, caso você não tenha acesso a ele, você pode logar usando o seu CPF.
+                <p>O Gmail institucional é a unica forma de fazer cadastro no site, caso você não tenha acesso a ele, você não consegue se cadastrar.
                 </p>
             </div>
 
             <div class="faq">
-                <h3>Meu Gmail não é institucional, posso enviar?</h3>
-                <p>Não, caso você não tenha acesso ao seu Gmail institucional, entre usando o seu CPF ou procure a
-                    gestão escolar.</p>
+                <h3>Meu Gmail não é institucional, posso me cadastrar?</h3>
+                <p>Não. O seu Gmail precisa obrigatóriamente ser o seu Gmail institucional.</p>
             </div>
 
             <div class="faq">
@@ -61,6 +61,11 @@
                 <p>Não. Após o envio, não é possível editar a denúncia. Certifique-se de revisar todas as informações
                     antes de enviar.</p>
             </div>
+
+            <div class="faq">
+                <h3>Fiz uma denúncia por acidente, posso apaga-la?</h3>
+                <p>Sim. Você pode apagar a sua denúncia, desde que a gestão não tenha aberto ela ainda.</p>
+            </div>
         </div>
     </main>
 
@@ -68,6 +73,13 @@
     <footer>
         <div class="rodadecapoeira">© 2025 Denúncias F.P.S.F.</div>
     </footer>
+
+    <script>
+        function confirmarLogout() {
+    // Retorna true para ir para /logout ou false para cancelar
+        return confirm("Você tem certeza que quer deslogar?");
+    }
+</script>
 
 </body>
 
