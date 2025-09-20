@@ -4,8 +4,6 @@ from google.auth.transport import requests
 from authlib.integrations.flask_client import OAuth
 from app.bancodedados import salvar_usuario, buscar_usuario
 from app.bancodedados import criar_denuncia, mostrar_denuncias, apagar_denuncia
-from datetime import datetime
-
 
 app = Flask(__name__)
 rotas_bp = Blueprint('rotas', __name__)
@@ -23,6 +21,7 @@ google = oauth.register(
     client_kwargs={'scope': 'openid email profile'},
 )
 
+'''###### LOGIN ######
 @rotas_bp.route('/')
 def homepage():
     if "user_id" in session:
@@ -56,7 +55,7 @@ def callback():
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
-@rotas_bp.route('/logout')
+@rotas_bp.route('/Logout')
 def logout():
     session.clear()
     return redirect(url_for("rotas.cadastro"))
@@ -66,40 +65,47 @@ def cadastro():
     if "user_id" in session:
         return redirect(url_for('rotas.inicio'))
     return render_template('login.html')
+'''
 
+###### PAGINA NORMAL ######
 @rotas_bp.route('/Inicio')
 def inicio():
     if "user_id" in session:
         usuario = buscar_usuario(session["user_id"])
         if usuario:
-            denuncias = mostrar_denuncias()
+            denuncias = mostrar_denuncias(session["user_id"])
             return render_template("inicio.html", usuario={
                 "id": usuario[0],
                 "name": usuario[1],
                 "email": usuario[2],
                 "picture": usuario[3]
             }, denuncias=denuncias)
-
-    return redirect(url_for('rotas.cadastro'))
+    return redirect(url_for('rotalogin.cadastro'))
 
 @rotas_bp.route('/Ajuda')
 def ajuda():
     return render_template('ajuda.html')
 
+###### PAGINA DE DENUNCIA ######
+
 @rotas_bp.route('/Denuncia', methods=['GET', 'POST'])
 def denuncia():
+    if "user_id" not in session:
+        return redirect(url_for('rotalogin.cadastro'))
+
     if request.method == 'POST':
         titulo = request.form.get('titulo')
         gravidade = request.form.get('gravidade')
         descricao = request.form.get('descricao')
-        data = datetime.now().strftime('%d/%m/%Y %H:%M')
 
-        criar_denuncia(titulo, gravidade, descricao, data)
+        criar_denuncia(titulo, gravidade, descricao, session["user_id"])
 
     return render_template('denuncia.html')
 
 @rotas_bp.route('/Inicio/delete/<int:id>', methods=['POST'])
 def excluir_denuncia(id):
-    apagar_denuncia(id)
-    return render_template('inicio.html')
+    if "user_id" not in session:
+        return redirect(url_for('rotalogin.cadastro'))
 
+    apagar_denuncia(id, session["user_id"])
+    return redirect(url_for('rotas.inicio'))
