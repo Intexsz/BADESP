@@ -55,3 +55,9 @@ def buscar_cargo(user_id):
         resultado = cursor.fetchone()
         return resultado[0] if resultado else None
 
+def pegar_no_nome(id):
+    with sqlite3.connect("usuarios.db") as conn:
+        cursor = conn.cursor()
+        cursor.execute("SELECT nome FROM usuarios WHERE id = ?", (id,))
+        resultado = cursor.fetchone()
+        return resultado[0] if resultado else None

@@ -8,23 +8,23 @@ from app.rotalogin import rota_login
 from app.bancodedadosdenuncia import criar_tabela
 
 app = Flask(__name__)
-app.secret_key = "AGOCSPX-as9HxMU0xYAbQQlwiNZMpB73irZ7"
+app.secret_key = "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"
 
-# CLIENT ID do Google
-CLIENT_ID = "334998652961-c43b5pt422pnfqk98t56pu4d6aphi5fe.apps.googleusercontent.com"
+# CLIENT ID do Gugu
+CLIENT_ID = "334998652961-rpf4gt64873gg0uoa64cmlqkcmj33q4b.apps.googleusercontent.com"
 
 oauth = OAuth(app)
 google = oauth.register(
     name='google',
     client_id=CLIENT_ID,
-    client_secret='AGOCSPX-as9HxMU0xYAbQQlwiNZMpB73irZ7',
+    client_secret='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',
     access_token_url='https://oauth2.googleapis.com/token',
     authorize_url='https://accounts.google.com/o/oauth2/auth',
     api_base_url='https://www.googleapis.com/oauth2/v1/',
     client_kwargs={'scope': 'openid email profile'},
 )
 
-# Registra a instância do Blueprint
+# Registra os blueprints
 app.register_blueprint(rotas_bp)
 app.register_blueprint(rota_login)
 app.register_blueprint(rota_secretaria)

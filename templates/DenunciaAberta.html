@@ -27,46 +27,24 @@
       </ul>
     </nav>
   </header>
-
-    <h2>Bem Vindo {{ usuario[1] }}!</h2>
-    <p><b>Email:</b> {{ usuario[2] }}</p>
-    <img src="{{ usuario[3] }}" alt="Foto do usuário" style="border-radius:50%">
-
+  
   <div class="painel-container">
     <h1>Painel de Denúncias</h1>
     <div id="denuncias-container">
-      {% if denuncias %}
-        {% for d in denuncias %}
-          <div class="denuncia-card" id="denuncia-{{ d[0] }}">
-            <h3>{{ d[1] }}</h3>
-            <p>Ocorrido: {{ d[2] }}</p>
-            <p>Denúncia: {{ d[3] }}</p>
-            <p>Data: {{ d[4] }}</p>
-            {% if d[5] == 'Visto.' %}
-              <p><b>Situação:</b> Visto por {{ d[7] }}</p>
-            {% else %}
-              <p><b>Situação:</b> {{ d[5] }}</p>
-            {% endif %}
-            {% if d[5] == 'Em Análise.' or d[5] == 'Expirada.' %}
-              <form class="apagar-form" action="{{ url_for('rotas.excluir_denuncia', id=d[0]) }}" method="POST">
-                <button type="submit">Apagar</button>
-              </form>
-            {% else %}
-            <div class="botãooff">
-              <form class="apagar-form" action="{{ url_for('rotas.excluir_denuncia', id=d[0]) }}" method="POST">
-                <button type="submit" disabled>Apagar</button>
-              </form>
-            </div>
-            {% endif %}
+      {% if usuario %}
+          <div class="denuncia-card" id="denuncia-{{ usuario['id'] }}">
+            <h3>{{ usuario['titulo'] }}</h3>
+            <p>Ocorrido: {{ usuario['gravidade'] }}</p>
+            <p>Denúncia: {{ usuario['descricao'] }}</p>
+            <p>Data: {{ usuario['data'] }}</p>
+            <p>Situação: Visto por {{ usuario['visto'] }}</p>
+            <p>Denunciado por: {{ usuario['nome'] }}</p>
           </div>
-        {% endfor %}
       {% else %}
-        <p>Nenhuma denúncia cadastrada.</p>
+        <p>Erro.</p>
       {% endif %}
     </div>
   </div>
-
-  <footer></footer>
 
   <script>
     // Toggle menu lateral
@@ -76,7 +54,6 @@
     btn.addEventListener('click', () => {
       sidebar.classList.toggle('active');
     });
-
 
     function confirmarLogout() {
       

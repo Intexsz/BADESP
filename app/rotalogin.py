@@ -6,15 +6,15 @@ from app.bancodedadosusuario import salvar_usuario
 
 app = Flask(__name__)
 rota_login = Blueprint('rotalogin', __name__)
-app.secret_key = "AGOCSPX-as9HxMU0xYAbQQlwiNZMpB73irZ7"
+app.secret_key = "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"
 
-CLIENT_ID = "334998652961-c43b5pt422pnfqk98t56pu4d6aphi5fe.apps.googleusercontent.com"
+CLIENT_ID = "334998652961-rpf4gt64873gg0uoa64cmlqkcmj33q4b.apps.googleusercontent.com"
 
 oauth = OAuth(app)
 google = oauth.register(
     name='google',
     client_id=CLIENT_ID,
-    client_secret="AGOCSPX-as9HxMU0xYAbQQlwiNZMpB73irZ7",
+    client_secret="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",
     access_token_url='https://oauth2.googleapis.com/token',
     authorize_url='https://accounts.google.com/o/oauth2/auth',
     api_base_url='https://www.googleapis.com/oauth2/v1/',
@@ -44,9 +44,10 @@ def processar_login(cargo):
         return jsonify({"status": "ok", "user": user_data})
     except Exception as e:
         return jsonify({"error": str(e)}), 400
+######----------######
+
 
 ###### ALUNO ######
-
 @rota_login.route('/Login/callback', methods=["POST", "GET"])
 def callback():
     return processar_login("Aluno")
@@ -56,6 +57,8 @@ def cadastro():
     if "user_id" in session:
         return redirect(url_for('rotas.inicio'))
     return render_template('login.html')
+######----------######
+
 
 ###### SECRETARIA ######
 @rota_login.route('/Login/Secretaria/callback', methods=["POST", "GET"])
@@ -67,11 +70,13 @@ def login_secretaria():
     if "user_id" in session:
         return redirect(url_for('rotas.inicio'))
     return render_template('login_secretaria.html')
+######----------######
+
 
 ###### DESLOGAR ######
 @rota_login.route('/Logout')
 def logout():
     session.clear()
     return redirect(url_for("rotalogin.cadastro"))
-
+######----------######
 
