@@ -38,9 +38,29 @@
             <p>Ocorrido: {{ usuario['gravidade'] }}</p>
             <p>Denúncia: {{ usuario['descricao'] }}</p>
             <p>Data: {{ usuario['data'] }}</p>
-            <p>Situação: Visto por {{ usuario['visto'] }}</p>
+            {% if usuario['status'] == 'Aprovado.' %}
+              <p><span style="color: rgb(0, 255, 0);">Situação:  {{ usuario['status'] }}</span></p>
+            {% elif usuario['status'] == 'Recusado.' %}
+              <p><span style="color: red;">Situação: {{ usuario['status'] }}</span></p>
+            {% elif usuario['status'] == 'Arquivado.' %}
+              <p><span style="color: rgb(198, 198, 198);">Situação:  {{ usuario['status'] }}</span></p>
+            {% else %}
+              <p><span style="color: orange;">Visto por: {{ usuario['visto'] }}</span></p>
+            {% endif %}
             <p>Denunciado por: {{ usuario['nome'] }}</p>
           </div>
+
+          <form action="{{ url_for('rotasecretaria.aprovar', id=usuario['id']) }}" method="GET" onclick="return confirmarAbrir()">
+            <button type="submit" class="abrir-btn">Aprovar</button>
+          </form>
+          <br>
+          <form action="{{ url_for('rotasecretaria.recusar', id=usuario['id']) }}" method="GET" onclick="return confirmarAbrir()">
+            <button type="submit" class="abrir-btn">Recusar</button>
+          </form>
+          <br>
+          <form action="{{ url_for('rotasecretaria.arquivar', id=usuario['id']) }}" method="GET" onclick="return confirmarAbrir()">
+            <button type="submit" class="abrir-btn">Arquivar</button>
+          </form>
       {% else %}
         <p>Erro.</p>
       {% endif %}
@@ -56,10 +76,16 @@
       sidebar.classList.toggle('active');
     });
 
+    function confirmarAbrir() {
+      return confirm("Deseja Confirmar a Aprovação desta denúncia?");
+    }
+
     function confirmarLogout() {
       
     return confirm("Você tem certeza que quer deslogar?");
     }
+
+
 
   </script>
 

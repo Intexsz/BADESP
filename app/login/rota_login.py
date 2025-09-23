@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, render_template, session, redirect, u
 from google.oauth2 import id_token
 from google.auth.transport import requests
 from authlib.integrations.flask_client import OAuth
-from app.bancodedadosusuario import salvar_usuario
+from app.database.db_usuario import salvar_usuario
 
 app = Flask(__name__)
 rota_login = Blueprint('rotalogin', __name__)

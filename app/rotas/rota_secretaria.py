@@ -1,8 +1,8 @@
 from flask import Flask, session, redirect, url_for, Blueprint,render_template
 from authlib.integrations.flask_client import OAuth
-from app.bancodedadosusuario import buscar_cargo, pegar_no_nome
-from app.bancodedadosdenuncia import buscar_status_denuncia, abrir_denunciabanquinho, pegar_na_denuncia_haha, mostrar_denuncias, buscar_visto
-
+from app.database.db_usuario import buscar_cargo, pegar_no_nome
+from app.database.db_denuncia import buscar_status_denuncia, abrir_denunciabanquinho, pegar_na_denuncia_haha, buscar_visto
+from app.database.db_denuncia import atualizar_statuse
 app = Flask(__name__)
 rota_secretaria = Blueprint('rotasecretaria', __name__)
 
@@ -19,7 +19,6 @@ google = oauth.register(
     client_kwargs={'scope': 'openid email profile'},
 )
 
-
 ###### ABRIR DENUNCIA SE NÃO ESTIVER EXPIRADA ######
 @rota_secretaria.route('/Inicio/abrir/<int:id>', methods=['POST'])
 def abrir_denuncia(id):
@@ -32,7 +31,6 @@ def abrir_denuncia(id):
 
         status = buscar_status_denuncia(id, session["user_id"])
         if status != 'Expirada.':
-            # FALTA COLOCAR CAIXA DE AVISO SE DESEJA ABRIR DENUNCIA #
             abrir_denunciabanquinho(id, cargo)
             return redirect(url_for('rotas.inicio'))
         else:
@@ -44,40 +42,6 @@ def abrir_denuncia(id):
         """
     else:
         return redirect(url_for('rotas.incio'))
-######----------######
-
-
-###### ARQUIVAR ######
-@rota_secretaria.route('/Inicio/Arquivar/<int:id>', methods=['POST'])
-def arquivar_denuncia(id):
-    if 'user_id' not in session:
-        return redirect(url_for('rotalogin.cadastro'))
-    cargo = buscar_cargo(session['user_id'])
-
-    if cargo == 'Aluno':
-        return redirect(url_for('rotas.inicio'))
-    elif cargo == 'Secretaria':
-        # arquivar denuncia
-        print('ok')
-    else:
-        return redirect(url_for('rotas.inicio'))
-######----------######
-
-
-###### APROVAR ######
-@rota_secretaria.route('/Inicio/Aprovar/<int:id>', methods=['POST'])
-def aprovar(id):
-    if 'user_id' not in session:
-        return redirect(url_for('rotalogin.cadastro'))
-    cargo = buscar_cargo(session['user_id'])
-
-    if cargo == 'Aluno':
-        return redirect(url_for('rotas.inicio'))
-    elif cargo == 'Secretaria':
-        # aprovar
-        print('ok')
-    else:
-        return redirect(url_for('rotas.inicio'))
 ######----------######
 
 # Abre a denuncia #
@@ -121,3 +85,74 @@ def detalhe_denuncia(id):
     return redirect(url_for('rotas.inicio'))
 
 ######----------######
+
+@rota_secretaria.route('/Inicio/Recusar/<int:id>', methods=['POST', 'GET'])
+def recusar(id):
+    if 'user_id' not in session:
+        return redirect(url_for('rotalogin.cadastro'))
+    cargo = buscar_cargo(session['user_id'])
+
+    if cargo == 'Aluno':
+        return redirect(url_for('rotas.inicio'))
+    elif cargo == 'Secretaria':
+        status = buscar_status_denuncia(id, session["user_id"])
+        if status != 'Expirada.':
+            atualizar_statuse(id, cargo, 'Recusado.')
+            return redirect(url_for('rotas.inicio'))
+        else:
+            return f"""
+            <script>
+                alert("A denuncia expirou.");
+                window.location.href = "{url_for('rotas.inicio')}";
+            </script>
+        """
+    else:
+        return redirect(url_for('rotas.inicio'))
+
+    
+@rota_secretaria.route('/Inicio/Aprovar/<int:id>', methods=['POST', 'GET'])
+def aprovar(id):
+    if 'user_id' not in session:
+        return redirect(url_for('rotalogin.cadastro'))
+    cargo = buscar_cargo(session['user_id'])
+
+    if cargo == 'Aluno':
+        return redirect(url_for('rotas.inicio'))
+    elif cargo == 'Secretaria':
+        status = buscar_status_denuncia(id, session["user_id"])
+        if status != 'Expirada.':
+            atualizar_statuse(id, cargo, 'Aprovado.')
+            return redirect(url_for('rotas.inicio'))
+        else:
+            return f"""
+            <script>
+                alert("A denuncia expirou.");
+                window.location.href = "{url_for('rotas.inicio')}";
+            </script>
+        """
+    else:
+        return redirect(url_for('rotas.inicio'))
+
+    
+@rota_secretaria.route('/Inicio/Arquivar/<int:id>', methods=['POST', 'GET'])
+def arquivar(id):
+    if 'user_id' not in session:
+        return redirect(url_for('rotalogin.cadastro'))
+    cargo = buscar_cargo(session['user_id'])
+
+    if cargo == 'Aluno':
+        return redirect(url_for('rotas.inicio'))
+    elif cargo == 'Secretaria':
+        status = buscar_status_denuncia(id, session["user_id"])
+        if status != 'Expirada.':
+            atualizar_statuse(id, cargo, 'Arquivado.')
+            return redirect(url_for('rotas.inicio'))
+        else:
+            return f"""
+            <script>
+                alert("A denuncia expirou.");
+                window.location.href = "{url_for('rotas.inicio')}";
+            </script>
+        """
+    else:
+        return redirect(url_for('rotas.inicio'))

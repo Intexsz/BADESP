@@ -1,7 +1,7 @@
 from flask import Flask, request, render_template, session, redirect, url_for, Blueprint
 from authlib.integrations.flask_client import OAuth
-from app.bancodedadosusuario import buscar_cargo, buscar_usuario
-from app.bancodedadosdenuncia import buscar_status_denuncia, mostrar_denuncias, apagar_denuncia, criar_denuncia, expirar
+from app.database.db_usuario import buscar_cargo, buscar_usuario
+from app.database.db_denuncia import buscar_status_denuncia, mostrar_denuncias, apagar_denuncia, criar_denuncia, expirar
 
 app = Flask(__name__)
 rotas_bp = Blueprint('rotas', __name__)

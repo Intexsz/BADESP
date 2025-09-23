@@ -1,6 +1,6 @@
 import sqlite3
 from datetime import datetime, timedelta
-from app.bancodedadosusuario import buscar_usuario
+from app.database.db_usuario import buscar_usuario
 
 # iniciar banco de dados de denuncia
 def criar_tabela():
@@ -113,8 +113,8 @@ def abrir_denunciabanquinho(id, cargo, nome):
     cursor = conn.cursor()
     # atualiza o status para VISTO no id se o status for diferente de expirado
     cursor.execute(
-        'UPDATE denuncias SET status = ? WHERE id = ? AND status != ?',
-        ("Visto.", id, "Expirada.")
+        'UPDATE denuncias SET status = ? WHERE id = ? AND status = ?',
+        ("Visto.", id, "Em Análise.")
     )
     # atualiza o visto para o nome de quem abriu
     cursor.execute(
@@ -159,3 +159,19 @@ def buscar_visto(id):
     resultado = cursor.fetchone()
     conn.close()
     return resultado[0] if resultado else None
+
+def atualizar_statuse(id, cargo, novo):
+    # se não for secretaria, vaza
+    if cargo != "Secretaria":
+        return
+
+    conn = sqlite3.connect('denuncias.db')
+    cursor = conn.cursor()
+    # atualiza o status para novo no id se o status for diferente de expirado
+    cursor.execute(
+        'UPDATE denuncias SET status = ? WHERE id = ? AND status != ?',
+        (novo, id, "Expirada.")
+    )
+    
+    conn.commit()
+    conn.close()
