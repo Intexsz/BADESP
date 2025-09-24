@@ -22,9 +22,9 @@ google = oauth.register(
 ###### PAGINAS NORMAIS ######
 @rotas_bp.route('/')
 def homepage():
-    if "user_id" in session:
-        return redirect(url_for('rotas.inicio'))
-    return redirect(url_for('rotalogin.cadastro'))
+    if not "user_id" in session:
+        return redirect(url_for('rotas.cadastro'))
+    return redirect(url_for('rotalogin.inicio'))
 
 @rotas_bp.route('/Inicio')
 def inicio():
@@ -67,7 +67,7 @@ def denuncia():
 
 
 ###### DELETAR DENUNCIA SE ESTIVER EM ANALISE OU EXPIRADA ######
-@rotas_bp.route('/Inicio/delete/<int:id>', methods=['POST'])
+@rotas_bp.route('/Inicio/delete/<int:id>', methods=['POST' , 'GET'])
 def excluir_denuncia(id):
     if "user_id" not in session:
         return redirect(url_for('rotalogin.cadastro'))

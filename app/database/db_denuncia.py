@@ -125,12 +125,12 @@ def abrir_denunciabanquinho(id, cargo, nome):
     # atualiza o status para VISTO no id se o status for diferente de expirado
     cursor.execute(
         'UPDATE denuncias SET status = ? WHERE id = ? AND status = ?',
-        ("Visto.", id, "Em Análise.")
+        ("Visto.", id, 'Em Análise.')
     )
     
     cursor.execute(
-    'UPDATE denuncias SET visto = ? WHERE id = ? AND visto = ? AND status NOT IN (?, ?, ?, ?)',
-    (nome, id, 'Ninguém.','Expirada.', 'Aprovada.', 'Recusada.', 'Arquivada.')
+    'UPDATE denuncias SET visto = ? WHERE id = ? AND visto = ?',
+    (nome, id, 'Ninguém')
     )
 
     conn.commit()
