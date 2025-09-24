@@ -91,7 +91,7 @@ def expirar():
     denuncias = cursor.fetchall()
     for d in denuncias:
         id_denuncia, data_str, status = d
-        if status != "Em Análise.":
+        if status != "Visto.":
             continue
 
         created_at = datetime.strptime(data_str, "%d/%m/%Y %H:%M")
@@ -116,12 +116,12 @@ def abrir_denunciabanquinho(id, cargo, nome):
         'UPDATE denuncias SET status = ? WHERE id = ? AND status = ?',
         ("Visto.", id, "Em Análise.")
     )
-    # atualiza o visto para o nome de quem abriu
-    cursor.execute(
-        'UPDATE denuncias SET visto = ? WHERE id = ? AND status != ?',
-        (nome, id, "Expirada.")
-    )
     
+    cursor.execute(
+    'UPDATE denuncias SET visto = ? WHERE id = ? AND visto = ? AND status NOT IN (?, ?, ?, ?)',
+    (nome, id, 'Ninguém.','Expirada.', 'Aprovada.', 'Recusada.', 'Arquivada.')
+    )
+
     conn.commit()
     conn.close()
 
