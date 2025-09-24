@@ -4,7 +4,10 @@ body {
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  background: linear-gradient(360deg, #29387f, black);
+
+  /* Gradiente mais suave e fluido */
+  background: linear-gradient(to bottom, #0d0d0d, #1a1a40, #000);
+  min-height: 100vh;
   color: #f5f4f4;
 }
 
@@ -12,12 +15,15 @@ body {
 .painel-container {
   width: 90%;
   max-width: 800px;
-  background: linear-gradient(90deg, #29387f, #25337a, black);
+
+  /* Mantém contraste mas sem quebrar com o fundo */
+  background: rgba(25, 25, 60, 0.9);
   padding: 30px;
   border-radius: 20px;
   margin-bottom: 20px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
 }
+
 
 /* ===== Formulário ===== */
 form {
