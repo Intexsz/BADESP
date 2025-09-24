@@ -65,8 +65,6 @@ def detalhe_denuncia(id):
     cargo = buscar_cargo(session['user_id'])
     
     if cargo == 'Secretaria':
-        print(buscar_visto(id))
-        print(pegar_no_nome(session['user_id']))
         
         visto = buscar_visto(id)
         nomezin = pegar_no_nome(session['user_id'])

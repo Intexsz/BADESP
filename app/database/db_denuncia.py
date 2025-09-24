@@ -12,18 +12,21 @@ def criar_tabela():
             titulo TEXT NOT NULL,
             gravidade TEXT NOT NULL,
             descricao TEXT NOT NULL,
+            comentario TEXT,
+            comentario_ia TEXT,
             data TEXT NOT NULL,
             user_id TEXT NOT NULL,
             status TEXT NOT NULL,
             nome TEXT NOT NULL,
-            visto TEXT
+            visto TEXT,
+            cargo TEXT
         )
     ''')
     conn.commit()
     conn.close()
 
 # aqui ira criar a denuncia
-def criar_denuncia(titulo, gravidade, descricao, user_id, status, nome):
+def criar_denuncia(titulo, gravidade, descricao, user_id, status):
     data = datetime.now().strftime("%d/%m/%Y %H:%M") # data de quando foi criada
     conn = sqlite3.connect('denuncias.db')
     usuario = buscar_usuario(user_id)
@@ -34,11 +37,12 @@ def criar_denuncia(titulo, gravidade, descricao, user_id, status, nome):
     "foto": usuario[3],
     "cargo": usuario[4]}
     nome = usuario_dict["nome"]
+    cargo = usuario_dict['cargo']
     cursor = conn.cursor()
     cursor.execute('''
-        INSERT INTO denuncias (titulo, gravidade, descricao, data, user_id, status, nome, visto)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    ''', (titulo, gravidade, descricao, data, user_id, status, nome, 'Ninguém'))
+        INSERT INTO denuncias (titulo, gravidade, descricao, data, user_id, status, nome, visto, comentario, comentario_ia, cargo)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ''', (titulo, gravidade, descricao, data, user_id, status, nome, 'Ninguém', '', '', cargo))
     conn.commit()
     conn.close()
 
@@ -49,12 +53,19 @@ def mostrar_denuncias(user_id, cargo):
     
     if cargo == "Secretaria":
         cursor.execute('''
-            SELECT id, titulo, gravidade, descricao, data, status, nome, visto
+            SELECT id, titulo, gravidade, descricao, data, status, nome, visto, cargo
             FROM denuncias
             WHERE status != "Expirada."
             ORDER BY id DESC
         ''')
     elif cargo == 'Aluno':
+        cursor.execute('''
+            SELECT id, titulo, gravidade, descricao, data, status, nome, visto
+            FROM denuncias
+            WHERE user_id = ?
+            ORDER BY id DESC
+        ''', (user_id,))
+    elif cargo == 'Professor':
         cursor.execute('''
             SELECT id, titulo, gravidade, descricao, data, status, nome, visto
             FROM denuncias
@@ -130,10 +141,10 @@ def pegar_na_denuncia_haha(id):
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT id, titulo, gravidade, descricao, data, status, nome, visto
+        SELECT id, titulo, gravidade, descricao, data, status, nome, visto, comentario, comentario_ia, cargo
         FROM denuncias
         WHERE id = ?
-    """, (id,)) # seleciona os atributos no banco de dados denuncias onde o id é igual ao id fornecido
+    """, (id,))
 
     row = cursor.fetchone()
     conn.close()
@@ -147,7 +158,10 @@ def pegar_na_denuncia_haha(id):
             "data": row[4],
             "status": row[5],
             "nome": row[6],
-            'visto': row[7]
+            'visto': row[7],
+            'comentario': row[8],
+            'comentario_ia': row[9],
+            'cargo': row[10]
         }
     else:
         return 'no'

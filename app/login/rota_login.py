@@ -29,7 +29,6 @@ def processar_login(cargo):
     if not token:
         return jsonify({"error": "Token não fornecido"}), 400
     
-    print(f'{cargo} de /processar login')
     try:
         idinfo = id_token.verify_oauth2_token(token, requests.Request(), CLIENT_ID)
         user_data = {

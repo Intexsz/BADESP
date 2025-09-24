@@ -59,16 +59,8 @@ def denuncia():
         titulo = request.form.get('titulo')
         gravidade = request.form.get('gravidade')
         descricao = request.form.get('descricao')
-        usuario = buscar_usuario(session['user_id'])
-        usuario_dict = {
-        "id": usuario[0],
-        "nome": usuario[1],
-        "email": usuario[2],
-        "foto": usuario[3],
-        "cargo": usuario[4]}
-        nome = usuario_dict["nome"]
         
-        criar_denuncia(titulo, gravidade, descricao, session["user_id"], 'Em Análise.', nome)
+        criar_denuncia(titulo, gravidade, descricao, session["user_id"], 'Em Análise.')
         
     return render_template('denuncia.html')
 ######----------######
