@@ -70,8 +70,20 @@ def login_secretaria():
     if "user_id" in session:
         return redirect(url_for('rotas.inicio'))
     return render_template('login_secretaria.html')
-######----------######
 
+######-----------######
+
+###### PROFESSOR ######
+@rota_login.route('/Login/Professor/callback', methods=["POST", "GET"])
+def callback_professor():
+    return processar_login("Professor")
+
+@rota_login.route('/Login/Professor', methods=['GET', 'POST'])
+def login_professor():
+    if "user_id" in session:
+        return redirect(url_for('rotas.inicio'))
+    return render_template('login_professor.html')
+######----------######
 
 ###### DESLOGAR ######
 @rota_login.route('/Logout')

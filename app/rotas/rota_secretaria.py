@@ -19,6 +19,20 @@ google = oauth.register(
     client_kwargs={'scope': 'openid email profile'},
 )
 
+def checar_stats(id):
+    status = buscar_status_denuncia(id, session["user_id"])
+    if status == 'Expirada.':
+        return False
+    
+    cargo = buscar_cargo(session['user_id'])
+    if cargo == 'Secretaria':
+        if status != 'Expirada.':
+            return True
+        else:
+            return 'Expirou'
+    else:
+        return False
+    
 ###### ABRIR DENUNCIA SE NÃO ESTIVER EXPIRADA ######
 @rota_secretaria.route('/Inicio/abrir/<int:id>', methods=['POST'])
 def abrir_denuncia(id):
@@ -26,9 +40,7 @@ def abrir_denuncia(id):
         return redirect(url_for('rotalogin.cadastro'))
 
     cargo = buscar_cargo(session["user_id"])
-
     if cargo == "Secretaria":
-
         status = buscar_status_denuncia(id, session["user_id"])
         if status != 'Expirada.':
             abrir_denunciabanquinho(id, cargo)
@@ -88,71 +100,44 @@ def detalhe_denuncia(id):
 
 @rota_secretaria.route('/Inicio/Recusar/<int:id>', methods=['POST', 'GET'])
 def recusar(id):
-    if 'user_id' not in session:
-        return redirect(url_for('rotalogin.cadastro'))
-    cargo = buscar_cargo(session['user_id'])
-
-    if cargo == 'Aluno':
-        return redirect(url_for('rotas.inicio'))
-    elif cargo == 'Secretaria':
-        status = buscar_status_denuncia(id, session["user_id"])
-        if status != 'Expirada.':
-            atualizar_statuse(id, cargo, 'Recusado.')
-            return redirect(url_for('rotas.inicio'))
-        else:
-            return f"""
+    if checar_stats(id):
+        cargo = buscar_cargo(session['user_id'])
+        atualizar_statuse(id, cargo, 'Recusado.')
+    elif checar_stats(id) == 'Expirou':
+        return f"""
             <script>
                 alert("A denuncia expirou.");
                 window.location.href = "{url_for('rotas.inicio')}";
             </script>
         """
-    else:
-        return redirect(url_for('rotas.inicio'))
+    return redirect(url_for('rotas.inicio'))
 
     
 @rota_secretaria.route('/Inicio/Aprovar/<int:id>', methods=['POST', 'GET'])
 def aprovar(id):
-    if 'user_id' not in session:
-        return redirect(url_for('rotalogin.cadastro'))
-    cargo = buscar_cargo(session['user_id'])
-
-    if cargo == 'Aluno':
-        return redirect(url_for('rotas.inicio'))
-    elif cargo == 'Secretaria':
-        status = buscar_status_denuncia(id, session["user_id"])
-        if status != 'Expirada.':
-            atualizar_statuse(id, cargo, 'Aprovado.')
-            return redirect(url_for('rotas.inicio'))
-        else:
-            return f"""
+    if checar_stats(id):
+        cargo = buscar_cargo(session['user_id'])
+        atualizar_statuse(id, cargo, 'Aprovado.')
+    elif checar_stats(id) == 'Expirou':
+        return f"""
             <script>
                 alert("A denuncia expirou.");
                 window.location.href = "{url_for('rotas.inicio')}";
             </script>
         """
-    else:
-        return redirect(url_for('rotas.inicio'))
+    return redirect(url_for('rotas.inicio'))
 
     
 @rota_secretaria.route('/Inicio/Arquivar/<int:id>', methods=['POST', 'GET'])
 def arquivar(id):
-    if 'user_id' not in session:
-        return redirect(url_for('rotalogin.cadastro'))
-    cargo = buscar_cargo(session['user_id'])
-
-    if cargo == 'Aluno':
-        return redirect(url_for('rotas.inicio'))
-    elif cargo == 'Secretaria':
-        status = buscar_status_denuncia(id, session["user_id"])
-        if status != 'Expirada.':
-            atualizar_statuse(id, cargo, 'Arquivado.')
-            return redirect(url_for('rotas.inicio'))
-        else:
-            return f"""
+    if checar_stats(id):
+        cargo = buscar_cargo(session['user_id'])
+        atualizar_statuse(id, cargo, 'Arquivado.')
+    elif checar_stats(id) == 'Expirou':
+        return f"""
             <script>
                 alert("A denuncia expirou.");
                 window.location.href = "{url_for('rotas.inicio')}";
             </script>
         """
-    else:
-        return redirect(url_for('rotas.inicio'))
+    return redirect(url_for('rotas.inicio'))

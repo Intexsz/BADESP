@@ -40,6 +40,8 @@ def inicio():
         return render_template("secretaria.html", denuncias=denuncias, usuario=usuario)
     elif cargo == 'Aluno':
         return render_template("inicio.html", denuncias=denuncias, usuario=usuario)
+    elif cargo == 'Professor':
+        return render_template('professor.html', denuncias=denuncias, usuario=usuario)
 
 @rotas_bp.route('/Ajuda')
 def ajuda():
