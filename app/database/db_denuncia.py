@@ -15,7 +15,7 @@ def criar_tabela():
             comentario TEXT,
             comentario_ia TEXT,
             data TEXT NOT NULL,
-            datavista TEXT NOT NULL,
+            datavisto TEXT,
             user_id TEXT NOT NULL,
             status TEXT NOT NULL,
             nome TEXT NOT NULL,
