@@ -19,7 +19,8 @@ def criar_tabela():
             status TEXT NOT NULL,
             nome TEXT NOT NULL,
             visto TEXT,
-            cargo TEXT
+            cargo TEXT,
+            pin TEXT
         )
     ''')
     conn.commit()

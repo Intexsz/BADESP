@@ -20,11 +20,16 @@ google = oauth.register(
 )
 
 ###### PAGINAS NORMAIS ######
+
+@rotas_bp.route('/Configurar')
+def configurar():
+    return 'oi'
+
 @rotas_bp.route('/')
 def homepage():
     if not "user_id" in session:
-        return redirect(url_for('rotas.cadastro'))
-    return redirect(url_for('rotalogin.inicio'))
+        return redirect(url_for('rotalogin.cadastro'))
+    return redirect(url_for('rotas.inicio'))
 
 @rotas_bp.route('/Inicio')
 def inicio():
@@ -36,12 +41,26 @@ def inicio():
     denuncias = mostrar_denuncias(session["user_id"], cargo)
     usuario = buscar_usuario(session["user_id"])
 
+    # ===== PAGINAÇÃO =====
+    page = int(request.args.get("page", 1))   # página atual
+    per_page = 4                              # quantos itens por página
+    start = (page - 1) * per_page 
+    end = start + per_page
+
+    denuncias_paginadas = denuncias[start:end]
+    total_pages = (len(denuncias) + per_page - 1) // per_page
+
     if cargo == "Secretaria":
-        return render_template("secretaria.html", denuncias=denuncias, usuario=usuario)
+        return render_template("secretaria.html", 
+                               denuncias=denuncias_paginadas, 
+                               usuario=usuario,
+                               page=page,
+                               total_pages=total_pages)
     elif cargo == 'Aluno':
-        return render_template("inicio.html", denuncias=denuncias, usuario=usuario)
+        return render_template("inicio.html", denuncias=denuncias_paginadas, usuario=usuario)
     elif cargo == 'Professor':
-        return render_template('professor.html', denuncias=denuncias, usuario=usuario)
+        return render_template("professor.html", denuncias=denuncias_paginadas, usuario=usuario)
+
 
 @rotas_bp.route('/Ajuda')
 def ajuda():
