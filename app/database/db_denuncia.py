@@ -15,6 +15,7 @@ def criar_tabela():
             comentario TEXT,
             comentario_ia TEXT,
             data TEXT NOT NULL,
+            datavista TEXT NOT NULL,
             user_id TEXT NOT NULL,
             status TEXT NOT NULL,
             nome TEXT NOT NULL,
@@ -99,18 +100,20 @@ def buscar_status_denuncia(id, user_id):
 def expirar():
     conn = sqlite3.connect('denuncias.db')
     cursor = conn.cursor()
-    cursor.execute('SELECT id, data, status FROM denuncias')
+    cursor.execute('SELECT id, datavisto, status FROM denuncias')
     denuncias = cursor.fetchall()
+
     for d in denuncias:
         id_denuncia, data_str, status = d
         if status != "Visto.":
             continue
 
+
         created_at = datetime.strptime(data_str, "%d/%m/%Y %H:%M")
         if datetime.now() > created_at + timedelta(days=7):
             cursor.execute(
-                'UPDATE denuncias SET status = ? WHERE id = ?',
-                ("Expirada.", id_denuncia)
+                'UPDATE denuncias SET status = ? WHERE id = ? AND status = ?',
+                ("Expirada.", id_denuncia, 'Visto.')
             )
     conn.commit()
     conn.close()
@@ -120,7 +123,8 @@ def abrir_denunciabanquinho(id, cargo, nome):
     # se não for secretaria, vaza
     if cargo != "Secretaria":
         return
-
+    
+    data = datetime.now().strftime("%d/%m/%Y %H:%M") 
     conn = sqlite3.connect('denuncias.db')
     cursor = conn.cursor()
     # atualiza o status para VISTO no id se o status for diferente de expirado
@@ -132,6 +136,11 @@ def abrir_denunciabanquinho(id, cargo, nome):
     cursor.execute(
     'UPDATE denuncias SET visto = ? WHERE id = ? AND visto = ?',
     (nome, id, 'Ninguém')
+    )
+
+    cursor.execute(
+    'UPDATE denuncias SET datavisto = ? WHERE id = ?',
+    (data, id)
     )
 
     conn.commit()
