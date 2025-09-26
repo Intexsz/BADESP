@@ -65,11 +65,13 @@
         <p>Erro.</p>
       {% endif %}
       <div class="comentario">
-        <form method="POST">
-          <textarea name="hehehehea" style="text-align: center;" placeholder="Deseja adicionar um comentario?"></textarea>
+        <form action="{{ url_for('rotasecretaria.comentar', id=usuario['id']) }}" method="POST">
+          <textarea name="comentario" style="text-align: center;" placeholder="Deseja adicionar um comentario?"></textarea>
           <button type="submit" class="abrir-btn" onclick="return confirmarTexto()">Enviar</button>
         </form>
-      </div>
+    </div>
+    
+    
     </div>
   </div>
   

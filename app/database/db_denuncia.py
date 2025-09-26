@@ -55,21 +55,21 @@ def mostrar_denuncias(user_id, cargo):
     
     if cargo == "Secretaria":
         cursor.execute('''
-            SELECT id, titulo, gravidade, descricao, data, status, nome, visto, cargo
+            SELECT id, titulo, gravidade, descricao, data, status, nome, visto, cargo, comentario
             FROM denuncias
             WHERE status != "Expirada."
             ORDER BY id DESC
         ''')
     elif cargo == 'Aluno':
         cursor.execute('''
-            SELECT id, titulo, gravidade, descricao, data, status, nome, visto
+            SELECT id, titulo, gravidade, descricao, data, status, nome, visto, comentario
             FROM denuncias
             WHERE user_id = ?
             ORDER BY id DESC
         ''', (user_id,))
     elif cargo == 'Professor':
         cursor.execute('''
-            SELECT id, titulo, gravidade, descricao, data, status, nome, visto
+            SELECT id, titulo, gravidade, descricao, data, status, nome, visto, comentario
             FROM denuncias
             WHERE user_id = ?
             ORDER BY id DESC
@@ -158,6 +158,9 @@ def pegar_na_denuncia_haha(id):
 
     row = cursor.fetchone()
     conn.close()
+    
+    # Adicione este print para depurar
+    print(f"Dados buscados do banco para denúncia ID {id}: {row}")
 
     if row:
         return {
@@ -175,6 +178,7 @@ def pegar_na_denuncia_haha(id):
         }
     else:
         return 'no'
+
     
 def buscar_visto(id):
     conn = sqlite3.connect('denuncias.db')
@@ -196,6 +200,22 @@ def atualizar_statuse(id, cargo, novo):
         'UPDATE denuncias SET status = ? WHERE id = ? AND status != ?',
         (novo, id, "Expirada.")
     )
+    
+    conn.commit()
+    conn.close()
+
+def publicar_comentario(comentario, id, cargo):
+    # se não for secretaria, vaza
+    if cargo != "Secretaria":
+        return
+
+    conn = sqlite3.connect('denuncias.db')
+    cursor = conn.cursor()
+    cursor.execute(
+        'UPDATE denuncias SET comentario = ? WHERE id = ?',
+        (comentario, id)
+    )
+    print(f'{comentario}')
     
     conn.commit()
     conn.close()
