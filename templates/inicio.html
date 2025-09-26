@@ -54,6 +54,11 @@
             {% else %}
               <p><span style="color: rgb(255, 255, 255);">Situação: Em Análise</span></p>
             {% endif %}
+            {% if d[8] != '' %}
+            <p><b>Comentario da Secretaria: </b>{{ d[8] }}</p>
+          {% else %}
+            <p>Ainda não há comentário para esta denúncia.</p>
+          {% endif %}
             {% if d[5] == 'Em Análise.' or d[5] == 'Expirada.' %}
               <form class="apagar-form" action="{{ url_for('rotas.excluir_denuncia', id=d[0]) }}" method="POST">
                 <button type="submit">Apagar</button>
