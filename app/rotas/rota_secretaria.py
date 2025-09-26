@@ -114,7 +114,7 @@ def comentar(id):
             </script>
         """
     
-    return redirect(url_for('rotas.inicio'))
+    return redirect(url_for('rotasecretaria.inicio'))
 
 @rota_secretaria.route('/Inicio/Recusar/<int:id>', methods=['POST', 'GET'])
 def recusar(id):
