@@ -64,11 +64,16 @@
       {% else %}
         <p>Erro.</p>
       {% endif %}
+      <br>
+      {% if usuario['comentario'] == '' %}
       <div class="comentario">
         <form action="{{ url_for('rotasecretaria.comentar', id=usuario['id']) }}" method="POST">
           <textarea name="comentario" style="text-align: center;" placeholder="Deseja adicionar um comentario?"></textarea>
           <button type="submit" class="abrir-btn" onclick="return confirmarTexto()">Enviar</button>
         </form>
+      {% else %}
+      <p style="align-items: center; text-align: center;">Comentario já feito.</p>
+      {% endif %}
     </div>
     
     
