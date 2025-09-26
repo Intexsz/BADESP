@@ -1,8 +1,9 @@
-from flask import Flask, session, redirect, url_for, Blueprint,render_template
+from flask import Flask, session, redirect, url_for, Blueprint,render_template, request
 from authlib.integrations.flask_client import OAuth
 from app.database.db_usuario import buscar_cargo, pegar_no_nome
 from app.database.db_denuncia import buscar_status_denuncia, abrir_denunciabanquinho, pegar_na_denuncia_haha, buscar_visto
 from app.database.db_denuncia import atualizar_statuse
+
 app = Flask(__name__)
 rota_secretaria = Blueprint('rotasecretaria', __name__)
 
@@ -57,8 +58,12 @@ def abrir_denuncia(id):
 ######----------######
 
 # Abre a denuncia #
-@rota_secretaria.route("/detalhe/<int:id>")
+@rota_secretaria.route("/detalhe/<int:id>", methods=['POST', 'GET'])
 def detalhe_denuncia(id):
+    if request.method == 'POST':
+        texto = request.form['hehehehea']
+
+        
     if "user_id" not in session:
         return redirect(url_for("rotalogin.cadastro"))
     
@@ -109,7 +114,6 @@ def recusar(id):
             </script>
         """
     return redirect(url_for('rotas.inicio'))
-
     
 @rota_secretaria.route('/Inicio/Aprovar/<int:id>', methods=['POST', 'GET'])
 def aprovar(id):
