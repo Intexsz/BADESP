@@ -199,3 +199,17 @@ def atualizar_statuse(id, cargo, novo):
     
     conn.commit()
     conn.close()
+
+def atualizar_comentario(comentario, id, cargo):
+    if cargo != 'Secretaria':
+        return
+    conn = sqlite3.connect('denuncias.db')
+    cursor = conn.cursor()
+
+    cursor.execute(
+        'UPDATE denuncias SET comentario = ? WHERE id = ?',
+        (comentario, id)
+    )
+
+    conn.commit()
+    conn.close()

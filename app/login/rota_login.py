@@ -30,7 +30,7 @@ def processar_login(cargo):
         return jsonify({"error": "Token não fornecido"}), 400
     
     try:
-        idinfo = id_token.verify_oauth2_token(token, requests.Request(), CLIENT_ID)
+        idinfo = id_token.verify_oauth2_token(token, requests.Request(), CLIENT_ID,  clock_skew_in_seconds=60)
         user_data = {
             "id": idinfo["sub"],
             "email": idinfo["email"],
