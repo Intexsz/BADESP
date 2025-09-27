@@ -22,7 +22,6 @@ google = oauth.register(
 
 def checar_stats(id):
     status = buscar_status_denuncia(id)
-    print(status)
     if status == None:
         return 'Erro'
     
@@ -132,7 +131,7 @@ def comentar(id):
                 window.location.href = "{url_for('rotas.inicio')}";
             </script>
         """
-
+    
     return redirect(url_for('rotasecretaria.detalhe_denuncia', id=id))
 
 @rota_secretaria.route('/Inicio/Recusar/<int:id>', methods=['POST', 'GET'])
