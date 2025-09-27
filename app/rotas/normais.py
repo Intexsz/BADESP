@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, session, redirect, url_for, Blueprint
+from flask import Flask, request, render_template, session, redirect, url_for, Blueprint, make_response
 from authlib.integrations.flask_client import OAuth
 from app.database.db_usuario import buscar_cargo, buscar_usuario
 from app.database.db_denuncia import buscar_status_denuncia, mostrar_denuncias, apagar_denuncia, criar_denuncia, expirar
@@ -57,7 +57,7 @@ def inicio():
                                page=page,
                                total_pages=total_pages)
     elif cargo == 'Aluno':
-        return render_template("inicio.html", denuncias=denuncias_paginadas, usuario=usuario)
+        return render_template("inicio.html", denuncias=denuncias, usuario=usuario)
     elif cargo == 'Professor':
         return render_template("professor.html", denuncias=denuncias_paginadas, usuario=usuario)
 
@@ -81,6 +81,13 @@ def denuncia():
         
         criar_denuncia(titulo, gravidade, descricao, session["user_id"], 'Em Análise.')
         
+        return f"""
+    <script>
+        window.location.reload();
+        window.location.href = "{url_for('rotas.denuncia')}";
+    </script>
+"""
+        
     return render_template('denuncia.html')
 ######----------######
 
@@ -91,7 +98,7 @@ def excluir_denuncia(id):
     if "user_id" not in session:
         return redirect(url_for('rotalogin.cadastro'))
     
-    status = buscar_status_denuncia(id, session["user_id"])
+    status = buscar_status_denuncia(id)
     if status == 'Em Análise.' or status == 'Expirada.':
         apagar_denuncia(id, session["user_id"])
         return redirect(url_for('rotas.inicio'))

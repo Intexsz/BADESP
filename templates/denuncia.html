@@ -30,9 +30,9 @@
   <div class="form-container">
     <h1>Enviar Denúncia</h1>
     <form id="form-denuncia" method="POST">
-      <input type="text" id="titulo" placeholder="Título da denúncia" required name="titulo">
+      <input type="text" placeholder="Título da denúncia" required name="titulo">
 
-      <select id="gravidade" required name="gravidade">
+      <select required name="gravidade">
         <option value="">Ocorrido</option>
         <option value="Agressão">Agressão (física, verbal, psicológica, moral e sexual)</option>
         <option value="Destruição Patrimônial">Destruição Patrimônial </option>
@@ -41,7 +41,7 @@
         <option value="Outros">Outros</option>
       </select>
       
-      <textarea id="resposta" placeholder="Denúncia:" required name="descricao"></textarea>
+      <textarea placeholder="Denúncia:" required name="descricao"></textarea>
       <button type="submit">Enviar Denúncia</button>
     </form>
   </div>
@@ -59,7 +59,7 @@
     }
 
     alert("Sua denúncia foi enviada com sucesso!");
-
+    
     form.submit();
 
     function confirmarLogout() {

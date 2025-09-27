@@ -41,16 +41,18 @@
           <div class="denuncia-card" id="denuncia-{{ d[0] }}">
             <h3>{{ d[1] }}</h3>
             <p>Ocorrido: {{ d[2] }}</p>
-            <p>Denúncia: {{ d[3] }}</p>
+            <p>Denúncia: <br><br> <textarea disabled style="width: 700px; height: 100px;resize: none;">{{ d[3] }}</textarea></p>
             <p>Data: {{ d[4] }}</p>
             {% if d[5] == 'Aprovado.' %}
               <p><span style="color: rgb(0, 255, 0);">Situação:  Aprovado por {{ d[7] }}</span></p>
             {% elif d[5] == 'Recusado.' %}
               <p><span style="color: red;">Situação: Recusado por {{ d[7] }}</span></p>
             {% elif d[5] == 'Arquivado.' %}
-              <p><span style="color: rgb(198, 198, 198);">Situação: Arquivado por {{ d[7] }}<span><p>
+              <p><span style="color: gray;">Situação: Arquivado por {{ d[7] }}<span><p>
             {% elif d[5] == 'Visto.' %}
               <p><span style="color: orange;">Situação: Visto por {{ d[7] }}<span><p>
+            {% elif d[5] == 'Expirada.' %}
+              <p><span style="color: gray;">Situação: Expirado.<span><p></p>
             {% else %}
               <p><span style="color: rgb(255, 255, 255);">Situação: Em Análise</span></p>
             {% endif %}

@@ -88,10 +88,10 @@ def apagar_denuncia(id, user_id):
     conn.close()
 
 # aqui vai buscar o status da denuncia
-def buscar_status_denuncia(id, user_id):
+def buscar_status_denuncia(id):
     conn = sqlite3.connect('denuncias.db')
     cursor = conn.cursor()
-    cursor.execute('SELECT status FROM denuncias WHERE id = ? AND user_id = ?', (id, user_id))
+    cursor.execute('SELECT status FROM denuncias WHERE id = ?', (id,))
     resultado = cursor.fetchone()
     conn.close()
     return resultado[0] if resultado else None
@@ -107,7 +107,6 @@ def expirar():
         id_denuncia, data_str, status = d
         if status != "Visto.":
             continue
-
 
         created_at = datetime.strptime(data_str, "%d/%m/%Y %H:%M")
         if datetime.now() > created_at + timedelta(days=7):
@@ -184,6 +183,14 @@ def buscar_visto(id):
     conn = sqlite3.connect('denuncias.db')
     cursor = conn.cursor()
     cursor.execute('SELECT visto FROM denuncias WHERE id = ?', (id,))
+    resultado = cursor.fetchone()
+    conn.close()
+    return resultado[0] if resultado else None
+
+def buscar_comentario(id):
+    conn = sqlite3.connect('denuncias.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT comentario FROM denuncias WHERE id = ?', (id,))
     resultado = cursor.fetchone()
     conn.close()
     return resultado[0] if resultado else None

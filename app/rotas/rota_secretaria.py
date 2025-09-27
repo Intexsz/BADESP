@@ -2,7 +2,7 @@ from flask import Flask, session, redirect, url_for, Blueprint,render_template, 
 from authlib.integrations.flask_client import OAuth
 from app.database.db_usuario import buscar_cargo, pegar_no_nome
 from app.database.db_denuncia import buscar_status_denuncia, abrir_denunciabanquinho, pegar_na_denuncia_haha, buscar_visto
-from app.database.db_denuncia import atualizar_statuse, publicar_comentario
+from app.database.db_denuncia import atualizar_statuse, publicar_comentario, buscar_comentario
 
 app = Flask(__name__)
 rota_secretaria = Blueprint('rotasecretaria', __name__)
@@ -21,9 +21,13 @@ google = oauth.register(
 )
 
 def checar_stats(id):
-    status = buscar_status_denuncia(id, session["user_id"])
+    status = buscar_status_denuncia(id)
+    print(status)
+    if status == None:
+        return 'Erro'
+    
     if status == 'Expirada.':
-        return False
+        return 'Expirou'
     
     cargo = buscar_cargo(session['user_id'])
     if cargo == 'Secretaria':
@@ -42,7 +46,7 @@ def abrir_denuncia(id):
 
     cargo = buscar_cargo(session["user_id"])
     if cargo == "Secretaria":
-        status = buscar_status_denuncia(id, session["user_id"])
+        status = buscar_status_denuncia(id)
         if status != 'Expirada.':
             abrir_denunciabanquinho(id, cargo)
             return redirect(url_for('rotas.inicio'))
@@ -99,28 +103,18 @@ def detalhe_denuncia(id):
 @rota_secretaria.route('/Comentar/<int:id>', methods=['POST'])
 def comentar(id):
     comentario = request.form.get('comentario')
+    checagem = buscar_comentario(id)
 
     if not comentario:
         return redirect(url_for('rotas.inicio'))
     
-    if checar_stats(id):
-        cargo = buscar_cargo(session['user_id'])
-        publicar_comentario(comentario, id, cargo)
-    elif checar_stats(id) == 'Expirou':
-        return """
+    if checar_stats(id) == 'Erro':
+        return f"""
             <script>
-                alert("A denuncia expirou.");
+                alert("Erro.");
                 window.location.href = "{url_for('rotas.inicio')}";
             </script>
         """
-    
-    return redirect(url_for('rotasecretaria.inicio'))
-
-@rota_secretaria.route('/Inicio/Recusar/<int:id>', methods=['POST', 'GET'])
-def recusar(id):
-    if checar_stats(id):
-        cargo = buscar_cargo(session['user_id'])
-        atualizar_statuse(id, cargo, 'Recusado.')
     elif checar_stats(id) == 'Expirou':
         return f"""
             <script>
@@ -128,33 +122,61 @@ def recusar(id):
                 window.location.href = "{url_for('rotas.inicio')}";
             </script>
         """
+    if checar_stats(id) and checagem == '':
+        cargo = buscar_cargo(session['user_id'])
+        publicar_comentario(comentario, id, cargo)
+    else:
+        return f"""
+            <script>
+                alert("Comentario ja feito.");
+                window.location.href = "{url_for('rotas.inicio')}";
+            </script>
+        """
+
+    return redirect(url_for('rotasecretaria.detalhe_denuncia', id=id))
+
+@rota_secretaria.route('/Inicio/Recusar/<int:id>', methods=['POST', 'GET'])
+def recusar(id):
+    if checar_stats(id) == 'Expirou':
+        return f"""
+            <script>
+                alert("A denuncia expirou.");
+                window.location.href = "{url_for('rotas.inicio')}";
+            </script>
+        """
+    if checar_stats(id):
+        cargo = buscar_cargo(session['user_id'])
+        atualizar_statuse(id, cargo, 'Recusado.')
+    
     return redirect(url_for('rotas.inicio'))
     
 @rota_secretaria.route('/Inicio/Aprovar/<int:id>', methods=['POST', 'GET'])
 def aprovar(id):
-    if checar_stats(id):
-        cargo = buscar_cargo(session['user_id'])
-        atualizar_statuse(id, cargo, 'Aprovado.')
-    elif checar_stats(id) == 'Expirou':
+    if checar_stats(id) == 'Expirou':
         return f"""
             <script>
                 alert("A denuncia expirou.");
                 window.location.href = "{url_for('rotas.inicio')}";
             </script>
         """
+    if checar_stats(id):
+        cargo = buscar_cargo(session['user_id'])
+        atualizar_statuse(id, cargo, 'Aprovado.')
+
     return redirect(url_for('rotas.inicio'))
 
     
 @rota_secretaria.route('/Inicio/Arquivar/<int:id>', methods=['POST', 'GET'])
 def arquivar(id):
-    if checar_stats(id):
-        cargo = buscar_cargo(session['user_id'])
-        atualizar_statuse(id, cargo, 'Arquivado.')
-    elif checar_stats(id) == 'Expirou':
+    if checar_stats(id) == 'Expirou':
         return f"""
             <script>
                 alert("A denuncia expirou.");
                 window.location.href = "{url_for('rotas.inicio')}";
             </script>
         """
+    if checar_stats(id):
+        cargo = buscar_cargo(session['user_id'])
+        atualizar_statuse(id, cargo, 'Arquivado.')
+
     return redirect(url_for('rotas.inicio'))
