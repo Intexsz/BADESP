@@ -61,9 +61,20 @@
           {% else %}
             <p>Ainda não há comentário para esta denúncia.</p>
           {% endif %}
-            {% if d[5] == 'Em Análise.' or d[5] == 'Expirada.' %}
+            {% if d[5] == 'Em Análise.' %}
               <form class="apagar-form" action="{{ url_for('rotas.excluir_denuncia', id=d[0]) }}" method="POST">
                 <button type="submit">Apagar</button>
+              </form>
+            {% elif d[5] == 'Expirada.' %}
+              <form class="apagar-form" action="{{ url_for('rotas.excluir_denuncia', id=d[0]) }}" method="POST">
+                <button type="submit">Apagar</button>
+              </form>
+              <br>
+                <form class="reenviar-form" action="{{ url_for('rotas.reenviar_denuncia', id=d[0]) }}" method="POST">
+                <input type="hidden" name="titulo" value="{{ d[1] }}">
+                <input type="hidden" name="gravidade" value="{{ d[2] }}">
+                <input type="hidden" name="descricao" value="{{ d[3] }}">
+                <button type="submit">Reenviar</button>
               </form>
             {% else %}
             <div class="botãooff">
