@@ -1,7 +1,5 @@
-	Melhorar o visual do site
-	Pagina da Gestão e do Professor
+	Melhorar o visual da pagina do aluno
 	Opção de filtragem de denuncias, aprovadas, em analise, arquivadas, recusadas e todas as denuncias
-	Ter um css para cada pagina, o inicio.css ta sendo o css do site inteiro literalmente
-	Gravidade de denuncia, baixa, media ou alta
+	Gravidade de denuncia, baixa, media ou alta (precisa de IA)
 	Professor somente poderá ver denuncias médias pra baixo ou caso elw seja envolvido
 	

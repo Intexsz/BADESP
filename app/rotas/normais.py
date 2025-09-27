@@ -21,10 +21,6 @@ google = oauth.register(
 
 ###### PAGINAS NORMAIS ######
 
-@rotas_bp.route('/Configurar')
-def configurar():
-    return 'oi'
-
 @rotas_bp.route('/')
 def homepage():
     if not "user_id" in session:
