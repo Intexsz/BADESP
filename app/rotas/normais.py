@@ -110,3 +110,28 @@ def excluir_denuncia(id):
             </script>
         """
 ######----------######
+
+
+###### REENVIA A DENUNCIA SE FOR EXPIRADA ######
+@rotas_bp.route('/Inicio/reenviar/<int:id>', methods=['POST'])
+def reenviar_denuncia(id):
+    if "user_id" not in session:
+        return redirect(url_for('rotalogin.cadastro'))
+    
+    titulo = request.form.get('titulo')
+    gravidade = request.form.get('gravidade')
+    descricao = request.form.get('descricao')
+
+    status = buscar_status_denuncia(id)
+    if status == 'Expirada.':
+        criar_denuncia(titulo, gravidade, descricao, session["user_id"], 'Em Análise.')
+        apagar_denuncia(id, session["user_id"])
+        return redirect(url_for('rotas.inicio'))
+    else:
+        return f"""
+            <script>
+                alert("Não é possível reenviar denúncia.");
+                window.location.href = "{url_for('rotas.inicio')}";
+            </script>
+        """
+######----------######
