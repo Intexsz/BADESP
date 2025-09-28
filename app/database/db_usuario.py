@@ -10,7 +10,8 @@ def init_db():
                 nome TEXT,
                 email TEXT,
                 foto TEXT,
-                cargo TEXT NOT NULL
+                cargo TEXT NOT NULL,
+                pin TEXT
             )
         """)
         conn.commit()

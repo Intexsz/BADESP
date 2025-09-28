@@ -10,6 +10,7 @@ def criar_tabela():
         CREATE TABLE IF NOT EXISTS denuncias (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             titulo TEXT NOT NULL,
+            tipo TEXT,
             gravidade TEXT NOT NULL,
             descricao TEXT NOT NULL,
             comentario TEXT,
@@ -19,9 +20,7 @@ def criar_tabela():
             user_id TEXT NOT NULL,
             status TEXT NOT NULL,
             nome TEXT NOT NULL,
-            visto TEXT,
-            cargo TEXT,
-            pin TEXT
+            visto TEXT
         )
     ''')
     conn.commit()
@@ -49,35 +48,61 @@ def criar_denuncia(titulo, gravidade, descricao, user_id, status):
     conn.close()
 
 # aqui vai pegar as denuncias e retornar
-def mostrar_denuncias(user_id, cargo):
+def mostrar_denuncias(user_id, cargo, tipo):
     conn = sqlite3.connect('denuncias.db')
     cursor = conn.cursor()
     
-    if cargo == "Secretaria":
-        cursor.execute('''
+    if tipo != 'Tudo':
+        if cargo == "Secretaria":
+            cursor.execute('''
+            SELECT id, titulo, gravidade, descricao, data, status, nome, visto, cargo, comentario
+            FROM denuncias
+            WHERE status != "Expirada." AND status = ?
+            ORDER BY id DESC
+        ''', (tipo,))
+        elif cargo == 'Aluno':
+            cursor.execute('''
+            SELECT id, titulo, gravidade, descricao, data, status, nome, visto, comentario
+            FROM denuncias
+            WHERE user_id = ? AND status = ?
+            ORDER BY id DESC
+        ''', (user_id,tipo,))
+        elif cargo == 'Professor':
+            cursor.execute('''
+            SELECT id, titulo, gravidade, descricao, data, status, nome, visto, comentario
+            FROM denuncias
+            WHERE user_id = ? AND status = ?
+            ORDER BY id DESC
+        ''', (user_id,tipo,))
+        denuncias = cursor.fetchall()
+        conn.close()
+        return denuncias
+
+    elif tipo == 'Tudo':
+        if cargo == "Secretaria":
+            cursor.execute('''
             SELECT id, titulo, gravidade, descricao, data, status, nome, visto, cargo, comentario
             FROM denuncias
             WHERE status != "Expirada."
             ORDER BY id DESC
         ''')
-    elif cargo == 'Aluno':
-        cursor.execute('''
+        elif cargo == 'Aluno':
+            cursor.execute('''
             SELECT id, titulo, gravidade, descricao, data, status, nome, visto, comentario
             FROM denuncias
             WHERE user_id = ?
             ORDER BY id DESC
         ''', (user_id,))
-    elif cargo == 'Professor':
-        cursor.execute('''
+        elif cargo == 'Professor':
+            cursor.execute('''
             SELECT id, titulo, gravidade, descricao, data, status, nome, visto, comentario
             FROM denuncias
             WHERE user_id = ?
             ORDER BY id DESC
         ''', (user_id,))
-    
-    denuncias = cursor.fetchall()
-    conn.close()
-    return denuncias
+        denuncias = cursor.fetchall()
+        conn.close()
+        return denuncias
 
 # aqui é apagar as denuncias
 def apagar_denuncia(id, user_id):
@@ -105,17 +130,22 @@ def expirar():
 
     for d in denuncias:
         id_denuncia, data_str, status = d
-        if status != "Visto.":
+
+        if status != "Visto." or not data_str:
             continue
 
-        created_at = datetime.strptime(data_str, "%d/%m/%Y %H:%M")
-        if datetime.now() > created_at + timedelta(days=7):
+        data_visto = datetime.strptime(data_str, "%d/%m/%Y %H:%M")
+
+        # expira 7 segundos depois de ter sido vista
+        if datetime.now() > data_visto + timedelta(days=7):
             cursor.execute(
                 'UPDATE denuncias SET status = ? WHERE id = ? AND status = ?',
                 ("Expirada.", id_denuncia, 'Visto.')
             )
+
     conn.commit()
     conn.close()
+
 
 # aqui é quando ele abre a denuncia, deixando ela em Visto.
 def abrir_denunciabanquinho(id, cargo, nome):
@@ -157,9 +187,6 @@ def pegar_na_denuncia_haha(id):
 
     row = cursor.fetchone()
     conn.close()
-    
-    # Adicione este print para depurar
-    print(f"Dados buscados do banco para denúncia ID {id}: {row}")
 
     if row:
         return {

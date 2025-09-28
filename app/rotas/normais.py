@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, session, redirect, url_for, Blueprint, make_response
+from flask import Flask, request, render_template, session, redirect, url_for, Blueprint
 from authlib.integrations.flask_client import OAuth
 from app.database.db_usuario import buscar_cargo, buscar_usuario
 from app.database.db_denuncia import buscar_status_denuncia, mostrar_denuncias, apagar_denuncia, criar_denuncia, expirar
@@ -27,35 +27,49 @@ def homepage():
         return redirect(url_for('rotalogin.cadastro'))
     return redirect(url_for('rotas.inicio'))
 
-@rotas_bp.route('/Inicio')
+@rotas_bp.route('/Inicio', methods=['POST', 'GET'])
 def inicio():
     if "user_id" not in session:
         return redirect(url_for("rotalogin.cadastro"))
-    
+
     expirar()
     cargo = buscar_cargo(session["user_id"])
-    denuncias = mostrar_denuncias(session["user_id"], cargo)
     usuario = buscar_usuario(session["user_id"])
+    denuncias = mostrar_denuncias(session["user_id"], cargo, 'Em Análise')
+    filtro = request.args.get('filtro', 'Tudo')
 
+    if request.method == 'POST':
+        querer = request.form.get('Olavo', 'Tudo')
+        return redirect(url_for('rotas.inicio', filtro=querer))
+    
+    if filtro == 'Tudo':
+        denuncias = mostrar_denuncias(session["user_id"], cargo, 'Tudo')
+    elif filtro == 'Aprovado':
+        denuncias = mostrar_denuncias(session["user_id"], cargo, 'Aprovado.')
+    elif filtro == 'Recusado':
+        denuncias = mostrar_denuncias(session["user_id"], cargo, 'Recusado.')
+    elif filtro == 'Arquivado':
+        denuncias = mostrar_denuncias(session["user_id"], cargo, 'Arquivado.')
+    elif filtro == 'Aberto':
+        denuncias = mostrar_denuncias(session["user_id"], cargo, 'Em Análise.')
+    elif filtro == 'Expirada':
+        denuncias = mostrar_denuncias(session["user_id"], cargo, 'Expirada.')
+    
     # ===== PAGINAÇÃO =====
-    page = int(request.args.get("page", 1))   # página atual
-    per_page = 4                              # quantos itens por página
+    page = int(request.args.get("page", 1))
+    per_page = 4
     start = (page - 1) * per_page 
     end = start + per_page
 
     denuncias_paginadas = denuncias[start:end]
     total_pages = (len(denuncias) + per_page - 1) // per_page
-
+        
     if cargo == "Secretaria":
-        return render_template("secretaria.html", 
-                               denuncias=denuncias_paginadas, 
-                               usuario=usuario,
-                               page=page,
-                               total_pages=total_pages)
+        return render_template("secretaria.html", denuncias=denuncias_paginadas, usuario=usuario,page=page,total_pages=total_pages,filtro=filtro)
     elif cargo == 'Aluno':
-        return render_template("inicio.html", denuncias=denuncias, usuario=usuario)
+        return render_template("inicio.html", denuncias=denuncias, usuario=usuario,filtro=filtro)
     elif cargo == 'Professor':
-        return render_template("professor.html", denuncias=denuncias_paginadas, usuario=usuario)
+        return render_template("professor.html", denuncias=denuncias_paginadas, usuario=usuario,filtro=filtro)
 
 
 @rotas_bp.route('/Ajuda')
