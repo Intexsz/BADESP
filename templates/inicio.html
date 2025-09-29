@@ -62,7 +62,7 @@
             {% elif d[5] == 'Arquivado.' %}
               <p><span style="color: gray;">🗃️Situação: Arquivado por: {{ d[7] }}🗃️<span><p>
             {% elif d[5] == 'Visto.' %}
-              <p><span style="color: orange;">🔎Situação: Visualizado por: {{ d[7] }}🔎<span><p>
+              <p><span style="color: orange;">🔎Situação: Visualizado por: {{ d[7] }} ás {{ d[9] }}🔎<span><p>
             {% elif d[5] == 'Expirada.' %}
               <p><span style="color: gray;">⏰Situação: Expirado.⏰<span><p></p>
             {% else %}

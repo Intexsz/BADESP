@@ -55,21 +55,21 @@ def mostrar_denuncias(user_id, cargo, tipo):
     if tipo != 'Tudo':
         if cargo == "Secretaria":
             cursor.execute('''
-            SELECT id, titulo, gravidade, descricao, data, status, nome, visto, cargo, comentario
+            SELECT id, titulo, gravidade, descricao, data, status, nome, visto, cargo, comentario, datavisto
             FROM denuncias
             WHERE status != "Expirada." AND status = ?
             ORDER BY id DESC
         ''', (tipo,))
         elif cargo == 'Aluno':
             cursor.execute('''
-            SELECT id, titulo, gravidade, descricao, data, status, nome, visto, comentario
+            SELECT id, titulo, gravidade, descricao, data, status, nome, visto, comentario, datavisto
             FROM denuncias
             WHERE user_id = ? AND status = ?
             ORDER BY id DESC
         ''', (user_id,tipo,))
         elif cargo == 'Professor':
             cursor.execute('''
-            SELECT id, titulo, gravidade, descricao, data, status, nome, visto, comentario
+            SELECT id, titulo, gravidade, descricao, data, status, nome, visto, comentario, datavisto
             FROM denuncias
             WHERE user_id = ? AND status = ?
             ORDER BY id DESC
@@ -81,21 +81,21 @@ def mostrar_denuncias(user_id, cargo, tipo):
     elif tipo == 'Tudo':
         if cargo == "Secretaria":
             cursor.execute('''
-            SELECT id, titulo, gravidade, descricao, data, status, nome, visto, cargo, comentario
+            SELECT id, titulo, gravidade, descricao, data, status, nome, visto, cargo, comentario, datavisto
             FROM denuncias
             WHERE status != "Expirada."
             ORDER BY id DESC
         ''')
         elif cargo == 'Aluno':
             cursor.execute('''
-            SELECT id, titulo, gravidade, descricao, data, status, nome, visto, comentario
+            SELECT id, titulo, gravidade, descricao, data, status, nome, visto, comentario, datavisto
             FROM denuncias
             WHERE user_id = ?
             ORDER BY id DESC
         ''', (user_id,))
         elif cargo == 'Professor':
             cursor.execute('''
-            SELECT id, titulo, gravidade, descricao, data, status, nome, visto, comentario
+            SELECT id, titulo, gravidade, descricao, data, status, nome, visto, comentario, datavisto
             FROM denuncias
             WHERE user_id = ?
             ORDER BY id DESC
@@ -146,6 +146,28 @@ def expirar():
     conn.commit()
     conn.close()
 
+def expirar_aberto():
+    conn = sqlite3.connect('denuncias.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT id, datavisto, status FROM denuncias')
+    denuncias = cursor.fetchall()
+
+    for d in denuncias:
+        id_denuncia, data_str, status = d
+
+        if status != "Visto." or data_str:
+            continue
+
+        data_visto = datetime.strptime(data_str, "%d/%m/%Y %H:%M")
+
+        if datetime.now() > data_visto + timedelta(days=7):
+            cursor.execute(
+                'UPDATE denuncias SET status = ? WHERE id = ? AND status = ?',
+                ("Expirada.", id_denuncia, 'Visto.')
+            )
+
+    conn.commit()
+    conn.close()
 
 # aqui é quando ele abre a denuncia, deixando ela em Visto.
 def abrir_denunciabanquinho(id, cargo, nome):
@@ -156,6 +178,14 @@ def abrir_denunciabanquinho(id, cargo, nome):
     data = datetime.now().strftime("%d/%m/%Y %H:%M") 
     conn = sqlite3.connect('denuncias.db')
     cursor = conn.cursor()
+    # seleciona o datavisto
+    cursor.execute("""
+        SELECT datavisto
+        FROM denuncias
+        WHERE id = ?
+    """, (id,))
+    row = cursor.fetchone()
+    
     # atualiza o status para VISTO no id se o status for diferente de expirado
     cursor.execute(
         'UPDATE denuncias SET status = ? WHERE id = ? AND status = ?',
@@ -167,7 +197,9 @@ def abrir_denunciabanquinho(id, cargo, nome):
     (nome, id, 'Ninguém')
     )
 
-    cursor.execute(
+    # verifica se datavisto não for None e atualiza o datavisto quaso não exista
+    if not row[0] or row[0] == '':
+        cursor.execute(
     'UPDATE denuncias SET datavisto = ? WHERE id = ?',
     (data, id)
     )
@@ -180,7 +212,7 @@ def pegar_na_denuncia_haha(id):
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT id, titulo, gravidade, descricao, data, status, nome, visto, comentario, comentario_ia, cargo
+        SELECT id, titulo, gravidade, descricao, data, status, nome, visto, comentario, comentario_ia, cargo, datavisto
         FROM denuncias
         WHERE id = ?
     """, (id,))
@@ -200,7 +232,8 @@ def pegar_na_denuncia_haha(id):
             'visto': row[7],
             'comentario': row[8],
             'comentario_ia': row[9],
-            'cargo': row[10]
+            'cargo': row[10],
+            'datavisto': row[11]
         }
     else:
         return 'no'
@@ -249,7 +282,6 @@ def publicar_comentario(comentario, id, cargo):
         'UPDATE denuncias SET comentario = ? WHERE id = ?',
         (comentario, id)
     )
-    print(f'{comentario}')
     
     conn.commit()
     conn.close()

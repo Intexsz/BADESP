@@ -58,7 +58,7 @@
             {% elif usuario['status'] == 'Arquivado.' %}
               <p><span style="color: rgb(198, 198, 198);">Situação:  {{ usuario['status'] }}</span></p>
             {% else %}
-              <p><span style="color: orange;">Visto por: {{ usuario['visto'] }}</span></p>
+              <p><span style="color: orange;">Visto por: {{ usuario['visto'] }} ás {{ usuario['datavisto'] }}</span></p>
             {% endif %}
             <p>Denunciado por: {{ usuario['nome'] }}</p>
           </div>

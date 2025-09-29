@@ -25,12 +25,20 @@ google = oauth.register(
 def processar_login(cargo):
     token = request.json.get("credential") if request.is_json else \
             request.form.get("credential") or request.args.get("credential")
+    
+    print("TOKEN RECEBIDO DO FRONT:", token)
 
     if not token:
         return jsonify({"error": "Token não fornecido"}), 400
     
     try:
-        idinfo = id_token.verify_oauth2_token(token, requests.Request(), CLIENT_ID,  clock_skew_in_seconds=60)
+        idinfo = id_token.verify_oauth2_token(
+    token,
+    requests.Request(),
+    CLIENT_ID,
+    clock_skew_in_seconds=300  # tolera 5 minutos de diferença
+)
+
         user_data = {
             "id": idinfo["sub"],
             "email": idinfo["email"],
@@ -42,7 +50,11 @@ def processar_login(cargo):
         session["user_id"] = user_data["id"]
         return jsonify({"status": "ok", "user": user_data})
     except Exception as e:
+        import traceback
+        print("ERRO AO VALIDAR TOKEN:", e)
+        traceback.print_exc()
         return jsonify({"error": str(e)}), 400
+
 ######----------######
 
 
