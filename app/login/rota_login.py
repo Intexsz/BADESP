@@ -36,7 +36,7 @@ def processar_login(cargo):
     token,
     requests.Request(),
     CLIENT_ID,
-    clock_skew_in_seconds=300  # tolera 5 minutos de diferença
+    clock_skew_in_seconds=300
 )
 
         user_data = {
