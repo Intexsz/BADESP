@@ -19,6 +19,7 @@ def criar_tabela():
             datavisto TEXT,
             user_id TEXT NOT NULL,
             status TEXT NOT NULL,
+            cargo TEXT,
             nome TEXT NOT NULL,
             visto TEXT
         )
