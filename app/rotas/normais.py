@@ -21,45 +21,55 @@ google = oauth.register(
 
 ###### PAGINAS NORMAIS ######
 
-@rotas_bp.route('/Configurar')
-def configurar():
-    return 'oi'
-
 @rotas_bp.route('/')
 def homepage():
     if not "user_id" in session:
         return redirect(url_for('rotalogin.cadastro'))
     return redirect(url_for('rotas.inicio'))
 
-@rotas_bp.route('/Inicio')
+@rotas_bp.route('/Inicio', methods=['POST', 'GET'])
 def inicio():
     if "user_id" not in session:
         return redirect(url_for("rotalogin.cadastro"))
-    
+
     expirar()
     cargo = buscar_cargo(session["user_id"])
-    denuncias = mostrar_denuncias(session["user_id"], cargo)
     usuario = buscar_usuario(session["user_id"])
+    denuncias = mostrar_denuncias(session["user_id"], cargo, 'Em Análise')
+    filtro = request.args.get('filtro', 'Tudo')
 
+    if request.method == 'POST':
+        querer = request.form.get('Olavo', 'Tudo')
+        return redirect(url_for('rotas.inicio', filtro=querer))
+    
+    if filtro == 'Tudo':
+        denuncias = mostrar_denuncias(session["user_id"], cargo, 'Tudo')
+    elif filtro == 'Aprovado':
+        denuncias = mostrar_denuncias(session["user_id"], cargo, 'Aprovado.')
+    elif filtro == 'Recusado':
+        denuncias = mostrar_denuncias(session["user_id"], cargo, 'Recusado.')
+    elif filtro == 'Arquivado':
+        denuncias = mostrar_denuncias(session["user_id"], cargo, 'Arquivado.')
+    elif filtro == 'Aberto':
+        denuncias = mostrar_denuncias(session["user_id"], cargo, 'Em Análise.')
+    elif filtro == 'Expirada':
+        denuncias = mostrar_denuncias(session["user_id"], cargo, 'Expirada.')
+    
     # ===== PAGINAÇÃO =====
-    page = int(request.args.get("page", 1))   # página atual
-    per_page = 4                              # quantos itens por página
+    page = int(request.args.get("page", 1))
+    per_page = 4
     start = (page - 1) * per_page 
     end = start + per_page
 
     denuncias_paginadas = denuncias[start:end]
     total_pages = (len(denuncias) + per_page - 1) // per_page
-
+        
     if cargo == "Secretaria":
-        return render_template("secretaria.html", 
-                               denuncias=denuncias_paginadas, 
-                               usuario=usuario,
-                               page=page,
-                               total_pages=total_pages)
+        return render_template("secretaria.html", denuncias=denuncias_paginadas, usuario=usuario,page=page,total_pages=total_pages,filtro=filtro)
     elif cargo == 'Aluno':
-        return render_template("inicio.html", denuncias=denuncias_paginadas, usuario=usuario)
+        return render_template("inicio.html", denuncias=denuncias, usuario=usuario,filtro=filtro)
     elif cargo == 'Professor':
-        return render_template("professor.html", denuncias=denuncias_paginadas, usuario=usuario)
+        return render_template("professor.html", denuncias=denuncias_paginadas, usuario=usuario,filtro=filtro)
 
 
 @rotas_bp.route('/Ajuda')
@@ -81,6 +91,13 @@ def denuncia():
         
         criar_denuncia(titulo, gravidade, descricao, session["user_id"], 'Em Análise.')
         
+        return f"""
+    <script>
+        window.location.reload();
+        window.location.href = "{url_for('rotas.denuncia')}";
+    </script>
+"""
+        
     return render_template('denuncia.html')
 ######----------######
 
@@ -91,7 +108,7 @@ def excluir_denuncia(id):
     if "user_id" not in session:
         return redirect(url_for('rotalogin.cadastro'))
     
-    status = buscar_status_denuncia(id, session["user_id"])
+    status = buscar_status_denuncia(id)
     if status == 'Em Análise.' or status == 'Expirada.':
         apagar_denuncia(id, session["user_id"])
         return redirect(url_for('rotas.inicio'))
@@ -99,6 +116,31 @@ def excluir_denuncia(id):
         return f"""
             <script>
                 alert("Não é mais possível deletar denúncia.");
+                window.location.href = "{url_for('rotas.inicio')}";
+            </script>
+        """
+######----------######
+
+
+###### REENVIA A DENUNCIA SE FOR EXPIRADA ######
+@rotas_bp.route('/Inicio/reenviar/<int:id>', methods=['POST'])
+def reenviar_denuncia(id):
+    if "user_id" not in session:
+        return redirect(url_for('rotalogin.cadastro'))
+    
+    titulo = request.form.get('titulo')
+    gravidade = request.form.get('gravidade')
+    descricao = request.form.get('descricao')
+
+    status = buscar_status_denuncia(id)
+    if status == 'Expirada.':
+        criar_denuncia(titulo, gravidade, descricao, session["user_id"], 'Em Análise.')
+        apagar_denuncia(id, session["user_id"])
+        return redirect(url_for('rotas.inicio'))
+    else:
+        return f"""
+            <script>
+                alert("Não é possível reenviar denúncia.");
                 window.location.href = "{url_for('rotas.inicio')}";
             </script>
         """

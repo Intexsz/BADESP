@@ -10,6 +10,7 @@ def criar_tabela():
         CREATE TABLE IF NOT EXISTS denuncias (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             titulo TEXT NOT NULL,
+            tipo TEXT,
             gravidade TEXT NOT NULL,
             descricao TEXT NOT NULL,
             comentario TEXT,
@@ -18,10 +19,9 @@ def criar_tabela():
             datavisto TEXT,
             user_id TEXT NOT NULL,
             status TEXT NOT NULL,
-            nome TEXT NOT NULL,
-            visto TEXT,
             cargo TEXT,
-            pin TEXT
+            nome TEXT NOT NULL,
+            visto TEXT
         )
     ''')
     conn.commit()
@@ -49,35 +49,61 @@ def criar_denuncia(titulo, gravidade, descricao, user_id, status):
     conn.close()
 
 # aqui vai pegar as denuncias e retornar
-def mostrar_denuncias(user_id, cargo):
+def mostrar_denuncias(user_id, cargo, tipo):
     conn = sqlite3.connect('denuncias.db')
     cursor = conn.cursor()
     
-    if cargo == "Secretaria":
-        cursor.execute('''
-            SELECT id, titulo, gravidade, descricao, data, status, nome, visto, cargo, comentario
+    if tipo != 'Tudo':
+        if cargo == "Secretaria":
+            cursor.execute('''
+            SELECT id, titulo, gravidade, descricao, data, status, nome, visto, cargo, comentario, datavisto
+            FROM denuncias
+            WHERE status != "Expirada." AND status = ?
+            ORDER BY id DESC
+        ''', (tipo,))
+        elif cargo == 'Aluno':
+            cursor.execute('''
+            SELECT id, titulo, gravidade, descricao, data, status, nome, visto, comentario, datavisto
+            FROM denuncias
+            WHERE user_id = ? AND status = ?
+            ORDER BY id DESC
+        ''', (user_id,tipo,))
+        elif cargo == 'Professor':
+            cursor.execute('''
+            SELECT id, titulo, gravidade, descricao, data, status, nome, visto, comentario, datavisto
+            FROM denuncias
+            WHERE user_id = ? AND status = ?
+            ORDER BY id DESC
+        ''', (user_id,tipo,))
+        denuncias = cursor.fetchall()
+        conn.close()
+        return denuncias
+
+    elif tipo == 'Tudo':
+        if cargo == "Secretaria":
+            cursor.execute('''
+            SELECT id, titulo, gravidade, descricao, data, status, nome, visto, cargo, comentario, datavisto
             FROM denuncias
             WHERE status != "Expirada."
             ORDER BY id DESC
         ''')
-    elif cargo == 'Aluno':
-        cursor.execute('''
-            SELECT id, titulo, gravidade, descricao, data, status, nome, visto, comentario
+        elif cargo == 'Aluno':
+            cursor.execute('''
+            SELECT id, titulo, gravidade, descricao, data, status, nome, visto, comentario, datavisto
             FROM denuncias
             WHERE user_id = ?
             ORDER BY id DESC
         ''', (user_id,))
-    elif cargo == 'Professor':
-        cursor.execute('''
-            SELECT id, titulo, gravidade, descricao, data, status, nome, visto, comentario
+        elif cargo == 'Professor':
+            cursor.execute('''
+            SELECT id, titulo, gravidade, descricao, data, status, nome, visto, comentario, datavisto
             FROM denuncias
             WHERE user_id = ?
             ORDER BY id DESC
         ''', (user_id,))
-    
-    denuncias = cursor.fetchall()
-    conn.close()
-    return denuncias
+        denuncias = cursor.fetchall()
+        conn.close()
+        return denuncias
 
 # aqui é apagar as denuncias
 def apagar_denuncia(id, user_id):
@@ -88,10 +114,10 @@ def apagar_denuncia(id, user_id):
     conn.close()
 
 # aqui vai buscar o status da denuncia
-def buscar_status_denuncia(id, user_id):
+def buscar_status_denuncia(id):
     conn = sqlite3.connect('denuncias.db')
     cursor = conn.cursor()
-    cursor.execute('SELECT status FROM denuncias WHERE id = ? AND user_id = ?', (id, user_id))
+    cursor.execute('SELECT status FROM denuncias WHERE id = ?', (id,))
     resultado = cursor.fetchone()
     conn.close()
     return resultado[0] if resultado else None
@@ -105,16 +131,42 @@ def expirar():
 
     for d in denuncias:
         id_denuncia, data_str, status = d
-        if status != "Visto.":
+
+        if status != "Visto." or not data_str:
             continue
 
+        data_visto = datetime.strptime(data_str, "%d/%m/%Y %H:%M")
 
-        created_at = datetime.strptime(data_str, "%d/%m/%Y %H:%M")
-        if datetime.now() > created_at + timedelta(days=7):
+        # expira 7 segundos depois de ter sido vista
+        if datetime.now() > data_visto + timedelta(days=7):
             cursor.execute(
                 'UPDATE denuncias SET status = ? WHERE id = ? AND status = ?',
                 ("Expirada.", id_denuncia, 'Visto.')
             )
+
+    conn.commit()
+    conn.close()
+
+def expirar_aberto():
+    conn = sqlite3.connect('denuncias.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT id, datavisto, status FROM denuncias')
+    denuncias = cursor.fetchall()
+
+    for d in denuncias:
+        id_denuncia, data_str, status = d
+
+        if status != "Visto." or data_str:
+            continue
+
+        data_visto = datetime.strptime(data_str, "%d/%m/%Y %H:%M")
+
+        if datetime.now() > data_visto + timedelta(days=7):
+            cursor.execute(
+                'UPDATE denuncias SET status = ? WHERE id = ? AND status = ?',
+                ("Expirada.", id_denuncia, 'Visto.')
+            )
+
     conn.commit()
     conn.close()
 
@@ -127,6 +179,14 @@ def abrir_denunciabanquinho(id, cargo, nome):
     data = datetime.now().strftime("%d/%m/%Y %H:%M") 
     conn = sqlite3.connect('denuncias.db')
     cursor = conn.cursor()
+    # seleciona o datavisto
+    cursor.execute("""
+        SELECT datavisto
+        FROM denuncias
+        WHERE id = ?
+    """, (id,))
+    row = cursor.fetchone()
+    
     # atualiza o status para VISTO no id se o status for diferente de expirado
     cursor.execute(
         'UPDATE denuncias SET status = ? WHERE id = ? AND status = ?',
@@ -138,7 +198,9 @@ def abrir_denunciabanquinho(id, cargo, nome):
     (nome, id, 'Ninguém')
     )
 
-    cursor.execute(
+    # verifica se datavisto não for None e atualiza o datavisto quaso não exista
+    if not row[0] or row[0] == '':
+        cursor.execute(
     'UPDATE denuncias SET datavisto = ? WHERE id = ?',
     (data, id)
     )
@@ -151,16 +213,13 @@ def pegar_na_denuncia_haha(id):
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT id, titulo, gravidade, descricao, data, status, nome, visto, comentario, comentario_ia, cargo
+        SELECT id, titulo, gravidade, descricao, data, status, nome, visto, comentario, comentario_ia, cargo, datavisto
         FROM denuncias
         WHERE id = ?
     """, (id,))
 
     row = cursor.fetchone()
     conn.close()
-    
-    # Adicione este print para depurar
-    print(f"Dados buscados do banco para denúncia ID {id}: {row}")
 
     if row:
         return {
@@ -174,7 +233,8 @@ def pegar_na_denuncia_haha(id):
             'visto': row[7],
             'comentario': row[8],
             'comentario_ia': row[9],
-            'cargo': row[10]
+            'cargo': row[10],
+            'datavisto': row[11]
         }
     else:
         return 'no'
@@ -184,6 +244,14 @@ def buscar_visto(id):
     conn = sqlite3.connect('denuncias.db')
     cursor = conn.cursor()
     cursor.execute('SELECT visto FROM denuncias WHERE id = ?', (id,))
+    resultado = cursor.fetchone()
+    conn.close()
+    return resultado[0] if resultado else None
+
+def buscar_comentario(id):
+    conn = sqlite3.connect('denuncias.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT comentario FROM denuncias WHERE id = ?', (id,))
     resultado = cursor.fetchone()
     conn.close()
     return resultado[0] if resultado else None
@@ -215,7 +283,6 @@ def publicar_comentario(comentario, id, cargo):
         'UPDATE denuncias SET comentario = ? WHERE id = ?',
         (comentario, id)
     )
-    print(f'{comentario}')
     
     conn.commit()
     conn.close()

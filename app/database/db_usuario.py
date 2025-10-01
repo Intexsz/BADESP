@@ -10,7 +10,8 @@ def init_db():
                 nome TEXT,
                 email TEXT,
                 foto TEXT,
-                cargo TEXT NOT NULL
+                cargo TEXT,
+                pin INTEGER
             )
         """)
         conn.commit()
@@ -48,3 +49,4 @@ def pegar_no_nome(id):
         cursor.execute("SELECT nome FROM usuarios WHERE id = ?", (id,))
         resultado = cursor.fetchone()
         return resultado[0] if resultado else None
+
