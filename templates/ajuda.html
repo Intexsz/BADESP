@@ -81,13 +81,29 @@
     // Retorna true para ir para /logout ou false para cancelar
         return confirm("Você tem certeza que quer deslogar?");
     }
-    const btn = document.querySelector('.menu-btn');
-    const sidebar = document.querySelector('.sidebar');
+    const menuBtn = document.querySelector('.menu-btn');
+const sidebar = document.querySelector('.sidebar');
 
-    btn.addEventListener('click', () => {
+menuBtn.addEventListener('click', () => {
     sidebar.classList.toggle('active');
-    }
-);
+});
+
+// ACORDEÃO FAQQQQQQQ
+const faqs = document.querySelectorAll('#ajuda .faq');
+
+faqs.forEach(faq => {
+  // Anexar o ouvinte de eventos diretamente ao elemento pai (.faq)
+  faq.addEventListener('click', () => {
+    // Fecha outras FAQs abertas
+    faqs.forEach(f => {
+      if (f !== faq) {
+        f.classList.remove('active');
+      }
+    });
+    // Alterna a FAQ clicada
+    faq.classList.toggle('active');
+  });
+});
 
 </script>
 
