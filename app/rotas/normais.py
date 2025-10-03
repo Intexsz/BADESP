@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, session, redirect, url_for, Blueprint
+from flask import Flask, request, render_template, session, redirect, url_for, Blueprint, flash
 from authlib.integrations.flask_client import OAuth
 from app.database.db_usuario import buscar_cargo, buscar_usuario
 from app.database.db_denuncia import buscar_status_denuncia, mostrar_denuncias, apagar_denuncia, criar_denuncia, expirar
@@ -91,12 +91,9 @@ def denuncia():
         
         criar_denuncia(titulo, gravidade, descricao, session["user_id"], 'Em Análise.')
         
-        return f"""
-    <script>
-        window.location.reload();
-        window.location.href = "{url_for('rotas.denuncia')}";
-    </script>
-"""
+        flash("Sua denúncia foi enviada com sucesso!")
+        
+        return redirect(url_for('rotas.denuncia'))
         
     return render_template('denuncia.html')
 ######----------######
