@@ -29,7 +29,7 @@ def checar_stats(id):
         return 'Expirou'
     
     cargo = buscar_cargo(session['user_id'])
-    if cargo == 'Secretaria':
+    if cargo == 'Secretaria' or cargo == 'Professor':
         if status != 'Expirada.':
             return True
         else:
@@ -44,7 +44,7 @@ def abrir_denuncia(id):
         return redirect(url_for('rotalogin.cadastro'))
 
     cargo = buscar_cargo(session["user_id"])
-    if cargo == "Secretaria":
+    if cargo == "Secretaria" or cargo == 'Professor':
         status = buscar_status_denuncia(id)
         if status != 'Expirada.':
             abrir_denunciabanquinho(id, cargo)
@@ -67,7 +67,7 @@ def detalhe_denuncia(id):
     
     cargo = buscar_cargo(session['user_id'])
     
-    if cargo == 'Secretaria':
+    if cargo == 'Secretaria' or cargo == 'Professor':
         
         visto = buscar_visto(id)
         nomezin = pegar_no_nome(session['user_id'])

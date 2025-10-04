@@ -1,6 +1,6 @@
 from flask import Flask, request, render_template, session, redirect, url_for, Blueprint, flash
 from authlib.integrations.flask_client import OAuth
-from app.database.db_usuario import buscar_cargo, buscar_usuario
+from app.database.db_usuario import buscar_cargo, buscar_usuario, buscar_nome_secretaria, buscar_nome_professor
 from app.database.db_denuncia import buscar_status_denuncia, mostrar_denuncias, apagar_denuncia, criar_denuncia, expirar
 
 app = Flask(__name__)
@@ -69,7 +69,7 @@ def inicio():
     elif cargo == 'Aluno':
         return render_template("inicio.html", denuncias=denuncias, usuario=usuario,filtro=filtro)
     elif cargo == 'Professor':
-        return render_template("professor.html", denuncias=denuncias_paginadas, usuario=usuario,filtro=filtro)
+        return render_template("professor.html", denuncias=denuncias_paginadas, usuario=usuario,page=page,total_pages=total_pages,filtro=filtro)
 
 
 @rotas_bp.route('/Ajuda')
@@ -88,14 +88,17 @@ def denuncia():
         titulo = request.form.get('titulo')
         gravidade = request.form.get('gravidade')
         descricao = request.form.get('descricao')
-        
-        criar_denuncia(titulo, gravidade, descricao, session["user_id"], 'Em Análise.')
+        quem = request.form.get('quem')
+        pessoa = request.form.get('pessoa')
+
+        criar_denuncia(titulo, gravidade, descricao, session["user_id"], 'Em Análise.', quem, pessoa)
         
         flash("Sua denúncia foi enviada com sucesso!")
         
         return redirect(url_for('rotas.denuncia'))
-        
-    return render_template('denuncia.html')
+    nomeprof = buscar_nome_professor()
+    nomesecretaria = buscar_nome_secretaria()
+    return render_template('denuncia.html', professor=nomeprof, secretaria=nomesecretaria)
 ######----------######
 
 
@@ -128,10 +131,12 @@ def reenviar_denuncia(id):
     titulo = request.form.get('titulo')
     gravidade = request.form.get('gravidade')
     descricao = request.form.get('descricao')
+    quem = request.form.get('quem')
+    pessoa = request.form.get('pessoa')
 
     status = buscar_status_denuncia(id)
     if status == 'Expirada.':
-        criar_denuncia(titulo, gravidade, descricao, session["user_id"], 'Em Análise.')
+        criar_denuncia(titulo, gravidade, descricao, session["user_id"], 'Em Análise.', quem, pessoa)
         apagar_denuncia(id, session["user_id"])
         return redirect(url_for('rotas.inicio'))
     else:

@@ -1,96 +1,126 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-
+<html lang="pt-br">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='OIP.jpg') }}">
-  <title>SNEP - Início</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='inicio.css') }}">
-  <script src="{{ url_for('static', filename='js/inicio.js') }}" defer></script>
-</head>
-
-<body>
-  <header class="Cabecalho">
-    <nav>
-      <h1 class="nome">Segurança Nas Escolas Públicas</h1>
-    </nav>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SNEP - Início</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='secretaria.css') }}">
+    <script src="{{ url_for('static', filename='js/inicio.js') }}" defer></script>
+     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='OIP.jpg') }}">
+ </head>
+ <header class="Cabecalho">
+    
+    <h1 class="nome">S.N.E.P</h1>
+    
     <button class="menu-btn">☰</button>
 
-    <!-- Menu lateral -->
     <nav class="sidebar">
       <ul>
         <li><a href="/Inicio">Início</a></li>
         <li><a href="/Ajuda">Ajuda</a></li>
         <li><a href="/Denuncia">Fazer Denúncia</a></li>
         <li><a href="/Logout" onclick="return confirmarLogout()"><i class="fas fa-user-circle"></i>Deslogar</a></li>
-        <li><a href="/MudarPin"><i class="fas fa-cog"></i> Mudar o PIN</a></li>
+        <li><a href="/MudarPin"> Mudar o PIN</a></li>
       </ul>
     </nav>
-  </header>
 
-    <h2>Bem Vindo {{ usuario[1] }}!</h2>
-    <p><b>Email:</b> {{ usuario[2] }}</p>
-    <img src="{{ usuario[3] }}" alt="Foto do usuário" style="border-radius:50%">
-
-  <div class="painel-container">
-    <h1>Painel de Denúncias</h1>
-    <div id="denuncias-container">
-      {% if denuncias %}
-        {% for d in denuncias %}
-          <div class="denuncia-card" id="denuncia-{{ d[0] }}">
-            <h3>{{ d[1] }}</h3>
-            <p>Ocorrido: {{ d[2] }}</p>
-            <p>Denúncia: {{ d[3] }}</p>
-            <p>Data: {{ d[4] }}</p>
-            {% if d[5] == 'Aprovado.' %}
-              <p><span style="color: rgb(0, 255, 0);">Situação:  Aprovado por {{ d[7] }}</span></p>
-            {% elif d[5] == 'Recusado.' %}
-              <p><span style="color: red;">Situação: Recusado por {{ d[7] }}</span></p>
-            {% elif d[5] == 'Arquivado.' %}
-              <p><span style="color: rgb(198, 198, 198);">Situação: Arquivado por {{ d[7] }}<span><p>
-            {% elif d[5] == 'Visto.' %}
-              <p><span style="color: orange;">Situação: Visto por {{ d[7] }}<span><p>
-            {% else %}
-              <p><span style="color: rgb(255, 255, 255);">Situação: Em Análise</span></p>
-            {% endif %}
-            {% if d[5] == 'Em Análise.' or d[5] == 'Expirada.' %}
-              <form class="apagar-form" action="{{ url_for('rotas.excluir_denuncia', id=d[0]) }}" method="POST">
-                <button type="submit">Apagar</button>
-              </form>
-            {% else %}
-            <div class="botãooff">
-              <form class="apagar-form" action="{{ url_for('rotas.excluir_denuncia', id=d[0]) }}" method="POST">
-                <button type="submit" disabled>Apagar</button>
-              </form>
-            </div>
-            {% endif %}
-          </div>
-        {% endfor %}
-      {% else %}
-        <p>Nenhuma denúncia cadastrada.</p>
-      {% endif %}
+    <div class="profile-icon">
+      <img src="{{ usuario[3] }}">
     </div>
-  </div>
+  
+  </header>
+ <body>
+      <h6 class="mensagem">Bem Vindo Professor:   {{ usuario[1] }}</h6>
+      <form class="filtro" method="GET" action="{{ url_for('rotas.inicio') }}">
+        <select name="filtro" onchange="this.form.submit()">
+          <option value="Tudo" {% if filtro == "Tudo" %}selected{% endif %}>Tudo</option>
+          <option value="Aprovado" {% if filtro == "Aprovado" %}selected{% endif %}>Aprovado</option>
+          <option value="Recusado" {% if filtro == "Recusado" %}selected{% endif %}>Recusado</option>
+          <option value="Arquivado" {% if filtro == "Arquivado" %}selected{% endif %}>Arquivado</option>
+          <option value="Aberto" {% if filtro == "Aberto" %}selected{% endif %}>Aberto</option>
+        </select>
+      </form>
 
-  <script>
-    // Toggle menu lateral
-    const btn = document.querySelector('.menu-btn');
-    const sidebar = document.querySelector('.sidebar');
+<div class="grid-container">
+{% if denuncias %}
+  {% for d in denuncias %}
+    {% set cor = "white" %}
+    {% set nome = "📂Denúncia em aberto📂 " %}
 
-    btn.addEventListener('click', () => {
-      sidebar.classList.toggle('active');
-    });
+    {% if d[5] == 'Aprovado.' %}
+      {% set cor = "rgb(0, 255, 0)" %}
+      {% set nome = "✔️Aprovado por: " ~ d[7] ~ '✔️' %}
+    {% elif d[5] == 'Recusado.' %}
+      {% set cor = "red" %}
+      {% set nome = "❌Recusado por: " ~ d[7] ~ '❌' %}
+    {% elif d[5] == 'Arquivado.' %}
+      {% set cor = "gray" %}
+      {% set nome = "🗃️Arquivado por: " ~ d[7] ~ '🗃️' %}
+    {% elif d[5] == 'Visto.' %}
+      {% set cor = "rgb(255, 150, 0)" %}
+      {% set nome = "🔎Visualizado por: " ~ d[7] ~ ' ás ' ~ d[10] ~ '🔎'%}
+    {% endif %}
+
+    <form action="{{ url_for('rotasecretaria.detalhe_denuncia', id=d[0]) }}" method="GET" onclick="return confirmarAbrir()">
+      <div class="grid-item">
+        <button type="submit" style="color: {{ cor }}">
+          {{ d[1] }} <br>
+          Nome: {{ d[6] }} <br>
+          Data: {{ d[4] }} <br><br>
+          {{ nome }}
+        </button>
+      </div>
+    </form>
+  {% endfor %}
+  {% else %}
+    <p>Nenhuma denúncia encontrada.</p>
+{% endif %}
+
+</div>
+
+<div class="pagination">
+{% set current_page = page %}
+{% if page > total_pages %}
+  {% set current_page = total_pages %}
+{% elif page < 1 %}
+  {% set current_page = 1 %}
+{% endif %}
+
+<div class="pagination">
+  {% if current_page > 1 %}
+    <a href="{{ url_for('rotas.inicio', page=current_page-1, filtro=filtro) }}">&laquo; Anterior</a>
+  {% endif %}
+
+  <span>Página {{ current_page }} de {{ total_pages }}</span>
+
+  {% if current_page < total_pages %}
+    <a href="{{ url_for('rotas.inicio', page=current_page+1, filtro=filtro) }}">Próxima &raquo;</a>
+  {% endif %}
+</div>
 
 
-    function confirmarLogout() {
-      
-    return confirm("Você tem certeza que quer deslogar?");
-    }
+</div>
+    <script>
+      // Toggle menu lateral
+      const btn = document.querySelector('.menu-btn');
+      const sidebar = document.querySelector('.sidebar');
+      btn.addEventListener('click', () => {
+        sidebar.classList.toggle('active');
+      });
+  
+      function confirmarLogout() {
+        return confirm("Você tem certeza que quer deslogar?");
+      }
+  
+      function confirmarAbrir() {
+        return confirm("Você tem certeza que deseja abrir? Após aberto não poderá mais ser deletado e o usuario SABERÁ que foi você quem abriu");
+      }
 
-  </script>
+      function toggleProfileMenu() {
+    var menu = document.getElementById("profile-menu");
+    menu.classList.toggle("show"); 
+}
 
-
-</body>
+    </script>
+ </body>
 </html>
