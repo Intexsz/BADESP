@@ -31,11 +31,10 @@
   </header>
 
   <div class="painel-container">
-    <h1>Denúncia de: {{ usuario['nome'] }}</h1>
+    <h1>{{ usuario['titulo'] }}</h1>
     <div id="denuncias-container">
       {% if usuario %}
       <div class="denuncia-card" id="denuncia-{{ usuario['id'] }}">
-        <h3>{{ usuario['titulo'] }}</h3>
         <p>Ocorrido: {{ usuario['gravidade'] }}</p>
         <p>Denúncia:</p>
         <br>
@@ -68,57 +67,57 @@
         {% else %}
         <p>??? erro.</p>
         {% endif %}
-        <p>Denunciado por: {{ usuario['nome'] }}</p>
-        {% if usuario['cargo'] == 'Professor' and usuario['especifico'] != 'any' %}
-        <p><b>Esta denúncia foi destinada somente para você!</b></p>
-        {% elif usuario['cargo'] == 'Secretaria' and usuario['especifico'] != 'any' %}
-        <p><b>Esta denúncia foi destinada somente para você!</b></p>
-        {% endif %}
+                    {% if usuario['cargo'] == 'Professor' and usuario['especifico'] != 'any' %}
+                    <p><b>Destinado ao Professor:</b> {{usuario['especifico']}}</p>
+                    {% elif usuario['cargo'] == 'Secretaria' and usuario['especifico'] != 'any' %}
+                    <p><b>Destinado ao Secretario(a):</b> {{usuario['especifico']}}</p>
+                    {% endif %}
 
-        {% if usuario['cargo'] == 'Professor' and usuario['especifico'] == 'any' %}
-        <p><b>Esta denúncia foi destinada apenas para Professores!</b></p>
-        {% elif usuario['cargo'] == 'Secretaria' and usuario['especifico'] == 'any' %}
-        <p><b>Esta denúncia foi destinada apenas para a gestão!</b></p>
-        {% endif %}
-        {% if usuario['comentario'] != '' %}
-        <p><b>Comentario vinculado a denúncia: </b>{{ usuario['comentario'] }}</p>
-        {% else %}
-        <p>Ainda não há comentário vinculado a esta denúncia.</p>
-        {% endif %}
+                    {% if usuario['cargo'] == 'Professor' and usuario['especifico'] == 'any' %}
+                    <p><b>Destinado somente aos Professores.</b></p>
+                    {% elif usuario['cargo'] == 'Secretaria' and usuario['especifico'] == 'any' %}
+                    <p><b>Destinado somente a gestão.</b></p>
+                    {% endif %}
+                    {% if usuario['comentario'] != '' %}
+                    <p><b>Comentario feito por {{usuario['visto']}}: </b>{{ usuario['comentario'] }}</p>
+                    {% else %}
+                    <p>Ainda não há comentário para esta denúncia.</p>
+                    {% endif %}
       </div>
 
-      <form action="{{ url_for('rotasecretaria.aprovar', id=usuario['id']) }}" method="GET"
-        onclick="return confirmarAbrir()">
-        <button type="submit" class="abrir-btn">Aprovar</button>
+      {% if usuario['status'] == 'Em Análise.' %}
+      <form class="apagar-form" action="{{ url_for('rotas.excluir_denuncia', id=usuario['id']) }}" method="POST">
+        <button type="submit">Apagar</button>
+      </form>
+      {% elif usuario['status'] == 'Expirada.' %}
+      <form class="apagar-form" action="{{ url_for('rotas.excluir_denuncia', id=usuario['id']) }}" method="POST">
+        <button type="submit">Apagar</button>
       </form>
       <br>
-      <form action="{{ url_for('rotasecretaria.recusar', id=usuario['id']) }}" method="GET"
-        onclick="return confirmarRecusar()">
-        <button type="submit" class="abrir-btn">Recusar</button>
+      <form class="reenviar-form" action="{{ url_for('rotas.reenviar_denuncia', id=usuario['id']) }}" method="POST">
+        <input type="hidden" name="titulo" value="{{ usuario['titulo'] }}">
+        <input type="hidden" name="gravidade" value="{{ usuario['gravidade'] }}">
+        <input type="hidden" name="descricao" value="{{ usuario['descricao'] }}">
+        <input type="hidden" name="quem" value="{{ usuario['cargo'] }}">
+        <input type="hidden" name="pessoa" value="{{ usuario['especifico'] }}">
+
+        <button type="submit">Reenviar</button>
       </form>
-      <br>
-      <form action="{{ url_for('rotasecretaria.arquivar', id=usuario['id']) }}" method="GET"
-        onclick="return confirmaArquivar()">
-        <button type="submit" class="abrir-btn">Arquivar</button>
-      </form>
+      {% else %}
+      <div class="botãooff">
+        <form class="apagar-form" action="{{ url_for('rotas.excluir_denuncia', id=usuario['id']) }}" method="POST">
+          <button type="submit" disabled>Apagar</button>
+        </form>
+      </div>
+      {% endif %}
       {% else %}
       <p>Erro.</p>
       {% endif %}
       <br>
-      {% if usuario['comentario'] == '' %}
-      <div class="comentario">
-        <form action="{{ url_for('rotasecretaria.comentar', id=usuario['id']) }}" method="POST">
-          <textarea name="comentario" style="text-align: center;"
-            placeholder="Deseja adicionar um comentario?"></textarea>
-          <button type="submit" class="abrir-btn" onclick="return confirmarTexto()">Enviar</button>
-        </form>
-        {% else %}
-        <p style="align-items: center; text-align: center;">Comentario já feito.</p>
-        {% endif %}
-      </div>
-
-
     </div>
+
+
+  </div>
   </div>
 
   <script>
@@ -131,16 +130,7 @@
     });
 
     function confirmarAbrir() {
-      return confirm("Deseja Confirmar a Aprovação desta denúncia?");
-    }
-    function confirmaArquivar() {
-      return confirm("Deseja Arquivar esta denúncia?");
-    }
-    function confirmarRecusar() {
-      return confirm("Deseja Recusar esta denúncia?");
-    }
-    function confirmarTexto() {
-      return confirm("Deseja enviar um comentario sobre esta denúncia? Você pode comentar somente UMA vez por denúncia");
+      return confirm("Deseja Apagar essa denúncia?");
     }
 
     function confirmarLogout() {

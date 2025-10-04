@@ -72,9 +72,6 @@
     const form = document.getElementById('form-denuncia');
 
     form.addEventListener('submit', function (event) {
-      event.preventDefault(); // Impede envio automático
-
-      // Pergunta de confirmação
       const confirmado = confirm(
         "Você tem certeza que quer enviar esta denúncia? " +
         "A gestão escolar terá ACESSO ao seu nome e saberá que você enviou esta denúncia. " +
@@ -83,16 +80,16 @@
         "Caso seja visualizada, você NÃO PODERÁ MAIS APAGAR SUA DENÚNCIA."
       );
 
-      if (!confirmado) return;
-
-      alert("Sua denúncia foi enviada com sucesso!");
-      form.submit(); // envia o formulário
+      if (!confirmado) {
+        event.preventDefault(); // impede envio se não confirmar
+      }
     });
 
     // Função separada para confirmar logout
     function confirmarLogout() {
       return confirm("Você tem certeza que quer deslogar?");
     }
+
 
     // Toggle da sidebar
     const btn = document.querySelector('.menu-btn');

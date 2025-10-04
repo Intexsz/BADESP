@@ -1,7 +1,7 @@
 from flask import Flask, request, render_template, session, redirect, url_for, Blueprint, flash
 from authlib.integrations.flask_client import OAuth
 from app.database.db_usuario import buscar_cargo, buscar_usuario, buscar_nome_secretaria, buscar_nome_professor
-from app.database.db_denuncia import buscar_status_denuncia, mostrar_denuncias, apagar_denuncia, criar_denuncia, expirar
+from app.database.db_denuncia import buscar_status_denuncia, mostrar_denuncias, apagar_denuncia, criar_denuncia, expirar, checagem_denunciahehe
 
 app = Flask(__name__)
 rotas_bp = Blueprint('rotas', __name__)
@@ -83,8 +83,17 @@ def ajuda():
 def denuncia():
     if "user_id" not in session:
         return redirect(url_for('rotalogin.cadastro'))
-    
+    nomeprof = buscar_nome_professor()
+    nomesecretaria = buscar_nome_secretaria()
+
     if request.method == 'POST':
+        if not checagem_denunciahehe(session['user_id']):
+            return f"""
+    <script>
+        window.location.href = "{url_for('rotas.inicio')}";
+        alert("Você precisa esperar 30 minutos antes de criar outra denúncia.");
+    </script>
+    """
         titulo = request.form.get('titulo')
         gravidade = request.form.get('gravidade')
         descricao = request.form.get('descricao')
@@ -93,11 +102,13 @@ def denuncia():
 
         criar_denuncia(titulo, gravidade, descricao, session["user_id"], 'Em Análise.', quem, pessoa)
         
-        flash("Sua denúncia foi enviada com sucesso!")
+        return f"""
+    <script>
+        window.location.href = "{url_for('rotas.inicio')}";
+        alert("Denuncia enviada com sucesso!");
+    </script>
+    """
         
-        return redirect(url_for('rotas.denuncia'))
-    nomeprof = buscar_nome_professor()
-    nomesecretaria = buscar_nome_secretaria()
     return render_template('denuncia.html', professor=nomeprof, secretaria=nomesecretaria)
 ######----------######
 
