@@ -43,9 +43,9 @@ def criar_denuncia(titulo, gravidade, descricao, user_id, status, cargo, especif
     nome = usuario_dict["nome"]
     cursor = conn.cursor()
     cursor.execute('''
-        INSERT INTO denuncias (titulo, gravidade, descricao, data, user_id, status, nome, visto, comentario, comentario_ia, cargo, especifico)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    ''', (titulo, gravidade, descricao, data, user_id, status, nome, 'Ninguém', '', '', cargo, especifico))
+        INSERT INTO denuncias (titulo, gravidade, descricao, data, user_id, status, nome, visto, comentario, cargo, especifico)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ''', (titulo, gravidade, descricao, data, user_id, status, nome, 'Ninguém', '', cargo, especifico))
     conn.commit()
     conn.close()
 
@@ -176,7 +176,7 @@ def checagem_denunciahehe(user_id):
     ultima_data = datetime.strptime(ultima_data_str, "%d/%m/%Y %H:%M")
 
     # Checa se passaram 30 minutos desde a última denúncia para evitar spam
-    return datetime.now() >= ultima_data + timedelta(seconds=30)
+    return datetime.now() >= ultima_data + timedelta(seconds=3)
 ######----------######
 
 # aqui é quando ele abre a denuncia, deixando ela em Visto.
@@ -227,7 +227,7 @@ def pegar_na_denuncia_haha(id):
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT id, titulo, gravidade, descricao, data, status, nome, visto, comentario, comentario_ia, cargo, datavisto, especifico
+        SELECT id, titulo, gravidade, descricao, data, status, nome, visto, comentario, tipo, cargo, datavisto, especifico
         FROM denuncias
         WHERE id = ?
     """, (id,))
@@ -246,7 +246,7 @@ def pegar_na_denuncia_haha(id):
             "nome": row[6],
             'visto': row[7],
             'comentario': row[8],
-            'comentario_ia': row[9],
+            'tipo': row[9],
             'cargo': row[10],
             'datavisto': row[11],
             'especifico': row[12]
