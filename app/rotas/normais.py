@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, session, redirect, url_for, Blueprint, flash
+from flask import Flask, request, render_template, session, redirect, url_for, Blueprint, make_response
 from authlib.integrations.flask_client import OAuth
 from app.database.db_usuario import buscar_cargo, buscar_usuario, buscar_nome_secretaria, buscar_nome_professor
 from app.database.db_denuncia import buscar_status_denuncia, mostrar_denuncias, apagar_denuncia, criar_denuncia, expirar, checagem_denunciahehe
@@ -42,18 +42,20 @@ def inicio():
         querer = request.form.get('Olavo', 'Tudo')
         return redirect(url_for('rotas.inicio', filtro=querer))
     
-    if filtro == 'Tudo':
-        denuncias = mostrar_denuncias(session["user_id"], cargo, 'Tudo')
-    elif filtro == 'Aprovado':
+    if filtro == 'Aprovado':
         denuncias = mostrar_denuncias(session["user_id"], cargo, 'Aprovado.')
     elif filtro == 'Recusado':
         denuncias = mostrar_denuncias(session["user_id"], cargo, 'Recusado.')
+    elif filtro == 'Abertas':
+        denuncias = mostrar_denuncias(session["user_id"], cargo, 'Visto.')
     elif filtro == 'Arquivado':
         denuncias = mostrar_denuncias(session["user_id"], cargo, 'Arquivado.')
-    elif filtro == 'Aberto':
+    elif filtro == 'Esperando':
         denuncias = mostrar_denuncias(session["user_id"], cargo, 'Em Análise.')
     elif filtro == 'Expirada':
         denuncias = mostrar_denuncias(session["user_id"], cargo, 'Expirada.')
+    else:
+        denuncias = mostrar_denuncias(session["user_id"], cargo, 'Tudo')
     
     # ===== PAGINAÇÃO =====
     page = int(request.args.get("page", 1))
@@ -83,6 +85,7 @@ def ajuda():
 def denuncia():
     if "user_id" not in session:
         return redirect(url_for('rotalogin.cadastro'))
+    
     nomeprof = buscar_nome_professor()
     nomesecretaria = buscar_nome_secretaria()
 
@@ -94,6 +97,7 @@ def denuncia():
         alert("Você precisa esperar 30 minutos antes de criar outra denúncia.");
     </script>
     """
+        
         titulo = request.form.get('titulo')
         gravidade = request.form.get('gravidade')
         descricao = request.form.get('descricao')
@@ -108,8 +112,13 @@ def denuncia():
         alert("Denuncia enviada com sucesso!");
     </script>
     """
-        
-    return render_template('denuncia.html', professor=nomeprof, secretaria=nomesecretaria)
+
+    # GET
+    resp = make_response(render_template('denuncia.html', professor=nomeprof, secretaria=nomesecretaria))
+    resp.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0'
+    resp.headers['Pragma'] = 'no-cache'
+    resp.headers['Expires'] = '0'
+    return resp
 ######----------######
 
 

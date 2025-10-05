@@ -32,8 +32,8 @@
 
   <div class="form-container">
     <h1>Enviar Denúncia</h1>
-    <form id="form-denuncia" method="POST">
-      <input type="text" placeholder="Título da denúncia" required name="titulo" maxlength="70">
+    <form id="form-denuncia" method="POST" autocomplete="off">
+      <input type="text" placeholder="Título da denúncia" required name="titulo" maxlength="30">
 
       <select required name="gravidade">
         <option value="">Ocorrido</option>
@@ -51,7 +51,7 @@
         <option value="">Escolha:</option>
         <option value="Professor">Professor</option>
         <option value="Secretaria">Secretaria</option>
-        <option value="Ambos">Ambos</option>
+        <option value="Ambos">Todas as Autoridades</option>
       </select>
 
       <!-- Select escondido até o usuário escolher -->
@@ -99,6 +99,18 @@
       sidebar.classList.toggle('active');
     });
   </script>
+
+<script>
+  function verificarSelect() {
+    const select = document.getElementById("quem");
+    if (select && select.value !== "") {
+      mostrarPessoas();
+    }
+  }
+
+  window.addEventListener("pageshow", () => setTimeout(verificarSelect, 50));
+  window.addEventListener("load", () => setTimeout(verificarSelect, 50));
+</script>
 
   <script>
     const professores = JSON.parse(document.getElementById('dados').dataset.professores);
