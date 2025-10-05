@@ -45,10 +45,10 @@
     resize: none; 
     text-align: start; 
     vertical-align: top; 
-    padding: 5px;  /* reduz espaço interno */
-    box-sizing: border-box;  /* garante que o padding não aumente a caixa */
-    overflow: hidden;
-    cursor:pointer;
+    padding: 5px;  
+    box-sizing: border-box;  
+    overflow-y: auto;   /* permite scroll vertical */
+    cursor: pointer;
 ">
 {{ usuario['descricao'] }}
 </textarea>
@@ -68,7 +68,6 @@
         {% else %}
         <p>??? erro.</p>
         {% endif %}
-        <p>Denunciado por: {{ usuario['nome'] }}</p>
         {% if usuario['cargo'] == 'Professor' and usuario['especifico'] != 'any' %}
         <p><b>Esta denúncia foi destinada somente para você!</b></p>
         {% elif usuario['cargo'] == 'Secretaria' and usuario['especifico'] != 'any' %}

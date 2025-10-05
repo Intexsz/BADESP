@@ -44,10 +44,10 @@
     resize: none; 
     text-align: start; 
     vertical-align: top; 
-    padding: 5px;  /* reduz espaço interno */
-    box-sizing: border-box;  /* garante que o padding não aumente a caixa */
-    overflow: hidden;
-    cursor:pointer;
+    padding: 5px;  
+    box-sizing: border-box;  
+    overflow-y: auto;   /* permite scroll vertical */
+    cursor: pointer;
 ">
 {{ usuario['descricao'] }}
 </textarea>
@@ -67,16 +67,18 @@
         {% else %}
         <p>??? erro.</p>
         {% endif %}
-                    {% if usuario['cargo'] == 'Professor' and usuario['especifico'] != 'any' %}
+                    {% if usuario['cargo'] == 'Professor' and usuario['especifico'] != 'any' and usuario['especifico'] != None %}
                     <p><b>Destinado ao Professor:</b> {{usuario['especifico']}}</p>
-                    {% elif usuario['cargo'] == 'Secretaria' and usuario['especifico'] != 'any' %}
+                    {% elif usuario['cargo'] == 'Secretaria' and usuario['especifico'] != 'any' and usuario['especifico'] != None %}
                     <p><b>Destinado ao Secretario(a):</b> {{usuario['especifico']}}</p>
                     {% endif %}
 
-                    {% if usuario['cargo'] == 'Professor' and usuario['especifico'] == 'any' %}
+                    {% if usuario['cargo'] == 'Professor' and usuario['especifico'] == 'any' and usuario['especifico'] != None %}
                     <p><b>Destinado somente aos Professores.</b></p>
-                    {% elif usuario['cargo'] == 'Secretaria' and usuario['especifico'] == 'any' %}
+                    {% elif usuario['cargo'] == 'Secretaria' and usuario['especifico'] == 'any' and usuario['especifico'] != None %}
                     <p><b>Destinado somente a gestão.</b></p>
+                    {% elif usuario['especifico'] == None %}
+                    <p><b>Erro, porfavor faça o envio da denuncia novamente</b></p>
                     {% endif %}
                     {% if usuario['comentario'] != '' %}
                     <p><b>Comentario feito por {{usuario['visto']}}: </b>{{ usuario['comentario'] }}</p>

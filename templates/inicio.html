@@ -39,11 +39,12 @@
           <form method="get" action="{{ url_for('rotas.inicio') }}">
         <select name="filtro" onchange="this.form.submit()">
           <option value="Tudo" {% if filtro == "Tudo" %}selected{% endif %}>Tudo</option>
+          <option value="Esperando" {% if filtro == "Esperando" %}selected{% endif %}>Esperando Resposta</option>
+          <option value="Abertas" {% if filtro == "Abertas" %}selected{% endif %}>Abertas</option>
           <option value="Aprovado" {% if filtro == "Aprovado" %}selected{% endif %}>Aprovado</option>
           <option value="Recusado" {% if filtro == "Recusado" %}selected{% endif %}>Recusado</option>
           <option value="Arquivado" {% if filtro == "Arquivado" %}selected{% endif %}>Arquivado</option>
-          <option value="Aberto" {% if filtro == "Aberto" %}selected{% endif %}>Em Espera</option>
-          <option value="Expirada" {% if filtro == "Expirada" %}selected{% endif %}>Expiradas</option>
+          <option value="Expirada" {% if filtro == "Expirada" %}selected{% endif %}>Expirado</option>
         </select>
       </form>
       <br>
@@ -72,7 +73,7 @@
           </div>
         {% endfor %}
       {% else %}
-        <p>Nenhuma denúncia encontrada. Tente alterar o filtro</p>
+        <p>Nenhuma denúncia encontrada.</p>
       {% endif %}
     </div>
   </div>

@@ -59,14 +59,12 @@ button {
   border-radius: 8px;
   background: #29387f;
   color: #ADD8E6;
-  font-weight: bold;
   cursor: pointer;
   transition: all 0.3s;
 }
 
 button:hover {
   background: #394cac;
-  transform: translateY(-2px);
 }
 
 /* ===== Cards de denúncias ===== */
@@ -92,53 +90,51 @@ button:hover {
   margin-bottom: 6px;
 }
 
-
-
 /* Botão estilo hambúrguer */
 .menu-btn {
-  position: fixed;
+  position: fixed; 
   top: 10px;
   left: 10px;
   font-size: 20px;
   padding: 8px 12px;
-  background: linear-gradient(90deg, #29387f, #25337a);
+  background-color: #2f379f ;
   color: white;
   border: none;
   cursor: pointer;
   border-radius: 6px;
   z-index: 1001;
-  transition: background 0.3s;
+  transition: 0.3s;
 }
 
 .menu-btn:hover {
-  background: #302f9f;
+  background-color: #25327c ;
 }
 
-/* Menu lateral */
+.menu-btn:active {
+  background-color: rgb(61, 83, 207) ;
+}
+
 .sidebar {
-  position: fixed;
+  position: fixed; 
+  align-items: center;
+  text-align: center;
   top: 0;
   left: 0;
   transform: translateX(-100%);
-  /* escondido inicialmente */
   width: 200px;
   height: 100%;
   background: linear-gradient(135deg, #25337a, #111);
-  box-shadow: 3px 0 15px rgba(0, 0, 0, 0.5);
+  box-shadow: 3px 0 15px rgba(0,0,0,0.5);
   padding-top: 80px;
-  /* distancia do topo para links */
   transition: transform 0.5s ease;
-  /* transição suave */
-  z-index: 100;
+  z-index: 1000;
   border-radius: 0 10px 10px 0;
 }
 
-/* Quando ativo, aparece */
 .sidebar.active {
   transform: translateX(0);
 }
 
-/* Links do menu */
 .sidebar ul {
   list-style: none;
   padding: 0;
@@ -150,15 +146,21 @@ button:hover {
 }
 
 .sidebar ul li a {
-  color: white;
+  color: rgb(255, 255, 255);
   text-decoration: none;
   font-size: 16px;
   padding: 8px 15px;
   display: block;
   transition: transform 0.2s, color 0.3s;
+  font-family: Segoe UI;
 }
 
 .sidebar ul li a:hover {
-  color: #23c5c7;
+  color: #76faff;
+  transform: translateX(8px);
+}
+
+.sidebar ul li a:active {
+  color: #d9f9fa;
   transform: translateX(8px);
 }
