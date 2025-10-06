@@ -39,11 +39,12 @@
           <form method="get" action="{{ url_for('rotas.inicio') }}">
         <select name="filtro" onchange="this.form.submit()">
           <option value="Tudo" {% if filtro == "Tudo" %}selected{% endif %}>Tudo</option>
+          <option value="Esperando" {% if filtro == "Esperando" %}selected{% endif %}>Esperando Resposta</option>
+          <option value="Abertas" {% if filtro == "Abertas" %}selected{% endif %}>Abertas</option>
           <option value="Aprovado" {% if filtro == "Aprovado" %}selected{% endif %}>Aprovado</option>
           <option value="Recusado" {% if filtro == "Recusado" %}selected{% endif %}>Recusado</option>
           <option value="Arquivado" {% if filtro == "Arquivado" %}selected{% endif %}>Arquivado</option>
-          <option value="Aberto" {% if filtro == "Aberto" %}selected{% endif %}>Em Espera</option>
-          <option value="Expirada" {% if filtro == "Expirada" %}selected{% endif %}>Expiradas</option>
+          <option value="Expirada" {% if filtro == "Expirada" %}selected{% endif %}>Expirado</option>
         </select>
       </form>
       <br>
@@ -52,8 +53,6 @@
         {% for d in denuncias %}
           <div class="denuncia-card" id="denuncia-{{ d[0] }}">
             <h3>{{ d[1] }}</h3>
-            <p>Ocorrido: {{ d[2] }}</p>
-            <p>Denúncia: <br><br> <textarea disabled style="width: 700px; height: 100px;resize: none;">{{ d[3] }}</textarea></p>
             <p>Data: {{ d[4] }}</p>
             {% if d[5] == 'Aprovado.' %}
               <p><span style="color: rgb(0, 255, 0);">✔️Situação:  Aprovado por: {{ d[7] }}✔️</span></p>
@@ -68,37 +67,13 @@
             {% else %}
               <p><span style="color: rgb(255, 255, 255);">Situação: ⏳Esperando Resposta...⏳</span></p>
             {% endif %}
-            {% if d[8] != '' %}
-            <p><b>Comentario da Secretaria: </b>{{ d[8] }}</p>
-          {% else %}
-            <p>Ainda não há comentário para esta denúncia.</p>
-          {% endif %}
-            {% if d[5] == 'Em Análise.' %}
-              <form class="apagar-form" action="{{ url_for('rotas.excluir_denuncia', id=d[0]) }}" method="POST">
-                <button type="submit">Apagar</button>
+              <form class="apagar-form" action="{{ url_for('rotasecretaria.detalhe_denuncia', id=d[0]) }}" method="POST">
+                <button type="submit">Abrir Denuncia</button>
               </form>
-            {% elif d[5] == 'Expirada.' %}
-              <form class="apagar-form" action="{{ url_for('rotas.excluir_denuncia', id=d[0]) }}" method="POST">
-                <button type="submit">Apagar</button>
-              </form>
-              <br>
-                <form class="reenviar-form" action="{{ url_for('rotas.reenviar_denuncia', id=d[0]) }}" method="POST">
-                <input type="hidden" name="titulo" value="{{ d[1] }}">
-                <input type="hidden" name="gravidade" value="{{ d[2] }}">
-                <input type="hidden" name="descricao" value="{{ d[3] }}">
-                <button type="submit">Reenviar</button>
-              </form>
-            {% else %}
-            <div class="botãooff">
-              <form class="apagar-form" action="{{ url_for('rotas.excluir_denuncia', id=d[0]) }}" method="POST">
-                <button type="submit" disabled>Apagar</button>
-              </form>
-            </div>
-            {% endif %}
           </div>
         {% endfor %}
       {% else %}
-        <p>Nenhuma denúncia cadastrada.</p>
+        <p>Nenhuma denúncia encontrada.</p>
       {% endif %}
     </div>
   </div>

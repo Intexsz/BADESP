@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -8,30 +9,31 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='denuncia.css') }}">
   <script src="{{ url_for('static', filename='js/denuncias.js') }}" defer></script>
 </head>
+
 <body>
 
-   <header class="Cabecalho">
-  
+  <header class="Cabecalho">
+
     <h1 class="nome">Segurança Nas Escolas Públicas</h1>
 
-      <button class="menu-btn">☰</button>
+    <button class="menu-btn">☰</button>
 
-      <!-- Menu lateral -->
-      <nav class="sidebar">
-        <ul>
-          <li><a href="/Inicio">Início</a></li>
-          <li><a href="/Ajuda">Ajuda</a></li>
-          <li><a href="/Denuncia">Fazer Denúncia</a></li>
-          <li><a href="/Logout" onclick="return confirmarLogout()"><i class="fas fa-user-circle"></i>Deslogar</a></li>
-          <li><a href="/MudarPin"><i class="fas fa-cog"></i> Mudar o PIN</a></li>
-        </ul>
-      </nav>
-    </header>
-  
+    <!-- Menu lateral -->
+    <nav class="sidebar">
+      <ul>
+        <li><a href="/Inicio">Início</a></li>
+        <li><a href="/Ajuda">Ajuda</a></li>
+        <li><a href="/Denuncia">Fazer Denúncia</a></li>
+        <li><a href="/Logout" onclick="return confirmarLogout()"><i class="fas fa-user-circle"></i>Deslogar</a></li>
+        <li><a href="/MudarPin"><i class="fas fa-cog"></i> Mudar o PIN</a></li>
+      </ul>
+    </nav>
+  </header>
+
   <div class="form-container">
     <h1>Enviar Denúncia</h1>
-    <form id="form-denuncia" method="POST">
-      <input type="text" placeholder="Título da denúncia" required name="titulo" maxlength="70">
+    <form id="form-denuncia" method="POST" autocomplete="off">
+      <input type="text" placeholder="Título da denúncia" required name="titulo" maxlength="30">
 
       <select required name="gravidade">
         <option value="">Ocorrido</option>
@@ -41,47 +43,118 @@
         <option value="Atitudes Inadequadas">Atitudes Inadequadas</option>
         <option value="Outros">Outros</option>
       </select>
-      
+
       <textarea placeholder="Denúncia:" required name="descricao"></textarea>
+
+      <p>Deseja enviar para quem?</p>
+      <select required name="quem" id="quem" onchange="mostrarPessoas()">
+        <option value="">Escolha:</option>
+        <option value="Professor">Professor</option>
+        <option value="Secretaria">Secretaria</option>
+        <option value="Ambos">Todas as Autoridades</option>
+      </select>
+
+      <!-- Select escondido até o usuário escolher -->
+      <div id="pessoaDiv" style="display:none; margin-top:10px;">
+        <label for="pessoa">Escolha a pessoa:</label>
+        <select name="pessoa" id="pessoa">
+          <!-- Opções adicionadas via JS -->
+        </select>
+      </div>
+
       <button type="submit">Enviar Denúncia</button>
     </form>
   </div>
 
-<script>
-const form = document.getElementById('form-denuncia');
+  <div id="dados" data-professores='{{ professor|tojson }}' data-secretarias='{{ secretaria|tojson }}'></div>
 
-form.addEventListener('submit', function(event) {
-    event.preventDefault(); // Impede envio automático
+  <script>
+    const form = document.getElementById('form-denuncia');
 
-    // Pergunta de confirmação
-    const confirmado = confirm(
+    form.addEventListener('submit', function (event) {
+      const confirmado = confirm(
         "Você tem certeza que quer enviar esta denúncia? " +
         "A gestão escolar terá ACESSO ao seu nome e saberá que você enviou esta denúncia. " +
         "Após enviar, você não poderá mais editar. " +
         "Se enviar, só poderá APAGAR antes da Secretaria abrir sua denúncia. " +
         "Caso seja visualizada, você NÃO PODERÁ MAIS APAGAR SUA DENÚNCIA."
-    );
+      );
 
-    if (!confirmado) return;
+      if (!confirmado) {
+        event.preventDefault(); // impede envio se não confirmar
+      }
+    });
 
-    alert("Sua denúncia foi enviada com sucesso!");
-    form.submit(); // envia o formulário
-});
+    // Função separada para confirmar logout
+    function confirmarLogout() {
+      return confirm("Você tem certeza que quer deslogar?");
+    }
 
-// Função separada para confirmar logout
-function confirmarLogout() {
-    return confirm("Você tem certeza que quer deslogar?");
-}
 
-// Toggle da sidebar
-const btn = document.querySelector('.menu-btn');
-const sidebar = document.querySelector('.sidebar');
+    // Toggle da sidebar
+    const btn = document.querySelector('.menu-btn');
+    const sidebar = document.querySelector('.sidebar');
 
-btn.addEventListener('click', () => {
-    sidebar.classList.toggle('active');
-});
+    btn.addEventListener('click', () => {
+      sidebar.classList.toggle('active');
+    });
+  </script>
+
+<script>
+  function verificarSelect() {
+    const select = document.getElementById("quem");
+    if (select && select.value !== "") {
+      mostrarPessoas();
+    }
+  }
+
+  window.addEventListener("pageshow", () => setTimeout(verificarSelect, 50));
+  window.addEventListener("load", () => setTimeout(verificarSelect, 50));
 </script>
 
+  <script>
+    const professores = JSON.parse(document.getElementById('dados').dataset.professores);
+    const secretarias = JSON.parse(document.getElementById('dados').dataset.secretarias);
+
+
+    function mostrarPessoas() {
+      const quem = document.getElementById("quem").value;
+      const pessoaDiv = document.getElementById("pessoaDiv");
+      const pessoaSelect = document.getElementById("pessoa");
+
+      // limpa opções anteriores
+      pessoaSelect.innerHTML = "";
+
+      if (quem === "Professor") {
+        pessoaDiv.style.display = "block";
+        pessoaSelect.innerHTML += '<option value="any">Qualquer Professor</option>';
+        professores.forEach(nome => {
+          pessoaSelect.innerHTML += `<option value="${nome}">${nome}</option>`;
+        });
+      }
+      else if (quem === "Secretaria") {
+        pessoaDiv.style.display = "block";
+        pessoaSelect.innerHTML += '<option value="any">Qualquer Gestão</option>';
+        secretarias.forEach(nome => {
+          pessoaSelect.innerHTML += `<option value="${nome}">${nome}</option>`;
+        });
+      }
+      else if (quem === "Ambos") {
+        pessoaDiv.style.display = "none";
+        pessoaSelect.innerHTML += '<option value="any">Qualquer Pessoa</option>';
+        professores.forEach(nome => {
+          pessoaSelect.innerHTML += `<option value="${nome}">${nome}</option>`;
+        });
+        secretarias.forEach(nome => {
+          pessoaSelect.innerHTML += `<option value="${nome}">${nome}</option>`;
+        });
+      }
+      else {
+        pessoaDiv.style.display = "none";
+      }
+    }
+  </script>
 
 </body>
+
 </html>

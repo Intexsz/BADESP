@@ -49,4 +49,18 @@ def pegar_no_nome(id):
         cursor.execute("SELECT nome FROM usuarios WHERE id = ?", (id,))
         resultado = cursor.fetchone()
         return resultado[0] if resultado else None
+    
+def buscar_nome_secretaria():
+    with sqlite3.connect("usuarios.db") as conn:
+        cursor = conn.cursor()
+        cursor.execute("SELECT nome FROM usuarios WHERE cargo = 'Secretaria'")
+        rows = cursor.fetchall()
+        return [row[0] for row in rows]
+    
+def buscar_nome_professor():
+    with sqlite3.connect("usuarios.db") as conn:
+        cursor = conn.cursor()
+        cursor.execute("SELECT nome FROM usuarios WHERE cargo = 'Professor'")
+        rows = cursor.fetchall()
+        return [row[0] for row in rows]
 
