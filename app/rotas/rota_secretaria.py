@@ -29,7 +29,7 @@ def checar_stats(id):
         return 'Expirou'
     
     cargo = buscar_cargo(session['user_id'])
-    if cargo == 'Secretaria':
+    if cargo == 'Secretaria' or cargo == 'Professor':
         if status != 'Expirada.':
             return True
         else:
@@ -44,10 +44,10 @@ def abrir_denuncia(id):
         return redirect(url_for('rotalogin.cadastro'))
 
     cargo = buscar_cargo(session["user_id"])
-    if cargo == "Secretaria":
+    if cargo == "Secretaria" or cargo == 'Professor':
         status = buscar_status_denuncia(id)
         if status != 'Expirada.':
-            abrir_denunciabanquinho(id, cargo)
+            abrir_denunciabanquinho(id, cargo, session['user_id'])
             return redirect(url_for('rotas.inicio'))
         else:
             return f"""
@@ -57,7 +57,7 @@ def abrir_denuncia(id):
             </script>
         """
     else:
-        return redirect(url_for('rotas.incio'))
+        return redirect(url_for('rotas.inicio'))
 ######----------######
 
 @rota_secretaria.route("/detalhe/<int:id>", methods=['POST', 'GET'])
@@ -67,19 +67,19 @@ def detalhe_denuncia(id):
     
     cargo = buscar_cargo(session['user_id'])
     
-    if cargo == 'Secretaria':
+    if cargo == 'Secretaria' or cargo == 'Professor':
         
         visto = buscar_visto(id)
         nomezin = pegar_no_nome(session['user_id'])
 
         # se denuncia não foi aberta por ninguem
-        if visto == None or visto == 'Ninguém':
-            abrir_denunciabanquinho(id, cargo, nomezin)
+        if not visto or visto == 'Ninguém':
+            abrir_denunciabanquinho(id, cargo, nomezin, session['user_id'])
             denuncia = pegar_na_denuncia_haha(id)
 
         # se denuncia foi aberta pelo mesmo usuario e esse mesmo usuario deseja reabrir
         elif visto == nomezin:
-            abrir_denunciabanquinho(id, cargo, nomezin)
+            abrir_denunciabanquinho(id, cargo, nomezin, session['user_id'])
             denuncia = pegar_na_denuncia_haha(id)
         else:
             # se foi aberta por outra pessoa
@@ -95,7 +95,27 @@ def detalhe_denuncia(id):
         
         return render_template("DenunciaAberta.html", usuario=denuncia)
     
-    return redirect(url_for('rotas.inicio'))
+    elif cargo == 'Aluno':
+        denuncia = pegar_na_denuncia_haha(id)
+        nome = pegar_no_nome(session['user_id'])
+
+
+        if denuncia == 'no':
+            return "Denúncia não encontrada", 404
+
+        # só o dono da denúncia pode abrir
+        if denuncia['nome'] != nome:
+            return f"""
+        <script>
+            alert("Você não tem permissão para acessar esta denúncia.");
+            window.location.href = "{url_for('rotas.inicio')}";
+        </script>
+        """
+
+        return render_template("DenunciaAbertaAluno.html", usuario=denuncia)
+    else:
+        return redirect(url_for('rotas.inicio'))
+    
 
 ######----------######
 
@@ -123,7 +143,7 @@ def comentar(id):
         """
     if checar_stats(id) and checagem == '':
         cargo = buscar_cargo(session['user_id'])
-        publicar_comentario(comentario, id, cargo)
+        publicar_comentario(comentario, id, cargo, session['user_id'])
     else:
         return f"""
             <script>
@@ -145,7 +165,7 @@ def recusar(id):
         """
     if checar_stats(id):
         cargo = buscar_cargo(session['user_id'])
-        atualizar_statuse(id, cargo, 'Recusado.')
+        atualizar_statuse(id, cargo, 'Recusado.', session['user_id'])
     
     return redirect(url_for('rotas.inicio'))
     
@@ -160,7 +180,7 @@ def aprovar(id):
         """
     if checar_stats(id):
         cargo = buscar_cargo(session['user_id'])
-        atualizar_statuse(id, cargo, 'Aprovado.')
+        atualizar_statuse(id, cargo, 'Aprovado.', session['user_id'])
 
     return redirect(url_for('rotas.inicio'))
 
@@ -176,6 +196,6 @@ def arquivar(id):
         """
     if checar_stats(id):
         cargo = buscar_cargo(session['user_id'])
-        atualizar_statuse(id, cargo, 'Arquivado.')
+        atualizar_statuse(id, cargo, 'Arquivado.', session['user_id'])
 
     return redirect(url_for('rotas.inicio'))
