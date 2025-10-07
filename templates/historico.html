@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histórico de Denúncias</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='historico.css') }}">
+</head>
+<body>
+
+    <header class="cabecalho">
+        <button class="menu-btn">☰</button>
+        <h1 class="nome">S.N.E.P</h1>
+        <div class="profile-icon">
+            <img src="{{ usuario[3] }}">
+        </div>
+    </header>
+
+    <nav class="sidebar">
+      <ul>
+        <li><a href="/Inicio">Início</a></li>
+        <li><a href="/Ajuda">Ajuda</a></li>
+        <li><a href="/Denuncia">Fazer Denúncia</a></li>
+        <li><a href="/Logout" onclick="return confirmarLogout()">Deslogar</a></li>
+        <li><a href="/MudarPin">Mudar o PIN</a></li>
+      </ul>
+    </nav>
+
+    <div class="main-content">
+        <div class="container">
+            <h1 class="page-title">Histórico de Denúncias</h1>
+
+            <table class="denuncias-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Data</th>
+                        <th>Descrição</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela-denuncias-body">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+    const menuBtn = document.querySelector('.menu-btn');
+    const sidebar = document.querySelector('.sidebar');
+
+    if (menuBtn && sidebar) {
+        menuBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+        });
+    }
+
+    const denuncias = [
+        {
+            id: 'DN-001',
+            data: '15/10/2025',
+            descricao: 'Denúncia sobre bullying na quadra de esportes.',
+            status: 'Resolvida'
+        },
+        {
+            id: 'DN-002',
+            data: '20/10/2025',
+            descricao: 'Reclamação sobre barulho excessivo na sala de aula.',
+            status: 'Pendente'
+        },
+        {
+            id: 'DN-003',
+            data: '22/10/2025',
+            descricao: 'Problema com um professor que faltou sem aviso.',
+            status: 'Arquivada'
+        },
+        {
+            id: 'DN-004',
+            data: '25/10/2025',
+            descricao: 'Sugestão para melhoria da cantina.',
+            status: 'Pendente'
+        }
+    ];
+
+    const tabelaDenunciasBody = document.getElementById('tabela-denuncias-body');
+
+    function carregarDenuncias() {
+        if (!tabelaDenunciasBody) return;
+
+        denuncias.forEach(denuncia => {
+            const tr = document.createElement('tr');
+            const statusClass = `status-${denuncia.status.toLowerCase()}`;
+
+            tr.innerHTML = `
+                <td>${denuncia.id}</td>
+                <td>${denuncia.data}</td>
+                <td>${denuncia.descricao}</td>
+                <td class="${statusClass}">${denuncia.status}</td>
+            `;
+            tabelaDenunciasBody.appendChild(tr);
+        });
+    }
+
+    carregarDenuncias();
+    });
+
+    </script>
+</body>
+</html>
+
+

@@ -1,0 +1,178 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .cabecalho {
+    background-color: rgb(90, 89, 89);
+    top: 0;
+    left: 0;
+    z-index: 10;
+    box-shadow: 0 2px 9px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    padding: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 1px;
+    width: 100%; 
+  }
+  
+  .profile-icon {
+    position: relative;
+    color: white;
+    font-size: 30px; 
+    cursor: pointer;
+    padding-right: 10px; 
+  }
+  
+  .profile-icon {  
+    padding-right: 10px; 
+  }
+  
+  .profile-icon img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 3px solid white;
+      object-fit: cover;
+  }
+  
+  .profile-icon {
+      position: relative; 
+  }
+  
+  .nome {
+    font-family: "Abril Fatface", serif;
+    font-weight: 1000;
+    font-style: normal;
+    font-size: 35px;
+    color: white;
+    margin: 0 auto; 
+    flex-grow: 1; 
+    text-align: center; 
+  
+  }
+  
+  .menu-btn {
+    position: fixed; 
+    top: 10px;
+    left: 10px;
+    font-size: 20px;
+    padding: 8px 12px;
+    background-color: rgb(90, 89, 89);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    z-index: 1001;
+    transition: 0.3s;
+  }
+  
+  .menu-btn:hover {
+    background-color: rgb(90, 89, 89);
+  }
+  
+  .sidebar {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    transform: translateX(-100%);
+    width: 200px;
+    height: 100%;
+    background-color: rgb(90, 89, 89);
+    box-shadow: 3px 0 15px rgba(0, 0, 0, 0.5);
+    padding-top: 80px;
+    transition: transform 0.5s ease;
+    z-index: 1000;
+    border-radius: 0 10px 10px 0;
+  }
+  
+  .sidebar.active {
+    transform: translateX(0);
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidebar ul li {
+    margin: 15px 0;
+  }
+  
+  .sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 8px 15px;
+    display: block;
+    transition: transform 0.2s, color 0.3s;
+  }
+  
+  .sidebar ul li a:hover {
+    color: #ffffff;
+    transform: translateX(8px);
+  }
+  
+  body {
+    min-height: 100vh;
+    text-align: center;
+    background-color: #3a3434;
+  }
+  
+  .main-content {
+      display: flex;
+      justify-content: center;
+      padding: 15px;
+  }
+  
+  .container {
+      width: 100%;
+      max-width: 900px;
+      background-color: #ffffff;
+      border-radius: 4px;
+      padding: 20px;
+      border: 2px solid rgb(238, 232, 232);
+      box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+      backdrop-filter: blur( 13.5px );
+      -webkit-backdrop-filter: blur( 13.5px );
+  }
+  
+  .page-title {
+      text-align: center;
+      color: #000000;
+      margin-bottom: 15px;
+  }
+  
+  
+  .denuncias-table {
+      width: 100%;
+      border-collapse: collapse;
+  }
+  
+  .denuncias-table th, .denuncias-table td {
+      text-align: left;
+      padding: 10px 15px;
+      border-bottom: 1px solid #060505;
+  }
+  
+  .denuncias-table thead th {
+      background-color: rgb(90, 89, 89);
+      color: #ffffff;
+      font-weight: bold;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+  }
+  
+  .denuncias-table tbody tr:hover {
+      background-color: #ffffff;
+  }
+  
+  .status-pendente { color: #ffc107; font-weight: bold; }
+  .status-resolvida { color: #28a745; font-weight: bold; }
+  .status-arquivada { color: #6c757d; font-weight: bold; }
+  
