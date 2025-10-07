@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def casinha():
-    return render_template('sa.html')
+    return render_template('iniciosecretaria.html')
 
 @app.route('/Ajuda')
 def ajuda():

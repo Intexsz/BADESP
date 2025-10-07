@@ -35,7 +35,6 @@ def inicio():
     expirar()
     cargo = buscar_cargo(session["user_id"])
     usuario = buscar_usuario(session["user_id"])
-    denuncias = mostrar_denuncias(session["user_id"], cargo, 'Em Análise')
     filtro = request.args.get('filtro', 'Tudo')
 
     if request.method == 'POST':
@@ -56,8 +55,58 @@ def inicio():
         denuncias = mostrar_denuncias(session["user_id"], cargo, 'Expirada.')
     else:
         denuncias = mostrar_denuncias(session["user_id"], cargo, 'Tudo')
+
+        
+    if cargo == "Secretaria":
+        return render_template("iniciosecretaria.html",usuario=usuario)
+    elif cargo == 'Aluno':
+        return render_template("inicio.html", denuncias=denuncias, usuario=usuario,filtro=filtro)
+    elif cargo == 'Professor':
+        return render_template("inicioprofessor.html",usuario=usuario)
+
+@rotas_bp.route('/Historico')
+def historico():
+    if "user_id" not in session:
+        return redirect(url_for('rotalogin.cadastro'))
+    cargo = buscar_cargo(session["user_id"])
+    if cargo == 'Aluno':
+        return redirect(url_for('rotas.inicio'))
+    
+    expirar()
+    cargo = buscar_cargo(session["user_id"])
+    usuario = buscar_usuario(session["user_id"])
+    filtro = request.args.get('filtro', 'Tudo')
+
+    if request.method == 'POST':
+        querer = request.form.get('Olavo', 'Tudo')
+        return redirect(url_for('rotas.inicio', filtro=querer))
+
+    denuncias = mostrar_denuncias(session["user_id"], cargo, 'Historico')
     
     # ===== PAGINAÇÃO =====
+    page = int(request.args.get("page", 1))
+    per_page = 10
+    start = (page - 1) * per_page 
+    end = start + per_page
+
+    denuncias_paginadas = denuncias[start:end]
+    total_pages = (len(denuncias) + per_page - 1) // per_page
+
+    return render_template('historico.html', denuncias=denuncias_paginadas, usuario=usuario,page=page,total_pages=total_pages,filtro=filtro)
+
+
+@rotas_bp.route('/Denuncias')
+def denuncias():
+    if "user_id" not in session:
+        return redirect(url_for('rotalogin.cadastro'))
+    cargo = buscar_cargo(session["user_id"])
+    if cargo == 'Aluno':
+        return redirect(url_for('rotas.inicio'))
+    
+    expirar()
+    usuario = buscar_usuario(session["user_id"])
+    denuncias = mostrar_denuncias(session["user_id"], cargo, 'Em Análise.')
+    
     page = int(request.args.get("page", 1))
     per_page = 4
     start = (page - 1) * per_page 
@@ -65,14 +114,8 @@ def inicio():
 
     denuncias_paginadas = denuncias[start:end]
     total_pages = (len(denuncias) + per_page - 1) // per_page
-        
-    if cargo == "Secretaria":
-        return render_template("secretaria.html", denuncias=denuncias_paginadas, usuario=usuario,page=page,total_pages=total_pages,filtro=filtro)
-    elif cargo == 'Aluno':
-        return render_template("inicio.html", denuncias=denuncias, usuario=usuario,filtro=filtro)
-    elif cargo == 'Professor':
-        return render_template("professor.html", denuncias=denuncias_paginadas, usuario=usuario,page=page,total_pages=total_pages,filtro=filtro)
-
+    
+    return render_template("secretaria.html", denuncias=denuncias_paginadas, usuario=usuario,page=page,total_pages=total_pages,filtro='Esperando')
 
 @rotas_bp.route('/Ajuda')
 def ajuda():

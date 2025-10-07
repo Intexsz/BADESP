@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='iniciosecretaria.css') }}">
+    <title>Inicio</title>
+</head>
+<header class="Cabecalho">
+    
+    <h1 class="nome">S.N.E.P</h1>
+    
+    <button class="menu-btn">☰</button>
+
+    <nav class="sidebar">
+      <ul>
+        <li><a href="/Inicio">Início</a></li>
+        <li><a href="/Ajuda">Ajuda</a></li>
+        <li><a href="/Denuncia">Ver Denúncia</a></li>
+        <li><a href="/Logout" onclick="return confirmarLogout()"><i class="fas fa-user-circle"></i>Deslogar</a></li>
+        <li><a href="/MudarPin"> Mudar o PIN</a></li>
+      </ul>
+    </nav>
+
+    <div class="profile-icon">
+      <img src="{{ usuario[3] }}">
+    </div>
+
+</header>
+<body>
+   <div class="main-content">
+        <div class="dashboard-container">
+            <a href="/Historico" class="card card-5">
+                <p class="card-large-text">Histórico</p>
+                
+            </a>
+            <a href="/Denuncias" class="card card-6">
+                <p class="card-large-text">Denúncias</p>
+              
+            </a>
+            <a href="#" class="card card-7">
+                <p class="card-large-text">Alunos</p>
+                <p class="card-small-text">Cadastrados</p>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const menuBtn = document.querySelector('.menu-btn');
+        const sidebar = document.querySelector('.sidebar');
+        
+        menuBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

@@ -56,6 +56,31 @@ def mostrar_denuncias(user_id, cargo, tipo):
     nomezin = pegar_no_nome(user_id)
 
     if tipo != 'Tudo':
+        if tipo == 'Historico':
+            if cargo == "Secretaria":
+                cursor.execute('''
+            SELECT id, titulo, gravidade, descricao, data, status, nome, visto, cargo, comentario, datavisto, especifico
+            FROM denuncias
+            WHERE status NOT IN ("Em Análise.", "Expirado.")
+              AND (cargo = 'Secretaria' OR cargo = 'Ambos')
+              AND especifico IN (?, "any")
+            ORDER BY id DESC
+        ''', (nomezin,))
+            elif cargo == 'Aluno':
+                return
+            elif cargo == 'Professor':
+                cursor.execute('''
+            SELECT id, titulo, gravidade, descricao, data, status, nome, visto, cargo, comentario, datavisto
+            FROM denuncias
+            WHERE status NOT IN ("Em Análise.", "Expirado.")
+              AND (cargo = 'Professor' OR cargo = 'Ambos')
+              AND especifico IN (?, "any")
+            ORDER BY id DESC
+        ''', (nomezin,))
+            denuncias = cursor.fetchall()
+            conn.close()
+            return denuncias
+        
         if cargo == "Secretaria":
             cursor.execute('''
             SELECT id, titulo, gravidade, descricao, data, status, nome, visto, cargo, comentario, datavisto, especifico
