@@ -59,41 +59,47 @@
         {% elif usuario['status'] == 'Arquivado.' %}
         <p><span style="color: rgb(198, 198, 198);">Situação: 🗃️Arquivado por: {{usuario['visto']}}🗃️</span></p>
         {% elif usuario['status'] == 'Visto.' %}
-        <p><span style="color: orange;">🔎Situação: Visualizado por: {{ usuario['visto'] }} ás {{ usuario['datavisto']}}🔎<span><p>
-        {% elif usuario['status'] == 'Em Análise.' %}
-        <p><span style="color: rgb(255, 255, 255);">Situação: ⏳Esperando Resposta...⏳</span></p>
-        {% elif usuario['status'] == 'Expirada.' %}
-        <p><span style="color: gray;">⏰Situação: Expirado.⏰<span></p>
-        {% else %}
-        <p>??? erro.</p>
-        {% endif %}
-                    {% if usuario['cargo'] == 'Professor' and usuario['especifico'] != 'any' and usuario['especifico'] != None %}
-                    <p><b>Destinado ao Professor:</b> {{usuario['especifico']}}</p>
-                    {% elif usuario['cargo'] == 'Secretaria' and usuario['especifico'] != 'any' and usuario['especifico'] != None %}
-                    <p><b>Destinado ao Secretario(a):</b> {{usuario['especifico']}}</p>
-                    {% endif %}
+        <p><span style="color: orange;">🔎Situação: Visualizado por: {{ usuario['visto'] }} ás {{
+            usuario['datavisto']}}🔎<span>
+              <p>
+                {% elif usuario['status'] == 'Em Análise.' %}
+              <p><span style="color: rgb(255, 255, 255);">Situação: ⏳Esperando Resposta...⏳</span></p>
+              {% elif usuario['status'] == 'Expirada.' %}
+              <p><span style="color: gray;">⏰Situação: Expirado.⏰<span></p>
+              {% else %}
+              <p>??? erro.</p>
+              {% endif %}
+              {% if usuario['cargo'] == 'Professor' and usuario['especifico'] != 'any' and usuario['especifico'] != None
+              %}
+              <p><b>Destinado ao Professor:</b> {{usuario['especifico']}}</p>
+              {% elif usuario['cargo'] == 'Secretaria' and usuario['especifico'] != 'any' and usuario['especifico'] !=
+              None %}
+              <p><b>Destinado ao Secretario(a):</b> {{usuario['especifico']}}</p>
+              {% endif %}
 
-                    {% if usuario['cargo'] == 'Professor' and usuario['especifico'] == 'any' and usuario['especifico'] != None %}
-                    <p><b>Destinado somente aos Professores.</b></p>
-                    {% elif usuario['cargo'] == 'Secretaria' and usuario['especifico'] == 'any' and usuario['especifico'] != None %}
-                    <p><b>Destinado somente a gestão.</b></p>
-                    {% elif usuario['especifico'] == None %}
-                    <p><b>Erro, porfavor faça o envio da denuncia novamente</b></p>
-                    {% endif %}
-                    {% if usuario['comentario'] != '' %}
-                    <p><b>Comentario feito por {{usuario['visto']}}: </b>{{ usuario['comentario'] }}</p>
-                    {% else %}
-                    <p>Ainda não há comentário para esta denúncia.</p>
-                    {% endif %}
+              {% if usuario['cargo'] == 'Professor' and usuario['especifico'] == 'any' and usuario['especifico'] != None
+              %}
+              <p><b>Destinado somente aos Professores.</b></p>
+              {% elif usuario['cargo'] == 'Secretaria' and usuario['especifico'] == 'any' and usuario['especifico'] !=
+              None %}
+              <p><b>Destinado somente a gestão.</b></p>
+              {% elif usuario['especifico'] == None %}
+              <p><b>Erro, porfavor faça o envio da denuncia novamente</b></p>
+              {% endif %}
+              {% if usuario['comentario'] != '' %}
+              <p><b>Comentario feito por {{usuario['visto']}}: </b>{{ usuario['comentario'] }}</p>
+              {% else %}
+              <p>Ainda não há comentário para esta denúncia.</p>
+              {% endif %}
       </div>
 
       {% if usuario['status'] == 'Em Análise.' %}
       <form class="apagar-form" action="{{ url_for('rotas.excluir_denuncia', id=usuario['id']) }}" method="POST">
-        <button type="submit">Apagar</button>
+        <button type="submit" class="buttozito">Apagar</button>
       </form>
       {% elif usuario['status'] == 'Expirada.' %}
       <form class="apagar-form" action="{{ url_for('rotas.excluir_denuncia', id=usuario['id']) }}" method="POST">
-        <button type="submit">Apagar</button>
+        <button type="submit" class="buttozito">Apagar</button>
       </form>
       <br>
       <form class="reenviar-form" action="{{ url_for('rotas.reenviar_denuncia', id=usuario['id']) }}" method="POST">
@@ -107,7 +113,7 @@
       </form>
       {% else %}
       <div class="botãooff">
-        <form class="apagar-form" action="{{ url_for('rotas.excluir_denuncia', id=usuario['id']) }}" method="POST">
+        <form class="apagar-form" method="POST">
           <button type="submit" disabled>Apagar</button>
         </form>
       </div>

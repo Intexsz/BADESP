@@ -84,3 +84,10 @@ def cadastrar_pin(id, pin, escola, ano, turma):
                 WHERE id = ?
             """, (pin, escola, ano, turma, id))
             conn.commit()
+
+def check_pin(user_id):
+    with sqlite3.connect("usuarios.db") as conn:
+        cursor = conn.cursor()
+        cursor.execute("SELECT pin FROM usuarios WHERE id = ?", (user_id,))
+        resultado = cursor.fetchone()
+        return resultado[0] if resultado else None

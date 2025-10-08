@@ -70,8 +70,10 @@
 
   <script>
     const form = document.getElementById('form-denuncia');
-
-    form.addEventListener('submit', function (event) {
+  
+    form.addEventListener('submit', async function (event) {
+      event.preventDefault(); // impede envio automático
+  
       const confirmado = confirm(
         "Você tem certeza que quer enviar esta denúncia? " +
         "A gestão escolar terá ACESSO ao seu nome e saberá que você enviou esta denúncia. " +
@@ -79,26 +81,37 @@
         "Se enviar, só poderá APAGAR antes da Secretaria abrir sua denúncia. " +
         "Caso seja visualizada, você NÃO PODERÁ MAIS APAGAR SUA DENÚNCIA."
       );
-
-      if (!confirmado) {
-        event.preventDefault(); // impede envio se não confirmar
+  
+      if (!confirmado) return;
+  
+      const pin = prompt("Digite seu PIN para confirmar o envio:");
+  
+      if (!pin) {
+        return;
+      }
+  
+      try {
+        const response = await fetch(`{{ url_for('rotas.verificar_pin') }}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ pin: pin })
+        });
+  
+        const result = await response.json();
+  
+        if (result.status === "ok") {
+          form.submit(); // agora envia de verdade
+        } else {
+          alert(result.mensagem || "PIN incorreto. Tente novamente.");
+        }
+  
+      } catch (error) {
+        console.error("Erro ao verificar o PIN:", error);
+        alert("Erro no servidor. Tente novamente mais tarde.");
       }
     });
-
-    // Função separada para confirmar logout
-    function confirmarLogout() {
-      return confirm("Você tem certeza que quer deslogar?");
-    }
-
-
-    // Toggle da sidebar
-    const btn = document.querySelector('.menu-btn');
-    const sidebar = document.querySelector('.sidebar');
-
-    btn.addEventListener('click', () => {
-      sidebar.classList.toggle('active');
-    });
   </script>
+  
 
 <script>
   function verificarSelect() {

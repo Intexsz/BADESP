@@ -1,11 +1,13 @@
-from flask import Flask, request, render_template, session, redirect, url_for, Blueprint, make_response
+from flask import Flask, request, render_template, session, redirect, url_for, Blueprint, make_response, jsonify
 from authlib.integrations.flask_client import OAuth
 from app.database.db_usuario import buscar_cargo, buscar_usuario, buscar_nome_secretaria, buscar_nome_professor
 from app.database.db_denuncia import buscar_status_denuncia, mostrar_denuncias, apagar_denuncia, criar_denuncia, expirar, checagem_denunciahehe
-from app.database.db_usuario import usuario_tem_pin, cadastrar_pin
+from app.database.db_usuario import usuario_tem_pin, cadastrar_pin, check_pin
+from flask_cors import CORS
 
 app = Flask(__name__)
 rotas_bp = Blueprint('rotas', __name__)
+CORS(app)
 
 CLIENT_ID = "334998652961-rpf4gt64873gg0uoa64cmlqkcmj33q4b.apps.googleusercontent.com"
 
@@ -252,3 +254,23 @@ def reenviar_denuncia(id):
             </script>
         """
 ######----------######
+
+@rotas_bp.route('/verificar_pin', methods=['POST'])
+def verificar_pin():
+    if "user_id" not in session:
+        return redirect(url_for('rotalogin.cadastro'))
+    if not usuario_tem_pin(session["user_id"]):
+        return redirect(url_for("rotas.cadastro2_pin"))
+    
+    data = request.get_json()
+    pin_inserido = data.get('pin')
+    usuario_id = session.get('user_id')
+
+    resultado = check_pin(usuario_id)
+    print(resultado)
+    print(pin_inserido)
+
+    if str(resultado) == str(pin_inserido):
+        return jsonify({'status': 'ok'})
+    else:
+        return jsonify({'status': 'erro', 'mensagem': 'PIN incorreto'})

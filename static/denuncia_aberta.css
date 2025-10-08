@@ -70,6 +70,18 @@ textarea::placeholder {
   cursor: pointer;
   transition: all 0.3s;
 }
+
+.buttozito{
+  padding: 12px;
+  border: 1px solid;
+  border-radius: 8px;
+  background: #29387f;
+  color: #ADD8E6;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
 .dic button{
   padding: 12px;
   border: 1px solid;
@@ -93,6 +105,10 @@ button:disabled {
     color: #ADD8E6;
     font-weight: bold;
     transition: all 0.3s;
+}
+.buttozito:hover {
+  background: #394cac;
+  transform: translateY(-2px);
 }
 
 .abrir-btn:hover {
