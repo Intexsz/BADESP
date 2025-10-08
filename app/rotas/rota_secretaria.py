@@ -1,6 +1,6 @@
 from flask import Flask, session, redirect, url_for, Blueprint,render_template, request
 from authlib.integrations.flask_client import OAuth
-from app.database.db_usuario import buscar_cargo, pegar_no_nome
+from app.database.db_usuario import buscar_cargo, pegar_no_nome, usuario_tem_pin
 from app.database.db_denuncia import buscar_status_denuncia, abrir_denunciabanquinho, pegar_na_denuncia_haha, buscar_visto
 from app.database.db_denuncia import atualizar_statuse, publicar_comentario, buscar_comentario
 
@@ -42,6 +42,9 @@ def checar_stats(id):
 def abrir_denuncia(id):
     if "user_id" not in session:
         return redirect(url_for('rotalogin.cadastro'))
+    
+    if not usuario_tem_pin(session["user_id"]):
+        return redirect(url_for("rotas.cadastro2_pin"))
 
     cargo = buscar_cargo(session["user_id"])
     if cargo == "Secretaria" or cargo == 'Professor':
@@ -64,6 +67,8 @@ def abrir_denuncia(id):
 def detalhe_denuncia(id):
     if "user_id" not in session:
         return redirect(url_for("rotalogin.cadastro"))
+    if not usuario_tem_pin(session["user_id"]):
+        return redirect(url_for("rotas.cadastro2_pin"))
     
     cargo = buscar_cargo(session['user_id'])
     
@@ -123,7 +128,7 @@ def detalhe_denuncia(id):
 def comentar(id):
     comentario = request.form.get('comentario')
     checagem = buscar_comentario(id)
-
+    
     if not comentario:
         return redirect(url_for('rotas.inicio'))
     

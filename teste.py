@@ -3,8 +3,8 @@ from flask import Flask, render_template
 app = Flask(__name__)
 
 @app.route('/')
-def casinha():
-    return render_template('iniciosecretaria.html')
+def cadastro_pin():
+    return render_template('cadastroaluno.html')
 
 @app.route('/Ajuda')
 def ajuda():

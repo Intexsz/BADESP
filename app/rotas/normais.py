@@ -2,6 +2,7 @@ from flask import Flask, request, render_template, session, redirect, url_for, B
 from authlib.integrations.flask_client import OAuth
 from app.database.db_usuario import buscar_cargo, buscar_usuario, buscar_nome_secretaria, buscar_nome_professor
 from app.database.db_denuncia import buscar_status_denuncia, mostrar_denuncias, apagar_denuncia, criar_denuncia, expirar, checagem_denunciahehe
+from app.database.db_usuario import usuario_tem_pin, cadastrar_pin
 
 app = Flask(__name__)
 rotas_bp = Blueprint('rotas', __name__)
@@ -21,17 +22,48 @@ google = oauth.register(
 
 ###### PAGINAS NORMAIS ######
 
+@rotas_bp.route('/Login2', methods=['GET', 'POST'])
+def cadastro2_pin():
+    if not "user_id" in session:
+        return redirect(url_for('rotalogin.cadastro'))
+    if usuario_tem_pin(session["user_id"]):
+        return redirect(url_for("rotas.inicio"))
+    cargo = buscar_cargo(session["user_id"])
+
+    if request.method == 'POST':
+        id = session.get("user_id")
+        pin = request.form['pin']
+        escola = request.form['escola']
+        if cargo == 'Aluno':   
+            ano = request.form['ano']
+            turma = request.form['turma']
+        else:
+            ano = None
+            turma = None
+
+        cadastrar_pin(id, pin, escola, ano, turma)
+
+        return redirect(url_for('rotas.inicio'))
+
+    return render_template("cadastroaluno.html", cargo=cargo)
+
 @rotas_bp.route('/')
 def homepage():
     if not "user_id" in session:
         return redirect(url_for('rotalogin.cadastro'))
+    if not usuario_tem_pin(session["user_id"]):
+        return redirect(url_for("rotas.cadastro2_pin"))
+    
     return redirect(url_for('rotas.inicio'))
 
 @rotas_bp.route('/Inicio', methods=['POST', 'GET'])
 def inicio():
     if "user_id" not in session:
         return redirect(url_for("rotalogin.cadastro"))
-
+    
+    if not usuario_tem_pin(session["user_id"]):
+        return redirect(url_for("rotas.cadastro2_pin"))
+    
     expirar()
     cargo = buscar_cargo(session["user_id"])
     usuario = buscar_usuario(session["user_id"])
@@ -56,7 +88,6 @@ def inicio():
     else:
         denuncias = mostrar_denuncias(session["user_id"], cargo, 'Tudo')
 
-        
     if cargo == "Secretaria":
         return render_template("iniciosecretaria.html",usuario=usuario)
     elif cargo == 'Aluno':
@@ -69,6 +100,8 @@ def historico():
     if "user_id" not in session:
         return redirect(url_for('rotalogin.cadastro'))
     cargo = buscar_cargo(session["user_id"])
+    if not usuario_tem_pin(session["user_id"]):
+        return redirect(url_for("rotas.cadastro2_pin"))
     if cargo == 'Aluno':
         return redirect(url_for('rotas.inicio'))
     
@@ -99,6 +132,8 @@ def historico():
 def denuncias():
     if "user_id" not in session:
         return redirect(url_for('rotalogin.cadastro'))
+    if not usuario_tem_pin(session["user_id"]):
+        return redirect(url_for("rotas.cadastro2_pin"))
     cargo = buscar_cargo(session["user_id"])
     if cargo == 'Aluno':
         return redirect(url_for('rotas.inicio'))
@@ -128,6 +163,9 @@ def ajuda():
 def denuncia():
     if "user_id" not in session:
         return redirect(url_for('rotalogin.cadastro'))
+    
+    if not usuario_tem_pin(session["user_id"]):
+        return redirect(url_for("rotas.cadastro2_pin"))
     
     nomeprof = buscar_nome_professor()
     nomesecretaria = buscar_nome_secretaria()
@@ -170,7 +208,9 @@ def denuncia():
 def excluir_denuncia(id):
     if "user_id" not in session:
         return redirect(url_for('rotalogin.cadastro'))
-    
+    if not usuario_tem_pin(session["user_id"]):
+        return redirect(url_for("rotas.cadastro2_pin"))
+
     status = buscar_status_denuncia(id)
     if status == 'Em Análise.' or status == 'Expirada.':
         apagar_denuncia(id, session["user_id"])
@@ -190,6 +230,8 @@ def excluir_denuncia(id):
 def reenviar_denuncia(id):
     if "user_id" not in session:
         return redirect(url_for('rotalogin.cadastro'))
+    if not usuario_tem_pin(session["user_id"]):
+        return redirect(url_for("rotas.cadastro2_pin"))
     
     titulo = request.form.get('titulo')
     gravidade = request.form.get('gravidade')

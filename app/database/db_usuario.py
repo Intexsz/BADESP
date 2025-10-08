@@ -11,7 +11,10 @@ def init_db():
                 email TEXT,
                 foto TEXT,
                 cargo TEXT,
-                pin INTEGER
+                pin INTEGER,
+                escola TEXT, 
+                ano INTEGER, 
+                turma TEXT
             )
         """)
         conn.commit()
@@ -64,3 +67,20 @@ def buscar_nome_professor():
         rows = cursor.fetchall()
         return [row[0] for row in rows]
 
+def usuario_tem_pin(user_id):
+    with sqlite3.connect("usuarios.db") as conn:
+        cursor = conn.cursor()
+        cursor.execute("SELECT pin FROM usuarios WHERE id = ?", (user_id,))
+        resultado = cursor.fetchone()
+        # Retorna True se o usuário tiver um pin, False se não tiver
+        return bool(resultado and resultado[0] is not None)
+
+def cadastrar_pin(id, pin, escola, ano, turma):
+    with sqlite3.connect("usuarios.db") as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                UPDATE usuarios
+                SET pin = ?, escola = ?, ano = ?, turma = ?
+                WHERE id = ?
+            """, (pin, escola, ano, turma, id))
+            conn.commit()

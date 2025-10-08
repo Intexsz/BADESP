@@ -25,8 +25,6 @@ google = oauth.register(
 def processar_login(cargo):
     token = request.json.get("credential") if request.is_json else \
             request.form.get("credential") or request.args.get("credential")
-    
-    print("TOKEN RECEBIDO DO FRONT:", token)
 
     if not token:
         return jsonify({"error": "Token não fornecido"}), 400
