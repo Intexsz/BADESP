@@ -91,3 +91,13 @@ def check_pin(user_id):
         cursor.execute("SELECT pin FROM usuarios WHERE id = ?", (user_id,))
         resultado = cursor.fetchone()
         return resultado[0] if resultado else None
+    
+def novo_pin(pin, id):
+    with sqlite3.connect("usuarios.db") as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                UPDATE usuarios
+                SET pin = ?
+                WHERE id = ?
+            """, (pin,id))
+            conn.commit()
