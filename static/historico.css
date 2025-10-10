@@ -203,7 +203,7 @@ body {
 body {
   min-height: 100vh;
   text-align: center;
-  background-color: #3a3434;
+  background-color: #6e6e6e;
 }
 
 .main-content {
@@ -219,7 +219,7 @@ body {
   border-radius: 4px;
   padding: 20px;
   border: 2px solid rgb(238, 232, 232);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  box-shadow: 0 4px 15px rgba(212, 212, 212, 0.2); 
   backdrop-filter: blur(13.5px);
   -webkit-backdrop-filter: blur(13.5px);
 }
