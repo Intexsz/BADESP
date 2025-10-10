@@ -97,8 +97,8 @@ def inicio():
     elif cargo == 'Professor':
         return render_template("inicioprofessor.html",usuario=usuario)
 
-@rotas_bp.route('/Historico')
-def historico():
+@rotas_bp.route('/Abertas')
+def Abertas():
     if "user_id" not in session:
         return redirect(url_for('rotalogin.cadastro'))
     cargo = buscar_cargo(session["user_id"])
@@ -127,7 +127,39 @@ def historico():
     denuncias_paginadas = denuncias[start:end]
     total_pages = (len(denuncias) + per_page - 1) // per_page
 
-    return render_template('historico.html', denuncias=denuncias_paginadas, usuario=usuario,page=page,total_pages=total_pages,filtro=filtro)
+    return render_template('historico.html', denuncias=denuncias_paginadas, usuario=usuario,page=page,total_pages=total_pages,filtro=filtro,tipo='Abertas')
+
+@rotas_bp.route('/Resolvidas')
+def Resolvidas():
+    if "user_id" not in session:
+        return redirect(url_for('rotalogin.cadastro'))
+    cargo = buscar_cargo(session["user_id"])
+    if not usuario_tem_pin(session["user_id"]):
+        return redirect(url_for("rotas.cadastro2_pin"))
+    if cargo == 'Aluno':
+        return redirect(url_for('rotas.inicio'))
+    
+    expirar()
+    cargo = buscar_cargo(session["user_id"])
+    usuario = buscar_usuario(session["user_id"])
+    filtro = request.args.get('filtro', 'Tudo')
+
+    if request.method == 'POST':
+        querer = request.form.get('Olavo', 'Tudo')
+        return redirect(url_for('rotas.inicio', filtro=querer))
+
+    denuncias = mostrar_denuncias(session["user_id"], cargo, 'Resolvidas')
+    
+    # ===== PAGINAÇÃO =====
+    page = int(request.args.get("page", 1))
+    per_page = 10
+    start = (page - 1) * per_page 
+    end = start + per_page
+
+    denuncias_paginadas = denuncias[start:end]
+    total_pages = (len(denuncias) + per_page - 1) // per_page
+
+    return render_template('historico.html', denuncias=denuncias_paginadas, usuario=usuario,page=page,total_pages=total_pages,filtro=filtro,tipo='Resolvidas')
 
 
 @rotas_bp.route('/Denuncias')
@@ -267,9 +299,7 @@ def verificar_pin():
     usuario_id = session.get('user_id')
 
     resultado = check_pin(usuario_id)
-    print(resultado)
-    print(pin_inserido)
-
+    
     if str(resultado) == str(pin_inserido):
         return jsonify({'status': 'ok'})
     else:

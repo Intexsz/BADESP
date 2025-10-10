@@ -61,9 +61,9 @@
       {% set nome = "🔎Visualizado por: " ~ d[7] ~ ' ás ' ~ d[10] ~ '🔎'%}
     {% endif %}
 
-    <form action="{{ url_for('rotasecretaria.detalhe_denuncia', id=d[0]) }}" method="GET" onclick="return confirmarAbrir()">
+    <form action="{{ url_for('rotasecretaria.detalhe_denuncia', id=d[0]) }}" method="GET">
       <div class="grid-item">
-        <button type="submit" style="color: {{ cor }}">
+        <button type="button" style="color: {{ cor }}" onclick="verificarPin({{ d[0] }})">
           {{ d[1] }} <br>
           Nome: {{ d[6] }} <br>
           Data: {{ d[4] }} <br><br>
@@ -99,27 +99,61 @@
 
 
 </div>
-    <script>
-      // Toggle menu lateral
-      const btn = document.querySelector('.menu-btn');
-      const sidebar = document.querySelector('.sidebar');
-      btn.addEventListener('click', () => {
-        sidebar.classList.toggle('active');
-      });
-  
-      function confirmarLogout() {
-        return confirm("Você tem certeza que quer deslogar?");
-      }
-  
-      function confirmarAbrir() {
-        return confirm("Você tem certeza que deseja abrir? Após aberto não poderá mais ser deletado e o usuario SABERÁ que foi você quem abriu");
-      }
+  <script>
+    // Toggle menu lateral
+    const btn = document.querySelector('.menu-btn');
+    const sidebar = document.querySelector('.sidebar');
+    btn.addEventListener('click', () => {
+      sidebar.classList.toggle('active');
+    });
 
-      function toggleProfileMenu() {
-    var menu = document.getElementById("profile-menu");
-    menu.classList.toggle("show"); 
-}
+    function confirmarLogout() {
+      return confirm("Você tem certeza que quer deslogar?");
+    }
 
-    </script>
+    function toggleProfileMenu() {
+      var menu = document.getElementById("profile-menu");
+      menu.classList.toggle("show");
+    }
+
+  </script>
+
+  <script>
+    async function verificarPin(denunciaId) {
+      const pin = prompt("Digite seu PIN para abrir a denúncia:");
+      if (!pin) return;
+
+      try {
+        const response = await fetch(`{{ url_for('rotas.verificar_pin') }}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ pin: pin })
+        });
+
+        const result = await response.json();
+
+        if (result.status === "ok") {
+          const confirmar = confirm(
+            "Você tem certeza que deseja abrir? Após aberto não poderá mais ser deletado e o usuário SABERÁ que foi você quem abriu."
+          );
+          if (!confirmar) return;
+
+          const form = document.createElement("form");
+          form.method = "POST";
+          form.action = `/detalhe/${denunciaId}`;
+          document.body.appendChild(form);
+          form.submit();
+        } else {
+          alert(result.mensagem || "PIN incorreto. Tente novamente.");
+        }
+
+      } catch (error) {
+        console.error("Erro ao verificar o PIN:", error);
+        alert("Erro no servidor. Tente novamente mais tarde.");
+      }
+    }
+  </script>
  </body>
 </html>
