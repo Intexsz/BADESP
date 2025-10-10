@@ -32,14 +32,6 @@
  <body>
       <h6 class="mensagem">Bem Vindo Professor:   {{ usuario[1] }}</h6>
       <form class="filtro" method="GET" action="{{ url_for('rotas.inicio') }}">
-        <select name="filtro" onchange="this.form.submit()">
-          <option value="Tudo" {% if filtro == "Tudo" %}selected{% endif %}>Tudo</option>
-          <option value="Aprovado" {% if filtro == "Aprovado" %}selected{% endif %}>Aprovado</option>
-          <option value="Recusado" {% if filtro == "Recusado" %}selected{% endif %}>Recusado</option>
-          <option value="Arquivado" {% if filtro == "Arquivado" %}selected{% endif %}>Arquivado</option>
-          <option value="Aberto" {% if filtro == "Aberto" %}selected{% endif %}>Aberto</option>
-        </select>
-      </form>
 
 <div class="grid-container">
 {% if denuncias %}
