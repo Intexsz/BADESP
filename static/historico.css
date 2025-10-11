@@ -113,7 +113,7 @@ body {
 .profile-menu ul li a:hover {
   background-color: rgb(66, 64, 64);
   color: white;
-
+  transition: 0.3s;
 }
 
 .nome {
@@ -215,7 +215,8 @@ body {
 .container {
   width: 100%;
   max-width: 1100px;
-  background-color: rgb(245, 245, 245);
+  background-color: rgb(231, 231, 231);
+  transition: 0.5s;
   border-radius: 4px;
   padding: 20px;
   border: 2px solid rgb(238, 232, 232);
@@ -235,9 +236,15 @@ body {
   border-collapse: collapse;
 }
 
-.denuncias-table th,
+.denuncias-table th{
+  text-align: center;
+  padding: 10px 15px;
+  border-bottom: 1px solid #060505;
+}
 .denuncias-table td {
-  text-align: left;
+  text-align: center;
+  border-left: 1px solid #060505;
+  border-right: 1px solid #060505;
   padding: 10px 15px;
   border-bottom: 1px solid #060505;
 }
@@ -252,19 +259,5 @@ body {
 
 .denuncias-table tbody tr:hover {
   background-color: #ffffff;
-}
-
-.status-pendente {
-  color: #ffc107;
-  font-weight: bold;
-}
-
-.status-resolvida {
-  color: #28a745;
-  font-weight: bold;
-}
-
-.status-arquivada {
-  color: #6c757d;
-  font-weight: bold;
+  transition: 0.5s;
 }

@@ -15,7 +15,7 @@
         <h1>Cadastro</h1>
 
         <!-- Formulário -->
-        <form method="POST" action="{{ url_for('rotas.cadastro2_pin') }}" onsubmit="return validarPin()">
+        <form method="POST" action="{{ url_for('rotas.cadastro2_pin') }}" onsubmit="return validarPin()"autocomplete="off">
 
             <div class="input-container">
                 <select name="escola" id="select-escola" required>

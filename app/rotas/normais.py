@@ -214,12 +214,12 @@ def denuncia():
     """
         
         titulo = request.form.get('titulo')
-        gravidade = request.form.get('gravidade')
+        tipo = request.form.get('tipo')
         descricao = request.form.get('descricao')
         quem = request.form.get('quem')
         pessoa = request.form.get('pessoa')
 
-        criar_denuncia(titulo, gravidade, descricao, session["user_id"], 'Em Análise.', quem, pessoa)
+        criar_denuncia(titulo, tipo, descricao, session["user_id"], 'Em Análise.', quem, pessoa)
         
         return f"""
     <script>
@@ -268,14 +268,14 @@ def reenviar_denuncia(id):
         return redirect(url_for("rotas.cadastro2_pin"))
     
     titulo = request.form.get('titulo')
-    gravidade = request.form.get('gravidade')
+    tipo = request.form.get('tipo')
     descricao = request.form.get('descricao')
     quem = request.form.get('quem')
     pessoa = request.form.get('pessoa')
 
     status = buscar_status_denuncia(id)
     if status == 'Expirada.':
-        criar_denuncia(titulo, gravidade, descricao, session["user_id"], 'Em Análise.', quem, pessoa)
+        criar_denuncia(titulo, tipo, descricao, session["user_id"], 'Em Análise.', quem, pessoa)
         apagar_denuncia(id, session["user_id"])
         return redirect(url_for('rotas.inicio'))
     else:

@@ -33,29 +33,44 @@
       <h6 class="mensagem">Bem Vindo Professor:   {{ usuario[1] }}</h6>
       <form class="filtro" method="GET" action="{{ url_for('rotas.inicio') }}">
 
-<div class="grid-container">
-{% if denuncias %}
-  {% for d in denuncias %}
+  <div class="grid-container">
+    {% if denuncias %}
+    {% for d in denuncias %}
     {% set cor = "white" %}
     {% set nome = "📂Denúncia em aberto📂 " %}
 
     {% if d[5] == 'Aprovado.' %}
-      {% set cor = "rgb(0, 255, 0)" %}
-      {% set nome = "✔️Aprovado por: " ~ d[7] ~ '✔️' %}
+    {% set cor = "rgb(0, 255, 0)" %}
+    {% set nome = "✔️Aprovado por: " ~ d[7] ~ '✔️' %}
     {% elif d[5] == 'Recusado.' %}
-      {% set cor = "red" %}
-      {% set nome = "❌Recusado por: " ~ d[7] ~ '❌' %}
+    {% set cor = "red" %}
+    {% set nome = "❌Recusado por: " ~ d[7] ~ '❌' %}
     {% elif d[5] == 'Arquivado.' %}
-      {% set cor = "gray" %}
-      {% set nome = "🗃️Arquivado por: " ~ d[7] ~ '🗃️' %}
+    {% set cor = "gray" %}
+    {% set nome = "🗃️Arquivado por: " ~ d[7] ~ '🗃️' %}
     {% elif d[5] == 'Visto.' %}
-      {% set cor = "rgb(255, 150, 0)" %}
-      {% set nome = "🔎Visualizado por: " ~ d[7] ~ ' ás ' ~ d[10] ~ '🔎'%}
+    {% set cor = "rgb(255, 150, 0)" %}
+    {% set nome = "🔎Visualizado por: " ~ d[7] ~ ' ás ' ~ d[10] ~ '🔎'%}
+    {% endif %}
+
+    <!-- cor de fundo -->
+    {% if d[13] == 'Alta' %}
+    {% set corr = "red" %}
+    {% set nome = '⚠️Gravidade Grave!⚠️' %}
+    {% elif d[13] == 'Média' %}
+    {% set corr = "yellow" %}
+    {% set nome = '⚠️Gravidade Média!⚠️' %}
+    {% elif d[13] == 'Baixa' %}
+    {% set corr = "rgb(0, 255, 0)" %}
+    {% set nome = '⚠️Gravidade Baixa!⚠️' %}
+    {% else %}
+    {% set corr = "white" %}
+    {% set nome = '⚠️Erro ao Calcular Gravidade!⚠️' %}
     {% endif %}
 
     <form action="{{ url_for('rotasecretaria.detalhe_denuncia', id=d[0]) }}" method="GET">
       <div class="grid-item">
-        <button type="button" style="color: {{ cor }}" onclick="verificarPin({{ d[0] }})">
+        <button type="button" style="color: {{ corr }}" onclick="verificarPin({{ d[0] }})">
           {{ d[1] }} <br>
           Nome: {{ d[6] }} <br>
           Data: {{ d[4] }} <br><br>
@@ -63,12 +78,12 @@
         </button>
       </div>
     </form>
-  {% endfor %}
-  {% else %}
-    <p>Nenhuma denúncia encontrada.</p>
-{% endif %}
+    {% endfor %}
+    {% else %}
+    <p style="color: white; text-align: center; align-items: center; font-family: arial;">Nenhuma denúncia encontrada.</p>
+    {% endif %}
 
-</div>
+  </div>
 
 <div class="pagination">
 {% set current_page = page %}

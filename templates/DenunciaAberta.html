@@ -34,12 +34,34 @@
     <h1>Denúncia de: {{ usuario['nome'] }}</h1>
     <div id="denuncias-container">
       {% if usuario %}
+      {% if usuario['gravidade'] == 'Alta' %}
+      {% set corr = "red" %}
+      {% elif usuario['gravidade'] == 'Média' %}
+      {% set corr = "yellow" %}
+      {% elif usuario['gravidade'] == 'Baixa' %}
+      {% set corr = "rgb(0, 255, 0)" %}
+      {% endif %}
       <div class="denuncia-card" id="denuncia-{{ usuario['id'] }}">
         <h3>{{ usuario['titulo'] }}</h3>
-        <p>Ocorrido: {{ usuario['gravidade'] }}</p>
-        <p>Denúncia:</p>
-        <br>
+        <p>Ocorrido: {{ usuario['tipo'] }}</p>
+        <p style="color: {{ corr }};">Gravidade: {{ usuario['gravidade'] }}</p>
+
+        <p>Denúncia: </p>
         <textarea disabled style="
+    width: 750px; 
+    height: 100px; 
+    resize: none; 
+    text-align: start; 
+    vertical-align: top; 
+    padding: 5px;  
+    box-sizing: border-box;  
+    overflow-y: auto;   /* permite scroll vertical */
+    cursor: pointer;
+">
+{{ usuario['descricao_ia'] }}</textarea>
+<p>Denúncia sem correção:</p>
+      <br>
+      <textarea disabled style="
     width: 750px; 
     height: 100px; 
     resize: none; 
@@ -60,46 +82,50 @@
         {% elif usuario['status'] == 'Arquivado.' %}
         <p><span style="color: rgb(198, 198, 198);">Situação: 🗃️Arquivado por: {{usuario['visto']}}🗃️</span></p>
         {% elif usuario['status'] == 'Visto.' %}
-        <p><span style="color: orange;">🔎Situação: Visualizado por: {{ usuario['visto'] }} ás {{ usuario['datavisto']}}🔎<span><p>
-        {% elif usuario['status'] == 'Em Análise.' %}
-        <p><span style="color: rgb(255, 255, 255);">Situação: ⏳Esperando Resposta...⏳</span></p>
-        {% elif usuario['status'] == 'Expirada.' %}
-        <p><span style="color: gray;">⏰Situação: Expirado.⏰<span></p>
-        {% else %}
-        <p>??? erro.</p>
-        {% endif %}
-        {% if usuario['cargo'] == 'Professor' and usuario['especifico'] != 'any' %}
-        <p><b>Esta denúncia foi destinada somente para você!</b></p>
-        {% elif usuario['cargo'] == 'Secretaria' and usuario['especifico'] != 'any' %}
-        <p><b>Esta denúncia foi destinada somente para você!</b></p>
-        {% endif %}
+        <p><span style="color: orange;">🔎Situação: Visualizado por: {{ usuario['visto'] }} ás {{
+            usuario['datavisto']}}🔎<span>
+              <p>
+                {% elif usuario['status'] == 'Em Análise.' %}
+              <p><span style="color: rgb(255, 255, 255);">Situação: ⏳Esperando Resposta...⏳</span></p>
+              {% elif usuario['status'] == 'Expirada.' %}
+              <p><span style="color: gray;">⏰Situação: Expirado.⏰<span></p>
+              {% else %}
+              <p>??? erro.</p>
+              {% endif %}
+              {% if usuario['cargo'] == 'Professor' and usuario['especifico'] != 'any' %}
+              <p><b>Esta denúncia foi destinada somente para você!</b></p>
+              {% elif usuario['cargo'] == 'Secretaria' and usuario['especifico'] != 'any' %}
+              <p><b>Esta denúncia foi destinada somente para você!</b></p>
+              {% endif %}
 
-        {% if usuario['cargo'] == 'Professor' and usuario['especifico'] == 'any' %}
-        <p><b>Esta denúncia foi destinada apenas para Professores!</b></p>
-        {% elif usuario['cargo'] == 'Secretaria' and usuario['especifico'] == 'any' %}
-        <p><b>Esta denúncia foi destinada apenas para a gestão!</b></p>
-        {% endif %}
-        {% if usuario['comentario'] != '' %}
-        <p><b>Comentario vinculado a denúncia: </b>{{ usuario['comentario'] }}</p>
-        {% else %}
-        <p>Ainda não há comentário vinculado a esta denúncia.</p>
-        {% endif %}
+              {% if usuario['cargo'] == 'Professor' and usuario['especifico'] == 'any' %}
+              <p><b>Esta denúncia foi destinada apenas para Professores!</b></p>
+              {% elif usuario['cargo'] == 'Secretaria' and usuario['especifico'] == 'any' %}
+              <p><b>Esta denúncia foi destinada apenas para a gestão!</b></p>
+              {% endif %}
+              {% if usuario['comentario'] != '' %}
+              <p><b>Comentario vinculado a denúncia: </b>{{ usuario['comentario'] }}</p>
+              {% else %}
+              <p>Ainda não há comentário vinculado a esta denúncia.</p>
+              {% endif %}
+
+              <br>
+              <form action="{{ url_for('rotasecretaria.aprovar', id=usuario['id']) }}" method="GET"
+                onclick="return confirmarAbrir()">
+                <button type="submit" class="abrir-btn">Aprovar</button>
+              </form>
+              <br>
+              <form action="{{ url_for('rotasecretaria.recusar', id=usuario['id']) }}" method="GET"
+                onclick="return confirmarRecusar()">
+                <button type="submit" class="abrir-btn">Recusar</button>
+              </form>
+              <br>
+              <form action="{{ url_for('rotasecretaria.arquivar', id=usuario['id']) }}" method="GET"
+                onclick="return confirmaArquivar()">
+                <button type="submit" class="abrir-btn">Arquivar</button>
+              </form>
+
       </div>
-
-      <form action="{{ url_for('rotasecretaria.aprovar', id=usuario['id']) }}" method="GET"
-        onclick="return confirmarAbrir()">
-        <button type="submit" class="abrir-btn">Aprovar</button>
-      </form>
-      <br>
-      <form action="{{ url_for('rotasecretaria.recusar', id=usuario['id']) }}" method="GET"
-        onclick="return confirmarRecusar()">
-        <button type="submit" class="abrir-btn">Recusar</button>
-      </form>
-      <br>
-      <form action="{{ url_for('rotasecretaria.arquivar', id=usuario['id']) }}" method="GET"
-        onclick="return confirmaArquivar()">
-        <button type="submit" class="abrir-btn">Arquivar</button>
-      </form>
       {% else %}
       <p>Erro.</p>
       {% endif %}
@@ -113,8 +139,8 @@
         </form>
         {% else %}
         <p style="align-items: center; text-align: center;">Comentario já feito.</p>
-        {% endif %}
       </div>
+      {% endif %}
 
 
     </div>

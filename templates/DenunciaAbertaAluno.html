@@ -34,9 +34,33 @@
     <h1>{{ usuario['titulo'] }}</h1>
     <div id="denuncias-container">
       {% if usuario %}
+      {% if usuario['gravidade'] == 'Alta' %}
+      {% set corr = "red" %}
+      {% elif usuario['gravidade'] == 'Média' %}
+      {% set corr = "yellow" %}
+      {% elif usuario['gravidade'] == 'Baixa' %}
+      {% set corr = "rgb(0, 255, 0)" %}
+      {% endif %}
       <div class="denuncia-card" id="denuncia-{{ usuario['id'] }}">
-        <p>Ocorrido: {{ usuario['gravidade'] }}</p>
-        <p>Denúncia:</p>
+        <h3>{{ usuario['titulo'] }}</h3>
+        <p>Ocorrido: {{ usuario['tipo'] }}</p>
+        <p style="color: {{ corr }};">Gravidade: {{ usuario['gravidade'] }}</p>
+
+        <p>Denúncia: </p>
+        <textarea disabled style="
+    width: 750px; 
+    height: 100px; 
+    resize: none; 
+    text-align: start; 
+    vertical-align: top; 
+    padding: 5px;  
+    box-sizing: border-box;  
+    overflow-y: auto;   /* permite scroll vertical */
+    cursor: pointer;
+">
+{{ usuario['descricao_ia'] }}
+</textarea>
+        <p>Denúncia sem correção:</p>
         <br>
         <textarea disabled style="
     width: 750px; 
@@ -104,7 +128,7 @@
       <br>
       <form class="reenviar-form" action="{{ url_for('rotas.reenviar_denuncia', id=usuario['id']) }}" method="POST">
         <input type="hidden" name="titulo" value="{{ usuario['titulo'] }}">
-        <input type="hidden" name="gravidade" value="{{ usuario['gravidade'] }}">
+        <input type="hidden" name="tipo" value="{{ usuario['tipo'] }}">
         <input type="hidden" name="descricao" value="{{ usuario['descricao'] }}">
         <input type="hidden" name="quem" value="{{ usuario['cargo'] }}">
         <input type="hidden" name="pessoa" value="{{ usuario['especifico'] }}">

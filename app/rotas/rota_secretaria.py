@@ -71,7 +71,7 @@ def detalhe_denuncia(id):
         return redirect(url_for("rotas.cadastro2_pin"))
     
     cargo = buscar_cargo(session['user_id'])
-    if cargo == 'Secretaria' or cargo == 'Professor':
+    if cargo in ('Secretaria', 'Professor'):
         
         visto = buscar_visto(id)
         nomezin = pegar_no_nome(session['user_id'])
