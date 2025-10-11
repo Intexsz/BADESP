@@ -53,10 +53,6 @@ body {
   object-fit: cover;
 }
 
-.profile-icon {
-  position: relative;
-}
-
 .clicar {
   color: rgb(154, 89, 192);
   font-family: Segoe UI;
@@ -67,53 +63,6 @@ body {
   color: rgb(205, 118, 255);
   font-family: Segoe UI;
 
-}
-
-.profile-menu {
-  display: none;
-  position: absolute;
-  top: 60px;
-  right: 0;
-  min-width: 180px;
-  background-color: rgb(90, 89, 89);
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-  overflow: hidden;
-  z-index: 100;
-  backdrop-filter: blur(10px);
-  transform-origin: top;
-  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-  transform: scaleY(0);
-  opacity: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.profile-menu.show {
-  display: block;
-  transform: scaleY(1);
-  opacity: 1;
-}
-
-.profile-menu ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.profile-menu ul li a {
-  color: #e0e0e0;
-  padding: 12px 16px;
-  text-decoration: none;
-  font-size: 14px;
-  transition: background-color 0.2s ease;
-  display: flex;
-  align-items: center;
-}
-
-.profile-menu ul li a:hover {
-  background-color: rgb(66, 64, 64);
-  color: white;
-  transition: 0.3s;
 }
 
 .nome {
