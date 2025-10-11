@@ -148,7 +148,6 @@ body {
   transform: translateX(8px);
 }
 
-
 body {
   min-height: 100vh;
   text-align: center;
@@ -167,7 +166,7 @@ body {
   background-color: rgb(231, 231, 231);
   transition: 0.5s;
   border-radius: 4px;
-  padding: 20px;
+  padding: 50px;
   border: 2px solid rgb(238, 232, 232);
   box-shadow: 0 4px 15px rgba(212, 212, 212, 0.2); 
   backdrop-filter: blur(13.5px);
@@ -194,7 +193,7 @@ body {
   text-align: center;
   border-left: 1px solid #060505;
   border-right: 1px solid #060505;
-  padding: 10px 15px;
+  padding: 10px 20px;
   border-bottom: 1px solid #060505;
 }
 

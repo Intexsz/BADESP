@@ -117,7 +117,7 @@ def mostrar_denuncias(user_id, cargo, tipo):
                 return
             elif cargo == 'Professor':
                 cursor.execute('''
-            SELECT id, titulo, tipo, descricao, data, status, nome, visto, cargo, comentario, datavisto, descricao_ia, gravidade, turma, ano
+            SELECT id, titulo, tipo, descricao, data, status, nome, visto, cargo, comentario, datavisto, especifico, descricao_ia, gravidade, turma, ano
             FROM denuncias
             WHERE status NOT IN ("Em Análise.", "Expirado.", "Visto.")
               AND (cargo = 'Professor' OR cargo = 'Ambos')
@@ -142,7 +142,7 @@ def mostrar_denuncias(user_id, cargo, tipo):
                 return
             elif cargo == 'Professor':
                 cursor.execute('''
-            SELECT id, titulo, tipo, descricao, data, status, nome, visto, cargo, comentario, datavisto, descricao_ia, gravidade, turma, ano
+            SELECT id, titulo, tipo, descricao, data, status, nome, visto, cargo, comentario, datavisto, especifico, descricao_ia, gravidade, turma, ano
             FROM denuncias
             WHERE status = "Visto."
               AND (cargo = 'Professor' OR cargo = 'Ambos')
@@ -172,7 +172,7 @@ def mostrar_denuncias(user_id, cargo, tipo):
         ''', (user_id,tipo,))
         elif cargo == 'Professor':
             cursor.execute('''
-            SELECT id, titulo, tipo, descricao, data, status, nome, visto, cargo, comentario, datavisto, descricao_ia, gravidade, turma, ano
+            SELECT id, titulo, tipo, descricao, data, status, nome, visto, cargo, comentario, datavisto, especifico, descricao_ia, gravidade, turma, ano
             FROM denuncias
             WHERE status != "Expirada."
               AND (cargo = 'Professor' OR cargo = 'Ambos')

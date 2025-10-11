@@ -95,7 +95,7 @@ def inicio():
     elif cargo == 'Aluno':
         return render_template("inicio.html", denuncias=denuncias, usuario=usuario,filtro=filtro)
     elif cargo == 'Professor':
-        return render_template("inicioprofessor.html",usuario=usuario)
+        return render_template("iniciosecretaria.html",usuario=usuario)
 
 @rotas_bp.route('/Abertas')
 def Abertas():
