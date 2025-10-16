@@ -51,7 +51,6 @@ def criar_tabela():
             turma TEXT
         )
     ''')
-    # OBS: gravidade e tipo estão trocados de lugar (quando for fazer o gravidade com IA arrumar isso)
     conn.commit()
     conn.close()
 
