@@ -133,3 +133,11 @@ h1 {
 .custom-google-btn:hover {
   background-color: #29387f;
 }
+.Termos{
+  display: flex;
+  padding: 10px;
+}
+.Termos input{
+  height: 30px;
+  width: 30px;
+}
