@@ -6,26 +6,6 @@ import re
 
 client = OpenAI(api_key='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')
 
-def IA(frase):
-    response = client.responses.create(
-    model="gpt-4o-mini",
-    input=[
-        {
-            "role": "system",
-            "content": (
-                "Reforme e resuma a frase para que fique mais formal e profissional, "
-                "independentemente do contexto, e avalie qual o tipo de gravidade: "
-                "Baixa, Média ou Alta. "
-                "Responda exatamente neste formato:\n\n"
-                "Frase reformulada: <frase>\n"
-                "Tipo de gravidade: <gravidade>"
-            )
-        },
-        {"role": "user", "content": frase}
-    ])
-    texto_resposta = response.output[0].content[0].text.strip()
-    return texto_resposta
-
 # iniciar banco de dados de denuncia
 def criar_tabela():
     conn = sqlite3.connect('denuncias.db')
@@ -53,6 +33,26 @@ def criar_tabela():
     ''')
     conn.commit()
     conn.close()
+
+def IA(frase):
+    response = client.responses.create(
+    model="gpt-4o-mini",
+    input=[
+        {
+            "role": "system",
+            "content": (
+                "Reforme e resuma a frase para que fique mais formal e profissional, "
+                "independentemente do contexto, e avalie qual o tipo de gravidade: "
+                "Baixa, Média ou Alta. "
+                "Responda exatamente neste formato:\n\n"
+                "Frase reformulada: <frase>\n"
+                "Tipo de gravidade: <gravidade>"
+            )
+        },
+        {"role": "user", "content": frase}
+    ])
+    texto_resposta = response.output[0].content[0].text.strip()
+    return texto_resposta
 
 # aqui ira criar a denuncia
 def criar_denuncia(titulo, tipo, descricao, user_id, status, cargo, especifico):
