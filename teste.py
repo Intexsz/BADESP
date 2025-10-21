@@ -1,15 +1,27 @@
-from flask import Flask, render_template
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
-app = Flask(__name__)
+# Dados do remetente e destinatário
+remetente = 'juniorsolva2025@gmail.com'
+senha = 'phlh cyyd btep epgy'
+destinatario = '@gmail.com'
 
-@app.route('/')
-def cadastro_pin():
-    return render_template('cadastroaluno.html')
+# Criando a mensagem
+msg = MIMEMultipart()
+msg['From'] = remetente
+msg['To'] = destinatario
+msg['Subject'] = 'Assunto do Email'
 
-@app.route('/Ajuda')
-def ajuda():
-    return render_template('ajuda.html')
+corpo = 'Sabia que vocês são muito molestaveis?'
+msg.attach(MIMEText(corpo, 'plain'))
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# Configurando o servidor SMTP do Gmail
+server = smtplib.SMTP('smtp.gmail.com', 587)
+server.starttls()  # Segurança
+server.login(remetente, senha)
+texto = msg.as_string()
+server.sendmail(remetente, destinatario, texto)
+server.quit()
 
+print('Email enviado com sucesso!')
