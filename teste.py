@@ -13,7 +13,7 @@ msg['From'] = remetente
 msg['To'] = destinatario
 msg['Subject'] = 'Assunto do Email'
 
-corpo = 'Sabia que vocês são muito molestaveis?'
+corpo = 'Sabia que vocês são muito?'
 msg.attach(MIMEText(corpo, 'plain'))
 
 # Configurando o servidor SMTP do Gmail

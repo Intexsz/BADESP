@@ -10,7 +10,6 @@ from app.database.db_denuncia import criar_tabela
 app = Flask(__name__)
 app.secret_key = "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"
 
-# CLIENT ID do Gugu
 CLIENT_ID = "334998652961-rpf4gt64873gg0uoa64cmlqkcmj33q4b.apps.googleusercontent.com"
 
 oauth = OAuth(app)
