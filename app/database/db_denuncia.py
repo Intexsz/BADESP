@@ -81,7 +81,7 @@ def criar_denuncia(titulo, tipo, descricao, user_id, status, cargo, especifico):
         descricao_ia = match.group(1).strip()
         gravidade = match.group(2).capitalize()
     else:
-        descricao_ia = "❌Erro na IA.❌"
+        descricao_ia = f"❌Erro na IA.❌ \n\n {texto_resposta}"
         gravidade = 'Desconhecido'
     
     ano = usuario_dict['ano']
