@@ -36,7 +36,6 @@ def processar_login(cargo):
     CLIENT_ID,
     clock_skew_in_seconds=300
 )
-
         user_data = {
             "id": idinfo["sub"],
             "email": idinfo["email"],
