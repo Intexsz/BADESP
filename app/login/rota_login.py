@@ -23,19 +23,20 @@ google = oauth.register(
 
 ###### LOGIN ######
 def processar_login(cargo):
-    token = request.json.get("credential") if request.is_json else \
-            request.form.get("credential") or request.args.get("credential")
-
-    if not token:
-        return jsonify({"error": "Token não fornecido"}), 400
-    
     try:
+        token = request.json.get("credential") if request.is_json else \
+                request.form.get("credential") or request.args.get("credential")
+
+        if not token:
+            return jsonify({"error": "Token não fornecido"}), 400
+
         idinfo = id_token.verify_oauth2_token(
-    token,
-    requests.Request(),
-    CLIENT_ID,
-    clock_skew_in_seconds=300
-)
+            token,
+            requests.Request(),
+            CLIENT_ID,
+            clock_skew_in_seconds=300
+        )
+
         user_data = {
             "id": idinfo["sub"],
             "email": idinfo["email"],
@@ -43,14 +44,20 @@ def processar_login(cargo):
             "picture": idinfo.get("picture"),
             "cargo": cargo
         }
+
         salvar_usuario(user_data)
         session["user_id"] = user_data["id"]
         return jsonify({"status": "ok", "user": user_data})
+
+    except ValueError as ve:
+        print("Erro ao validar token:", ve)
+        return jsonify({"error": "Token inválido"}), 400
     except Exception as e:
         import traceback
-        print("ERRO AO VALIDAR TOKEN:", e)
+        print("ERRO GERAL NO LOGIN:", e)
         traceback.print_exc()
-        return jsonify({"error": str(e)}), 400
+        return jsonify({"error": f"Erro interno: {str(e)}"}), 500
+
 
 ######----------######
 
