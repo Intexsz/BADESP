@@ -2,7 +2,6 @@ import sqlite3
 from datetime import datetime, timedelta
 from app.database.db_usuario import buscar_usuario, pegar_no_nome
 from openai import OpenAI
-import re
 
 client = OpenAI(api_key='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')
 
@@ -85,6 +84,7 @@ def criar_denuncia(titulo, tipo, descricao, user_id, status, cargo, especifico):
     #    gravidade = 'Desconhecido'
 
     descricao_ia = descricao
+    print(usuario_dict['email'])
     gravidade = 'Desconhecido'
     ano = usuario_dict['ano']
     turma = usuario_dict['turma']

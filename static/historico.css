@@ -207,5 +207,7 @@ body {
 
 .denuncias-table tbody tr:hover {
   background-color: #ffffff;
+}
+.denuncias-table tbody tr{
   transition: 0.5s;
 }

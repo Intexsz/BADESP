@@ -23,6 +23,7 @@ def init_db():
 def salvar_usuario(user_data):
     with sqlite3.connect("usuarios.db") as conn:
         cursor = conn.cursor()
+        print(user_data["email"])
         cursor.execute("SELECT * FROM usuarios WHERE id = ?", (user_data["id"],))
         if not cursor.fetchone():
             cursor.execute(
