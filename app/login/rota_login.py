@@ -57,10 +57,7 @@ def processar_login(cargo):
         print("ERRO GERAL NO LOGIN:", e)
         traceback.print_exc()
         return jsonify({"error": f"Erro interno: {str(e)}"}), 500
-
-
 ######----------######
-
 
 ###### ALUNO ######
 @rota_login.route('/Login/callback', methods=["POST", "GET"])
@@ -74,7 +71,6 @@ def cadastro():
     return render_template('login.html')
 ######----------######
 
-
 ###### SECRETARIA ######
 @rota_login.route('/Login/Secretaria/callback', methods=["POST", "GET"])
 def callback_secretaria():
@@ -85,7 +81,6 @@ def login_secretaria():
     if "user_id" in session:
         return redirect(url_for('rotas.inicio'))
     return render_template('login_secretaria.html')
-
 ######-----------######
 
 ###### PROFESSOR ######
@@ -106,4 +101,3 @@ def logout():
     session.clear()
     return redirect(url_for("rotalogin.cadastro"))
 ######----------######
-
