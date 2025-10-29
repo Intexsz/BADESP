@@ -1,3 +1,36 @@
+.Cabecalho {
+  background-color: rgb(90, 89, 89);
+  top: 0;
+  left: 0;
+  z-index: 10;
+  box-shadow: 0 2px 9px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  padding: 10px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+.profile-icon {
+  position: relative;
+  color: white;
+  font-size: 30px;
+  padding-right: 20px;
+}
+
+.nome {
+  font-family: Segoe UI;
+  font-style: normal;
+  font-size: 40px;
+  color: white;
+  margin: 0 auto;
+  flex-grow: 1;
+  text-align: center;
+
+}
+
 body {
   font-family: Arial, sans-serif;
   display: flex;
@@ -5,18 +38,15 @@ body {
   align-items: center;
   padding: 20px;
 
-  /* Gradiente mais suave e fluido */
   background: linear-gradient(to bottom, #0d0d0d, #1a1a40, #000);
   min-height: 100vh;
   color: #f5f4f4;
 }
 
-/* ===== Containers ===== */
 .painel-container {
   width: 90%;
   max-width: 800px;
 
-  /* Mantém contraste mas sem quebrar com o fundo */
   background: rgba(25, 25, 60, 0.9);
   padding: 30px;
   border-radius: 20px;
@@ -24,8 +54,6 @@ body {
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
 }
 
-
-/* ===== Formulário ===== */
 form {
   display: flex;
   flex-direction: column;
@@ -52,7 +80,6 @@ textarea::placeholder {
   color: #4682B4;
 }
 
-/*botão de envio*/
 button {
   padding: 12px;
   border: 1px solid;
@@ -77,8 +104,8 @@ button {
 }
 
 button:disabled {
-    cursor: not-allowed; /* muda o cursor */
-    opacity: 0.5;         /* deixa mais claro que está desativado */
+    cursor: not-allowed; 
+    opacity: 0.5;        
     padding: 12px;
     border: 1px solid;
     border-radius: 8px;
@@ -92,7 +119,6 @@ button:hover {
   background: #394cac;
 }
 
-/* ===== Cards de denúncias ===== */
 .denuncia-card {
   background: rgb(240, 235, 235, 0.1);
   border-left: 6px solid white;
@@ -119,7 +145,6 @@ button:hover {
   margin-bottom: 6px;
 }
 
-/* Botão estilo hambúrguer */
 .menu-btn {
   position: fixed; 
   top: 10px;
