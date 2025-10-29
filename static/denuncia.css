@@ -102,6 +102,47 @@ select option {
   opacity: 0.8;
 }
 
+.select-seta {
+  position: relative; 
+  margin: 10px 0;
+  width: 100%;
+}
+
+.form-container select {
+  width: 100%;
+  height: 50px;
+  background: transparent;
+  border: 2px solid rgb(251, 250, 250);
+  border-radius: 10px;
+  font-size: 16px;
+  color: rgb(239, 236, 236);
+  padding: 0 40px 0 20px; 
+  -webkit-appearance: none; 
+  cursor: pointer;
+}
+
+.select-seta::after {
+  content: '▼'; 
+  position: absolute;
+  top: 50%;
+  right: 15px; 
+  transform: translateY(-50%); 
+  color: white;
+  pointer-events: none; 
+  font-size: 12px; 
+}
+
+select option {
+  background-color: #000;
+  color: #FFFFFF;
+}
+
+.form-container select:focus {
+  border-color: #add8e6;
+  outline: none;
+}
+
+
 button {
   padding: 12px;
   border: 1px solid;
