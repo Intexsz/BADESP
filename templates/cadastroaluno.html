@@ -14,16 +14,13 @@
     <div class="container">
         <h1>Cadastro</h1>
 
-        <!-- Formulário -->
         <form method="POST" action="{{ url_for('rotas.cadastro2_pin') }}" onsubmit="return validarPin()"autocomplete="off">
-
             <div class="input-container">
                 <select name="escola" id="select-escola" required>
                     <option value="" disabled selected>Selecione a escola</option>
                     <option value="PEI Francisco Pereira De Souza Filho Prof">PEI Francisco Pereira De Souza Filho Prof</option>
                 </select>
             </div>
-
             {% if cargo == 'Aluno' %}
             <div class="input-container">
                 <select name="ano" id="select-serie" required onchange="atualizarTurmas()">
@@ -37,7 +34,6 @@
                     <option value="3">3ª Série EM</option>
                 </select>
             </div>
-
             <div class="input-container" id="container-turma" style="display: none;">
                 <select name="turma" id="select-turma" required>
                     <option value="" disabled selected>Selecione a turma</option>
@@ -49,7 +45,6 @@
                     pattern="\d{6}" title="O PIN deve ter 6 números"
                     oninput="this.value = this.value.replace(/\D/g, '')">
             </div>
-
             <div class="input-container">
                 <input placeholder="Confirmar PIN" type="text" name="confirmar" id="confirmar" required maxlength="6"
                     minlength="6" pattern="\d{6}" title="O PIN deve ter 6 números"
@@ -64,7 +59,6 @@
     </div>
 
     <script>
-        // opções por série
         const turmasPorSerie = {
             "6": ["6° A", "6° B", "6° C", "6° D"],
             "7": ["7° A", "7° B", "7° C", "7° D"],
@@ -75,7 +69,6 @@
             "3": ["3° A", "3° B", "3° C", "3° D"]
         };
 
-        // atualiza as turmas conforme a série
         function atualizarTurmas() {
             const serieSelecionada = document.getElementById("select-serie").value;
             const containerTurma = document.getElementById("container-turma");
@@ -97,7 +90,6 @@
             }
         }
 
-        // valida o PIN antes de enviar
         function validarPin() {
             const pin = document.getElementById("pin").value;
             const confirmar = document.getElementById("confirmar").value;
