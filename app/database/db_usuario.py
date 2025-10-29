@@ -67,6 +67,21 @@ def buscar_nome_professor():
         cursor.execute("SELECT nome FROM usuarios WHERE cargo = 'Professor'")
         rows = cursor.fetchall()
         return [row[0] for row in rows]
+    
+def buscar_nome_aluno():
+    with sqlite3.connect("usuarios.db") as conn:
+        cursor = conn.cursor()
+        cursor.execute("SELECT turma, nome FROM usuarios")
+        rows = cursor.fetchall()
+
+    alunos_por_turma = {}
+    for turma, nome in rows:
+        if not turma or not nome:
+            continue
+        if turma not in alunos_por_turma:
+            alunos_por_turma[turma] = []
+        alunos_por_turma[turma].append(nome)
+    return alunos_por_turma
 
 def usuario_tem_pin(user_id):
     with sqlite3.connect("usuarios.db") as conn:
@@ -93,12 +108,23 @@ def check_pin(user_id):
         resultado = cursor.fetchone()
         return resultado[0] if resultado else None
     
-def novo_pin(pin, id):
+def novo_pin(pin, nome, turma):
     with sqlite3.connect("usuarios.db") as conn:
             cursor = conn.cursor()
             cursor.execute("""
                 UPDATE usuarios
                 SET pin = ?
-                WHERE id = ?
-            """, (pin,id))
+                WHERE nome = ?
+                AND turma = ?
+            """, (pin,nome,turma))
+            conn.commit()
+
+def novo_pin_secretaria(pin, nome):
+    with sqlite3.connect("usuarios.db") as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                UPDATE usuarios
+                SET pin = ?
+                WHERE nome = ?
+            """, (pin,nome))
             conn.commit()

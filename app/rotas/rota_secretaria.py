@@ -1,6 +1,6 @@
 from flask import Flask, session, redirect, url_for, Blueprint,render_template, request
 from authlib.integrations.flask_client import OAuth
-from app.database.db_usuario import buscar_cargo, pegar_no_nome, usuario_tem_pin
+from app.database.db_usuario import buscar_cargo, pegar_no_nome, usuario_tem_pin, buscar_nome_aluno, novo_pin, novo_pin_secretaria
 from app.database.db_denuncia import buscar_status_denuncia, abrir_denunciabanquinho, pegar_na_denuncia_haha, buscar_visto
 from app.database.db_denuncia import atualizar_statuse, publicar_comentario, buscar_comentario
 
@@ -63,6 +63,7 @@ def abrir_denuncia(id):
         return redirect(url_for('rotas.inicio'))
 ######----------######
 
+###### MOSTRAR O DETALHE DAS DENUNCIAS ######
 @rota_secretaria.route("/detalhe/<int:id>", methods=['POST', 'GET'])
 def detalhe_denuncia(id):
     if "user_id" not in session:
@@ -119,10 +120,9 @@ def detalhe_denuncia(id):
         return render_template("DenunciaAbertaAluno.html", usuario=denuncia)
     else:
         return redirect(url_for('rotas.inicio'))
-    
-
 ######----------######
 
+###### ROTA PARA OS COMENTARIOS ######
 @rota_secretaria.route('/Comentar/<int:id>', methods=['POST'])
 def comentar(id):
     comentario = request.form.get('comentario')
@@ -157,7 +157,9 @@ def comentar(id):
         """
     
     return redirect(url_for('rotasecretaria.detalhe_denuncia', id=id))
+######----------######
 
+###### ROTAS PARA MUDAR STATUS DA DENUNCIA ######
 @rota_secretaria.route('/Inicio/Recusar/<int:id>', methods=['POST', 'GET'])
 def recusar(id):
     if checar_stats(id) == 'Expirou':
@@ -187,8 +189,9 @@ def aprovar(id):
         atualizar_statuse(id, cargo, 'Aprovado.', session['user_id'])
 
     return redirect(url_for('rotas.inicio'))
+######----------######
 
-    
+###### ROTAS PARA ARQUIVAR A DENUNCIA ######
 @rota_secretaria.route('/Inicio/Arquivar/<int:id>', methods=['POST', 'GET'])
 def arquivar(id):
     if checar_stats(id) == 'Expirou':
@@ -203,3 +206,61 @@ def arquivar(id):
         atualizar_statuse(id, cargo, 'Arquivado.', session['user_id'])
 
     return redirect(url_for('rotas.inicio'))
+######----------######
+
+###### ROTA PARA MUDAR O PIN ######
+@rota_secretaria.route('/MudarPIN', methods=['GET', 'POST'])
+def alunos():
+    if "user_id" not in session:
+        return redirect(url_for('rotalogin.cadastro'))
+    if not usuario_tem_pin(session["user_id"]):
+        return redirect(url_for("rotas.cadastro2_pin"))
+
+    cargo = buscar_cargo(session['user_id'])
+    if cargo in ('Secretaria', 'Professor'):
+    # pega todos os alunos organizados por turma
+        alunos_por_turma = buscar_nome_aluno()
+
+        if request.method == "POST":
+            turma = request.form.get("turma")
+            aluno = request.form.get("aluno")
+            pin = request.form.get("pin")
+            novo_pin(pin, aluno, turma)
+            return f"""
+            <script>
+                alert("Pin de {aluno} de turma {turma} atualizado com sucesso!");
+                window.location.href = "{url_for('rotas.inicio')}";
+            </script>
+        """
+        
+        return render_template("recuperacao_pin.html", alunos_por_turma=alunos_por_turma)
+    else:
+        return redirect(url_for('rotas.inicio'))
+######----------######
+
+@rota_secretaria.route('/MudarPIN/Gestao', methods=['GET', 'POST'])
+def gestao():
+    if "user_id" not in session:
+        return redirect(url_for('rotalogin.cadastro'))
+    if not usuario_tem_pin(session["user_id"]):
+        return redirect(url_for("rotas.cadastro2_pin"))
+
+    cargo = buscar_cargo(session['user_id'])
+    if cargo in ('Secretaria', 'Professor'):
+        alunos_por_turma = buscar_nome_aluno()
+        
+        if request.method == "POST":
+            gestao = pegar_no_nome(session['user_id'])
+            pin = request.form.get("pin")
+            novo_pin_secretaria(pin, gestao)
+            return f"""
+            <script>
+                alert("Pin de {gestao} de hhahaduhsufqwuifqwiogasmvak atualizado com sucesso!");
+                window.location.href = "{url_for('rotas.inicio')}";
+            </script>
+        """
+        
+        return render_template("recuperacao_pin_secretaria.html", alunos_por_turma=alunos_por_turma)
+    else:
+        return redirect(url_for('rotas.inicio'))
+######----------######

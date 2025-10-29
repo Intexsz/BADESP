@@ -1,11 +1,10 @@
-# main.py
 from flask import Flask
 from authlib.integrations.flask_client import OAuth
 from app.database.db_usuario import init_db
+from app.database.db_denuncia import criar_tabela
 from app.rotas.normais import rotas_bp
 from app.rotas.rota_secretaria import rota_secretaria
 from app.login.rota_login import rota_login
-from app.database.db_denuncia import criar_tabela
 
 app = Flask(__name__)
 app.secret_key = "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"
