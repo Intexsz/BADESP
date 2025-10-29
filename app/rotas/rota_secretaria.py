@@ -209,7 +209,7 @@ def arquivar(id):
 ######----------######
 
 ###### ROTA PARA MUDAR O PIN ######
-@rota_secretaria.route('/MudarPin', methods=['GET', 'POST'])
+@rota_secretaria.route('/MudarPIN', methods=['GET', 'POST'])
 def alunos():
     if "user_id" not in session:
         return redirect(url_for('rotalogin.cadastro'))
