@@ -189,10 +189,10 @@ def denuncias():
 @rotas_bp.route('/Ajuda')
 def ajuda():
     if "user_id" not in session:
-        return render_template('ajuda_semlogin.html')
+        return render_template('ajuda.html',login=False)
     if not usuario_tem_pin(session["user_id"]):
         return redirect(url_for("rotas.cadastro2_pin"))
-    return render_template('ajuda.html')
+    return render_template('ajuda.html',login=True)
 ######----------######
 
 
