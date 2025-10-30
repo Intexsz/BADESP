@@ -98,7 +98,7 @@ def detalhe_denuncia(id):
         if denuncia == 'no':
             return "Denúncia não encontrada", 404
         
-        return render_template("DenunciaAberta.html", usuario=denuncia)
+        return render_template("DenunciaAberta.html", usuario=denuncia,tipo_usuario='secretaria')
     
     elif cargo == 'Aluno':
         denuncia = pegar_na_denuncia_haha(id)
@@ -117,7 +117,7 @@ def detalhe_denuncia(id):
         </script>
         """
 
-        return render_template("DenunciaAbertaAluno.html", usuario=denuncia)
+        return render_template("DenunciaAberta.html", usuario=denuncia,tipo_usuario='Aluno')
     else:
         return redirect(url_for('rotas.inicio'))
 ######----------######
