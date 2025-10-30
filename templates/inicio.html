@@ -12,11 +12,14 @@
 
 <body>
   <header class="Cabecalho">
-    
+    <button class="menu-btn">☰</button>
     <h1 class="nome">B.A.D.E.S.P</h1>
     
-    <button class="menu-btn">☰</button>
-
+    <!-- Agrupar a saudação e a imagem do usuário em um contêiner -->
+    <div class="user-info"> 
+        <img src="{{ usuario[3] }}" alt="Foto do usuário" class="profile-image">
+    </div>
+    
     <nav class="sidebar">
       <ul>
         <li><a href="/Inicio">Início</a></li>
@@ -26,13 +29,10 @@
         <li><a href="/Logout" onclick="return confirmarLogout()"><i class="fas fa-user-circle"></i>Deslogar</a></li>
       </ul>
     </nav>
-
-  
-  
   </header>
 
-  <h2>Bem Vindo {{ usuario[1] }}!</h2>
-  <img src="{{ usuario[3] }}" alt="Foto do usuário" style="border-radius:50%">
+
+  
 
   <div class="painel-container">
     <h1>Painel de Denúncias</h1>

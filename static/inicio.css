@@ -1,42 +1,130 @@
-
-.nome {
-  font-family: Segoe UI;
-  font-style: normal;
-  font-size: 40px;
-  color: white;
-  text-align: center;
-  flex-grow: 1;
-}
-
-.profile-icon {
-  position: relative;
-  color: white;
-  font-size: 30px;
-  padding-right: 20px;
-  margin-left: auto;
-}
-
-
 body {
   font-family: Arial, sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
-
   background: linear-gradient(to bottom, #0d0d0d, #1a1a40, #000);
   min-height: 100vh;
   color: #f5f4f4;
 }
 
+.Cabecalho {
+  background-color: rgba(25, 25, 60, 0.9);
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  box-shadow: 0 2px 9px rgba(0, 0, 0, 0.4);
+  padding: 10px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+.Cabecalho h1.nome {
+  display: none;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 15px; 
+}
+
+.profile-image {
+  border-radius: 50%;
+  width: 40px; 
+  height: 40px;
+  object-fit: cover;
+  border: 2px solid white; 
+}
+
+.user-info h2 {
+  font-size: 16px;
+  margin: 0;
+}
+
+.menu-btn {
+  font-size: 24px;
+  padding: 8px 12px;
+  background-color: #2f379f;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  z-index: 1001;
+  transition: 0.3s;
+}
+
+.menu-btn:hover {
+  background-color: #25327c;
+}
+
+.Cabecalho .menu-btn {
+  position: static;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translateX(-100%);
+  width: 200px;
+  height: 100%;
+  background: linear-gradient(135deg, #25337a, #111);
+  box-shadow: 3px 0 15px rgba(0, 0, 0, 0.5);
+  padding-top: 80px;
+  transition: transform 0.5s ease;
+  z-index: 1000;
+  border-radius: 0 10px 10px 0;
+}
+
+.sidebar.active {
+  transform: translateX(0);
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar ul li {
+  margin: 15px 0;
+}
+
+.sidebar ul li a {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  font-size: 16px;
+  padding: 8px 15px;
+  display: block;
+  transition: transform 0.2s, color 0.3s;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.sidebar ul li a:hover {
+  color: #76faff;
+  transform: translateX(8px);
+}
+
+.sidebar ul li a:active {
+  color: #d9f9fa;
+  transform: translateX(8px);
+}
+
+/* Estilos para o painel */
 .painel-container {
   width: 90%;
   max-width: 800px;
-
   background: rgba(25, 25, 60, 0.9);
   padding: 30px;
   border-radius: 20px;
-  margin-bottom: 20px;
+  margin-top: 80px; /* Ajusta a margem para evitar que o conteúdo fique por trás do cabeçalho fixo */
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
 }
 
@@ -131,76 +219,3 @@ button:hover {
   margin-bottom: 6px;
 }
 
-.menu-btn {
-  position: fixed; 
-  top: 10px;
-  left: 10px;
-  font-size: 20px;
-  padding: 8px 12px;
-  background-color: #2f379f ;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 6px;
-  z-index: 1001;
-  transition: 0.3s;
-}
-
-.menu-btn:hover {
-  background-color: #25327c ;
-}
-
-.menu-btn:active {
-  background-color: rgb(61, 83, 207) ;
-}
-
-.sidebar {
-  position: fixed; 
-  align-items: center;
-  text-align: center;
-  top: 0;
-  left: 0;
-  transform: translateX(-100%);
-  width: 200px;
-  height: 100%;
-  background: linear-gradient(135deg, #25337a, #111);
-  box-shadow: 3px 0 15px rgba(0,0,0,0.5);
-  padding-top: 80px;
-  transition: transform 0.5s ease;
-  z-index: 1000;
-  border-radius: 0 10px 10px 0;
-}
-
-.sidebar.active {
-  transform: translateX(0);
-}
-
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.sidebar ul li {
-  margin: 15px 0;
-}
-
-.sidebar ul li a {
-  color: rgb(255, 255, 255);
-  text-decoration: none;
-  font-size: 16px;
-  padding: 8px 15px;
-  display: block;
-  transition: transform 0.2s, color 0.3s;
-  font-family: Segoe UI;
-}
-
-.sidebar ul li a:hover {
-  color: #76faff;
-  transform: translateX(8px);
-}
-
-.sidebar ul li a:active {
-  color: #d9f9fa;
-  transform: translateX(8px);
-}
