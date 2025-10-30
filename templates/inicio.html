@@ -12,21 +12,23 @@
 
 <body>
   <header class="Cabecalho">
-    <nav>
-      <h1 class="nome">BADESP</h1>
-    </nav>
-
+    
+    <h1 class="nome">B.A.D.E.S.P</h1>
+    
     <button class="menu-btn">☰</button>
 
-    <!-- Menu lateral -->
     <nav class="sidebar">
       <ul>
         <li><a href="/Inicio">Início</a></li>
         <li><a href="/Ajuda">Ajuda</a></li>
         <li><a href="/Denuncia">Fazer Denúncia</a></li>
+        <li><a href="/MudarPIN"> Mudar o PIN</a></li>
         <li><a href="/Logout" onclick="return confirmarLogout()"><i class="fas fa-user-circle"></i>Deslogar</a></li>
       </ul>
     </nav>
+
+  
+  
   </header>
 
   <h2>Bem Vindo {{ usuario[1] }}!</h2>
