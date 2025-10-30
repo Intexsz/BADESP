@@ -68,7 +68,7 @@ def callback():
 def cadastro():
     if "user_id" in session:
         return redirect(url_for('rotas.inicio'))
-    return render_template('login.html')
+    return render_template('login.html',tipo='/Login/callback')
 ######----------######
 
 ###### SECRETARIA ######
@@ -80,7 +80,7 @@ def callback_secretaria():
 def login_secretaria():
     if "user_id" in session:
         return redirect(url_for('rotas.inicio'))
-    return render_template('login_secretaria.html')
+    return render_template('login.html',tipo='/Login/Secretaria/callback')
 ######-----------######
 
 ###### PROFESSOR ######
@@ -92,7 +92,7 @@ def callback_professor():
 def login_professor():
     if "user_id" in session:
         return redirect(url_for('rotas.inicio'))
-    return render_template('login_professor.html')
+    return render_template('login.html',tipo='/Login/Professor/callback')
 ######----------######
 
 ###### DESLOGAR ######
