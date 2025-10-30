@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='OIP.jpg') }}">
-  <title>BADESP - Denuncia({{ usuario['id'] }})</title>
+  <title>BADESP - Denúncia</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='denuncia_aberta.css') }}">
   <script src="{{ url_for('static', filename='js/inicio.js') }}" defer></script>
 </head>
@@ -23,29 +24,35 @@
         <li><a href="/Inicio">Início</a></li>
         <li><a href="/Ajuda">Ajuda</a></li>
         <li><a href="/Denuncia">Fazer Denúncia</a></li>
-        <li><a href="/Logout" onclick="return confirmarLogout()"><i class="fas fa-user-circle"></i>Deslogar</a></li>
-         
+        <li><a href="/Logout" onclick="return confirmarLogout()">Deslogar</a></li>
       </ul>
     </nav>
   </header>
 
   <div class="painel-container">
-    <h1>Denúncia de: {{ usuario['nome'] }}</h1>
-    <div id="denuncias-container">
-      {% if usuario %}
-      {% if usuario['gravidade'] == 'Alta' %}
-      {% set corr = "red" %}
-      {% elif usuario['gravidade'] == 'Média' %}
-      {% set corr = "yellow" %}
-      {% elif usuario['gravidade'] == 'Baixa' %}
-      {% set corr = "rgb(0, 255, 0)" %}
+    <h1>
+      {% if tipo_usuario == 'secretaria' %}
+        Denúncia de: {{ usuario['nome'] }}
+      {% else %}
+        {{ usuario['titulo'] }}
       {% endif %}
+    </h1>
+
+    {% if usuario %}
+      {% if usuario['gravidade'] == 'Alta' %}
+        {% set corr = "red" %}
+      {% elif usuario['gravidade'] == 'Média' %}
+        {% set corr = "yellow" %}
+      {% elif usuario['gravidade'] == 'Baixa' %}
+        {% set corr = "rgb(0, 255, 0)" %}
+      {% endif %}
+
       <div class="denuncia-card" id="denuncia-{{ usuario['id'] }}">
         <h3>{{ usuario['titulo'] }}</h3>
         <p>Ocorrido: {{ usuario['tipo'] }}</p>
         <p style="color: {{ corr }};">Gravidade: {{ usuario['gravidade'] }}</p>
 
-        <p>Denúncia: </p>
+        <p>Denúncia:</p>
         <textarea disabled style="
     width: 750px; 
     height: 100px; 
@@ -56,11 +63,10 @@
     box-sizing: border-box;  
     overflow-y: auto;   /* permite scroll vertical */
     cursor: pointer;
-">
-{{ usuario['descricao_ia'] }}</textarea>
-<p>Denúncia sem correção:</p>
-      <br>
-      <textarea disabled style="
+">{{ usuario['descricao_ia'] }}</textarea>
+
+        <p>Denúncia sem correção:</p>
+        <textarea disabled style="
     width: 750px; 
     height: 100px; 
     resize: none; 
@@ -70,113 +76,99 @@
     box-sizing: border-box;  
     overflow-y: auto;   /* permite scroll vertical */
     cursor: pointer;
-">
-{{ usuario['descricao'] }}
-</textarea>
+">{{ usuario['descricao'] }}</textarea>
+
         <p>Data: {{ usuario['data'] }}</p>
+
         {% if usuario['status'] == 'Aprovado.' %}
-        <p><span style="color: rgb(0, 255, 0);">Situação: ✔️Aprovado por: {{usuario['visto']}}✔️</span></p>
+          <p style="color: rgb(0,255,0);">✔️Aprovado por: {{ usuario['visto'] }}✔️</p>
         {% elif usuario['status'] == 'Recusado.' %}
-        <p><span style="color: red;">Situação: ❌Recusado por: {{usuario['visto']}} ❌ </span></p>
+          <p style="color: red;">❌Recusado por: {{ usuario['visto'] }}❌</p>
         {% elif usuario['status'] == 'Arquivado.' %}
-        <p><span style="color: rgb(198, 198, 198);">Situação: 🗃️Arquivado por: {{usuario['visto']}}🗃️</span></p>
+          <p style="color: gray;">🗃️Arquivado por: {{ usuario['visto'] }}🗃️</p>
         {% elif usuario['status'] == 'Visto.' %}
-        <p><span style="color: orange;">🔎Situação: Visualizado por: {{ usuario['visto'] }} ás {{
-            usuario['datavisto']}}🔎<span>
-              <p>
-                {% elif usuario['status'] == 'Em Análise.' %}
-              <p><span style="color: rgb(255, 255, 255);">Situação: ⏳Esperando Resposta...⏳</span></p>
-              {% elif usuario['status'] == 'Expirada.' %}
-              <p><span style="color: gray;">⏰Situação: Expirado.⏰<span></p>
-              {% else %}
-              <p>??? erro.</p>
-              {% endif %}
-              {% if usuario['cargo'] == 'Professor' and usuario['especifico'] != 'any' %}
-              <p><b>Esta denúncia foi destinada somente para você!</b></p>
-              {% elif usuario['cargo'] == 'Secretaria' and usuario['especifico'] != 'any' %}
-              <p><b>Esta denúncia foi destinada somente para você!</b></p>
-              {% endif %}
-
-              {% if usuario['cargo'] == 'Professor' and usuario['especifico'] == 'any' %}
-              <p><b>Esta denúncia foi destinada apenas para Professores!</b></p>
-              {% elif usuario['cargo'] == 'Secretaria' and usuario['especifico'] == 'any' %}
-              <p><b>Esta denúncia foi destinada apenas para a gestão!</b></p>
-              {% endif %}
-              {% if usuario['comentario'] != '' %}
-              <p><b>Comentario vinculado a denúncia: </b>{{ usuario['comentario'] }}</p>
-              {% else %}
-              <p>Ainda não há comentário vinculado a esta denúncia.</p>
-              {% endif %}
-
-              <br>
-              <form action="{{ url_for('rotasecretaria.aprovar', id=usuario['id']) }}" method="GET"
-                onclick="return confirmarAbrir()">
-                <button type="submit" class="abrir-btn">Aprovar</button>
-              </form>
-              <br>
-              <form action="{{ url_for('rotasecretaria.recusar', id=usuario['id']) }}" method="GET"
-                onclick="return confirmarRecusar()">
-                <button type="submit" class="abrir-btn">Recusar</button>
-              </form>
-              <br>
-              <form action="{{ url_for('rotasecretaria.arquivar', id=usuario['id']) }}" method="GET"
-                onclick="return confirmaArquivar()">
-                <button type="submit" class="abrir-btn">Arquivar</button>
-              </form>
-
-      </div>
-      {% else %}
-      <p>Erro.</p>
-      {% endif %}
-      <br>
-      {% if usuario['comentario'] == '' %}
-      <div class="comentario">
-        <form action="{{ url_for('rotasecretaria.comentar', id=usuario['id']) }}" method="POST">
-          <textarea name="comentario" style="text-align: center;"
-            placeholder="Deseja adicionar um comentario?"></textarea>
-          <button type="submit" class="abrir-btn" onclick="return confirmarTexto()">Enviar</button>
-        </form>
+          <p style="color: orange;">🔎Visualizado por: {{ usuario['visto'] }} às {{ usuario['datavisto'] }}🔎</p>
+        {% elif usuario['status'] == 'Em Análise.' %}
+          <p style="color: white;">⏳Esperando resposta...⏳</p>
+        {% elif usuario['status'] == 'Expirada.' %}
+          <p style="color: gray;">⏰Expirada⏰</p>
         {% else %}
-        <p style="align-items: center; text-align: center;">Comentario já feito.</p>
+          <p>Erro de status.</p>
+        {% endif %}
+
+        {% if usuario['cargo'] == 'Professor' and usuario['especifico'] != 'any' %}
+          <p><b>Destinado ao Professor:</b> {{ usuario['especifico'] }}</p>
+        {% elif usuario['cargo'] == 'Secretaria' and usuario['especifico'] != 'any' %}
+          <p><b>Destinado ao Secretário(a):</b> {{ usuario['especifico'] }}</p>
+        {% elif usuario['cargo'] == 'Professor' and usuario['especifico'] == 'any' %}
+          <p><b>Destinado a todos os Professores.</b></p>
+        {% elif usuario['cargo'] == 'Secretaria' and usuario['especifico'] == 'any' %}
+          <p><b>Destinado a toda a Gestão.</b></p>
+        {% endif %}
+
+        {% if usuario['comentario'] %}
+          <p><b>Comentário de {{ usuario['visto'] }}:</b> {{ usuario['comentario'] }}</p>
+        {% else %}
+          <p>Ainda não há comentário vinculado.</p>
+        {% endif %}
       </div>
+
+      <!-- Botões diferentes por tipo de usuário -->
+      {% if tipo_usuario == 'secretaria' %}
+        <form action="{{ url_for('rotasecretaria.aprovar', id=usuario['id']) }}" method="GET" onclick="return confirmarAbrir()">
+          <button type="submit" class="abrir-btn">Aprovar</button>
+        </form>
+        <br>
+
+        <form action="{{ url_for('rotasecretaria.recusar', id=usuario['id']) }}" method="GET" onclick="return confirmarRecusar()">
+          <button type="submit" class="abrir-btn">Recusar</button>
+        </form>
+        <br>
+        <form action="{{ url_for('rotasecretaria.arquivar', id=usuario['id']) }}" method="GET" onclick="return confirmaArquivar()">
+          <button type="submit" class="abrir-btn">Arquivar</button>
+        </form>
+        <br>
+        {% if not usuario['comentario'] %}
+          <form action="{{ url_for('rotasecretaria.comentar', id=usuario['id']) }}" method="POST">
+            <textarea name="comentario" placeholder="Adicionar comentário..." style="text-align: center;"></textarea>
+            <button type="submit" class="abrir-btn" onclick="return confirmarTexto()">Enviar</button>
+          </form>
+        {% endif %}
+
+      {% else %}
+        {% if usuario['status'] in ['Em Análise.', 'Expirada.'] %}
+          <form class="apagar-form" action="{{ url_for('rotas.excluir_denuncia', id=usuario['id']) }}" method="POST">
+            <button type="submit" class="buttozito">Apagar</button>
+          </form>
+        {% endif %}
+
+        {% if usuario['status'] == 'Expirada.' %}
+          <form class="reenviar-form" action="{{ url_for('rotas.reenviar_denuncia', id=usuario['id']) }}" method="POST">
+            <input type="hidden" name="titulo" value="{{ usuario['titulo'] }}">
+            <input type="hidden" name="tipo" value="{{ usuario['tipo'] }}">
+            <input type="hidden" name="descricao" value="{{ usuario['descricao'] }}">
+            <input type="hidden" name="quem" value="{{ usuario['cargo'] }}">
+            <input type="hidden" name="pessoa" value="{{ usuario['especifico'] }}">
+            <button type="submit">Reenviar</button>
+          </form>
+        {% endif %}
       {% endif %}
-
-
-    </div>
+    {% else %}
+      <p>Erro ao carregar denúncia.</p>
+    {% endif %}
   </div>
 
   <script>
-    // Toggle menu lateral
     const btn = document.querySelector('.menu-btn');
     const sidebar = document.querySelector('.sidebar');
+    btn.addEventListener('click', () => sidebar.classList.toggle('active'));
 
-    btn.addEventListener('click', () => {
-      sidebar.classList.toggle('active');
-    });
-
-    function confirmarAbrir() {
-      return confirm("Deseja Confirmar a Aprovação desta denúncia?");
-    }
-    function confirmaArquivar() {
-      return confirm("Deseja Arquivar esta denúncia?");
-    }
-    function confirmarRecusar() {
-      return confirm("Deseja Recusar esta denúncia?");
-    }
-    function confirmarTexto() {
-      return confirm("Deseja enviar um comentario sobre esta denúncia? Você pode comentar somente UMA vez por denúncia");
-    }
-
-    function confirmarLogout() {
-
-      return confirm("Você tem certeza que quer deslogar?");
-    }
-
-
-
+    function confirmarAbrir() { return confirm("Deseja aprovar esta denúncia?"); }
+    function confirmaArquivar() { return confirm("Deseja arquivar esta denúncia?"); }
+    function confirmarRecusar() { return confirm("Deseja recusar esta denúncia?"); }
+    function confirmarTexto() { return confirm("Deseja enviar um comentário? Você só pode comentar uma vez."); }
+    function confirmarLogout() { return confirm("Deseja deslogar?"); }
   </script>
 
-
 </body>
-
 </html>
