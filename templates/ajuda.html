@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='OIP.jpg') }}">
-    <title>Ajuda - SNESP</title>
+    <title>BADESP - Ajuda</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='Ajuda.css') }}">
     <script src="{{ url_for('static', filename='js/Ajuda.js') }}" defer></script>
 
@@ -15,19 +15,35 @@
 
     <!-- Cabeçalho -->
     <header class="Cabecalho">
-        <h1 class="nome">SNESP</h1>
+        <h1 class="nome">BADESP</h1>
         <button class="menu-btn">☰</button>
 
         <!-- Menu lateral -->
+        {% if not login %}
+        <nav class="sidebar">
+            <ul>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <li><a href="/Login">Fazer Login</a></li>
+            </ul>
+        </nav>
+        {% else %}
         <nav class="sidebar">
             <ul>
                 <li><a href="/Inicio">Início</a></li>
                 <li><a href="/Ajuda">Ajuda</a></li>
                 <li><a href="/Denuncia">Fazer Denúncia</a></li>
-                <li><a href="/Logout" onclick="return confirmarLogout()"><i class="fas fa-user-circle"></i>Deslogar</a></li>
-                <li><a href="/MudarPin"><i class="fas fa-cog"></i> Mudar o PIN</a></li>
+                <li><a href="/Logout" onclick="return confirmarLogout()"><i class="fas fa-user-circle"></i>Deslogar</a>
+                </li>
+
             </ul>
         </nav>
+        {% endif %}
     </header>
 
     <!-- Conteúdo principal -->
@@ -43,7 +59,8 @@
 
             <div class="faq">
                 <h3>Preciso usar meu Gmail institucional?</h3>
-                <p>O Gmail institucional é a unica forma de fazer cadastro no site, caso você não tenha acesso a ele, você não consegue se cadastrar.
+                <p>O Gmail institucional é a unica forma de fazer cadastro no site, caso você não tenha acesso a ele,
+                    você não consegue se cadastrar.
                 </p>
             </div>
 
@@ -73,39 +90,39 @@
 
     <!-- Rodapé -->
     <footer>
-        <div class="rodadecapoeira">© 2025 SNESP</div>
+        <div class="rodadecapoeira">© 2025 BADESP</div>
     </footer>
 
     <script>
         function confirmarLogout() {
-    // Retorna true para ir para /logout ou false para cancelar
-        return confirm("Você tem certeza que quer deslogar?");
-    }
-    const menuBtn = document.querySelector('.menu-btn');
-const sidebar = document.querySelector('.sidebar');
+            // Retorna true para ir para /logout ou false para cancelar
+            return confirm("Você tem certeza que quer deslogar?");
+        }
+        const menuBtn = document.querySelector('.menu-btn');
+        const sidebar = document.querySelector('.sidebar');
 
-menuBtn.addEventListener('click', () => {
-    sidebar.classList.toggle('active');
-});
+        menuBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+        });
 
-// ACORDEÃO FAQQQQQQQ
-const faqs = document.querySelectorAll('#ajuda .faq');
+        // ACORDEÃO FAQQQQQQQ
+        const faqs = document.querySelectorAll('#ajuda .faq');
 
-faqs.forEach(faq => {
-  // Anexar o ouvinte de eventos diretamente ao elemento pai (.faq)
-  faq.addEventListener('click', () => {
-    // Fecha outras FAQs abertas
-    faqs.forEach(f => {
-      if (f !== faq) {
-        f.classList.remove('active');
-      }
-    });
-    // Alterna a FAQ clicada
-    faq.classList.toggle('active');
-  });
-});
+        faqs.forEach(faq => {
+            // Anexar o ouvinte de eventos diretamente ao elemento pai (.faq)
+            faq.addEventListener('click', () => {
+                // Fecha outras FAQs abertas
+                faqs.forEach(f => {
+                    if (f !== faq) {
+                        f.classList.remove('active');
+                    }
+                });
+                // Alterna a FAQ clicada
+                faq.classList.toggle('active');
+            });
+        });
 
-</script>
+    </script>
 
 </body>
 

@@ -1,0 +1,188 @@
+:root {
+    --background-dark: #0d0d0d;
+    --background-gradient: linear-gradient(90deg, rgb(110, 109, 109), rgb(71, 71, 71));
+    --text-primary: #f5f4f4;
+    --text-secondary: rgb(239, 236, 236);
+    --text-placeholder: rgba(255, 255, 255, 0.7);
+    --border-color: rgba(255, 255, 255, 0.5);
+    --accent-color-hover: #add8e6;
+    --button-color: #000000;
+    --button-hover: #39748d;
+    --checkbox-size: 16px; 
+}
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--background-gradient);
+    min-height: 100vh;
+    color: var(--text-primary);
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 420px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    padding: 35px 40px;
+    position: relative;
+    backdrop-filter: blur(20px);
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+h1 {
+    font-size: 36px;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.input-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.input-container input,
+.input-container select,
+.input-container textarea {
+    width: 100%;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.05); 
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 16px;
+    color: var(--text-secondary);
+    padding: 0 45px 0 20px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.input-container input:focus,
+.input-container select:focus,
+.input-container textarea:focus {
+    border-color: var(--accent-color-hover);
+}
+
+.input-container input::placeholder,
+.input-container textarea::placeholder {
+    color: var(--text-placeholder);
+}
+
+.select-seta::after {
+    content: '▼';
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    pointer-events: none;
+    font-size: 12px;
+}
+
+.select-seta select {
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    padding-right: 40px;
+}
+
+.input-container select option {
+    background-color: var(--button-color);
+    color: var(--text-primary);
+}
+
+.termos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 24px;
+    text-align: left;
+    font-size: 14px;
+}
+
+.termos input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: var(--checkbox-size);
+    height: var(--checkbox-size);
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+    position: relative;
+    top: -1px;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.termos input[type="checkbox"]:checked {
+    background-color: var(--button-color);
+    border-color: var(--button-color);
+}
+
+.termos input[type="checkbox"]:checked::after {
+    content: '✔';
+    color: white;
+    font-size: calc(var(--checkbox-size) * 0.8);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.termos label {
+    display: flex;
+    align-items: center;
+}
+
+.termos a {
+    text-decoration: none;
+    color: var(--accent-color-hover);
+    transition: color 0.3s;
+}
+
+.termos a:hover {
+    color: var(--button-hover);
+    text-decoration: underline;
+}
+
+.submit-button {
+    width: 100%;
+    height: 50px;
+    background-color: #fff;
+    border: none;
+    border-radius: 15px;
+    color: black;
+    font-weight: 500;
+    margin-top: 24px;
+    cursor: pointer;
+    outline: none;
+    font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.submit-button:hover {
+    background-color: rgb(184, 178, 178);
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}

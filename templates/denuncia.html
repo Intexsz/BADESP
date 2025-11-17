@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='OIP.jpg') }}">
-  <title>Painel de Denúncias</title>
+  <title>BADESP - Denunciar</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='denuncia.css') }}">
   <script src="{{ url_for('static', filename='js/denuncias.js') }}" defer></script>
 </head>
@@ -14,18 +14,17 @@
 
   <header class="Cabecalho">
 
-    <h1 class="nome">Segurança Nas Escolas Públicas</h1>
+    <h1 class="nome">BADESP</h1>
 
     <button class="menu-btn">☰</button>
 
-    <!-- Menu lateral -->
     <nav class="sidebar">
       <ul>
         <li><a href="/Inicio">Início</a></li>
         <li><a href="/Ajuda">Ajuda</a></li>
         <li><a href="/Denuncia">Fazer Denúncia</a></li>
         <li><a href="/Logout" onclick="return confirmarLogout()"><i class="fas fa-user-circle"></i>Deslogar</a></li>
-        <li><a href="/MudarPin"><i class="fas fa-cog"></i> Mudar o PIN</a></li>
+         
       </ul>
     </nav>
   </header>
@@ -33,16 +32,19 @@
   <div class="form-container">
     <h1>Enviar Denúncia</h1>
     <form id="form-denuncia" method="POST" autocomplete="off">
-      <input type="text" placeholder="Título da denúncia" required name="titulo" maxlength="30">
+      <input type="text" placeholder="Título da denúncia" required name="titulo" maxlength="50">
 
-      <select required name="gravidade">
-        <option value="">Ocorrido</option>
-        <option value="Agressão">Agressão (física, verbal, psicológica, moral e sexual)</option>
-        <option value="Destruição Patrimônial">Destruição Patrimônial </option>
-        <option value="Falta de Recursos">Falta de Recursos</option>
-        <option value="Atitudes Inadequadas">Atitudes Inadequadas</option>
-        <option value="Outros">Outros</option>
-      </select>
+      <div class="select-seta">
+        <select required name="tipo">
+          <option value="">Ocorrido</option>
+          <option value="Agressão">Agressão (física, verbal, psicológica, moral e sexual)</option>
+          <option value="Destruição Patrimônial">Destruição Patrimônial </option>
+          <option value="Falta de Recursos">Falta de Recursos</option>
+          <option value="Atitudes Inadequadas">Atitudes Inadequadas</option>
+          <option value="Sugestão">Sugestão para a Escola</option>
+          <option value="Outros">Outros </option>
+        </select>
+      </div>
 
       <textarea placeholder="Denúncia:" required name="descricao"></textarea>
 
@@ -54,11 +56,9 @@
         <option value="Ambos">Todas as Autoridades</option>
       </select>
 
-      <!-- Select escondido até o usuário escolher -->
       <div id="pessoaDiv" style="display:none; margin-top:10px;">
         <label for="pessoa">Escolha a pessoa:</label>
         <select name="pessoa" id="pessoa">
-          <!-- Opções adicionadas via JS -->
         </select>
       </div>
 
@@ -70,8 +70,9 @@
 
   <script>
     const form = document.getElementById('form-denuncia');
-
-    form.addEventListener('submit', function (event) {
+  
+    form.addEventListener('submit', async function (event) {
+      event.preventDefault(); 
       const confirmado = confirm(
         "Você tem certeza que quer enviar esta denúncia? " +
         "A gestão escolar terá ACESSO ao seu nome e saberá que você enviou esta denúncia. " +
@@ -79,26 +80,58 @@
         "Se enviar, só poderá APAGAR antes da Secretaria abrir sua denúncia. " +
         "Caso seja visualizada, você NÃO PODERÁ MAIS APAGAR SUA DENÚNCIA."
       );
-
-      if (!confirmado) {
-        event.preventDefault(); // impede envio se não confirmar
+  
+      if (!confirmado) return;
+  
+      const pin = prompt("Digite seu PIN para confirmar o envio:");
+  
+      if (!pin) {
+        return;
+      }
+  
+      try {
+        const response = await fetch(`{{ url_for('rotas.verificar_pin') }}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ pin: pin })
+        });
+  
+        const result = await response.json();
+  
+        if (result.status === "ok") {
+          form.submit(); 
+        } else {
+          alert(result.mensagem || "PIN incorreto. Tente novamente.");
+        }
+  
+      } catch (error) {
+        console.error("Erro ao verificar o PIN:", error);
+        alert("Erro no servidor. Tente novamente mais tarde.");
       }
     });
 
-    // Função separada para confirmar logout
-    function confirmarLogout() {
-      return confirm("Você tem certeza que quer deslogar?");
-    }
+    document.addEventListener('DOMContentLoaded', (event) => {
+    const mainCategorySelect = document.getElementById('main-category');
+    const outrosBox = document.getElementById('outros-box');
+    const otherCategoryInput = document.getElementById('other-category-input');
 
-
-    // Toggle da sidebar
-    const btn = document.querySelector('.menu-btn');
-    const sidebar = document.querySelector('.sidebar');
-
-    btn.addEventListener('click', () => {
-      sidebar.classList.toggle('active');
+    if (mainCategorySelect) {
+        mainCategorySelect.addEventListener('change', function() {
+            if (this.value === 'Outros') {
+                outrosBox.style.display = 'block';
+                otherCategoryInput.setAttribute('required', 'required');
+            } else {
+                outrosBox.style.display = 'none';
+                otherCategoryInput.removeAttribute('required');
+                otherCategoryInput.value = ''; 
+            }
+        });
+      }
     });
+
+
   </script>
+  
 
 <script>
   function verificarSelect() {
@@ -122,7 +155,6 @@
       const pessoaDiv = document.getElementById("pessoaDiv");
       const pessoaSelect = document.getElementById("pessoa");
 
-      // limpa opções anteriores
       pessoaSelect.innerHTML = "";
 
       if (quem === "Professor") {
@@ -154,6 +186,14 @@
       }
     }
   </script>
+      <script>
+        const menuBtn = document.querySelector('.menu-btn');
+        const sidebar = document.querySelector('.sidebar');
+        
+        menuBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+        });
+    </script>
 
 </body>
 

@@ -1,6 +1,9 @@
 import sqlite3
 from datetime import datetime, timedelta
 from app.database.db_usuario import buscar_usuario, pegar_no_nome
+from openai import OpenAI
+
+client = OpenAI(api_key='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')
 
 # iniciar banco de dados de denuncia
 def criar_tabela():
@@ -22,15 +25,36 @@ def criar_tabela():
             cargo TEXT,
             nome TEXT NOT NULL,
             visto TEXT,
-            especifico TEXT
+            especifico TEXT, 
+            ano INTEGER, 
+            turma TEXT
         )
     ''')
-    # OBS: gravidade e tipo estão trocados de lugar (quando for fazer o gravidade com IA arrumar isso)
     conn.commit()
     conn.close()
 
+def IA(frase):
+    response = client.responses.create(
+    model="gpt-4o-mini",
+    input=[
+        {
+            "role": "system",
+            "content": (
+                "Reforme e resuma a frase para que fique mais formal e profissional, "
+                "independentemente do contexto, e avalie qual o tipo de gravidade: "
+                "Baixa, Média ou Alta. "
+                "Responda exatamente neste formato:\n\n"
+                "Frase reformulada: <frase>\n"
+                "Tipo de gravidade: <gravidade>"
+            )
+        },
+        {"role": "user", "content": frase}
+    ])
+    texto_resposta = response.output[0].content[0].text.strip()
+    return texto_resposta
+
 # aqui ira criar a denuncia
-def criar_denuncia(titulo, gravidade, descricao, user_id, status, cargo, especifico):
+def criar_denuncia(titulo, tipo, descricao, user_id, status, cargo, especifico):
     data = datetime.now().strftime("%d/%m/%Y %H:%M") # data de quando foi criada
     conn = sqlite3.connect('denuncias.db')
     usuario = buscar_usuario(user_id)
@@ -39,13 +63,37 @@ def criar_denuncia(titulo, gravidade, descricao, user_id, status, cargo, especif
     "nome": usuario[1],
     "email": usuario[2],
     "foto": usuario[3],
-    "cargo": usuario[4]}
+    "cargo": usuario[4],
+    'pin': usuario[5],
+    'escola': usuario[6],
+    'ano': usuario[7],
+    'turma': usuario[8]}
+
+    #texto_resposta = IA(descricao)
+    #match = re.search(
+    #r"Frase reformulada[:\-–]?\s*[\"']?(.*?)[\"']?\s*(?:\.|\n|$).*?"
+    #r"Tipo de gravidade[:\-–]?\s*[\"']?(Baixa|M[eé]dia|Alta)[\"']?",
+    #texto_resposta,
+    #re.IGNORECASE | re.DOTALL)
+
+    #if match:
+    #    descricao_ia = match.group(1).strip()
+    #    gravidade = match.group(2).capitalize()
+    #else:
+    #    descricao_ia = f"❌Erro na IA.❌ \n\n {texto_resposta}"
+    #    gravidade = 'Desconhecido'
+
+    descricao_ia = descricao
+    print(usuario_dict['email'])
+    gravidade = 'Desconhecido'
+    ano = usuario_dict['ano']
+    turma = usuario_dict['turma']
     nome = usuario_dict["nome"]
     cursor = conn.cursor()
     cursor.execute('''
-        INSERT INTO denuncias (titulo, gravidade, descricao, data, user_id, status, nome, visto, comentario, cargo, especifico)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    ''', (titulo, gravidade, descricao, data, user_id, status, nome, 'Ninguém', '', cargo, especifico))
+        INSERT INTO denuncias (titulo, tipo, descricao, data, user_id, status, nome, visto, comentario, cargo, especifico, descricao_ia, gravidade, turma, ano)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ''', (titulo, tipo, descricao, data, user_id, status, nome, 'Ninguém', '', cargo, especifico, descricao_ia, gravidade, turma, ano))
     conn.commit()
     conn.close()
 
@@ -56,9 +104,59 @@ def mostrar_denuncias(user_id, cargo, tipo):
     nomezin = pegar_no_nome(user_id)
 
     if tipo != 'Tudo':
+        if tipo == 'Resolvidas':
+            if cargo == "Secretaria":
+                cursor.execute('''
+            SELECT id, titulo, tipo, descricao, data, status, nome, visto, cargo, comentario, datavisto, especifico, descricao_ia, gravidade, turma, ano
+            FROM denuncias
+            WHERE status NOT IN ("Em Análise.", "Expirado.", "Visto.")
+              AND (cargo = 'Secretaria' OR cargo = 'Ambos')
+              AND especifico IN (?, "any")
+            ORDER BY id DESC
+        ''', (nomezin,))
+            elif cargo == 'Aluno':
+                return
+            elif cargo == 'Professor':
+                cursor.execute('''
+            SELECT id, titulo, tipo, descricao, data, status, nome, visto, cargo, comentario, datavisto, especifico, descricao_ia, gravidade, turma, ano
+            FROM denuncias
+            WHERE status NOT IN ("Em Análise.", "Expirado.", "Visto.")
+              AND (cargo = 'Professor' OR cargo = 'Ambos')
+              AND especifico IN (?, "any")
+            ORDER BY id DESC
+        ''', (nomezin,))
+            denuncias = cursor.fetchall()
+            conn.close()
+            return denuncias
+        
+        if tipo == 'Historico':
+            if cargo == "Secretaria":
+                cursor.execute('''
+            SELECT id, titulo, tipo, descricao, data, status, nome, visto, cargo, comentario, datavisto, especifico, descricao_ia, gravidade, turma, ano
+            FROM denuncias
+            WHERE status = "Visto."
+              AND (cargo = 'Secretaria' OR cargo = 'Ambos')
+              AND especifico IN (?, "any")
+            ORDER BY id DESC
+        ''', (nomezin,))
+            elif cargo == 'Aluno':
+                return
+            elif cargo == 'Professor':
+                cursor.execute('''
+            SELECT id, titulo, tipo, descricao, data, status, nome, visto, cargo, comentario, datavisto, especifico, descricao_ia, gravidade, turma, ano
+            FROM denuncias
+            WHERE status = "Visto."
+              AND (cargo = 'Professor' OR cargo = 'Ambos')
+              AND especifico IN (?, "any")
+            ORDER BY id DESC
+        ''', (nomezin,))
+            denuncias = cursor.fetchall()
+            conn.close()
+            return denuncias
+        
         if cargo == "Secretaria":
             cursor.execute('''
-            SELECT id, titulo, gravidade, descricao, data, status, nome, visto, cargo, comentario, datavisto, especifico
+            SELECT id, titulo, tipo, descricao, data, status, nome, visto, cargo, comentario, datavisto, especifico, descricao_ia, gravidade, turma, ano
             FROM denuncias
             WHERE status != "Expirada."
               AND (cargo = 'Secretaria' OR cargo = 'Ambos')
@@ -68,14 +166,14 @@ def mostrar_denuncias(user_id, cargo, tipo):
         ''', (tipo,nomezin,))
         elif cargo == 'Aluno':
             cursor.execute('''
-            SELECT id, titulo, gravidade, descricao, data, status, nome, visto, comentario, datavisto
+            SELECT id, titulo, tipo, descricao, data, status, nome, visto, comentario, datavisto, descricao_ia, gravidade, turma, ano
             FROM denuncias
             WHERE user_id = ? AND status = ?
             ORDER BY id DESC
         ''', (user_id,tipo,))
         elif cargo == 'Professor':
             cursor.execute('''
-            SELECT id, titulo, gravidade, descricao, data, status, nome, visto, cargo, comentario, datavisto
+            SELECT id, titulo, tipo, descricao, data, status, nome, visto, cargo, comentario, datavisto, especifico, descricao_ia, gravidade, turma, ano
             FROM denuncias
             WHERE status != "Expirada."
               AND (cargo = 'Professor' OR cargo = 'Ambos')
@@ -90,7 +188,7 @@ def mostrar_denuncias(user_id, cargo, tipo):
     elif tipo == 'Tudo':
         if cargo == "Secretaria":
             cursor.execute('''
-            SELECT id, titulo, gravidade, descricao, data, status, nome, visto, cargo, comentario, datavisto
+            SELECT id, titulo, tipo, descricao, data, status, nome, visto, cargo, comentario, datavisto, descricao_ia, gravidade, turma, ano
             FROM denuncias
             WHERE status != "Expirada."
               AND (cargo = 'Secretaria' OR cargo = 'Ambos')
@@ -99,14 +197,14 @@ def mostrar_denuncias(user_id, cargo, tipo):
         ''', (nomezin,))
         elif cargo == 'Aluno':
             cursor.execute('''
-            SELECT id, titulo, gravidade, descricao, data, status, nome, visto, comentario, datavisto
+            SELECT id, titulo, tipo, descricao, data, status, nome, visto, comentario, datavisto, descricao_ia, gravidade, turma, ano
             FROM denuncias
             WHERE user_id = ?
             ORDER BY id DESC
         ''', (user_id,))
         elif cargo == 'Professor':
             cursor.execute('''
-            SELECT id, titulo, gravidade, descricao, data, status, nome, visto, cargo, comentario, datavisto
+            SELECT id, titulo, tipo, descricao, data, status, nome, visto, cargo, comentario, datavisto, descricao_ia, gravidade, turma, ano
             FROM denuncias
             WHERE status != "Expirada."
               AND (cargo = 'Professor' OR cargo = 'Ambos')
@@ -227,7 +325,7 @@ def pegar_na_denuncia_haha(id):
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT id, titulo, gravidade, descricao, data, status, nome, visto, comentario, tipo, cargo, datavisto, especifico
+        SELECT id, titulo, tipo, descricao, data, status, nome, visto, comentario, tipo, cargo, datavisto, especifico, descricao_ia, gravidade, turma, ano
         FROM denuncias
         WHERE id = ?
     """, (id,))
@@ -239,7 +337,7 @@ def pegar_na_denuncia_haha(id):
         return {
             "id": row[0],
             "titulo": row[1],
-            "gravidade": row[2],
+            "tipo": row[2],
             "descricao": row[3],
             "data": row[4],
             "status": row[5],
@@ -249,7 +347,11 @@ def pegar_na_denuncia_haha(id):
             'tipo': row[9],
             'cargo': row[10],
             'datavisto': row[11],
-            'especifico': row[12]
+            'especifico': row[12],
+            'descricao_ia': row[13],
+            'gravidade': row[14],
+            'turma': row[15],
+            'ano': row[16]
         }
     else:
         return 'no'

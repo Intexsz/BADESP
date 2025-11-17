@@ -1,10 +1,13 @@
-from flask import Flask, request, render_template, session, redirect, url_for, Blueprint, make_response
+from flask import Flask, request, render_template, session, redirect, url_for, Blueprint, make_response, jsonify
 from authlib.integrations.flask_client import OAuth
 from app.database.db_usuario import buscar_cargo, buscar_usuario, buscar_nome_secretaria, buscar_nome_professor
 from app.database.db_denuncia import buscar_status_denuncia, mostrar_denuncias, apagar_denuncia, criar_denuncia, expirar, checagem_denunciahehe
+from app.database.db_usuario import usuario_tem_pin, cadastrar_pin, check_pin
+from flask_cors import CORS
 
 app = Flask(__name__)
 rotas_bp = Blueprint('rotas', __name__)
+CORS(app)
 
 CLIENT_ID = "334998652961-rpf4gt64873gg0uoa64cmlqkcmj33q4b.apps.googleusercontent.com"
 
@@ -21,21 +24,51 @@ google = oauth.register(
 
 ###### PAGINAS NORMAIS ######
 
+@rotas_bp.route('/Login2', methods=['GET', 'POST'])
+def cadastro2_pin():
+    if not "user_id" in session:
+        return redirect(url_for('rotalogin.cadastro'))
+    if usuario_tem_pin(session["user_id"]):
+        return redirect(url_for("rotas.inicio"))
+    cargo = buscar_cargo(session["user_id"])
+
+    if request.method == 'POST':
+        id = session.get("user_id")
+        pin = request.form['pin']
+        escola = request.form['escola']
+        if cargo == 'Aluno':   
+            ano = request.form['ano']
+            turma = request.form['turma']
+        else:
+            ano = None
+            turma = None
+
+        cadastrar_pin(id, pin, escola, ano, turma)
+
+        return redirect(url_for('rotas.inicio'))
+
+    return render_template("cadastroaluno.html", cargo=cargo)
+
 @rotas_bp.route('/')
 def homepage():
     if not "user_id" in session:
         return redirect(url_for('rotalogin.cadastro'))
+    if not usuario_tem_pin(session["user_id"]):
+        return redirect(url_for("rotas.cadastro2_pin"))
+    
     return redirect(url_for('rotas.inicio'))
 
 @rotas_bp.route('/Inicio', methods=['POST', 'GET'])
 def inicio():
     if "user_id" not in session:
         return redirect(url_for("rotalogin.cadastro"))
-
+    
+    if not usuario_tem_pin(session["user_id"]):
+        return redirect(url_for("rotas.cadastro2_pin"))
+    
     expirar()
     cargo = buscar_cargo(session["user_id"])
     usuario = buscar_usuario(session["user_id"])
-    denuncias = mostrar_denuncias(session["user_id"], cargo, 'Em Análise')
     filtro = request.args.get('filtro', 'Tudo')
 
     if request.method == 'POST':
@@ -56,8 +89,93 @@ def inicio():
         denuncias = mostrar_denuncias(session["user_id"], cargo, 'Expirada.')
     else:
         denuncias = mostrar_denuncias(session["user_id"], cargo, 'Tudo')
+
+    if cargo == "Secretaria":
+        return render_template("iniciosecretaria.html",usuario=usuario)
+    elif cargo == 'Aluno':
+        return render_template("inicio.html", denuncias=denuncias, usuario=usuario,filtro=filtro)
+    elif cargo == 'Professor':
+        return render_template("iniciosecretaria.html",usuario=usuario)
+
+@rotas_bp.route('/Abertas')
+def Abertas():
+    if "user_id" not in session:
+        return redirect(url_for('rotalogin.cadastro'))
+    cargo = buscar_cargo(session["user_id"])
+    if not usuario_tem_pin(session["user_id"]):
+        return redirect(url_for("rotas.cadastro2_pin"))
+    if cargo == 'Aluno':
+        return redirect(url_for('rotas.inicio'))
+    
+    expirar()
+    cargo = buscar_cargo(session["user_id"])
+    usuario = buscar_usuario(session["user_id"])
+    filtro = request.args.get('filtro', 'Tudo')
+
+    if request.method == 'POST':
+        querer = request.form.get('Olavo', 'Tudo')
+        return redirect(url_for('rotas.inicio', filtro=querer))
+
+    denuncias = mostrar_denuncias(session["user_id"], cargo, 'Historico')
     
     # ===== PAGINAÇÃO =====
+    page = int(request.args.get("page", 1))
+    per_page = 10
+    start = (page - 1) * per_page 
+    end = start + per_page
+
+    denuncias_paginadas = denuncias[start:end]
+    total_pages = (len(denuncias) + per_page - 1) // per_page
+
+    return render_template('historico.html', denuncias=denuncias_paginadas, usuario=usuario,page=page,total_pages=total_pages,filtro=filtro,tipo='Abertas')
+
+@rotas_bp.route('/Resolvidas')
+def Resolvidas():
+    if "user_id" not in session:
+        return redirect(url_for('rotalogin.cadastro'))
+    cargo = buscar_cargo(session["user_id"])
+    if not usuario_tem_pin(session["user_id"]):
+        return redirect(url_for("rotas.cadastro2_pin"))
+    if cargo == 'Aluno':
+        return redirect(url_for('rotas.inicio'))
+    
+    expirar()
+    cargo = buscar_cargo(session["user_id"])
+    usuario = buscar_usuario(session["user_id"])
+    filtro = request.args.get('filtro', 'Tudo')
+
+    if request.method == 'POST':
+        querer = request.form.get('Olavo', 'Tudo')
+        return redirect(url_for('rotas.inicio', filtro=querer))
+
+    denuncias = mostrar_denuncias(session["user_id"], cargo, 'Resolvidas')
+    
+    # ===== PAGINAÇÃO =====
+    page = int(request.args.get("page", 1))
+    per_page = 10
+    start = (page - 1) * per_page 
+    end = start + per_page
+
+    denuncias_paginadas = denuncias[start:end]
+    total_pages = (len(denuncias) + per_page - 1) // per_page
+
+    return render_template('historico.html', denuncias=denuncias_paginadas, usuario=usuario,page=page,total_pages=total_pages,filtro=filtro,tipo='Resolvidas')
+
+
+@rotas_bp.route('/Denuncias')
+def denuncias():
+    if "user_id" not in session:
+        return redirect(url_for('rotalogin.cadastro'))
+    if not usuario_tem_pin(session["user_id"]):
+        return redirect(url_for("rotas.cadastro2_pin"))
+    cargo = buscar_cargo(session["user_id"])
+    if cargo == 'Aluno':
+        return redirect(url_for('rotas.inicio'))
+    
+    expirar()
+    usuario = buscar_usuario(session["user_id"])
+    denuncias = mostrar_denuncias(session["user_id"], cargo, 'Em Análise.')
+    
     page = int(request.args.get("page", 1))
     per_page = 4
     start = (page - 1) * per_page 
@@ -65,18 +183,16 @@ def inicio():
 
     denuncias_paginadas = denuncias[start:end]
     total_pages = (len(denuncias) + per_page - 1) // per_page
-        
-    if cargo == "Secretaria":
-        return render_template("secretaria.html", denuncias=denuncias_paginadas, usuario=usuario,page=page,total_pages=total_pages,filtro=filtro)
-    elif cargo == 'Aluno':
-        return render_template("inicio.html", denuncias=denuncias, usuario=usuario,filtro=filtro)
-    elif cargo == 'Professor':
-        return render_template("professor.html", denuncias=denuncias_paginadas, usuario=usuario,page=page,total_pages=total_pages,filtro=filtro)
-
+    
+    return render_template("secretaria.html", denuncias=denuncias_paginadas, usuario=usuario,page=page,total_pages=total_pages,filtro='Esperando')
 
 @rotas_bp.route('/Ajuda')
 def ajuda():
-    return render_template('ajuda.html')
+    if "user_id" not in session:
+        return render_template('ajuda.html',login=False)
+    if not usuario_tem_pin(session["user_id"]):
+        return redirect(url_for("rotas.cadastro2_pin"))
+    return render_template('ajuda.html',login=True)
 ######----------######
 
 
@@ -85,6 +201,9 @@ def ajuda():
 def denuncia():
     if "user_id" not in session:
         return redirect(url_for('rotalogin.cadastro'))
+    
+    if not usuario_tem_pin(session["user_id"]):
+        return redirect(url_for("rotas.cadastro2_pin"))
     
     nomeprof = buscar_nome_professor()
     nomesecretaria = buscar_nome_secretaria()
@@ -99,12 +218,12 @@ def denuncia():
     """
         
         titulo = request.form.get('titulo')
-        gravidade = request.form.get('gravidade')
+        tipo = request.form.get('tipo')
         descricao = request.form.get('descricao')
         quem = request.form.get('quem')
         pessoa = request.form.get('pessoa')
 
-        criar_denuncia(titulo, gravidade, descricao, session["user_id"], 'Em Análise.', quem, pessoa)
+        criar_denuncia(titulo, tipo, descricao, session["user_id"], 'Em Análise.', quem, pessoa)
         
         return f"""
     <script>
@@ -127,7 +246,9 @@ def denuncia():
 def excluir_denuncia(id):
     if "user_id" not in session:
         return redirect(url_for('rotalogin.cadastro'))
-    
+    if not usuario_tem_pin(session["user_id"]):
+        return redirect(url_for("rotas.cadastro2_pin"))
+
     status = buscar_status_denuncia(id)
     if status == 'Em Análise.' or status == 'Expirada.':
         apagar_denuncia(id, session["user_id"])
@@ -147,16 +268,18 @@ def excluir_denuncia(id):
 def reenviar_denuncia(id):
     if "user_id" not in session:
         return redirect(url_for('rotalogin.cadastro'))
+    if not usuario_tem_pin(session["user_id"]):
+        return redirect(url_for("rotas.cadastro2_pin"))
     
     titulo = request.form.get('titulo')
-    gravidade = request.form.get('gravidade')
+    tipo = request.form.get('tipo')
     descricao = request.form.get('descricao')
     quem = request.form.get('quem')
     pessoa = request.form.get('pessoa')
 
     status = buscar_status_denuncia(id)
     if status == 'Expirada.':
-        criar_denuncia(titulo, gravidade, descricao, session["user_id"], 'Em Análise.', quem, pessoa)
+        criar_denuncia(titulo, tipo, descricao, session["user_id"], 'Em Análise.', quem, pessoa)
         apagar_denuncia(id, session["user_id"])
         return redirect(url_for('rotas.inicio'))
     else:
@@ -167,3 +290,21 @@ def reenviar_denuncia(id):
             </script>
         """
 ######----------######
+
+@rotas_bp.route('/verificar_pin', methods=['POST'])
+def verificar_pin():
+    if "user_id" not in session:
+        return redirect(url_for('rotalogin.cadastro'))
+    if not usuario_tem_pin(session["user_id"]):
+        return redirect(url_for("rotas.cadastro2_pin"))
+    
+    data = request.get_json()
+    pin_inserido = data.get('pin')
+    usuario_id = session.get('user_id')
+
+    resultado = check_pin(usuario_id)
+    
+    if str(resultado) == str(pin_inserido):
+        return jsonify({'status': 'ok'})
+    else:
+        return jsonify({'status': 'erro', 'mensagem': 'PIN incorreto'})

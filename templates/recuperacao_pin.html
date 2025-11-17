@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='pin.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='OIP.jpg') }}">
+    <title>BADESP - AlterarPIN</title>
+</head>
+
+<body>
+    {% if tipo == 'Aluno' %}
+    <div class="container">
+        <h1>Alterar PIN</h1>
+        <!-- Formulário -->
+        <form id="alterar-pin-form" method="POST" autocomplete="off">
+            <div class="input-container select-seta">
+                <label for="select-turma" class="sr-only">Selecione a turma</label>
+                <select id="select-turma" name="turma" required>
+                    <option value="" disabled selected>Selecione a turma</option>
+                    {% for turma in alunos_por_turma.keys() %}
+                    <option value="{{ turma }}">{{ turma }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div id="container-aluno" class="input-container select-seta" style="display:none;">
+                <label for="select-aluno" class="sr-only">Selecione o aluno</label>
+                <select id="select-aluno" name="aluno" required>
+                    <option value="" disabled selected>Selecione um aluno</option>
+                </select>
+            </div>
+
+            <div class="input-container">
+                <label for="pin" class="sr-only">PIN</label>
+                <input placeholder="PIN" type="text" name="pin" id="pin" required maxlength="6" minlength="6"
+                    pattern="\d{6}" title="O PIN deve ter 6 números"
+                    oninput="this.value = this.value.replace(/\D/g, '')">
+            </div>
+
+            <div class="input-container">
+                <label for="confirmar" class="sr-only">Confirmar PIN</label>
+                <input placeholder="Confirmar PIN" type="text" name="confirmar" id="confirmar" required maxlength="6"
+                    minlength="6" pattern="\d{6}" title="O PIN deve ter 6 números"
+                    oninput="this.value = this.value.replace(/\D/g, '')">
+            </div>
+
+            <div class='termos'>
+                <input type="checkbox" id="termos-condicoes" name="termos" required>
+                <label for="termos-condicoes">
+                    Ao continuar, você concorda com os <a href="/Termos" style="color: Blue;">Termos de Condições</a>
+                </label>
+            </div>
+
+            <button type="submit" class="submit-button">Confirmar</button>
+        </form>
+    </div>
+    {% elif tipo == 'Gestão' %}
+    <div class="container">
+        <h1>Alterar PIN</h1>
+
+        <!-- Formulário -->
+        <form method="POST" onsubmit="return validarPin()" autocomplete="off">
+
+            <div class="input-container">
+                <input placeholder="PIN" type="text" name="pin" id="pin" required maxlength="6" minlength="6"
+                    pattern="\d{6}" title="O PIN deve ter 6 números"
+                    oninput="this.value = this.value.replace(/\D/g, '')">
+            </div>
+
+            <div class="input-container">
+                <input placeholder="Confirmar PIN" type="text" name="confirmar" id="confirmar" required maxlength="6"
+                    minlength="6" pattern="\d{6}" title="O PIN deve ter 6 números"
+                    oninput="this.value = this.value.replace(/\D/g, '')">
+            </div>
+
+            <button type="submit" class="submit-button">Confirmar</button>
+        </form>
+    </div>
+    {% else %}
+    <p>Erro.</p>
+    {% endif %}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const alunosPorTurma = {{ alunos_por_turma | tojson
+        }};
+        const selectTurma = document.getElementById("select-turma");
+        const selectAluno = document.getElementById("select-aluno");
+        const containerAluno = document.getElementById("container-aluno");
+        const form = document.getElementById("alterar-pin-form");
+        const pinInput = document.getElementById("pin");
+        const confirmarInput = document.getElementById("confirmar");
+
+        function atualizarAlunos() {
+            const turmaSelecionada = selectTurma.value;
+            selectAluno.innerHTML = '<option value="" disabled selected>Selecione um aluno</option>';
+
+            if (turmaSelecionada && alunosPorTurma[turmaSelecionada]) {
+                alunosPorTurma[turmaSelecionada].forEach(aluno => {
+                    if (!aluno) return;
+                    const option = document.createElement("option");
+                    option.value = aluno;
+                    option.textContent = aluno;
+                    selectAluno.appendChild(option);
+                });
+                containerAluno.style.display = "block";
+            } else {
+                containerAluno.style.display = "none";
+            }
+        }
+
+        function validarPin() {
+            const pin = document.getElementById("pin").value;
+            const confirmar = document.getElementById("confirmar").value;
+            if (pin !== confirmar) {
+                alert("Os PINs não coincidem!");
+                return false;
+            }
+            return true;
+        }
+
+        selectTurma.addEventListener('change', atualizarAlunos);
+
+        form.addEventListener('submit', function (event) {
+            if (!validarPin()) {
+                event.preventDefault();
+            }
+        });
+
+        atualizarAlunos();
+        });
+    </script>
+</body>
+
+</html>

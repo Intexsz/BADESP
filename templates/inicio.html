@@ -5,75 +5,79 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='OIP.jpg') }}">
-  <title>SNEP - Início</title>
+  <title>BADESP - Início</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='inicio.css') }}">
   <script src="{{ url_for('static', filename='js/inicio.js') }}" defer></script>
 </head>
 
 <body>
   <header class="Cabecalho">
-    <nav>
-      <h1 class="nome">Segurança Nas Escolas Públicas</h1>
-    </nav>
-
     <button class="menu-btn">☰</button>
-
-    <!-- Menu lateral -->
+    <h1 class="nome">B.A.D.E.S.P</h1>
+    
+    <!-- Agrupar a saudação e a imagem do usuário em um contêiner -->
+    <div class="user-info"> 
+        <img src="{{ usuario[3] }}" alt="Foto do usuário" class="profile-image">
+    </div>
+    
     <nav class="sidebar">
       <ul>
         <li><a href="/Inicio">Início</a></li>
         <li><a href="/Ajuda">Ajuda</a></li>
         <li><a href="/Denuncia">Fazer Denúncia</a></li>
+        <li><a href="/MudarPIN"> Mudar o PIN</a></li>
         <li><a href="/Logout" onclick="return confirmarLogout()"><i class="fas fa-user-circle"></i>Deslogar</a></li>
-        <li><a href="/MudarPin"><i class="fas fa-cog"></i> Mudar o PIN</a></li>
       </ul>
     </nav>
   </header>
 
-    <h2>Bem Vindo {{ usuario[1] }}!</h2>
-    <p><b>Email:</b> {{ usuario[2] }}</p>
-    <img src="{{ usuario[3] }}" alt="Foto do usuário" style="border-radius:50%">
+
+  
 
   <div class="painel-container">
     <h1>Painel de Denúncias</h1>
-          <form method="get" action="{{ url_for('rotas.inicio') }}">
-        <select name="filtro" onchange="this.form.submit()">
-          <option value="Tudo" {% if filtro == "Tudo" %}selected{% endif %}>Tudo</option>
-          <option value="Esperando" {% if filtro == "Esperando" %}selected{% endif %}>Esperando Resposta</option>
-          <option value="Abertas" {% if filtro == "Abertas" %}selected{% endif %}>Abertas</option>
-          <option value="Aprovado" {% if filtro == "Aprovado" %}selected{% endif %}>Aprovado</option>
-          <option value="Recusado" {% if filtro == "Recusado" %}selected{% endif %}>Recusado</option>
-          <option value="Arquivado" {% if filtro == "Arquivado" %}selected{% endif %}>Arquivado</option>
-          <option value="Expirada" {% if filtro == "Expirada" %}selected{% endif %}>Expirado</option>
-        </select>
-      </form>
-      <br>
+    <form method="get" action="{{ url_for('rotas.inicio') }}">
+      <select name="filtro" onchange="this.form.submit()">
+        <option value="Tudo" {% if filtro=="Tudo" %}selected{% endif %}>Tudo</option>
+        <option value="Esperando" {% if filtro=="Esperando" %}selected{% endif %}>Esperando Resposta</option>
+        <option value="Abertas" {% if filtro=="Abertas" %}selected{% endif %}>Abertas</option>
+        <option value="Aprovado" {% if filtro=="Aprovado" %}selected{% endif %}>Aprovado</option>
+        <option value="Recusado" {% if filtro=="Recusado" %}selected{% endif %}>Recusado</option>
+        <option value="Arquivado" {% if filtro=="Arquivado" %}selected{% endif %}>Arquivado</option>
+        <option value="Expirada" {% if filtro=="Expirada" %}selected{% endif %}>Expirado</option>
+      </select>
+    </form>
+    <br>
     <div id="denuncias-container">
       {% if denuncias %}
-        {% for d in denuncias %}
-          <div class="denuncia-card" id="denuncia-{{ d[0] }}">
-            <h3>{{ d[1] }}</h3>
-            <p>Data: {{ d[4] }}</p>
-            {% if d[5] == 'Aprovado.' %}
-              <p><span style="color: rgb(0, 255, 0);">✔️Situação:  Aprovado por: {{ d[7] }}✔️</span></p>
-            {% elif d[5] == 'Recusado.' %}
-              <p><span style="color: red;">❌Situação: Recusado por: {{ d[7] }}❌</span></p>
-            {% elif d[5] == 'Arquivado.' %}
-              <p><span style="color: gray;">🗃️Situação: Arquivado por: {{ d[7] }}🗃️<span><p>
-            {% elif d[5] == 'Visto.' %}
-              <p><span style="color: orange;">🔎Situação: Visualizado por: {{ d[7] }} ás {{ d[9] }}🔎<span><p>
-            {% elif d[5] == 'Expirada.' %}
-              <p><span style="color: gray;">⏰Situação: Expirado.⏰<span><p></p>
-            {% else %}
-              <p><span style="color: rgb(255, 255, 255);">Situação: ⏳Esperando Resposta...⏳</span></p>
-            {% endif %}
-              <form class="apagar-form" action="{{ url_for('rotasecretaria.detalhe_denuncia', id=d[0]) }}" method="POST">
-                <button type="submit">Abrir Denuncia</button>
-              </form>
-          </div>
-        {% endfor %}
+      {% for d in denuncias %}
+      <div class="denuncia-card" id="denuncia-{{ d[0] }}">
+        <h3>{{ d[1] }}</h3>
+        <p>Data: {{ d[4] }}</p>
+        {% if d[5] == 'Aprovado.' %}
+        <p><span style="color: rgb(0, 255, 0);">✔️Situação: Aprovado por: {{ d[7] }}✔️</span></p>
+        {% elif d[5] == 'Recusado.' %}
+        <p><span style="color: red;">❌Situação: Recusado por: {{ d[7] }}❌</span></p>
+        {% elif d[5] == 'Arquivado.' %}
+        <p><span style="color: gray;">🗃️Situação: Arquivado por: {{ d[7] }}🗃️<span>
+              <p>
+                {% elif d[5] == 'Visto.' %}
+              <p><span style="color: orange;">🔎Situação: Visualizado por: {{ d[7] }} ás {{ d[9] }}🔎<span>
+                    <p>
+                      {% elif d[5] == 'Expirada.' %}
+                    <p><span style="color: gray;">⏰Situação: Expirado.⏰<span>
+                          <p></p>
+                          {% else %}
+                          <p><span style="color: rgb(255, 255, 255);">Situação: ⏳Esperando Resposta...⏳</span></p>
+                          {% endif %}
+                          <form class="apagar-form" action="{{ url_for('rotasecretaria.detalhe_denuncia', id=d[0]) }}"
+                            method="POST">
+                            <button type="button" onclick="verificarPin({{ d[0] }})">Abrir Denúncia</button>
+                          </form>
+      </div>
+      {% endfor %}
       {% else %}
-        <p>Nenhuma denúncia encontrada.</p>
+      <p>Nenhuma denúncia encontrada.</p>
       {% endif %}
     </div>
   </div>
@@ -89,12 +93,47 @@
 
 
     function confirmarLogout() {
-      
-    return confirm("Você tem certeza que quer deslogar?");
+
+      return confirm("Você tem certeza que quer deslogar?");
     }
 
   </script>
 
+<script>
+  async function verificarPin(denunciaId) {
+    const pin = prompt("Digite seu PIN para abrir a denúncia:");
+    if (!pin) return;
+
+    try {
+      const response = await fetch(`{{ url_for('rotas.verificar_pin') }}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ pin: pin })
+      });
+
+      const result = await response.json();
+
+      if (result.status === "ok") {
+
+        const form = document.createElement("form");
+        form.method = "POST";
+        form.action = `/detalhe/${denunciaId}`;
+        document.body.appendChild(form);
+        form.submit();
+      } else {
+        alert(result.mensagem || "PIN incorreto. Tente novamente.");
+      }
+    } catch (error) {
+      console.error("Erro ao verificar o PIN:", error);
+      alert("Erro no servidor. Tente novamente mais tarde.");
+    }
+  }
+</script>
+
+
 
 </body>
+
 </html>
