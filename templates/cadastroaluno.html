@@ -1,15 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<<<<<<< HEAD
-=======
-
->>>>>>> e3fc35942aa082cc34c0ee72acc9825cd4a45d4f
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='cadastro.css') }}">
     <script src="https://accounts.google.com/gsi/client" async defer></script>
-<<<<<<< HEAD
 
     <title>S.N.E.P</title>
 </head>
@@ -96,102 +91,4 @@
     <br>
     <br>
 </body>
-=======
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='OIP.jpg') }}">
-    <title>BADESP - Cadastro</title>
-</head>
-
-<body>
-    <div class="container">
-        <h1>Cadastro</h1>
-
-        <form method="POST" action="{{ url_for('rotas.cadastro2_pin') }}" onsubmit="return validarPin()"autocomplete="off">
-            <div class="input-container">
-                <select name="escola" id="select-escola" required>
-                    <option value="" disabled selected>Selecione a escola</option>
-                    <option value="PEI Francisco Pereira De Souza Filho Prof">PEI Francisco Pereira De Souza Filho Prof</option>
-                </select>
-            </div>
-            {% if cargo == 'Aluno' %}
-            <div class="input-container">
-                <select name="ano" id="select-serie" required onchange="atualizarTurmas()">
-                    <option value="" disabled selected>Selecione a série</option>
-                    <option value="6">6ª Série EF</option>
-                    <option value="7">7ª Série EF</option>
-                    <option value="8">8ª Série EF</option>
-                    <option value="9">9ª Série EF</option>
-                    <option value="1">1ª Série EM</option>
-                    <option value="2">2ª Série EM</option>
-                    <option value="3">3ª Série EM</option>
-                </select>
-            </div>
-            <div class="input-container" id="container-turma" style="display: none;">
-                <select name="turma" id="select-turma" required>
-                    <option value="" disabled selected>Selecione a turma</option>
-                </select>
-            </div>
-            {% endif %}
-            <div class="input-container">
-                <input placeholder="PIN" type="text" name="pin" id="pin" required maxlength="6" minlength="6"
-                    pattern="\d{6}" title="O PIN deve ter 6 números"
-                    oninput="this.value = this.value.replace(/\D/g, '')">
-            </div>
-            <div class="input-container">
-                <input placeholder="Confirmar PIN" type="text" name="confirmar" id="confirmar" required maxlength="6"
-                    minlength="6" pattern="\d{6}" title="O PIN deve ter 6 números"
-                    oninput="this.value = this.value.replace(/\D/g, '')">
-            </div>
-            <div class='Termos'>
-              <input type="checkbox" required> 
-            <p>Ao criar uma conta você concorda com os <a href="/Termos" style="color: Blue;">Termos de Condições</a></p>
-            </div>
-            <button type="submit" class="submit-button">Confirmar</button>
-        </form>
-    </div>
-
-    <script>
-        const turmasPorSerie = {
-            "6": ["6° A", "6° B", "6° C", "6° D"],
-            "7": ["7° A", "7° B", "7° C", "7° D"],
-            "8": ["8° A", "8° B", "8° C", "8° D"],
-            "9": ["9° A", "9° B", "9° C", "9° D"],
-            "1": ["1° A", "1° B", "1° C", "1° D", "1° E", "1° F", "1° G"],
-            "2": ["2° A", "2° B", "2° C", "2° D"],
-            "3": ["3° A", "3° B", "3° C", "3° D"]
-        };
-
-        function atualizarTurmas() {
-            const serieSelecionada = document.getElementById("select-serie").value;
-            const containerTurma = document.getElementById("container-turma");
-            const selectTurma = document.getElementById("select-turma");
-
-            selectTurma.innerHTML = '<option value="" disabled selected>Selecione a turma</option>';
-
-            if (serieSelecionada && turmasPorSerie[serieSelecionada]) {
-                const turmas = turmasPorSerie[serieSelecionada];
-                turmas.forEach(turma => {
-                    const option = document.createElement("option");
-                    option.text = turma;
-                    option.value = turma;
-                    selectTurma.add(option);
-                });
-                containerTurma.style.display = 'block';
-            } else {
-                containerTurma.style.display = 'none';
-            }
-        }
-
-        function validarPin() {
-            const pin = document.getElementById("pin").value;
-            const confirmar = document.getElementById("confirmar").value;
-            if (pin !== confirmar) {
-                alert("Os PINs não coincidem!");
-                return false;
-            }
-            return true;
-        }
-    </script>
-</body>
-
->>>>>>> e3fc35942aa082cc34c0ee72acc9825cd4a45d4f
 </html>
