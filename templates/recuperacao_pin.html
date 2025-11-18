@@ -14,6 +14,8 @@
     <div class="container">
         <h1>Alterar PIN</h1>
         <!-- Formulário -->
+         <p>Turmas disponiveis:</p>
+         <br>
         <form id="alterar-pin-form" method="POST" autocomplete="off">
             <div class="input-container select-seta">
                 <label for="select-turma" class="sr-only">Selecione a turma</label>
@@ -44,13 +46,6 @@
                 <input placeholder="Confirmar PIN" type="text" name="confirmar" id="confirmar" required maxlength="6"
                     minlength="6" pattern="\d{6}" title="O PIN deve ter 6 números"
                     oninput="this.value = this.value.replace(/\D/g, '')">
-            </div>
-
-            <div class='termos'>
-                <input type="checkbox" id="termos-condicoes" name="termos" required>
-                <label for="termos-condicoes">
-                    Ao continuar, você concorda com os <a href="/Termos" style="color: Blue;">Termos de Condições</a>
-                </label>
             </div>
 
             <button type="submit" class="submit-button">Confirmar</button>

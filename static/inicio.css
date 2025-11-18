@@ -1,22 +1,12 @@
-body {
-  font-family: Arial, sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  background: linear-gradient(to bottom, #0d0d0d, #1a1a40, #000);
-  min-height: 100vh;
-  color: #f5f4f4;
-}
-
 .Cabecalho {
-  background-color: rgba(25, 25, 60, 0.9);
-  position: fixed; 
+  position: sticky;
   top: 0;
   left: 0;
+  right: 0;
   width: 100%;
-  z-index: 10;
-  box-shadow: 0 2px 9px rgba(0, 0, 0, 0.4);
+  z-index: 1002;
+  background-color: rgb(90, 89, 89);
+  box-shadow: 0 2px 9px rgba(0, 0, 0, 0.1);
   padding: 10px 30px;
   display: flex;
   justify-content: space-between;
@@ -25,33 +15,51 @@ body {
   border-bottom-left-radius: 6px;
 }
 
-.Cabecalho h1.nome {
-  display: none;
+.profile-icon {
+  position: relative;
+  color: white;
+  font-size: 30px;
+  padding-right: 20px;
 }
 
-.user-info {
-  display: flex;
-  align-items: center;
-  gap: 15px; 
+.profile-icon {
+  position: relative;
+  color: white;
+  font-size: 30px;
+  padding-right: 20px;
 }
 
-.profile-image {
+.profile-icon {
+  padding-right: 0;
+  position: relative;
+}
+
+.profile-icon img {
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  width: 40px; 
-  height: 40px;
+  border: 3px solid white;
   object-fit: cover;
-  border: 2px solid white; 
 }
 
-.user-info h2 {
-  font-size: 16px;
-  margin: 0;
+.nome {
+  font-family: Segoe UI;
+  font-style: normal;
+  font-size: 40px;
+  color: white;
+  margin: 0 auto;
+  flex-grow: 1;
+  text-align: center;
+
 }
 
 .menu-btn {
-  font-size: 24px;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  font-size: 20px;
   padding: 8px 12px;
-  background-color: #2f379f;
+  background-color: #4f4f4f4f;
   color: white;
   border: none;
   cursor: pointer;
@@ -60,12 +68,14 @@ body {
   transition: 0.3s;
 }
 
+
+
 .menu-btn:hover {
-  background-color: #25327c;
+  background-color: rgb(105, 105, 105);
 }
 
-.Cabecalho .menu-btn {
-  position: static;
+.menu-btn:active {
+  background-color: rgb(156, 156, 156);
 }
 
 .sidebar {
@@ -75,7 +85,7 @@ body {
   transform: translateX(-100%);
   width: 200px;
   height: 100%;
-  background: linear-gradient(135deg, #25337a, #111);
+  background-color: rgb(90, 89, 89);
   box-shadow: 3px 0 15px rgba(0, 0, 0, 0.5);
   padding-top: 80px;
   transition: transform 0.5s ease;
@@ -104,17 +114,28 @@ body {
   padding: 8px 15px;
   display: block;
   transition: transform 0.2s, color 0.3s;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: Segoe UI;
 }
 
 .sidebar ul li a:hover {
-  color: #76faff;
+  color: #828282;
   transform: translateX(8px);
 }
 
 .sidebar ul li a:active {
   color: #d9f9fa;
   transform: translateX(8px);
+}
+
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background: linear-gradient(to bottom, #0d0d0d, #1a1a40, #000);
+  min-height: 100vh;
+  color: #f5f4f4;
 }
 
 /* Estilos para o painel */

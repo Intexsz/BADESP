@@ -233,7 +233,7 @@ def alunos():
             </script>
         """
         
-        return render_template("recuperacao_pin.html", alunos_por_turma=alunos_por_turma, tipo='Gestão')
+        return render_template("recuperacao_pin.html", alunos_por_turma=alunos_por_turma, tipo='Aluno')
     else:
         return redirect(url_for('rotas.inicio'))
 ######----------######

@@ -7,19 +7,15 @@
   <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='OIP.jpg') }}">
   <title>BADESP - Início</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='inicio.css') }}">
-  <script src="{{ url_for('static', filename='js/inicio.js') }}" defer></script>
 </head>
 
 <body>
   <header class="Cabecalho">
-    <button class="menu-btn">☰</button>
+
     <h1 class="nome">B.A.D.E.S.P</h1>
-    
-    <!-- Agrupar a saudação e a imagem do usuário em um contêiner -->
-    <div class="user-info"> 
-        <img src="{{ usuario[3] }}" alt="Foto do usuário" class="profile-image">
-    </div>
-    
+
+    <button class="menu-btn">☰</button>
+
     <nav class="sidebar">
       <ul>
         <li><a href="/Inicio">Início</a></li>
@@ -27,12 +23,15 @@
         <li><a href="/Denuncia">Fazer Denúncia</a></li>
         <li><a href="/MudarPIN"> Mudar o PIN</a></li>
         <li><a href="/Logout" onclick="return confirmarLogout()"><i class="fas fa-user-circle"></i>Deslogar</a></li>
+        <li><a href="/MudarPIN"> Mudar o PIN</a></li>
       </ul>
     </nav>
+
+    <div class="profile-icon">
+      <img src="{{ usuario[3] }}">
+    </div>
+
   </header>
-
-
-  
 
   <div class="painel-container">
     <h1>Painel de Denúncias</h1>
