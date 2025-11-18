@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Histórico de Denúncias</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='historico.css') }}">
-</head>
-<body>
 
-    <header class="cabecalho">
-        <button class="menu-btn">☰</button>
-        <h1 class="nome">S.N.E.P</h1>
-        <div class="profile-icon">
-            <img src="{{ usuario[3] }}">
-        </div>
-    </header>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BADESP - Lista de Denúncias</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='historico.css') }}">
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='OIP.jpg') }}">
+</head>
+
+<body>
+  <header class="Cabecalho">
+
+    <h1 class="nome">B.A.D.E.S.P</h1>
+
+    <button class="menu-btn">☰</button>
 
     <nav class="sidebar">
       <ul>
@@ -23,91 +23,167 @@
         <li><a href="/Denuncia">Fazer Denúncia</a></li>
         <li><a href="/MudarPIN"> Mudar o PIN</a></li>
         <li><a href="/Logout" onclick="return confirmarLogout()"><i class="fas fa-user-circle"></i>Deslogar</a></li>
-        <li><a href="/MudarPIN"> Mudar o PIN</a></li>
       </ul>
     </nav>
 
-    <div class="main-content">
-        <div class="container">
-            <h1 class="page-title">Histórico de Denúncias</h1>
-
-            <table class="denuncias-table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Data</th>
-                        <th>Descrição</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody id="tabela-denuncias-body">
-
-                </tbody>
-            </table>
-        </div>
+    <div class="profile-icon">
+      <img src="{{ usuario[3] }}">
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-    const menuBtn = document.querySelector('.menu-btn');
+  </header>
+
+  <div class="main-content">
+    <div class="container">
+      <h1 class="page-title">Mostrando Denuncias {{ tipo }}</h1>
+
+      <table class="denuncias-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Ano e Série</th>
+            <th>Título</th>
+            <th>Tipo</th>
+            <th>Gravidade</th>
+            <th>Data</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for d in denuncias %}
+          {% set cor = "white" %}
+          {% set nome = "📂Denúncia em aberto📂" %}
+
+          {% if d[5] == 'Aprovado.' %}
+          {% set cor = "rgb(0, 200, 0)" %}
+          {% set nome = "✔️Aprovado por " ~ d[7] ~ "✔️" %}
+          {% elif d[5] == 'Recusado.' %}
+          {% set cor = "red" %}
+          {% set nome = "❌Recusado por " ~ d[7] ~ "❌" %}
+          {% elif d[5] == 'Arquivado.' %}
+          {% set cor = "gray" %}
+          {% set nome = "🗃️Arquivado por " ~ d[7] ~ "🗃️" %}
+          {% elif d[5] == 'Visto.' %}
+          {% set cor = "rgb(255, 150, 0)" %}
+          {% set nome = "🔎Visualizado por " ~ d[7] ~ " às " ~ d[10] ~ "🔎" %}
+          {% endif %}
+
+          {% if d[13] == 'Alta' %}
+          {% set corr = "red" %}
+          {% elif d[13] == 'Média' %}
+          {% set corr = "rgb(255, 170, 0)" %}
+          {% elif d[13] == 'Baixa' %}
+          {% set corr = "rgb(0, 255, 0)" %}
+          {% else %}
+          {% set corr = "gray" %}
+          {% endif %}
+
+          {% if nome != "📂Denúncia em aberto📂" %}
+          <tr onclick="verificarPin({{ d[0] }})"
+            style="cursor:pointer; color: {{ cor }}; font-family: Arial, sans-serif;">
+
+            <td>{{ d[0] }}</td>
+            <td>{{ d[6] }}</td>
+            <td>{{ d[14] }}</td>
+            <td>{{ d[1] }}</td>
+            <td>{{ d[2] }}</td>
+            <td style="color: {{ corr }};">{{ d[13] }}</td>
+            <td>{{ d[4] }}</td>
+            <td>{{ nome }}</td>
+          </tr>
+          {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    const totalPages = {{ total_pages }};  // passado do Flask
+    const url = new URL(window.location.href);
+    let page = parseInt(url.searchParams.get('page')) || 1;
+
+    if (page < 1) page = 1;
+    else if (page > totalPages) page = totalPages;
+
+    if (parseInt(url.searchParams.get('page')) !== page) {
+      url.searchParams.set('page', page);
+      window.location.replace(url); // redireciona para a URL corrigida
+    }
+  </script>
+
+  <div class="pagination">
+    {% set current_page = page %}
+    {% if current_page < 1 %} {% set current_page=1 %} {% elif current_page> total_pages %}
+      {% set current_page = total_pages %}
+      {% endif %}
+
+      {% if current_page > 1 %}
+      <a class='clicar' href="{{ url_for('rotas.historico', page=current_page-1, filtro=filtro) }}">&laquo; Anterior</a>
+      {% endif %}
+
+      <span class="Páginaa">Página {{ current_page }} de {{ total_pages }}</span>
+
+      {% if current_page < total_pages %} <a class='clicar'
+        href="{{ url_for('rotas.historico', page=current_page+1, filtro=filtro) }}">Próxima &raquo;</a>
+        {% endif %}
+  </div>
+  <script>
+    // Toggle menu lateral
+    const btn = document.querySelector('.menu-btn');
     const sidebar = document.querySelector('.sidebar');
-
-    if (menuBtn && sidebar) {
-        menuBtn.addEventListener('click', () => {
-            sidebar.classList.toggle('active');
-        });
-    }
-
-    const denuncias = [
-        {
-            id: 'DN-001',
-            data: '15/10/2025',
-            descricao: 'Denúncia sobre bullying na quadra de esportes.',
-            status: 'Resolvida'
-        },
-        {
-            id: 'DN-002',
-            data: '20/10/2025',
-            descricao: 'Reclamação sobre barulho excessivo na sala de aula.',
-            status: 'Pendente'
-        },
-        {
-            id: 'DN-003',
-            data: '22/10/2025',
-            descricao: 'Problema com um professor que faltou sem aviso.',
-            status: 'Arquivada'
-        },
-        {
-            id: 'DN-004',
-            data: '25/10/2025',
-            descricao: 'Sugestão para melhoria da cantina.',
-            status: 'Pendente'
-        }
-    ];
-
-    const tabelaDenunciasBody = document.getElementById('tabela-denuncias-body');
-
-    function carregarDenuncias() {
-        if (!tabelaDenunciasBody) return;
-
-        denuncias.forEach(denuncia => {
-            const tr = document.createElement('tr');
-            const statusClass = `status-${denuncia.status.toLowerCase()}`;
-
-            tr.innerHTML = `
-                <td>${denuncia.id}</td>
-                <td>${denuncia.data}</td>
-                <td>${denuncia.descricao}</td>
-                <td class="${statusClass}">${denuncia.status}</td>
-            `;
-            tabelaDenunciasBody.appendChild(tr);
-        });
-    }
-
-    carregarDenuncias();
+    btn.addEventListener('click', () => {
+      sidebar.classList.toggle('active');
     });
 
-    </script>
-</body>
-</html>
+    function confirmarLogout() {
+      return confirm("Você tem certeza que quer deslogar?");
+    }
 
+    function confirmarAbrir() {
+      return confirm("Você tem certeza que deseja abrir? Após aberto não poderá mais ser deletado e o usuario SABERÁ que foi você quem abriu");
+    }
+
+    function toggleProfileMenu() {
+      var menu = document.getElementById("profile-menu");
+      menu.classList.toggle("show");
+    }
+
+  </script>
+
+  <script>
+    async function verificarPin(denunciaId) {
+      const pin = prompt("Digite seu PIN para abrir a denúncia:");
+      if (!pin) return;
+
+      try {
+        const response = await fetch(`{{ url_for('rotas.verificar_pin') }}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ pin: pin })
+        });
+
+        const result = await response.json();
+
+        if (result.status === "ok") {
+
+          const form = document.createElement("form");
+          form.method = "POST";
+          form.action = `/detalhe/${denunciaId}`;
+          document.body.appendChild(form);
+          form.submit();
+        } else {
+          alert(result.mensagem || "PIN incorreto. Tente novamente.");
+        }
+      } catch (error) {
+        console.error("Erro ao verificar o PIN:", error);
+        alert("Erro no servidor. Tente novamente mais tarde.");
+      }
+    }
+  </script>
+</body>
+
+</html>
