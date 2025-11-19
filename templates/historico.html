@@ -123,9 +123,9 @@
       <a class='clicar' href="{{ url_for('rotas.historico', page=current_page-1, filtro=filtro) }}">&laquo; Anterior</a>
       {% endif %}
 
-      <span class="Páginaa">Página {{ current_page }} de {{ total_pages }}</span>
+      <span style="color: white;" class="Páginaa">Página {{ current_page }} de {{ total_pages }}</span>
 
-      {% if current_page < total_pages %} <a class='clicar'
+      {% if current_page < total_pages %} <a style="color: white;" class='clicar'
         href="{{ url_for('rotas.historico', page=current_page+1, filtro=filtro) }}">Próxima &raquo;</a>
         {% endif %}
   </div>

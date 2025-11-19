@@ -1,70 +1,35 @@
 .Cabecalho {
-  position: sticky;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   width: 100%;
-<<<<<<< HEAD
-  z-index: 1002;
-  background-color: rgb(90, 89, 89);
+  height: 100%;
+  background: linear-gradient(to bottom, #3e3e98, #424286);
   box-shadow: 0 2px 9px rgba(0, 0, 0, 0.1);
   padding: 10px 30px;
-  display: flex;
-=======
-  z-index: 10;
-  box-shadow: 0 2px 9px rgba(0, 0, 0, 0.4);
->>>>>>> a969ee275a5c8aed5767bbe43fe983620f427391
   justify-content: space-between;
   border-bottom-right-radius: 6px;
   border-bottom-left-radius: 6px;
   padding-right: 15px;
-  padding: 10px 30px;
   display: flex;
   align-items: center;
-  height: 64px; 
+  height: 64px;
 }
 
 .profile-icon {
   position: relative;
   color: white;
   font-size: 30px;
-  padding-right: 20px;
-}
-
-<<<<<<< HEAD
-.profile-icon {
-  position: relative;
-  color: white;
-  font-size: 30px;
-  padding-right: 20px;
-=======
-.user-info {
-  display: flex;
-  align-items: center;
-  gap: 15px; 
-  margin-right: 20px;
-  padding-right: 5px;
->>>>>>> a969ee275a5c8aed5767bbe43fe983620f427391
-}
-
-.profile-icon {
-  padding-right: 0;
-  position: relative;
+  padding-right: 50px;
 }
 
 .profile-icon img {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-<<<<<<< HEAD
   border: 3px solid white;
   object-fit: cover;
-=======
-  max-width: 40px;
-  max-height: 40px;
-  object-fit: cover;
-  border: 2px solid white;  
->>>>>>> a969ee275a5c8aed5767bbe43fe983620f427391
 }
 
 .nome {
@@ -84,7 +49,7 @@
   left: 10px;
   font-size: 20px;
   padding: 8px 12px;
-  background-color: #4f4f4f4f;
+  background-color: #222e6a;
   color: white;
   border: none;
   cursor: pointer;
@@ -96,22 +61,24 @@
 
 
 .menu-btn:hover {
-  background-color: rgb(105, 105, 105);
+  background-color: #3547a0;
 }
 
 .menu-btn:active {
-  background-color: rgb(156, 156, 156);
+  background-color: #586cc4;
 }
 
 .sidebar {
-  position: fixed;
+  position: fixed; 
+  align-items: center;
+  text-align: center;
   top: 0;
   left: 0;
   transform: translateX(-100%);
   width: 200px;
   height: 100%;
-  background-color: rgb(90, 89, 89);
-  box-shadow: 3px 0 15px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(135deg, #25337a, #111);
+  box-shadow: 3px 0 15px rgba(0,0,0,0.5);
   padding-top: 80px;
   transition: transform 0.5s ease;
   z-index: 1000;
@@ -143,7 +110,7 @@
 }
 
 .sidebar ul li a:hover {
-  color: #828282;
+  color: #76faff;
   transform: translateX(8px);
 }
 
@@ -152,25 +119,22 @@
   transform: translateX(8px);
 }
 
-<<<<<<< HEAD
 body {
   font-family: Arial, sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  background: linear-gradient(to bottom, #0d0d0d, #1a1a40, #000);
+  background: linear-gradient(to bottom, #242458, #3d3d7e);
   min-height: 100vh;
   color: #f5f4f4;
 }
 
 /* Estilos para o painel */
-=======
->>>>>>> a969ee275a5c8aed5767bbe43fe983620f427391
 .painel-container {
   width: 90%;
   max-width: 800px;
-  background: rgba(25, 25, 60, 0.9);
+  background: #2e2e61;
   padding: 30px;
   border-radius: 20px;
   margin-top: 80px; 
@@ -207,7 +171,7 @@ button {
   padding: 12px;
   border: 1px solid;
   border-radius: 8px;
-  background: #29387f;
+  background: #59618d;
   color: #ADD8E6;
   cursor: pointer;
   transition: all 0.3s;
@@ -243,7 +207,7 @@ button:hover {
 }
 
 .denuncia-card {
-  background: rgb(240, 235, 235, 0.1);
+  background: rgba(255, 255, 255, 0.057);
   border-left: 6px solid white;
   border-radius: 15px;
   padding: 15px;

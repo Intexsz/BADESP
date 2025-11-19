@@ -62,7 +62,6 @@ def homepage():
 def inicio():
     if "user_id" not in session:
         return redirect(url_for("rotalogin.cadastro"))
-    
     if not usuario_tem_pin(session["user_id"]):
         return redirect(url_for("rotas.cadastro2_pin"))
     
@@ -199,14 +198,17 @@ def ajuda():
 ###### PAGINA DE DENUNCIA ######
 @rotas_bp.route('/Denuncia', methods=['GET', 'POST'])
 def denuncia():
+    cargo = buscar_cargo(session["user_id"])
     if "user_id" not in session:
         return redirect(url_for('rotalogin.cadastro'))
-    
     if not usuario_tem_pin(session["user_id"]):
         return redirect(url_for("rotas.cadastro2_pin"))
+    if cargo != 'Aluno':
+        return redirect(url_for('rotas.inicio'))
     
     nomeprof = buscar_nome_professor()
     nomesecretaria = buscar_nome_secretaria()
+    usuario = buscar_usuario(session["user_id"])
 
     if request.method == 'POST':
         if not checagem_denunciahehe(session['user_id']):
@@ -233,7 +235,7 @@ def denuncia():
     """
 
     # GET
-    resp = make_response(render_template('denuncia.html', professor=nomeprof, secretaria=nomesecretaria))
+    resp = make_response(render_template('denuncia.html', professor=nomeprof, secretaria=nomesecretaria,usuario=usuario))
     resp.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0'
     resp.headers['Pragma'] = 'no-cache'
     resp.headers['Expires'] = '0'
