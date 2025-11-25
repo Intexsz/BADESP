@@ -2,7 +2,7 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: linear-gradient(90deg, #29387f, black);
+  background: linear-gradient(90deg, #242458, #3e3e74);
   min-height: 100vh;
 }
 
@@ -39,7 +39,7 @@ body {
   transform: translateX(-100%);
   width: 200px;
   height: 100%;
-  background: linear-gradient(135deg, #25337a, #111);
+  background: linear-gradient(90deg, #242458, #3d3d7e);
   box-shadow: 3px 0 15px rgba(0,0,0,0.5);
   padding-top: 80px;
   transition: transform 0.5s ease;
@@ -83,7 +83,7 @@ body {
 
 /* Cabeçalho */
 .Cabecalho {
-  background: linear-gradient(90deg, #29387f, black);
+  background: linear-gradient(90deg, #242458, #3d3d7e);
   top: 0;
   left: 0;
   width: 100%;
@@ -103,30 +103,10 @@ body {
 
 /* Main */
 main {
-  background: linear-gradient(90deg, #29387f, black);
   text-align: center;
   color: white;
   padding: 50px 20px;
-}
-
-/* Footer */
-footer {
-  background: linear-gradient(90deg, #29387f, black);
-  color: white;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  z-index: 10;
-  box-shadow: 0 -2px 4px rgba(0,0,0,0.2);
-}
-
-.rodadecapoeira {
-  text-align: center;
-  font-size: 15px;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  margin: 0;
-  padding: 10px 0;
+  padding-bottom: 80px;
 }
 
 /* Responsividade */
@@ -202,7 +182,7 @@ footer {
 
 /* Perguntas e respostas */
 #ajuda .faq h3 {
-  color: #23c5c7;
+  color: #bfcbd1;
   margin: 0 0 8px 0;
   font-size: 20px;
   display: block;
@@ -238,7 +218,7 @@ footer {
 }
 
 #ajuda button:hover {
-  background: linear-gradient(90deg, #29387f, black);
+  background: linear-gradient(90deg, #242458, #3e3e74);
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(0,0,0,0.4);
 }
