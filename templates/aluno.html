@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alunos Cadastrados</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='aluno.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>Alunos Cadastrados</h1>
+    <table id="tabelaAlunos">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>Matrícula</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Dados gerados automaticamente pelo JavaScript -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    // Simulação de alunos cadastrados (pode ser substituído por dados reais)
+ const alunos = [
+  { nome: "Lucas Andrade", email: "lucas@gmail.com", matricula: "20231" },
+  { nome: "Mariana Silva", email: "mariana@gmail.com", matricula: "20232" },
+  { nome: "Pedro Santos", email: "pedro@gmail.com", matricula: "20233" }
+ ];
+
+ const tbody = document.querySelector('#tabelaAlunos tbody');
+
+ // Preenche a tabela automaticamente
+ alunos.forEach(aluno => {
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td>${aluno.nome}</td>
+    <td>${aluno.email}</td>
+    <td>${aluno.matricula}</td>
+  `;
+  tbody.appendChild(tr);
+  });
+  </script>
+</body>
+</html>
