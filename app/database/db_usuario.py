@@ -128,3 +128,22 @@ def novo_pin_secretaria(pin, nome):
                 WHERE nome = ?
             """, (pin,nome))
             conn.commit()
+
+def listar_alunose(ano=None, serie=None):
+    query = "SELECT nome, turma, email, ano FROM usuarios WHERE cargo = 'Aluno'"
+    params = []
+
+    # Aplica filtros dinamicamente
+    if ano and ano != "Todos":
+        query += " AND ano = ?"
+        params.append(ano)
+
+    if serie and serie != "Todos":
+        query += " AND turma = ?"
+        params.append(serie)
+
+    with sqlite3.connect("usuarios.db") as conn:
+        cursor = conn.cursor()
+        cursor.execute(query, params)
+        return cursor.fetchall()
+

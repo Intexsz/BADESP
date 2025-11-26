@@ -1,8 +1,8 @@
 from flask import Flask, session, redirect, url_for, Blueprint,render_template, request
 from authlib.integrations.flask_client import OAuth
-from app.database.db_usuario import buscar_cargo, pegar_no_nome, usuario_tem_pin, buscar_nome_aluno, novo_pin, novo_pin_secretaria,buscar_usuario
+from app.database.db_usuario import buscar_cargo, pegar_no_nome, usuario_tem_pin, buscar_nome_aluno, novo_pin, novo_pin_secretaria,buscar_usuario,listar_alunose
 from app.database.db_denuncia import buscar_status_denuncia, abrir_denunciabanquinho, pegar_na_denuncia_haha, buscar_visto
-from app.database.db_denuncia import atualizar_statuse, publicar_comentario, buscar_comentario
+from app.database.db_denuncia import atualizar_statuse, publicar_comentario, buscar_comentario,listar_denuncias,listar_aprovacao
 
 app = Flask(__name__)
 rota_secretaria = Blueprint('rotasecretaria', __name__)
@@ -264,3 +264,65 @@ def gestao():
     else:
         return redirect(url_for('rotas.inicio'))
 ######----------######
+
+@rota_secretaria.route('/Alunos', methods=['GET'])
+def listar_alunos():
+    if "user_id" not in session:
+        return redirect(url_for('rotalogin.cadastro'))
+
+    if not usuario_tem_pin(session["user_id"]):
+        return redirect(url_for("rotas.cadastro2_pin"))
+
+    cargo = buscar_cargo(session['user_id'])
+    if cargo not in ('Secretaria', 'Professor'):
+        return redirect(url_for('rotas.inicio'))
+
+    ano = request.args.get("Ano", "Todos")
+    serie = request.args.get("Serie", "Todos")
+
+    if ano == "Todos":
+        serie = "Todos"
+
+    if request.method == 'POST':
+        querer = request.form.get('Olavo', 'Tudo')
+        return redirect(url_for('rotas.inicio', filtro=querer))
+    
+    alunos = listar_alunose(ano=ano, serie=serie)
+
+    if alunos:
+        page = int(request.args.get("page", 1))
+        per_page = 10
+        start = (page - 1) * per_page 
+        end = start + per_page
+
+        denuncias_paginadas = alunos[start:end]
+        total_pages = (len(alunos) + per_page - 1) // per_page
+    
+        return render_template(
+        "aluno.html",
+        alunos_por_turma=denuncias_paginadas,
+        usuario=buscar_usuario(session['user_id']),
+        filtro_ano=ano,
+        filtro_serie=serie,
+        alunose = alunos,
+        quantia = listar_denuncias(alunos[0][0]),
+        aproved = listar_aprovacao(alunos[0][0]),page=page,total_pages=total_pages
+        )
+    else:
+        page = int(request.args.get("page", 1))
+        per_page = 10
+        start = (page - 1) * per_page 
+        end = start + per_page
+
+        denuncias_paginadas = alunos[start:end]
+        total_pages = (len(alunos) + per_page - 1) // per_page
+    
+        return render_template(
+        "aluno.html",
+        alunos_por_turma=denuncias_paginadas,
+        usuario=buscar_usuario(session['user_id']),
+        filtro_ano=ano,
+        filtro_serie=serie,
+        alunose = alunos,
+        page=page,total_pages=total_pages
+        )
