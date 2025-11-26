@@ -84,7 +84,6 @@ def criar_denuncia(titulo, tipo, descricao, user_id, status, cargo, especifico):
     #    gravidade = 'Desconhecido'
 
     descricao_ia = descricao
-    print(usuario_dict['email'])
     gravidade = 'Desconhecido'
     ano = usuario_dict['ano']
     turma = usuario_dict['turma']
@@ -422,3 +421,26 @@ def buscar_especifico(id):
     resultado = cursor.fetchone()
     conn.close()
     return resultado[0] if resultado else None
+
+def listar_denuncias(nome):
+    with sqlite3.connect("denuncias.db") as conn:
+        cursor = conn.cursor()
+        cursor.execute("""
+            SELECT COUNT(*)
+            FROM denuncias
+            WHERE nome = ?
+        """, (nome,))
+        
+        return cursor.fetchone()[0]
+
+def listar_aprovacao(nome):
+    with sqlite3.connect("denuncias.db") as conn:
+        cursor = conn.cursor()
+        cursor.execute("""
+            SELECT COUNT(*)
+            FROM denuncias
+            WHERE nome = ?
+            AND status = 'Aprovado.'
+        """, (nome,))
+        
+        return cursor.fetchone()[0]
