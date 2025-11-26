@@ -1,6 +1,6 @@
 from flask import Flask, session, redirect, url_for, Blueprint,render_template, request
 from authlib.integrations.flask_client import OAuth
-from app.database.db_usuario import buscar_cargo, pegar_no_nome, usuario_tem_pin, buscar_nome_aluno, novo_pin, novo_pin_secretaria
+from app.database.db_usuario import buscar_cargo, pegar_no_nome, usuario_tem_pin, buscar_nome_aluno, novo_pin, novo_pin_secretaria,buscar_usuario
 from app.database.db_denuncia import buscar_status_denuncia, abrir_denunciabanquinho, pegar_na_denuncia_haha, buscar_visto
 from app.database.db_denuncia import atualizar_statuse, publicar_comentario, buscar_comentario
 
@@ -98,7 +98,7 @@ def detalhe_denuncia(id):
         if denuncia == 'no':
             return "Denúncia não encontrada", 404
         
-        return render_template("DenunciaAberta.html", usuario=denuncia,tipo_usuario='secretaria')
+        return render_template("DenunciaAberta.html", usuario=denuncia,tipo_usuario='secretaria',usuario2=buscar_usuario(session['user_id']))
     
     elif cargo == 'Aluno':
         denuncia = pegar_na_denuncia_haha(id)
@@ -117,7 +117,7 @@ def detalhe_denuncia(id):
         </script>
         """
 
-        return render_template("DenunciaAberta.html", usuario=denuncia,tipo_usuario='Aluno')
+        return render_template("DenunciaAberta.html", usuario=denuncia,tipo_usuario='Aluno',usuario2=buscar_usuario(session['user_id']))
     else:
         return redirect(url_for('rotas.inicio'))
 ######----------######
@@ -233,12 +233,12 @@ def alunos():
             </script>
         """
         
-        return render_template("recuperacao_pin.html", alunos_por_turma=alunos_por_turma, tipo='Aluno')
+        return render_template("recuperacao_pin.html", alunos_por_turma=alunos_por_turma, tipo='Aluno',usuario=buscar_usuario(session['user_id']))
     else:
         return redirect(url_for('rotas.inicio'))
 ######----------######
 
-@rota_secretaria.route('/MudarPIN/Gestao', methods=['GET', 'POST'])
+@rota_secretaria.route('/MudarPIN/gestaomudanças', methods=['GET', 'POST'])
 def gestao():
     if "user_id" not in session:
         return redirect(url_for('rotalogin.cadastro'))
@@ -255,12 +255,12 @@ def gestao():
             novo_pin_secretaria(pin, gestao)
             return f"""
             <script>
-                alert("Pin de {gestao} de hhahaduhsufqwuifqwiogasmvak atualizado com sucesso!");
+                alert("Seu pin foi atualizado com sucesso!");
                 window.location.href = "{url_for('rotas.inicio')}";
             </script>
         """
         
-        return render_template("recuperacao_pin.html", alunos_por_turma=alunos_por_turma, tipo='Gestão')
+        return render_template("recuperacao_pin.html", alunos_por_turma=alunos_por_turma, tipo='Gestão',usuario=buscar_usuario(session['user_id']))
     else:
         return redirect(url_for('rotas.inicio'))
 ######----------######

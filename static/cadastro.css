@@ -36,6 +36,11 @@ h1 {
   color: white;
 }
 
+html{
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+
 .input-container {
   position: relative;
   width: 100%;

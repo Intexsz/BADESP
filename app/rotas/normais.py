@@ -97,7 +97,7 @@ def inicio():
         return render_template("iniciosecretaria.html",usuario=usuario)
 
 @rotas_bp.route('/Abertas')
-def Abertas():
+def abertas():
     if "user_id" not in session:
         return redirect(url_for('rotalogin.cadastro'))
     cargo = buscar_cargo(session["user_id"])
@@ -122,7 +122,7 @@ def Abertas():
     per_page = 10
     start = (page - 1) * per_page 
     end = start + per_page
-
+    
     denuncias_paginadas = denuncias[start:end]
     total_pages = (len(denuncias) + per_page - 1) // per_page
 
@@ -160,7 +160,6 @@ def Resolvidas():
 
     return render_template('historico.html', denuncias=denuncias_paginadas, usuario=usuario,page=page,total_pages=total_pages,filtro=filtro,tipo='Resolvidas')
 
-
 @rotas_bp.route('/Denuncias')
 def denuncias():
     if "user_id" not in session:
@@ -176,7 +175,7 @@ def denuncias():
     denuncias = mostrar_denuncias(session["user_id"], cargo, 'Em Análise.')
     
     page = int(request.args.get("page", 1))
-    per_page = 4
+    per_page = 6
     start = (page - 1) * per_page 
     end = start + per_page
 
@@ -188,21 +187,21 @@ def denuncias():
 @rotas_bp.route('/Ajuda')
 def ajuda():
     if "user_id" not in session:
-        return render_template('ajuda.html',login=False)
+        return render_template('ajuda.html',usuario=False)
     if not usuario_tem_pin(session["user_id"]):
         return redirect(url_for("rotas.cadastro2_pin"))
-    return render_template('ajuda.html',login=True)
+    return render_template('ajuda.html',usuario=buscar_usuario(session["user_id"]), cargo=buscar_cargo(session["user_id"]))
 ######----------######
 
 
 ###### PAGINA DE DENUNCIA ######
 @rotas_bp.route('/Denuncia', methods=['GET', 'POST'])
 def denuncia():
-    cargo = buscar_cargo(session["user_id"])
     if "user_id" not in session:
         return redirect(url_for('rotalogin.cadastro'))
     if not usuario_tem_pin(session["user_id"]):
         return redirect(url_for("rotas.cadastro2_pin"))
+    cargo = buscar_cargo(session["user_id"])
     if cargo != 'Aluno':
         return redirect(url_for('rotas.inicio'))
     

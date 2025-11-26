@@ -4,31 +4,51 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='OIP.jpg') }}">
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icone.png') }}">
   <title>BADESP - Denúncia</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='denuncia_aberta.css') }}">
   <script src="{{ url_for('static', filename='js/inicio.js') }}" defer></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
-  <header class="Cabecalho">
-    <nav>
-      <h1 class="nome">Segurança Nas Escolas Públicas</h1>
-    </nav>
 
-    <button class="menu-btn">☰</button>
-
-    <!-- Menu lateral -->
-    <nav class="sidebar">
-      <ul>
-        <li><a href="/Inicio">Início</a></li>
-        <li><a href="/Ajuda">Ajuda</a></li>
-        <li><a href="/Denuncia">Fazer Denúncia</a></li>
-        <li><a href="/Logout" onclick="return confirmarLogout()">Deslogar</a></li>
-      </ul>
-    </nav>
+  <header class="cabecalho glass">
+    <button class="menu-btn"><span class="material-icons">menu</span></button>
+    <h1 class="titulo">B.A.D.E.S.P</h1>
+    <div class="perfil">
+      <img src="{{ usuario2[3] }}" alt="Logado como: {{ usuario2[1] }}">
+    </div>
   </header>
 
+    <!-- Menu lateral -->
+    <nav class="sidebar glass sobreposto">
+      <ul>
+        <li><a href="/Inicio"><span class="material-icons">home</span> Início</a></li>
+        <li><a href="/Ajuda"><span class="material-icons">help_outline</span> Ajuda</a></li>
+
+        {% if tipo_usuario == 'Aluno' %}
+        <style>
+            body{background: linear-gradient(90deg, #242458, #3e3e74);}
+            .painel-container {background: rgba(25, 25, 60, 0.9);}
+        </style>
+
+        <li><a href="/Denuncia"><span class="material-icons">report</span> Fazer Denúncia</a></li>
+        {% elif tipo_usuario == 'secretaria'%}
+        <style>
+          body{background: linear-gradient(135deg, #242424, #353535);}
+       </style>
+
+        <li><a href="/MudarPIN"><span class="material-icons">pin</span> Mudar o PIN</a></li>
+        {% endif %}
+
+        <!-- DESLOGAR VERMELHO -->
+        <li><a href="/Logout" class="logout" onclick="confirmarLogout()"><span class="material-icons">logout</span> Deslogar</a></li>
+      </ul>
+    </nav>
+
+    <main>
   <div class="painel-container">
     <h1>
       {% if tipo_usuario == 'secretaria' %}
@@ -50,7 +70,7 @@
       <div class="denuncia-card" id="denuncia-{{ usuario['id'] }}">
         <h3>{{ usuario['titulo'] }}</h3>
         <p>Ocorrido: {{ usuario['tipo'] }}</p>
-        <p style="color: {{ corr }};">Gravidade: {{ usuario['gravidade'] }}</p>
+        <p style="color: {{ corr }};">Gravidade:⚠️{{ usuario['gravidade'] }}⚠️</p>
 
         <p>Denúncia:</p>
         <textarea disabled style="
@@ -157,11 +177,9 @@
       <p>Erro ao carregar denúncia.</p>
     {% endif %}
   </div>
+</main>
 
   <script>
-    const btn = document.querySelector('.menu-btn');
-    const sidebar = document.querySelector('.sidebar');
-    btn.addEventListener('click', () => sidebar.classList.toggle('active'));
 
     function confirmarAbrir() { return confirm("Deseja aprovar esta denúncia?"); }
     function confirmaArquivar() { return confirm("Deseja arquivar esta denúncia?"); }
@@ -169,6 +187,28 @@
     function confirmarTexto() { return confirm("Deseja enviar um comentário? Você só pode comentar uma vez."); }
     function confirmarLogout() { return confirm("Deseja deslogar?"); }
   </script>
+
+<script>
+  const btn = document.querySelector('.menu-btn');
+  const sidebar = document.querySelector('.sidebar');
+
+  btn.addEventListener('click', () => sidebar.classList.toggle('ativo'));
+
+  function confirmarLogout() {
+    if (confirm("Deseja realmente sair?")) {
+      alert("Logout realizado com sucesso!");
+    }
+  }
+
+  // ===== FECHAR MENU CLICANDO FORA + REDIRECIONAR P/ INÍCIO =====
+  document.addEventListener("click", (e) => {
+    const clicouFora = !sidebar.contains(e.target) && !btn.contains(e.target);
+
+    if (sidebar.classList.contains("ativo") && clicouFora) {
+      sidebar.classList.remove("ativo");
+    }
+  });
+</script>
 
 </body>
 </html>

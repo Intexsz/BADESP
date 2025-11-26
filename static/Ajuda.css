@@ -1,97 +1,156 @@
-/* Reset e corpo */
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(90deg, #29387f, black);
-  min-height: 100vh;
+:root {
+  --cinza-fundo: #1f1f1f;
+  --cinza-card: rgba(255, 255, 255, 0.06);
+  --cinza-borda: rgba(255, 255, 255, 0.12);
+  --texto: #f5f5f5;
+  --destaque: #58d0ff;
+  --fonte: "Inter", sans-serif;
 }
 
-/* Botão estilo hambúrguer */
+html{
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--fonte);
+}
+
+html{
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+.glass {
+  backdrop-filter: blur(12px);
+  background: var(--cinza-card);
+  border: 1px solid var(--cinza-borda);
+}
+
+body {
+  color: var(--texto);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
 .menu-btn {
-  position: fixed; 
-  top: 10px;
-  left: 10px;
-  font-size: 20px;
-  padding: 8px 12px;
-  background-color: #2f379f ;
-  color: white;
+  background: none;
   border: none;
   cursor: pointer;
-  border-radius: 6px;
-  z-index: 1001;
-  transition: 0.3s;
+  color: var(--texto);
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  transition: 0.2s;
 }
 
 .menu-btn:hover {
-  background-color: #25327c ;
+  transform: scale(1.15);
+  color: var(--destaque);
 }
 
-.menu-btn:active {
-  background-color: rgb(61, 83, 207) ;
+.perfil img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 2px solid var(--texto);
+  transition: 0.3s;
+}
+
+.titulo {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.login {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+.perfil img:hover {
+  transform: scale(1.08);
 }
 
 .sidebar {
-  position: fixed; 
-  align-items: center;
-  text-align: center;
+  position: fixed;
   top: 0;
-  left: 0;
-  transform: translateX(-100%);
-  width: 200px;
-  height: 100%;
-  background: linear-gradient(135deg, #25337a, #111);
-  box-shadow: 3px 0 15px rgba(0,0,0,0.5);
+  left: -260px;
+  height: 100vh;
+  width: 240px;
   padding-top: 80px;
-  transition: transform 0.5s ease;
-  z-index: 1000;
-  border-radius: 0 10px 10px 0;
+  transition: 0.4s ease;
+  z-index: 2000;
 }
 
-.sidebar.active {
-  transform: translateX(0);
+.sidebar.ativo {
+  left: 0;
 }
 
 .sidebar ul {
   list-style: none;
-  padding: 0;
-  margin: 0;
 }
 
-.sidebar ul li {
-  margin: 15px 0;
-}
-
-.sidebar ul li a {
-  color: rgb(255, 255, 255);
+/* ===== NOVO MENU ESTILIZADO ===== */
+.sidebar a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 24px;
+  margin-bottom: 8px;
+  color: var(--texto);
+  font-weight: 500;
   text-decoration: none;
-  font-size: 16px;
-  padding: 8px 15px;
-  display: block;
-  transition: transform 0.2s, color 0.3s;
-  font-family: Segoe UI;
+  transition: 0.3s;
+  position: relative;
+  border-radius: 8px;
 }
 
-.sidebar ul li a:hover {
-  color: #76faff;
-  transform: translateX(8px);
+/* Linha + sombra abaixo dos itens */
+.sidebar a::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.4);
 }
 
-.sidebar ul li a:active {
-  color: #d9f9fa;
-  transform: translateX(8px);
+/* Hover padrão */
+.sidebar a:hover {
+  background: rgba(255,255,255,0.1);
+  color: var(--destaque);
+}
+
+/* ===== DESLOGAR VERMELHO ===== */
+.sidebar a.logout {
+  color: #ff6b6b;
+  font-weight: 600;
+}
+
+.sidebar a.logout:hover {
+  background: rgba(255,80,80,0.15);
+  color: #ff3b3b;
 }
 
 /* Cabeçalho */
-.Cabecalho {
-  background: linear-gradient(90deg, #29387f, black);
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 10;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+.cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 25px;
   position: sticky;
-  padding: 15px 0;
-  text-align: center;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
 }
 
 .nome {
@@ -103,30 +162,10 @@ body {
 
 /* Main */
 main {
-  background: linear-gradient(90deg, #29387f, black);
   text-align: center;
   color: white;
   padding: 50px 20px;
-}
-
-/* Footer */
-footer {
-  background: linear-gradient(90deg, #29387f, black);
-  color: white;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  z-index: 10;
-  box-shadow: 0 -2px 4px rgba(0,0,0,0.2);
-}
-
-.rodadecapoeira {
-  text-align: center;
-  font-size: 15px;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  margin: 0;
-  padding: 10px 0;
+  padding-bottom: 80px;
 }
 
 /* Responsividade */
@@ -202,7 +241,7 @@ footer {
 
 /* Perguntas e respostas */
 #ajuda .faq h3 {
-  color: #23c5c7;
+  color: #bfcbd1;
   margin: 0 0 8px 0;
   font-size: 20px;
   display: block;
@@ -226,7 +265,6 @@ footer {
 
 /* Botões de ação */
 #ajuda button {
-  background: linear-gradient(90deg, #29387f, #25337a);
   color: #ffffff;
   border: none;
   padding: 12px 25px;
@@ -238,7 +276,6 @@ footer {
 }
 
 #ajuda button:hover {
-  background: linear-gradient(90deg, #29387f, black);
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(0,0,0,0.4);
 }

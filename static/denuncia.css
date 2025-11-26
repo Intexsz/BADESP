@@ -1,48 +1,84 @@
-.Cabecalho {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  background: linear-gradient(to bottom, #3e3e98, #424286);
-  box-shadow: 0 2px 9px rgba(0, 0, 0, 0.1);
-  padding: 10px 30px;
-  justify-content: space-between;
-  border-bottom-right-radius: 6px;
-  border-bottom-left-radius: 6px;
-  padding-right: 15px;
-  display: flex;
-  align-items: center;
-  height: 64px;
+:root {
+  --cinza-fundo: #1f1f1f;
+  --cinza-card: rgba(255, 255, 255, 0.06);
+  --cinza-borda: rgba(255, 255, 255, 0.12);
+  --texto: #f5f5f5;
+  --destaque: #58d0ff;
+  --fonte: "Inter", sans-serif;
 }
 
-.nome {
-  font-family: Segoe UI;
-  font-style: normal;
-  font-size: 40px;
-  color: white;
-  margin: 0 auto;
-  flex-grow: 1;
-  text-align: center;
-
-}
-
-.profile-icon {
-  position: relative;
-  color: white;
-  font-size: 30px;
-  padding-right: 50px;
-}
-
-.profile-icon img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: 3px solid white;
-  object-fit: cover;
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--fonte);
 }
 
 body {
+  background: linear-gradient(to bottom, #242458, #3d3d7e);
+  color: var(--texto);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* GLASS EFFECT */
+.glass {
+  backdrop-filter: blur(12px);
+  background: var(--cinza-card);
+  border: 1px solid var(--cinza-borda);
+}
+
+/* HEADER */
+.cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 25px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.menu-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--texto);
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  transition: 0.2s;
+}
+
+.menu-btn:hover {
+  transform: scale(1.15);
+  background: none;
+  color: var(--destaque);
+}
+
+.titulo {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.perfil img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 2px solid var(--texto);
+  transition: 0.3s;
+}
+
+.perfil img:hover {
+  transform: scale(1.08);
+}
+
+
+main {
   font-family: Arial, sans-serif;
   display: flex;
   flex-direction: column;
@@ -186,19 +222,23 @@ select option {
   outline: none;
 }
 
+html{
+  overflow-x: hidden;
+  overflow-y: visible;
+}
 
-button {
+main button {
   padding: 12px;
   border: 1px solid;
   border-radius: 8px;
-  background: #29387f;
+  background: linear-gradient(to bottom, #3e3e98, #424286);
   color: #ADD8E6;
   cursor: pointer;
   transition: all 0.3s;
 }
 
 button:hover {
-  background: #394cac;
+  background: linear-gradient(90deg, #3e3e98, #424286);
 }
 
 .denuncia-card {
@@ -223,76 +263,65 @@ button:hover {
   margin-bottom: 6px;
 }
 
-.menu-btn {
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  font-size: 20px;
-  padding: 8px 12px;
-  background-color: #222e6a;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 6px;
-  z-index: 1001;
-  transition: 0.3s;
-}
-
-.menu-btn:hover {
-  background-color: #3547a0;
-}
-
-.menu-btn:active {
-  background-color: #586cc4;
-}
-
 .sidebar {
-  position: fixed; 
-  align-items: center;
-  text-align: center;
+  position: fixed;
   top: 0;
-  left: 0;
-  transform: translateX(-100%);
-  width: 200px;
-  height: 100%;
-  background: linear-gradient(135deg, #25337a, #111);
-  box-shadow: 3px 0 15px rgba(0,0,0,0.5);
+  left: -260px;
+  height: 100vh;
+  width: 240px;
   padding-top: 80px;
-  transition: transform 0.5s ease;
-  z-index: 1000;
-  border-radius: 0 10px 10px 0;
+  transition: 0.4s ease;
+  z-index: 2000;
 }
 
-.sidebar.active {
-  transform: translateX(0);
+.sidebar.ativo {
+  left: 0;
 }
 
 .sidebar ul {
   list-style: none;
-  padding: 0;
-  margin: 0;
 }
 
-.sidebar ul li {
-  margin: 15px 0;
-}
-
-.sidebar ul li a {
-  color: rgb(255, 255, 255);
+/* ===== NOVO MENU ESTILIZADO ===== */
+.sidebar a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 24px;
+  margin-bottom: 8px;
+  color: var(--texto);
+  font-weight: 500;
   text-decoration: none;
-  font-size: 16px;
-  padding: 8px 15px;
-  display: block;
-  transition: transform 0.2s, color 0.3s;
-  font-family: Segoe UI;
+  transition: 0.3s;
+  position: relative;
+  border-radius: 8px;
 }
 
-.sidebar ul li a:hover {
-  color: #76faff;
-  transform: translateX(8px);
+/* Linha + sombra abaixo dos itens */
+.sidebar a::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.4);
 }
 
-.sidebar ul li a:active {
-  color: #d9f9fa;
-  transform: translateX(8px);
+/* Hover padrão */
+.sidebar a:hover {
+  background: rgba(255,255,255,0.1);
+  color: var(--destaque);
+}
+
+/* ===== DESLOGAR VERMELHO ===== */
+.sidebar a.logout {
+  color: #ff6b6b;
+  font-weight: 600;
+}
+
+.sidebar a.logout:hover {
+  background: rgba(255,80,80,0.15);
+  color: #ff3b3b;
 }
