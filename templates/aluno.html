@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alunos Cadastrados</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='aluno.css') }}">
+</head>
+<body>
+
+  <header class="Cabecalho">
+    
+        <h1 class="nome">B.A.D.E.S.P</h1>
+        
+        <button class="menu-btn">☰</button>
+    
+        <nav class="sidebar">
+          <ul>
+            <li><a href="/Inicio">Início</a></li>
+            <li><a href="/Ajuda">Ajuda</a></li>
+            <li><a href="/Denuncia">Fazer Denúncia</a></li>
+            <li><a href="/MudarPIN"> Mudar o PIN</a></li>
+            <li><a href="/Logout" onclick="return confirmarLogout()"><i class="fas fa-user-circle"></i>Deslogar</a></li>
+          </ul>
+        </nav>
+    
+        <div class="profile-icon">
+          <img src="{{ usuario[3] }}">
+        </div>
+  </header>
+
+  <div class="content">  
+  <div class="container">
+    <h1>Alunos Cadastrados</h1>
+    <table id="tabelaAlunos">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>Matrícula</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Dados gerados automaticamente pelo JavaScript -->
+      </tbody>
+    </table>
+   </div>
+  </div>
+
+  <script>
+    // Simulação de alunos cadastrados (pode ser substituído por dados reais)
+ const alunos = [
+  { nome: "Lucas Andrade", email: "lucas@gmail.com", matricula: "20231" },
+  { nome: "Mariana Silva", email: "mariana@gmail.com", matricula: "20232" },
+  { nome: "Pedro Santos", email: "pedro@gmail.com", matricula: "20233" }
+ ];
+
+ const tbody = document.querySelector('#tabelaAlunos tbody');
+
+ // Preenche a tabela automaticamente
+ alunos.forEach(aluno => {
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td>${aluno.nome}</td>
+    <td>${aluno.email}</td>
+    <td>${aluno.matricula}</td>
+  `;
+  tbody.appendChild(tr);
+  });
+
+  document.querySelector(".menu-btn").addEventListener("click", function() {
+  document.querySelector(".sidebar").classList.toggle("active");
+  });
+
+  </script>
+</body>
+</html>
