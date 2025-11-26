@@ -227,7 +227,7 @@ h2 {
 
 .input-container select option {
     background-color: var(--button-color);
-    color: var(--text-primary);
+    color: black;
 }
 
 .termos {
