@@ -25,7 +25,6 @@ main {
     --fonte: "Inter", sans-serif;
   }
   
-  /* RESET */
   * {
     margin: 0;
     padding: 0;
@@ -42,14 +41,12 @@ main {
     overflow-x: hidden;
   }
   
-  /* GLASS EFFECT */
   .glass {
     backdrop-filter: blur(12px);
     background: var(--cinza-card);
     border: 1px solid var(--cinza-borda);
   }
   
-  /* HEADER */
   .cabecalho {
     display: flex;
     justify-content: space-between;
@@ -113,7 +110,6 @@ main {
   list-style: none;
 }
 
-/* ===== NOVO MENU ESTILIZADO ===== */
 .sidebar a {
   display: flex;
   align-items: center;
@@ -128,7 +124,6 @@ main {
   border-radius: 8px;
 }
 
-/* Linha + sombra abaixo dos itens */
 .sidebar a::after {
   content: "";
   position: absolute;
@@ -140,13 +135,11 @@ main {
   box-shadow: 0 2px 5px rgba(0,0,0,0.4);
 }
 
-/* Hover padrão */
 .sidebar a:hover {
   background: rgba(255,255,255,0.1);
   color: var(--destaque);
 }
 
-/* ===== DESLOGAR VERMELHO ===== */
 .sidebar a.logout {
   color: #ff6b6b;
   font-weight: 600;
@@ -213,4 +206,55 @@ tr:hover {
 
 h2{
   color: #ffffff;
+}
+
+form {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  padding: 20px 0;
+  justify-content: center;
+  flex-direction: column;
+}
+
+form select {
+  background-color: #ffffff10;           
+  border: 1px solid #ffffff30;           
+  color: #f5f5f5;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  backdrop-filter: blur(4px);           
+  transition: 0.2s ease;
+}
+
+form select:hover {
+  border-color: #58d0ff;
+}
+
+form select:focus {
+  outline: none;
+  border-color: #58d0ff;
+  box-shadow: 0 0 8px #58d0ff50;
+}
+
+form select:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+form select option{
+color: black;
+}
+
+@media (max-width: 600px) {
+  form {
+      flex-direction: column;
+      align-items: stretch;
+  }
+
+  form select {
+      width: 100%;
+  }
 }
