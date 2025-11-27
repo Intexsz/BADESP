@@ -309,3 +309,8 @@ def verificar_pin():
         return jsonify({'status': 'ok'})
     else:
         return jsonify({'status': 'erro', 'mensagem': 'PIN incorreto'})
+
+
+@rotas_bp.route('/Termos')
+def Termos():
+    return render_template('termos.html')
