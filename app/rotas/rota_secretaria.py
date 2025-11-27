@@ -7,13 +7,13 @@ from app.database.db_denuncia import atualizar_statuse, publicar_comentario, bus
 app = Flask(__name__)
 rota_secretaria = Blueprint('rotasecretaria', __name__)
 
-CLIENT_ID = "334998652961-rpf4gt64873gg0uoa64cmlqkcmj33q4b.apps.googleusercontent.com"
+CLIENT_ID = "177205671715-238eoh4gfa3qusnfuuaa9jmctiot8vno.apps.googleusercontent.com"
 
 oauth = OAuth(app)
 google = oauth.register(
     name='google',
     client_id=CLIENT_ID,
-    client_secret='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',
+    client_secret='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',
     access_token_url='https://oauth2.googleapis.com/token',
     authorize_url='https://accounts.google.com/o/oauth2/auth',
     api_base_url='https://www.googleapis.com/oauth2/v1/',
