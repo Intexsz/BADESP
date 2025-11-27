@@ -214,10 +214,6 @@ textarea::placeholder {
   color: #4682B4;
 }
 
-html{
-  overflow-x: hidden;
-  overflow-y: visible;
-}
 
 main button {
   padding: 12px;

@@ -22,55 +22,71 @@
     </div>
   </header>
 
-    <!-- Menu lateral -->
-    <nav class="sidebar glass sobreposto">
-      <ul>
-        <li><a href="/Inicio"><span class="material-icons">home</span> Início</a></li>
-        <li><a href="/Ajuda"><span class="material-icons">help_outline</span> Ajuda</a></li>
+  <!-- Menu lateral -->
+  <nav class="sidebar glass sobreposto">
+    <ul>
+      <li><a href="/Inicio"><span class="material-icons">home</span> Início</a></li>
+      <li><a href="/Ajuda"><span class="material-icons">help_outline</span> Ajuda</a></li>
 
-        {% if tipo_usuario == 'Aluno' %}
-        <style>
-            body{background: linear-gradient(90deg, #242458, #3e3e74);}
-            .painel-container {background: rgba(25, 25, 60, 0.9);}
-        </style>
+      {% if tipo_usuario == 'Aluno' %}
+      <style>
+        body {
+          background: linear-gradient(90deg, #242458, #3e3e74);
+        }
 
-        <li><a href="/Denuncia"><span class="material-icons">report</span> Fazer Denúncia</a></li>
-        {% elif tipo_usuario == 'secretaria'%}
-        <style>
-          body{background: linear-gradient(135deg, #242424, #353535);}
-       </style>
+        .painel-container {
+          background: rgba(25, 25, 60, 0.9);
+        }
+      </style>
 
-        <li><a href="/MudarPIN"><span class="material-icons">pin</span> Mudar o PIN</a></li>
-        {% endif %}
+      <li><a href="/Denuncia"><span class="material-icons">report</span> Fazer Denúncia</a></li>
+      {% elif tipo_usuario == 'secretaria'%}
+      <style>
+        body {
+          background: linear-gradient(135deg, #242424, #353535);
+        }
+      </style>
 
-        <!-- DESLOGAR VERMELHO -->
-        <li><a href="/Logout" class="logout" onclick="confirmarLogout()"><span class="material-icons">logout</span> Deslogar</a></li>
-      </ul>
-    </nav>
-
-    <main>
-  <div class="painel-container">
-    <h1>
-      {% if tipo_usuario == 'secretaria' %}
-        Denúncia de: {{ usuario['nome'] }}
-      {% else %}
-        {{ usuario['titulo'] }}
+      <li><a href="/MudarPIN"><span class="material-icons">pin</span> Mudar o PIN</a></li>
       {% endif %}
-    </h1>
 
-    {% if usuario %}
+      <!-- DESLOGAR VERMELHO -->
+      <li><a href="/Logout" class="logout" onclick="confirmarLogout()"><span class="material-icons">logout</span>
+          Deslogar</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="painel-container">
+      <h1>
+        {% if tipo_usuario == 'secretaria' %}
+        Denúncia de: {{ usuario['nome'] }}
+        <br>
+        {% else %}
+        {{ usuario['titulo'] }}
+        <br>
+        {% endif %}
+        <br>
+      </h1>
+
+      {% if usuario %}
       {% if usuario['gravidade'] == 'Alta' %}
-        {% set corr = "red" %}
+      {% set corr = "red" %}
       {% elif usuario['gravidade'] == 'Média' %}
-        {% set corr = "yellow" %}
+      {% set corr = "yellow" %}
       {% elif usuario['gravidade'] == 'Baixa' %}
-        {% set corr = "rgb(0, 255, 0)" %}
+      {% set corr = "rgb(0, 255, 0)" %}
       {% endif %}
 
       <div class="denuncia-card" id="denuncia-{{ usuario['id'] }}">
+        {% if tipo_usuario == 'secretaria' %}
         <h3>{{ usuario['titulo'] }}</h3>
+        <br>
+        {% endif %}
         <p>Ocorrido: {{ usuario['tipo'] }}</p>
+        <br>
         <p style="color: {{ corr }};">Gravidade:⚠️{{ usuario['gravidade'] }}⚠️</p>
+        <br>
 
         <p>Denúncia:</p>
         <textarea disabled style="
@@ -84,6 +100,9 @@
     overflow-y: auto;   /* permite scroll vertical */
     cursor: pointer;
 ">{{ usuario['descricao_ia'] }}</textarea>
+        <br>
+        <br>
+        <br>
 
         <p>Denúncia sem correção:</p>
         <textarea disabled style="
@@ -97,87 +116,95 @@
     overflow-y: auto;   /* permite scroll vertical */
     cursor: pointer;
 ">{{ usuario['descricao'] }}</textarea>
-
+        <br>
+        <br>
         <p>Data: {{ usuario['data'] }}</p>
-
+        <br>
         {% if usuario['status'] == 'Aprovado.' %}
-          <p style="color: rgb(0,255,0);">✔️Aprovado por: {{ usuario['visto'] }}✔️</p>
+        <p style="color: rgb(0,255,0);">✔️Aprovado por: {{ usuario['visto'] }}✔️</p>
         {% elif usuario['status'] == 'Recusado.' %}
-          <p style="color: red;">❌Recusado por: {{ usuario['visto'] }}❌</p>
+        <p style="color: red;">❌Recusado por: {{ usuario['visto'] }}❌</p>
         {% elif usuario['status'] == 'Arquivado.' %}
-          <p style="color: gray;">🗃️Arquivado por: {{ usuario['visto'] }}🗃️</p>
+        <p style="color: gray;">🗃️Arquivado por: {{ usuario['visto'] }}🗃️</p>
         {% elif usuario['status'] == 'Visto.' %}
-          <p style="color: orange;">🔎Visualizado por: {{ usuario['visto'] }} às {{ usuario['datavisto'] }}🔎</p>
+        <p style="color: orange;">🔎Visualizado por: {{ usuario['visto'] }} às {{ usuario['datavisto'] }}🔎</p>
         {% elif usuario['status'] == 'Em Análise.' %}
-          <p style="color: white;">⏳Esperando resposta...⏳</p>
+        <p style="color: white;">⏳Esperando resposta...⏳</p>
         {% elif usuario['status'] == 'Expirada.' %}
-          <p style="color: gray;">⏰Expirada⏰</p>
+        <p style="color: gray;">⏰Expirada⏰</p>
+        <br>
         {% else %}
-          <p>Erro de status.</p>
+        <p>Erro de status.</p>
         {% endif %}
 
         {% if usuario['cargo'] == 'Professor' and usuario['especifico'] != 'any' %}
-          <p><b>Destinado ao Professor:</b> {{ usuario['especifico'] }}</p>
+        <p><b>Destinado ao Professor:</b> {{ usuario['especifico'] }}</p>
         {% elif usuario['cargo'] == 'Secretaria' and usuario['especifico'] != 'any' %}
-          <p><b>Destinado ao Secretário(a):</b> {{ usuario['especifico'] }}</p>
+        <p><b>Destinado ao Secretário(a):</b> {{ usuario['especifico'] }}</p>
         {% elif usuario['cargo'] == 'Professor' and usuario['especifico'] == 'any' %}
-          <p><b>Destinado a todos os Professores.</b></p>
+        <p><b>Destinado a todos os Professores.</b></p>
         {% elif usuario['cargo'] == 'Secretaria' and usuario['especifico'] == 'any' %}
-          <p><b>Destinado a toda a Gestão.</b></p>
+        <p><b>Destinado a toda a Gestão.</b></p>
         {% endif %}
-
+        <br>
         {% if usuario['comentario'] %}
-          <p><b>Comentário de {{ usuario['visto'] }}:</b> {{ usuario['comentario'] }}</p>
+        <p><b>Comentário de {{ usuario['visto'] }}:</b> {{ usuario['comentario'] }}</p>
         {% else %}
-          <p>Ainda não há comentário vinculado.</p>
+        <p>Ainda não há comentário vinculado.</p>
         {% endif %}
       </div>
 
       <!-- Botões diferentes por tipo de usuário -->
       {% if tipo_usuario == 'secretaria' %}
-        <form action="{{ url_for('rotasecretaria.aprovar', id=usuario['id']) }}" method="GET" onclick="return confirmarAbrir()">
-          <button type="submit" class="abrir-btn">Aprovar</button>
-        </form>
-        <br>
+      <br>
+      <form action="{{ url_for('rotasecretaria.aprovar', id=usuario['id']) }}" method="GET"
+        onclick="return confirmarAbrir()">
+        <button type="submit" class="abrir-btn">Aprovar</button>
+      </form>
+      <br>
 
-        <form action="{{ url_for('rotasecretaria.recusar', id=usuario['id']) }}" method="GET" onclick="return confirmarRecusar()">
-          <button type="submit" class="abrir-btn">Recusar</button>
-        </form>
-        <br>
-        <form action="{{ url_for('rotasecretaria.arquivar', id=usuario['id']) }}" method="GET" onclick="return confirmaArquivar()">
-          <button type="submit" class="abrir-btn">Arquivar</button>
-        </form>
-        <br>
-        {% if not usuario['comentario'] %}
-          <form action="{{ url_for('rotasecretaria.comentar', id=usuario['id']) }}" method="POST">
-            <textarea name="comentario" placeholder="Adicionar comentário..." style="text-align: center;"></textarea>
-            <button type="submit" class="abrir-btn" onclick="return confirmarTexto()">Enviar</button>
-          </form>
-        {% endif %}
+      <form action="{{ url_for('rotasecretaria.recusar', id=usuario['id']) }}" method="GET"
+        onclick="return confirmarRecusar()">
+        <button type="submit" class="abrir-btn">Recusar</button>
+      </form>
+      <br>
+      <form action="{{ url_for('rotasecretaria.arquivar', id=usuario['id']) }}" method="GET"
+        onclick="return confirmaArquivar()">
+        <button type="submit" class="abrir-btn">Arquivar</button>
+      </form>
+      <br>
+      {% if not usuario['comentario'] %}
+      <br>
+      <br>
+      <form action="{{ url_for('rotasecretaria.comentar', id=usuario['id']) }}" method="POST">
+        <textarea name="comentario" placeholder="Adicionar comentário..." style="text-align: center;"></textarea>
+        <button type="submit" class="abrir-btn" onclick="return confirmarTexto()">Enviar</button>
+      </form>
+      {% endif %}
 
       {% else %}
-        {% if usuario['status'] in ['Em Análise.', 'Expirada.'] %}
-          <form class="apagar-form" action="{{ url_for('rotas.excluir_denuncia', id=usuario['id']) }}" method="POST">
-            <button type="submit" class="buttozito">Apagar</button>
-          </form>
-        {% endif %}
-
-        {% if usuario['status'] == 'Expirada.' %}
-          <form class="reenviar-form" action="{{ url_for('rotas.reenviar_denuncia', id=usuario['id']) }}" method="POST">
-            <input type="hidden" name="titulo" value="{{ usuario['titulo'] }}">
-            <input type="hidden" name="tipo" value="{{ usuario['tipo'] }}">
-            <input type="hidden" name="descricao" value="{{ usuario['descricao'] }}">
-            <input type="hidden" name="quem" value="{{ usuario['cargo'] }}">
-            <input type="hidden" name="pessoa" value="{{ usuario['especifico'] }}">
-            <button type="submit">Reenviar</button>
-          </form>
-        {% endif %}
+      {% if usuario['status'] in ['Em Análise.', 'Expirada.'] %}
+      <form class="apagar-form" action="{{ url_for('rotas.excluir_denuncia', id=usuario['id']) }}" method="POST">
+        <button type="submit" class="buttozito">Apagar</button>
+      </form>
       {% endif %}
-    {% else %}
+
+      {% if usuario['status'] == 'Expirada.' %}
+      <form class="reenviar-form" action="{{ url_for('rotas.reenviar_denuncia', id=usuario['id']) }}" method="POST">
+        <input type="hidden" name="titulo" value="{{ usuario['titulo'] }}">
+        <input type="hidden" name="tipo" value="{{ usuario['tipo'] }}">
+        <input type="hidden" name="descricao" value="{{ usuario['descricao'] }}">
+        <input type="hidden" name="quem" value="{{ usuario['cargo'] }}">
+        <input type="hidden" name="pessoa" value="{{ usuario['especifico'] }}">
+        <button type="submit">Reenviar</button>
+      </form>
+      {% endif %}
+      {% endif %}
+      {% else %}
       <p>Erro ao carregar denúncia.</p>
-    {% endif %}
-  </div>
-</main>
+      {% endif %}
+    </div>
+  </main>
 
   <script>
 
@@ -188,27 +215,28 @@
     function confirmarLogout() { return confirm("Deseja deslogar?"); }
   </script>
 
-<script>
-  const btn = document.querySelector('.menu-btn');
-  const sidebar = document.querySelector('.sidebar');
+  <script>
+    const btn = document.querySelector('.menu-btn');
+    const sidebar = document.querySelector('.sidebar');
 
-  btn.addEventListener('click', () => sidebar.classList.toggle('ativo'));
+    btn.addEventListener('click', () => sidebar.classList.toggle('ativo'));
 
-  function confirmarLogout() {
-    if (confirm("Deseja realmente sair?")) {
-      alert("Logout realizado com sucesso!");
+    function confirmarLogout() {
+      if (confirm("Deseja realmente sair?")) {
+        alert("Logout realizado com sucesso!");
+      }
     }
-  }
 
-  // ===== FECHAR MENU CLICANDO FORA + REDIRECIONAR P/ INÍCIO =====
-  document.addEventListener("click", (e) => {
-    const clicouFora = !sidebar.contains(e.target) && !btn.contains(e.target);
+    // ===== FECHAR MENU CLICANDO FORA + REDIRECIONAR P/ INÍCIO =====
+    document.addEventListener("click", (e) => {
+      const clicouFora = !sidebar.contains(e.target) && !btn.contains(e.target);
 
-    if (sidebar.classList.contains("ativo") && clicouFora) {
-      sidebar.classList.remove("ativo");
-    }
-  });
-</script>
+      if (sidebar.classList.contains("ativo") && clicouFora) {
+        sidebar.classList.remove("ativo");
+      }
+    });
+  </script>
 
 </body>
+
 </html>

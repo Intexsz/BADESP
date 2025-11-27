@@ -55,8 +55,14 @@
       {% for d in denuncias %}
       <div class="denuncia-card" id="denuncia-{{ d[0] }}">
         <h3>{{ d[1] }}</h3>
-        <p>Data: {{ d[4] }}</p>
         <br>
+        <p>{{ d[2] }}</p>
+        {% if d[8] %}
+        <p>Respondido: Sim</p>
+        {% else %}
+        <p>Respondido: Não</p>
+        {% endif %}
+        <p>Data: {{ d[4] }}</p>
         {% if d[5] == 'Aprovado.' %}
         <p><span style="color: rgb(0, 255, 0);">✔️Situação: Aprovado por: {{ d[7] }}✔️</span></p>
         {% elif d[5] == 'Recusado.' %}
