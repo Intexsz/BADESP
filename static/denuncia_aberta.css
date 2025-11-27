@@ -136,10 +136,6 @@ textarea::placeholder {
   color: #4682B4;
 }
 
-html{
-  overflow-x: hidden;
-  overflow-y: visible;
-}
 
 main button,
 .abrir-btn,

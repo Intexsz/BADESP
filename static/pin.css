@@ -79,10 +79,6 @@ body {
     color: var(--destaque);
   }
 
-  html{
-    overflow-x: hidden;
-    overflow-y: visible;
-  }
 
 /* ===== NOVO MENU ESTILIZADO ===== */
 .sidebar a {

@@ -7,10 +7,6 @@
   --fonte: "Inter", sans-serif;
 }
 
-html{
-  overflow-x: hidden;
-  overflow-y: visible;
-}
 /* RESET */
 * {
   margin: 0;
@@ -19,10 +15,7 @@ html{
   font-family: var(--fonte);
 }
 
-html{
-  overflow-x: hidden;
-  overflow-y: visible;
-}
+
 .glass {
   backdrop-filter: blur(12px);
   background: var(--cinza-card);
