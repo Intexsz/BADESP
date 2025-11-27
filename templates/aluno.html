@@ -90,7 +90,6 @@
       </thead>
       
       <tbody>
-        {% if alunose %}
         {% for d in alunos_por_turma %}
 
         
@@ -102,16 +101,13 @@
           <td>{{ d[2] }}</td>
           <td>{{ d[3] }}°</td>
           <td>{{ d[1] }}</td>
-          <td>{{ quantia }}</td>
-          <td>{{ aproved }}</td>
+          <td>{{ d[4] }}</td>
+          <td>{{ d[5] }}</td>
         </tr>
         {% endif %}
         {% endfor %}
-      {% else %}
     </tbody>
     </table>
-    <p style="text-align: center; color: white;">Nenhuma denuncia encontrada.</p>
-    {% endif %}
    </div>
   </div>
 </main>

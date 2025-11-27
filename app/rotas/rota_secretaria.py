@@ -290,24 +290,38 @@ def listar_alunos():
     alunos = listar_alunose(ano=ano, serie=serie)
 
     if alunos:
+        alunos = listar_alunose(ano=ano, serie=serie)
+
+# Adiciona denúncias totais e aprovadas a cada aluno
+        alunos_processados = []
+
+        for a in alunos:
+            nome = a[0]
+            total = listar_denuncias(nome)
+            aprov = listar_aprovacao(nome)
+
+    # adiciona ao final da tupla (nome, turma, email, ano, total, aprobadas)
+            alunos_processados.append((*a, total, aprov))
+
+# Paginação em cima da lista já processada
         page = int(request.args.get("page", 1))
         per_page = 10
-        start = (page - 1) * per_page 
+        start = (page - 1) * per_page
         end = start + per_page
 
-        denuncias_paginadas = alunos[start:end]
-        total_pages = (len(alunos) + per_page - 1) // per_page
-    
+        denuncias_paginadas = alunos_processados[start:end]
+        total_pages = (len(alunos_processados) + per_page - 1) // per_page
+
         return render_template(
-        "aluno.html",
-        alunos_por_turma=denuncias_paginadas,
-        usuario=buscar_usuario(session['user_id']),
-        filtro_ano=ano,
-        filtro_serie=serie,
-        alunose = alunos,
-        quantia = listar_denuncias(alunos[0][0]),
-        aproved = listar_aprovacao(alunos[0][0]),page=page,total_pages=total_pages
-        )
+    "aluno.html",
+    alunos_por_turma=denuncias_paginadas,
+    usuario=buscar_usuario(session['user_id']),
+    filtro_ano=ano,
+    filtro_serie=serie,
+    page=page,
+    total_pages=total_pages
+    )
+
     else:
         page = int(request.args.get("page", 1))
         per_page = 10
