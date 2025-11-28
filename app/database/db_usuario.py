@@ -14,7 +14,8 @@ def init_db():
                 pin INTEGER,
                 escola TEXT, 
                 ano INTEGER, 
-                turma TEXT
+                turma TEXT,
+                turmano TEXT
             )
         """)
         conn.commit()
@@ -71,16 +72,16 @@ def buscar_nome_professor():
 def buscar_nome_aluno():
     with sqlite3.connect("usuarios.db") as conn:
         cursor = conn.cursor()
-        cursor.execute("SELECT turma, nome FROM usuarios")
+        cursor.execute("SELECT turmano, nome FROM usuarios")
         rows = cursor.fetchall()
 
     alunos_por_turma = {}
-    for turma, nome in rows:
-        if not turma or not nome:
+    for turmano, nome in rows:
+        if not turmano or not nome:
             continue
-        if turma not in alunos_por_turma:
-            alunos_por_turma[turma] = []
-        alunos_por_turma[turma].append(nome)
+        if turmano not in alunos_por_turma:
+            alunos_por_turma[turmano] = []
+        alunos_por_turma[turmano].append(nome)
     return alunos_por_turma
 
 def usuario_tem_pin(user_id):
@@ -91,15 +92,16 @@ def usuario_tem_pin(user_id):
         # Retorna True se o usuário tiver um pin, False se não tiver
         return bool(resultado and resultado[0] is not None)
 
-def cadastrar_pin(id, pin, escola, ano, turma):
+def cadastrar_pin(id, pin, escola, ano, turma, turmano):
     with sqlite3.connect("usuarios.db") as conn:
-            cursor = conn.cursor()
-            cursor.execute("""
-                UPDATE usuarios
-                SET pin = ?, escola = ?, ano = ?, turma = ?
-                WHERE id = ?
-            """, (pin, escola, ano, turma, id))
-            conn.commit()
+        cursor = conn.cursor()
+        cursor.execute("""
+            UPDATE usuarios
+            SET pin = ?, escola = ?, ano = ?, turma = ?, turmano = ?
+            WHERE id = ?
+        """, (pin, escola, ano, turma, turmano, id))
+        conn.commit()
+
 
 def check_pin(user_id):
     with sqlite3.connect("usuarios.db") as conn:

@@ -259,16 +259,9 @@ def gestao():
         if request.method == "POST":
             gestao = pegar_no_nome(session['user_id'])
             pin = request.form.get("pin")
-            if pin == '0' or pin == '000000':
-                return f"""
-            <script>
-                alert("não pode ser somente 0");
-                window.location.href = "{url_for('rotasecretaria.gestao')}";
-            </script>
-        """
-            else:
-                novo_pin_secretaria(pin, gestao)
-                return f"""
+
+            novo_pin_secretaria(pin, gestao)
+            return f"""
             <script>
                 alert("Pin de {gestao} atualizado com sucesso!");
                 window.location.href = "{url_for('rotas.inicio')}";

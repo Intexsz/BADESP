@@ -51,7 +51,8 @@ def cadastro2_pin():
             ano = None
             turma = None
 
-        cadastrar_pin(id, pin, escola, ano, turma)
+        cadastrar_pin(id, pin, escola, ano, turma, f'{ano}°{turma}')
+        print('uai')
 
         return redirect(url_for('rotas.inicio'))
 

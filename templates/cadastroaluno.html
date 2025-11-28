@@ -99,10 +99,10 @@
             if (pin !== confirmar) {
                 alert("Os PINs não coincidem!");
                 return false;
-                if (pin === 0 || pin === '000000') {
-                    alert("PIN inválido!");
-                    return false;
-                }
+            }
+            if (pin === 0 || pin === '000000') {
+                alert("PIN inválido!");
+                return false;
             }
             return true;
         }
