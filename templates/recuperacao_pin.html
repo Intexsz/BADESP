@@ -81,6 +81,7 @@
     <main>
     <div class="container">
         <h1>Alterar PIN</h1>
+        <br>
 
         <!-- Formulário -->
         <form method="POST" onsubmit="return validarPin()" autocomplete="off">
@@ -135,14 +136,24 @@
         }
 
         function validarPin() {
-            const pin = document.getElementById("pin").value;
-            const confirmar = document.getElementById("confirmar").value;
-            if (pin !== confirmar) {
-                alert("Os PINs não coincidem!");
-                return false;
-            }
-            return true;
-        }
+    const pin = document.getElementById("pin").value;
+    const confirmar = document.getElementById("confirmar").value;
+
+    // 1. Verificar se os PINs coincidem (esta deve vir primeiro)
+    if (pin !== confirmar) {
+        alert("Os PINs não coincidem!");
+        return false;
+    }
+    
+    if (pin === '0' || pin === '000000') {
+        alert("PIN inválido! Não pode ser apenas zeros.");
+        return false;
+    }
+    
+    // Se passou por ambas as verificações, o PIN é válido
+    return true;
+}
+
 
         selectTurma.addEventListener('change', atualizarAlunos);
 

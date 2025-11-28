@@ -35,6 +35,14 @@ def cadastro2_pin():
     if request.method == 'POST':
         id = session.get("user_id")
         pin = request.form['pin']
+        if pin == '000000':
+            return f"""
+    <script>
+        alert("PIN inválido. Por favor, escolha um PIN diferente de '000000'.");
+        redirect("{url_for('rotas.cadastro2_pin')}");
+    <script>
+        """
+
         escola = request.form['escola']
         if cargo == 'Aluno':   
             ano = request.form['ano']

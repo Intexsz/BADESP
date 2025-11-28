@@ -222,13 +222,20 @@ def alunos():
         alunos_por_turma = buscar_nome_aluno()
 
         if request.method == "POST":
-            turma = request.form.get("turma")
-            aluno = request.form.get("aluno")
+            gestao = pegar_no_nome(session['user_id'])
             pin = request.form.get("pin")
-            novo_pin(pin, aluno, turma)
-            return f"""
+            if pin == '0' or pin == '000000':
+                return f"""
             <script>
-                alert("Pin de {aluno} de turma {turma} atualizado com sucesso!");
+                alert("não pode ser somente 0");
+                window.location.href = "{url_for('rotasecretaria.gestao')}";
+            </script>
+        """
+            else:
+                novo_pin_secretaria(pin, gestao)
+                return f"""
+            <script>
+                alert("Pin atualizado com sucesso!");
                 window.location.href = "{url_for('rotas.inicio')}";
             </script>
         """
@@ -252,10 +259,18 @@ def gestao():
         if request.method == "POST":
             gestao = pegar_no_nome(session['user_id'])
             pin = request.form.get("pin")
-            novo_pin_secretaria(pin, gestao)
-            return f"""
+            if pin == '0' or pin == '000000':
+                return f"""
             <script>
-                alert("Seu pin foi atualizado com sucesso!");
+                alert("não pode ser somente 0");
+                window.location.href = "{url_for('rotasecretaria.gestao')}";
+            </script>
+        """
+            else:
+                novo_pin_secretaria(pin, gestao)
+                return f"""
+            <script>
+                alert("Pin de {gestao} atualizado com sucesso!");
                 window.location.href = "{url_for('rotas.inicio')}";
             </script>
         """
