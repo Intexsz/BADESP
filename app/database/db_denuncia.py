@@ -55,7 +55,7 @@ def IA(frase):
 
 # aqui ira criar a denuncia
 def criar_denuncia(titulo, tipo, descricao, user_id, status, cargo, especifico):
-    data = datetime.now().strftime("%d/%m/%Y %H:%M") # data de quando foi criada
+    data = datetime.now().strftime("%H:%M %d/%m/%Y") # data de quando foi criada
     conn = sqlite3.connect('denuncias.db')
     usuario = buscar_usuario(user_id)
     usuario_dict = {
@@ -244,7 +244,7 @@ def expirar():
         if status != "Visto." or not data_str:
             continue
 
-        data_visto = datetime.strptime(data_str, "%d/%m/%Y %H:%M")
+        data_visto = datetime.strptime(data_str, "%H:%M %d/%m/%Y")
 
         # expira 7 segundos depois de ter sido vista
         if datetime.now() > data_visto + timedelta(days=7):
@@ -270,7 +270,7 @@ def checagem_denunciahehe(user_id):
         return True  # nunca criou denúncia, pode criar
 
     ultima_data_str = resultado[0]
-    ultima_data = datetime.strptime(ultima_data_str, "%d/%m/%Y %H:%M")
+    ultima_data = datetime.strptime(ultima_data_str, "%H:%M %d/%m/%Y")
 
     # Checa se passaram 30 minutos desde a última denúncia para evitar spam
     return datetime.now() >= ultima_data + timedelta(seconds=3)
@@ -287,7 +287,7 @@ def abrir_denunciabanquinho(id, cargo, nome, id_user):
 
     if especifico != 'any' and especifico != nome_usuario:
         return
-    data = datetime.now().strftime("%d/%m/%Y %H:%M") 
+    data = datetime.now().strftime("%H:%M %d/%m/%Y") 
     conn = sqlite3.connect('denuncias.db')
     cursor = conn.cursor()
     # seleciona o datavisto

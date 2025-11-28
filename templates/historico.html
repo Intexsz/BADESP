@@ -55,20 +55,20 @@
         <tbody>
           {% for d in denuncias %}
           {% set cor = "white" %}
-          {% set nome = "📂Denúncia em aberto📂" %}
+          {% set nome = "📂Denúncia em aberto 📂" %}
 
           {% if d[5] == 'Aprovado.' %}
           {% set cor = "rgb(0, 200, 0)" %}
-          {% set nome = "✔️Aprovado por " ~ d[7] ~ "✔️" %}
+          {% set nome = "✔️Aprovado por " ~ d[7] ~ " ✔️" %}
           {% elif d[5] == 'Recusado.' %}
           {% set cor = "red" %}
-          {% set nome = "❌Recusado por " ~ d[7] ~ "❌" %}
+          {% set nome = "❌Recusado por " ~ d[7] ~ " ❌" %}
           {% elif d[5] == 'Arquivado.' %}
           {% set cor = "gray" %}
-          {% set nome = "🗃️Arquivado por " ~ d[7] ~ "🗃️" %}
+          {% set nome = "🗃️Arquivado por " ~ d[7] ~ " 🗃️" %}
           {% elif d[5] == 'Visto.' %}
           {% set cor = "rgb(255, 150, 0)" %}
-          {% set nome = "🔎Visualizado por " ~ d[7] ~ " às " ~ d[10] ~ "🔎" %}
+          {% set nome = "🔎Visualizado por " ~ d[7] ~ " às " ~ d[10] ~ " 🔎" %}
           {% endif %}
 
           {% if d[13] == 'Alta' %}
@@ -95,7 +95,18 @@
             <td>{{ d[2] }}</td>
             <td style="color: {{ corr }};">{{ d[13] }}</td>
             <td>{{ d[4] }}</td>
-            <td>{{ nome.split(' ')[0] }} {{ nome.split(' ')[1] }} {{ nome.split(' ')[2] }} {{ nome.split(' ')[-4] }} {{ nome.split(' ')[-3] }} {{ nome.split(' ')[-2] }} {{ nome.split(' ')[-1] }}</td>
+            {% set partes = nome.split(' ') %}
+            {% if not tipo == 'Abertas' %}
+            <td>
+                {{ partes[0] }} {{ partes[1] }} {{ partes[2] }} 
+                {{ partes[-2] }} {{" às " ~ d[10]}}{{ partes[-1] }}
+            </td>
+            {% else %}
+            <td>
+            {{ partes[0] }} {{ partes[1] }} {{ partes[2] }} 
+            {{ partes[-5] }} {{" às " ~ d[10]}}{{ partes[-1] }}
+            {% endif %}
+          </td>
           </tr>
           {% endif %}
           {% endfor %}

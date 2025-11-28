@@ -171,6 +171,7 @@ button:disabled {
   border-radius: 15px;
   padding: 15px;
   margin-bottom: 12px;
+  transition: 0.3s;
 }
 
 .denuncia-card:hover {
