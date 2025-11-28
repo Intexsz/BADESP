@@ -86,13 +86,16 @@
             style="cursor:pointer; color: {{ cor }}; font-family: Arial, sans-serif;">
 
             <td>{{ d[0] }}</td>
-            <td>{{ d[6] }}</td>
+            <td>{{ d[6].split(' ')[0]}}
+              {% if not d[6].split(' ')[0] == d[6].split(' ')[-1] %}
+              {{d[6].split(' ')[-1]}}
+              {% endif %}</td>
             <td>{{ d[15] }}°{{ d[14] }}</td>
             <td>{{ d[1] }}</td>
             <td>{{ d[2] }}</td>
             <td style="color: {{ corr }};">{{ d[13] }}</td>
             <td>{{ d[4] }}</td>
-            <td>{{ nome }}</td>
+            <td>{{ nome.split(' ')[0] }} {{ nome.split(' ')[1] }} {{ nome.split(' ')[2] }} {{ nome.split(' ')[-4] }} {{ nome.split(' ')[-3] }} {{ nome.split(' ')[-2] }} {{ nome.split(' ')[-1] }}</td>
           </tr>
           {% endif %}
           {% endfor %}

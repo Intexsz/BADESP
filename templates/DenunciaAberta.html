@@ -58,7 +58,7 @@
 
   <main>
     <div class="painel-container">
-      <h1>
+      <h2>
         {% if tipo_usuario == 'secretaria' %}
         Denúncia de: {{ usuario['nome'] }}
         <br>
@@ -67,7 +67,7 @@
         <br>
         {% endif %}
         <br>
-      </h1>
+      </h2>
 
       {% if usuario %}
       {% if usuario['gravidade'] == 'Alta' %}
@@ -177,7 +177,7 @@
       <br>
       <br>
       <form action="{{ url_for('rotasecretaria.comentar', id=usuario['id']) }}" method="POST">
-        <textarea name="comentario" placeholder="Adicionar comentário..." style="text-align: center;"></textarea>
+        <textarea name="comentario" maxlength="30" placeholder="Adicionar comentário..." style="text-align: center;"></textarea>
         <button type="submit" class="abrir-btn" onclick="return confirmarTexto()">Enviar</button>
       </form>
       {% endif %}

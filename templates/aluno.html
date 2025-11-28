@@ -98,7 +98,11 @@
         <tr onclick="verificarPin({{ d[0] }})"
           style="cursor:pointer; color: {{ cor }}; font-family: Arial, sans-serif;">
 
-          <td>{{ d[0] }}</td>
+          <td>
+            {{d[0].split(' ')[0]}}
+            {% if not d[0].split(' ')[0] == d[0].split(' ')[-1] %}
+            {{d[0].split(' ')[-1]}}
+            {% endif %}</td>
           <td>{{ d[2] }}</td>
           <td>{{ d[3] }}°</td>
           <td>{{ d[1] }}</td>
