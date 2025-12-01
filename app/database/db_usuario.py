@@ -13,7 +13,7 @@ def init_db():
                 cargo TEXT,
                 pin INTEGER,
                 escola TEXT, 
-                ano INTEGER, 
+                ano INTEGER,
                 turma TEXT,
                 turmano TEXT
             )

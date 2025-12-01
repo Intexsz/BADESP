@@ -237,8 +237,8 @@ def denuncia():
         
         return f"""
     <script>
+        alert("Denúncia enviada com sucesso!");
         window.location.href = "{url_for('rotas.inicio')}";
-        alert("Denuncia enviada com sucesso!");
     </script>
     """
 

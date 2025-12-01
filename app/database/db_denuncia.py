@@ -2,6 +2,7 @@ import sqlite3
 from datetime import datetime, timedelta
 from app.database.db_usuario import buscar_usuario, pegar_no_nome
 from openai import OpenAI
+import re
 
 client = OpenAI(api_key='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')
 
@@ -51,6 +52,7 @@ def IA(frase):
         {"role": "user", "content": frase}
     ])
     texto_resposta = response.output[0].content[0].text.strip()
+    print(texto_resposta)
     return texto_resposta
 
 # aqui ira criar a denuncia
@@ -69,22 +71,19 @@ def criar_denuncia(titulo, tipo, descricao, user_id, status, cargo, especifico):
     'ano': usuario[7],
     'turma': usuario[8]}
 
-    #texto_resposta = IA(descricao)
-    #match = re.search(
-    #r"Frase reformulada[:\-–]?\s*[\"']?(.*?)[\"']?\s*(?:\.|\n|$).*?"
-    #r"Tipo de gravidade[:\-–]?\s*[\"']?(Baixa|M[eé]dia|Alta)[\"']?",
-    #texto_resposta,
-    #re.IGNORECASE | re.DOTALL)
+    texto_resposta = IA(descricao)
+    match = re.search(
+    r"Frase reformulada[:\-–]?\s*[\"']?(.*?)[\"']?\s*(?:\.|\n|$).*?Tipo de gravidade[:\-–]?\s*[\"']?(Baixa|M[eé]dia|Alta)[\"']?",
+    texto_resposta,
+    re.IGNORECASE | re.DOTALL
+)
+    if match:
+        descricao_ia = match.group(1).strip()
+        gravidade = match.group(2).capitalize()
+    else:
+        descricao_ia = f"❌Erro na IA.❌ \n\n {texto_resposta}"
+        gravidade = 'Desconhecido'
 
-    #if match:
-    #    descricao_ia = match.group(1).strip()
-    #    gravidade = match.group(2).capitalize()
-    #else:
-    #    descricao_ia = f"❌Erro na IA.❌ \n\n {texto_resposta}"
-    #    gravidade = 'Desconhecido'
-
-    descricao_ia = descricao
-    gravidade = 'Desconhecido'
     ano = usuario_dict['ano']
     turma = usuario_dict['turma']
     nome = usuario_dict["nome"]
@@ -273,7 +272,7 @@ def checagem_denunciahehe(user_id):
     ultima_data = datetime.strptime(ultima_data_str, "%H:%M %d/%m/%Y")
 
     # Checa se passaram 30 minutos desde a última denúncia para evitar spam
-    return datetime.now() >= ultima_data + timedelta(seconds=3)
+    return datetime.now() >= ultima_data + timedelta(seconds=30)
 ######----------######
 
 # aqui é quando ele abre a denuncia, deixando ela em Visto.

@@ -54,6 +54,11 @@
         <option value="B" {% if filtro_serie=='B' %}selected{% endif %}>B</option>
         <option value="C" {% if filtro_serie=='C' %}selected{% endif %}>C</option>
         <option value="D" {% if filtro_serie=='D' %}selected{% endif %}>D</option>
+        <option value="E" {% if filtro_serie=='E' %}selected{% endif %}>E</option>
+        <option value="F" {% if filtro_serie=='F' %}selected{% endif %}>F</option>
+        <option value="G" {% if filtro_serie=='G' %}selected{% endif %}>G</option>
+        <option value="H" {% if filtro_serie=='H' %}selected{% endif %}>H</option>
+        <option value="I" {% if filtro_serie=='I' %}selected{% endif %}>I</option>
     </select>
   </form>
   
@@ -100,9 +105,15 @@
 
           <td>
             {{d[0].split(' ')[0]}}
+
+            {% if not d[0].split(' ')[-1] == d[0].split(' ')[-2] %}
+            {{d[0].split(' ')[-2]}}
+            {% endif %}
+
             {% if not d[0].split(' ')[0] == d[0].split(' ')[-1] %}
             {{d[0].split(' ')[-1]}}
             {% endif %}</td>
+            
           <td>{{ d[2] }}</td>
           <td>{{ d[3] }}°</td>
           <td>{{ d[1] }}</td>
