@@ -88,8 +88,7 @@
         <tr>
           <th>Nome</th>
           <th>Email</th>
-          <th>Ano</th>
-          <th>Turma</th>
+          <th>Ano e Série</th>
           <th>Total Denúncias</th>
           <th>Denúncias Aprovadas</th>
         </tr>
@@ -115,8 +114,7 @@
             {% endif %}</td>
             
           <td>{{ d[2] }}</td>
-          <td>{{ d[3] }}°</td>
-          <td>{{ d[1] }}</td>
+          <td>{{ d[3] }}°{{ d[1] }}</td>
           <td>{{ d[4] }}</td>
           <td>{{ d[5] }}</td>
         </tr>

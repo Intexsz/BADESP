@@ -1,6 +1,6 @@
 from flask import Flask, session, redirect, url_for, Blueprint,render_template, request
 from authlib.integrations.flask_client import OAuth
-from app.database.db_usuario import buscar_cargo, pegar_no_nome, usuario_tem_pin, buscar_nome_aluno, novo_pin, novo_pin_secretaria,buscar_usuario,listar_alunose
+from app.database.db_usuario import buscar_cargo, pegar_no_nome, usuario_tem_pin, buscar_nome_aluno, novo_pin_secretaria,buscar_usuario,listar_alunose
 from app.database.db_denuncia import buscar_status_denuncia, abrir_denunciabanquinho, pegar_na_denuncia_haha, buscar_visto
 from app.database.db_denuncia import atualizar_statuse, publicar_comentario, buscar_comentario,listar_denuncias,listar_aprovacao
 
@@ -36,7 +36,12 @@ def checar_stats(id):
             return 'Expirou'
     else:
         return False
-    
+
+@rota_secretaria.route('/autoriza_resolvidas/<int:id>', methods=['GET', 'POST'])
+def autoriza_resolvidas(id):
+    session["pode_acessar"] = True
+    return redirect(url_for(f"rotasecretaria.detalhe_denuncia", id=id))
+
 ###### ABRIR DENUNCIA SE NÃO ESTIVER EXPIRADA ######
 @rota_secretaria.route('/Inicio/abrir/<int:id>', methods=['POST'])
 def abrir_denuncia(id):
@@ -70,7 +75,9 @@ def detalhe_denuncia(id):
         return redirect(url_for("rotalogin.cadastro"))
     if not usuario_tem_pin(session["user_id"]):
         return redirect(url_for("rotas.cadastro2_pin"))
-    
+    if not session.get("pode_acessar"):
+        return redirect(url_for("rotas.inicio"))
+
     cargo = buscar_cargo(session['user_id'])
     if cargo in ('Secretaria', 'Professor'):
         
@@ -98,6 +105,7 @@ def detalhe_denuncia(id):
         if denuncia == 'no':
             return "Denúncia não encontrada", 404
         
+        session.pop("pode_acessar", None)
         return render_template("DenunciaAberta.html", usuario=denuncia,tipo_usuario='secretaria',usuario2=buscar_usuario(session['user_id']))
     
     elif cargo == 'Aluno':
@@ -117,6 +125,7 @@ def detalhe_denuncia(id):
         </script>
         """
 
+        session.pop("pode_acessar", None)
         return render_template("DenunciaAberta.html", usuario=denuncia,tipo_usuario='Aluno',usuario2=buscar_usuario(session['user_id']))
     else:
         return redirect(url_for('rotas.inicio'))

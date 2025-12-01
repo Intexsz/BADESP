@@ -177,7 +177,7 @@ main{
   border: 1px solid var(--cinza-borda);
 }
 
-/* Estilos para o painel */
+/* ESSA PORRA É DA SETA DO FILTRO, NÃO MEXER NO QUE ESTA FUNCIONADO */
 .painel-container {
   width: 90%;
   max-width: 800px;
@@ -195,12 +195,85 @@ form {
 }
 
 select {
-  padding: 10px;
+ padding: 10px;
   border-radius: 8px;
   border: 1px solid white;
-  background: rgb(251, 249, 249, 0.15);
-  color: #4682B4;
+  background: rgba(251, 249, 249, 0.15);
+  color: #ffffff;
+  -webkit-appearance: menulist; 
+  -moz-appearance: menulist;    
+  appearance: menulist;        
+  background-image: none;       
 }
+
+.input-container {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  margin: 30px 0;
+}
+
+.input-container img {
+  position: absolute;
+  right: 24px;
+  top: 20%;
+  margin-top: 5px;
+  display: block;
+}
+
+.input-container a {
+  font-size: 16px;
+  margin-top: 5px;
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  display: block;
+}
+
+.input-container a:hover {
+  text-decoration: underline;
+}
+
+.input-container input,
+.input-container select {
+  width: 100%;
+  height: 50px;
+  background: transparent;
+  outline: none;
+  border: 2px solid rgb(251, 250, 250);
+  border-radius: 10px;
+  font-size: 16px;
+  color: rgb(239, 236, 236);
+  padding: 0 45px 0 20px;
+  -webkit-appearance: none; 
+  -moz-appearance: none;    
+  appearance: none;          
+}
+
+.input-container input::placeholder {
+  line-height: 50px;
+  color: rgb(242, 237, 237);
+}
+
+.input-container select::placeholder {
+  color: rgb(242, 237, 237);
+}
+
+.input-container select option {
+  background-color: #29387f;
+  color: rgb(255, 255, 255);
+}
+
+.input-container.has-select::after {
+  content: '▼';
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: white;
+  pointer-events: none;
+}
+
 
 textarea {
   padding: 10px;

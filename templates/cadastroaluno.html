@@ -14,22 +14,15 @@
     <div class="container">
         <h1>Cadastro</h1>
 
-        <form method="POST" action="{{ url_for('rotas.cadastro2_pin') }}" onsubmit="return validarPin()"
-            autocomplete="off">
-            <div class="input-container">
+        <form method="POST" action="{{ url_for('rotas.cadastro2_pin') }}" onsubmit="return validarPin()"autocomplete="off">
+            <div class="input-container has-select">
                 <select name="escola" id="select-escola" required>
-                    <style>
-                        option:hover {
-                          background-color: yellow;
-                        }
-                      </style>
-                    <option disabled selected>Selecione a escola</option>
-                    <option value="PEI Francisco Pereira De Souza Filho Prof">PEI Francisco Pereira De Souza Filho Prof
-                    </option>
+                    <option value="" disabled selected>Selecione a escola</option>
+                    <option value="PEI Francisco Pereira De Souza Filho Prof">PEI Francisco Pereira De Souza Filho Prof</option>
                 </select>
             </div>
             {% if cargo == 'Aluno' %}
-            <div class="input-container">
+            <div class="input-container has-select">
                 <select name="ano" id="select-serie" required onchange="atualizarTurmas()">
                     <option value="" disabled selected>Selecione a série</option>
                     <option value="6">6ª Série EF</option>
@@ -41,7 +34,7 @@
                     <option value="3">3ª Série EM</option>
                 </select>
             </div>
-            <div class="input-container" id="container-turma" style="display: none;">
+            <div class="input-container has-select" id="container-turma" style="display: none;">
                 <select name="turma" id="select-turma" required>
                     <option value="" disabled selected>Selecione a turma</option>
                 </select>
@@ -58,9 +51,8 @@
                     oninput="this.value = this.value.replace(/\D/g, '')">
             </div>
             <div class='Termos'>
-                <input type="checkbox" required>
-                <p>Ao criar uma conta você concorda com os <a href="/Termos" style="color: Blue;">Termos de
-                        Condições</a></p>
+              <input type="checkbox" required> 
+            <p>Ao criar uma conta você concorda com os <a href="/Termos" style="color: Blue;">Termos de Condições</a></p>
             </div>
             <button type="submit" class="submit-button">Confirmar</button>
         </form>
@@ -72,7 +64,7 @@
             "7": ["A", "B", "C", "D"],
             "8": ["A", "B", "C", "D"],
             "9": ["A", "B", "C", "D"],
-            "1": ["A", "B", "C", "D", 'E', 'F', 'G'],
+            "1": ["A", "B", "C", "D", 'E','F','G'],
             "2": ["A", "B", "C", "D"],
             "3": ["A", "B", "C", "D"]
         };
@@ -103,10 +95,6 @@
             const confirmar = document.getElementById("confirmar").value;
             if (pin !== confirmar) {
                 alert("Os PINs não coincidem!");
-                return false;
-            }
-            if (pin === 0 || pin === '000000') {
-                alert("PIN inválido!");
                 return false;
             }
             return true;
