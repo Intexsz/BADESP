@@ -114,7 +114,7 @@ def abertas():
         return redirect(url_for("rotas.cadastro2_pin"))
     if cargo == 'Aluno':
         return redirect(url_for('rotas.inicio'))
-    
+
     expirar()
     cargo = buscar_cargo(session["user_id"])
     usuario = buscar_usuario(session["user_id"])
@@ -147,6 +147,21 @@ def Resolvidas():
     if cargo == 'Aluno':
         return redirect(url_for('rotas.inicio'))
     
+    filtro = request.args.get('filtro', 'Tudo')
+
+    if request.method == 'POST':
+        querer = request.form.get('Olavo', 'Tudo')
+        return redirect(url_for('rotas.inicio', filtro=querer))
+    
+    if filtro == 'Aprovado':
+        denuncias = mostrar_denuncias(session["user_id"], cargo, 'Aprovado.')
+    elif filtro == 'Recusado':
+        denuncias = mostrar_denuncias(session["user_id"], cargo, 'Recusado.')
+    elif filtro == 'Arquivado':
+        denuncias = mostrar_denuncias(session["user_id"], cargo, 'Arquivado.')
+    else:
+        denuncias = mostrar_denuncias(session["user_id"], cargo, 'Resolvidas')
+
     expirar()
     cargo = buscar_cargo(session["user_id"])
     usuario = buscar_usuario(session["user_id"])
@@ -155,8 +170,6 @@ def Resolvidas():
     if request.method == 'POST':
         querer = request.form.get('Olavo', 'Tudo')
         return redirect(url_for('rotas.inicio', filtro=querer))
-
-    denuncias = mostrar_denuncias(session["user_id"], cargo, 'Resolvidas')
     
     # ===== PAGINAÇÃO =====
     page = int(request.args.get("page", 1))

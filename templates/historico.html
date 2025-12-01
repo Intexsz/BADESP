@@ -34,7 +34,19 @@
     </ul>
   </nav>
 
+  {% if tipo == 'Resolvidas' %}
+  <form method="get" action="{{ url_for('rotas.Resolvidas') }}">
+    <select name="filtro" onchange="this.form.submit()">
+      <option value="Tudo" {% if filtro=="Tudo" %}selected{% endif %}>Tudo</option>
+      <option value="Aprovado" {% if filtro=="Aprovado" %}selected{% endif %}>Aprovado</option>
+      <option value="Recusado" {% if filtro=="Recusado" %}selected{% endif %}>Recusado</option>
+      <option value="Arquivado" {% if filtro=="Arquivado" %}selected{% endif %}>Arquivado</option>
+    </select>
+  </form>
+  {% endif %}
+
   <div class="main-content">
+    
     <div class="container">
       <h1 class="page-title">Mostrando Denuncias {{ tipo }}</h1>
 
@@ -52,6 +64,7 @@
           </tr>
         </thead>
 
+        
         <tbody>
           {% for d in denuncias %}
           {% set cor = "white" %}
@@ -85,6 +98,7 @@
           <tr onclick="verificarPin({{ d[0] }})"
             style="cursor:pointer; color: {{ cor }}; font-family: Arial, sans-serif;">
 
+        
             <td>{{ d[0] }}</td>
             <td>{{ d[6].split(' ')[0]}}
               {% if not d[6].split(' ')[0] == d[6].split(' ')[-1] %}
@@ -129,7 +143,7 @@
       <span style="color: white; " class="Páginaa">Página {{ current_page }} de {{ total_pages }}</span>
     
       {% if current_page < total_pages %}
-        <a class="clicar" href="{{ url_for('rotas.aZbertas', page=current_page+1) }}">Próxima &raquo;</a>
+        <a class="clicar" href="{{ url_for('rotas.abertas', page=current_page+1) }}">Próxima &raquo;</a>
       {% endif %}
     </div>
     
