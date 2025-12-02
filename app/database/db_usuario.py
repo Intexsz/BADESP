@@ -1,4 +1,5 @@
 import sqlite3
+import logging
 
 # iniciar banco de dados de login
 def init_db():
@@ -20,18 +21,56 @@ def init_db():
         conn.commit()
 
 # salvar usuario aluno
+# Configura logging para produção
+logging.basicConfig(filename='error_db.log', level=logging.ERROR,
+                    format='%(asctime)s - %(levelname)s - %(message)s')
+
 def salvar_usuario(user_data):
-    with sqlite3.connect("usuarios.db") as conn:
-        cursor = conn.cursor()
-        print(user_data["email"])
-        cursor.execute("SELECT * FROM usuarios WHERE id = ?", (user_data["id"],))
-        if not cursor.fetchone():
+    """
+    Salva um usuário no banco de dados SQLite.
+    Se o usuário já existir, ignora a inserção.
+    Logs detalhados em caso de erro.
+    """
+    try:
+        with sqlite3.connect("usuarios.db") as conn:
+            cursor = conn.cursor()
+
+            # Confere se os campos obrigatórios existem
+            if not user_data.get("id") or not user_data.get("email"):
+                logging.error("ID ou email ausente em user_data: %s", user_data)
+                return
+
+            # Verifica se o usuário já existe
+            cursor.execute("SELECT * FROM usuarios WHERE id = ?", (user_data["id"],))
+            if cursor.fetchone():
+                logging.info("Usuário já existe: %s", user_data["email"])
+                return
+
+            # Insere novo usuário
             cursor.execute(
                 "INSERT INTO usuarios (id, nome, email, foto, cargo) VALUES (?, ?, ?, ?, ?)",
-                (user_data["id"], user_data["name"], user_data["email"], user_data["picture"], user_data["cargo"])
+                (
+                    user_data.get("id"),
+                    user_data.get("name"),
+                    user_data.get("email"),
+                    user_data.get("picture"),
+                    user_data.get("cargo")
+                )
             )
             conn.commit()
+            logging.info("Usuário salvo com sucesso: %s", user_data["email"])
 
+    except sqlite3.IntegrityError as e:
+        # ID duplicado ou outra violação de integridade
+        logging.warning("Tentativa de inserir usuário já existente: %s - %s", user_data, e)
+
+    except sqlite3.OperationalError as e:
+        # Problema com o banco (ex: locked)
+        logging.error("Erro operacional no SQLite: %s - %s", user_data, e, exc_info=True)
+
+    except Exception as e:
+        # Qualquer outro erro
+        logging.error("Erro desconhecido ao salvar usuário: %s - %s", user_data, e, exc_info=True)
 # aqui vai buscar usuario
 def buscar_usuario(user_id):
     with sqlite3.connect("usuarios.db") as conn:
