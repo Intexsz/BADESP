@@ -167,33 +167,33 @@
     </script>
 
     <script>
-function validarPin() {
-    const pin = document.getElementById("pin").value;
-    const confirmar = document.getElementById("confirmar").value;
+        function validarPin() {
+            const pin = document.getElementById("pin").value;
+            const confirmar = document.getElementById("confirmar").value;
 
-    if (pin !== confirmar) {
-        alert("Os PINs não coincidem!");
-        return false;
-    }
+            if (pin !== confirmar) {
+                alert("Os PINs não coincidem!");
+                return false;
+            }
 
-    if (pin === "000000") {
-        alert("PIN inválido! Não pode ser 000000.");
-        return false;
-    }
+            if (pin === "000000") {
+                alert("PIN inválido! Não pode ser 000000.");
+                return false;
+            }
 
-    return true;
-}
-
-document.addEventListener('DOMContentLoaded', function () {
-    const form = document.getElementById("alterar-pin-form");
-
-    form.addEventListener('submit', function (event) {
-        if (!validarPin()) {
-            event.preventDefault();
+            return true;
         }
-    });
-});
-</script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById("alterar-pin-form");
+
+            form.addEventListener('submit', function (event) {
+                if (!validarPin()) {
+                    event.preventDefault();
+                }
+            });
+        });
+    </script>
 
 </body>
 
