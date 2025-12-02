@@ -6,37 +6,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BADESP - Lista de Denúncias</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='historico.css') }}">
-  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='OIP.jpg') }}">
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icone.png') }}">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=pin" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
-  <header class="Cabecalho">
 
-    <h1 class="nome">B.A.D.E.S.P</h1>
-
-    <button class="menu-btn">☰</button>
-
-    <nav class="sidebar">
-      <ul>
-        <li><a href="/Inicio">Início</a></li>
-        <li><a href="/Ajuda">Ajuda</a></li>
-        <li><a href="/Denuncia">Fazer Denúncia</a></li>
-        <li><a href="/MudarPIN"> Mudar o PIN</a></li>
-        <li><a href="/Logout" onclick="return confirmarLogout()"><i class="fas fa-user-circle"></i>Deslogar</a></li>
-<<<<<<< HEAD
-=======
-        <li><a href="/MudarPIN"> Mudar o PIN</a></li>
->>>>>>> bec48a749b5ab0a778bb63d4600ca4073d3ca62d
-      </ul>
-    </nav>
-
-    <div class="profile-icon">
-      <img src="{{ usuario[3] }}">
+  <header class="cabecalho glass">
+    <button class="menu-btn"><span class="material-icons">menu</span></button>
+    <h1 class="titulo">B.A.D.E.S.P</h1>
+    <div class="perfil">
+      <img src="{{ usuario[3] }}" alt="Logado como: {{ usuario[1] }}">
     </div>
-
   </header>
 
+  <nav class="sidebar glass sobreposto">
+    <ul>
+      <li><a href="/Inicio"><span class="material-icons">home</span> Início</a></li>
+      <li><a href="/Ajuda"><span class="material-icons">help_outline</span> Ajuda</a></li>
+      <li><a href="/MudarPIN"><span class="material-icons">pin</span> Mudar o PIN</a></li>
+
+      <!-- DESLOGAR VERMELHO -->
+      <li><a href="/Logout" class="logout" onclick="confirmarLogout()"><span class="material-icons">logout</span> Deslogar</a></li>
+    </ul>
+  </nav>
+
+  {% if tipo == 'Resolvidas' %}
+  <form method="get" action="{{ url_for('rotas.Resolvidas') }}">
+    <select name="filtro" onchange="this.form.submit()">
+      <option value="Tudo" {% if filtro=="Tudo" %}selected{% endif %}>Tudo</option>
+      <option value="Aprovado" {% if filtro=="Aprovado" %}selected{% endif %}>Aprovado</option>
+      <option value="Recusado" {% if filtro=="Recusado" %}selected{% endif %}>Recusado</option>
+      <option value="Arquivado" {% if filtro=="Arquivado" %}selected{% endif %}>Arquivado</option>
+    </select>
+  </form>
+  {% endif %}
+
   <div class="main-content">
+    
     <div class="container">
       <h1 class="page-title">Mostrando Denuncias {{ tipo }}</h1>
 
@@ -54,23 +64,24 @@
           </tr>
         </thead>
 
+        
         <tbody>
           {% for d in denuncias %}
           {% set cor = "white" %}
-          {% set nome = "📂Denúncia em aberto📂" %}
+          {% set nome = "📂Denúncia em aberto 📂" %}
 
           {% if d[5] == 'Aprovado.' %}
           {% set cor = "rgb(0, 200, 0)" %}
-          {% set nome = "✔️Aprovado por " ~ d[7] ~ "✔️" %}
+          {% set nome = "✔️Aprovado por " ~ d[7] ~ " ✔️" %}
           {% elif d[5] == 'Recusado.' %}
           {% set cor = "red" %}
-          {% set nome = "❌Recusado por " ~ d[7] ~ "❌" %}
+          {% set nome = "❌Recusado por " ~ d[7] ~ " ❌" %}
           {% elif d[5] == 'Arquivado.' %}
           {% set cor = "gray" %}
-          {% set nome = "🗃️Arquivado por " ~ d[7] ~ "🗃️" %}
+          {% set nome = "🗃️Arquivado por " ~ d[7] ~ " 🗃️" %}
           {% elif d[5] == 'Visto.' %}
           {% set cor = "rgb(255, 150, 0)" %}
-          {% set nome = "🔎Visualizado por " ~ d[7] ~ " às " ~ d[10] ~ "🔎" %}
+          {% set nome = "🔎Visualizado por " ~ d[7] ~ " às " ~ d[10] ~ " 🔎" %}
           {% endif %}
 
           {% if d[13] == 'Alta' %}
@@ -87,14 +98,29 @@
           <tr onclick="verificarPin({{ d[0] }})"
             style="cursor:pointer; color: {{ cor }}; font-family: Arial, sans-serif;">
 
+        
             <td>{{ d[0] }}</td>
-            <td>{{ d[6] }}</td>
-            <td>{{ d[14] }}</td>
+            <td>{{ d[6].split(' ')[0]}}
+              {% if not d[6].split(' ')[0] == d[6].split(' ')[-1] %}
+              {{d[6].split(' ')[-1]}}
+              {% endif %}</td>
+            <td>{{ d[15] }}°{{ d[14] }}</td>
             <td>{{ d[1] }}</td>
             <td>{{ d[2] }}</td>
             <td style="color: {{ corr }};">{{ d[13] }}</td>
             <td>{{ d[4] }}</td>
-            <td>{{ nome }}</td>
+            {% set partes = nome.split(' ') %}
+            {% if not tipo == 'Abertas' %}
+            <td>
+                {{ partes[0] }} {{ partes[1] }} {{ partes[2] }} 
+                {{ partes[-2] }} {{" às " ~ d[10]}}{{ partes[-1] }}
+            </td>
+            {% else %}
+            <td>
+            {{ partes[0] }} {{ partes[1] }} {{ partes[2] }} 
+            {{ partes[-5] }} {{" às " ~ d[10]}}{{ partes[-1] }}
+            {% endif %}
+          </td>
           </tr>
           {% endif %}
           {% endfor %}
@@ -102,6 +128,44 @@
       </table>
     </div>
   </div>
+
+  <main>
+    {% if tipo == 'Abertas' %}
+    <div class="pagination">
+      {% set current_page = page %}
+      {% if current_page < 1 %}{% set current_page = 1 %}
+      {% elif current_page > total_pages %}{% set current_page = total_pages %}{% endif %}
+    
+      {% if current_page > 1 %}
+        <a class="clicar" href="{{ url_for('rotas.abertas', page=current_page-1) }}">&laquo; Anterior</a>
+      {% endif %}
+    
+      <span style="color: white; " class="Páginaa">Página {{ current_page }} de {{ total_pages }}</span>
+    
+      {% if current_page < total_pages %}
+        <a class="clicar" href="{{ url_for('rotas.abertas', page=current_page+1) }}">Próxima &raquo;</a>
+      {% endif %}
+    </div>
+    
+    {% elif tipo == 'Resolvidas' %}
+    <div class="pagination">
+      {% set current_page = page %}
+      {% if current_page < 1 %}{% set current_page = 1 %}
+      {% elif current_page > total_pages %}{% set current_page = total_pages %}{% endif %}
+    
+      {% if current_page > 1 %}
+        <a class="clicar" href="{{ url_for('rotas.Resolvidas', page=current_page-1) }}">&laquo; Anterior</a>
+      {% endif %}
+    
+      <span style="color: white;" class="Páginaa">Página {{ current_page }} de {{ total_pages }}</span>
+    
+      {% if current_page < total_pages %}
+        <a class="clicar" href="{{ url_for('rotas.Resolvidas', page=current_page+1) }}">Próxima &raquo;</a>
+      {% endif %}
+    </div>
+    {% endif %}
+    
+  </main>
 
   <script>
     const totalPages = {{ total_pages }};  // passado do Flask
@@ -116,30 +180,8 @@
       window.location.replace(url); // redireciona para a URL corrigida
     }
   </script>
-
-  <div class="pagination">
-    {% set current_page = page %}
-    {% if current_page < 1 %} {% set current_page=1 %} {% elif current_page> total_pages %}
-      {% set current_page = total_pages %}
-      {% endif %}
-
-      {% if current_page > 1 %}
-      <a class='clicar' href="{{ url_for('rotas.historico', page=current_page-1, filtro=filtro) }}">&laquo; Anterior</a>
-      {% endif %}
-
-      <span class="Páginaa">Página {{ current_page }} de {{ total_pages }}</span>
-
-      {% if current_page < total_pages %} <a class='clicar'
-        href="{{ url_for('rotas.historico', page=current_page+1, filtro=filtro) }}">Próxima &raquo;</a>
-        {% endif %}
-  </div>
   <script>
     // Toggle menu lateral
-    const btn = document.querySelector('.menu-btn');
-    const sidebar = document.querySelector('.sidebar');
-    btn.addEventListener('click', () => {
-      sidebar.classList.toggle('active');
-    });
 
     function confirmarLogout() {
       return confirm("Você tem certeza que quer deslogar?");
@@ -176,7 +218,7 @@
 
           const form = document.createElement("form");
           form.method = "POST";
-          form.action = `/detalhe/${denunciaId}`;
+          form.action = `/autoriza_resolvidas/${denunciaId}`;
           document.body.appendChild(form);
           form.submit();
         } else {
@@ -188,6 +230,28 @@
       }
     }
   </script>
+
+<script>
+  const btn = document.querySelector('.menu-btn');
+  const sidebar = document.querySelector('.sidebar');
+
+  btn.addEventListener('click', () => sidebar.classList.toggle('ativo'));
+
+  function confirmarLogout() {
+    if (confirm("Deseja realmente sair?")) {
+      alert("Logout realizado com sucesso!");
+    }
+  }
+
+  // ===== FECHAR MENU CLICANDO FORA + REDIRECIONAR P/ INÍCIO =====
+  document.addEventListener("click", (e) => {
+    const clicouFora = !sidebar.contains(e.target) && !btn.contains(e.target);
+
+    if (sidebar.classList.contains("ativo") && clicouFora) {
+      sidebar.classList.remove("ativo");
+    }
+  });
+</script>
 </body>
 
 </html>

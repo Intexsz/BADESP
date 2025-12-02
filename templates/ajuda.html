@@ -4,106 +4,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='OIP.jpg') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icone.png') }}">
     <title>BADESP - Ajuda</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='Ajuda.css') }}">
     <script src="{{ url_for('static', filename='js/Ajuda.js') }}" defer></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=account_circle" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
 </head>
 
 <body>
 
-    <!-- Cabeçalho -->
-    <header class="Cabecalho">
-        <h1 class="nome">BADESP</h1>
-        <button class="menu-btn">☰</button>
-
-        <!-- Menu lateral -->
-        {% if not login %}
-        <nav class="sidebar">
-            <ul>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <li><a href="/Login">Fazer Login</a></li>
-            </ul>
-        </nav>
-        {% else %}
-        <nav class="sidebar">
-            <ul>
-                <li><a href="/Inicio">Início</a></li>
-                <li><a href="/Ajuda">Ajuda</a></li>
-                <li><a href="/Denuncia">Fazer Denúncia</a></li>
-                <li><a href="/Logout" onclick="return confirmarLogout()"><i class="fas fa-user-circle"></i>Deslogar</a>
-                </li>
-
-            </ul>
-        </nav>
-        {% endif %}
+    {% if usuario %}
+    <header class="cabecalho glass">
+        <button class="menu-btn"><span class="material-icons">menu</span></button>
+        <h1 class="titulo">B.A.D.E.S.P</h1>
+        <div class="perfil">
+            <img src="{{usuario[3]}}" alt="Logado como: {{ usuario[1] }}">
+        </div>
     </header>
 
-    <!-- Conteúdo principal -->
-    <main id="ajuda">
-        <h2 class="nome">Ajuda e Perguntas Frequentes</h2>
+    <nav class="sidebar glass sobreposto">
+        <ul>
+            <li><a href="/Inicio"><span class="material-icons">home</span> Início</a></li>
+            <li><a href="/Ajuda"><span class="material-icons">help_outline</span> Ajuda</a></li>
+            {% if cargo == 'Aluno' %}
+            <style>
+                body {
+                    background: linear-gradient(90deg, #242458, #3e3e74);
+                }
 
+                .painel-container {
+                    background: rgba(25, 25, 60, 0.9);
+                }
+            </style>
+            <li><a href="/Denuncia"><span class="material-icons">report</span> Fazer Denúncia</a></li>
+            {% elif cargo == 'Secretaria' or cargo == 'Professor' %}
+            <style>
+                body {
+                    background: linear-gradient(135deg, #242424, #353535);
+                }
+            </style>
+            <li><a href="/MudarPIN"><span class="material-icons">pin</span> Mudar o PIN</a></li>
+            {% endif %}
+
+            <!-- DESLOGAR VERMELHO -->
+            <li><a href="/Logout" class="logout" onclick="confirmarLogout()"><span class="material-icons">logout</span>
+                    Deslogar</a></li>
+        </ul>
+    </nav>
+    {% else %}
+    <style>
+        body {
+            background: linear-gradient(90deg, #242458, #3e3e74);
+        }
+    </style>
+    <header class="cabecalho glass">
+        <button class="menu-btn"><span class="material-icons">menu</span></button>
+        <h1 class="titulo">B.A.D.E.S.P</h1>
+        <div class="perfil">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5wt2-sE3VgB3SwwpeW9QWKNvvN3JqOFlUSQ&s" >
+        </div>
+    </header>
+
+    <nav class="sidebar glass sobreposto">
+        <ul>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <li><a href="/Login" class="inicio"><span class="material-icons">login</span> Fazer Login</a></li>
+        </ul>
+    </nav>
+    {% endif %}
+
+    {% if usuario %}
+    {% if cargo == 'Aluno' %}
+    <main id="ajuda">
         <div class="painel">
             <div class="faq">
-                <h3>Como enviar uma denúncia?</h3>
-                <p>Para enviar uma denúncia, clique no botão "Fazer Denúncia" na página inicial, preencha seu nome,
-                    Gmail institucional e descreva sua denúncia. Em seguida, clique em "Enviar Denúncia".</p>
+                <h3>Como posso fazer a alteração do meu PIN?</h3>
+                <p>Somente a secretaria poderá fazer a mudança do PIN da sua conta.</p>
             </div>
-
             <div class="faq">
-                <h3>Preciso usar meu Gmail institucional?</h3>
-                <p>O Gmail institucional é a unica forma de fazer cadastro no site, caso você não tenha acesso a ele,
-                    você não consegue se cadastrar.
-                </p>
+                <h3>Posso apagar uma denúncia?</h3>
+                <p>Sim, você poderá apagar a denúncia, porém, antes dela ser aberta pelos professores ou pela secretária, após isso a denúncia NÃO PODERÁ MAIS SER APAGADA.</p>
             </div>
-
             <div class="faq">
-                <h3>Meu Gmail não é institucional, posso me cadastrar?</h3>
-                <p>Não. O seu Gmail precisa obrigatóriamente ser o seu Gmail institucional.</p>
+                <h3>Posso logar com qualquer E-mail?</h3>
+                <p>Não, apenas com o seu E-mail institucional.</p>
             </div>
-
             <div class="faq">
-                <h3>Como funciona a segurança da minha denúncia?</h3>
-                <p>Todas as denúncias enviadas pelo site são armazenadas com segurança e apenas administradores
-                    autorizados têm acesso às informações.</p>
+                <h3>Quantas denúncias eu posso realizar?</h3>
+                <p>Você poderá realizar uma denúncias a cada 30 minutos.</p>
             </div>
-
             <div class="faq">
-                <h3>Posso editar minha denúncia depois de enviar?</h3>
-                <p>Não. Após o envio, não é possível editar a denúncia. Certifique-se de revisar todas as informações
-                    antes de enviar.</p>
-            </div>
-
-            <div class="faq">
-                <h3>Fiz uma denúncia por acidente, posso apaga-la?</h3>
-                <p>Sim. Você pode apagar a sua denúncia, desde que a gestão não tenha aberto ela ainda.</p>
+                <h3>Posso fazer alterações nas denúncias após o envio??</h3>
+                <p>Não, as denúncias permanecem do mesmo jeito e a única alternativa é apaga-la.</p>
             </div>
         </div>
     </main>
+    
+    {% endif %}
 
-    <!-- Rodapé -->
-    <footer>
-        <div class="rodadecapoeira">© 2025 BADESP</div>
-    </footer>
+    {% if cargo == 'Secretaria' or cargo == 'Professor' %}
+    <main id="ajuda">
+        <div class="painel">
+            <div class="faq">
+                <h3>Como posso fazer a alteração de um pinto de um aluno?</h3>
+                <p>Shehehehehehhehehehehehehehehe.</p>
+            </div>
+            <div class="faq">
+                <h3>Como posso fazer a alteração de um pinto de um aluno?</h3>
+                <p>Shehehehehehhehehehehehehehehe.</p>
+            </div>
+            <div class="faq">
+                <h3>Como posso fazer a alteração de um pinto de um aluno?</h3>
+                <p>Shehehehehehhehehehehehehehehe.</p>
+            </div>
+            <div class="faq">
+                <h3>Como posso fazer a alteração de um pinto de um aluno?</h3>
+                <p>Shehehehehehhehehehehehehehehe.</p>
+            </div>
+            <div class="faq">
+                <h3>Como posso fazer a alteração de um pinto de um aluno?</h3>
+                <p>Shehehehehehhehehehehehehehehe.</p>
+            </div>
+            <div class="faq">
+                <h3>Como posso fazer a alteração de um pinto de um aluno?</h3>
+                <p>Shehehehehehhehehehehehehehehe.</p>
+            </div>
+            <div class="faq">
+                <h3>Como posso fazer a alteração de um pinto de um aluno?</h3>
+                <p>Shehehehehehhehehehehehehehehe.</p>
+            </div>
+        </div>
+    </main>
+    {% endif %}
+    {% else %}
+    <main id="ajuda">
+    <div class="painel">
+        <div class="faq">
+            <h3>Eu não sei a minha senha do Gmail Institucional/Esqueci a senha?</h3>
+            <p>Você deverá redefinir a sua senha do google diretamente com a secretaria.</p>
+        </div>
+        <div class="faq">
+            <h3>Eu não sei a minha senha do Gmail Institucional/Esqueci a senha?</h3>
+            <p>Você deverá redefinir a sua senha do google diretamente com a secretaria.</p>
+        </div>
+        <div class="faq">
+            <h3>Eu não sei a minha senha do Gmail Institucional/Esqueci a senha?</h3>
+            <p>Você deverá redefinir a sua senha do google diretamente com a secretaria.</p>
+        </div>
+        <div class="faq">
+            <h3>Eu não sei a minha senha do Gmail Institucional/Esqueci a senha?</h3>
+            <p>Você deverá redefinir a sua senha do google diretamente com a secretaria.</p>
+        </div>
+        <div class="faq">
+            <h3>Eu não sei a minha senha do Gmail Institucional/Esqueci a senha?</h3>
+            <p>Você deverá redefinir a sua senha do google diretamente com a secretaria.</p>
+        </div>
+        <div class="faq">
+            <h3>Eu não sei a minha senha do Gmail Institucional/Esqueci a senha?</h3>
+            <p>Você deverá redefinir a sua senha do google diretamente com a secretaria.</p>
+        </div>
+        <div class="faq">
+            <h3>Eu não sei a minha senha do Gmail Institucional/Esqueci a senha?</h3>
+            <p>Você deverá redefinir a sua senha do google diretamente com a secretaria.</p>
+        </div>
+    </div>
+    </main>
+    {% endif %}
 
     <script>
         function confirmarLogout() {
             // Retorna true para ir para /logout ou false para cancelar
             return confirm("Você tem certeza que quer deslogar?");
         }
-        const menuBtn = document.querySelector('.menu-btn');
-        const sidebar = document.querySelector('.sidebar');
-
-        menuBtn.addEventListener('click', () => {
-            sidebar.classList.toggle('active');
-        });
 
         // ACORDEÃO FAQQQQQQQ
         const faqs = document.querySelectorAll('#ajuda .faq');
@@ -122,6 +205,28 @@
             });
         });
 
+    </script>
+
+    <script>
+        const btn = document.querySelector('.menu-btn');
+        const sidebar = document.querySelector('.sidebar');
+
+        btn.addEventListener('click', () => sidebar.classList.toggle('ativo'));
+
+        function confirmarLogout() {
+            if (confirm("Deseja realmente sair?")) {
+                alert("Logout realizado com sucesso!");
+            }
+        }
+
+        // ===== FECHAR MENU CLICANDO FORA + REDIRECIONAR P/ INÍCIO =====
+        document.addEventListener("click", (e) => {
+            const clicouFora = !sidebar.contains(e.target) && !btn.contains(e.target);
+
+            if (sidebar.classList.contains("ativo") && clicouFora) {
+                sidebar.classList.remove("ativo");
+            }
+        });
     </script>
 
 </body>

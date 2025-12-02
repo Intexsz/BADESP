@@ -9,13 +9,13 @@ app = Flask(__name__)
 rotas_bp = Blueprint('rotas', __name__)
 CORS(app)
 
-CLIENT_ID = "334998652961-rpf4gt64873gg0uoa64cmlqkcmj33q4b.apps.googleusercontent.com"
+CLIENT_ID = "177205671715-238eoh4gfa3qusnfuuaa9jmctiot8vno.apps.googleusercontent.com"
 
 oauth = OAuth(app)
 google = oauth.register(
     name='google',
     client_id=CLIENT_ID,
-    client_secret='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',
+    client_secret='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',
     access_token_url='https://oauth2.googleapis.com/token',
     authorize_url='https://accounts.google.com/o/oauth2/auth',
     api_base_url='https://www.googleapis.com/oauth2/v1/',
@@ -35,6 +35,14 @@ def cadastro2_pin():
     if request.method == 'POST':
         id = session.get("user_id")
         pin = request.form['pin']
+        if pin == '000000':
+            return f"""
+    <script>
+        alert("PIN inválido. Por favor, escolha um PIN diferente de '000000'.");
+        redirect("{url_for('rotas.cadastro2_pin')}");
+    <script>
+        """
+
         escola = request.form['escola']
         if cargo == 'Aluno':   
             ano = request.form['ano']
@@ -43,7 +51,8 @@ def cadastro2_pin():
             ano = None
             turma = None
 
-        cadastrar_pin(id, pin, escola, ano, turma)
+        cadastrar_pin(id, pin, escola, ano, turma, f'{ano}°{turma}')
+        print('uai')
 
         return redirect(url_for('rotas.inicio'))
 
@@ -62,7 +71,6 @@ def homepage():
 def inicio():
     if "user_id" not in session:
         return redirect(url_for("rotalogin.cadastro"))
-    
     if not usuario_tem_pin(session["user_id"]):
         return redirect(url_for("rotas.cadastro2_pin"))
     
@@ -98,7 +106,7 @@ def inicio():
         return render_template("iniciosecretaria.html",usuario=usuario)
 
 @rotas_bp.route('/Abertas')
-def Abertas():
+def abertas():
     if "user_id" not in session:
         return redirect(url_for('rotalogin.cadastro'))
     cargo = buscar_cargo(session["user_id"])
@@ -106,7 +114,7 @@ def Abertas():
         return redirect(url_for("rotas.cadastro2_pin"))
     if cargo == 'Aluno':
         return redirect(url_for('rotas.inicio'))
-    
+
     expirar()
     cargo = buscar_cargo(session["user_id"])
     usuario = buscar_usuario(session["user_id"])
@@ -123,7 +131,7 @@ def Abertas():
     per_page = 10
     start = (page - 1) * per_page 
     end = start + per_page
-
+    
     denuncias_paginadas = denuncias[start:end]
     total_pages = (len(denuncias) + per_page - 1) // per_page
 
@@ -139,6 +147,21 @@ def Resolvidas():
     if cargo == 'Aluno':
         return redirect(url_for('rotas.inicio'))
     
+    filtro = request.args.get('filtro', 'Tudo')
+
+    if request.method == 'POST':
+        querer = request.form.get('Olavo', 'Tudo')
+        return redirect(url_for('rotas.inicio', filtro=querer))
+    
+    if filtro == 'Aprovado':
+        denuncias = mostrar_denuncias(session["user_id"], cargo, 'Aprovado.')
+    elif filtro == 'Recusado':
+        denuncias = mostrar_denuncias(session["user_id"], cargo, 'Recusado.')
+    elif filtro == 'Arquivado':
+        denuncias = mostrar_denuncias(session["user_id"], cargo, 'Arquivado.')
+    else:
+        denuncias = mostrar_denuncias(session["user_id"], cargo, 'Resolvidas')
+
     expirar()
     cargo = buscar_cargo(session["user_id"])
     usuario = buscar_usuario(session["user_id"])
@@ -147,8 +170,6 @@ def Resolvidas():
     if request.method == 'POST':
         querer = request.form.get('Olavo', 'Tudo')
         return redirect(url_for('rotas.inicio', filtro=querer))
-
-    denuncias = mostrar_denuncias(session["user_id"], cargo, 'Resolvidas')
     
     # ===== PAGINAÇÃO =====
     page = int(request.args.get("page", 1))
@@ -160,7 +181,6 @@ def Resolvidas():
     total_pages = (len(denuncias) + per_page - 1) // per_page
 
     return render_template('historico.html', denuncias=denuncias_paginadas, usuario=usuario,page=page,total_pages=total_pages,filtro=filtro,tipo='Resolvidas')
-
 
 @rotas_bp.route('/Denuncias')
 def denuncias():
@@ -177,7 +197,7 @@ def denuncias():
     denuncias = mostrar_denuncias(session["user_id"], cargo, 'Em Análise.')
     
     page = int(request.args.get("page", 1))
-    per_page = 4
+    per_page = 6
     start = (page - 1) * per_page 
     end = start + per_page
 
@@ -189,10 +209,10 @@ def denuncias():
 @rotas_bp.route('/Ajuda')
 def ajuda():
     if "user_id" not in session:
-        return render_template('ajuda.html',login=False)
+        return render_template('ajuda.html',usuario=False)
     if not usuario_tem_pin(session["user_id"]):
         return redirect(url_for("rotas.cadastro2_pin"))
-    return render_template('ajuda.html',login=True)
+    return render_template('ajuda.html',usuario=buscar_usuario(session["user_id"]), cargo=buscar_cargo(session["user_id"]))
 ######----------######
 
 
@@ -201,12 +221,15 @@ def ajuda():
 def denuncia():
     if "user_id" not in session:
         return redirect(url_for('rotalogin.cadastro'))
-    
     if not usuario_tem_pin(session["user_id"]):
         return redirect(url_for("rotas.cadastro2_pin"))
+    cargo = buscar_cargo(session["user_id"])
+    if cargo != 'Aluno':
+        return redirect(url_for('rotas.inicio'))
     
     nomeprof = buscar_nome_professor()
     nomesecretaria = buscar_nome_secretaria()
+    usuario = buscar_usuario(session["user_id"])
 
     if request.method == 'POST':
         if not checagem_denunciahehe(session['user_id']):
@@ -227,13 +250,13 @@ def denuncia():
         
         return f"""
     <script>
+        alert("Denúncia enviada com sucesso!");
         window.location.href = "{url_for('rotas.inicio')}";
-        alert("Denuncia enviada com sucesso!");
     </script>
     """
 
     # GET
-    resp = make_response(render_template('denuncia.html', professor=nomeprof, secretaria=nomesecretaria))
+    resp = make_response(render_template('denuncia.html', professor=nomeprof, secretaria=nomesecretaria,usuario=usuario))
     resp.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0'
     resp.headers['Pragma'] = 'no-cache'
     resp.headers['Expires'] = '0'
@@ -308,3 +331,8 @@ def verificar_pin():
         return jsonify({'status': 'ok'})
     else:
         return jsonify({'status': 'erro', 'mensagem': 'PIN incorreto'})
+
+
+@rotas_bp.route('/Termos')
+def Termos():
+    return render_template('termos.html')

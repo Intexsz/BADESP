@@ -1,19 +1,19 @@
 from flask import Flask, session, redirect, url_for, Blueprint,render_template, request
 from authlib.integrations.flask_client import OAuth
-from app.database.db_usuario import buscar_cargo, pegar_no_nome, usuario_tem_pin, buscar_nome_aluno, novo_pin, novo_pin_secretaria
+from app.database.db_usuario import buscar_cargo, pegar_no_nome, usuario_tem_pin, buscar_nome_aluno, novo_pin_secretaria,buscar_usuario,listar_alunose
 from app.database.db_denuncia import buscar_status_denuncia, abrir_denunciabanquinho, pegar_na_denuncia_haha, buscar_visto
-from app.database.db_denuncia import atualizar_statuse, publicar_comentario, buscar_comentario
+from app.database.db_denuncia import atualizar_statuse, publicar_comentario, buscar_comentario,listar_denuncias,listar_aprovacao
 
 app = Flask(__name__)
 rota_secretaria = Blueprint('rotasecretaria', __name__)
 
-CLIENT_ID = "334998652961-rpf4gt64873gg0uoa64cmlqkcmj33q4b.apps.googleusercontent.com"
+CLIENT_ID = "177205671715-238eoh4gfa3qusnfuuaa9jmctiot8vno.apps.googleusercontent.com"
 
 oauth = OAuth(app)
 google = oauth.register(
     name='google',
     client_id=CLIENT_ID,
-    client_secret='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',
+    client_secret='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',
     access_token_url='https://oauth2.googleapis.com/token',
     authorize_url='https://accounts.google.com/o/oauth2/auth',
     api_base_url='https://www.googleapis.com/oauth2/v1/',
@@ -36,7 +36,12 @@ def checar_stats(id):
             return 'Expirou'
     else:
         return False
-    
+
+@rota_secretaria.route('/autoriza_resolvidas/<int:id>', methods=['GET', 'POST'])
+def autoriza_resolvidas(id):
+    session["pode_acessar"] = True
+    return redirect(url_for(f"rotasecretaria.detalhe_denuncia", id=id))
+
 ###### ABRIR DENUNCIA SE NÃO ESTIVER EXPIRADA ######
 @rota_secretaria.route('/Inicio/abrir/<int:id>', methods=['POST'])
 def abrir_denuncia(id):
@@ -70,7 +75,9 @@ def detalhe_denuncia(id):
         return redirect(url_for("rotalogin.cadastro"))
     if not usuario_tem_pin(session["user_id"]):
         return redirect(url_for("rotas.cadastro2_pin"))
-    
+    if not session.get("pode_acessar"):
+        return redirect(url_for("rotas.inicio"))
+
     cargo = buscar_cargo(session['user_id'])
     if cargo in ('Secretaria', 'Professor'):
         
@@ -98,7 +105,8 @@ def detalhe_denuncia(id):
         if denuncia == 'no':
             return "Denúncia não encontrada", 404
         
-        return render_template("DenunciaAberta.html", usuario=denuncia,tipo_usuario='secretaria')
+        session.pop("pode_acessar", None)
+        return render_template("DenunciaAberta.html", usuario=denuncia,tipo_usuario='secretaria',usuario2=buscar_usuario(session['user_id']))
     
     elif cargo == 'Aluno':
         denuncia = pegar_na_denuncia_haha(id)
@@ -117,7 +125,8 @@ def detalhe_denuncia(id):
         </script>
         """
 
-        return render_template("DenunciaAberta.html", usuario=denuncia,tipo_usuario='Aluno')
+        session.pop("pode_acessar", None)
+        return render_template("DenunciaAberta.html", usuario=denuncia,tipo_usuario='Aluno',usuario2=buscar_usuario(session['user_id']))
     else:
         return redirect(url_for('rotas.inicio'))
 ######----------######
@@ -222,23 +231,30 @@ def alunos():
         alunos_por_turma = buscar_nome_aluno()
 
         if request.method == "POST":
-            turma = request.form.get("turma")
-            aluno = request.form.get("aluno")
+            gestao = pegar_no_nome(session['user_id'])
             pin = request.form.get("pin")
-            novo_pin(pin, aluno, turma)
-            return f"""
+            if pin == '0' or pin == '000000':
+                return f"""
             <script>
-                alert("Pin de {aluno} de turma {turma} atualizado com sucesso!");
+                alert("não pode ser somente 0");
+                window.location.href = "{url_for('rotasecretaria.gestao')}";
+            </script>
+        """
+            else:
+                novo_pin_secretaria(pin, gestao)
+                return f"""
+            <script>
+                alert("Pin atualizado com sucesso!");
                 window.location.href = "{url_for('rotas.inicio')}";
             </script>
         """
         
-        return render_template("recuperacao_pin.html", alunos_por_turma=alunos_por_turma)
+        return render_template("recuperacao_pin.html", alunos_por_turma=alunos_por_turma, tipo='Aluno',usuario=buscar_usuario(session['user_id']))
     else:
         return redirect(url_for('rotas.inicio'))
 ######----------######
 
-@rota_secretaria.route('/MudarPIN/Gestao', methods=['GET', 'POST'])
+@rota_secretaria.route('/MudarPIN/gestaomudanças', methods=['GET', 'POST'])
 def gestao():
     if "user_id" not in session:
         return redirect(url_for('rotalogin.cadastro'))
@@ -252,15 +268,92 @@ def gestao():
         if request.method == "POST":
             gestao = pegar_no_nome(session['user_id'])
             pin = request.form.get("pin")
+
             novo_pin_secretaria(pin, gestao)
             return f"""
             <script>
-                alert("Pin de {gestao} de hhahaduhsufqwuifqwiogasmvak atualizado com sucesso!");
+                alert("Pin de {gestao} atualizado com sucesso!");
                 window.location.href = "{url_for('rotas.inicio')}";
             </script>
         """
         
-        return render_template("recuperacao_pin_secretaria.html", alunos_por_turma=alunos_por_turma)
+        return render_template("recuperacao_pin.html", alunos_por_turma=alunos_por_turma, tipo='Gestão',usuario=buscar_usuario(session['user_id']))
     else:
         return redirect(url_for('rotas.inicio'))
 ######----------######
+
+@rota_secretaria.route('/Alunos', methods=['GET'])
+def listar_alunos():
+    if "user_id" not in session:
+        return redirect(url_for('rotalogin.cadastro'))
+
+    if not usuario_tem_pin(session["user_id"]):
+        return redirect(url_for("rotas.cadastro2_pin"))
+
+    cargo = buscar_cargo(session['user_id'])
+    if cargo not in ('Secretaria', 'Professor'):
+        return redirect(url_for('rotas.inicio'))
+
+    ano = request.args.get("Ano", "Todos")
+    serie = request.args.get("Serie", "Todos")
+
+    if ano == "Todos":
+        serie = "Todos"
+
+    if request.method == 'POST':
+        querer = request.form.get('Olavo', 'Tudo')
+        return redirect(url_for('rotas.inicio', filtro=querer))
+    
+    alunos = listar_alunose(ano=ano, serie=serie)
+
+    if alunos:
+        alunos = listar_alunose(ano=ano, serie=serie)
+
+# Adiciona denúncias totais e aprovadas a cada aluno
+        alunos_processados = []
+
+        for a in alunos:
+            nome = a[0]
+            total = listar_denuncias(nome)
+            aprov = listar_aprovacao(nome)
+
+    # adiciona ao final da tupla (nome, turma, email, ano, total, aprobadas)
+            alunos_processados.append((*a, total, aprov))
+
+# Paginação em cima da lista já processada
+        page = int(request.args.get("page", 1))
+        per_page = 10
+        start = (page - 1) * per_page
+        end = start + per_page
+
+        denuncias_paginadas = alunos_processados[start:end]
+        total_pages = (len(alunos_processados) + per_page - 1) // per_page
+
+        return render_template(
+    "aluno.html",
+    alunos_por_turma=denuncias_paginadas,
+    usuario=buscar_usuario(session['user_id']),
+    filtro_ano=ano,
+    filtro_serie=serie,
+    page=page,
+    total_pages=total_pages
+    )
+
+    else:
+        page = int(request.args.get("page", 1))
+        per_page = 10
+        start = (page - 1) * per_page 
+        end = start + per_page
+
+        denuncias_paginadas = alunos[start:end]
+        total_pages = (len(alunos) + per_page - 1) // per_page
+    
+        return render_template(
+        "aluno.html",
+        alunos_por_turma=denuncias_paginadas,
+        usuario=buscar_usuario(session['user_id']),
+        filtro_ano=ano,
+        filtro_serie=serie,
+        alunose = alunos,
+        page=page,total_pages=total_pages
+        )

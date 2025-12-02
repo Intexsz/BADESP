@@ -2,6 +2,7 @@ import sqlite3
 from datetime import datetime, timedelta
 from app.database.db_usuario import buscar_usuario, pegar_no_nome
 from openai import OpenAI
+import re
 
 client = OpenAI(api_key='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')
 
@@ -51,11 +52,12 @@ def IA(frase):
         {"role": "user", "content": frase}
     ])
     texto_resposta = response.output[0].content[0].text.strip()
+    print(texto_resposta)
     return texto_resposta
 
 # aqui ira criar a denuncia
 def criar_denuncia(titulo, tipo, descricao, user_id, status, cargo, especifico):
-    data = datetime.now().strftime("%d/%m/%Y %H:%M") # data de quando foi criada
+    data = datetime.now().strftime("%H:%M %d/%m/%Y") # data de quando foi criada
     conn = sqlite3.connect('denuncias.db')
     usuario = buscar_usuario(user_id)
     usuario_dict = {
@@ -69,23 +71,19 @@ def criar_denuncia(titulo, tipo, descricao, user_id, status, cargo, especifico):
     'ano': usuario[7],
     'turma': usuario[8]}
 
-    #texto_resposta = IA(descricao)
-    #match = re.search(
-    #r"Frase reformulada[:\-–]?\s*[\"']?(.*?)[\"']?\s*(?:\.|\n|$).*?"
-    #r"Tipo de gravidade[:\-–]?\s*[\"']?(Baixa|M[eé]dia|Alta)[\"']?",
-    #texto_resposta,
-    #re.IGNORECASE | re.DOTALL)
+    texto_resposta = IA(descricao)
+    match = re.search(
+    r"Frase reformulada[:\-–]?\s*[\"']?(.*?)[\"']?\s*(?:\.|\n|$).*?Tipo de gravidade[:\-–]?\s*[\"']?(Baixa|M[eé]dia|Alta)[\"']?",
+    texto_resposta,
+    re.IGNORECASE | re.DOTALL
+)
+    if match:
+        descricao_ia = match.group(1).strip()
+        gravidade = match.group(2).capitalize()
+    else:
+        descricao_ia = f"❌Erro na IA.❌ \n\n {texto_resposta}"
+        gravidade = 'Desconhecido'
 
-    #if match:
-    #    descricao_ia = match.group(1).strip()
-    #    gravidade = match.group(2).capitalize()
-    #else:
-    #    descricao_ia = f"❌Erro na IA.❌ \n\n {texto_resposta}"
-    #    gravidade = 'Desconhecido'
-
-    descricao_ia = descricao
-    print(usuario_dict['email'])
-    gravidade = 'Desconhecido'
     ano = usuario_dict['ano']
     turma = usuario_dict['turma']
     nome = usuario_dict["nome"]
@@ -245,7 +243,7 @@ def expirar():
         if status != "Visto." or not data_str:
             continue
 
-        data_visto = datetime.strptime(data_str, "%d/%m/%Y %H:%M")
+        data_visto = datetime.strptime(data_str, "%H:%M %d/%m/%Y")
 
         # expira 7 segundos depois de ter sido vista
         if datetime.now() > data_visto + timedelta(days=7):
@@ -271,10 +269,10 @@ def checagem_denunciahehe(user_id):
         return True  # nunca criou denúncia, pode criar
 
     ultima_data_str = resultado[0]
-    ultima_data = datetime.strptime(ultima_data_str, "%d/%m/%Y %H:%M")
+    ultima_data = datetime.strptime(ultima_data_str, "%H:%M %d/%m/%Y")
 
     # Checa se passaram 30 minutos desde a última denúncia para evitar spam
-    return datetime.now() >= ultima_data + timedelta(seconds=3)
+    return datetime.now() >= ultima_data + timedelta(seconds=30)
 ######----------######
 
 # aqui é quando ele abre a denuncia, deixando ela em Visto.
@@ -288,7 +286,7 @@ def abrir_denunciabanquinho(id, cargo, nome, id_user):
 
     if especifico != 'any' and especifico != nome_usuario:
         return
-    data = datetime.now().strftime("%d/%m/%Y %H:%M") 
+    data = datetime.now().strftime("%H:%M %d/%m/%Y") 
     conn = sqlite3.connect('denuncias.db')
     cursor = conn.cursor()
     # seleciona o datavisto
@@ -422,3 +420,26 @@ def buscar_especifico(id):
     resultado = cursor.fetchone()
     conn.close()
     return resultado[0] if resultado else None
+
+def listar_denuncias(nome):
+    with sqlite3.connect("denuncias.db") as conn:
+        cursor = conn.cursor()
+        cursor.execute("""
+            SELECT COUNT(*)
+            FROM denuncias
+            WHERE nome = ?
+        """, (nome,))
+        
+        return cursor.fetchone()[0]
+
+def listar_aprovacao(nome):
+    with sqlite3.connect("denuncias.db") as conn:
+        cursor = conn.cursor()
+        cursor.execute("""
+            SELECT COUNT(*)
+            FROM denuncias
+            WHERE nome = ?
+            AND status = 'Aprovado.'
+        """, (nome,))
+        
+        return cursor.fetchone()[0]
