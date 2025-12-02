@@ -28,7 +28,7 @@ def processar_login(cargo):
                 request.form.get("credential") or request.args.get("credential")
 
         if not token:
-            return jsonify({"error": "Token não fornecido"}), 400
+            return jsonify({"error": "Erro: Token não fornecido."}), 400
 
         idinfo = id_token.verify_oauth2_token(
             token,
@@ -50,11 +50,9 @@ def processar_login(cargo):
         return jsonify({"status": "ok", "user": user_data})
 
     except ValueError as ve:
-        print("Erro ao validar token:", ve)
-        return jsonify({"error": "Token inválido"}), 400
+        return jsonify({"error": f"Token inválido: {str(ve)}"}), 400
     except Exception as e:
         import traceback
-        print("ERRO GERAL NO LOGIN:", e)
         traceback.print_exc()
         return jsonify({"error": f"Erro interno: {str(e)}"}), 500
 ######----------######

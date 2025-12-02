@@ -236,7 +236,7 @@ def denuncia():
             return f"""
     <script>
         window.location.href = "{url_for('rotas.inicio')}";
-        alert("Você precisa esperar 30 minutos antes de criar outra denúncia.");
+        alert("Você precisa esperar 5 minutos antes de criar outra denúncia.");
     </script>
     """
         

@@ -271,8 +271,7 @@ def checagem_denunciahehe(user_id):
     ultima_data_str = resultado[0]
     ultima_data = datetime.strptime(ultima_data_str, "%H:%M %d/%m/%Y")
 
-    # Checa se passaram 30 minutos desde a última denúncia para evitar spam
-    return datetime.now() >= ultima_data + timedelta(seconds=30)
+    return datetime.now() >= ultima_data + timedelta(minutes=5)
 ######----------######
 
 # aqui é quando ele abre a denuncia, deixando ela em Visto.

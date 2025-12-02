@@ -1,0 +1,12 @@
+2025-12-02 17:18:55,848 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-12-02 17:18:55,848 - INFO - [33mPress CTRL+C to quit[0m
+2025-12-02 17:18:55,851 - INFO -  * Restarting with stat
+2025-12-02 17:18:57,668 - WARNING -  * Debugger is active!
+2025-12-02 17:18:57,670 - INFO -  * Debugger PIN: 674-560-654
+2025-12-02 17:19:10,715 - INFO - 127.0.0.1 - - [02/Dec/2025 17:19:10] "GET /Ajuda HTTP/1.1" 200 -
+2025-12-02 17:19:10,735 - INFO - 127.0.0.1 - - [02/Dec/2025 17:19:10] "[33mGET /static/js/Ajuda.js HTTP/1.1[0m" 404 -
+2025-12-02 17:19:10,759 - INFO - 127.0.0.1 - - [02/Dec/2025 17:19:10] "[36mGET /static/Ajuda.css HTTP/1.1[0m" 304 -
+2025-12-02 17:19:10,784 - INFO - 127.0.0.1 - - [02/Dec/2025 17:19:10] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-02 17:19:13,036 - INFO - 127.0.0.1 - - [02/Dec/2025 17:19:13] "GET /Login HTTP/1.1" 200 -
+2025-12-02 17:19:13,056 - INFO - 127.0.0.1 - - [02/Dec/2025 17:19:13] "[36mGET /static/cadastro.css HTTP/1.1[0m" 304 -
