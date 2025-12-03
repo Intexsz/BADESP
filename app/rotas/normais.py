@@ -4,6 +4,13 @@ from app.database.db_usuario import buscar_cargo, buscar_usuario, buscar_nome_se
 from app.database.db_denuncia import buscar_status_denuncia, mostrar_denuncias, apagar_denuncia, criar_denuncia, expirar, checagem_denunciahehe
 from app.database.db_usuario import usuario_tem_pin, cadastrar_pin, check_pin
 from flask_cors import CORS
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+import smtplib
+
+######-E-Mail-######
+remetente = 'denunciasdehaytalo@gmail.com'
+senha = 'fpui zjlf ammk kpym'
 
 app = Flask(__name__)
 rotas_bp = Blueprint('rotas', __name__)
@@ -23,6 +30,26 @@ google = oauth.register(
 )
 
 ###### PAGINAS NORMAIS ######
+
+######-TESTE-######
+def envio_email(destinario, aluno):
+    # Criando a mensagem
+    msg = MIMEMultipart()
+    msg['From'] = remetente
+    msg['To'] = destinario
+    msg['Subject'] = 'Marcação em Denuncia'
+
+    corpo = f'Este email foi enviado a você pois o {aluno} o marcou em uma denúncia'
+    msg.attach(MIMEText(corpo, 'plain'))
+
+    # Configurando o servidor SMTP do Gmail
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()  # Segurança
+    server.login(remetente, senha)
+    texto = msg.as_string()
+    server.sendmail(remetente, destinario, texto)
+    server.quit()
+######-TESTE-######
 
 @rotas_bp.route('/Login2', methods=['GET', 'POST'])
 def cadastro2_pin():
