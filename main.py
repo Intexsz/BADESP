@@ -22,7 +22,6 @@ google = oauth.register(
     client_kwargs={'scope': 'openid email profile'},
 )
 
-# Registra os blueprints
 app.register_blueprint(rotas_bp)
 app.register_blueprint(rota_login)
 app.register_blueprint(rota_secretaria)
