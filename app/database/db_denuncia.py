@@ -70,20 +70,18 @@ def criar_denuncia(titulo, tipo, descricao, user_id, status, cargo, especifico):
     'ano': usuario[7],
     'turma': usuario[8]}
 
-    #texto_resposta = IA(descricao)
-    #match = re.search(
-    #r"Frase reformulada[:\-–]?\s*[\"']?(.*?)[\"']?\s*(?:\.|\n|$).*?Tipo de gravidade[:\-–]?\s*[\"']?(Baixa|M[eé]dia|Alta)[\"']?",
-    #texto_resposta,
-    #re.IGNORECASE | re.DOTALL)
-
-    #if match:
-    #    descricao_ia = match.group(1).strip()
-    #    gravidade = match.group(2).capitalize()
-    #else:
-    #    descricao_ia = f"❌Erro na IA.❌ \n\n {texto_resposta}"
-    #    gravidade = 'Desconhecido'
-    descricao_ia = f"❌Erro na IA.❌"
-    gravidade = 'Desconhecido'
+    texto_resposta = IA(descricao)
+    match = re.search(
+    r"Frase reformulada[:\-–]?\s*[\"']?(.*?)[\"']?\s*(?:\.|\n|$).*?Tipo de gravidade[:\-–]?\s*[\"']?(Baixa|M[eé]dia|Alta)[\"']?",
+    texto_resposta,
+    re.IGNORECASE | re.DOTALL)
+    
+    if match:
+        descricao_ia = match.group(1).strip()
+        gravidade = match.group(2).capitalize()
+    else:
+        descricao_ia = f"❌Erro na IA.❌ \n\n {texto_resposta}"
+        gravidade = 'Desconhecido'
 
     ano = usuario_dict['ano']
     turma = usuario_dict['turma']
