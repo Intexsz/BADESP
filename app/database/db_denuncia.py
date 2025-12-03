@@ -52,7 +52,6 @@ def IA(frase):
         {"role": "user", "content": frase}
     ])
     texto_resposta = response.output[0].content[0].text.strip()
-    print(texto_resposta)
     return texto_resposta
 
 # aqui ira criar a denuncia
