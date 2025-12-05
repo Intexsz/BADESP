@@ -30,7 +30,7 @@
       <li><a href="/Ajuda"><span class="material-icons">help_outline</span> Ajuda</a></li>
       <li><a href="/MudarPIN"><span class="material-icons">pin</span> Mudar o PIN</a></li>
 
-      <li><a href="/Logout" class="logout" onclick="confirmarLogout()"><span class="material-icons">logout</span>
+      <li><a class="logout" onclick="confirmarLogout()"><span class="material-icons">logout</span>
           Deslogar</a></li>
     </ul>
   </nav>
@@ -225,6 +225,7 @@
 
     function confirmarLogout() {
       if (confirm("Deseja realmente sair?")) {
+        window.location.href = "Logout"
         alert("Logout realizado com sucesso!");
       }
     }
