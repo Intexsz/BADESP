@@ -42,6 +42,7 @@ def allow_detail():
     if request.method == 'POST':
         id = request.form.get('idzin')
         session["allow_detail"] = True
+        session["allow_folder"] = True
         return redirect(url_for(f"rotasecretaria.detalhe_denuncia", id=id))
 
 @secretaria.route('/allow_folder', methods=['POST'])
@@ -106,6 +107,7 @@ def detalhe_denuncia(id):
             return "Denúncia não encontrada", 404
         
         session.pop("allow_folder", None)
+        session.pop("allow_detail", None)
         return render_template("denuncia_aberta.html", usuario=denuncia,tipo_usuario='secretaria',usuario2=buscar_usuario(session['user_id']))
     
     elif cargo == 'Aluno':
