@@ -7,7 +7,7 @@ import re
 client = OpenAI(api_key='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')
 
 # iniciar banco de dados de denuncia
-def criar_tabela():
+def create_table():
     conn = sqlite3.connect('denuncias.db')
     cursor = conn.cursor()
     cursor.execute('''
@@ -55,7 +55,7 @@ def IA(frase):
     return texto_resposta
 
 # aqui ira criar a denuncia
-def criar_denuncia(titulo, tipo, descricao, user_id, status, cargo, especifico):
+def create_report(titulo, tipo, descricao, user_id, status, cargo, especifico):
     data = datetime.now().strftime("%H:%M %d/%m/%Y") # data de quando foi criada
     conn = sqlite3.connect('denuncias.db')
     usuario = buscar_usuario(user_id)
@@ -70,18 +70,21 @@ def criar_denuncia(titulo, tipo, descricao, user_id, status, cargo, especifico):
     'ano': usuario[7],
     'turma': usuario[8]}
 
-    texto_resposta = IA(descricao)
-    match = re.search(
-    r"Frase reformulada[:\-–]?\s*[\"']?(.*?)[\"']?\s*(?:\.|\n|$).*?Tipo de gravidade[:\-–]?\s*[\"']?(Baixa|M[eé]dia|Alta)[\"']?",
-    texto_resposta,
-    re.IGNORECASE | re.DOTALL)
+    #texto_resposta = IA(descricao)
+    #match = re.search(
+    #r"Frase reformulada[:\-–]?\s*[\"']?(.*?)[\"']?\s*(?:\.|\n|$).*?Tipo de gravidade[:\-–]?\s*[\"']?(Baixa|M[eé]dia|Alta)[\"']?",
+    #texto_resposta,
+    #re.IGNORECASE | re.DOTALL)
     
-    if match:
-        descricao_ia = match.group(1).strip()
-        gravidade = match.group(2).capitalize()
-    else:
-        descricao_ia = f"❌Erro na IA.❌ \n\n {texto_resposta}"
-        gravidade = 'Desconhecido'
+    #if match:
+    #    descricao_ia = match.group(1).strip()
+    #    gravidade = match.group(2).capitalize()
+    #else:
+    #    descricao_ia = f"❌Erro na IA.❌ \n\n {texto_resposta}"
+    #    gravidade = 'Desconhecido'
+    
+    descricao_ia = f"❌Erro na IA.❌"
+    gravidade = 'Desconhecido'
 
     ano = usuario_dict['ano']
     turma = usuario_dict['turma']
@@ -95,7 +98,7 @@ def criar_denuncia(titulo, tipo, descricao, user_id, status, cargo, especifico):
     conn.close()
 
 # aqui vai pegar as denuncias e retornar
-def mostrar_denuncias(user_id, cargo, tipo):
+def show_reports(user_id, cargo, tipo):
     conn = sqlite3.connect('denuncias.db')
     cursor = conn.cursor()
     nomezin = pegar_no_nome(user_id)
@@ -213,7 +216,7 @@ def mostrar_denuncias(user_id, cargo, tipo):
         return denuncias
 
 # aqui é apagar as denuncias
-def apagar_denuncia(id, user_id):
+def delete_reports(id, user_id):
     conn = sqlite3.connect('denuncias.db')
     cursor = conn.cursor()
     cursor.execute('DELETE FROM denuncias WHERE id = ? AND user_id = ?', (id, user_id))
@@ -221,7 +224,7 @@ def apagar_denuncia(id, user_id):
     conn.close()
 
 # aqui vai buscar o status da denuncia
-def buscar_status_denuncia(id):
+def get_report_status(id):
     conn = sqlite3.connect('denuncias.db')
     cursor = conn.cursor()
     cursor.execute('SELECT status FROM denuncias WHERE id = ?', (id,))
@@ -229,8 +232,8 @@ def buscar_status_denuncia(id):
     conn.close()
     return resultado[0] if resultado else None
 
-# aqui vai ser aonde o status vai expirar quaso a denuncia fique parada durante 7 dias
-def expirar():
+# aqui vai ser aonde o status vai expire quaso a denuncia fique parada durante 7 dias
+def expire():
     conn = sqlite3.connect('denuncias.db')
     cursor = conn.cursor()
     cursor.execute('SELECT id, datavisto, status FROM denuncias')
@@ -244,7 +247,6 @@ def expirar():
 
         data_visto = datetime.strptime(data_str, "%H:%M %d/%m/%Y")
 
-        # expira 7 segundos depois de ter sido vista
         if datetime.now() > data_visto + timedelta(days=7):
             cursor.execute(
                 'UPDATE denuncias SET status = ? WHERE id = ? AND status = ?',
@@ -255,7 +257,7 @@ def expirar():
     conn.close()
 
 # checa se o usuario ja criou uma denuncia a menos de 30 minutos -feito com ajuda de IA
-def checagem_denunciahehe(user_id):
+def check_reports(user_id):
     conn = sqlite3.connect('denuncias.db')
     cursor = conn.cursor()
 
@@ -274,12 +276,12 @@ def checagem_denunciahehe(user_id):
 ######----------######
 
 # aqui é quando ele abre a denuncia, deixando ela em Visto.
-def abrir_denunciabanquinho(id, cargo, nome, id_user):
+def open_report_db(id, cargo, nome, id_user):
     # se não for secretaria, vaza
     if cargo != "Secretaria" and cargo != "Professor":
         return
     # se o nome especificado por diferente, retorne
-    especifico = buscar_especifico(id)
+    especifico = get_specific(id)
     nome_usuario = pegar_no_nome(id_user)
 
     if especifico != 'any' and especifico != nome_usuario:
@@ -316,7 +318,7 @@ def abrir_denunciabanquinho(id, cargo, nome, id_user):
     conn.commit()
     conn.close()
 
-def pegar_na_denuncia_haha(id):
+def get_report(id):
     conn = sqlite3.connect('denuncias.db')
     cursor = conn.cursor()
 
@@ -353,7 +355,7 @@ def pegar_na_denuncia_haha(id):
         return 'no'
 
     
-def buscar_visto(id):
+def get_open(id):
     conn = sqlite3.connect('denuncias.db')
     cursor = conn.cursor()
     cursor.execute('SELECT visto FROM denuncias WHERE id = ?', (id,))
@@ -361,7 +363,7 @@ def buscar_visto(id):
     conn.close()
     return resultado[0] if resultado else None
 
-def buscar_comentario(id):
+def check_coment(id):
     conn = sqlite3.connect('denuncias.db')
     cursor = conn.cursor()
     cursor.execute('SELECT comentario FROM denuncias WHERE id = ?', (id,))
@@ -369,12 +371,12 @@ def buscar_comentario(id):
     conn.close()
     return resultado[0] if resultado else None
 
-def atualizar_statuse(id, cargo, novo, id_user):
+def update_status(id, cargo, novo, id_user):
     # se não for secretaria, vaza
     if cargo != "Secretaria" and cargo != "Professor":
         return
     # se não for o nome especifico, vaza
-    especifico = buscar_especifico(id)
+    especifico = get_specific(id)
     nome_usuario = pegar_no_nome(id_user)
     
     if especifico != 'any' and especifico != nome_usuario:
@@ -391,12 +393,12 @@ def atualizar_statuse(id, cargo, novo, id_user):
     conn.commit()
     conn.close()
 
-def publicar_comentario(comentario, id, cargo, id_user):
+def post_comment(comentario, id, cargo, id_user):
     # se não for secretaria, vaza
     if cargo != "Secretaria" and cargo != "Professor":
         return
     # se não for nome especifico, vaza
-    especifico = buscar_especifico(id)
+    especifico = get_specific(id)
     nome_usuario = pegar_no_nome(id_user)
     
     if especifico != 'any' and especifico != nome_usuario:
@@ -411,7 +413,7 @@ def publicar_comentario(comentario, id, cargo, id_user):
     conn.commit()
     conn.close()
 
-def buscar_especifico(id):
+def get_specific(id):
     conn = sqlite3.connect('denuncias.db')
     cursor = conn.cursor()
     cursor.execute('SELECT especifico FROM denuncias WHERE id = ?', (id,))
@@ -419,7 +421,7 @@ def buscar_especifico(id):
     conn.close()
     return resultado[0] if resultado else None
 
-def listar_denuncias(nome):
+def list_reports(nome):
     with sqlite3.connect("denuncias.db") as conn:
         cursor = conn.cursor()
         cursor.execute("""
@@ -430,7 +432,7 @@ def listar_denuncias(nome):
         
         return cursor.fetchone()[0]
 
-def listar_aprovacao(nome):
+def list_approved(nome):
     with sqlite3.connect("denuncias.db") as conn:
         cursor = conn.cursor()
         cursor.execute("""

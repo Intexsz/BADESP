@@ -26,12 +26,7 @@ def init_db():
 logging.basicConfig(filename='error_db.log', level=logging.ERROR,
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
-def salvar_usuario(user_data):
-    """
-    Salva um usuário no banco de dados SQLite.
-    Se o usuário já existir, ignora a inserção.
-    Logs detalhados em caso de erro.
-    """
+def save_user(user_data):
     try:
         with sqlite3.connect("usuarios.db") as conn:
             cursor = conn.cursor()
@@ -80,7 +75,7 @@ def buscar_usuario(user_id):
         return cursor.fetchone()
 
 # buscar os cargos e verificar qual é o cargo do usuario atual, se é aluno ou professor ou secretaria
-def buscar_cargo(user_id):
+def get_role(user_id):
     with sqlite3.connect("usuarios.db") as conn:
         cursor = conn.cursor()
         cursor.execute("SELECT cargo FROM usuarios WHERE id = ?", (user_id,))
@@ -93,7 +88,14 @@ def pegar_no_nome(id):
         cursor.execute("SELECT nome FROM usuarios WHERE id = ?", (id,))
         resultado = cursor.fetchone()
         return resultado[0] if resultado else None
-    
+
+def buscar_email(nome):
+    with sqlite3.connect('usuarios.db') as conn:
+        cursor = conn.cursor()
+        cursor.execute('SELECT email FROM usuarios WHERE nome = ?', (nome,))
+        resultado = cursor.fetchone()
+        return resultado[0] if resultado else None
+
 def buscar_nome_secretaria():
     with sqlite3.connect("usuarios.db") as conn:
         cursor = conn.cursor()

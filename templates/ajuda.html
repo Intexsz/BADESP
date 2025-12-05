@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icone.png') }}">
     <title>B.A.D.E.S.P - Ajuda</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='Ajuda.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='ajuda.css') }}">
     <script src="{{ url_for('static', filename='js/Ajuda.js') }}" defer></script>
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -51,7 +51,6 @@
             <li><a href="/MudarPIN"><span class="material-icons">pin</span> Mudar o PIN</a></li>
             {% endif %}
 
-            <!-- DESLOGAR VERMELHO -->
             <li><a href="/Logout" class="logout" onclick="confirmarLogout()"><span class="material-icons">logout</span>
                     Deslogar</a></li>
         </ul>
@@ -102,7 +101,7 @@
             </div>
             <div class="faq">
                 <h3>Quantas denúncias eu posso realizar?</h3>
-                <p>Você poderá realizar uma denúncias a cada 30 minutos.</p>
+                <p>Você poderá realizar uma denúncias a cada 5 minutos.</p>
             </div>
             <div class="faq">
                 <h3>Posso fazer alterações nas denúncias após o envio?</h3>

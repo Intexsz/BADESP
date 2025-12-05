@@ -28,7 +28,6 @@
       <li><a href="/Ajuda"><span class="material-icons">help_outline</span> Ajuda</a></li>
       <li><a href="/Denuncia"><span class="material-icons">report</span> Fazer Denúncia</a></li>
 
-      <!-- DESLOGAR VERMELHO -->
       <li><a href="/Logout" class="logout" onclick="confirmarLogout()"><span class="material-icons">logout</span> Deslogar</a></li>
     </ul>
   </nav>
@@ -53,8 +52,8 @@
     <br>
     <br>
     <div id="denuncias-container">
-      {% if denuncias %}
-      {% for d in denuncias %}
+      {% if reports %}
+      {% for d in reports %}
       <div class="denuncia-card" id="denuncia-{{ d[0] }}">
         <h3>{{ d[1] }}</h3>
         <br>
@@ -115,7 +114,14 @@
 
         const form = document.createElement("form");
         form.method = "POST";
-        form.action = `/autoriza_resolvidas/${denunciaId}`;
+        form.action = `/allow_detail`;
+        document.body.appendChild(form);
+
+        const inputIdzin = document.createElement("input");
+        inputIdzin.type = "hidden";
+        inputIdzin.name = "idzin"; 
+        inputIdzin.value = denunciaId
+        form.appendChild(inputIdzin);
         document.body.appendChild(form);
         form.submit();
       } else {

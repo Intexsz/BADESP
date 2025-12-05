@@ -22,7 +22,6 @@
     </div>
   </header>
 
-  <!-- Menu lateral -->
   <nav class="sidebar glass sobreposto">
     <ul>
       <li><a href="/Inicio"><span class="material-icons">home</span> Início</a></li>
@@ -50,7 +49,6 @@
       <li><a href="/MudarPIN"><span class="material-icons">pin</span> Mudar o PIN</a></li>
       {% endif %}
 
-      <!-- DESLOGAR VERMELHO -->
       <li><a href="/Logout" class="logout" onclick="confirmarLogout()"><span class="material-icons">logout</span>
           Deslogar</a></li>
     </ul>
@@ -154,7 +152,6 @@
         {% endif %}
       </div>
 
-      <!-- Botões diferentes por tipo de usuário -->
       {% if tipo_usuario == 'secretaria' %}
       <br>
       <form action="{{ url_for('rotasecretaria.aprovar', id=usuario['id']) }}" method="GET"
@@ -177,7 +174,7 @@
       <br>
       <br>
       <form action="{{ url_for('rotasecretaria.comentar', id=usuario['id']) }}" method="POST">
-        <textarea name="comentario" maxlength="30" placeholder="Adicionar comentário..." style="text-align: center;"></textarea>
+        <textarea name="comentario" maxlength="255" placeholder="Adicionar comentário..." style="text-align: center;"></textarea>
         <button type="submit" class="abrir-btn" onclick="return confirmarTexto()">Enviar</button>
       </form>
       {% endif %}

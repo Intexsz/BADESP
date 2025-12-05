@@ -31,7 +31,6 @@
             <li><a href="/Ajuda"><span class="material-icons">help_outline</span> Ajuda</a></li>
             <li><a href="/MudarPIN"><span class="material-icons">pin</span> Mudar o PIN</a></li>
 
-            <!-- DESLOGAR VERMELHO -->
             <li><a href="/Logout" class="logout" onclick="confirmarLogout()"><span class="material-icons">logout</span>
                     Deslogar</a></li>
         </ul>
@@ -41,7 +40,6 @@
     <main>
         <div class="container">
             <h2>Alterar PIN</h2>
-            <!-- Formulário -->
             <p>Turmas disponiveis:</p>
             <br>
             <form id="alterar-pin-form" method="POST" autocomplete="off">
@@ -50,7 +48,9 @@
                     <select id="select-turma" name="turma" required>
                         <option value="" disabled selected>Selecione a turma</option>
                         {% for turma in alunos_por_turma.keys() %}
+                        {% if not turma == 'None°None' %}                        
                         <option value="{{ turma }}">{{ turma }}</option>
+                        {% endif %}
                         {% endfor %}
                     </select>
                 </div>
@@ -86,7 +86,6 @@
             <h1>Alterar PIN</h1>
             <br>
 
-            <!-- Formulário -->
             <form method="POST" id="alterar-pin-form" autocomplete="off">
 
                 <div class="input-container">

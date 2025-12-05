@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, render_template, session, redirect, u
 from google.oauth2 import id_token
 from google.auth.transport import requests
 from authlib.integrations.flask_client import OAuth
-from app.database.db_usuario import salvar_usuario
+from app.database.db_usuario import save_user
 
 app = Flask(__name__)
 rota_login = Blueprint('rotalogin', __name__)
@@ -45,7 +45,7 @@ def processar_login(cargo):
             "cargo": cargo
         }
 
-        salvar_usuario(user_data)
+        save_user(user_data)
         session["user_id"] = user_data["id"]
         return jsonify({"status": "ok", "user": user_data})
 

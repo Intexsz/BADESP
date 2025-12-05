@@ -96,18 +96,18 @@
 2025-12-03 14:51:58,412 - INFO - 127.0.0.1 - - [03/Dec/2025 14:51:58] "GET /static/icone.png HTTP/1.1" 200 -
 2025-12-03 14:51:59,976 - INFO - 127.0.0.1 - - [03/Dec/2025 14:51:59] "GET /Login/Secretaria HTTP/1.1" 200 -
 2025-12-03 14:51:59,997 - INFO - 127.0.0.1 - - [03/Dec/2025 14:51:59] "[36mGET /static/cadastro.css HTTP/1.1[0m" 304 -
-2025-12-03 15:01:04,269 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\rota_secretaria.py', reloading
+2025-12-03 15:01:04,269 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
 2025-12-03 15:01:04,396 - INFO -  * Restarting with stat
 2025-12-03 15:01:05,676 - WARNING -  * Debugger is active!
 2025-12-03 15:01:05,677 - INFO -  * Debugger PIN: 674-560-654
-2025-12-03 15:17:40,034 - ERROR - 127.0.0.1 - - [03/Dec/2025 15:17:40] code 400, message Bad request version ('jj\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06S')
-2025-12-03 15:17:40,040 - INFO - 127.0.0.1 - - [03/Dec/2025 15:17:40] "[31m[1m\x16\x03\x01\x06À\x01\x00\x06¼\x03\x03-\x15_\x01ça\x0e"ñm¥\x8b.\x0cÏÌ\x107Ê\x0e%ò\x98­kÐ,îõÏ?ô  S\x90´=oª¾t¿`\\cX²\x8drxyxz¬r%Ö*ïR\x1bz\x85y\x00 jj\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06S[0m" 400 -
-2025-12-03 15:17:40,041 - ERROR - 127.0.0.1 - - [03/Dec/2025 15:17:40] code 400, message Bad request version ('ì¯ø\x00')
-2025-12-03 15:17:40,042 - INFO - 127.0.0.1 - - [03/Dec/2025 15:17:40] "[31m[1m\x16\x03\x01\x07\x00\x01\x00\x06ü\x03\x03ÒÌ\x85=[ì\x01B\x08iÄE\x1a\x87\x9c\x1dsmö'{ÏÝÙu\x8cÑ[N\x8fî\x02 ¥\x8aÎß\x890ÉÒê\x88[¿kgh\x8f\x1d­¿¹Z\x90\x8cC^Ç\x04\x14\x1cì¯ø\x00 [0m" 400 -
-2025-12-03 15:17:40,043 - ERROR - 127.0.0.1 - - [03/Dec/2025 15:17:40] code 400, message Bad request version ('ºº\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x063\x1a\x1a\x00\x00\x00\x17\x00\x00DÍ\x00\x05\x00\x03\x02h2ÿ\x01\x00\x01\x00\x00')
-2025-12-03 15:17:40,043 - INFO - 127.0.0.1 - - [03/Dec/2025 15:17:40] "[31m[1m\x16\x03\x01\x06 \x01\x00\x06\x9c\x03\x03\x87êÑXP\x86)\x90\x1a\x8bxï\x15kÄO³Mµô%ñeÅ¢[ª\x8aºQóâ ¦A\x89\x99\x84ç[ö\x0eÎ¡²<\x9e>/ Þ/\x0fÐ\x01¹\x9cY\x01ëq\x98ì9¸\x00 ºº\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x063\x1a\x1a\x00\x00\x00\x17\x00\x00DÍ\x00\x05\x00\x03\x02h2ÿ\x01\x00\x01\x00\x00[0m" 400 -
+2025-12-03 15:17:40,034 - ERROR - 127.0.0.1 - - [03/Dec/2025 15:17:40] code 400, message Bad request version ('jj\x13\x01\x13\x02\x13\x03ï¿½+ï¿½/ï¿½,ï¿½0Ì©Ì¨ï¿½\x13ï¿½\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06S')
+2025-12-03 15:17:40,040 - INFO - 127.0.0.1 - - [03/Dec/2025 15:17:40] "[31m[1m\x16\x03\x01\x06ï¿½\x01\x00\x06ï¿½\x03\x03-\x15_\x01ï¿½a\x0e"ï¿½mï¿½\x8b.\x0cï¿½ï¿½\x107ï¿½\x0e%ï¿½\x98ï¿½kï¿½,ï¿½ï¿½ï¿½?ï¿½ ï¿½S\x90ï¿½=oï¿½ï¿½tï¿½`\\cXï¿½\x8drxyxzï¿½r%ï¿½*ï¿½R\x1bz\x85y\x00 jj\x13\x01\x13\x02\x13\x03ï¿½+ï¿½/ï¿½,ï¿½0Ì©Ì¨ï¿½\x13ï¿½\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06S[0m" 400 -
+2025-12-03 15:17:40,041 - ERROR - 127.0.0.1 - - [03/Dec/2025 15:17:40] code 400, message Bad request version ('ï¿½ï¿½\x00')
+2025-12-03 15:17:40,042 - INFO - 127.0.0.1 - - [03/Dec/2025 15:17:40] "[31m[1m\x16\x03\x01\x07\x00\x01\x00\x06ï¿½\x03\x03ï¿½ï¿½\x85=[ï¿½\x01B\x08iï¿½E\x1a\x87\x9c\x1dsmï¿½'{ï¿½ï¿½ï¿½u\x8cï¿½[N\x8fï¿½\x02 ï¿½\x8aï¿½ï¿½\x890ï¿½ï¿½ï¿½\x88[ï¿½kgh\x8f\x1dï¿½ï¿½ï¿½Z\x90\x8cC^ï¿½\x04\x14\x1cï¿½ï¿½\x00 [0m" 400 -
+2025-12-03 15:17:40,043 - ERROR - 127.0.0.1 - - [03/Dec/2025 15:17:40] code 400, message Bad request version ('ï¿½ï¿½\x13\x01\x13\x02\x13\x03ï¿½+ï¿½/ï¿½,ï¿½0Ì©Ì¨ï¿½\x13ï¿½\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x063\x1a\x1a\x00\x00\x00\x17\x00\x00Dï¿½\x00\x05\x00\x03\x02h2ï¿½\x01\x00\x01\x00\x00')
+2025-12-03 15:17:40,043 - INFO - 127.0.0.1 - - [03/Dec/2025 15:17:40] "[31m[1m\x16\x03\x01\x06ï¿½\x01\x00\x06\x9c\x03\x03\x87ï¿½ï¿½XP\x86)\x90\x1a\x8bxï¿½\x15kï¿½Oï¿½Mï¿½ï¿½%ï¿½eÅ¢[ï¿½\x8aï¿½Qï¿½ï¿½ ï¿½A\x89\x99\x84ï¿½[ï¿½\x0eÎ¡ï¿½<\x9e>/ ï¿½/\x0fï¿½\x01ï¿½\x9cY\x01ï¿½q\x98ï¿½9ï¿½\x00 ï¿½ï¿½\x13\x01\x13\x02\x13\x03ï¿½+ï¿½/ï¿½,ï¿½0Ì©Ì¨ï¿½\x13ï¿½\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x063\x1a\x1a\x00\x00\x00\x17\x00\x00Dï¿½\x00\x05\x00\x03\x02h2ï¿½\x01\x00\x01\x00\x00[0m" 400 -
 2025-12-03 15:17:40,044 - ERROR - 127.0.0.1 - - [03/Dec/2025 15:17:40] code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x06')
-2025-12-03 15:17:40,045 - INFO - 127.0.0.1 - - [03/Dec/2025 15:17:40] "[31m[1m\x16\x03\x01\x06 \x01\x00\x06\x9c\x03\x03÷\x99\x97¶!Í÷[0m" 400 -
+2025-12-03 15:17:40,045 - INFO - 127.0.0.1 - - [03/Dec/2025 15:17:40] "[31m[1m\x16\x03\x01\x06ï¿½\x01\x00\x06\x9c\x03\x03ï¿½\x99\x97ï¿½!ï¿½ï¿½[0m" 400 -
 2025-12-03 15:17:48,511 - INFO - 127.0.0.1 - - [03/Dec/2025 15:17:48] "GET /Login/Secretaria HTTP/1.1" 200 -
 2025-12-03 15:17:48,603 - INFO - 127.0.0.1 - - [03/Dec/2025 15:17:48] "[36mGET /static/cadastro.css HTTP/1.1[0m" 304 -
 2025-12-03 15:17:52,977 - INFO - 127.0.0.1 - - [03/Dec/2025 15:17:52] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
@@ -282,3 +282,1343 @@
 2025-12-03 17:32:53,142 - INFO - 127.0.0.1 - - [03/Dec/2025 17:32:53] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
 2025-12-03 17:33:00,912 - INFO - 127.0.0.1 - - [03/Dec/2025 17:33:00] "GET /Inicio HTTP/1.1" 200 -
 2025-12-03 17:33:00,959 - INFO - 127.0.0.1 - - [03/Dec/2025 17:33:00] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 14:42:28,183 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-12-04 14:42:28,184 - INFO - [33mPress CTRL+C to quit[0m
+2025-12-04 14:42:28,185 - INFO -  * Restarting with stat
+2025-12-04 14:42:29,207 - WARNING -  * Debugger is active!
+2025-12-04 14:42:29,213 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 14:43:03,736 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\main.py', reloading
+2025-12-04 14:43:03,887 - INFO -  * Restarting with stat
+2025-12-04 14:43:05,054 - WARNING -  * Debugger is active!
+2025-12-04 14:43:05,055 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 14:43:06,185 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\main.py', reloading
+2025-12-04 14:43:06,346 - INFO -  * Restarting with stat
+2025-12-04 14:43:07,370 - WARNING -  * Debugger is active!
+2025-12-04 14:43:07,372 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 14:43:09,524 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\teste_email.py', reloading
+2025-12-04 14:43:09,630 - INFO -  * Restarting with stat
+2025-12-04 14:43:10,584 - WARNING -  * Debugger is active!
+2025-12-04 14:43:10,585 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 14:43:16,904 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\teste_email.py', reloading
+2025-12-04 14:43:17,037 - INFO -  * Restarting with stat
+2025-12-04 14:43:18,061 - WARNING -  * Debugger is active!
+2025-12-04 14:43:18,062 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 14:43:20,247 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\teste_email.py', reloading
+2025-12-04 14:43:20,356 - INFO -  * Restarting with stat
+2025-12-04 14:43:21,409 - WARNING -  * Debugger is active!
+2025-12-04 14:43:21,410 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 14:43:22,538 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\teste_email.py', reloading
+2025-12-04 14:43:22,674 - INFO -  * Restarting with stat
+2025-12-04 14:43:23,785 - WARNING -  * Debugger is active!
+2025-12-04 14:43:23,787 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 14:43:26,994 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\teste_email.py', reloading
+2025-12-04 14:43:27,125 - INFO -  * Restarting with stat
+2025-12-04 14:43:28,167 - WARNING -  * Debugger is active!
+2025-12-04 14:43:28,168 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 14:43:30,330 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\teste_email.py', reloading
+2025-12-04 14:43:30,457 - INFO -  * Restarting with stat
+2025-12-04 14:43:31,632 - WARNING -  * Debugger is active!
+2025-12-04 14:43:31,634 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 14:43:33,806 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\teste_email.py', reloading
+2025-12-04 14:43:33,926 - INFO -  * Restarting with stat
+2025-12-04 14:43:34,977 - WARNING -  * Debugger is active!
+2025-12-04 14:43:34,978 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 14:49:28,998 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-12-04 14:49:28,998 - INFO - [33mPress CTRL+C to quit[0m
+2025-12-04 14:49:29,000 - INFO -  * Restarting with stat
+2025-12-04 14:49:30,504 - WARNING -  * Debugger is active!
+2025-12-04 14:49:30,506 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 14:49:30,885 - INFO - 127.0.0.1 - - [04/Dec/2025 14:49:30] "[32mGET / HTTP/1.1[0m" 302 -
+2025-12-04 14:49:30,941 - INFO - 127.0.0.1 - - [04/Dec/2025 14:49:30] "GET /Login HTTP/1.1" 200 -
+2025-12-04 14:49:31,019 - INFO - 127.0.0.1 - - [04/Dec/2025 14:49:31] "[36mGET /static/cadastro.css HTTP/1.1[0m" 304 -
+2025-12-04 14:49:44,851 - INFO - 127.0.0.1 - - [04/Dec/2025 14:49:44] "POST /Login/callback HTTP/1.1" 200 -
+2025-12-04 14:49:44,899 - INFO - 127.0.0.1 - - [04/Dec/2025 14:49:44] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 14:49:44,925 - INFO - 127.0.0.1 - - [04/Dec/2025 14:49:44] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 14:49:48,857 - INFO - 127.0.0.1 - - [04/Dec/2025 14:49:48] "GET /Login HTTP/1.1" 200 -
+2025-12-04 14:49:48,887 - INFO - 127.0.0.1 - - [04/Dec/2025 14:49:48] "[36mGET /static/cadastro.css HTTP/1.1[0m" 304 -
+2025-12-04 14:49:52,465 - INFO - 127.0.0.1 - - [04/Dec/2025 14:49:52] "GET /Denuncias HTTP/1.1" 200 -
+2025-12-04 14:49:52,494 - INFO - 127.0.0.1 - - [04/Dec/2025 14:49:52] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 14:49:54,247 - INFO - 127.0.0.1 - - [04/Dec/2025 14:49:54] "GET /MudarPIN HTTP/1.1" 200 -
+2025-12-04 14:49:54,284 - INFO - 127.0.0.1 - - [04/Dec/2025 14:49:54] "GET /static/pin.css HTTP/1.1" 200 -
+2025-12-04 14:57:21,406 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\normais.py', reloading
+2025-12-04 14:57:21,590 - INFO -  * Restarting with stat
+2025-12-04 14:57:23,506 - WARNING -  * Debugger is active!
+2025-12-04 14:57:23,507 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 14:58:57,495 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\normais.py', reloading
+2025-12-04 14:58:57,621 - INFO -  * Restarting with stat
+2025-12-04 14:59:00,390 - WARNING -  * Debugger is active!
+2025-12-04 14:59:00,392 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 14:59:09,959 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\normais.py', reloading
+2025-12-04 14:59:10,123 - INFO -  * Restarting with stat
+2025-12-04 14:59:11,605 - WARNING -  * Debugger is active!
+2025-12-04 14:59:11,606 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 14:59:18,007 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\normais.py', reloading
+2025-12-04 14:59:18,132 - INFO -  * Restarting with stat
+2025-12-04 14:59:19,462 - WARNING -  * Debugger is active!
+2025-12-04 14:59:19,465 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 15:00:08,915 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\normais.py', reloading
+2025-12-04 15:00:09,043 - INFO -  * Restarting with stat
+2025-12-04 15:00:10,246 - WARNING -  * Debugger is active!
+2025-12-04 15:00:10,247 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 15:00:11,418 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\normais.py', reloading
+2025-12-04 15:00:11,572 - INFO -  * Restarting with stat
+2025-12-04 15:00:12,734 - WARNING -  * Debugger is active!
+2025-12-04 15:00:12,736 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 15:02:43,243 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\normais.py', reloading
+2025-12-04 15:02:43,368 - INFO -  * Restarting with stat
+2025-12-04 15:04:33,795 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-12-04 15:04:33,795 - INFO - [33mPress CTRL+C to quit[0m
+2025-12-04 15:04:33,796 - INFO -  * Restarting with stat
+2025-12-04 15:04:34,808 - WARNING -  * Debugger is active!
+2025-12-04 15:04:34,810 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 15:04:49,771 - INFO - 127.0.0.1 - - [04/Dec/2025 15:04:49] "GET /Login HTTP/1.1" 200 -
+2025-12-04 15:04:49,880 - INFO - 127.0.0.1 - - [04/Dec/2025 15:04:49] "GET /static/cadastro.css HTTP/1.1" 200 -
+2025-12-04 15:05:07,079 - INFO - 127.0.0.1 - - [04/Dec/2025 15:05:07] "GET /Login HTTP/1.1" 200 -
+2025-12-04 15:05:07,098 - INFO - 127.0.0.1 - - [04/Dec/2025 15:05:07] "[36mGET /static/cadastro.css HTTP/1.1[0m" 304 -
+2025-12-04 15:05:44,731 - INFO - 127.0.0.1 - - [04/Dec/2025 15:05:44] "POST /Login/callback HTTP/1.1" 200 -
+2025-12-04 15:05:44,846 - INFO - 127.0.0.1 - - [04/Dec/2025 15:05:44] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 15:05:44,869 - INFO - 127.0.0.1 - - [04/Dec/2025 15:05:44] "GET /static/inicio.css HTTP/1.1" 200 -
+2025-12-04 15:05:48,185 - INFO - 127.0.0.1 - - [04/Dec/2025 15:05:48] "GET /Denuncia HTTP/1.1" 200 -
+2025-12-04 15:05:48,202 - INFO - 127.0.0.1 - - [04/Dec/2025 15:05:48] "[33mGET /static/js/denuncias.js HTTP/1.1[0m" 404 -
+2025-12-04 15:05:48,210 - INFO - 127.0.0.1 - - [04/Dec/2025 15:05:48] "GET /static/denuncia.css HTTP/1.1" 200 -
+2025-12-04 15:06:02,027 - INFO - 127.0.0.1 - - [04/Dec/2025 15:06:02] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 15:06:23,194 - INFO - 127.0.0.1 - - [04/Dec/2025 15:06:23] "[35m[1mPOST /Denuncia HTTP/1.1[0m" 500 -
+2025-12-04 15:06:23,230 - INFO - 127.0.0.1 - - [04/Dec/2025 15:06:23] "GET /Denuncia?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2025-12-04 15:06:23,237 - INFO - 127.0.0.1 - - [04/Dec/2025 15:06:23] "GET /Denuncia?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2025-12-04 15:06:23,261 - INFO - 127.0.0.1 - - [04/Dec/2025 15:06:23] "GET /Denuncia?__debugger__=yes&cmd=resource&f=console.png&s=MINfKEOfpKXRbEe9k3GN HTTP/1.1" 200 -
+2025-12-04 15:06:23,271 - INFO - 127.0.0.1 - - [04/Dec/2025 15:06:23] "GET /Denuncia?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2025-12-04 15:06:29,569 - INFO - 127.0.0.1 - - [04/Dec/2025 15:06:29] "GET /Denuncia HTTP/1.1" 200 -
+2025-12-04 15:09:42,441 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\normais.py', reloading
+2025-12-04 15:09:42,558 - INFO -  * Restarting with stat
+2025-12-04 15:09:43,687 - WARNING -  * Debugger is active!
+2025-12-04 15:09:43,689 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 15:09:57,434 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\normais.py', reloading
+2025-12-04 15:09:57,576 - INFO -  * Restarting with stat
+2025-12-04 15:09:58,791 - WARNING -  * Debugger is active!
+2025-12-04 15:09:58,792 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 15:10:04,113 - INFO - 127.0.0.1 - - [04/Dec/2025 15:10:04] "GET /Denuncia HTTP/1.1" 200 -
+2025-12-04 15:10:04,132 - INFO - 127.0.0.1 - - [04/Dec/2025 15:10:04] "[33mGET /static/js/denuncias.js HTTP/1.1[0m" 404 -
+2025-12-04 15:10:04,160 - INFO - 127.0.0.1 - - [04/Dec/2025 15:10:04] "[36mGET /static/denuncia.css HTTP/1.1[0m" 304 -
+2025-12-04 15:10:04,172 - INFO - 127.0.0.1 - - [04/Dec/2025 15:10:04] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 15:11:29,000 - INFO - 127.0.0.1 - - [04/Dec/2025 15:11:28] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 15:11:44,400 - INFO - 127.0.0.1 - - [04/Dec/2025 15:11:44] "[32mPOST /Denuncia HTTP/1.1[0m" 302 -
+2025-12-04 15:11:44,425 - INFO - 127.0.0.1 - - [04/Dec/2025 15:11:44] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 15:11:44,442 - INFO - 127.0.0.1 - - [04/Dec/2025 15:11:44] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2025-12-04 15:11:52,423 - INFO - 127.0.0.1 - - [04/Dec/2025 15:11:52] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 15:11:52,436 - INFO - 127.0.0.1 - - [04/Dec/2025 15:11:52] "[32mPOST /autoriza_resolvidas/2 HTTP/1.1[0m" 302 -
+2025-12-04 15:11:52,571 - INFO - 127.0.0.1 - - [04/Dec/2025 15:11:52] "GET /detalhe/2 HTTP/1.1" 200 -
+2025-12-04 15:11:52,591 - INFO - 127.0.0.1 - - [04/Dec/2025 15:11:52] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2025-12-04 15:11:52,611 - INFO - 127.0.0.1 - - [04/Dec/2025 15:11:52] "GET /static/denuncia_aberta.css HTTP/1.1" 200 -
+2025-12-04 15:15:02,945 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\normais.py', reloading
+2025-12-04 15:15:03,151 - INFO -  * Restarting with stat
+2025-12-04 15:15:04,487 - WARNING -  * Debugger is active!
+2025-12-04 15:15:04,489 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 15:15:40,640 - INFO - 127.0.0.1 - - [04/Dec/2025 15:15:40] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 15:15:40,734 - INFO - 127.0.0.1 - - [04/Dec/2025 15:15:40] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2025-12-04 15:21:47,117 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2025-12-04 15:21:47,246 - INFO -  * Restarting with stat
+2025-12-04 15:21:48,393 - WARNING -  * Debugger is active!
+2025-12-04 15:21:48,394 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 15:21:59,658 - INFO - 127.0.0.1 - - [04/Dec/2025 15:21:59] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 15:21:59,700 - INFO - 127.0.0.1 - - [04/Dec/2025 15:21:59] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2025-12-04 15:21:59,714 - INFO - 127.0.0.1 - - [04/Dec/2025 15:21:59] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 15:22:02,436 - INFO - 127.0.0.1 - - [04/Dec/2025 15:22:02] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 15:22:02,448 - INFO - 127.0.0.1 - - [04/Dec/2025 15:22:02] "[32mPOST /autoriza_resolvidas/2 HTTP/1.1[0m" 302 -
+2025-12-04 15:22:02,481 - INFO - 127.0.0.1 - - [04/Dec/2025 15:22:02] "GET /detalhe/2 HTTP/1.1" 200 -
+2025-12-04 15:22:02,497 - INFO - 127.0.0.1 - - [04/Dec/2025 15:22:02] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2025-12-04 15:22:02,498 - INFO - 127.0.0.1 - - [04/Dec/2025 15:22:02] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2025-12-04 15:22:07,227 - INFO - 127.0.0.1 - - [04/Dec/2025 15:22:07] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 15:22:07,241 - INFO - 127.0.0.1 - - [04/Dec/2025 15:22:07] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2025-12-04 15:22:20,102 - INFO - 127.0.0.1 - - [04/Dec/2025 15:22:20] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 15:22:23,001 - INFO - 127.0.0.1 - - [04/Dec/2025 15:22:23] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 15:22:23,014 - INFO - 127.0.0.1 - - [04/Dec/2025 15:22:23] "[32mPOST /autoriza_resolvidas/1 HTTP/1.1[0m" 302 -
+2025-12-04 15:22:23,022 - INFO - 127.0.0.1 - - [04/Dec/2025 15:22:23] "GET /detalhe/1 HTTP/1.1" 200 -
+2025-12-04 15:22:23,041 - INFO - 127.0.0.1 - - [04/Dec/2025 15:22:23] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2025-12-04 15:22:23,042 - INFO - 127.0.0.1 - - [04/Dec/2025 15:22:23] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2025-12-04 15:22:27,706 - INFO - 127.0.0.1 - - [04/Dec/2025 15:22:27] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 15:22:27,724 - INFO - 127.0.0.1 - - [04/Dec/2025 15:22:27] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2025-12-04 15:22:30,822 - INFO - 127.0.0.1 - - [04/Dec/2025 15:22:30] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 15:22:30,833 - INFO - 127.0.0.1 - - [04/Dec/2025 15:22:30] "[32mPOST /autoriza_resolvidas/2 HTTP/1.1[0m" 302 -
+2025-12-04 15:22:30,840 - INFO - 127.0.0.1 - - [04/Dec/2025 15:22:30] "GET /detalhe/2 HTTP/1.1" 200 -
+2025-12-04 15:22:30,858 - INFO - 127.0.0.1 - - [04/Dec/2025 15:22:30] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2025-12-04 15:22:30,858 - INFO - 127.0.0.1 - - [04/Dec/2025 15:22:30] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2025-12-04 15:27:37,179 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\normais.py', reloading
+2025-12-04 15:27:37,335 - INFO -  * Restarting with stat
+2025-12-04 15:27:38,659 - WARNING -  * Debugger is active!
+2025-12-04 15:27:38,661 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 15:29:06,753 - INFO - 127.0.0.1 - - [04/Dec/2025 15:29:06] "GET /Denuncia HTTP/1.1" 200 -
+2025-12-04 15:29:06,762 - INFO - 127.0.0.1 - - [04/Dec/2025 15:29:06] "GET /Denuncia HTTP/1.1" 200 -
+2025-12-04 15:29:06,784 - INFO - 127.0.0.1 - - [04/Dec/2025 15:29:06] "[33mGET /static/js/denuncias.js HTTP/1.1[0m" 404 -
+2025-12-04 15:29:06,851 - INFO - 127.0.0.1 - - [04/Dec/2025 15:29:06] "[36mGET /static/denuncia.css HTTP/1.1[0m" 304 -
+2025-12-04 15:29:32,146 - INFO - 127.0.0.1 - - [04/Dec/2025 15:29:32] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 15:29:42,842 - INFO - 127.0.0.1 - - [04/Dec/2025 15:29:42] "[32mPOST /Denuncia HTTP/1.1[0m" 302 -
+2025-12-04 15:29:42,866 - INFO - 127.0.0.1 - - [04/Dec/2025 15:29:42] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 15:29:42,893 - INFO - 127.0.0.1 - - [04/Dec/2025 15:29:42] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2025-12-04 15:29:48,092 - INFO - 127.0.0.1 - - [04/Dec/2025 15:29:48] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 15:29:48,103 - INFO - 127.0.0.1 - - [04/Dec/2025 15:29:48] "[32mPOST /autoriza_resolvidas/3 HTTP/1.1[0m" 302 -
+2025-12-04 15:29:48,139 - INFO - 127.0.0.1 - - [04/Dec/2025 15:29:48] "GET /detalhe/3 HTTP/1.1" 200 -
+2025-12-04 15:29:48,157 - INFO - 127.0.0.1 - - [04/Dec/2025 15:29:48] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2025-12-04 15:29:48,160 - INFO - 127.0.0.1 - - [04/Dec/2025 15:29:48] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2025-12-04 15:30:13,073 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\normais.py', reloading
+2025-12-04 15:30:13,262 - INFO -  * Restarting with stat
+2025-12-04 15:30:14,800 - WARNING -  * Debugger is active!
+2025-12-04 15:30:14,803 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 15:30:57,712 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2025-12-04 15:30:57,850 - INFO -  * Restarting with stat
+2025-12-04 15:30:59,072 - WARNING -  * Debugger is active!
+2025-12-04 15:30:59,074 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 15:31:01,900 - INFO - 127.0.0.1 - - [04/Dec/2025 15:31:01] "GET /Denuncia HTTP/1.1" 200 -
+2025-12-04 15:31:01,920 - INFO - 127.0.0.1 - - [04/Dec/2025 15:31:01] "[33mGET /static/js/denuncias.js HTTP/1.1[0m" 404 -
+2025-12-04 15:31:01,944 - INFO - 127.0.0.1 - - [04/Dec/2025 15:31:01] "[36mGET /static/denuncia.css HTTP/1.1[0m" 304 -
+2025-12-04 15:31:20,898 - INFO - 127.0.0.1 - - [04/Dec/2025 15:31:20] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 15:31:30,850 - INFO - 127.0.0.1 - - [04/Dec/2025 15:31:30] "[32mPOST /Denuncia HTTP/1.1[0m" 302 -
+2025-12-04 15:31:30,874 - INFO - 127.0.0.1 - - [04/Dec/2025 15:31:30] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 15:31:30,896 - INFO - 127.0.0.1 - - [04/Dec/2025 15:31:30] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2025-12-04 15:31:34,943 - INFO - 127.0.0.1 - - [04/Dec/2025 15:31:34] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 15:31:34,952 - INFO - 127.0.0.1 - - [04/Dec/2025 15:31:34] "[32mPOST /autoriza_resolvidas/4 HTTP/1.1[0m" 302 -
+2025-12-04 15:31:34,985 - INFO - 127.0.0.1 - - [04/Dec/2025 15:31:34] "GET /detalhe/4 HTTP/1.1" 200 -
+2025-12-04 15:31:35,004 - INFO - 127.0.0.1 - - [04/Dec/2025 15:31:35] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2025-12-04 15:31:35,007 - INFO - 127.0.0.1 - - [04/Dec/2025 15:31:35] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2025-12-04 15:32:27,926 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\normais.py', reloading
+2025-12-04 15:32:28,075 - INFO -  * Restarting with stat
+2025-12-04 15:32:29,347 - WARNING -  * Debugger is active!
+2025-12-04 15:32:29,348 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 15:32:32,551 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\normais.py', reloading
+2025-12-04 15:32:32,673 - INFO -  * Restarting with stat
+2025-12-04 15:32:33,957 - WARNING -  * Debugger is active!
+2025-12-04 15:32:33,960 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 15:32:34,340 - INFO - 127.0.0.1 - - [04/Dec/2025 15:32:34] "GET /Denuncia HTTP/1.1" 200 -
+2025-12-04 15:32:34,358 - INFO - 127.0.0.1 - - [04/Dec/2025 15:32:34] "[33mGET /static/js/denuncias.js HTTP/1.1[0m" 404 -
+2025-12-04 15:32:34,378 - INFO - 127.0.0.1 - - [04/Dec/2025 15:32:34] "[36mGET /static/denuncia.css HTTP/1.1[0m" 304 -
+2025-12-04 15:32:42,261 - INFO - 127.0.0.1 - - [04/Dec/2025 15:32:42] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 15:32:53,104 - INFO - 127.0.0.1 - - [04/Dec/2025 15:32:53] "[32mPOST /Denuncia HTTP/1.1[0m" 302 -
+2025-12-04 15:32:53,123 - INFO - 127.0.0.1 - - [04/Dec/2025 15:32:53] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 15:32:53,147 - INFO - 127.0.0.1 - - [04/Dec/2025 15:32:53] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2025-12-04 15:33:15,110 - INFO - 127.0.0.1 - - [04/Dec/2025 15:33:15] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 15:33:15,121 - INFO - 127.0.0.1 - - [04/Dec/2025 15:33:15] "[32mPOST /autoriza_resolvidas/5 HTTP/1.1[0m" 302 -
+2025-12-04 15:33:15,153 - INFO - 127.0.0.1 - - [04/Dec/2025 15:33:15] "GET /detalhe/5 HTTP/1.1" 200 -
+2025-12-04 15:33:15,169 - INFO - 127.0.0.1 - - [04/Dec/2025 15:33:15] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2025-12-04 15:33:15,170 - INFO - 127.0.0.1 - - [04/Dec/2025 15:33:15] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2025-12-04 15:34:14,055 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\normais.py', reloading
+2025-12-04 15:34:14,313 - INFO -  * Restarting with stat
+2025-12-04 15:34:32,033 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-12-04 15:34:32,034 - INFO - [33mPress CTRL+C to quit[0m
+2025-12-04 15:34:32,036 - INFO -  * Restarting with stat
+2025-12-04 15:34:33,382 - WARNING -  * Debugger is active!
+2025-12-04 15:34:33,385 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 15:34:39,171 - INFO - 127.0.0.1 - - [04/Dec/2025 15:34:39] "GET /Denuncia HTTP/1.1" 200 -
+2025-12-04 15:34:39,193 - INFO - 127.0.0.1 - - [04/Dec/2025 15:34:39] "[33mGET /static/js/denuncias.js HTTP/1.1[0m" 404 -
+2025-12-04 15:34:39,239 - INFO - 127.0.0.1 - - [04/Dec/2025 15:34:39] "[36mGET /static/denuncia.css HTTP/1.1[0m" 304 -
+2025-12-04 15:34:55,102 - INFO - 127.0.0.1 - - [04/Dec/2025 15:34:55] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 15:35:05,919 - INFO - 127.0.0.1 - - [04/Dec/2025 15:35:05] "[32mPOST /Denuncia HTTP/1.1[0m" 302 -
+2025-12-04 15:35:05,941 - INFO - 127.0.0.1 - - [04/Dec/2025 15:35:05] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 15:35:05,965 - INFO - 127.0.0.1 - - [04/Dec/2025 15:35:05] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2025-12-04 15:35:53,757 - INFO - 127.0.0.1 - - [04/Dec/2025 15:35:53] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 15:35:53,767 - INFO - 127.0.0.1 - - [04/Dec/2025 15:35:53] "[32mPOST /autoriza_resolvidas/6 HTTP/1.1[0m" 302 -
+2025-12-04 15:35:53,799 - INFO - 127.0.0.1 - - [04/Dec/2025 15:35:53] "GET /detalhe/6 HTTP/1.1" 200 -
+2025-12-04 15:35:53,817 - INFO - 127.0.0.1 - - [04/Dec/2025 15:35:53] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2025-12-04 15:35:53,818 - INFO - 127.0.0.1 - - [04/Dec/2025 15:35:53] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2025-12-04 15:37:38,764 - INFO - 127.0.0.1 - - [04/Dec/2025 15:37:38] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 15:37:38,779 - INFO - 127.0.0.1 - - [04/Dec/2025 15:37:38] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2025-12-04 15:37:47,784 - INFO - 127.0.0.1 - - [04/Dec/2025 15:37:47] "GET /Denuncia HTTP/1.1" 200 -
+2025-12-04 15:37:47,800 - INFO - 127.0.0.1 - - [04/Dec/2025 15:37:47] "[36mGET /static/denuncia.css HTTP/1.1[0m" 304 -
+2025-12-04 15:37:47,806 - INFO - 127.0.0.1 - - [04/Dec/2025 15:37:47] "[33mGET /static/js/denuncias.js HTTP/1.1[0m" 404 -
+2025-12-04 15:37:58,209 - INFO - 127.0.0.1 - - [04/Dec/2025 15:37:58] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 15:38:02,226 - INFO - 127.0.0.1 - - [04/Dec/2025 15:38:02] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 15:38:05,549 - INFO - 127.0.0.1 - - [04/Dec/2025 15:38:05] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 15:38:07,111 - INFO - 127.0.0.1 - - [04/Dec/2025 15:38:07] "[32mPOST /Denuncia HTTP/1.1[0m" 302 -
+2025-12-04 15:38:09,228 - INFO - 127.0.0.1 - - [04/Dec/2025 15:38:09] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 15:38:12,836 - INFO - 127.0.0.1 - - [04/Dec/2025 15:38:12] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 15:38:14,363 - INFO - 127.0.0.1 - - [04/Dec/2025 15:38:14] "[32mPOST /Denuncia HTTP/1.1[0m" 302 -
+2025-12-04 15:38:16,356 - INFO - 127.0.0.1 - - [04/Dec/2025 15:38:16] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 15:38:17,706 - INFO - 127.0.0.1 - - [04/Dec/2025 15:38:17] "[32mPOST /Denuncia HTTP/1.1[0m" 302 -
+2025-12-04 15:38:19,899 - INFO - 127.0.0.1 - - [04/Dec/2025 15:38:19] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 15:38:21,532 - INFO - 127.0.0.1 - - [04/Dec/2025 15:38:21] "[32mPOST /Denuncia HTTP/1.1[0m" 302 -
+2025-12-04 15:38:24,183 - INFO - 127.0.0.1 - - [04/Dec/2025 15:38:24] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 15:38:29,448 - INFO - 127.0.0.1 - - [04/Dec/2025 15:38:29] "[32mPOST /Denuncia HTTP/1.1[0m" 302 -
+2025-12-04 15:38:32,473 - INFO - 127.0.0.1 - - [04/Dec/2025 15:38:32] "[32mPOST /Denuncia HTTP/1.1[0m" 302 -
+2025-12-04 15:38:32,484 - INFO - 127.0.0.1 - - [04/Dec/2025 15:38:32] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 15:38:32,510 - INFO - 127.0.0.1 - - [04/Dec/2025 15:38:32] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2025-12-04 15:42:20,595 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2025-12-04 15:42:20,778 - INFO -  * Restarting with stat
+2025-12-04 15:42:21,960 - WARNING -  * Debugger is active!
+2025-12-04 15:42:21,962 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 15:42:27,901 - INFO - 127.0.0.1 - - [04/Dec/2025 15:42:27] "GET /Denuncia HTTP/1.1" 200 -
+2025-12-04 15:42:27,917 - INFO - 127.0.0.1 - - [04/Dec/2025 15:42:27] "[33mGET /static/js/denuncias.js HTTP/1.1[0m" 404 -
+2025-12-04 15:42:27,940 - INFO - 127.0.0.1 - - [04/Dec/2025 15:42:27] "[36mGET /static/denuncia.css HTTP/1.1[0m" 304 -
+2025-12-04 15:42:37,765 - INFO - 127.0.0.1 - - [04/Dec/2025 15:42:37] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 15:42:41,172 - INFO - 127.0.0.1 - - [04/Dec/2025 15:42:41] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 15:42:43,948 - INFO - 127.0.0.1 - - [04/Dec/2025 15:42:43] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 15:42:47,912 - INFO - 127.0.0.1 - - [04/Dec/2025 15:42:47] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 15:42:49,436 - INFO - 127.0.0.1 - - [04/Dec/2025 15:42:49] "[32mPOST /Denuncia HTTP/1.1[0m" 302 -
+2025-12-04 15:42:50,547 - INFO - 127.0.0.1 - - [04/Dec/2025 15:42:50] "[32mPOST /Denuncia HTTP/1.1[0m" 302 -
+2025-12-04 15:42:51,284 - INFO - 127.0.0.1 - - [04/Dec/2025 15:42:51] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 15:42:52,814 - INFO - 127.0.0.1 - - [04/Dec/2025 15:42:52] "[32mPOST /Denuncia HTTP/1.1[0m" 302 -
+2025-12-04 15:42:54,293 - INFO - 127.0.0.1 - - [04/Dec/2025 15:42:54] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 15:42:56,344 - INFO - 127.0.0.1 - - [04/Dec/2025 15:42:56] "[32mPOST /Denuncia HTTP/1.1[0m" 302 -
+2025-12-04 15:42:59,511 - INFO - 127.0.0.1 - - [04/Dec/2025 15:42:59] "[32mPOST /Denuncia HTTP/1.1[0m" 302 -
+2025-12-04 15:43:02,370 - INFO - 127.0.0.1 - - [04/Dec/2025 15:43:02] "[32mPOST /Denuncia HTTP/1.1[0m" 302 -
+2025-12-04 15:43:02,388 - INFO - 127.0.0.1 - - [04/Dec/2025 15:43:02] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 15:43:02,411 - INFO - 127.0.0.1 - - [04/Dec/2025 15:43:02] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2025-12-04 15:47:53,883 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 15:47:54,049 - INFO -  * Restarting with stat
+2025-12-04 15:47:55,288 - WARNING -  * Debugger is active!
+2025-12-04 15:47:55,290 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 15:48:05,926 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 15:48:06,046 - INFO -  * Restarting with stat
+2025-12-04 15:48:07,203 - WARNING -  * Debugger is active!
+2025-12-04 15:48:07,204 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 15:48:08,330 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 15:48:08,439 - INFO -  * Restarting with stat
+2025-12-04 15:48:09,497 - WARNING -  * Debugger is active!
+2025-12-04 15:48:09,498 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 15:48:15,834 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 15:48:15,962 - INFO -  * Restarting with stat
+2025-12-04 15:48:17,062 - WARNING -  * Debugger is active!
+2025-12-04 15:48:17,063 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 15:48:19,250 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 15:48:19,407 - INFO -  * Restarting with stat
+2025-12-04 15:48:20,709 - WARNING -  * Debugger is active!
+2025-12-04 15:48:20,710 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 15:48:31,226 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 15:48:31,334 - INFO -  * Restarting with stat
+2025-12-04 15:48:32,386 - WARNING -  * Debugger is active!
+2025-12-04 15:48:32,387 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 15:48:34,560 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 15:48:34,707 - INFO -  * Restarting with stat
+2025-12-04 15:48:35,835 - WARNING -  * Debugger is active!
+2025-12-04 15:48:35,837 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 15:48:44,623 - INFO - 127.0.0.1 - - [04/Dec/2025 15:48:44] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 15:48:44,671 - INFO - 127.0.0.1 - - [04/Dec/2025 15:48:44] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2025-12-04 15:48:44,686 - INFO - 127.0.0.1 - - [04/Dec/2025 15:48:44] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 15:48:47,456 - INFO - 127.0.0.1 - - [04/Dec/2025 15:48:47] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 15:48:47,515 - INFO - 127.0.0.1 - - [04/Dec/2025 15:48:47] "[35m[1mPOST /autoriza_resolvidas HTTP/1.1[0m" 500 -
+2025-12-04 15:48:47,534 - INFO - 127.0.0.1 - - [04/Dec/2025 15:48:47] "GET /autoriza_resolvidas?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2025-12-04 15:48:47,536 - INFO - 127.0.0.1 - - [04/Dec/2025 15:48:47] "GET /autoriza_resolvidas?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2025-12-04 15:48:47,543 - INFO - 127.0.0.1 - - [04/Dec/2025 15:48:47] "GET /autoriza_resolvidas?__debugger__=yes&cmd=resource&f=console.png&s=xv9CPRND3lDk1v9pz6o6 HTTP/1.1" 200 -
+2025-12-04 15:48:47,551 - INFO - 127.0.0.1 - - [04/Dec/2025 15:48:47] "GET /autoriza_resolvidas?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2025-12-04 15:49:17,523 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 15:49:17,636 - INFO -  * Restarting with stat
+2025-12-04 15:49:18,717 - WARNING -  * Debugger is active!
+2025-12-04 15:49:18,719 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 15:49:37,566 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 15:49:37,699 - INFO -  * Restarting with stat
+2025-12-04 16:05:35,285 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-12-04 16:05:35,285 - INFO - [33mPress CTRL+C to quit[0m
+2025-12-04 16:05:35,286 - INFO -  * Restarting with stat
+2025-12-04 16:05:36,466 - WARNING -  * Debugger is active!
+2025-12-04 16:05:36,468 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 16:05:45,243 - INFO - 127.0.0.1 - - [04/Dec/2025 16:05:45] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 16:05:45,278 - INFO - 127.0.0.1 - - [04/Dec/2025 16:05:45] "[35m[1mPOST /autoriza_resolvidas HTTP/1.1[0m" 500 -
+2025-12-04 16:05:45,385 - INFO - 127.0.0.1 - - [04/Dec/2025 16:05:45] "[36mGET /autoriza_resolvidas?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-12-04 16:05:45,389 - INFO - 127.0.0.1 - - [04/Dec/2025 16:05:45] "[36mGET /autoriza_resolvidas?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-12-04 16:05:45,400 - INFO - 127.0.0.1 - - [04/Dec/2025 16:05:45] "GET /autoriza_resolvidas?__debugger__=yes&cmd=resource&f=console.png&s=3KrSUyQ1G9thSkpQwTzu HTTP/1.1" 200 -
+2025-12-04 16:06:10,872 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 16:06:11,001 - INFO -  * Restarting with stat
+2025-12-04 16:06:12,254 - WARNING -  * Debugger is active!
+2025-12-04 16:06:12,255 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 16:06:15,132 - INFO - 127.0.0.1 - - [04/Dec/2025 16:06:15] "[35m[1mPOST /autoriza_resolvidas HTTP/1.1[0m" 500 -
+2025-12-04 16:06:15,185 - INFO - 127.0.0.1 - - [04/Dec/2025 16:06:15] "[36mGET /autoriza_resolvidas?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-12-04 16:06:15,190 - INFO - 127.0.0.1 - - [04/Dec/2025 16:06:15] "[36mGET /autoriza_resolvidas?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-12-04 16:06:15,201 - INFO - 127.0.0.1 - - [04/Dec/2025 16:06:15] "GET /autoriza_resolvidas?__debugger__=yes&cmd=resource&f=console.png&s=OQ39ffGSxW7bs4qpFWyu HTTP/1.1" 200 -
+2025-12-04 16:06:15,210 - INFO - 127.0.0.1 - - [04/Dec/2025 16:06:15] "[36mGET /autoriza_resolvidas?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-12-04 16:06:31,146 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 16:06:31,288 - INFO -  * Restarting with stat
+2025-12-04 16:06:32,481 - WARNING -  * Debugger is active!
+2025-12-04 16:06:32,483 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 16:06:37,132 - INFO - 127.0.0.1 - - [04/Dec/2025 16:06:37] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 16:06:37,149 - INFO - 127.0.0.1 - - [04/Dec/2025 16:06:37] "[35m[1mPOST /autoriza_resolvidas HTTP/1.1[0m" 500 -
+2025-12-04 16:06:37,199 - INFO - 127.0.0.1 - - [04/Dec/2025 16:06:37] "[36mGET /autoriza_resolvidas?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-12-04 16:06:37,200 - INFO - 127.0.0.1 - - [04/Dec/2025 16:06:37] "[36mGET /autoriza_resolvidas?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-12-04 16:06:37,208 - INFO - 127.0.0.1 - - [04/Dec/2025 16:06:37] "GET /autoriza_resolvidas?__debugger__=yes&cmd=resource&f=console.png&s=NAjzko8WRPoXKXUxfQi3 HTTP/1.1" 200 -
+2025-12-04 16:06:39,581 - INFO - 127.0.0.1 - - [04/Dec/2025 16:06:39] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 16:06:39,595 - INFO - 127.0.0.1 - - [04/Dec/2025 16:06:39] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2025-12-04 16:06:39,609 - INFO - 127.0.0.1 - - [04/Dec/2025 16:06:39] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 16:06:42,022 - INFO - 127.0.0.1 - - [04/Dec/2025 16:06:42] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 16:06:42,045 - INFO - 127.0.0.1 - - [04/Dec/2025 16:06:42] "[35m[1mPOST /autoriza_resolvidas HTTP/1.1[0m" 500 -
+2025-12-04 16:06:42,062 - INFO - 127.0.0.1 - - [04/Dec/2025 16:06:42] "[36mGET /autoriza_resolvidas?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-12-04 16:06:42,063 - INFO - 127.0.0.1 - - [04/Dec/2025 16:06:42] "[36mGET /autoriza_resolvidas?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-12-04 16:06:42,070 - INFO - 127.0.0.1 - - [04/Dec/2025 16:06:42] "[36mGET /autoriza_resolvidas?__debugger__=yes&cmd=resource&f=console.png&s=NAjzko8WRPoXKXUxfQi3 HTTP/1.1[0m" 304 -
+2025-12-04 16:07:12,163 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 16:07:12,331 - INFO -  * Restarting with stat
+2025-12-04 16:07:13,604 - WARNING -  * Debugger is active!
+2025-12-04 16:07:13,605 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 16:07:14,241 - INFO - 127.0.0.1 - - [04/Dec/2025 16:07:14] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 16:07:14,256 - INFO - 127.0.0.1 - - [04/Dec/2025 16:07:14] "[35m[1mPOST /autoriza_resolvidas HTTP/1.1[0m" 500 -
+2025-12-04 16:07:14,303 - INFO - 127.0.0.1 - - [04/Dec/2025 16:07:14] "[36mGET /autoriza_resolvidas?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-12-04 16:07:14,305 - INFO - 127.0.0.1 - - [04/Dec/2025 16:07:14] "[36mGET /autoriza_resolvidas?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-12-04 16:07:14,310 - INFO - 127.0.0.1 - - [04/Dec/2025 16:07:14] "GET /autoriza_resolvidas?__debugger__=yes&cmd=resource&f=console.png&s=MsoGzMcFhHsy0RDsJmwm HTTP/1.1" 200 -
+2025-12-04 16:07:27,262 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 16:07:27,388 - INFO -  * Restarting with stat
+2025-12-04 16:07:28,586 - WARNING -  * Debugger is active!
+2025-12-04 16:07:28,588 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 16:07:29,930 - INFO - 127.0.0.1 - - [04/Dec/2025 16:07:29] "POST /autoriza_resolvidas HTTP/1.1" 200 -
+2025-12-04 16:07:29,946 - INFO - 127.0.0.1 - - [04/Dec/2025 16:07:29] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-12-04 16:08:02,107 - INFO - 127.0.0.1 - - [04/Dec/2025 16:08:02] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 16:08:02,141 - INFO - 127.0.0.1 - - [04/Dec/2025 16:08:02] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2025-12-04 16:08:02,156 - INFO - 127.0.0.1 - - [04/Dec/2025 16:08:02] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 16:08:35,540 - INFO - 127.0.0.1 - - [04/Dec/2025 16:08:35] "POST /autoriza_resolvidas HTTP/1.1" 200 -
+2025-12-04 16:08:37,188 - INFO - 127.0.0.1 - - [04/Dec/2025 16:08:37] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 16:08:37,205 - INFO - 127.0.0.1 - - [04/Dec/2025 16:08:37] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2025-12-04 16:08:37,220 - INFO - 127.0.0.1 - - [04/Dec/2025 16:08:37] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 16:08:41,219 - INFO - 127.0.0.1 - - [04/Dec/2025 16:08:41] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 16:08:41,228 - INFO - 127.0.0.1 - - [04/Dec/2025 16:08:41] "POST /autoriza_resolvidas HTTP/1.1" 200 -
+2025-12-04 16:08:55,609 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 16:08:55,749 - INFO -  * Restarting with stat
+2025-12-04 16:08:56,890 - WARNING -  * Debugger is active!
+2025-12-04 16:08:56,892 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 16:11:08,898 - INFO - 127.0.0.1 - - [04/Dec/2025 16:11:08] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 16:11:08,940 - INFO - 127.0.0.1 - - [04/Dec/2025 16:11:08] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2025-12-04 16:11:08,952 - INFO - 127.0.0.1 - - [04/Dec/2025 16:11:08] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 16:11:11,197 - INFO - 127.0.0.1 - - [04/Dec/2025 16:11:11] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 16:11:11,210 - INFO - 127.0.0.1 - - [04/Dec/2025 16:11:11] "POST /autoriza_resolvidas HTTP/1.1" 200 -
+2025-12-04 16:11:56,819 - INFO - 127.0.0.1 - - [04/Dec/2025 16:11:56] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 16:11:56,835 - INFO - 127.0.0.1 - - [04/Dec/2025 16:11:56] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2025-12-04 16:11:56,849 - INFO - 127.0.0.1 - - [04/Dec/2025 16:11:56] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 16:11:58,934 - INFO - 127.0.0.1 - - [04/Dec/2025 16:11:58] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 16:11:58,945 - INFO - 127.0.0.1 - - [04/Dec/2025 16:11:58] "POST /autoriza_resolvidas HTTP/1.1" 200 -
+2025-12-04 16:12:10,294 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 16:12:10,396 - INFO -  * Restarting with stat
+2025-12-04 16:12:11,468 - WARNING -  * Debugger is active!
+2025-12-04 16:12:11,469 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 16:12:15,956 - INFO - 127.0.0.1 - - [04/Dec/2025 16:12:15] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 16:12:15,992 - INFO - 127.0.0.1 - - [04/Dec/2025 16:12:15] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2025-12-04 16:12:16,004 - INFO - 127.0.0.1 - - [04/Dec/2025 16:12:16] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 16:12:17,967 - INFO - 127.0.0.1 - - [04/Dec/2025 16:12:17] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 16:12:17,979 - INFO - 127.0.0.1 - - [04/Dec/2025 16:12:17] "[32mPOST /autoriza_resolvidas HTTP/1.1[0m" 302 -
+2025-12-04 16:12:17,995 - INFO - 127.0.0.1 - - [04/Dec/2025 16:12:17] "GET /detalhe/18 HTTP/1.1" 200 -
+2025-12-04 16:12:18,016 - INFO - 127.0.0.1 - - [04/Dec/2025 16:12:18] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2025-12-04 16:12:18,018 - INFO - 127.0.0.1 - - [04/Dec/2025 16:12:18] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2025-12-04 16:12:21,425 - INFO - 127.0.0.1 - - [04/Dec/2025 16:12:21] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 16:12:21,439 - INFO - 127.0.0.1 - - [04/Dec/2025 16:12:21] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2025-12-04 16:12:25,038 - INFO - 127.0.0.1 - - [04/Dec/2025 16:12:25] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 16:12:25,055 - INFO - 127.0.0.1 - - [04/Dec/2025 16:12:25] "[32mPOST /autoriza_resolvidas HTTP/1.1[0m" 302 -
+2025-12-04 16:12:25,063 - INFO - 127.0.0.1 - - [04/Dec/2025 16:12:25] "GET /detalhe/17 HTTP/1.1" 200 -
+2025-12-04 16:12:25,084 - INFO - 127.0.0.1 - - [04/Dec/2025 16:12:25] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2025-12-04 16:12:25,085 - INFO - 127.0.0.1 - - [04/Dec/2025 16:12:25] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2025-12-04 16:12:28,042 - INFO - 127.0.0.1 - - [04/Dec/2025 16:12:28] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 16:12:28,057 - INFO - 127.0.0.1 - - [04/Dec/2025 16:12:28] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2025-12-04 16:12:32,255 - INFO - 127.0.0.1 - - [04/Dec/2025 16:12:32] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 16:12:32,267 - INFO - 127.0.0.1 - - [04/Dec/2025 16:12:32] "[32mPOST /autoriza_resolvidas HTTP/1.1[0m" 302 -
+2025-12-04 16:12:32,275 - INFO - 127.0.0.1 - - [04/Dec/2025 16:12:32] "GET /detalhe/6 HTTP/1.1" 200 -
+2025-12-04 16:12:32,291 - INFO - 127.0.0.1 - - [04/Dec/2025 16:12:32] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2025-12-04 16:12:32,293 - INFO - 127.0.0.1 - - [04/Dec/2025 16:12:32] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2025-12-04 16:12:34,738 - INFO - 127.0.0.1 - - [04/Dec/2025 16:12:34] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 16:12:34,753 - INFO - 127.0.0.1 - - [04/Dec/2025 16:12:34] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2025-12-04 16:12:42,990 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 16:12:43,118 - INFO -  * Restarting with stat
+2025-12-04 16:12:44,335 - WARNING -  * Debugger is active!
+2025-12-04 16:12:44,336 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 16:14:31,091 - INFO - 127.0.0.1 - - [04/Dec/2025 16:14:31] "[32mGET / HTTP/1.1[0m" 302 -
+2025-12-04 16:14:31,108 - INFO - 127.0.0.1 - - [04/Dec/2025 16:14:31] "GET /Login HTTP/1.1" 200 -
+2025-12-04 16:14:31,208 - INFO - 127.0.0.1 - - [04/Dec/2025 16:14:31] "[36mGET /static/cadastro.css HTTP/1.1[0m" 304 -
+2025-12-04 16:14:37,690 - INFO - 127.0.0.1 - - [04/Dec/2025 16:14:37] "POST /Login/callback HTTP/1.1" 200 -
+2025-12-04 16:14:37,707 - INFO - 127.0.0.1 - - [04/Dec/2025 16:14:37] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 16:14:37,729 - INFO - 127.0.0.1 - - [04/Dec/2025 16:14:37] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 16:14:39,291 - INFO - 127.0.0.1 - - [04/Dec/2025 16:14:39] "GET /Denuncias HTTP/1.1" 200 -
+2025-12-04 16:14:39,309 - INFO - 127.0.0.1 - - [04/Dec/2025 16:14:39] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 16:16:08,518 - INFO - 127.0.0.1 - - [04/Dec/2025 16:16:08] "GET /Denuncias HTTP/1.1" 200 -
+2025-12-04 16:16:08,534 - INFO - 127.0.0.1 - - [04/Dec/2025 16:16:08] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 16:16:08,551 - INFO - 127.0.0.1 - - [04/Dec/2025 16:16:08] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 16:16:18,102 - INFO - 127.0.0.1 - - [04/Dec/2025 16:16:18] "GET /Denuncias HTTP/1.1" 200 -
+2025-12-04 16:16:18,120 - INFO - 127.0.0.1 - - [04/Dec/2025 16:16:18] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 16:16:18,134 - INFO - 127.0.0.1 - - [04/Dec/2025 16:16:18] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 16:16:32,653 - INFO - 127.0.0.1 - - [04/Dec/2025 16:16:32] "GET /Denuncias HTTP/1.1" 200 -
+2025-12-04 16:16:32,670 - INFO - 127.0.0.1 - - [04/Dec/2025 16:16:32] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 16:16:32,688 - INFO - 127.0.0.1 - - [04/Dec/2025 16:16:32] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 16:16:36,428 - INFO - 127.0.0.1 - - [04/Dec/2025 16:16:36] "GET /Denuncias?page=2&filtro=Esperando HTTP/1.1" 200 -
+2025-12-04 16:16:36,449 - INFO - 127.0.0.1 - - [04/Dec/2025 16:16:36] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 16:16:37,082 - INFO - 127.0.0.1 - - [04/Dec/2025 16:16:37] "GET /Denuncias?page=3&filtro=Esperando HTTP/1.1" 200 -
+2025-12-04 16:16:37,105 - INFO - 127.0.0.1 - - [04/Dec/2025 16:16:37] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 16:16:46,252 - INFO - 127.0.0.1 - - [04/Dec/2025 16:16:46] "GET /Denuncias?page=2&filtro=Esperando HTTP/1.1" 200 -
+2025-12-04 16:16:46,276 - INFO - 127.0.0.1 - - [04/Dec/2025 16:16:46] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 16:16:52,227 - INFO - 127.0.0.1 - - [04/Dec/2025 16:16:52] "GET /Denuncias?page=1&filtro=Esperando HTTP/1.1" 200 -
+2025-12-04 16:16:52,248 - INFO - 127.0.0.1 - - [04/Dec/2025 16:16:52] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 16:16:52,266 - INFO - 127.0.0.1 - - [04/Dec/2025 16:16:52] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 16:17:00,582 - INFO - 127.0.0.1 - - [04/Dec/2025 16:17:00] "GET /Denuncias?page=2&filtro=Esperando HTTP/1.1" 200 -
+2025-12-04 16:17:00,606 - INFO - 127.0.0.1 - - [04/Dec/2025 16:17:00] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 16:17:01,504 - INFO - 127.0.0.1 - - [04/Dec/2025 16:17:01] "GET /Denuncias?page=1&filtro=Esperando HTTP/1.1" 200 -
+2025-12-04 16:17:01,523 - INFO - 127.0.0.1 - - [04/Dec/2025 16:17:01] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 16:17:05,237 - INFO - 127.0.0.1 - - [04/Dec/2025 16:17:05] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 16:17:05,248 - INFO - 127.0.0.1 - - [04/Dec/2025 16:17:05] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 16:17:21,547 - INFO - 127.0.0.1 - - [04/Dec/2025 16:17:21] "GET /Denuncias?page=2&filtro=Esperando HTTP/1.1" 200 -
+2025-12-04 16:17:21,575 - INFO - 127.0.0.1 - - [04/Dec/2025 16:17:21] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 16:17:21,577 - INFO - 127.0.0.1 - - [04/Dec/2025 16:17:21] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 16:17:37,412 - INFO - 127.0.0.1 - - [04/Dec/2025 16:17:37] "GET /Denuncias?page=1&filtro=Esperando HTTP/1.1" 200 -
+2025-12-04 16:17:37,436 - INFO - 127.0.0.1 - - [04/Dec/2025 16:17:37] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 16:17:37,439 - INFO - 127.0.0.1 - - [04/Dec/2025 16:17:37] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 16:17:59,121 - INFO - 127.0.0.1 - - [04/Dec/2025 16:17:59] "GET /Denuncias?page=2&filtro=Esperando HTTP/1.1" 200 -
+2025-12-04 16:17:59,146 - INFO - 127.0.0.1 - - [04/Dec/2025 16:17:59] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 16:18:06,948 - INFO - 127.0.0.1 - - [04/Dec/2025 16:18:06] "GET /Denuncias?page=1&filtro=Esperando HTTP/1.1" 200 -
+2025-12-04 16:18:06,968 - INFO - 127.0.0.1 - - [04/Dec/2025 16:18:06] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 16:18:25,973 - INFO - 127.0.0.1 - - [04/Dec/2025 16:18:25] "GET /Denuncias?page=2&filtro=Esperando HTTP/1.1" 200 -
+2025-12-04 16:18:25,995 - INFO - 127.0.0.1 - - [04/Dec/2025 16:18:25] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 16:18:27,153 - INFO - 127.0.0.1 - - [04/Dec/2025 16:18:27] "GET /Denuncias?page=3&filtro=Esperando HTTP/1.1" 200 -
+2025-12-04 16:18:27,173 - INFO - 127.0.0.1 - - [04/Dec/2025 16:18:27] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 16:18:38,987 - INFO - 127.0.0.1 - - [04/Dec/2025 16:18:38] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 16:18:39,010 - INFO - 127.0.0.1 - - [04/Dec/2025 16:18:39] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 16:19:37,945 - INFO - 127.0.0.1 - - [04/Dec/2025 16:19:37] "GET /Denuncias?page=3&filtro=Esperando HTTP/1.1" 200 -
+2025-12-04 16:19:37,969 - INFO - 127.0.0.1 - - [04/Dec/2025 16:19:37] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 16:19:37,970 - INFO - 127.0.0.1 - - [04/Dec/2025 16:19:37] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 16:19:37,991 - INFO - 127.0.0.1 - - [04/Dec/2025 16:19:37] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 16:21:03,212 - INFO - 127.0.0.1 - - [04/Dec/2025 16:21:03] "GET /Denuncias?page=2&filtro=Esperando HTTP/1.1" 200 -
+2025-12-04 16:21:03,248 - INFO - 127.0.0.1 - - [04/Dec/2025 16:21:03] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 16:21:03,250 - INFO - 127.0.0.1 - - [04/Dec/2025 16:21:03] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 16:21:07,559 - INFO - 127.0.0.1 - - [04/Dec/2025 16:21:07] "GET /Denuncias?page=1&filtro=Esperando HTTP/1.1" 200 -
+2025-12-04 16:21:07,585 - INFO - 127.0.0.1 - - [04/Dec/2025 16:21:07] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 16:21:07,587 - INFO - 127.0.0.1 - - [04/Dec/2025 16:21:07] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 16:21:13,080 - INFO - 127.0.0.1 - - [04/Dec/2025 16:21:13] "GET /Denuncias?page=2&filtro=Esperando HTTP/1.1" 200 -
+2025-12-04 16:21:13,104 - INFO - 127.0.0.1 - - [04/Dec/2025 16:21:13] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 16:21:13,106 - INFO - 127.0.0.1 - - [04/Dec/2025 16:21:13] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 16:21:23,154 - INFO - 127.0.0.1 - - [04/Dec/2025 16:21:23] "GET /Denuncias?page=3&filtro=Esperando HTTP/1.1" 200 -
+2025-12-04 16:21:23,182 - INFO - 127.0.0.1 - - [04/Dec/2025 16:21:23] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 16:21:23,184 - INFO - 127.0.0.1 - - [04/Dec/2025 16:21:23] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 16:21:31,010 - INFO - 127.0.0.1 - - [04/Dec/2025 16:21:31] "GET /Denuncias?page=2&filtro=Esperando HTTP/1.1" 200 -
+2025-12-04 16:21:31,036 - INFO - 127.0.0.1 - - [04/Dec/2025 16:21:31] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 16:21:31,040 - INFO - 127.0.0.1 - - [04/Dec/2025 16:21:31] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 16:21:38,434 - INFO - 127.0.0.1 - - [04/Dec/2025 16:21:38] "GET /Denuncias?page=1&filtro=Esperando HTTP/1.1" 200 -
+2025-12-04 16:21:38,459 - INFO - 127.0.0.1 - - [04/Dec/2025 16:21:38] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 16:21:38,464 - INFO - 127.0.0.1 - - [04/Dec/2025 16:21:38] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 16:23:16,555 - INFO - 127.0.0.1 - - [04/Dec/2025 16:23:16] "GET /Denuncias?page=1&filtro=Esperando HTTP/1.1" 200 -
+2025-12-04 16:23:16,573 - INFO - 127.0.0.1 - - [04/Dec/2025 16:23:16] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 16:23:16,589 - INFO - 127.0.0.1 - - [04/Dec/2025 16:23:16] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 16:23:48,087 - INFO - 127.0.0.1 - - [04/Dec/2025 16:23:48] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 16:23:48,101 - INFO - 127.0.0.1 - - [04/Dec/2025 16:23:48] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2025-12-04 16:23:48,117 - INFO - 127.0.0.1 - - [04/Dec/2025 16:23:48] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 16:24:24,004 - INFO - 127.0.0.1 - - [04/Dec/2025 16:24:24] "GET /Denuncias?page=2&filtro=Esperando HTTP/1.1" 200 -
+2025-12-04 16:24:24,021 - INFO - 127.0.0.1 - - [04/Dec/2025 16:24:24] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 16:24:26,829 - INFO - 127.0.0.1 - - [04/Dec/2025 16:24:26] "GET /Denuncias?page=3&filtro=Esperando HTTP/1.1" 200 -
+2025-12-04 16:24:26,862 - INFO - 127.0.0.1 - - [04/Dec/2025 16:24:26] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 16:27:40,146 - INFO - 127.0.0.1 - - [04/Dec/2025 16:27:40] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 16:27:40,158 - INFO - 127.0.0.1 - - [04/Dec/2025 16:27:40] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 16:45:21,915 - INFO - 127.0.0.1 - - [04/Dec/2025 16:45:21] "GET /Denuncias?page=3&filtro=Esperando HTTP/1.1" 200 -
+2025-12-04 16:45:21,938 - INFO - 127.0.0.1 - - [04/Dec/2025 16:45:21] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 16:45:21,944 - INFO - 127.0.0.1 - - [04/Dec/2025 16:45:21] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 16:45:21,959 - INFO - 127.0.0.1 - - [04/Dec/2025 16:45:21] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 16:47:07,954 - INFO - 127.0.0.1 - - [04/Dec/2025 16:47:07] "GET /Denuncias?page=3&filtro=Esperando HTTP/1.1" 200 -
+2025-12-04 16:47:07,976 - INFO - 127.0.0.1 - - [04/Dec/2025 16:47:07] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 16:47:07,996 - INFO - 127.0.0.1 - - [04/Dec/2025 16:47:07] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 16:47:08,009 - INFO - 127.0.0.1 - - [04/Dec/2025 16:47:08] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-12-04 16:48:37,897 - INFO - 127.0.0.1 - - [04/Dec/2025 16:48:37] "GET /Denuncias?page=3&filtro=Esperando HTTP/1.1" 200 -
+2025-12-04 16:48:37,914 - INFO - 127.0.0.1 - - [04/Dec/2025 16:48:37] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 16:48:37,927 - INFO - 127.0.0.1 - - [04/Dec/2025 16:48:37] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 16:49:35,150 - INFO - 127.0.0.1 - - [04/Dec/2025 16:49:35] "GET /Denuncias?page=3&filtro=Esperando HTTP/1.1" 200 -
+2025-12-04 16:49:35,172 - INFO - 127.0.0.1 - - [04/Dec/2025 16:49:35] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 16:49:35,189 - INFO - 127.0.0.1 - - [04/Dec/2025 16:49:35] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 16:59:19,311 - INFO - 127.0.0.1 - - [04/Dec/2025 16:59:19] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 16:59:19,337 - INFO - 127.0.0.1 - - [04/Dec/2025 16:59:19] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 16:59:20,092 - INFO - 127.0.0.1 - - [04/Dec/2025 16:59:20] "GET /Abertas HTTP/1.1" 200 -
+2025-12-04 16:59:20,113 - INFO - 127.0.0.1 - - [04/Dec/2025 16:59:20] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 16:59:20,125 - INFO - 127.0.0.1 - - [04/Dec/2025 16:59:20] "GET /Abertas?page=0 HTTP/1.1" 200 -
+2025-12-04 16:59:20,139 - INFO - 127.0.0.1 - - [04/Dec/2025 16:59:20] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 16:59:20,157 - INFO - 127.0.0.1 - - [04/Dec/2025 16:59:20] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 16:59:22,383 - INFO - 127.0.0.1 - - [04/Dec/2025 16:59:22] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 16:59:22,406 - INFO - 127.0.0.1 - - [04/Dec/2025 16:59:22] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 16:59:23,237 - INFO - 127.0.0.1 - - [04/Dec/2025 16:59:23] "GET /Resolvidas HTTP/1.1" 200 -
+2025-12-04 16:59:23,259 - INFO - 127.0.0.1 - - [04/Dec/2025 16:59:23] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 16:59:23,276 - INFO - 127.0.0.1 - - [04/Dec/2025 16:59:23] "GET /Resolvidas?page=1 HTTP/1.1" 200 -
+2025-12-04 16:59:23,298 - INFO - 127.0.0.1 - - [04/Dec/2025 16:59:23] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 17:00:03,126 - INFO - 127.0.0.1 - - [04/Dec/2025 17:00:03] "GET /Resolvidas?page=1 HTTP/1.1" 200 -
+2025-12-04 17:00:03,145 - INFO - 127.0.0.1 - - [04/Dec/2025 17:00:03] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 17:00:03,161 - INFO - 127.0.0.1 - - [04/Dec/2025 17:00:03] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 17:06:06,428 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2025-12-04 17:06:06,577 - INFO -  * Restarting with stat
+2025-12-04 17:06:07,631 - WARNING -  * Debugger is active!
+2025-12-04 17:06:07,632 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 17:13:41,193 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 17:13:41,297 - INFO -  * Restarting with stat
+2025-12-04 17:13:42,434 - WARNING -  * Debugger is active!
+2025-12-04 17:13:42,435 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 17:14:44,098 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 17:14:44,228 - INFO -  * Restarting with stat
+2025-12-04 17:14:45,350 - WARNING -  * Debugger is active!
+2025-12-04 17:14:45,352 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 17:14:47,527 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 17:14:47,642 - INFO -  * Restarting with stat
+2025-12-04 17:15:10,093 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-12-04 17:15:10,093 - INFO - [33mPress CTRL+C to quit[0m
+2025-12-04 17:15:10,094 - INFO -  * Restarting with stat
+2025-12-04 17:15:11,239 - WARNING -  * Debugger is active!
+2025-12-04 17:15:11,240 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 17:15:16,577 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 17:15:16,707 - INFO -  * Restarting with stat
+2025-12-04 17:15:17,869 - WARNING -  * Debugger is active!
+2025-12-04 17:15:17,870 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 17:15:22,609 - INFO - 127.0.0.1 - - [04/Dec/2025 17:15:22] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 17:15:22,647 - INFO - 127.0.0.1 - - [04/Dec/2025 17:15:22] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2025-12-04 17:15:28,081 - INFO - 127.0.0.1 - - [04/Dec/2025 17:15:28] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 17:15:28,103 - INFO - 127.0.0.1 - - [04/Dec/2025 17:15:28] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 17:15:29,255 - INFO - 127.0.0.1 - - [04/Dec/2025 17:15:29] "GET /Abertas HTTP/1.1" 200 -
+2025-12-04 17:15:29,274 - INFO - 127.0.0.1 - - [04/Dec/2025 17:15:29] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 17:15:29,293 - INFO - 127.0.0.1 - - [04/Dec/2025 17:15:29] "GET /Abertas?page=0 HTTP/1.1" 200 -
+2025-12-04 17:15:29,313 - INFO - 127.0.0.1 - - [04/Dec/2025 17:15:29] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 17:15:30,859 - INFO - 127.0.0.1 - - [04/Dec/2025 17:15:30] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 17:15:30,879 - INFO - 127.0.0.1 - - [04/Dec/2025 17:15:30] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 17:15:31,371 - INFO - 127.0.0.1 - - [04/Dec/2025 17:15:31] "GET /Denuncias HTTP/1.1" 200 -
+2025-12-04 17:15:31,392 - INFO - 127.0.0.1 - - [04/Dec/2025 17:15:31] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 17:15:37,154 - INFO - 127.0.0.1 - - [04/Dec/2025 17:15:37] "GET /Denuncias?page=2&filtro=Esperando HTTP/1.1" 200 -
+2025-12-04 17:15:37,173 - INFO - 127.0.0.1 - - [04/Dec/2025 17:15:37] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 17:16:56,049 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 17:16:56,195 - INFO -  * Restarting with stat
+2025-12-04 17:16:57,273 - WARNING -  * Debugger is active!
+2025-12-04 17:16:57,274 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 17:20:26,709 - INFO - 127.0.0.1 - - [04/Dec/2025 17:20:26] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 17:20:26,756 - INFO - 127.0.0.1 - - [04/Dec/2025 17:20:26] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 17:20:30,157 - INFO - 127.0.0.1 - - [04/Dec/2025 17:20:30] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 17:20:30,209 - INFO - 127.0.0.1 - - [04/Dec/2025 17:20:30] "GET /Abertas HTTP/1.1" 200 -
+2025-12-04 17:20:30,214 - INFO - 127.0.0.1 - - [04/Dec/2025 17:20:30] "GET /Abertas HTTP/1.1" 200 -
+2025-12-04 17:20:30,233 - INFO - 127.0.0.1 - - [04/Dec/2025 17:20:30] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 17:20:30,253 - INFO - 127.0.0.1 - - [04/Dec/2025 17:20:30] "GET /Abertas?page=0 HTTP/1.1" 200 -
+2025-12-04 17:20:30,277 - INFO - 127.0.0.1 - - [04/Dec/2025 17:20:30] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 17:20:33,321 - INFO - 127.0.0.1 - - [04/Dec/2025 17:20:33] "GET /Abertas HTTP/1.1" 200 -
+2025-12-04 17:20:33,345 - INFO - 127.0.0.1 - - [04/Dec/2025 17:20:33] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 17:20:33,362 - INFO - 127.0.0.1 - - [04/Dec/2025 17:20:33] "GET /Abertas?page=0 HTTP/1.1" 200 -
+2025-12-04 17:20:33,378 - INFO - 127.0.0.1 - - [04/Dec/2025 17:20:33] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 17:20:55,125 - INFO - 127.0.0.1 - - [04/Dec/2025 17:20:55] "GET /Abertas HTTP/1.1" 200 -
+2025-12-04 17:20:55,148 - INFO - 127.0.0.1 - - [04/Dec/2025 17:20:55] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 17:20:55,164 - INFO - 127.0.0.1 - - [04/Dec/2025 17:20:55] "GET /Abertas?page=0 HTTP/1.1" 200 -
+2025-12-04 17:20:55,179 - INFO - 127.0.0.1 - - [04/Dec/2025 17:20:55] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 17:21:30,205 - INFO - 127.0.0.1 - - [04/Dec/2025 17:21:30] "GET /Abertas HTTP/1.1" 200 -
+2025-12-04 17:21:30,234 - INFO - 127.0.0.1 - - [04/Dec/2025 17:21:30] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 17:21:30,246 - INFO - 127.0.0.1 - - [04/Dec/2025 17:21:30] "GET /Abertas?page=0 HTTP/1.1" 200 -
+2025-12-04 17:21:30,269 - INFO - 127.0.0.1 - - [04/Dec/2025 17:21:30] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 17:21:32,480 - INFO - 127.0.0.1 - - [04/Dec/2025 17:21:32] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 17:21:32,496 - INFO - 127.0.0.1 - - [04/Dec/2025 17:21:32] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 17:21:32,510 - INFO - 127.0.0.1 - - [04/Dec/2025 17:21:32] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 17:21:33,801 - INFO - 127.0.0.1 - - [04/Dec/2025 17:21:33] "GET /Abertas HTTP/1.1" 200 -
+2025-12-04 17:21:33,825 - INFO - 127.0.0.1 - - [04/Dec/2025 17:21:33] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 17:21:33,846 - INFO - 127.0.0.1 - - [04/Dec/2025 17:21:33] "GET /Abertas?page=0 HTTP/1.1" 200 -
+2025-12-04 17:21:33,868 - INFO - 127.0.0.1 - - [04/Dec/2025 17:21:33] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 17:21:36,705 - INFO - 127.0.0.1 - - [04/Dec/2025 17:21:36] "GET /Abertas HTTP/1.1" 200 -
+2025-12-04 17:21:36,730 - INFO - 127.0.0.1 - - [04/Dec/2025 17:21:36] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 17:21:36,748 - INFO - 127.0.0.1 - - [04/Dec/2025 17:21:36] "GET /Abertas?page=0 HTTP/1.1" 200 -
+2025-12-04 17:21:36,771 - INFO - 127.0.0.1 - - [04/Dec/2025 17:21:36] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 17:23:25,194 - INFO - 127.0.0.1 - - [04/Dec/2025 17:23:25] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 17:23:25,216 - INFO - 127.0.0.1 - - [04/Dec/2025 17:23:25] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 17:23:29,329 - INFO - 127.0.0.1 - - [04/Dec/2025 17:23:29] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 17:23:29,352 - INFO - 127.0.0.1 - - [04/Dec/2025 17:23:29] "GET /Abertas HTTP/1.1" 200 -
+2025-12-04 17:23:29,375 - INFO - 127.0.0.1 - - [04/Dec/2025 17:23:29] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 17:23:29,394 - INFO - 127.0.0.1 - - [04/Dec/2025 17:23:29] "GET /Abertas?page=0 HTTP/1.1" 200 -
+2025-12-04 17:23:29,418 - INFO - 127.0.0.1 - - [04/Dec/2025 17:23:29] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 17:23:39,272 - INFO - 127.0.0.1 - - [04/Dec/2025 17:23:39] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 17:23:39,301 - INFO - 127.0.0.1 - - [04/Dec/2025 17:23:39] "GET /Abertas HTTP/1.1" 200 -
+2025-12-04 17:23:39,325 - INFO - 127.0.0.1 - - [04/Dec/2025 17:23:39] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 17:23:39,346 - INFO - 127.0.0.1 - - [04/Dec/2025 17:23:39] "GET /Abertas?page=0 HTTP/1.1" 200 -
+2025-12-04 17:23:39,369 - INFO - 127.0.0.1 - - [04/Dec/2025 17:23:39] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 17:23:49,888 - INFO - 127.0.0.1 - - [04/Dec/2025 17:23:49] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 17:23:49,906 - INFO - 127.0.0.1 - - [04/Dec/2025 17:23:49] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 17:23:49,920 - INFO - 127.0.0.1 - - [04/Dec/2025 17:23:49] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 17:23:54,336 - INFO - 127.0.0.1 - - [04/Dec/2025 17:23:54] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 17:23:54,356 - INFO - 127.0.0.1 - - [04/Dec/2025 17:23:54] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 17:23:54,369 - INFO - 127.0.0.1 - - [04/Dec/2025 17:23:54] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 17:23:57,234 - INFO - 127.0.0.1 - - [04/Dec/2025 17:23:57] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 17:23:57,254 - INFO - 127.0.0.1 - - [04/Dec/2025 17:23:57] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 17:23:57,267 - INFO - 127.0.0.1 - - [04/Dec/2025 17:23:57] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 17:24:01,385 - INFO - 127.0.0.1 - - [04/Dec/2025 17:24:01] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 17:24:01,404 - INFO - 127.0.0.1 - - [04/Dec/2025 17:24:01] "GET /Abertas HTTP/1.1" 200 -
+2025-12-04 17:24:01,423 - INFO - 127.0.0.1 - - [04/Dec/2025 17:24:01] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 17:24:01,439 - INFO - 127.0.0.1 - - [04/Dec/2025 17:24:01] "GET /Abertas?page=0 HTTP/1.1" 200 -
+2025-12-04 17:24:01,455 - INFO - 127.0.0.1 - - [04/Dec/2025 17:24:01] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 17:24:45,200 - INFO - 127.0.0.1 - - [04/Dec/2025 17:24:45] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 17:24:45,216 - INFO - 127.0.0.1 - - [04/Dec/2025 17:24:45] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 17:24:45,226 - INFO - 127.0.0.1 - - [04/Dec/2025 17:24:45] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 17:26:02,940 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2025-12-04 17:26:03,135 - INFO -  * Restarting with stat
+2025-12-04 17:26:04,543 - WARNING -  * Debugger is active!
+2025-12-04 17:26:04,544 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 17:30:00,311 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2025-12-04 17:30:00,447 - INFO -  * Restarting with stat
+2025-12-04 17:30:01,786 - WARNING -  * Debugger is active!
+2025-12-04 17:30:01,787 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 17:30:14,397 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2025-12-04 17:30:14,540 - INFO -  * Restarting with stat
+2025-12-04 17:30:15,874 - WARNING -  * Debugger is active!
+2025-12-04 17:30:15,875 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 17:30:34,766 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2025-12-04 17:30:34,875 - INFO -  * Restarting with stat
+2025-12-04 17:30:36,086 - WARNING -  * Debugger is active!
+2025-12-04 17:30:36,087 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 17:30:53,916 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2025-12-04 17:30:54,047 - INFO -  * Restarting with stat
+2025-12-04 17:30:55,288 - WARNING -  * Debugger is active!
+2025-12-04 17:30:55,289 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 17:31:40,224 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2025-12-04 17:31:40,357 - INFO -  * Restarting with stat
+2025-12-04 17:31:41,646 - WARNING -  * Debugger is active!
+2025-12-04 17:31:41,648 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 17:31:53,234 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\normais.py', reloading
+2025-12-04 17:31:53,365 - INFO -  * Restarting with stat
+2025-12-04 17:31:54,628 - WARNING -  * Debugger is active!
+2025-12-04 17:31:54,629 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 17:32:09,336 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2025-12-04 17:32:09,500 - INFO -  * Restarting with stat
+2025-12-04 17:32:10,688 - WARNING -  * Debugger is active!
+2025-12-04 17:32:10,689 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 17:34:31,249 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 17:34:31,388 - INFO -  * Restarting with stat
+2025-12-04 17:34:32,614 - WARNING -  * Debugger is active!
+2025-12-04 17:34:32,615 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 17:35:04,284 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 17:35:04,425 - INFO -  * Restarting with stat
+2025-12-04 17:35:05,635 - WARNING -  * Debugger is active!
+2025-12-04 17:35:05,637 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 17:35:23,501 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2025-12-04 17:35:23,744 - INFO -  * Restarting with stat
+2025-12-04 17:35:24,956 - WARNING -  * Debugger is active!
+2025-12-04 17:35:24,957 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 17:35:36,558 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2025-12-04 17:35:36,672 - INFO -  * Restarting with stat
+2025-12-04 17:35:37,871 - WARNING -  * Debugger is active!
+2025-12-04 17:35:37,873 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 17:35:58,256 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 17:35:58,478 - INFO -  * Restarting with stat
+2025-12-04 17:35:59,663 - WARNING -  * Debugger is active!
+2025-12-04 17:35:59,665 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 17:36:15,678 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2025-12-04 17:36:15,909 - INFO -  * Restarting with stat
+2025-12-04 17:36:17,123 - WARNING -  * Debugger is active!
+2025-12-04 17:36:17,124 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 17:36:49,975 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2025-12-04 17:36:50,083 - INFO -  * Restarting with stat
+2025-12-04 17:36:51,106 - WARNING -  * Debugger is active!
+2025-12-04 17:36:51,107 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 17:37:11,024 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 17:37:11,156 - INFO -  * Restarting with stat
+2025-12-04 17:37:12,249 - WARNING -  * Debugger is active!
+2025-12-04 17:37:12,250 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 17:42:49,161 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\normais.py', reloading
+2025-12-04 17:42:49,283 - INFO -  * Restarting with stat
+2025-12-04 17:42:51,085 - WARNING -  * Debugger is active!
+2025-12-04 17:42:51,086 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 17:42:54,305 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\normais.py', reloading
+2025-12-04 17:42:54,449 - INFO -  * Restarting with stat
+2025-12-04 17:42:55,725 - WARNING -  * Debugger is active!
+2025-12-04 17:42:55,727 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 17:43:02,076 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\normais.py', reloading
+2025-12-04 17:43:02,227 - INFO -  * Restarting with stat
+2025-12-04 17:43:03,459 - WARNING -  * Debugger is active!
+2025-12-04 17:43:03,460 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 17:43:04,630 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\normais.py', reloading
+2025-12-04 17:43:04,787 - INFO -  * Restarting with stat
+2025-12-04 17:43:06,043 - WARNING -  * Debugger is active!
+2025-12-04 17:43:06,045 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 17:43:07,182 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\normais.py', reloading
+2025-12-04 17:43:07,294 - INFO -  * Restarting with stat
+2025-12-04 17:43:08,727 - WARNING -  * Debugger is active!
+2025-12-04 17:43:08,728 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 17:43:09,880 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\normais.py', reloading
+2025-12-04 17:43:10,031 - INFO -  * Restarting with stat
+2025-12-04 17:43:11,567 - WARNING -  * Debugger is active!
+2025-12-04 17:43:11,569 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 17:43:11,683 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\normais.py', reloading
+2025-12-04 17:43:11,806 - INFO -  * Restarting with stat
+2025-12-04 17:43:13,278 - WARNING -  * Debugger is active!
+2025-12-04 17:43:13,279 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 17:43:24,879 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\normais.py', reloading
+2025-12-04 17:43:25,009 - INFO -  * Restarting with stat
+2025-12-04 17:43:26,293 - WARNING -  * Debugger is active!
+2025-12-04 17:43:26,294 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 17:43:27,421 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\normais.py', reloading
+2025-12-04 17:43:27,535 - INFO -  * Restarting with stat
+2025-12-04 17:43:28,610 - WARNING -  * Debugger is active!
+2025-12-04 17:43:28,612 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 17:45:35,909 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\normais.py', reloading
+2025-12-04 17:45:36,028 - INFO -  * Restarting with stat
+2025-12-04 17:45:37,462 - WARNING -  * Debugger is active!
+2025-12-04 17:45:37,463 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 17:45:38,607 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\normais.py', reloading
+2025-12-04 17:45:38,734 - INFO -  * Restarting with stat
+2025-12-04 17:45:40,108 - WARNING -  * Debugger is active!
+2025-12-04 17:45:40,111 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 17:45:49,625 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 17:45:49,766 - INFO -  * Restarting with stat
+2025-12-04 17:45:51,070 - WARNING -  * Debugger is active!
+2025-12-04 17:45:51,073 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 17:45:52,240 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 17:45:52,363 - INFO -  * Restarting with stat
+2025-12-04 17:45:53,695 - WARNING -  * Debugger is active!
+2025-12-04 17:45:53,698 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 17:46:52,484 - INFO - 127.0.0.1 - - [04/Dec/2025 17:46:52] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 17:46:52,529 - INFO - 127.0.0.1 - - [04/Dec/2025 17:46:52] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2025-12-04 17:46:52,544 - INFO - 127.0.0.1 - - [04/Dec/2025 17:46:52] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 17:46:53,867 - INFO - 127.0.0.1 - - [04/Dec/2025 17:46:53] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 17:46:53,882 - INFO - 127.0.0.1 - - [04/Dec/2025 17:46:53] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2025-12-04 17:46:56,854 - INFO - 127.0.0.1 - - [04/Dec/2025 17:46:56] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 17:46:56,865 - INFO - 127.0.0.1 - - [04/Dec/2025 17:46:56] "[32mPOST /autoriza_resolvidas HTTP/1.1[0m" 302 -
+2025-12-04 17:46:56,905 - INFO - 127.0.0.1 - - [04/Dec/2025 17:46:56] "GET /detalhe/18 HTTP/1.1" 200 -
+2025-12-04 17:46:56,921 - INFO - 127.0.0.1 - - [04/Dec/2025 17:46:56] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2025-12-04 17:46:56,923 - INFO - 127.0.0.1 - - [04/Dec/2025 17:46:56] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2025-12-04 17:46:59,027 - INFO - 127.0.0.1 - - [04/Dec/2025 17:46:59] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 17:46:59,043 - INFO - 127.0.0.1 - - [04/Dec/2025 17:46:59] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2025-12-04 17:47:00,707 - INFO - 127.0.0.1 - - [04/Dec/2025 17:47:00] "GET /Ajuda HTTP/1.1" 200 -
+2025-12-04 17:47:00,720 - INFO - 127.0.0.1 - - [04/Dec/2025 17:47:00] "GET /static/ajuda.css HTTP/1.1" 200 -
+2025-12-04 17:47:00,724 - INFO - 127.0.0.1 - - [04/Dec/2025 17:47:00] "[33mGET /static/js/Ajuda.js HTTP/1.1[0m" 404 -
+2025-12-04 17:47:02,283 - INFO - 127.0.0.1 - - [04/Dec/2025 17:47:02] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 17:47:02,299 - INFO - 127.0.0.1 - - [04/Dec/2025 17:47:02] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2025-12-04 17:47:23,471 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\database\\db_usuario.py', reloading
+2025-12-04 17:47:23,603 - INFO -  * Restarting with stat
+2025-12-04 17:47:24,655 - WARNING -  * Debugger is active!
+2025-12-04 17:47:24,656 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 17:47:35,200 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\login\\rota_login.py', reloading
+2025-12-04 17:47:35,407 - INFO -  * Restarting with stat
+2025-12-04 17:47:36,616 - WARNING -  * Debugger is active!
+2025-12-04 17:47:36,619 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 17:48:07,054 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\database\\db_usuario.py', reloading
+2025-12-04 17:48:07,201 - INFO -  * Restarting with stat
+2025-12-04 17:48:18,717 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-12-04 17:48:18,717 - INFO - [33mPress CTRL+C to quit[0m
+2025-12-04 17:48:18,718 - INFO -  * Restarting with stat
+2025-12-04 17:48:19,906 - WARNING -  * Debugger is active!
+2025-12-04 17:48:19,907 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 19:07:41,163 - INFO - 127.0.0.1 - - [04/Dec/2025 19:07:41] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 19:07:41,247 - INFO - 127.0.0.1 - - [04/Dec/2025 19:07:41] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2025-12-04 19:08:03,498 - INFO - 127.0.0.1 - - [04/Dec/2025 19:08:03] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 19:08:03,626 - INFO - 127.0.0.1 - - [04/Dec/2025 19:08:03] "GET /Denuncias HTTP/1.1" 200 -
+2025-12-04 19:08:03,654 - INFO - 127.0.0.1 - - [04/Dec/2025 19:08:03] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 19:10:18,635 - INFO - 127.0.0.1 - - [04/Dec/2025 19:10:18] "GET /Ajuda HTTP/1.1" 200 -
+2025-12-04 19:10:18,655 - INFO - 127.0.0.1 - - [04/Dec/2025 19:10:18] "GET /static/ajuda.css HTTP/1.1" 200 -
+2025-12-04 19:10:18,658 - INFO - 127.0.0.1 - - [04/Dec/2025 19:10:18] "[33mGET /static/js/Ajuda.js HTTP/1.1[0m" 404 -
+2025-12-04 19:10:22,744 - INFO - 127.0.0.1 - - [04/Dec/2025 19:10:22] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 19:10:22,766 - INFO - 127.0.0.1 - - [04/Dec/2025 19:10:22] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 19:10:32,332 - INFO - 127.0.0.1 - - [04/Dec/2025 19:10:32] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 19:10:32,353 - INFO - 127.0.0.1 - - [04/Dec/2025 19:10:32] "GET /Denuncias HTTP/1.1" 200 -
+2025-12-04 19:10:32,377 - INFO - 127.0.0.1 - - [04/Dec/2025 19:10:32] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 19:10:35,940 - INFO - 127.0.0.1 - - [04/Dec/2025 19:10:35] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 19:10:35,960 - INFO - 127.0.0.1 - - [04/Dec/2025 19:10:35] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 19:10:39,217 - INFO - 127.0.0.1 - - [04/Dec/2025 19:10:39] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 19:10:39,432 - INFO - 127.0.0.1 - - [04/Dec/2025 19:10:39] "GET /Abertas HTTP/1.1" 200 -
+2025-12-04 19:10:39,453 - INFO - 127.0.0.1 - - [04/Dec/2025 19:10:39] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 19:10:39,472 - INFO - 127.0.0.1 - - [04/Dec/2025 19:10:39] "GET /Abertas?page=0 HTTP/1.1" 200 -
+2025-12-04 19:10:39,491 - INFO - 127.0.0.1 - - [04/Dec/2025 19:10:39] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 19:12:22,691 - INFO - 127.0.0.1 - - [04/Dec/2025 19:12:22] "GET /Abertas?page=0 HTTP/1.1" 200 -
+2025-12-04 19:12:22,707 - INFO - 127.0.0.1 - - [04/Dec/2025 19:12:22] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 19:12:22,720 - INFO - 127.0.0.1 - - [04/Dec/2025 19:12:22] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 19:12:24,004 - INFO - 127.0.0.1 - - [04/Dec/2025 19:12:24] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 19:12:24,024 - INFO - 127.0.0.1 - - [04/Dec/2025 19:12:24] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 19:12:26,324 - INFO - 127.0.0.1 - - [04/Dec/2025 19:12:26] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 19:12:26,340 - INFO - 127.0.0.1 - - [04/Dec/2025 19:12:26] "GET /Resolvidas HTTP/1.1" 200 -
+2025-12-04 19:12:26,360 - INFO - 127.0.0.1 - - [04/Dec/2025 19:12:26] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 19:12:26,379 - INFO - 127.0.0.1 - - [04/Dec/2025 19:12:26] "GET /Resolvidas?page=1 HTTP/1.1" 200 -
+2025-12-04 19:12:26,393 - INFO - 127.0.0.1 - - [04/Dec/2025 19:12:26] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 19:12:48,672 - INFO - 127.0.0.1 - - [04/Dec/2025 19:12:48] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 19:12:48,696 - INFO - 127.0.0.1 - - [04/Dec/2025 19:12:48] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 19:23:29,055 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 19:23:29,197 - INFO -  * Restarting with stat
+2025-12-04 19:27:31,330 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-12-04 19:27:31,331 - INFO - [33mPress CTRL+C to quit[0m
+2025-12-04 19:27:31,332 - INFO -  * Restarting with stat
+2025-12-04 19:27:32,309 - WARNING -  * Debugger is active!
+2025-12-04 19:27:32,310 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 19:29:26,278 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 19:29:26,381 - INFO -  * Restarting with stat
+2025-12-04 19:29:27,377 - WARNING -  * Debugger is active!
+2025-12-04 19:29:27,378 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 19:29:52,472 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 19:29:52,571 - INFO -  * Restarting with stat
+2025-12-04 19:29:53,550 - WARNING -  * Debugger is active!
+2025-12-04 19:29:53,551 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 19:30:00,936 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 19:30:01,057 - INFO -  * Restarting with stat
+2025-12-04 19:30:02,144 - WARNING -  * Debugger is active!
+2025-12-04 19:30:02,146 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 19:30:25,154 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 19:30:25,311 - INFO -  * Restarting with stat
+2025-12-04 19:30:26,442 - WARNING -  * Debugger is active!
+2025-12-04 19:30:26,443 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 19:30:31,801 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 19:30:31,910 - INFO -  * Restarting with stat
+2025-12-04 19:30:33,001 - WARNING -  * Debugger is active!
+2025-12-04 19:30:33,002 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 19:30:45,601 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 19:30:45,717 - INFO -  * Restarting with stat
+2025-12-04 19:30:46,807 - WARNING -  * Debugger is active!
+2025-12-04 19:30:46,809 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 19:30:50,019 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 19:30:50,155 - INFO -  * Restarting with stat
+2025-12-04 19:30:51,262 - WARNING -  * Debugger is active!
+2025-12-04 19:30:51,264 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 19:30:52,447 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 19:30:52,570 - INFO -  * Restarting with stat
+2025-12-04 19:30:53,778 - WARNING -  * Debugger is active!
+2025-12-04 19:30:53,779 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 19:31:13,723 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 19:31:13,835 - INFO -  * Restarting with stat
+2025-12-04 19:47:04,283 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-12-04 19:47:04,283 - INFO - [33mPress CTRL+C to quit[0m
+2025-12-04 19:47:04,284 - INFO -  * Restarting with stat
+2025-12-04 19:47:05,388 - WARNING -  * Debugger is active!
+2025-12-04 19:47:05,390 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 19:47:05,448 - INFO - 127.0.0.1 - - [04/Dec/2025 19:47:05] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 19:47:05,496 - INFO - 127.0.0.1 - - [04/Dec/2025 19:47:05] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 19:47:05,542 - INFO - 127.0.0.1 - - [04/Dec/2025 19:47:05] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 19:47:12,737 - INFO - 127.0.0.1 - - [04/Dec/2025 19:47:12] "[32mGET /Abertas HTTP/1.1[0m" 302 -
+2025-12-04 19:47:12,747 - INFO - 127.0.0.1 - - [04/Dec/2025 19:47:12] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 19:47:12,773 - INFO - 127.0.0.1 - - [04/Dec/2025 19:47:12] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 19:47:15,720 - INFO - 127.0.0.1 - - [04/Dec/2025 19:47:15] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 19:47:15,736 - INFO - 127.0.0.1 - - [04/Dec/2025 19:47:15] "[32mGET /Denuncias?nome=Novas HTTP/1.1[0m" 302 -
+2025-12-04 19:47:15,745 - INFO - 127.0.0.1 - - [04/Dec/2025 19:47:15] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 19:47:15,767 - INFO - 127.0.0.1 - - [04/Dec/2025 19:47:15] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 19:47:18,766 - INFO - 127.0.0.1 - - [04/Dec/2025 19:47:18] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 19:47:18,786 - INFO - 127.0.0.1 - - [04/Dec/2025 19:47:18] "[32mGET /Abertas?nome=Abertas HTTP/1.1[0m" 302 -
+2025-12-04 19:47:18,795 - INFO - 127.0.0.1 - - [04/Dec/2025 19:47:18] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 19:47:18,815 - INFO - 127.0.0.1 - - [04/Dec/2025 19:47:18] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 19:48:15,164 - INFO - 127.0.0.1 - - [04/Dec/2025 19:48:15] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 19:48:15,182 - INFO - 127.0.0.1 - - [04/Dec/2025 19:48:15] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 19:48:15,197 - INFO - 127.0.0.1 - - [04/Dec/2025 19:48:15] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 19:48:17,011 - INFO - 127.0.0.1 - - [04/Dec/2025 19:48:17] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 19:48:17,027 - INFO - 127.0.0.1 - - [04/Dec/2025 19:48:17] "[31m[1mGET /allow_folder?nome=Abertas HTTP/1.1[0m" 405 -
+2025-12-04 19:48:17,059 - INFO - 127.0.0.1 - - [04/Dec/2025 19:48:17] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-12-04 19:48:32,149 - INFO - 127.0.0.1 - - [04/Dec/2025 19:48:32] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 19:48:32,163 - INFO - 127.0.0.1 - - [04/Dec/2025 19:48:32] "[31m[1mGET /allow_folder?nome=Abertas HTTP/1.1[0m" 405 -
+2025-12-04 19:48:34,494 - INFO - 127.0.0.1 - - [04/Dec/2025 19:48:34] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 19:48:34,512 - INFO - 127.0.0.1 - - [04/Dec/2025 19:48:34] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 19:48:34,526 - INFO - 127.0.0.1 - - [04/Dec/2025 19:48:34] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 19:48:36,477 - INFO - 127.0.0.1 - - [04/Dec/2025 19:48:36] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 19:48:36,520 - INFO - 127.0.0.1 - - [04/Dec/2025 19:48:36] "[35m[1mPOST /allow_folder HTTP/1.1[0m" 500 -
+2025-12-04 19:48:36,543 - INFO - 127.0.0.1 - - [04/Dec/2025 19:48:36] "GET /allow_folder?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2025-12-04 19:48:36,547 - INFO - 127.0.0.1 - - [04/Dec/2025 19:48:36] "GET /allow_folder?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2025-12-04 19:48:36,569 - INFO - 127.0.0.1 - - [04/Dec/2025 19:48:36] "GET /allow_folder?__debugger__=yes&cmd=resource&f=console.png&s=9sUxSGRpomovJDnd7Zxt HTTP/1.1" 200 -
+2025-12-04 19:48:36,593 - INFO - 127.0.0.1 - - [04/Dec/2025 19:48:36] "GET /allow_folder?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2025-12-04 19:49:24,914 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 19:49:25,031 - INFO -  * Restarting with stat
+2025-12-04 19:49:26,201 - WARNING -  * Debugger is active!
+2025-12-04 19:49:26,203 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 19:49:28,703 - INFO - 127.0.0.1 - - [04/Dec/2025 19:49:28] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 19:49:28,719 - INFO - 127.0.0.1 - - [04/Dec/2025 19:49:28] "[32mPOST /allow_folder HTTP/1.1[0m" 302 -
+2025-12-04 19:49:28,725 - INFO - 127.0.0.1 - - [04/Dec/2025 19:49:28] "[32mGET /Abertas HTTP/1.1[0m" 302 -
+2025-12-04 19:49:28,737 - INFO - 127.0.0.1 - - [04/Dec/2025 19:49:28] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 19:49:28,784 - INFO - 127.0.0.1 - - [04/Dec/2025 19:49:28] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 19:49:30,908 - INFO - 127.0.0.1 - - [04/Dec/2025 19:49:30] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 19:49:30,924 - INFO - 127.0.0.1 - - [04/Dec/2025 19:49:30] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 19:49:30,939 - INFO - 127.0.0.1 - - [04/Dec/2025 19:49:30] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 19:49:32,770 - INFO - 127.0.0.1 - - [04/Dec/2025 19:49:32] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 19:49:32,786 - INFO - 127.0.0.1 - - [04/Dec/2025 19:49:32] "[32mPOST /allow_folder HTTP/1.1[0m" 302 -
+2025-12-04 19:49:32,792 - INFO - 127.0.0.1 - - [04/Dec/2025 19:49:32] "[32mGET /Abertas HTTP/1.1[0m" 302 -
+2025-12-04 19:49:32,798 - INFO - 127.0.0.1 - - [04/Dec/2025 19:49:32] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 19:49:32,821 - INFO - 127.0.0.1 - - [04/Dec/2025 19:49:32] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 19:49:52,708 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\normais.py', reloading
+2025-12-04 19:49:52,818 - INFO -  * Restarting with stat
+2025-12-04 19:49:53,943 - WARNING -  * Debugger is active!
+2025-12-04 19:49:53,945 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 19:49:56,117 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\normais.py', reloading
+2025-12-04 19:49:56,231 - INFO -  * Restarting with stat
+2025-12-04 19:49:57,363 - WARNING -  * Debugger is active!
+2025-12-04 19:49:57,364 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 19:50:12,082 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\normais.py', reloading
+2025-12-04 19:50:12,199 - INFO -  * Restarting with stat
+2025-12-04 19:50:13,369 - WARNING -  * Debugger is active!
+2025-12-04 19:50:13,371 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 19:50:15,551 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\normais.py', reloading
+2025-12-04 19:50:15,674 - INFO -  * Restarting with stat
+2025-12-04 19:50:16,912 - WARNING -  * Debugger is active!
+2025-12-04 19:50:16,913 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 19:50:30,568 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 19:50:30,707 - INFO -  * Restarting with stat
+2025-12-04 19:50:31,959 - WARNING -  * Debugger is active!
+2025-12-04 19:50:31,962 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 19:50:32,022 - INFO - 127.0.0.1 - - [04/Dec/2025 19:50:32] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 19:50:32,063 - INFO - 127.0.0.1 - - [04/Dec/2025 19:50:32] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 19:50:32,074 - INFO - 127.0.0.1 - - [04/Dec/2025 19:50:32] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 19:50:37,390 - INFO - 127.0.0.1 - - [04/Dec/2025 19:50:37] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 19:50:37,406 - INFO - 127.0.0.1 - - [04/Dec/2025 19:50:37] "[32mPOST /allow_folder HTTP/1.1[0m" 302 -
+2025-12-04 19:50:37,429 - INFO - 127.0.0.1 - - [04/Dec/2025 19:50:37] "GET /Abertas HTTP/1.1" 200 -
+2025-12-04 19:50:37,454 - INFO - 127.0.0.1 - - [04/Dec/2025 19:50:37] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 19:50:37,464 - INFO - 127.0.0.1 - - [04/Dec/2025 19:50:37] "GET /Abertas?page=0 HTTP/1.1" 200 -
+2025-12-04 19:50:37,491 - INFO - 127.0.0.1 - - [04/Dec/2025 19:50:37] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 19:50:41,573 - INFO - 127.0.0.1 - - [04/Dec/2025 19:50:41] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 19:50:41,598 - INFO - 127.0.0.1 - - [04/Dec/2025 19:50:41] "[35m[1mPOST /allow_folder HTTP/1.1[0m" 500 -
+2025-12-04 19:50:41,624 - INFO - 127.0.0.1 - - [04/Dec/2025 19:50:41] "[36mGET /allow_folder?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-12-04 19:50:41,631 - INFO - 127.0.0.1 - - [04/Dec/2025 19:50:41] "[36mGET /allow_folder?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-12-04 19:50:41,640 - INFO - 127.0.0.1 - - [04/Dec/2025 19:50:41] "GET /allow_folder?__debugger__=yes&cmd=resource&f=console.png&s=TvRURhvtXRNWfq9sg5R8 HTTP/1.1" 200 -
+2025-12-04 19:51:14,901 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 19:51:15,019 - INFO -  * Restarting with stat
+2025-12-04 19:51:16,131 - WARNING -  * Debugger is active!
+2025-12-04 19:51:16,133 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 19:51:16,866 - INFO - 127.0.0.1 - - [04/Dec/2025 19:51:16] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 19:51:16,901 - INFO - 127.0.0.1 - - [04/Dec/2025 19:51:16] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 19:51:16,914 - INFO - 127.0.0.1 - - [04/Dec/2025 19:51:16] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 19:51:18,992 - INFO - 127.0.0.1 - - [04/Dec/2025 19:51:18] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 19:51:19,010 - INFO - 127.0.0.1 - - [04/Dec/2025 19:51:19] "[32mPOST /allow_folder HTTP/1.1[0m" 302 -
+2025-12-04 19:51:19,028 - INFO - 127.0.0.1 - - [04/Dec/2025 19:51:19] "GET /Denuncias HTTP/1.1" 200 -
+2025-12-04 19:51:19,052 - INFO - 127.0.0.1 - - [04/Dec/2025 19:51:19] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 19:51:22,446 - INFO - 127.0.0.1 - - [04/Dec/2025 19:51:22] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 19:51:22,461 - INFO - 127.0.0.1 - - [04/Dec/2025 19:51:22] "[32mPOST /allow_folder HTTP/1.1[0m" 302 -
+2025-12-04 19:51:22,479 - INFO - 127.0.0.1 - - [04/Dec/2025 19:51:22] "GET /Alunos HTTP/1.1" 200 -
+2025-12-04 19:51:22,501 - INFO - 127.0.0.1 - - [04/Dec/2025 19:51:22] "GET /static/aluno.css HTTP/1.1" 200 -
+2025-12-04 19:51:26,887 - INFO - 127.0.0.1 - - [04/Dec/2025 19:51:26] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 19:51:26,900 - INFO - 127.0.0.1 - - [04/Dec/2025 19:51:26] "[32mPOST /allow_folder HTTP/1.1[0m" 302 -
+2025-12-04 19:51:26,940 - INFO - 127.0.0.1 - - [04/Dec/2025 19:51:26] "GET /Resolvidas HTTP/1.1" 200 -
+2025-12-04 19:51:26,968 - INFO - 127.0.0.1 - - [04/Dec/2025 19:51:26] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 19:51:26,981 - INFO - 127.0.0.1 - - [04/Dec/2025 19:51:26] "GET /Resolvidas?page=1 HTTP/1.1" 200 -
+2025-12-04 19:51:26,996 - INFO - 127.0.0.1 - - [04/Dec/2025 19:51:26] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 19:51:29,748 - INFO - 127.0.0.1 - - [04/Dec/2025 19:51:29] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 19:51:29,769 - INFO - 127.0.0.1 - - [04/Dec/2025 19:51:29] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 19:51:39,681 - INFO - 127.0.0.1 - - [04/Dec/2025 19:51:39] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 19:51:39,695 - INFO - 127.0.0.1 - - [04/Dec/2025 19:51:39] "[32mPOST /allow_folder HTTP/1.1[0m" 302 -
+2025-12-04 19:51:39,706 - INFO - 127.0.0.1 - - [04/Dec/2025 19:51:39] "GET /Resolvidas HTTP/1.1" 200 -
+2025-12-04 19:51:39,727 - INFO - 127.0.0.1 - - [04/Dec/2025 19:51:39] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 19:51:39,744 - INFO - 127.0.0.1 - - [04/Dec/2025 19:51:39] "GET /Resolvidas?page=1 HTTP/1.1" 200 -
+2025-12-04 19:51:39,768 - INFO - 127.0.0.1 - - [04/Dec/2025 19:51:39] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 19:51:42,446 - INFO - 127.0.0.1 - - [04/Dec/2025 19:51:42] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 19:51:42,465 - INFO - 127.0.0.1 - - [04/Dec/2025 19:51:42] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 19:53:46,792 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 19:53:46,896 - INFO -  * Restarting with stat
+2025-12-04 19:53:48,025 - WARNING -  * Debugger is active!
+2025-12-04 19:53:48,027 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 19:53:50,205 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 19:53:50,329 - INFO -  * Restarting with stat
+2025-12-04 19:53:51,465 - WARNING -  * Debugger is active!
+2025-12-04 19:53:51,467 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 19:53:55,733 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 19:53:55,846 - INFO -  * Restarting with stat
+2025-12-04 19:53:56,972 - WARNING -  * Debugger is active!
+2025-12-04 19:53:56,973 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 19:54:06,486 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 19:54:06,625 - INFO -  * Restarting with stat
+2025-12-04 19:54:07,770 - WARNING -  * Debugger is active!
+2025-12-04 19:54:07,771 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 19:54:12,038 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 19:54:12,154 - INFO -  * Restarting with stat
+2025-12-04 19:54:13,189 - WARNING -  * Debugger is active!
+2025-12-04 19:54:13,190 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 19:54:56,101 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 19:54:56,222 - INFO -  * Restarting with stat
+2025-12-04 19:54:57,302 - WARNING -  * Debugger is active!
+2025-12-04 19:54:57,303 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 20:08:25,862 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 20:08:26,071 - INFO -  * Restarting with stat
+2025-12-04 20:08:27,245 - WARNING -  * Debugger is active!
+2025-12-04 20:08:27,247 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 20:08:29,427 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 20:08:29,591 - INFO -  * Restarting with stat
+2025-12-04 20:08:30,792 - WARNING -  * Debugger is active!
+2025-12-04 20:08:30,793 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 20:09:14,685 - INFO - 127.0.0.1 - - [04/Dec/2025 20:09:14] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 20:09:14,730 - INFO - 127.0.0.1 - - [04/Dec/2025 20:09:14] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 20:09:14,743 - INFO - 127.0.0.1 - - [04/Dec/2025 20:09:14] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 20:09:16,592 - INFO - 127.0.0.1 - - [04/Dec/2025 20:09:16] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 20:09:16,609 - INFO - 127.0.0.1 - - [04/Dec/2025 20:09:16] "[32mPOST /allow_folder HTTP/1.1[0m" 302 -
+2025-12-04 20:09:16,631 - INFO - 127.0.0.1 - - [04/Dec/2025 20:09:16] "GET /Abertas HTTP/1.1" 200 -
+2025-12-04 20:09:16,654 - INFO - 127.0.0.1 - - [04/Dec/2025 20:09:16] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 20:09:16,669 - INFO - 127.0.0.1 - - [04/Dec/2025 20:09:16] "GET /Abertas?page=0 HTTP/1.1" 200 -
+2025-12-04 20:09:16,692 - INFO - 127.0.0.1 - - [04/Dec/2025 20:09:16] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 20:09:25,571 - INFO - 127.0.0.1 - - [04/Dec/2025 20:09:25] "GET /Resolvidas?page=1 HTTP/1.1" 200 -
+2025-12-04 20:09:25,596 - INFO - 127.0.0.1 - - [04/Dec/2025 20:09:25] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 20:09:29,862 - INFO - 127.0.0.1 - - [04/Dec/2025 20:09:29] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 20:09:29,875 - INFO - 127.0.0.1 - - [04/Dec/2025 20:09:29] "[33mPOST /allow_detail/1 HTTP/1.1[0m" 404 -
+2025-12-04 20:13:52,956 - INFO - 127.0.0.1 - - [04/Dec/2025 20:13:52] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 20:13:52,971 - INFO - 127.0.0.1 - - [04/Dec/2025 20:13:52] "[33mPOST /allow_detail/1 HTTP/1.1[0m" 404 -
+2025-12-04 20:13:59,816 - INFO - 127.0.0.1 - - [04/Dec/2025 20:13:59] "GET /Resolvidas?page=1 HTTP/1.1" 200 -
+2025-12-04 20:13:59,833 - INFO - 127.0.0.1 - - [04/Dec/2025 20:13:59] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 20:13:59,847 - INFO - 127.0.0.1 - - [04/Dec/2025 20:13:59] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 20:14:16,415 - INFO - 127.0.0.1 - - [04/Dec/2025 20:14:16] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 20:14:16,431 - INFO - 127.0.0.1 - - [04/Dec/2025 20:14:16] "[32mPOST /allow_detail HTTP/1.1[0m" 302 -
+2025-12-04 20:14:16,454 - INFO - 127.0.0.1 - - [04/Dec/2025 20:14:16] "GET /detalhe/1 HTTP/1.1" 200 -
+2025-12-04 20:14:16,480 - INFO - 127.0.0.1 - - [04/Dec/2025 20:14:16] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2025-12-04 20:14:16,483 - INFO - 127.0.0.1 - - [04/Dec/2025 20:14:16] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2025-12-04 20:14:23,535 - INFO - 127.0.0.1 - - [04/Dec/2025 20:14:23] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 20:14:23,556 - INFO - 127.0.0.1 - - [04/Dec/2025 20:14:23] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 20:14:26,416 - INFO - 127.0.0.1 - - [04/Dec/2025 20:14:26] "[32mGET /detalhe/1 HTTP/1.1[0m" 302 -
+2025-12-04 20:14:26,426 - INFO - 127.0.0.1 - - [04/Dec/2025 20:14:26] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 20:14:26,450 - INFO - 127.0.0.1 - - [04/Dec/2025 20:14:26] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 20:14:29,326 - INFO - 127.0.0.1 - - [04/Dec/2025 20:14:29] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 20:14:29,341 - INFO - 127.0.0.1 - - [04/Dec/2025 20:14:29] "[32mPOST /allow_folder HTTP/1.1[0m" 302 -
+2025-12-04 20:14:29,348 - INFO - 127.0.0.1 - - [04/Dec/2025 20:14:29] "GET /Abertas HTTP/1.1" 200 -
+2025-12-04 20:14:29,372 - INFO - 127.0.0.1 - - [04/Dec/2025 20:14:29] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 20:14:29,390 - INFO - 127.0.0.1 - - [04/Dec/2025 20:14:29] "GET /Abertas?page=0 HTTP/1.1" 200 -
+2025-12-04 20:14:29,412 - INFO - 127.0.0.1 - - [04/Dec/2025 20:14:29] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 20:14:31,453 - INFO - 127.0.0.1 - - [04/Dec/2025 20:14:31] "[32mGET /detalhe/1 HTTP/1.1[0m" 302 -
+2025-12-04 20:14:31,460 - INFO - 127.0.0.1 - - [04/Dec/2025 20:14:31] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 20:14:31,485 - INFO - 127.0.0.1 - - [04/Dec/2025 20:14:31] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 20:14:46,340 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 20:14:46,449 - INFO -  * Restarting with stat
+2025-12-04 20:14:47,487 - WARNING -  * Debugger is active!
+2025-12-04 20:14:47,489 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 20:14:52,295 - INFO - 127.0.0.1 - - [04/Dec/2025 20:14:52] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 20:14:52,341 - INFO - 127.0.0.1 - - [04/Dec/2025 20:14:52] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 20:14:52,356 - INFO - 127.0.0.1 - - [04/Dec/2025 20:14:52] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 20:14:54,135 - INFO - 127.0.0.1 - - [04/Dec/2025 20:14:54] "GET /detalhe/1 HTTP/1.1" 200 -
+2025-12-04 20:14:54,155 - INFO - 127.0.0.1 - - [04/Dec/2025 20:14:54] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2025-12-04 20:14:54,166 - INFO - 127.0.0.1 - - [04/Dec/2025 20:14:54] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2025-12-04 20:14:57,228 - INFO - 127.0.0.1 - - [04/Dec/2025 20:14:57] "GET /detalhe/2 HTTP/1.1" 200 -
+2025-12-04 20:14:57,250 - INFO - 127.0.0.1 - - [04/Dec/2025 20:14:57] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2025-12-04 20:14:57,256 - INFO - 127.0.0.1 - - [04/Dec/2025 20:14:57] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2025-12-04 20:14:57,275 - INFO - 127.0.0.1 - - [04/Dec/2025 20:14:57] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 20:15:04,820 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 20:15:04,927 - INFO -  * Restarting with stat
+2025-12-04 20:15:05,990 - WARNING -  * Debugger is active!
+2025-12-04 20:15:05,992 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 20:15:13,401 - INFO - 127.0.0.1 - - [04/Dec/2025 20:15:13] "[33mGET /detalhe/³ HTTP/1.1[0m" 404 -
+2025-12-04 20:16:22,488 - INFO - 127.0.0.1 - - [04/Dec/2025 20:16:22] "GET /detalhe/3 HTTP/1.1" 200 -
+2025-12-04 20:16:22,519 - INFO - 127.0.0.1 - - [04/Dec/2025 20:16:22] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2025-12-04 20:16:22,580 - INFO - 127.0.0.1 - - [04/Dec/2025 20:16:22] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2025-12-04 20:16:22,595 - INFO - 127.0.0.1 - - [04/Dec/2025 20:16:22] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 20:16:24,473 - INFO - 127.0.0.1 - - [04/Dec/2025 20:16:24] "[32mGET /detalhe/4 HTTP/1.1[0m" 302 -
+2025-12-04 20:16:24,492 - INFO - 127.0.0.1 - - [04/Dec/2025 20:16:24] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 20:16:24,517 - INFO - 127.0.0.1 - - [04/Dec/2025 20:16:24] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 20:17:24,203 - INFO - 127.0.0.1 - - [04/Dec/2025 20:17:24] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 20:17:24,223 - INFO - 127.0.0.1 - - [04/Dec/2025 20:17:24] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 20:17:24,240 - INFO - 127.0.0.1 - - [04/Dec/2025 20:17:24] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 20:17:38,042 - INFO - 127.0.0.1 - - [04/Dec/2025 20:17:38] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 20:17:38,058 - INFO - 127.0.0.1 - - [04/Dec/2025 20:17:38] "[32mPOST /allow_folder HTTP/1.1[0m" 302 -
+2025-12-04 20:17:38,177 - INFO - 127.0.0.1 - - [04/Dec/2025 20:17:38] "GET /Denuncias HTTP/1.1" 200 -
+2025-12-04 20:17:38,197 - INFO - 127.0.0.1 - - [04/Dec/2025 20:17:38] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 20:17:59,886 - INFO - 127.0.0.1 - - [04/Dec/2025 20:17:59] "GET /Denuncias HTTP/1.1" 200 -
+2025-12-04 20:17:59,903 - INFO - 127.0.0.1 - - [04/Dec/2025 20:17:59] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 20:17:59,920 - INFO - 127.0.0.1 - - [04/Dec/2025 20:17:59] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 20:18:02,887 - INFO - 127.0.0.1 - - [04/Dec/2025 20:18:02] "[32mPOST /allow_detail HTTP/1.1[0m" 302 -
+2025-12-04 20:18:02,893 - INFO - 127.0.0.1 - - [04/Dec/2025 20:18:02] "[32mGET /detalhe/18 HTTP/1.1[0m" 302 -
+2025-12-04 20:18:02,899 - INFO - 127.0.0.1 - - [04/Dec/2025 20:18:02] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 20:18:02,925 - INFO - 127.0.0.1 - - [04/Dec/2025 20:18:02] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 20:18:08,479 - INFO - 127.0.0.1 - - [04/Dec/2025 20:18:08] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 20:18:08,496 - INFO - 127.0.0.1 - - [04/Dec/2025 20:18:08] "[32mPOST /allow_folder HTTP/1.1[0m" 302 -
+2025-12-04 20:18:08,505 - INFO - 127.0.0.1 - - [04/Dec/2025 20:18:08] "GET /Denuncias HTTP/1.1" 200 -
+2025-12-04 20:18:08,525 - INFO - 127.0.0.1 - - [04/Dec/2025 20:18:08] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 20:18:10,504 - INFO - 127.0.0.1 - - [04/Dec/2025 20:18:10] "[32mPOST /allow_detail HTTP/1.1[0m" 302 -
+2025-12-04 20:18:10,511 - INFO - 127.0.0.1 - - [04/Dec/2025 20:18:10] "[32mGET /detalhe/18 HTTP/1.1[0m" 302 -
+2025-12-04 20:18:10,519 - INFO - 127.0.0.1 - - [04/Dec/2025 20:18:10] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 20:18:10,543 - INFO - 127.0.0.1 - - [04/Dec/2025 20:18:10] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 20:19:40,567 - INFO - 127.0.0.1 - - [04/Dec/2025 20:19:40] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 20:19:40,589 - INFO - 127.0.0.1 - - [04/Dec/2025 20:19:40] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 20:19:40,604 - INFO - 127.0.0.1 - - [04/Dec/2025 20:19:40] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 20:19:42,385 - INFO - 127.0.0.1 - - [04/Dec/2025 20:19:42] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 20:19:42,412 - INFO - 127.0.0.1 - - [04/Dec/2025 20:19:42] "[35m[1mPOST /allow_detail HTTP/1.1[0m" 500 -
+2025-12-04 20:19:42,432 - INFO - 127.0.0.1 - - [04/Dec/2025 20:19:42] "GET /allow_detail?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2025-12-04 20:19:42,438 - INFO - 127.0.0.1 - - [04/Dec/2025 20:19:42] "GET /allow_detail?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2025-12-04 20:19:42,448 - INFO - 127.0.0.1 - - [04/Dec/2025 20:19:42] "GET /allow_detail?__debugger__=yes&cmd=resource&f=console.png&s=X2X0ySBxNexWYdTjfsMr HTTP/1.1" 200 -
+2025-12-04 20:19:42,459 - INFO - 127.0.0.1 - - [04/Dec/2025 20:19:42] "GET /allow_detail?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2025-12-04 20:20:16,315 - INFO - 127.0.0.1 - - [04/Dec/2025 20:20:16] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 20:20:16,338 - INFO - 127.0.0.1 - - [04/Dec/2025 20:20:16] "[35m[1mPOST /allow_detail HTTP/1.1[0m" 500 -
+2025-12-04 20:20:16,367 - INFO - 127.0.0.1 - - [04/Dec/2025 20:20:16] "[36mGET /allow_detail?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-12-04 20:20:16,368 - INFO - 127.0.0.1 - - [04/Dec/2025 20:20:16] "[36mGET /allow_detail?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-12-04 20:20:16,377 - INFO - 127.0.0.1 - - [04/Dec/2025 20:20:16] "[36mGET /allow_detail?__debugger__=yes&cmd=resource&f=console.png&s=X2X0ySBxNexWYdTjfsMr HTTP/1.1[0m" 304 -
+2025-12-04 20:20:37,721 - INFO - 127.0.0.1 - - [04/Dec/2025 20:20:37] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 20:20:37,739 - INFO - 127.0.0.1 - - [04/Dec/2025 20:20:37] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 20:20:37,754 - INFO - 127.0.0.1 - - [04/Dec/2025 20:20:37] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 20:20:40,301 - INFO - 127.0.0.1 - - [04/Dec/2025 20:20:40] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 20:20:40,314 - INFO - 127.0.0.1 - - [04/Dec/2025 20:20:40] "[32mPOST /allow_folder HTTP/1.1[0m" 302 -
+2025-12-04 20:20:40,327 - INFO - 127.0.0.1 - - [04/Dec/2025 20:20:40] "GET /Denuncias HTTP/1.1" 200 -
+2025-12-04 20:20:40,348 - INFO - 127.0.0.1 - - [04/Dec/2025 20:20:40] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 20:20:42,084 - INFO - 127.0.0.1 - - [04/Dec/2025 20:20:42] "[32mPOST /allow_detail HTTP/1.1[0m" 302 -
+2025-12-04 20:20:42,094 - INFO - 127.0.0.1 - - [04/Dec/2025 20:20:42] "[32mGET /detalhe/18 HTTP/1.1[0m" 302 -
+2025-12-04 20:20:42,104 - INFO - 127.0.0.1 - - [04/Dec/2025 20:20:42] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 20:20:42,130 - INFO - 127.0.0.1 - - [04/Dec/2025 20:20:42] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 20:21:25,093 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\normais.py', reloading
+2025-12-04 20:21:25,221 - INFO -  * Restarting with stat
+2025-12-04 20:21:26,476 - WARNING -  * Debugger is active!
+2025-12-04 20:21:26,478 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 20:21:27,615 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\normais.py', reloading
+2025-12-04 20:21:27,740 - INFO -  * Restarting with stat
+2025-12-04 20:21:29,033 - WARNING -  * Debugger is active!
+2025-12-04 20:21:29,035 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 20:21:30,155 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\normais.py', reloading
+2025-12-04 20:21:30,284 - INFO -  * Restarting with stat
+2025-12-04 20:21:31,537 - WARNING -  * Debugger is active!
+2025-12-04 20:21:31,539 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 20:21:34,782 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 20:21:34,899 - INFO -  * Restarting with stat
+2025-12-04 20:21:36,074 - WARNING -  * Debugger is active!
+2025-12-04 20:21:36,076 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 20:22:04,410 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\normais.py', reloading
+2025-12-04 20:22:04,584 - INFO -  * Restarting with stat
+2025-12-04 20:22:05,830 - WARNING -  * Debugger is active!
+2025-12-04 20:22:05,832 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 20:22:07,655 - INFO - 127.0.0.1 - - [04/Dec/2025 20:22:07] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 20:22:07,698 - INFO - 127.0.0.1 - - [04/Dec/2025 20:22:07] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 20:22:07,714 - INFO - 127.0.0.1 - - [04/Dec/2025 20:22:07] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 20:22:10,009 - INFO - 127.0.0.1 - - [04/Dec/2025 20:22:10] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 20:22:10,026 - INFO - 127.0.0.1 - - [04/Dec/2025 20:22:10] "[32mPOST /allow_folder HTTP/1.1[0m" 302 -
+2025-12-04 20:22:10,044 - INFO - 127.0.0.1 - - [04/Dec/2025 20:22:10] "GET /Denuncias HTTP/1.1" 200 -
+2025-12-04 20:22:10,062 - INFO - 127.0.0.1 - - [04/Dec/2025 20:22:10] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 20:22:12,225 - INFO - 127.0.0.1 - - [04/Dec/2025 20:22:12] "[32mPOST /allow_detail HTTP/1.1[0m" 302 -
+2025-12-04 20:22:12,256 - INFO - 127.0.0.1 - - [04/Dec/2025 20:22:12] "GET /detalhe/17 HTTP/1.1" 200 -
+2025-12-04 20:22:12,280 - INFO - 127.0.0.1 - - [04/Dec/2025 20:22:12] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2025-12-04 20:22:12,293 - INFO - 127.0.0.1 - - [04/Dec/2025 20:22:12] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2025-12-04 20:22:14,952 - INFO - 127.0.0.1 - - [04/Dec/2025 20:22:14] "GET /detalhe/18 HTTP/1.1" 200 -
+2025-12-04 20:22:14,980 - INFO - 127.0.0.1 - - [04/Dec/2025 20:22:14] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2025-12-04 20:22:14,986 - INFO - 127.0.0.1 - - [04/Dec/2025 20:22:14] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2025-12-04 20:22:17,109 - INFO - 127.0.0.1 - - [04/Dec/2025 20:22:17] "[33mGET /detalhe/19 HTTP/1.1[0m" 404 -
+2025-12-04 20:22:20,089 - INFO - 127.0.0.1 - - [04/Dec/2025 20:22:20] "GET /detalhe/14 HTTP/1.1" 200 -
+2025-12-04 20:22:20,108 - INFO - 127.0.0.1 - - [04/Dec/2025 20:22:20] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2025-12-04 20:22:20,114 - INFO - 127.0.0.1 - - [04/Dec/2025 20:22:20] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2025-12-04 20:22:48,491 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 20:22:48,626 - INFO -  * Restarting with stat
+2025-12-04 20:22:49,902 - WARNING -  * Debugger is active!
+2025-12-04 20:22:49,903 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 20:22:51,041 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 20:22:51,183 - INFO -  * Restarting with stat
+2025-12-04 20:22:52,436 - WARNING -  * Debugger is active!
+2025-12-04 20:22:52,437 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 20:22:54,082 - INFO - 127.0.0.1 - - [04/Dec/2025 20:22:54] "GET /detalhe/13 HTTP/1.1" 200 -
+2025-12-04 20:22:54,118 - INFO - 127.0.0.1 - - [04/Dec/2025 20:22:54] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2025-12-04 20:22:54,136 - INFO - 127.0.0.1 - - [04/Dec/2025 20:22:54] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2025-12-04 20:22:55,685 - INFO - 127.0.0.1 - - [04/Dec/2025 20:22:55] "GET /detalhe/13 HTTP/1.1" 200 -
+2025-12-04 20:22:55,703 - INFO - 127.0.0.1 - - [04/Dec/2025 20:22:55] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2025-12-04 20:22:55,705 - INFO - 127.0.0.1 - - [04/Dec/2025 20:22:55] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2025-12-04 20:22:55,718 - INFO - 127.0.0.1 - - [04/Dec/2025 20:22:55] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 20:22:56,149 - INFO - 127.0.0.1 - - [04/Dec/2025 20:22:56] "GET /detalhe/13 HTTP/1.1" 200 -
+2025-12-04 20:22:56,168 - INFO - 127.0.0.1 - - [04/Dec/2025 20:22:56] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2025-12-04 20:22:56,168 - INFO - 127.0.0.1 - - [04/Dec/2025 20:22:56] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2025-12-04 20:22:56,182 - INFO - 127.0.0.1 - - [04/Dec/2025 20:22:56] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 20:22:56,432 - INFO - 127.0.0.1 - - [04/Dec/2025 20:22:56] "GET /detalhe/13 HTTP/1.1" 200 -
+2025-12-04 20:22:56,451 - INFO - 127.0.0.1 - - [04/Dec/2025 20:22:56] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2025-12-04 20:22:56,452 - INFO - 127.0.0.1 - - [04/Dec/2025 20:22:56] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2025-12-04 20:22:56,466 - INFO - 127.0.0.1 - - [04/Dec/2025 20:22:56] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 20:22:56,687 - INFO - 127.0.0.1 - - [04/Dec/2025 20:22:56] "GET /detalhe/13 HTTP/1.1" 200 -
+2025-12-04 20:22:56,705 - INFO - 127.0.0.1 - - [04/Dec/2025 20:22:56] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2025-12-04 20:22:56,706 - INFO - 127.0.0.1 - - [04/Dec/2025 20:22:56] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2025-12-04 20:22:56,724 - INFO - 127.0.0.1 - - [04/Dec/2025 20:22:56] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 20:22:57,808 - INFO - 127.0.0.1 - - [04/Dec/2025 20:22:57] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 20:22:57,830 - INFO - 127.0.0.1 - - [04/Dec/2025 20:22:57] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 20:23:00,102 - INFO - 127.0.0.1 - - [04/Dec/2025 20:23:00] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 20:23:00,118 - INFO - 127.0.0.1 - - [04/Dec/2025 20:23:00] "[32mPOST /allow_folder HTTP/1.1[0m" 302 -
+2025-12-04 20:23:00,145 - INFO - 127.0.0.1 - - [04/Dec/2025 20:23:00] "GET /Denuncias HTTP/1.1" 200 -
+2025-12-04 20:23:00,166 - INFO - 127.0.0.1 - - [04/Dec/2025 20:23:00] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 20:23:01,908 - INFO - 127.0.0.1 - - [04/Dec/2025 20:23:01] "[32mPOST /allow_detail HTTP/1.1[0m" 302 -
+2025-12-04 20:23:01,927 - INFO - 127.0.0.1 - - [04/Dec/2025 20:23:01] "GET /detalhe/16 HTTP/1.1" 200 -
+2025-12-04 20:23:01,946 - INFO - 127.0.0.1 - - [04/Dec/2025 20:23:01] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2025-12-04 20:23:01,950 - INFO - 127.0.0.1 - - [04/Dec/2025 20:23:01] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2025-12-04 20:23:25,339 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 20:23:25,500 - INFO -  * Restarting with stat
+2025-12-04 20:23:26,755 - WARNING -  * Debugger is active!
+2025-12-04 20:23:26,757 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 20:23:28,931 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 20:23:29,048 - INFO -  * Restarting with stat
+2025-12-04 20:23:30,168 - WARNING -  * Debugger is active!
+2025-12-04 20:23:30,171 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 20:23:50,092 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 20:23:50,223 - INFO -  * Restarting with stat
+2025-12-04 20:23:51,584 - WARNING -  * Debugger is active!
+2025-12-04 20:23:51,586 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 20:23:51,645 - INFO - 127.0.0.1 - - [04/Dec/2025 20:23:51] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 20:23:51,701 - INFO - 127.0.0.1 - - [04/Dec/2025 20:23:51] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 20:23:53,598 - INFO - 127.0.0.1 - - [04/Dec/2025 20:23:53] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 20:23:53,615 - INFO - 127.0.0.1 - - [04/Dec/2025 20:23:53] "[32mPOST /allow_folder HTTP/1.1[0m" 302 -
+2025-12-04 20:23:53,634 - INFO - 127.0.0.1 - - [04/Dec/2025 20:23:53] "GET /Denuncias HTTP/1.1" 200 -
+2025-12-04 20:23:53,659 - INFO - 127.0.0.1 - - [04/Dec/2025 20:23:53] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 20:23:54,995 - INFO - 127.0.0.1 - - [04/Dec/2025 20:23:54] "[32mPOST /allow_detail HTTP/1.1[0m" 302 -
+2025-12-04 20:23:55,017 - INFO - 127.0.0.1 - - [04/Dec/2025 20:23:55] "GET /detalhe/12 HTTP/1.1" 200 -
+2025-12-04 20:23:55,040 - INFO - 127.0.0.1 - - [04/Dec/2025 20:23:55] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2025-12-04 20:23:55,044 - INFO - 127.0.0.1 - - [04/Dec/2025 20:23:55] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2025-12-04 20:23:58,881 - INFO - 127.0.0.1 - - [04/Dec/2025 20:23:58] "GET /detalhe/11 HTTP/1.1" 200 -
+2025-12-04 20:23:58,906 - INFO - 127.0.0.1 - - [04/Dec/2025 20:23:58] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2025-12-04 20:23:58,911 - INFO - 127.0.0.1 - - [04/Dec/2025 20:23:58] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2025-12-04 20:24:01,126 - INFO - 127.0.0.1 - - [04/Dec/2025 20:24:01] "GET /detalhe/10 HTTP/1.1" 200 -
+2025-12-04 20:24:01,150 - INFO - 127.0.0.1 - - [04/Dec/2025 20:24:01] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2025-12-04 20:24:01,162 - INFO - 127.0.0.1 - - [04/Dec/2025 20:24:01] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2025-12-04 20:24:01,180 - INFO - 127.0.0.1 - - [04/Dec/2025 20:24:01] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 20:24:47,581 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 20:24:47,718 - INFO -  * Restarting with stat
+2025-12-04 20:24:48,941 - WARNING -  * Debugger is active!
+2025-12-04 20:24:48,943 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 20:24:50,577 - INFO - 127.0.0.1 - - [04/Dec/2025 20:24:50] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 20:24:50,620 - INFO - 127.0.0.1 - - [04/Dec/2025 20:24:50] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 20:24:52,561 - INFO - 127.0.0.1 - - [04/Dec/2025 20:24:52] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 20:24:52,578 - INFO - 127.0.0.1 - - [04/Dec/2025 20:24:52] "[32mPOST /allow_folder HTTP/1.1[0m" 302 -
+2025-12-04 20:24:52,596 - INFO - 127.0.0.1 - - [04/Dec/2025 20:24:52] "GET /Denuncias HTTP/1.1" 200 -
+2025-12-04 20:24:52,615 - INFO - 127.0.0.1 - - [04/Dec/2025 20:24:52] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 20:24:54,655 - INFO - 127.0.0.1 - - [04/Dec/2025 20:24:54] "[32mPOST /allow_detail HTTP/1.1[0m" 302 -
+2025-12-04 20:24:54,685 - INFO - 127.0.0.1 - - [04/Dec/2025 20:24:54] "GET /detalhe/15 HTTP/1.1" 200 -
+2025-12-04 20:24:54,706 - INFO - 127.0.0.1 - - [04/Dec/2025 20:24:54] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2025-12-04 20:24:54,711 - INFO - 127.0.0.1 - - [04/Dec/2025 20:24:54] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2025-12-04 20:24:57,766 - INFO - 127.0.0.1 - - [04/Dec/2025 20:24:57] "[32mGET /detalhe/13 HTTP/1.1[0m" 302 -
+2025-12-04 20:24:57,776 - INFO - 127.0.0.1 - - [04/Dec/2025 20:24:57] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 20:24:57,799 - INFO - 127.0.0.1 - - [04/Dec/2025 20:24:57] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 20:25:00,190 - INFO - 127.0.0.1 - - [04/Dec/2025 20:25:00] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 20:25:00,206 - INFO - 127.0.0.1 - - [04/Dec/2025 20:25:00] "[32mPOST /allow_folder HTTP/1.1[0m" 302 -
+2025-12-04 20:25:00,223 - INFO - 127.0.0.1 - - [04/Dec/2025 20:25:00] "GET /Denuncias HTTP/1.1" 200 -
+2025-12-04 20:25:00,247 - INFO - 127.0.0.1 - - [04/Dec/2025 20:25:00] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 20:25:04,375 - INFO - 127.0.0.1 - - [04/Dec/2025 20:25:04] "GET /detalhe/6 HTTP/1.1" 200 -
+2025-12-04 20:25:04,395 - INFO - 127.0.0.1 - - [04/Dec/2025 20:25:04] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2025-12-04 20:25:04,406 - INFO - 127.0.0.1 - - [04/Dec/2025 20:25:04] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2025-12-04 20:25:06,637 - INFO - 127.0.0.1 - - [04/Dec/2025 20:25:06] "GET /Inicio HTTP/1.1" 200 -
+2025-12-04 20:25:06,660 - INFO - 127.0.0.1 - - [04/Dec/2025 20:25:06] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2025-12-04 20:30:56,786 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2025-12-04 20:30:56,896 - INFO -  * Restarting with stat
+2025-12-04 20:30:57,981 - WARNING -  * Debugger is active!
+2025-12-04 20:30:57,983 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 20:32:02,485 - INFO - 127.0.0.1 - - [04/Dec/2025 20:32:02] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 20:32:02,502 - INFO - 127.0.0.1 - - [04/Dec/2025 20:32:02] "[32mPOST /allow_folder HTTP/1.1[0m" 302 -
+2025-12-04 20:32:02,558 - INFO - 127.0.0.1 - - [04/Dec/2025 20:32:02] "GET /Abertas HTTP/1.1" 200 -
+2025-12-04 20:32:02,634 - INFO - 127.0.0.1 - - [04/Dec/2025 20:32:02] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 20:32:02,653 - INFO - 127.0.0.1 - - [04/Dec/2025 20:32:02] "GET /Abertas?page=1 HTTP/1.1" 200 -
+2025-12-04 20:32:02,692 - INFO - 127.0.0.1 - - [04/Dec/2025 20:32:02] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2025-12-04 20:36:16,274 - INFO - 127.0.0.1 - - [04/Dec/2025 20:36:16] "GET /Denuncia HTTP/1.1" 200 -
+2025-12-04 20:36:16,291 - INFO - 127.0.0.1 - - [04/Dec/2025 20:36:16] "[36mGET /static/denuncia.css HTTP/1.1[0m" 304 -
+2025-12-04 20:36:16,293 - INFO - 127.0.0.1 - - [04/Dec/2025 20:36:16] "[33mGET /static/js/denuncias.js HTTP/1.1[0m" 404 -
+2025-12-04 20:37:51,382 - INFO - 127.0.0.1 - - [04/Dec/2025 20:37:51] "GET /Denuncia HTTP/1.1" 200 -
+2025-12-04 20:37:51,401 - INFO - 127.0.0.1 - - [04/Dec/2025 20:37:51] "[36mGET /static/denuncia.css HTTP/1.1[0m" 304 -
+2025-12-04 20:37:51,403 - INFO - 127.0.0.1 - - [04/Dec/2025 20:37:51] "[33mGET /static/js/denuncias.js HTTP/1.1[0m" 404 -
+2025-12-04 20:37:51,413 - INFO - 127.0.0.1 - - [04/Dec/2025 20:37:51] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2025-12-04 20:37:58,248 - INFO - 127.0.0.1 - - [04/Dec/2025 20:37:58] "POST /verificar_pin HTTP/1.1" 200 -
+2025-12-04 20:38:17,036 - INFO - 127.0.0.1 - - [04/Dec/2025 20:38:17] "[35m[1mPOST /Denuncia HTTP/1.1[0m" 500 -
+2025-12-04 20:38:17,058 - INFO - 127.0.0.1 - - [04/Dec/2025 20:38:17] "[36mGET /Denuncia?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-12-04 20:38:17,060 - INFO - 127.0.0.1 - - [04/Dec/2025 20:38:17] "[36mGET /Denuncia?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-12-04 20:38:17,080 - INFO - 127.0.0.1 - - [04/Dec/2025 20:38:17] "GET /Denuncia?__debugger__=yes&cmd=resource&f=console.png&s=kd4Xt2YR7ah9J6zlOEVG HTTP/1.1" 200 -
+2025-12-04 20:38:17,094 - INFO - 127.0.0.1 - - [04/Dec/2025 20:38:17] "[36mGET /Denuncia?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-12-04 20:52:15,035 - INFO - 127.0.0.1 - - [04/Dec/2025 20:52:15] "[35m[1mPOST /Denuncia HTTP/1.1[0m" 500 -
+2025-12-04 20:52:15,046 - INFO - 127.0.0.1 - - [04/Dec/2025 20:52:15] "[36mGET /Denuncia?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-12-04 20:52:15,047 - INFO - 127.0.0.1 - - [04/Dec/2025 20:52:15] "[36mGET /Denuncia?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-12-04 20:52:15,056 - INFO - 127.0.0.1 - - [04/Dec/2025 20:52:15] "[36mGET /Denuncia?__debugger__=yes&cmd=resource&f=console.png&s=kd4Xt2YR7ah9J6zlOEVG HTTP/1.1[0m" 304 -
+2025-12-04 20:52:15,066 - INFO - 127.0.0.1 - - [04/Dec/2025 20:52:15] "[36mGET /Denuncia?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-12-04 20:54:21,562 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2025-12-04 20:54:21,699 - INFO -  * Restarting with stat
+2025-12-04 20:54:22,926 - WARNING -  * Debugger is active!
+2025-12-04 20:54:22,928 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 20:54:27,167 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2025-12-04 20:54:27,289 - INFO -  * Restarting with stat
+2025-12-04 20:54:28,429 - WARNING -  * Debugger is active!
+2025-12-04 20:54:28,431 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 20:54:38,981 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2025-12-04 20:54:39,091 - INFO -  * Restarting with stat
+2025-12-04 20:54:40,389 - WARNING -  * Debugger is active!
+2025-12-04 20:54:40,390 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 20:54:42,547 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2025-12-04 20:54:42,666 - INFO -  * Restarting with stat
+2025-12-04 20:54:43,758 - WARNING -  * Debugger is active!
+2025-12-04 20:54:43,759 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 20:54:45,925 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2025-12-04 20:54:46,034 - INFO -  * Restarting with stat
+2025-12-04 20:54:47,175 - WARNING -  * Debugger is active!
+2025-12-04 20:54:47,177 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 20:54:48,293 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2025-12-04 20:54:48,412 - INFO -  * Restarting with stat
+2025-12-04 20:54:49,633 - WARNING -  * Debugger is active!
+2025-12-04 20:54:49,635 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 20:54:50,764 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2025-12-04 20:54:50,902 - INFO -  * Restarting with stat
+2025-12-04 20:54:52,146 - WARNING -  * Debugger is active!
+2025-12-04 20:54:52,148 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 20:54:53,276 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2025-12-04 20:54:53,433 - INFO -  * Restarting with stat
+2025-12-04 20:54:54,589 - WARNING -  * Debugger is active!
+2025-12-04 20:54:54,590 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 20:55:31,151 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2025-12-04 20:55:31,248 - INFO -  * Restarting with stat
+2025-12-04 20:55:32,396 - WARNING -  * Debugger is active!
+2025-12-04 20:55:32,397 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 21:18:28,442 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2025-12-04 21:18:28,582 - INFO -  * Restarting with stat
+2025-12-04 21:18:30,000 - WARNING -  * Debugger is active!
+2025-12-04 21:18:30,002 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 21:19:43,213 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2025-12-04 21:19:43,452 - INFO -  * Restarting with stat
+2025-12-04 21:19:44,545 - WARNING -  * Debugger is active!
+2025-12-04 21:19:44,546 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 21:19:46,759 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2025-12-04 21:19:46,919 - INFO -  * Restarting with stat
+2025-12-04 21:19:48,171 - WARNING -  * Debugger is active!
+2025-12-04 21:19:48,173 - INFO -  * Debugger PIN: 674-560-654
+2025-12-04 21:19:49,290 - INFO -  * Detected change in 'c:\\Users\\ManoelJoseDaSilvaJun\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2025-12-04 21:19:49,394 - INFO -  * Restarting with stat
+2025-12-04 21:19:50,427 - WARNING -  * Debugger is active!
+2025-12-04 21:19:50,429 - INFO -  * Debugger PIN: 674-560-654

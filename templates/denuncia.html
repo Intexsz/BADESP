@@ -29,7 +29,6 @@
       <li><a href="/Ajuda"><span class="material-icons">help_outline</span> Ajuda</a></li>
       <li><a href="/Denuncia"><span class="material-icons">report</span> Fazer Denúncia</a></li>
 
-      <!-- DESLOGAR VERMELHO -->
       <li><a href="/Logout" class="logout" onclick="confirmarLogout()"><span class="material-icons">logout</span> Deslogar</a></li>
     </ul>
   </nav>
@@ -38,10 +37,10 @@
   <div class="form-container">
     <h1>Enviar Denúncia</h1>
     <form id="form-denuncia" method="POST" autocomplete="off">
-      <input type="text" placeholder="Título da denúncia" required name="titulo" maxlength="20">
+      <input type="text" id='titulo'placeholder="Título da denúncia" required name="titulo" maxlength="60">
 
       <div class="select-seta">
-        <select required name="tipo">
+        <select required name="tipo" id="tipo">
           <option value="">Ocorrido</option>
           <option value="Agressão">Agressão (física, verbal, psicológica, moral e sexual)</option>
           <option value="Destruição Patrimônial">Destruição Patrimônial </option>
@@ -52,7 +51,7 @@
         </select>
       </div>
 
-      <textarea placeholder="Denúncia:" required name="descricao"></textarea>
+      <textarea id="denuncia" placeholder="Denúncia:" required name="descricao"></textarea>
 
       <p>Deseja enviar para quem?</p>
       <select required name="quem" id="quem" onchange="mostrarPessoas()">
@@ -68,7 +67,7 @@
         </select>
       </div>
 
-      <button type="submit">Enviar Denúncia</button>
+      <button type="submit" id="botãooo">Enviar Denúncia</button>
     </form>
   </div>
 
@@ -77,7 +76,8 @@
 </main>
   <script>
     const form = document.getElementById('form-denuncia');
-  
+    const elemento = document.getElementById('botãooo');
+
     form.addEventListener('submit', async function (event) {
       event.preventDefault(); 
       const confirmado = confirm(
@@ -87,7 +87,7 @@
         "Se enviar, só poderá APAGAR antes da Secretaria abrir sua denúncia. " +
         "Caso seja visualizada, você NÃO PODERÁ MAIS APAGAR SUA DENÚNCIA."
       );
-  
+
       if (!confirmado) return;
   
       const pin = prompt("Digite seu PIN para confirmar o envio:");
@@ -106,7 +106,9 @@
         const result = await response.json();
   
         if (result.status === "ok") {
-          form.submit(); 
+          alert("Denúncia enviada com sucesso!");
+          form.submit();
+          elemento.remove();
         } else {
           alert(result.mensagem || "PIN incorreto. Tente novamente.");
         }
