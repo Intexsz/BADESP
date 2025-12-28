@@ -1,7 +1,7 @@
 from flask import Flask, session, redirect, url_for, Blueprint,render_template, request
 from authlib.integrations.flask_client import OAuth
 from app.database.db_usuario import get_role, pegar_no_nome, usuario_tem_pin, buscar_nome_aluno, novo_pin_secretaria,buscar_usuario,listar_alunose
-from app.database.db_denuncia import get_report_status, open_report_db, get_report, get_open
+from app.database.db_denuncia import get_report_status, open_report_db, get_report
 from app.database.db_denuncia import update_status, post_comment, check_coment,list_reports,list_approved
 
 app = Flask(__name__)

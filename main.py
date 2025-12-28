@@ -2,7 +2,7 @@ from flask import Flask
 from authlib.integrations.flask_client import OAuth
 from app.database.db_usuario import init_db
 from app.database.db_denuncia import create_table
-from app.rotas.normais import rotas_bp
+from app.rotas.aluno import rotas_bp
 from app.rotas.secretaria import secretaria
 from app.login.rota_login import rota_login
 
