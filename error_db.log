@@ -1730,3 +1730,246 @@
 2025-12-05 19:27:29,201 - INFO - 127.0.0.1 - - [05/Dec/2025 19:27:29] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
 2025-12-05 19:27:32,024 - INFO - 127.0.0.1 - - [05/Dec/2025 19:27:32] "GET /Inicio HTTP/1.1" 200 -
 2025-12-05 19:27:32,052 - INFO - 127.0.0.1 - - [05/Dec/2025 19:27:32] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2025-12-28 01:39:46,752 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-12-28 01:39:46,754 - INFO - [33mPress CTRL+C to quit[0m
+2025-12-28 01:39:46,758 - INFO -  * Restarting with stat
+2025-12-28 01:39:51,918 - WARNING -  * Debugger is active!
+2025-12-28 01:39:55,262 - INFO -  * Debugger PIN: 369-653-580
+2025-12-28 01:40:20,748 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2025-12-28 01:40:21,102 - INFO -  * Restarting with stat
+2025-12-28 01:40:26,942 - WARNING -  * Debugger is active!
+2025-12-28 01:40:26,957 - INFO -  * Debugger PIN: 369-653-580
+2025-12-28 01:43:00,785 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-12-28 01:43:00,785 - INFO - [33mPress CTRL+C to quit[0m
+2025-12-28 01:43:00,901 - INFO -  * Restarting with stat
+2025-12-28 01:43:08,022 - WARNING -  * Debugger is active!
+2025-12-28 01:43:08,032 - INFO -  * Debugger PIN: 369-653-580
+2025-12-28 01:44:56,279 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\main.py', reloading
+2025-12-28 01:44:56,930 - INFO -  * Restarting with stat
+2025-12-28 01:45:11,553 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-12-28 01:45:11,553 - INFO - [33mPress CTRL+C to quit[0m
+2025-12-28 01:45:11,558 - INFO -  * Restarting with stat
+2025-12-28 01:45:16,285 - WARNING -  * Debugger is active!
+2025-12-28 01:45:16,296 - INFO -  * Debugger PIN: 369-653-580
+2025-12-28 02:15:21,481 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-12-28 02:15:21,482 - INFO - [33mPress CTRL+C to quit[0m
+2026-01-05 12:36:47,139 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-01-05 12:36:47,140 - INFO - [33mPress CTRL+C to quit[0m
+2026-01-05 12:36:47,145 - INFO -  * Restarting with stat
+2026-01-05 12:36:50,714 - WARNING -  * Debugger is active!
+2026-01-05 12:36:50,725 - INFO -  * Debugger PIN: 369-653-580
+2026-01-05 12:38:02,759 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-01-05 12:38:02,760 - INFO - [33mPress CTRL+C to quit[0m
+2026-01-05 12:38:02,762 - INFO -  * Restarting with stat
+2026-01-05 12:38:05,736 - WARNING -  * Debugger is active!
+2026-01-05 12:38:05,745 - INFO -  * Debugger PIN: 369-653-580
+2026-01-05 12:39:29,194 - INFO - 127.0.0.1 - - [05/Jan/2026 12:39:29] "[32mGET / HTTP/1.1[0m" 302 -
+2026-01-05 12:39:29,314 - INFO - 127.0.0.1 - - [05/Jan/2026 12:39:29] "GET /Login HTTP/1.1" 200 -
+2026-01-05 12:39:29,578 - INFO - 127.0.0.1 - - [05/Jan/2026 12:39:29] "GET /static/cadastro.css HTTP/1.1" 200 -
+2026-01-05 12:39:30,731 - INFO - 127.0.0.1 - - [05/Jan/2026 12:39:30] "GET /static/icone.png HTTP/1.1" 200 -
+2026-01-05 12:40:10,650 - INFO - 127.0.0.1 - - [05/Jan/2026 12:40:10] "POST /Login/callback HTTP/1.1" 200 -
+2026-01-05 12:40:10,775 - INFO - 127.0.0.1 - - [05/Jan/2026 12:40:10] "GET /Inicio HTTP/1.1" 200 -
+2026-01-05 12:40:10,818 - INFO - 127.0.0.1 - - [05/Jan/2026 12:40:10] "GET /static/iniciosecretaria.css HTTP/1.1" 200 -
+2026-01-05 12:40:16,878 - INFO - 127.0.0.1 - - [05/Jan/2026 12:40:16] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-05 12:40:16,928 - INFO - 127.0.0.1 - - [05/Jan/2026 12:40:16] "[32mPOST /allow_folder HTTP/1.1[0m" 302 -
+2026-01-05 12:40:17,034 - INFO - 127.0.0.1 - - [05/Jan/2026 12:40:17] "GET /Denuncias HTTP/1.1" 200 -
+2026-01-05 12:40:17,082 - INFO - 127.0.0.1 - - [05/Jan/2026 12:40:17] "GET /static/secretaria.css HTTP/1.1" 200 -
+2026-01-05 12:40:17,150 - INFO - 127.0.0.1 - - [05/Jan/2026 12:40:17] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-05 12:40:19,931 - INFO - 127.0.0.1 - - [05/Jan/2026 12:40:19] "GET /Inicio HTTP/1.1" 200 -
+2026-01-05 12:40:19,963 - INFO - 127.0.0.1 - - [05/Jan/2026 12:40:19] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2026-01-05 12:40:21,797 - INFO - 127.0.0.1 - - [05/Jan/2026 12:40:21] "GET /Denuncias HTTP/1.1" 200 -
+2026-01-05 12:40:21,823 - INFO - 127.0.0.1 - - [05/Jan/2026 12:40:21] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2026-01-05 12:40:23,844 - INFO - 127.0.0.1 - - [05/Jan/2026 12:40:23] "GET /Inicio HTTP/1.1" 200 -
+2026-01-05 12:40:23,866 - INFO - 127.0.0.1 - - [05/Jan/2026 12:40:23] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2026-01-05 12:40:30,160 - INFO - 127.0.0.1 - - [05/Jan/2026 12:40:30] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-05 12:40:30,180 - INFO - 127.0.0.1 - - [05/Jan/2026 12:40:30] "[32mPOST /allow_folder HTTP/1.1[0m" 302 -
+2026-01-05 12:40:30,364 - INFO - 127.0.0.1 - - [05/Jan/2026 12:40:30] "GET /Abertas HTTP/1.1" 200 -
+2026-01-05 12:40:30,409 - INFO - 127.0.0.1 - - [05/Jan/2026 12:40:30] "GET /static/historico.css HTTP/1.1" 200 -
+2026-01-05 12:40:30,430 - INFO - 127.0.0.1 - - [05/Jan/2026 12:40:30] "GET /Abertas?page=0 HTTP/1.1" 200 -
+2026-01-05 12:40:30,667 - INFO - 127.0.0.1 - - [05/Jan/2026 12:40:30] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2026-01-05 12:40:30,699 - INFO - 127.0.0.1 - - [05/Jan/2026 12:40:30] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-05 12:40:32,385 - INFO - 127.0.0.1 - - [05/Jan/2026 12:40:32] "GET /Inicio HTTP/1.1" 200 -
+2026-01-05 12:40:32,412 - INFO - 127.0.0.1 - - [05/Jan/2026 12:40:32] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2026-01-05 12:40:35,012 - INFO - 127.0.0.1 - - [05/Jan/2026 12:40:35] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-05 12:40:35,029 - INFO - 127.0.0.1 - - [05/Jan/2026 12:40:35] "[32mPOST /allow_folder HTTP/1.1[0m" 302 -
+2026-01-05 12:40:35,150 - INFO - 127.0.0.1 - - [05/Jan/2026 12:40:35] "GET /Alunos HTTP/1.1" 200 -
+2026-01-05 12:40:35,219 - INFO - 127.0.0.1 - - [05/Jan/2026 12:40:35] "GET /static/aluno.css HTTP/1.1" 200 -
+2026-01-05 12:40:39,096 - INFO - 127.0.0.1 - - [05/Jan/2026 12:40:39] "GET /Inicio HTTP/1.1" 200 -
+2026-01-05 12:40:39,124 - INFO - 127.0.0.1 - - [05/Jan/2026 12:40:39] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2026-01-05 12:40:40,628 - INFO - 127.0.0.1 - - [05/Jan/2026 12:40:40] "GET /MudarPIN HTTP/1.1" 200 -
+2026-01-05 12:40:40,689 - INFO - 127.0.0.1 - - [05/Jan/2026 12:40:40] "GET /static/pin.css HTTP/1.1" 200 -
+2026-01-05 12:41:21,816 - INFO - 127.0.0.1 - - [05/Jan/2026 12:41:21] "GET /Inicio HTTP/1.1" 200 -
+2026-01-05 12:41:21,846 - INFO - 127.0.0.1 - - [05/Jan/2026 12:41:21] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2026-01-05 12:41:26,346 - INFO - 127.0.0.1 - - [05/Jan/2026 12:41:26] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-05 12:41:26,398 - INFO - 127.0.0.1 - - [05/Jan/2026 12:41:26] "[32mPOST /allow_folder HTTP/1.1[0m" 302 -
+2026-01-05 12:41:26,423 - INFO - 127.0.0.1 - - [05/Jan/2026 12:41:26] "GET /Resolvidas HTTP/1.1" 200 -
+2026-01-05 12:41:26,447 - INFO - 127.0.0.1 - - [05/Jan/2026 12:41:26] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2026-01-05 12:41:26,466 - INFO - 127.0.0.1 - - [05/Jan/2026 12:41:26] "GET /Resolvidas?page=1 HTTP/1.1" 200 -
+2026-01-05 12:41:26,505 - INFO - 127.0.0.1 - - [05/Jan/2026 12:41:26] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2026-01-05 12:41:26,653 - INFO - 127.0.0.1 - - [05/Jan/2026 12:41:26] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-05 12:41:48,938 - INFO - 127.0.0.1 - - [05/Jan/2026 12:41:48] "GET /Inicio HTTP/1.1" 200 -
+2026-01-05 12:41:48,964 - INFO - 127.0.0.1 - - [05/Jan/2026 12:41:48] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2026-01-05 12:41:57,450 - INFO - 127.0.0.1 - - [05/Jan/2026 12:41:57] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-05 12:41:57,474 - INFO - 127.0.0.1 - - [05/Jan/2026 12:41:57] "[32mPOST /allow_folder HTTP/1.1[0m" 302 -
+2026-01-05 12:41:57,493 - INFO - 127.0.0.1 - - [05/Jan/2026 12:41:57] "GET /Resolvidas HTTP/1.1" 200 -
+2026-01-05 12:41:57,520 - INFO - 127.0.0.1 - - [05/Jan/2026 12:41:57] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2026-01-05 12:41:57,548 - INFO - 127.0.0.1 - - [05/Jan/2026 12:41:57] "GET /Resolvidas?page=1 HTTP/1.1" 200 -
+2026-01-05 12:41:57,611 - INFO - 127.0.0.1 - - [05/Jan/2026 12:41:57] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2026-01-05 12:43:40,472 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2026-01-05 12:43:40,654 - INFO -  * Restarting with stat
+2026-01-05 12:47:47,400 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-01-05 12:47:47,400 - INFO - [33mPress CTRL+C to quit[0m
+2026-01-05 12:47:47,405 - INFO -  * Restarting with stat
+2026-01-05 12:47:51,046 - WARNING -  * Debugger is active!
+2026-01-05 12:47:51,056 - INFO -  * Debugger PIN: 369-653-580
+2026-01-05 12:47:51,100 - INFO - 127.0.0.1 - - [05/Jan/2026 12:47:51] "GET /Inicio HTTP/1.1" 200 -
+2026-01-05 12:47:51,213 - INFO - 127.0.0.1 - - [05/Jan/2026 12:47:51] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2026-01-05 12:48:01,350 - INFO - 127.0.0.1 - - [05/Jan/2026 12:48:01] "GET /Inicio HTTP/1.1" 200 -
+2026-01-05 12:48:01,464 - INFO - 127.0.0.1 - - [05/Jan/2026 12:48:01] "GET /static/inicio.css HTTP/1.1" 200 -
+2026-01-05 12:48:01,978 - INFO - 127.0.0.1 - - [05/Jan/2026 12:48:01] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-05 12:48:10,848 - INFO - 127.0.0.1 - - [05/Jan/2026 12:48:10] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-05 12:48:10,878 - INFO - 127.0.0.1 - - [05/Jan/2026 12:48:10] "[32mPOST /allow_detail HTTP/1.1[0m" 302 -
+2026-01-05 12:48:11,037 - INFO - 127.0.0.1 - - [05/Jan/2026 12:48:11] "GET /detalhe/14 HTTP/1.1" 200 -
+2026-01-05 12:48:11,064 - INFO - 127.0.0.1 - - [05/Jan/2026 12:48:11] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2026-01-05 12:48:11,079 - INFO - 127.0.0.1 - - [05/Jan/2026 12:48:11] "GET /static/denuncia_aberta.css HTTP/1.1" 200 -
+2026-01-05 12:48:43,291 - INFO - 127.0.0.1 - - [05/Jan/2026 12:48:43] "[32mPOST /Inicio/reenviar/14 HTTP/1.1[0m" 302 -
+2026-01-05 12:48:49,656 - INFO - 127.0.0.1 - - [05/Jan/2026 12:48:49] "[32mPOST /Inicio/reenviar/14 HTTP/1.1[0m" 302 -
+2026-01-05 12:48:49,668 - INFO - 127.0.0.1 - - [05/Jan/2026 12:48:49] "GET /Inicio HTTP/1.1" 200 -
+2026-01-05 12:48:49,690 - INFO - 127.0.0.1 - - [05/Jan/2026 12:48:49] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2026-01-05 12:49:06,351 - INFO - 127.0.0.1 - - [05/Jan/2026 12:49:06] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-05 12:49:06,372 - INFO - 127.0.0.1 - - [05/Jan/2026 12:49:06] "[32mPOST /allow_detail HTTP/1.1[0m" 302 -
+2026-01-05 12:49:06,385 - INFO - 127.0.0.1 - - [05/Jan/2026 12:49:06] "GET /detalhe/20 HTTP/1.1" 200 -
+2026-01-05 12:49:06,406 - INFO - 127.0.0.1 - - [05/Jan/2026 12:49:06] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2026-01-05 12:49:06,411 - INFO - 127.0.0.1 - - [05/Jan/2026 12:49:06] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2026-01-05 12:50:13,273 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\rotas\\aluno.py', reloading
+2026-01-05 12:50:13,508 - INFO -  * Restarting with stat
+2026-01-05 12:50:16,591 - WARNING -  * Debugger is active!
+2026-01-05 12:50:16,600 - INFO -  * Debugger PIN: 369-653-580
+2026-01-05 12:50:19,690 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\rotas\\aluno.py', reloading
+2026-01-05 12:50:20,146 - INFO -  * Restarting with stat
+2026-01-05 12:50:23,831 - WARNING -  * Debugger is active!
+2026-01-05 12:50:23,841 - INFO -  * Debugger PIN: 369-653-580
+2026-01-05 12:54:38,619 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\rotas\\aluno.py', reloading
+2026-01-05 12:54:38,788 - INFO -  * Restarting with stat
+2026-01-05 13:07:47,801 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-01-05 13:07:47,802 - INFO - [33mPress CTRL+C to quit[0m
+2026-01-05 13:07:47,804 - INFO -  * Restarting with stat
+2026-01-05 13:07:51,100 - WARNING -  * Debugger is active!
+2026-01-05 13:07:51,110 - INFO -  * Debugger PIN: 369-653-580
+2026-01-05 13:07:57,717 - INFO - 127.0.0.1 - - [05/Jan/2026 13:07:57] "GET /Inicio HTTP/1.1" 200 -
+2026-01-05 13:07:57,807 - INFO - 127.0.0.1 - - [05/Jan/2026 13:07:57] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2026-01-05 13:08:03,245 - INFO - 127.0.0.1 - - [05/Jan/2026 13:08:03] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-05 13:08:03,265 - INFO - 127.0.0.1 - - [05/Jan/2026 13:08:03] "[32mPOST /allow_detail HTTP/1.1[0m" 302 -
+2026-01-05 13:08:03,319 - INFO - 127.0.0.1 - - [05/Jan/2026 13:08:03] "GET /detalhe/18 HTTP/1.1" 200 -
+2026-01-05 13:08:03,347 - INFO - 127.0.0.1 - - [05/Jan/2026 13:08:03] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2026-01-05 13:08:03,348 - INFO - 127.0.0.1 - - [05/Jan/2026 13:08:03] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2026-01-05 13:08:28,734 - INFO - 127.0.0.1 - - [05/Jan/2026 13:08:28] "[32mPOST /Inicio/reenviar/18 HTTP/1.1[0m" 302 -
+2026-01-05 13:08:28,747 - INFO - 127.0.0.1 - - [05/Jan/2026 13:08:28] "GET /Inicio HTTP/1.1" 200 -
+2026-01-05 13:08:28,765 - INFO - 127.0.0.1 - - [05/Jan/2026 13:08:28] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2026-01-05 13:09:32,964 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2026-01-05 13:09:33,284 - INFO -  * Restarting with stat
+2026-01-05 13:09:36,730 - WARNING -  * Debugger is active!
+2026-01-05 13:09:36,740 - INFO -  * Debugger PIN: 369-653-580
+2026-01-05 13:10:00,950 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2026-01-05 13:10:01,165 - INFO -  * Restarting with stat
+2026-01-05 13:10:04,454 - WARNING -  * Debugger is active!
+2026-01-05 13:10:04,464 - INFO -  * Debugger PIN: 369-653-580
+2026-01-05 13:10:14,555 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2026-01-05 13:10:14,781 - INFO -  * Restarting with stat
+2026-01-05 13:26:57,235 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-01-05 13:26:57,236 - INFO - [33mPress CTRL+C to quit[0m
+2026-01-05 13:26:57,238 - INFO -  * Restarting with stat
+2026-01-05 13:27:00,658 - WARNING -  * Debugger is active!
+2026-01-05 13:27:00,667 - INFO -  * Debugger PIN: 369-653-580
+2026-01-05 13:27:00,703 - INFO - 127.0.0.1 - - [05/Jan/2026 13:27:00] "GET /Inicio HTTP/1.1" 200 -
+2026-01-05 13:27:00,808 - INFO - 127.0.0.1 - - [05/Jan/2026 13:27:00] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2026-01-05 13:27:01,320 - INFO - 127.0.0.1 - - [05/Jan/2026 13:27:01] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-05 13:27:06,818 - INFO - 127.0.0.1 - - [05/Jan/2026 13:27:06] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-05 13:27:06,838 - INFO - 127.0.0.1 - - [05/Jan/2026 13:27:06] "[32mPOST /allow_folder HTTP/1.1[0m" 302 -
+2026-01-05 13:27:06,878 - INFO - 127.0.0.1 - - [05/Jan/2026 13:27:06] "GET /Denuncias HTTP/1.1" 200 -
+2026-01-05 13:27:06,905 - INFO - 127.0.0.1 - - [05/Jan/2026 13:27:06] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2026-01-05 13:27:11,488 - INFO - 127.0.0.1 - - [05/Jan/2026 13:27:11] "GET /Inicio HTTP/1.1" 200 -
+2026-01-05 13:27:11,514 - INFO - 127.0.0.1 - - [05/Jan/2026 13:27:11] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2026-01-05 13:27:13,929 - INFO - 127.0.0.1 - - [05/Jan/2026 13:27:13] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-05 13:27:13,953 - INFO - 127.0.0.1 - - [05/Jan/2026 13:27:13] "[32mPOST /allow_folder HTTP/1.1[0m" 302 -
+2026-01-05 13:27:14,124 - INFO - 127.0.0.1 - - [05/Jan/2026 13:27:14] "GET /Abertas HTTP/1.1" 200 -
+2026-01-05 13:27:14,149 - INFO - 127.0.0.1 - - [05/Jan/2026 13:27:14] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2026-01-05 13:27:14,168 - INFO - 127.0.0.1 - - [05/Jan/2026 13:27:14] "GET /Abertas?page=0 HTTP/1.1" 200 -
+2026-01-05 13:27:14,243 - INFO - 127.0.0.1 - - [05/Jan/2026 13:27:14] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2026-01-05 13:27:16,357 - INFO - 127.0.0.1 - - [05/Jan/2026 13:27:16] "GET /Inicio HTTP/1.1" 200 -
+2026-01-05 13:27:16,385 - INFO - 127.0.0.1 - - [05/Jan/2026 13:27:16] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2026-01-05 13:27:57,322 - INFO - 127.0.0.1 - - [05/Jan/2026 13:27:57] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-05 13:27:57,339 - INFO - 127.0.0.1 - - [05/Jan/2026 13:27:57] "[32mPOST /allow_folder HTTP/1.1[0m" 302 -
+2026-01-05 13:27:57,356 - INFO - 127.0.0.1 - - [05/Jan/2026 13:27:57] "GET /Denuncias HTTP/1.1" 200 -
+2026-01-05 13:27:57,391 - INFO - 127.0.0.1 - - [05/Jan/2026 13:27:57] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2026-01-05 13:28:00,280 - INFO - 127.0.0.1 - - [05/Jan/2026 13:28:00] "[32mPOST /allow_detail HTTP/1.1[0m" 302 -
+2026-01-05 13:28:00,417 - INFO - 127.0.0.1 - - [05/Jan/2026 13:28:00] "GET /detalhe/4 HTTP/1.1" 200 -
+2026-01-05 13:28:00,450 - INFO - 127.0.0.1 - - [05/Jan/2026 13:28:00] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2026-01-05 13:28:00,450 - INFO - 127.0.0.1 - - [05/Jan/2026 13:28:00] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2026-01-05 13:28:00,603 - INFO - 127.0.0.1 - - [05/Jan/2026 13:28:00] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-05 13:29:02,004 - INFO - 127.0.0.1 - - [05/Jan/2026 13:29:02] "GET /Inicio HTTP/1.1" 200 -
+2026-01-05 13:29:02,033 - INFO - 127.0.0.1 - - [05/Jan/2026 13:29:02] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2026-01-05 13:29:05,009 - INFO - 127.0.0.1 - - [05/Jan/2026 13:29:05] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-05 13:29:05,030 - INFO - 127.0.0.1 - - [05/Jan/2026 13:29:05] "[32mPOST /allow_folder HTTP/1.1[0m" 302 -
+2026-01-05 13:29:05,050 - INFO - 127.0.0.1 - - [05/Jan/2026 13:29:05] "GET /Abertas HTTP/1.1" 200 -
+2026-01-05 13:29:05,074 - INFO - 127.0.0.1 - - [05/Jan/2026 13:29:05] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2026-01-05 13:29:05,101 - INFO - 127.0.0.1 - - [05/Jan/2026 13:29:05] "GET /Abertas?page=1 HTTP/1.1" 200 -
+2026-01-05 13:29:05,173 - INFO - 127.0.0.1 - - [05/Jan/2026 13:29:05] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2026-01-05 13:29:05,271 - INFO - 127.0.0.1 - - [05/Jan/2026 13:29:05] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-05 13:29:09,009 - INFO - 127.0.0.1 - - [05/Jan/2026 13:29:09] "GET /Inicio HTTP/1.1" 200 -
+2026-01-05 13:29:09,038 - INFO - 127.0.0.1 - - [05/Jan/2026 13:29:09] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2026-01-05 13:29:10,936 - INFO - 127.0.0.1 - - [05/Jan/2026 13:29:10] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-05 13:29:14,025 - INFO - 127.0.0.1 - - [05/Jan/2026 13:29:14] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-05 13:29:14,046 - INFO - 127.0.0.1 - - [05/Jan/2026 13:29:14] "[32mPOST /allow_folder HTTP/1.1[0m" 302 -
+2026-01-05 13:29:14,063 - INFO - 127.0.0.1 - - [05/Jan/2026 13:29:14] "GET /Resolvidas HTTP/1.1" 200 -
+2026-01-05 13:29:14,094 - INFO - 127.0.0.1 - - [05/Jan/2026 13:29:14] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2026-01-05 13:29:14,128 - INFO - 127.0.0.1 - - [05/Jan/2026 13:29:14] "GET /Resolvidas?page=1 HTTP/1.1" 200 -
+2026-01-05 13:29:14,198 - INFO - 127.0.0.1 - - [05/Jan/2026 13:29:14] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2026-01-05 13:29:34,866 - INFO - 127.0.0.1 - - [05/Jan/2026 13:29:34] "GET /Inicio HTTP/1.1" 200 -
+2026-01-05 13:29:34,894 - INFO - 127.0.0.1 - - [05/Jan/2026 13:29:34] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2026-01-05 13:29:38,217 - INFO - 127.0.0.1 - - [05/Jan/2026 13:29:38] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-05 13:29:38,237 - INFO - 127.0.0.1 - - [05/Jan/2026 13:29:38] "[32mPOST /allow_folder HTTP/1.1[0m" 302 -
+2026-01-05 13:29:38,289 - INFO - 127.0.0.1 - - [05/Jan/2026 13:29:38] "GET /Alunos HTTP/1.1" 200 -
+2026-01-05 13:29:38,318 - INFO - 127.0.0.1 - - [05/Jan/2026 13:29:38] "[36mGET /static/aluno.css HTTP/1.1[0m" 304 -
+2026-01-05 13:29:40,557 - INFO - 127.0.0.1 - - [05/Jan/2026 13:29:40] "GET /Inicio HTTP/1.1" 200 -
+2026-01-05 13:29:40,586 - INFO - 127.0.0.1 - - [05/Jan/2026 13:29:40] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2026-01-05 13:29:42,865 - INFO - 127.0.0.1 - - [05/Jan/2026 13:29:42] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-05 13:29:42,886 - INFO - 127.0.0.1 - - [05/Jan/2026 13:29:42] "[32mPOST /allow_folder HTTP/1.1[0m" 302 -
+2026-01-05 13:29:42,907 - INFO - 127.0.0.1 - - [05/Jan/2026 13:29:42] "GET /Resolvidas HTTP/1.1" 200 -
+2026-01-05 13:29:42,936 - INFO - 127.0.0.1 - - [05/Jan/2026 13:29:42] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2026-01-05 13:29:42,958 - INFO - 127.0.0.1 - - [05/Jan/2026 13:29:42] "GET /Resolvidas?page=1 HTTP/1.1" 200 -
+2026-01-05 13:29:43,039 - INFO - 127.0.0.1 - - [05/Jan/2026 13:29:43] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2026-01-05 13:32:18,959 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2026-01-05 13:32:19,177 - INFO -  * Restarting with stat
+2026-01-05 13:32:22,526 - WARNING -  * Debugger is active!
+2026-01-05 13:32:22,535 - INFO -  * Debugger PIN: 369-653-580
+2026-01-05 13:32:40,091 - INFO - 127.0.0.1 - - [05/Jan/2026 13:32:40] "GET /Inicio HTTP/1.1" 200 -
+2026-01-05 13:32:40,181 - INFO - 127.0.0.1 - - [05/Jan/2026 13:32:40] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2026-01-05 13:32:43,551 - INFO - 127.0.0.1 - - [05/Jan/2026 13:32:43] "GET /Ajuda HTTP/1.1" 200 -
+2026-01-05 13:32:43,575 - INFO - 127.0.0.1 - - [05/Jan/2026 13:32:43] "GET /static/ajuda.css HTTP/1.1" 200 -
+2026-01-05 13:32:43,581 - INFO - 127.0.0.1 - - [05/Jan/2026 13:32:43] "[33mGET /static/js/Ajuda.js HTTP/1.1[0m" 404 -
+2026-01-05 13:32:43,617 - INFO - 127.0.0.1 - - [05/Jan/2026 13:32:43] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-05 13:32:45,088 - INFO - 127.0.0.1 - - [05/Jan/2026 13:32:45] "GET /Denuncia HTTP/1.1" 200 -
+2026-01-05 13:32:45,117 - INFO - 127.0.0.1 - - [05/Jan/2026 13:32:45] "[33mGET /static/js/denuncias.js HTTP/1.1[0m" 404 -
+2026-01-05 13:32:45,117 - INFO - 127.0.0.1 - - [05/Jan/2026 13:32:45] "GET /static/denuncia.css HTTP/1.1" 200 -
+2026-01-05 13:32:45,182 - INFO - 127.0.0.1 - - [05/Jan/2026 13:32:45] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-05 13:32:57,046 - INFO - 127.0.0.1 - - [05/Jan/2026 13:32:57] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-05 13:33:20,165 - INFO - 127.0.0.1 - - [05/Jan/2026 13:33:20] "[32mPOST /Denuncia HTTP/1.1[0m" 302 -
+2026-01-05 13:33:20,183 - INFO - 127.0.0.1 - - [05/Jan/2026 13:33:20] "GET /Inicio HTTP/1.1" 200 -
+2026-01-05 13:33:20,223 - INFO - 127.0.0.1 - - [05/Jan/2026 13:33:20] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2026-01-05 13:33:39,047 - INFO - 127.0.0.1 - - [05/Jan/2026 13:33:39] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-05 13:33:39,066 - INFO - 127.0.0.1 - - [05/Jan/2026 13:33:39] "[32mPOST /allow_detail HTTP/1.1[0m" 302 -
+2026-01-05 13:33:39,120 - INFO - 127.0.0.1 - - [05/Jan/2026 13:33:39] "GET /detalhe/22 HTTP/1.1" 200 -
+2026-01-05 13:33:39,145 - INFO - 127.0.0.1 - - [05/Jan/2026 13:33:39] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2026-01-05 13:33:39,146 - INFO - 127.0.0.1 - - [05/Jan/2026 13:33:39] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2026-01-05 13:34:16,452 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2026-01-05 13:34:16,751 - INFO -  * Restarting with stat

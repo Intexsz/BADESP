@@ -32,14 +32,17 @@ google = oauth.register(
 ###### PAGINAS NORMAIS ######
 
 ######-TESTE-######
-def envio_email(destinario, aluno):
-    # Criando a mensagem
+def envio_email(destinario, aluno, tipo, debug):
+    # Criando a mensagem    
     msg = MIMEMultipart()
     msg['From'] = remetente
     msg['To'] = destinario
-    msg['Subject'] = 'Marcação em Denuncia'
-
-    corpo = f'Este email foi enviado a você pois o {aluno} o marcou em uma denúncia\n\n Acesse agora: https://www.badesp.online/'
+    if tipo == 'Marcar':
+        msg['Subject'] = 'Marcação em Denuncia'
+        corpo = f'Este email foi enviado a você pois o {aluno} o marcou em uma denúncia\n\n Acesse agora: https://www.badesp.online/'
+    elif tipo == 'Erro':
+        msg['Subject'] = 'Erro na IA'
+        corpo = f'Este email foi enviado pois houve um erro na IA \n\n{debug}.\n\n Acesse agora: https://www.badesp.online/'
     msg.attach(MIMEText(corpo, 'plain'))
 
     # Configurando o servidor SMTP do Gmail
@@ -272,7 +275,7 @@ def denuncia():
         quem = request.form.get('quem')
         pessoa = request.form.get('pessoa')
         if pessoa != 'any':
-            envio_email(buscar_email(pessoa), pegar_no_nome(session['user_id']))
+            envio_email(buscar_email(pessoa), pegar_no_nome(session['user_id']), 'Marcar', None)
 
         create_report(titulo, tipo, descricao, session["user_id"], 'Em Análise.', quem, pessoa)
         

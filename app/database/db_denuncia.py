@@ -4,6 +4,32 @@ from app.database.db_usuario import buscar_usuario, pegar_no_nome
 from openai import OpenAI
 import re
 
+######-E-Mail-######
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+import smtplib
+remetente = 'denunciasdehaytalo@gmail.com'
+senha = 'fpui zjlf ammk kpym'
+
+def envio_email(destinario, tipo, debug):
+    # Criando a mensagem    
+    msg = MIMEMultipart()
+    msg['From'] = remetente
+    msg['To'] = destinario
+    if tipo == 'Erro':
+        msg['Subject'] = 'Erro na IA'
+        corpo = f'Este email foi enviado pois houve um erro na IA \n\n{debug}.\n\n Acesse agora: https://www.badesp.online/'
+    msg.attach(MIMEText(corpo, 'plain'))
+
+    # Configurando o servidor SMTP do Gmail
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls() 
+    server.login(remetente, senha)
+    texto = msg.as_string()
+    server.sendmail(remetente, destinario, texto)
+    server.quit()
+######----------######
+
 client = OpenAI(api_key='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')
 
 # iniciar banco de dados de denuncia
@@ -70,21 +96,24 @@ def create_report(titulo, tipo, descricao, user_id, status, cargo, especifico):
     'ano': usuario[7],
     'turma': usuario[8]}
 
-    #texto_resposta = IA(descricao)
-    #match = re.search(
-    #r"Frase reformulada[:\-–]?\s*[\"']?(.*?)[\"']?\s*(?:\.|\n|$).*?Tipo de gravidade[:\-–]?\s*[\"']?(Baixa|M[eé]dia|Alta)[\"']?",
-    #texto_resposta,
-    #re.IGNORECASE | re.DOTALL)
+    try:
+        texto_resposta = IA(descricao)
+        match = re.search(
+        r"Frase reformulada[:\-–]?\s*[\"']?(.*?)[\"']?\s*(?:\.|\n|$).*?Tipo de gravidade[:\-–]?\s*[\"']?(Baixa|M[eé]dia|Alta)[\"']?",
+        texto_resposta,
+        re.IGNORECASE | re.DOTALL)
     
-    #if match:
-    #    descricao_ia = match.group(1).strip()
-    #    gravidade = match.group(2).capitalize()
-    #else:
-    #    descricao_ia = f"❌Erro na IA.❌ \n\n {texto_resposta}"
-    #    gravidade = 'Desconhecido'
-    
-    descricao_ia = f"❌Erro na IA.❌"
-    gravidade = 'Desconhecido'
+        if match:
+            descricao_ia = match.group(1).strip()
+            gravidade = match.group(2).capitalize()
+        else:
+            descricao_ia = f"❌Erro na IA.❌ \n\n {texto_resposta}"
+            gravidade = 'Desconhecido'
+
+    except Exception as error:
+        descricao_ia = f"❌Erro na IA.❌"
+        gravidade = 'Desconhecido'
+        envio_email('00001103203009sp@al.educacao.sp.gov.br', 'Erro', error)
 
     ano = usuario_dict['ano']
     turma = usuario_dict['turma']
