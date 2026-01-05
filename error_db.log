@@ -1973,3 +1973,5 @@
 2026-01-05 13:33:39,146 - INFO - 127.0.0.1 - - [05/Jan/2026 13:33:39] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
 2026-01-05 13:34:16,452 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
 2026-01-05 13:34:16,751 - INFO -  * Restarting with stat
+2026-01-05 13:34:19,770 - WARNING -  * Debugger is active!
+2026-01-05 13:34:19,779 - INFO -  * Debugger PIN: 369-653-580
