@@ -84,6 +84,43 @@
         {% endif %}
         <p>Ocorrido: {{ usuario['tipo'] }}</p>
         <br>
+        <div class="envolvidos-container">
+          <strong>Envolvidos:</strong>
+
+          {% if envolvidos and envolvidos != '[]' and envolvidos|length > 0 %}
+
+          <div class="lista-tags">
+            {% set lista = envolvidos.split(',') if envolvidos is string else envolvidos %}
+
+            {% for pessoa in lista %}
+            {# Remove espaços extras que podem vir do split #}
+            {% set p = pessoa.strip() %}
+
+            {% if loop.last and loop.index > 1 %}
+            {# Se for o último e não for o único, coloca o 'e' antes #}
+            <span class="tag-aluno"> e <b>{{ p }}</b>.</span>
+
+            {% elif loop.last %}
+            {# Se for o único da lista #}
+            <span class="tag-aluno"><b>{{ p }}</b>.</span>
+
+            {% elif loop.revindex0 == 1 %}
+            {# Se for o penúltimo, não coloca vírgula agora, pois o próximo terá o 'e' #}
+            <span class="tag-aluno"><b>{{ p }}</b></span>
+
+            {% else %}
+            {# Para todos os outros casos, coloca vírgula #}
+            <span class="tag-aluno"><b>{{ p }}</b>,</span>
+            {% endif %}
+            {% endfor %}
+          </div>
+
+          {% else %}
+          {# 4. Caso contrário, mostra o aviso #}
+          <span class="aviso-vazio">Não foi identificado nenhum envolvido.</span>
+          {% endif %}
+        </div>
+        <br>
         <p style="color: {{ corr }};">Gravidade:⚠️{{ usuario['gravidade'] }}⚠️</p>
         <br>
 
@@ -175,7 +212,8 @@
       <br>
       <br>
       <form action="{{ url_for('rotasecretaria.comentar', id=usuario['id']) }}" method="POST">
-        <textarea name="comentario" maxlength="255" placeholder="Adicionar comentário..." style="text-align: center;"></textarea>
+        <textarea name="comentario" maxlength="255" placeholder="Adicionar comentário..."
+          style="text-align: center;"></textarea>
         <button type="submit" class="abrir-btn" onclick="return confirmarTexto()">Enviar</button>
       </form>
       {% endif %}

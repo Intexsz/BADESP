@@ -320,3 +320,41 @@ button:hover {
   background: rgba(255,80,80,0.15);
   color: #ff3b3b;
 }
+
+/* Estilo da caixa onde ficam os nomes */
+.lista-envolvidos {
+    margin-top: 15px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+/* Cada linha de aluno (item da lista) */
+.item-envolvido {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgb(96, 114, 216);
+    padding: 8px 12px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    font-size: 0.95rem;
+}
+
+/* Botão de remover (X) */
+.btn-remove {
+    background: transparent;
+    border: none;
+    color: #dc3545;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 0 5px;
+    transition: color 0.2s;
+}
+
+.btn-remove:hover {
+    color: #a71d2a;
+}

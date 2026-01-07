@@ -1,8 +1,8 @@
 from flask import Flask, request, render_template, session, redirect, url_for, Blueprint, make_response, jsonify
 from authlib.integrations.flask_client import OAuth
 from app.database.db_usuario import get_role, buscar_usuario, buscar_nome_secretaria, buscar_nome_professor
-from app.database.db_denuncia import get_report_status, show_reports, delete_reports, create_report, expire, check_reports
-from app.database.db_usuario import usuario_tem_pin, cadastrar_pin, check_pin, buscar_email, pegar_no_nome
+from app.database.db_denuncia import get_report_status, show_reports, delete_reports, create_report, expire, check_reports, checar_envolvidos
+from app.database.db_usuario import usuario_tem_pin, cadastrar_pin, check_pin, buscar_email, pegar_no_nome, buscar_nome_aluno
 from app.database.db_site import mostrar_teams
 from flask_cors import CORS
 from email.mime.text import MIMEText
@@ -87,7 +87,6 @@ def homepage():
         return redirect(url_for('rotalogin.cadastro'))
     if not usuario_tem_pin(session["user_id"]):
         return redirect(url_for("rotas.cadastro2_pin"))
-    
     return redirect(url_for('rotas.inicio'))
 
 @rotas_bp.route('/Inicio', methods=['POST', 'GET'])
@@ -256,7 +255,8 @@ def denuncia():
     cargo = get_role(session["user_id"])
     if cargo != 'Aluno':
         return redirect(url_for('rotas.inicio'))
-    
+    alunos_por_turma = buscar_nome_aluno()
+
     nomeprof = buscar_nome_professor()
     nomesecretaria = buscar_nome_secretaria()
     usuario = buscar_usuario(session["user_id"])
@@ -275,15 +275,17 @@ def denuncia():
         descricao = request.form.get('descricao')
         quem = request.form.get('quem')
         pessoa = request.form.get('pessoa')
+        envolvidos = request.form.get('lista_envolvidos_final')
+
         if pessoa != 'any':
             envio_email(buscar_email(pessoa), pegar_no_nome(session['user_id']), 'Marcar', None)
 
-        create_report(titulo, tipo, descricao, session["user_id"], 'Em Análise.', quem, pessoa)
+        create_report(titulo, tipo, descricao, session["user_id"], 'Em Análise.', quem, pessoa,envolvidos)
         
         return redirect(url_for('rotas.inicio'))
 
     # GET
-    resp = make_response(render_template('denuncia.html', professor=nomeprof, secretaria=nomesecretaria,usuario=usuario))
+    resp = make_response(render_template('denuncia.html', professor=nomeprof, secretaria=nomesecretaria,usuario=usuario, alunos_por_turma=alunos_por_turma))
     resp.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0'
     resp.headers['Pragma'] = 'no-cache'
     resp.headers['Expires'] = '0'

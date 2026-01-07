@@ -1,7 +1,7 @@
 from flask import Flask, session, redirect, url_for, Blueprint,render_template, request, flash
 from authlib.integrations.flask_client import OAuth
 from app.database.db_usuario import get_role, pegar_no_nome, usuario_tem_pin, buscar_nome_aluno, novo_pin_secretaria,buscar_usuario,listar_alunose, mudar_turma, check_team, novo_pin
-from app.database.db_denuncia import get_report_status, open_report_db, get_report
+from app.database.db_denuncia import get_report_status, open_report_db, get_report, checar_envolvidos
 from app.database.db_denuncia import update_status, post_comment, check_coment,list_reports,list_approved
 from app.database.db_site import create_team, mostrar_teams, delete_team, check_teams
 
@@ -109,7 +109,7 @@ def detalhe_denuncia(id):
         
         session.pop("allow_folder", None)
         session.pop("allow_detail", None)
-        return render_template("denuncia_aberta.html", usuario=denuncia,tipo_usuario='secretaria',usuario2=buscar_usuario(session['user_id']))
+        return render_template("denuncia_aberta.html", usuario=denuncia,tipo_usuario='secretaria',usuario2=buscar_usuario(session['user_id']), envolvidos = checar_envolvidos(id))
     
     elif cargo == 'Aluno':
         denuncia = get_report(id)
@@ -128,7 +128,7 @@ def detalhe_denuncia(id):
 
         session.pop("allow_detail", None)
         session.pop("allow_folder", None)
-        return render_template("denuncia_aberta.html", usuario=denuncia,tipo_usuario='Aluno',usuario2=buscar_usuario(session['user_id']))
+        return render_template("denuncia_aberta.html", usuario=denuncia,tipo_usuario='Aluno',usuario2=buscar_usuario(session['user_id']), envolvidos = checar_envolvidos(id))
     else:
         return redirect(url_for('rotas.inicio'))
 ######----------######
@@ -158,6 +158,8 @@ def comentar(id):
         """
     if checar_stats(id) and checagem == '':
         cargo = get_role(session['user_id'])
+        session["allow_detail"] = True
+        session["allow_folder"] = True
         post_comment(comentario, id, cargo, session['user_id'])
     else:
         return f"""

@@ -54,7 +54,8 @@ def create_table():
             visto TEXT,
             especifico TEXT, 
             ano INTEGER, 
-            turma TEXT
+            turma TEXT,
+            envolvidos TEXT
         )
     ''')
     conn.commit()
@@ -81,7 +82,7 @@ def IA(frase):
     return texto_resposta
 
 # aqui ira criar a denuncia
-def create_report(titulo, tipo, descricao, user_id, status, cargo, especifico):
+def create_report(titulo, tipo, descricao, user_id, status, cargo, especifico,envolvidos):
     data = datetime.now().strftime("%H:%M %d/%m/%Y") # data de quando foi criada
     conn = sqlite3.connect('denuncias.db')
     usuario = buscar_usuario(user_id)
@@ -120,9 +121,9 @@ def create_report(titulo, tipo, descricao, user_id, status, cargo, especifico):
     nome = usuario_dict["nome"]
     cursor = conn.cursor()
     cursor.execute('''
-        INSERT INTO denuncias (titulo, tipo, descricao, data, user_id, status, nome, visto, comentario, cargo, especifico, descricao_ia, gravidade, turma, ano)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    ''', (titulo, tipo, descricao, data, user_id, status, nome, 'Ninguém', '', cargo, especifico, descricao_ia, gravidade, turma, ano))
+        INSERT INTO denuncias (titulo, tipo, descricao, data, user_id, status, nome, visto, comentario, cargo, especifico, descricao_ia, gravidade, turma, ano, envolvidos)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ''', (titulo, tipo, descricao, data, user_id, status, nome, 'Ninguém', '', cargo, especifico, descricao_ia, gravidade, turma, ano, envolvidos))
     conn.commit()
     conn.close()
 
@@ -472,3 +473,24 @@ def list_approved(nome):
         """, (nome,))
         
         return cursor.fetchone()[0]
+
+def checar_envolvidos(id_denuncia):
+    with sqlite3.connect("denuncias.db") as conn:
+        conn.row_factory = sqlite3.Row
+        cursor = conn.cursor()
+        
+        cursor.execute("SELECT titulo, envolvidos FROM denuncias WHERE id = ?", (id_denuncia,))
+        row = cursor.fetchone()
+        
+        if row:
+            texto_bruto = row['envolvidos']
+            
+            if not texto_bruto:
+                return []
+
+            lista_formatada = [nome.strip() for nome in texto_bruto.split(',')]
+                
+            return lista_formatada
+        else:
+            return None
+        

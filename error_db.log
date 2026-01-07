@@ -4721,3 +4721,513 @@
 2026-01-07 17:25:18,440 - INFO - 127.0.0.1 - - [07/Jan/2026 17:25:18] "GET /Denuncia HTTP/1.1" 200 -
 2026-01-07 17:25:18,466 - INFO - 127.0.0.1 - - [07/Jan/2026 17:25:18] "[36mGET /static/denuncia.css HTTP/1.1[0m" 304 -
 2026-01-07 17:25:18,474 - INFO - 127.0.0.1 - - [07/Jan/2026 17:25:18] "[33mGET /static/js/denuncias.js HTTP/1.1[0m" 404 -
+2026-01-07 17:36:52,528 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\testes\\teste.py', reloading
+2026-01-07 17:36:53,172 - INFO -  * Restarting with stat
+2026-01-07 17:36:57,430 - WARNING -  * Debugger is active!
+2026-01-07 17:36:57,440 - INFO -  * Debugger PIN: 369-653-580
+2026-01-07 17:46:40,949 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-01-07 17:46:40,950 - INFO - [33mPress CTRL+C to quit[0m
+2026-01-07 17:46:40,954 - INFO -  * Restarting with stat
+2026-01-07 17:46:44,081 - WARNING -  * Debugger is active!
+2026-01-07 17:46:44,091 - INFO -  * Debugger PIN: 369-653-580
+2026-01-07 17:46:46,332 - INFO - 127.0.0.1 - - [07/Jan/2026 17:46:46] "[32mGET / HTTP/1.1[0m" 302 -
+2026-01-07 17:46:46,372 - INFO - 127.0.0.1 - - [07/Jan/2026 17:46:46] "GET /Inicio HTTP/1.1" 200 -
+2026-01-07 17:46:46,444 - INFO - 127.0.0.1 - - [07/Jan/2026 17:46:46] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2026-01-07 17:51:52,166 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-01-07 17:51:52,166 - INFO - [33mPress CTRL+C to quit[0m
+2026-01-07 17:51:52,170 - INFO -  * Restarting with stat
+2026-01-07 17:51:55,475 - WARNING -  * Debugger is active!
+2026-01-07 17:51:55,485 - INFO -  * Debugger PIN: 369-653-580
+2026-01-07 17:53:04,928 - INFO - 127.0.0.1 - - [07/Jan/2026 17:53:04] "[35m[1mGET /Denuncia HTTP/1.1[0m" 500 -
+2026-01-07 17:53:05,058 - INFO - 127.0.0.1 - - [07/Jan/2026 17:53:05] "GET /Denuncia?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2026-01-07 17:53:05,067 - INFO - 127.0.0.1 - - [07/Jan/2026 17:53:05] "GET /Denuncia?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2026-01-07 17:53:05,634 - INFO - 127.0.0.1 - - [07/Jan/2026 17:53:05] "GET /Denuncia?__debugger__=yes&cmd=resource&f=console.png&s=ookxpPcmWDSsuVUCrSiK HTTP/1.1" 200 -
+2026-01-07 17:53:05,665 - INFO - 127.0.0.1 - - [07/Jan/2026 17:53:05] "GET /Denuncia?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2026-01-07 17:53:46,603 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\rotas\\aluno.py', reloading
+2026-01-07 17:53:46,818 - INFO -  * Restarting with stat
+2026-01-07 17:54:05,422 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-01-07 17:54:05,423 - INFO - [33mPress CTRL+C to quit[0m
+2026-01-07 17:54:05,426 - INFO -  * Restarting with stat
+2026-01-07 17:54:09,715 - WARNING -  * Debugger is active!
+2026-01-07 17:54:09,725 - INFO -  * Debugger PIN: 369-653-580
+2026-01-07 17:54:27,887 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\rotas\\aluno.py', reloading
+2026-01-07 17:54:28,083 - INFO -  * Restarting with stat
+2026-01-07 17:54:32,176 - WARNING -  * Debugger is active!
+2026-01-07 17:54:32,185 - INFO -  * Debugger PIN: 369-653-580
+2026-01-07 17:54:39,268 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\rotas\\aluno.py', reloading
+2026-01-07 17:54:39,552 - INFO -  * Restarting with stat
+2026-01-07 17:54:43,361 - WARNING -  * Debugger is active!
+2026-01-07 17:54:43,371 - INFO -  * Debugger PIN: 369-653-580
+2026-01-07 17:54:43,410 - INFO - 127.0.0.1 - - [07/Jan/2026 17:54:43] "GET /Denuncia HTTP/1.1" 200 -
+2026-01-07 17:54:43,437 - INFO - 127.0.0.1 - - [07/Jan/2026 17:54:43] "[33mGET /static/js/denuncias.js HTTP/1.1[0m" 404 -
+2026-01-07 17:54:43,490 - INFO - 127.0.0.1 - - [07/Jan/2026 17:54:43] "[36mGET /static/denuncia.css HTTP/1.1[0m" 304 -
+2026-01-07 17:54:43,975 - INFO - 127.0.0.1 - - [07/Jan/2026 17:54:43] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-07 17:58:16,725 - INFO - 127.0.0.1 - - [07/Jan/2026 17:58:16] "GET /Denuncia HTTP/1.1" 200 -
+2026-01-07 17:58:16,752 - INFO - 127.0.0.1 - - [07/Jan/2026 17:58:16] "[36mGET /static/denuncia.css HTTP/1.1[0m" 304 -
+2026-01-07 17:58:16,752 - INFO - 127.0.0.1 - - [07/Jan/2026 17:58:16] "[33mGET /static/js/denuncias.js HTTP/1.1[0m" 404 -
+2026-01-07 17:58:17,237 - INFO - 127.0.0.1 - - [07/Jan/2026 17:58:17] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-07 17:59:08,849 - INFO - 127.0.0.1 - - [07/Jan/2026 17:59:08] "GET /Denuncia HTTP/1.1" 200 -
+2026-01-07 17:59:08,877 - INFO - 127.0.0.1 - - [07/Jan/2026 17:59:08] "[33mGET /static/js/denuncias.js HTTP/1.1[0m" 404 -
+2026-01-07 17:59:08,877 - INFO - 127.0.0.1 - - [07/Jan/2026 17:59:08] "[36mGET /static/denuncia.css HTTP/1.1[0m" 304 -
+2026-01-07 17:59:09,358 - INFO - 127.0.0.1 - - [07/Jan/2026 17:59:09] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-07 17:59:41,263 - INFO - 127.0.0.1 - - [07/Jan/2026 17:59:41] "GET /Denuncia HTTP/1.1" 200 -
+2026-01-07 17:59:41,286 - INFO - 127.0.0.1 - - [07/Jan/2026 17:59:41] "[36mGET /static/denuncia.css HTTP/1.1[0m" 304 -
+2026-01-07 17:59:41,288 - INFO - 127.0.0.1 - - [07/Jan/2026 17:59:41] "[33mGET /static/js/denuncias.js HTTP/1.1[0m" 404 -
+2026-01-07 17:59:41,315 - INFO - 127.0.0.1 - - [07/Jan/2026 17:59:41] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-07 18:00:05,852 - INFO - 127.0.0.1 - - [07/Jan/2026 18:00:05] "GET /Denuncia HTTP/1.1" 200 -
+2026-01-07 18:00:05,872 - INFO - 127.0.0.1 - - [07/Jan/2026 18:00:05] "[36mGET /static/denuncia.css HTTP/1.1[0m" 304 -
+2026-01-07 18:00:05,873 - INFO - 127.0.0.1 - - [07/Jan/2026 18:00:05] "[33mGET /static/js/denuncias.js HTTP/1.1[0m" 404 -
+2026-01-07 18:00:05,935 - INFO - 127.0.0.1 - - [07/Jan/2026 18:00:05] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-07 18:01:20,318 - INFO - 127.0.0.1 - - [07/Jan/2026 18:01:20] "GET /Denuncia HTTP/1.1" 200 -
+2026-01-07 18:01:20,342 - INFO - 127.0.0.1 - - [07/Jan/2026 18:01:20] "[36mGET /static/denuncia.css HTTP/1.1[0m" 304 -
+2026-01-07 18:01:20,346 - INFO - 127.0.0.1 - - [07/Jan/2026 18:01:20] "[33mGET /static/js/denuncias.js HTTP/1.1[0m" 404 -
+2026-01-07 18:01:20,451 - INFO - 127.0.0.1 - - [07/Jan/2026 18:01:20] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-07 18:02:02,354 - INFO - 127.0.0.1 - - [07/Jan/2026 18:02:02] "GET /Denuncia HTTP/1.1" 200 -
+2026-01-07 18:02:02,383 - INFO - 127.0.0.1 - - [07/Jan/2026 18:02:02] "[36mGET /static/denuncia.css HTTP/1.1[0m" 304 -
+2026-01-07 18:02:02,385 - INFO - 127.0.0.1 - - [07/Jan/2026 18:02:02] "[33mGET /static/js/denuncias.js HTTP/1.1[0m" 404 -
+2026-01-07 18:02:02,467 - INFO - 127.0.0.1 - - [07/Jan/2026 18:02:02] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-07 18:02:37,374 - INFO - 127.0.0.1 - - [07/Jan/2026 18:02:37] "GET /Denuncia HTTP/1.1" 200 -
+2026-01-07 18:02:37,400 - INFO - 127.0.0.1 - - [07/Jan/2026 18:02:37] "[33mGET /static/js/denuncias.js HTTP/1.1[0m" 404 -
+2026-01-07 18:02:37,402 - INFO - 127.0.0.1 - - [07/Jan/2026 18:02:37] "[36mGET /static/denuncia.css HTTP/1.1[0m" 304 -
+2026-01-07 18:02:37,448 - INFO - 127.0.0.1 - - [07/Jan/2026 18:02:37] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-07 18:03:08,379 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\rotas\\aluno.py', reloading
+2026-01-07 18:03:08,603 - INFO -  * Restarting with stat
+2026-01-07 18:03:12,862 - WARNING -  * Debugger is active!
+2026-01-07 18:03:12,871 - INFO -  * Debugger PIN: 369-653-580
+2026-01-07 18:03:13,910 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\rotas\\aluno.py', reloading
+2026-01-07 18:03:14,236 - INFO -  * Restarting with stat
+2026-01-07 18:03:17,871 - WARNING -  * Debugger is active!
+2026-01-07 18:03:17,881 - INFO -  * Debugger PIN: 369-653-580
+2026-01-07 18:08:06,855 - INFO - 127.0.0.1 - - [07/Jan/2026 18:08:06] "GET /Denuncia HTTP/1.1" 200 -
+2026-01-07 18:08:06,884 - INFO - 127.0.0.1 - - [07/Jan/2026 18:08:06] "[33mGET /static/js/denuncias.js HTTP/1.1[0m" 404 -
+2026-01-07 18:08:06,977 - INFO - 127.0.0.1 - - [07/Jan/2026 18:08:06] "GET /static/denuncia.css HTTP/1.1" 200 -
+2026-01-07 18:08:07,460 - INFO - 127.0.0.1 - - [07/Jan/2026 18:08:07] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-07 18:08:47,731 - INFO - 127.0.0.1 - - [07/Jan/2026 18:08:47] "GET /Denuncia HTTP/1.1" 200 -
+2026-01-07 18:08:47,764 - INFO - 127.0.0.1 - - [07/Jan/2026 18:08:47] "[33mGET /static/js/denuncias.js HTTP/1.1[0m" 404 -
+2026-01-07 18:08:47,764 - INFO - 127.0.0.1 - - [07/Jan/2026 18:08:47] "[36mGET /static/denuncia.css HTTP/1.1[0m" 304 -
+2026-01-07 18:08:47,859 - INFO - 127.0.0.1 - - [07/Jan/2026 18:08:47] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-07 18:10:33,123 - INFO - 127.0.0.1 - - [07/Jan/2026 18:10:33] "GET /Denuncia HTTP/1.1" 200 -
+2026-01-07 18:10:33,156 - INFO - 127.0.0.1 - - [07/Jan/2026 18:10:33] "[33mGET /static/js/denuncias.js HTTP/1.1[0m" 404 -
+2026-01-07 18:10:33,168 - INFO - 127.0.0.1 - - [07/Jan/2026 18:10:33] "GET /static/denuncia.css HTTP/1.1" 200 -
+2026-01-07 18:10:33,644 - INFO - 127.0.0.1 - - [07/Jan/2026 18:10:33] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-07 18:10:46,481 - INFO - 127.0.0.1 - - [07/Jan/2026 18:10:46] "GET /Denuncia HTTP/1.1" 200 -
+2026-01-07 18:10:46,515 - INFO - 127.0.0.1 - - [07/Jan/2026 18:10:46] "[33mGET /static/js/denuncias.js HTTP/1.1[0m" 404 -
+2026-01-07 18:10:46,524 - INFO - 127.0.0.1 - - [07/Jan/2026 18:10:46] "GET /static/denuncia.css HTTP/1.1" 200 -
+2026-01-07 18:10:46,787 - INFO - 127.0.0.1 - - [07/Jan/2026 18:10:46] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-07 18:13:30,438 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2026-01-07 18:13:30,676 - INFO -  * Restarting with stat
+2026-01-07 18:13:34,452 - WARNING -  * Debugger is active!
+2026-01-07 18:13:34,461 - INFO -  * Debugger PIN: 369-653-580
+2026-01-07 18:13:43,586 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2026-01-07 18:13:43,792 - INFO -  * Restarting with stat
+2026-01-07 18:13:48,208 - WARNING -  * Debugger is active!
+2026-01-07 18:13:48,220 - INFO -  * Debugger PIN: 369-653-580
+2026-01-07 18:13:49,270 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2026-01-07 18:13:49,472 - INFO -  * Restarting with stat
+2026-01-07 18:13:53,529 - WARNING -  * Debugger is active!
+2026-01-07 18:13:53,539 - INFO -  * Debugger PIN: 369-653-580
+2026-01-07 18:14:41,028 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2026-01-07 18:14:41,240 - INFO -  * Restarting with stat
+2026-01-07 18:14:44,863 - WARNING -  * Debugger is active!
+2026-01-07 18:14:44,872 - INFO -  * Debugger PIN: 369-653-580
+2026-01-07 18:15:03,171 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2026-01-07 18:15:03,391 - INFO -  * Restarting with stat
+2026-01-07 18:15:08,671 - WARNING -  * Debugger is active!
+2026-01-07 18:15:08,680 - INFO -  * Debugger PIN: 369-653-580
+2026-01-07 18:15:15,813 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2026-01-07 18:15:16,009 - INFO -  * Restarting with stat
+2026-01-07 18:15:19,523 - WARNING -  * Debugger is active!
+2026-01-07 18:15:19,533 - INFO -  * Debugger PIN: 369-653-580
+2026-01-07 18:15:24,603 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2026-01-07 18:15:24,816 - INFO -  * Restarting with stat
+2026-01-07 18:15:28,612 - WARNING -  * Debugger is active!
+2026-01-07 18:15:28,622 - INFO -  * Debugger PIN: 369-653-580
+2026-01-07 18:16:43,274 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\rotas\\aluno.py', reloading
+2026-01-07 18:16:43,475 - INFO -  * Restarting with stat
+2026-01-07 18:16:49,041 - WARNING -  * Debugger is active!
+2026-01-07 18:16:49,051 - INFO -  * Debugger PIN: 369-653-580
+2026-01-07 18:17:35,475 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2026-01-07 18:17:35,866 - INFO -  * Restarting with stat
+2026-01-07 18:17:39,296 - WARNING -  * Debugger is active!
+2026-01-07 18:17:39,306 - INFO -  * Debugger PIN: 369-653-580
+2026-01-07 18:18:00,046 - INFO - 127.0.0.1 - - [07/Jan/2026 18:18:00] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-07 18:18:00,611 - INFO - 127.0.0.1 - - [07/Jan/2026 18:18:00] "[35m[1mPOST /Denuncia HTTP/1.1[0m" 500 -
+2026-01-07 18:18:00,740 - INFO - 127.0.0.1 - - [07/Jan/2026 18:18:00] "[36mGET /Denuncia?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2026-01-07 18:18:00,750 - INFO - 127.0.0.1 - - [07/Jan/2026 18:18:00] "[36mGET /Denuncia?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2026-01-07 18:18:01,212 - INFO - 127.0.0.1 - - [07/Jan/2026 18:18:01] "GET /Denuncia?__debugger__=yes&cmd=resource&f=console.png&s=r6lZCs1ZdmSX0nbAWt4X HTTP/1.1" 200 -
+2026-01-07 18:18:01,240 - INFO - 127.0.0.1 - - [07/Jan/2026 18:18:01] "[36mGET /Denuncia?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2026-01-07 18:18:21,723 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\rotas\\aluno.py', reloading
+2026-01-07 18:18:21,958 - INFO -  * Restarting with stat
+2026-01-07 18:18:25,305 - WARNING -  * Debugger is active!
+2026-01-07 18:18:25,315 - INFO -  * Debugger PIN: 369-653-580
+2026-01-07 18:18:25,355 - INFO - 127.0.0.1 - - [07/Jan/2026 18:18:25] "GET /Denuncia HTTP/1.1" 200 -
+2026-01-07 18:18:48,733 - INFO - 127.0.0.1 - - [07/Jan/2026 18:18:48] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-07 18:19:19,175 - INFO - 127.0.0.1 - - [07/Jan/2026 18:19:19] "[32mPOST /Denuncia HTTP/1.1[0m" 302 -
+2026-01-07 18:19:19,207 - INFO - 127.0.0.1 - - [07/Jan/2026 18:19:19] "GET /Inicio HTTP/1.1" 200 -
+2026-01-07 18:19:19,353 - INFO - 127.0.0.1 - - [07/Jan/2026 18:19:19] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2026-01-07 18:20:27,016 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\rotas\\aluno.py', reloading
+2026-01-07 18:20:27,343 - INFO -  * Restarting with stat
+2026-01-07 18:20:31,532 - WARNING -  * Debugger is active!
+2026-01-07 18:20:31,541 - INFO -  * Debugger PIN: 369-653-580
+2026-01-07 18:20:35,637 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\rotas\\aluno.py', reloading
+2026-01-07 18:20:35,855 - INFO -  * Restarting with stat
+2026-01-07 18:21:29,134 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-01-07 18:21:29,135 - INFO - [33mPress CTRL+C to quit[0m
+2026-01-07 18:21:29,139 - INFO -  * Restarting with stat
+2026-01-07 18:21:32,618 - WARNING -  * Debugger is active!
+2026-01-07 18:21:32,627 - INFO -  * Debugger PIN: 369-653-580
+2026-01-07 18:21:32,669 - INFO - 127.0.0.1 - - [07/Jan/2026 18:21:32] "[35m[1mGET /Inicio HTTP/1.1[0m" 500 -
+2026-01-07 18:21:32,776 - INFO - 127.0.0.1 - - [07/Jan/2026 18:21:32] "GET /Inicio?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2026-01-07 18:21:32,785 - INFO - 127.0.0.1 - - [07/Jan/2026 18:21:32] "GET /Inicio?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2026-01-07 18:21:32,807 - INFO - 127.0.0.1 - - [07/Jan/2026 18:21:32] "GET /Inicio?__debugger__=yes&cmd=resource&f=console.png&s=XDUByeDhAX7h8hbM0WJ6 HTTP/1.1" 200 -
+2026-01-07 18:21:32,843 - INFO - 127.0.0.1 - - [07/Jan/2026 18:21:32] "GET /Inicio?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2026-01-07 18:21:47,280 - INFO - 127.0.0.1 - - [07/Jan/2026 18:21:47] "GET /Denuncia HTTP/1.1" 200 -
+2026-01-07 18:21:47,301 - INFO - 127.0.0.1 - - [07/Jan/2026 18:21:47] "[36mGET /static/denuncia.css HTTP/1.1[0m" 304 -
+2026-01-07 18:21:47,303 - INFO - 127.0.0.1 - - [07/Jan/2026 18:21:47] "[33mGET /static/js/denuncias.js HTTP/1.1[0m" 404 -
+2026-01-07 18:21:47,421 - INFO - 127.0.0.1 - - [07/Jan/2026 18:21:47] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-07 18:22:06,578 - INFO - 127.0.0.1 - - [07/Jan/2026 18:22:06] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-07 18:22:07,088 - INFO - 127.0.0.1 - - [07/Jan/2026 18:22:07] "POST /Denuncia HTTP/1.1" 200 -
+2026-01-07 18:22:07,137 - INFO - 127.0.0.1 - - [07/Jan/2026 18:22:07] "[35m[1mGET /Inicio HTTP/1.1[0m" 500 -
+2026-01-07 18:22:08,561 - INFO - 127.0.0.1 - - [07/Jan/2026 18:22:08] "[36mGET /Inicio?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2026-01-07 18:22:08,562 - INFO - 127.0.0.1 - - [07/Jan/2026 18:22:08] "[36mGET /Inicio?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2026-01-07 18:22:08,616 - INFO - 127.0.0.1 - - [07/Jan/2026 18:22:08] "[36mGET /Inicio?__debugger__=yes&cmd=resource&f=console.png&s=XDUByeDhAX7h8hbM0WJ6 HTTP/1.1[0m" 304 -
+2026-01-07 18:23:28,890 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\rotas\\aluno.py', reloading
+2026-01-07 18:23:29,103 - INFO -  * Restarting with stat
+2026-01-07 18:23:32,358 - WARNING -  * Debugger is active!
+2026-01-07 18:23:32,369 - INFO -  * Debugger PIN: 369-653-580
+2026-01-07 18:23:32,407 - INFO - 127.0.0.1 - - [07/Jan/2026 18:23:32] "[35m[1mGET /Inicio HTTP/1.1[0m" 500 -
+2026-01-07 18:23:32,518 - INFO - 127.0.0.1 - - [07/Jan/2026 18:23:32] "[36mGET /Inicio?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2026-01-07 18:23:32,519 - INFO - 127.0.0.1 - - [07/Jan/2026 18:23:32] "[36mGET /Inicio?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2026-01-07 18:23:32,983 - INFO - 127.0.0.1 - - [07/Jan/2026 18:23:32] "GET /Inicio?__debugger__=yes&cmd=resource&f=console.png&s=r5ZtfRloqrUWHZRqT8Cf HTTP/1.1" 200 -
+2026-01-07 18:23:33,005 - INFO - 127.0.0.1 - - [07/Jan/2026 18:23:33] "[36mGET /Inicio?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2026-01-07 18:25:09,336 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2026-01-07 18:25:09,565 - INFO -  * Restarting with stat
+2026-01-07 18:25:13,043 - WARNING -  * Debugger is active!
+2026-01-07 18:25:13,053 - INFO -  * Debugger PIN: 369-653-580
+2026-01-07 18:25:13,093 - INFO - 127.0.0.1 - - [07/Jan/2026 18:25:13] "[35m[1mGET /Inicio HTTP/1.1[0m" 500 -
+2026-01-07 18:25:13,201 - INFO - 127.0.0.1 - - [07/Jan/2026 18:25:13] "[36mGET /Inicio?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2026-01-07 18:25:13,202 - INFO - 127.0.0.1 - - [07/Jan/2026 18:25:13] "[36mGET /Inicio?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2026-01-07 18:25:13,665 - INFO - 127.0.0.1 - - [07/Jan/2026 18:25:13] "GET /Inicio?__debugger__=yes&cmd=resource&f=console.png&s=6gx9aYGys1ZCMcKf8ltw HTTP/1.1" 200 -
+2026-01-07 18:25:13,698 - INFO - 127.0.0.1 - - [07/Jan/2026 18:25:13] "[36mGET /Inicio?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2026-01-07 18:25:34,261 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2026-01-07 18:25:34,552 - INFO -  * Restarting with stat
+2026-01-07 18:25:37,865 - WARNING -  * Debugger is active!
+2026-01-07 18:25:37,874 - INFO -  * Debugger PIN: 369-653-580
+2026-01-07 18:25:37,925 - INFO - 127.0.0.1 - - [07/Jan/2026 18:25:37] "GET /Inicio HTTP/1.1" 200 -
+2026-01-07 18:25:37,997 - INFO - 127.0.0.1 - - [07/Jan/2026 18:25:37] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2026-01-07 18:25:38,644 - INFO - 127.0.0.1 - - [07/Jan/2026 18:25:38] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-07 18:25:48,057 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\rotas\\aluno.py', reloading
+2026-01-07 18:25:48,290 - INFO -  * Restarting with stat
+2026-01-07 18:25:51,577 - WARNING -  * Debugger is active!
+2026-01-07 18:25:51,587 - INFO -  * Debugger PIN: 369-653-580
+2026-01-07 18:25:51,635 - INFO - 127.0.0.1 - - [07/Jan/2026 18:25:51] "GET /Inicio HTTP/1.1" 200 -
+2026-01-07 18:25:51,704 - INFO - 127.0.0.1 - - [07/Jan/2026 18:25:51] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2026-01-07 18:25:52,618 - INFO - 127.0.0.1 - - [07/Jan/2026 18:25:52] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-07 18:26:22,894 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2026-01-07 18:26:23,081 - INFO -  * Restarting with stat
+2026-01-07 18:26:26,874 - WARNING -  * Debugger is active!
+2026-01-07 18:26:26,884 - INFO -  * Debugger PIN: 369-653-580
+2026-01-07 18:26:49,250 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2026-01-07 18:26:49,435 - INFO -  * Restarting with stat
+2026-01-07 18:26:52,760 - WARNING -  * Debugger is active!
+2026-01-07 18:26:52,770 - INFO -  * Debugger PIN: 369-653-580
+2026-01-07 18:27:02,364 - INFO - 127.0.0.1 - - [07/Jan/2026 18:27:02] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-07 18:27:02,384 - INFO - 127.0.0.1 - - [07/Jan/2026 18:27:02] "[32mPOST /allow_detail HTTP/1.1[0m" 302 -
+2026-01-07 18:27:02,448 - INFO - 127.0.0.1 - - [07/Jan/2026 18:27:02] "GET /detalhe/23 HTTP/1.1" 200 -
+2026-01-07 18:27:02,482 - INFO - 127.0.0.1 - - [07/Jan/2026 18:27:02] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2026-01-07 18:27:02,557 - INFO - 127.0.0.1 - - [07/Jan/2026 18:27:02] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2026-01-07 18:27:05,611 - INFO - 127.0.0.1 - - [07/Jan/2026 18:27:05] "[32mGET /detalhe/22 HTTP/1.1[0m" 302 -
+2026-01-07 18:27:05,651 - INFO - 127.0.0.1 - - [07/Jan/2026 18:27:05] "GET /Inicio HTTP/1.1" 200 -
+2026-01-07 18:27:05,674 - INFO - 127.0.0.1 - - [07/Jan/2026 18:27:05] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2026-01-07 18:27:38,206 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2026-01-07 18:27:38,396 - INFO -  * Restarting with stat
+2026-01-07 18:27:42,007 - WARNING -  * Debugger is active!
+2026-01-07 18:27:42,017 - INFO -  * Debugger PIN: 369-653-580
+2026-01-07 18:28:42,455 - INFO - 127.0.0.1 - - [07/Jan/2026 18:28:42] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-07 18:28:42,478 - INFO - 127.0.0.1 - - [07/Jan/2026 18:28:42] "[32mPOST /allow_detail HTTP/1.1[0m" 302 -
+2026-01-07 18:28:42,601 - INFO - 127.0.0.1 - - [07/Jan/2026 18:28:42] "GET /detalhe/23 HTTP/1.1" 200 -
+2026-01-07 18:28:42,635 - INFO - 127.0.0.1 - - [07/Jan/2026 18:28:42] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2026-01-07 18:28:42,686 - INFO - 127.0.0.1 - - [07/Jan/2026 18:28:42] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2026-01-07 18:29:43,483 - INFO - 127.0.0.1 - - [07/Jan/2026 18:29:43] "GET /Inicio HTTP/1.1" 200 -
+2026-01-07 18:29:43,513 - INFO - 127.0.0.1 - - [07/Jan/2026 18:29:43] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2026-01-07 18:29:46,303 - INFO - 127.0.0.1 - - [07/Jan/2026 18:29:46] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-07 18:29:46,319 - INFO - 127.0.0.1 - - [07/Jan/2026 18:29:46] "[32mPOST /allow_detail HTTP/1.1[0m" 302 -
+2026-01-07 18:29:46,335 - INFO - 127.0.0.1 - - [07/Jan/2026 18:29:46] "GET /detalhe/22 HTTP/1.1" 200 -
+2026-01-07 18:29:46,365 - INFO - 127.0.0.1 - - [07/Jan/2026 18:29:46] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2026-01-07 18:29:46,369 - INFO - 127.0.0.1 - - [07/Jan/2026 18:29:46] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2026-01-07 18:29:48,977 - INFO - 127.0.0.1 - - [07/Jan/2026 18:29:48] "GET /Inicio HTTP/1.1" 200 -
+2026-01-07 18:29:49,010 - INFO - 127.0.0.1 - - [07/Jan/2026 18:29:49] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2026-01-07 18:32:57,901 - INFO - 127.0.0.1 - - [07/Jan/2026 18:32:57] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-07 18:32:57,917 - INFO - 127.0.0.1 - - [07/Jan/2026 18:32:57] "[32mPOST /allow_detail HTTP/1.1[0m" 302 -
+2026-01-07 18:32:58,046 - INFO - 127.0.0.1 - - [07/Jan/2026 18:32:58] "GET /detalhe/23 HTTP/1.1" 200 -
+2026-01-07 18:32:58,076 - INFO - 127.0.0.1 - - [07/Jan/2026 18:32:58] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2026-01-07 18:32:58,079 - INFO - 127.0.0.1 - - [07/Jan/2026 18:32:58] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2026-01-07 18:33:28,072 - INFO - 127.0.0.1 - - [07/Jan/2026 18:33:28] "[32mGET /detalhe/23 HTTP/1.1[0m" 302 -
+2026-01-07 18:33:28,091 - INFO - 127.0.0.1 - - [07/Jan/2026 18:33:28] "GET /Inicio HTTP/1.1" 200 -
+2026-01-07 18:33:28,117 - INFO - 127.0.0.1 - - [07/Jan/2026 18:33:28] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2026-01-07 18:33:28,161 - INFO - 127.0.0.1 - - [07/Jan/2026 18:33:28] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-07 18:33:30,883 - INFO - 127.0.0.1 - - [07/Jan/2026 18:33:30] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-07 18:33:30,896 - INFO - 127.0.0.1 - - [07/Jan/2026 18:33:30] "[32mPOST /allow_detail HTTP/1.1[0m" 302 -
+2026-01-07 18:33:31,019 - INFO - 127.0.0.1 - - [07/Jan/2026 18:33:31] "GET /detalhe/23 HTTP/1.1" 200 -
+2026-01-07 18:33:31,046 - INFO - 127.0.0.1 - - [07/Jan/2026 18:33:31] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2026-01-07 18:33:31,048 - INFO - 127.0.0.1 - - [07/Jan/2026 18:33:31] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2026-01-07 18:33:40,434 - INFO - 127.0.0.1 - - [07/Jan/2026 18:33:40] "[32mGET /detalhe/23 HTTP/1.1[0m" 302 -
+2026-01-07 18:33:40,448 - INFO - 127.0.0.1 - - [07/Jan/2026 18:33:40] "GET /Inicio HTTP/1.1" 200 -
+2026-01-07 18:33:40,476 - INFO - 127.0.0.1 - - [07/Jan/2026 18:33:40] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2026-01-07 18:33:40,511 - INFO - 127.0.0.1 - - [07/Jan/2026 18:33:40] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-07 18:33:43,447 - INFO - 127.0.0.1 - - [07/Jan/2026 18:33:43] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-07 18:33:43,463 - INFO - 127.0.0.1 - - [07/Jan/2026 18:33:43] "[32mPOST /allow_detail HTTP/1.1[0m" 302 -
+2026-01-07 18:33:43,582 - INFO - 127.0.0.1 - - [07/Jan/2026 18:33:43] "GET /detalhe/23 HTTP/1.1" 200 -
+2026-01-07 18:33:43,609 - INFO - 127.0.0.1 - - [07/Jan/2026 18:33:43] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2026-01-07 18:33:43,610 - INFO - 127.0.0.1 - - [07/Jan/2026 18:33:43] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2026-01-07 18:34:37,696 - INFO - 127.0.0.1 - - [07/Jan/2026 18:34:37] "[32mGET /detalhe/23 HTTP/1.1[0m" 302 -
+2026-01-07 18:34:37,715 - INFO - 127.0.0.1 - - [07/Jan/2026 18:34:37] "GET /Inicio HTTP/1.1" 200 -
+2026-01-07 18:34:37,747 - INFO - 127.0.0.1 - - [07/Jan/2026 18:34:37] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2026-01-07 18:34:37,800 - INFO - 127.0.0.1 - - [07/Jan/2026 18:34:37] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-07 18:34:40,075 - INFO - 127.0.0.1 - - [07/Jan/2026 18:34:40] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-07 18:34:40,093 - INFO - 127.0.0.1 - - [07/Jan/2026 18:34:40] "[32mPOST /allow_detail HTTP/1.1[0m" 302 -
+2026-01-07 18:34:40,254 - INFO - 127.0.0.1 - - [07/Jan/2026 18:34:40] "[35m[1mGET /detalhe/23 HTTP/1.1[0m" 500 -
+2026-01-07 18:34:40,287 - INFO - 127.0.0.1 - - [07/Jan/2026 18:34:40] "GET /detalhe/23?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2026-01-07 18:34:40,287 - INFO - 127.0.0.1 - - [07/Jan/2026 18:34:40] "GET /detalhe/23?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2026-01-07 18:34:40,309 - INFO - 127.0.0.1 - - [07/Jan/2026 18:34:40] "GET /detalhe/23?__debugger__=yes&cmd=resource&f=console.png&s=igY6G3aG9yd70Hl45rqF HTTP/1.1" 200 -
+2026-01-07 18:34:40,335 - INFO - 127.0.0.1 - - [07/Jan/2026 18:34:40] "GET /detalhe/23?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2026-01-07 18:35:07,708 - INFO - 127.0.0.1 - - [07/Jan/2026 18:35:07] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-07 18:35:07,726 - INFO - 127.0.0.1 - - [07/Jan/2026 18:35:07] "[32mPOST /allow_detail HTTP/1.1[0m" 302 -
+2026-01-07 18:35:07,847 - INFO - 127.0.0.1 - - [07/Jan/2026 18:35:07] "GET /detalhe/23 HTTP/1.1" 200 -
+2026-01-07 18:35:07,874 - INFO - 127.0.0.1 - - [07/Jan/2026 18:35:07] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2026-01-07 18:35:07,876 - INFO - 127.0.0.1 - - [07/Jan/2026 18:35:07] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2026-01-07 18:37:21,192 - INFO - 127.0.0.1 - - [07/Jan/2026 18:37:21] "[32mGET /detalhe/23 HTTP/1.1[0m" 302 -
+2026-01-07 18:37:21,208 - INFO - 127.0.0.1 - - [07/Jan/2026 18:37:21] "GET /Inicio HTTP/1.1" 200 -
+2026-01-07 18:37:21,240 - INFO - 127.0.0.1 - - [07/Jan/2026 18:37:21] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2026-01-07 18:37:21,345 - INFO - 127.0.0.1 - - [07/Jan/2026 18:37:21] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-07 18:37:23,963 - INFO - 127.0.0.1 - - [07/Jan/2026 18:37:23] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-07 18:37:23,982 - INFO - 127.0.0.1 - - [07/Jan/2026 18:37:23] "[32mPOST /allow_detail HTTP/1.1[0m" 302 -
+2026-01-07 18:37:24,084 - INFO - 127.0.0.1 - - [07/Jan/2026 18:37:24] "[35m[1mGET /detalhe/23 HTTP/1.1[0m" 500 -
+2026-01-07 18:37:24,115 - INFO - 127.0.0.1 - - [07/Jan/2026 18:37:24] "[36mGET /detalhe/23?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2026-01-07 18:37:24,116 - INFO - 127.0.0.1 - - [07/Jan/2026 18:37:24] "[36mGET /detalhe/23?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2026-01-07 18:37:24,141 - INFO - 127.0.0.1 - - [07/Jan/2026 18:37:24] "[36mGET /detalhe/23?__debugger__=yes&cmd=resource&f=console.png&s=igY6G3aG9yd70Hl45rqF HTTP/1.1[0m" 304 -
+2026-01-07 18:37:24,559 - INFO - 127.0.0.1 - - [07/Jan/2026 18:37:24] "[36mGET /detalhe/23?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2026-01-07 18:38:04,363 - INFO - 127.0.0.1 - - [07/Jan/2026 18:38:04] "GET /detalhe/23 HTTP/1.1" 200 -
+2026-01-07 18:38:04,388 - INFO - 127.0.0.1 - - [07/Jan/2026 18:38:04] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2026-01-07 18:38:04,388 - INFO - 127.0.0.1 - - [07/Jan/2026 18:38:04] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2026-01-07 18:38:04,420 - INFO - 127.0.0.1 - - [07/Jan/2026 18:38:04] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-07 18:38:27,078 - INFO - 127.0.0.1 - - [07/Jan/2026 18:38:27] "[32mGET /detalhe/23 HTTP/1.1[0m" 302 -
+2026-01-07 18:38:27,094 - INFO - 127.0.0.1 - - [07/Jan/2026 18:38:27] "GET /Inicio HTTP/1.1" 200 -
+2026-01-07 18:38:27,113 - INFO - 127.0.0.1 - - [07/Jan/2026 18:38:27] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2026-01-07 18:38:27,151 - INFO - 127.0.0.1 - - [07/Jan/2026 18:38:27] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-07 18:38:31,948 - INFO - 127.0.0.1 - - [07/Jan/2026 18:38:31] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-07 18:38:31,967 - INFO - 127.0.0.1 - - [07/Jan/2026 18:38:31] "[32mPOST /allow_detail HTTP/1.1[0m" 302 -
+2026-01-07 18:38:32,101 - INFO - 127.0.0.1 - - [07/Jan/2026 18:38:32] "GET /detalhe/23 HTTP/1.1" 200 -
+2026-01-07 18:38:32,128 - INFO - 127.0.0.1 - - [07/Jan/2026 18:38:32] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2026-01-07 18:38:32,130 - INFO - 127.0.0.1 - - [07/Jan/2026 18:38:32] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2026-01-07 18:38:46,710 - INFO - 127.0.0.1 - - [07/Jan/2026 18:38:46] "[32mGET /detalhe/23 HTTP/1.1[0m" 302 -
+2026-01-07 18:38:46,727 - INFO - 127.0.0.1 - - [07/Jan/2026 18:38:46] "GET /Inicio HTTP/1.1" 200 -
+2026-01-07 18:38:46,751 - INFO - 127.0.0.1 - - [07/Jan/2026 18:38:46] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2026-01-07 18:38:46,799 - INFO - 127.0.0.1 - - [07/Jan/2026 18:38:46] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-07 18:38:49,562 - INFO - 127.0.0.1 - - [07/Jan/2026 18:38:49] "GET /Denuncia HTTP/1.1" 200 -
+2026-01-07 18:38:49,590 - INFO - 127.0.0.1 - - [07/Jan/2026 18:38:49] "[36mGET /static/denuncia.css HTTP/1.1[0m" 304 -
+2026-01-07 18:38:49,594 - INFO - 127.0.0.1 - - [07/Jan/2026 18:38:49] "[33mGET /static/js/denuncias.js HTTP/1.1[0m" 404 -
+2026-01-07 18:39:05,615 - INFO - 127.0.0.1 - - [07/Jan/2026 18:39:05] "GET /Denuncia HTTP/1.1" 200 -
+2026-01-07 18:39:05,637 - INFO - 127.0.0.1 - - [07/Jan/2026 18:39:05] "[36mGET /static/denuncia.css HTTP/1.1[0m" 304 -
+2026-01-07 18:39:05,639 - INFO - 127.0.0.1 - - [07/Jan/2026 18:39:05] "[33mGET /static/js/denuncias.js HTTP/1.1[0m" 404 -
+2026-01-07 18:39:05,719 - INFO - 127.0.0.1 - - [07/Jan/2026 18:39:05] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-07 18:39:27,882 - INFO - 127.0.0.1 - - [07/Jan/2026 18:39:27] "[36mGET /static/denuncia.css HTTP/1.1[0m" 304 -
+2026-01-07 18:39:27,886 - INFO - 127.0.0.1 - - [07/Jan/2026 18:39:27] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-01-07 18:40:25,958 - INFO - 127.0.0.1 - - [07/Jan/2026 18:40:25] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-07 18:40:49,800 - INFO - 127.0.0.1 - - [07/Jan/2026 18:40:49] "[32mPOST /Denuncia HTTP/1.1[0m" 302 -
+2026-01-07 18:40:49,825 - INFO - 127.0.0.1 - - [07/Jan/2026 18:40:49] "GET /Inicio HTTP/1.1" 200 -
+2026-01-07 18:40:49,910 - INFO - 127.0.0.1 - - [07/Jan/2026 18:40:49] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2026-01-07 18:41:20,957 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2026-01-07 18:41:21,421 - INFO -  * Restarting with stat
+2026-01-07 18:41:24,962 - WARNING -  * Debugger is active!
+2026-01-07 18:41:24,976 - INFO -  * Debugger PIN: 369-653-580
+2026-01-07 18:41:25,007 - INFO - 127.0.0.1 - - [07/Jan/2026 18:41:25] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-07 18:41:25,030 - INFO - 127.0.0.1 - - [07/Jan/2026 18:41:25] "[32mPOST /allow_detail HTTP/1.1[0m" 302 -
+2026-01-07 18:41:25,161 - INFO - 127.0.0.1 - - [07/Jan/2026 18:41:25] "GET /detalhe/24 HTTP/1.1" 200 -
+2026-01-07 18:41:25,195 - INFO - 127.0.0.1 - - [07/Jan/2026 18:41:25] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2026-01-07 18:41:25,251 - INFO - 127.0.0.1 - - [07/Jan/2026 18:41:25] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2026-01-07 18:46:27,394 - INFO - 127.0.0.1 - - [07/Jan/2026 18:46:27] "GET /Inicio HTTP/1.1" 200 -
+2026-01-07 18:46:30,254 - INFO - 127.0.0.1 - - [07/Jan/2026 18:46:30] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-07 18:46:30,270 - INFO - 127.0.0.1 - - [07/Jan/2026 18:46:30] "[32mPOST /allow_detail HTTP/1.1[0m" 302 -
+2026-01-07 18:46:30,286 - INFO - 127.0.0.1 - - [07/Jan/2026 18:46:30] "GET /detalhe/24 HTTP/1.1" 200 -
+2026-01-07 18:46:30,310 - INFO - 127.0.0.1 - - [07/Jan/2026 18:46:30] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2026-01-07 18:46:30,316 - INFO - 127.0.0.1 - - [07/Jan/2026 18:46:30] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2026-01-07 18:46:40,857 - INFO - 127.0.0.1 - - [07/Jan/2026 18:46:40] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-07 18:46:40,876 - INFO - 127.0.0.1 - - [07/Jan/2026 18:46:40] "[32mPOST /allow_detail HTTP/1.1[0m" 302 -
+2026-01-07 18:46:40,889 - INFO - 127.0.0.1 - - [07/Jan/2026 18:46:40] "GET /detalhe/23 HTTP/1.1" 200 -
+2026-01-07 18:46:40,924 - INFO - 127.0.0.1 - - [07/Jan/2026 18:46:40] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2026-01-07 18:46:40,924 - INFO - 127.0.0.1 - - [07/Jan/2026 18:46:40] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2026-01-07 18:47:12,764 - INFO - 127.0.0.1 - - [07/Jan/2026 18:47:12] "GET /Inicio HTTP/1.1" 200 -
+2026-01-07 18:47:12,803 - INFO - 127.0.0.1 - - [07/Jan/2026 18:47:12] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2026-01-07 18:47:45,558 - INFO - 127.0.0.1 - - [07/Jan/2026 18:47:45] "GET /Denuncia HTTP/1.1" 200 -
+2026-01-07 18:47:45,594 - INFO - 127.0.0.1 - - [07/Jan/2026 18:47:45] "[36mGET /static/denuncia.css HTTP/1.1[0m" 304 -
+2026-01-07 18:47:45,594 - INFO - 127.0.0.1 - - [07/Jan/2026 18:47:45] "[33mGET /static/js/denuncias.js HTTP/1.1[0m" 404 -
+2026-01-07 18:48:35,913 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2026-01-07 18:48:36,107 - INFO -  * Restarting with stat
+2026-01-07 18:48:40,155 - WARNING -  * Debugger is active!
+2026-01-07 18:48:40,165 - INFO -  * Debugger PIN: 369-653-580
+2026-01-07 18:48:40,217 - INFO - 127.0.0.1 - - [07/Jan/2026 18:48:40] "GET /Inicio HTTP/1.1" 200 -
+2026-01-07 18:48:40,360 - INFO - 127.0.0.1 - - [07/Jan/2026 18:48:40] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2026-01-07 18:49:36,324 - INFO - 127.0.0.1 - - [07/Jan/2026 18:49:36] "GET /Inicio HTTP/1.1" 200 -
+2026-01-07 18:49:36,355 - INFO - 127.0.0.1 - - [07/Jan/2026 18:49:36] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2026-01-07 18:49:36,454 - INFO - 127.0.0.1 - - [07/Jan/2026 18:49:36] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-07 18:49:39,901 - INFO - 127.0.0.1 - - [07/Jan/2026 18:49:39] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-07 18:49:39,925 - INFO - 127.0.0.1 - - [07/Jan/2026 18:49:39] "[32mPOST /allow_folder HTTP/1.1[0m" 302 -
+2026-01-07 18:49:39,979 - INFO - 127.0.0.1 - - [07/Jan/2026 18:49:39] "GET /Denuncias HTTP/1.1" 200 -
+2026-01-07 18:49:40,029 - INFO - 127.0.0.1 - - [07/Jan/2026 18:49:40] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2026-01-07 18:49:42,508 - INFO - 127.0.0.1 - - [07/Jan/2026 18:49:42] "[32mPOST /allow_detail HTTP/1.1[0m" 302 -
+2026-01-07 18:49:42,607 - INFO - 127.0.0.1 - - [07/Jan/2026 18:49:42] "GET /detalhe/24 HTTP/1.1" 200 -
+2026-01-07 18:49:42,644 - INFO - 127.0.0.1 - - [07/Jan/2026 18:49:42] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2026-01-07 18:49:42,648 - INFO - 127.0.0.1 - - [07/Jan/2026 18:49:42] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2026-01-07 18:49:53,008 - INFO - 127.0.0.1 - - [07/Jan/2026 18:49:53] "[32mPOST /Comentar/24 HTTP/1.1[0m" 302 -
+2026-01-07 18:49:53,014 - INFO - 127.0.0.1 - - [07/Jan/2026 18:49:53] "[32mGET /detalhe/24 HTTP/1.1[0m" 302 -
+2026-01-07 18:49:53,035 - INFO - 127.0.0.1 - - [07/Jan/2026 18:49:53] "GET /Inicio HTTP/1.1" 200 -
+2026-01-07 18:49:53,062 - INFO - 127.0.0.1 - - [07/Jan/2026 18:49:53] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2026-01-07 18:49:55,762 - INFO - 127.0.0.1 - - [07/Jan/2026 18:49:55] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-07 18:49:55,787 - INFO - 127.0.0.1 - - [07/Jan/2026 18:49:55] "[32mPOST /allow_folder HTTP/1.1[0m" 302 -
+2026-01-07 18:49:55,805 - INFO - 127.0.0.1 - - [07/Jan/2026 18:49:55] "GET /Denuncias HTTP/1.1" 200 -
+2026-01-07 18:49:55,830 - INFO - 127.0.0.1 - - [07/Jan/2026 18:49:55] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2026-01-07 18:52:56,038 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\rotas\\aluno.py', reloading
+2026-01-07 18:52:56,263 - INFO -  * Restarting with stat
+2026-01-07 18:53:00,467 - WARNING -  * Debugger is active!
+2026-01-07 18:53:00,477 - INFO -  * Debugger PIN: 369-653-580
+2026-01-07 18:53:48,906 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2026-01-07 18:53:49,089 - INFO -  * Restarting with stat
+2026-01-07 18:53:52,532 - WARNING -  * Debugger is active!
+2026-01-07 18:53:52,541 - INFO -  * Debugger PIN: 369-653-580
+2026-01-07 18:54:53,147 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2026-01-07 18:54:53,347 - INFO -  * Restarting with stat
+2026-01-07 18:54:56,744 - WARNING -  * Debugger is active!
+2026-01-07 18:54:56,754 - INFO -  * Debugger PIN: 369-653-580
+2026-01-07 18:55:05,853 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2026-01-07 18:55:06,041 - INFO -  * Restarting with stat
+2026-01-07 18:55:09,469 - WARNING -  * Debugger is active!
+2026-01-07 18:55:09,479 - INFO -  * Debugger PIN: 369-653-580
+2026-01-07 18:57:17,831 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2026-01-07 18:57:17,998 - INFO -  * Restarting with stat
+2026-01-07 18:57:21,121 - WARNING -  * Debugger is active!
+2026-01-07 18:57:21,131 - INFO -  * Debugger PIN: 369-653-580
+2026-01-07 18:57:23,173 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2026-01-07 18:57:23,380 - INFO -  * Restarting with stat
+2026-01-07 18:57:27,059 - WARNING -  * Debugger is active!
+2026-01-07 18:57:27,069 - INFO -  * Debugger PIN: 369-653-580
+2026-01-07 18:57:27,093 - INFO - 127.0.0.1 - - [07/Jan/2026 18:57:27] "[32mPOST /allow_detail HTTP/1.1[0m" 302 -
+2026-01-07 18:57:27,184 - INFO - 127.0.0.1 - - [07/Jan/2026 18:57:27] "GET /detalhe/23 HTTP/1.1" 200 -
+2026-01-07 18:57:27,225 - INFO - 127.0.0.1 - - [07/Jan/2026 18:57:27] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2026-01-07 18:57:27,312 - INFO - 127.0.0.1 - - [07/Jan/2026 18:57:27] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2026-01-07 18:57:32,858 - INFO - 127.0.0.1 - - [07/Jan/2026 18:57:32] "[32mPOST /Comentar/23 HTTP/1.1[0m" 302 -
+2026-01-07 18:57:32,880 - INFO - 127.0.0.1 - - [07/Jan/2026 18:57:32] "GET /detalhe/23 HTTP/1.1" 200 -
+2026-01-07 18:57:32,901 - INFO - 127.0.0.1 - - [07/Jan/2026 18:57:32] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2026-01-07 18:57:32,907 - INFO - 127.0.0.1 - - [07/Jan/2026 18:57:32] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2026-01-07 18:57:44,099 - INFO - 127.0.0.1 - - [07/Jan/2026 18:57:44] "[32mGET /detalhe/23 HTTP/1.1[0m" 302 -
+2026-01-07 18:57:44,125 - INFO - 127.0.0.1 - - [07/Jan/2026 18:57:44] "GET /Inicio HTTP/1.1" 200 -
+2026-01-07 18:57:44,147 - INFO - 127.0.0.1 - - [07/Jan/2026 18:57:44] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2026-01-07 18:57:44,188 - INFO - 127.0.0.1 - - [07/Jan/2026 18:57:44] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-07 18:57:52,942 - INFO - 127.0.0.1 - - [07/Jan/2026 18:57:52] "[33mGET /Comentar HTTP/1.1[0m" 404 -
+2026-01-07 18:57:56,371 - INFO - 127.0.0.1 - - [07/Jan/2026 18:57:56] "[31m[1mGET /Comentar/1 HTTP/1.1[0m" 405 -
+2026-01-07 18:59:17,289 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\database\\db_usuario.py', reloading
+2026-01-07 18:59:17,511 - INFO -  * Restarting with stat
+2026-01-07 18:59:21,050 - WARNING -  * Debugger is active!
+2026-01-07 18:59:21,060 - INFO -  * Debugger PIN: 369-653-580
+2026-01-07 19:00:25,376 - INFO - 127.0.0.1 - - [07/Jan/2026 19:00:25] "GET /Inicio HTTP/1.1" 200 -
+2026-01-07 19:00:25,465 - INFO - 127.0.0.1 - - [07/Jan/2026 19:00:25] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2026-01-07 19:00:26,117 - INFO - 127.0.0.1 - - [07/Jan/2026 19:00:26] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-07 19:00:28,278 - INFO - 127.0.0.1 - - [07/Jan/2026 19:00:28] "GET /Denuncia HTTP/1.1" 200 -
+2026-01-07 19:00:28,302 - INFO - 127.0.0.1 - - [07/Jan/2026 19:00:28] "[36mGET /static/denuncia.css HTTP/1.1[0m" 304 -
+2026-01-07 19:00:28,308 - INFO - 127.0.0.1 - - [07/Jan/2026 19:00:28] "[33mGET /static/js/denuncias.js HTTP/1.1[0m" 404 -
+2026-01-07 19:00:38,381 - INFO - 127.0.0.1 - - [07/Jan/2026 19:00:38] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-07 19:01:04,284 - INFO - 127.0.0.1 - - [07/Jan/2026 19:01:04] "[32mPOST /Denuncia HTTP/1.1[0m" 302 -
+2026-01-07 19:01:04,460 - INFO - 127.0.0.1 - - [07/Jan/2026 19:01:04] "[35m[1mGET /Inicio HTTP/1.1[0m" 500 -
+2026-01-07 19:01:04,664 - INFO - 127.0.0.1 - - [07/Jan/2026 19:01:04] "[36mGET /Inicio?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2026-01-07 19:01:04,673 - INFO - 127.0.0.1 - - [07/Jan/2026 19:01:04] "[36mGET /Inicio?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2026-01-07 19:01:04,723 - INFO - 127.0.0.1 - - [07/Jan/2026 19:01:04] "GET /Inicio?__debugger__=yes&cmd=resource&f=console.png&s=gXH5QxFyeyg5JQ8imjiy HTTP/1.1" 200 -
+2026-01-07 19:01:05,778 - INFO - 127.0.0.1 - - [07/Jan/2026 19:01:05] "[36mGET /Inicio?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2026-01-07 19:02:09,914 - INFO - 127.0.0.1 - - [07/Jan/2026 19:02:09] "[35m[1mGET /Inicio HTTP/1.1[0m" 500 -
+2026-01-07 19:02:09,942 - INFO - 127.0.0.1 - - [07/Jan/2026 19:02:09] "[36mGET /Inicio?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2026-01-07 19:02:09,943 - INFO - 127.0.0.1 - - [07/Jan/2026 19:02:09] "[36mGET /Inicio?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2026-01-07 19:02:09,973 - INFO - 127.0.0.1 - - [07/Jan/2026 19:02:09] "[36mGET /Inicio?__debugger__=yes&cmd=resource&f=console.png&s=gXH5QxFyeyg5JQ8imjiy HTTP/1.1[0m" 304 -
+2026-01-07 19:02:10,004 - INFO - 127.0.0.1 - - [07/Jan/2026 19:02:10] "[36mGET /Inicio?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2026-01-07 19:02:13,210 - INFO - 127.0.0.1 - - [07/Jan/2026 19:02:13] "GET /Denuncia HTTP/1.1" 200 -
+2026-01-07 19:02:14,753 - INFO - 127.0.0.1 - - [07/Jan/2026 19:02:14] "[35m[1mGET /Inicio HTTP/1.1[0m" 500 -
+2026-01-07 19:02:14,778 - INFO - 127.0.0.1 - - [07/Jan/2026 19:02:14] "[36mGET /Inicio?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2026-01-07 19:02:14,782 - INFO - 127.0.0.1 - - [07/Jan/2026 19:02:14] "[36mGET /Inicio?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2026-01-07 19:02:14,801 - INFO - 127.0.0.1 - - [07/Jan/2026 19:02:14] "[36mGET /Inicio?__debugger__=yes&cmd=resource&f=console.png&s=gXH5QxFyeyg5JQ8imjiy HTTP/1.1[0m" 304 -
+2026-01-07 19:02:14,833 - INFO - 127.0.0.1 - - [07/Jan/2026 19:02:14] "[36mGET /Inicio?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2026-01-07 19:02:42,009 - INFO - 127.0.0.1 - - [07/Jan/2026 19:02:42] "[32mGET /Logout HTTP/1.1[0m" 302 -
+2026-01-07 19:02:42,021 - INFO - 127.0.0.1 - - [07/Jan/2026 19:02:42] "GET /Login HTTP/1.1" 200 -
+2026-01-07 19:02:42,048 - INFO - 127.0.0.1 - - [07/Jan/2026 19:02:42] "[36mGET /static/cadastro.css HTTP/1.1[0m" 304 -
+2026-01-07 19:02:48,888 - INFO - 127.0.0.1 - - [07/Jan/2026 19:02:48] "POST /Login/callback HTTP/1.1" 200 -
+2026-01-07 19:02:48,927 - INFO - 127.0.0.1 - - [07/Jan/2026 19:02:48] "[35m[1mGET /Inicio HTTP/1.1[0m" 500 -
+2026-01-07 19:02:48,961 - INFO - 127.0.0.1 - - [07/Jan/2026 19:02:48] "[36mGET /Inicio?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2026-01-07 19:02:48,962 - INFO - 127.0.0.1 - - [07/Jan/2026 19:02:48] "[36mGET /Inicio?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2026-01-07 19:02:48,983 - INFO - 127.0.0.1 - - [07/Jan/2026 19:02:48] "[36mGET /Inicio?__debugger__=yes&cmd=resource&f=console.png&s=gXH5QxFyeyg5JQ8imjiy HTTP/1.1[0m" 304 -
+2026-01-07 19:03:49,912 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-01-07 19:03:49,913 - INFO - [33mPress CTRL+C to quit[0m
+2026-01-07 19:03:49,916 - INFO -  * Restarting with stat
+2026-01-07 19:03:53,065 - WARNING -  * Debugger is active!
+2026-01-07 19:03:53,074 - INFO -  * Debugger PIN: 369-653-580
+2026-01-07 19:03:53,122 - INFO - 127.0.0.1 - - [07/Jan/2026 19:03:53] "GET /Inicio HTTP/1.1" 200 -
+2026-01-07 19:03:53,198 - INFO - 127.0.0.1 - - [07/Jan/2026 19:03:53] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2026-01-07 19:03:53,636 - INFO - 127.0.0.1 - - [07/Jan/2026 19:03:53] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-07 19:04:08,093 - INFO - 127.0.0.1 - - [07/Jan/2026 19:04:08] "GET /Inicio HTTP/1.1" 200 -
+2026-01-07 19:04:08,112 - INFO - 127.0.0.1 - - [07/Jan/2026 19:04:08] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2026-01-07 19:04:08,136 - INFO - 127.0.0.1 - - [07/Jan/2026 19:04:08] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-07 19:04:11,764 - INFO - 127.0.0.1 - - [07/Jan/2026 19:04:11] "GET /Denuncia HTTP/1.1" 200 -
+2026-01-07 19:04:11,789 - INFO - 127.0.0.1 - - [07/Jan/2026 19:04:11] "[36mGET /static/denuncia.css HTTP/1.1[0m" 304 -
+2026-01-07 19:04:11,796 - INFO - 127.0.0.1 - - [07/Jan/2026 19:04:11] "[33mGET /static/js/denuncias.js HTTP/1.1[0m" 404 -
+2026-01-07 19:04:19,954 - INFO - 127.0.0.1 - - [07/Jan/2026 19:04:19] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-07 19:04:48,386 - INFO - 127.0.0.1 - - [07/Jan/2026 19:04:48] "[32mPOST /Denuncia HTTP/1.1[0m" 302 -
+2026-01-07 19:04:48,399 - INFO - 127.0.0.1 - - [07/Jan/2026 19:04:48] "GET /Inicio HTTP/1.1" 200 -
+2026-01-07 19:04:48,434 - INFO - 127.0.0.1 - - [07/Jan/2026 19:04:48] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2026-01-07 19:05:31,951 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2026-01-07 19:05:32,207 - INFO -  * Restarting with stat
+2026-01-07 19:05:35,402 - WARNING -  * Debugger is active!
+2026-01-07 19:05:35,411 - INFO -  * Debugger PIN: 369-653-580
+2026-01-07 19:05:37,450 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2026-01-07 19:05:37,724 - INFO -  * Restarting with stat
+2026-01-07 19:05:41,174 - WARNING -  * Debugger is active!
+2026-01-07 19:05:41,184 - INFO -  * Debugger PIN: 369-653-580
+2026-01-07 19:05:42,027 - INFO - 127.0.0.1 - - [07/Jan/2026 19:05:42] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-07 19:05:42,047 - INFO - 127.0.0.1 - - [07/Jan/2026 19:05:42] "[32mPOST /allow_detail HTTP/1.1[0m" 302 -
+2026-01-07 19:05:42,105 - INFO - 127.0.0.1 - - [07/Jan/2026 19:05:42] "GET /detalhe/1 HTTP/1.1" 200 -
+2026-01-07 19:05:42,145 - INFO - 127.0.0.1 - - [07/Jan/2026 19:05:42] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
+2026-01-07 19:05:42,189 - INFO - 127.0.0.1 - - [07/Jan/2026 19:05:42] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
+2026-01-07 19:06:31,042 - INFO - 127.0.0.1 - - [07/Jan/2026 19:06:31] "[31m[1mGET /allow_detail HTTP/1.1[0m" 405 -
+2026-01-07 19:06:34,503 - INFO - 127.0.0.1 - - [07/Jan/2026 19:06:34] "[33mGET /allow_detail/1 HTTP/1.1[0m" 404 -
+2026-01-07 19:06:39,437 - INFO - 127.0.0.1 - - [07/Jan/2026 19:06:39] "GET /Inicio HTTP/1.1" 200 -
+2026-01-07 19:06:39,462 - INFO - 127.0.0.1 - - [07/Jan/2026 19:06:39] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2026-01-07 19:07:13,551 - INFO - 127.0.0.1 - - [07/Jan/2026 19:07:13] "GET /Inicio HTTP/1.1" 200 -
+2026-01-07 19:07:13,581 - INFO - 127.0.0.1 - - [07/Jan/2026 19:07:13] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2026-01-07 19:07:13,622 - INFO - 127.0.0.1 - - [07/Jan/2026 19:07:13] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-07 19:07:16,169 - INFO - 127.0.0.1 - - [07/Jan/2026 19:07:16] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-07 19:07:16,187 - INFO - 127.0.0.1 - - [07/Jan/2026 19:07:16] "[32mPOST /allow_folder HTTP/1.1[0m" 302 -
+2026-01-07 19:07:16,267 - INFO - 127.0.0.1 - - [07/Jan/2026 19:07:16] "GET /Alunos HTTP/1.1" 200 -
+2026-01-07 19:07:16,295 - INFO - 127.0.0.1 - - [07/Jan/2026 19:07:16] "[36mGET /static/aluno.css HTTP/1.1[0m" 304 -
+2026-01-07 19:08:32,650 - INFO - 127.0.0.1 - - [07/Jan/2026 19:08:32] "GET /Alunos HTTP/1.1" 200 -
+2026-01-07 19:08:32,682 - INFO - 127.0.0.1 - - [07/Jan/2026 19:08:32] "[36mGET /static/aluno.css HTTP/1.1[0m" 304 -
+2026-01-07 19:08:32,761 - INFO - 127.0.0.1 - - [07/Jan/2026 19:08:32] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-07 19:08:44,902 - INFO - 127.0.0.1 - - [07/Jan/2026 19:08:44] "GET /Alunos HTTP/1.1" 200 -
+2026-01-07 19:08:44,925 - INFO - 127.0.0.1 - - [07/Jan/2026 19:08:44] "[36mGET /static/aluno.css HTTP/1.1[0m" 304 -
+2026-01-07 19:08:45,251 - INFO - 127.0.0.1 - - [07/Jan/2026 19:08:45] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-07 19:09:05,200 - INFO - 127.0.0.1 - - [07/Jan/2026 19:09:05] "GET /Alunos HTTP/1.1" 200 -
+2026-01-07 19:09:05,218 - INFO - 127.0.0.1 - - [07/Jan/2026 19:09:05] "[36mGET /static/aluno.css HTTP/1.1[0m" 304 -
+2026-01-07 19:09:05,252 - INFO - 127.0.0.1 - - [07/Jan/2026 19:09:05] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-07 19:09:14,569 - INFO - 127.0.0.1 - - [07/Jan/2026 19:09:14] "GET /Alunos HTTP/1.1" 200 -
+2026-01-07 19:09:14,588 - INFO - 127.0.0.1 - - [07/Jan/2026 19:09:14] "[36mGET /static/aluno.css HTTP/1.1[0m" 304 -
+2026-01-07 19:09:14,619 - INFO - 127.0.0.1 - - [07/Jan/2026 19:09:14] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-07 19:11:25,818 - INFO - 127.0.0.1 - - [07/Jan/2026 19:11:25] "GET /Alunos HTTP/1.1" 200 -
+2026-01-07 19:11:25,843 - INFO - 127.0.0.1 - - [07/Jan/2026 19:11:25] "[36mGET /static/aluno.css HTTP/1.1[0m" 304 -
+2026-01-07 19:11:26,361 - INFO - 127.0.0.1 - - [07/Jan/2026 19:11:26] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-07 19:12:18,372 - INFO - 127.0.0.1 - - [07/Jan/2026 19:12:18] "GET /Alunos HTTP/1.1" 200 -
+2026-01-07 19:12:18,397 - INFO - 127.0.0.1 - - [07/Jan/2026 19:12:18] "[36mGET /static/aluno.css HTTP/1.1[0m" 304 -
+2026-01-07 19:12:18,427 - INFO - 127.0.0.1 - - [07/Jan/2026 19:12:18] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-07 19:12:47,615 - INFO - 127.0.0.1 - - [07/Jan/2026 19:12:47] "GET /Alunos HTTP/1.1" 200 -
+2026-01-07 19:12:47,633 - INFO - 127.0.0.1 - - [07/Jan/2026 19:12:47] "[36mGET /static/aluno.css HTTP/1.1[0m" 304 -
+2026-01-07 19:12:47,662 - INFO - 127.0.0.1 - - [07/Jan/2026 19:12:47] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-07 19:13:07,533 - INFO - 127.0.0.1 - - [07/Jan/2026 19:13:07] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-01-07 19:13:07,550 - INFO - 127.0.0.1 - - [07/Jan/2026 19:13:07] "[36mGET /static/aluno.css HTTP/1.1[0m" 304 -
