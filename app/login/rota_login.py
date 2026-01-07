@@ -37,6 +37,12 @@ def processar_login(cargo):
             clock_skew_in_seconds=300
         )
 
+        emaile = idinfo['email']
+        checks = emaile.split('@')
+        if checks[1] == 'al.educacao.sp.gov.br':
+            cargo = 'Aluno'
+        elif checks[1] == 'prof.educacao.sp.gov.br':
+            cargo = 'Professor'
         user_data = {
             "id": idinfo["sub"],
             "email": idinfo["email"],

@@ -1,8 +1,9 @@
-from flask import Flask, session, redirect, url_for, Blueprint,render_template, request
+from flask import Flask, session, redirect, url_for, Blueprint,render_template, request, flash
 from authlib.integrations.flask_client import OAuth
-from app.database.db_usuario import get_role, pegar_no_nome, usuario_tem_pin, buscar_nome_aluno, novo_pin_secretaria,buscar_usuario,listar_alunose
+from app.database.db_usuario import get_role, pegar_no_nome, usuario_tem_pin, buscar_nome_aluno, novo_pin_secretaria,buscar_usuario,listar_alunose, mudar_turma, check_team
 from app.database.db_denuncia import get_report_status, open_report_db, get_report
 from app.database.db_denuncia import update_status, post_comment, check_coment,list_reports,list_approved
+from app.database.db_site import create_team, mostrar_teams, delete_team, check_teams
 
 app = Flask(__name__)
 secretaria = Blueprint('rotasecretaria', __name__)
@@ -283,6 +284,60 @@ def gestao():
         return redirect(url_for('rotas.inicio'))
 ######----------######
 
+@secretaria.route('/Turmas', methods=['GET', 'POST'])
+def turmas():
+    if "user_id" not in session:
+        return redirect(url_for('rotalogin.cadastro'))
+    if not usuario_tem_pin(session["user_id"]):
+        return redirect(url_for("rotas.cadastro2_pin"))
+    
+    cargo = get_role(session['user_id'])
+    if cargo in ('Secretaria', 'Professor'):
+        if request.method == 'POST':
+            ano = request.form.get('ano')
+            turma = request.form.get('turma').upper()
+            if check_teams(f'{ano}°{turma}') is None:
+                create_team(f'{ano}°{turma}')
+                return redirect(url_for('rotasecretaria.turmas'))
+            flash(f"Não é possivel criar turma {ano}°{turma}, Turma ja existente", "erro")
+            return redirect(url_for('rotasecretaria.turmas'))
+        
+        return render_template("turmas.html", turmas=mostrar_teams())
+    else:
+        return redirect(url_for('rotas.inicio'))
+    
+@secretaria.route('/RemoverTurma', methods=['POST'])
+def remove_team():
+    turma = request.form.get('nome_turma_input')
+    
+    if not turma:
+        return redirect(url_for('rotasecretaria.turmas'))
+    alunos_na_turma = check_team(turma)
+    
+    if alunos_na_turma:
+        flash(f"Não é possível remover a turma {turma}: {len(alunos_na_turma)} aluno(s) associado(s).", "erro")
+        return redirect(url_for('rotasecretaria.turmas'))
+    
+    delete_team(turma)
+    flash(f"Turma {turma} removida com sucesso!", "sucesso")
+    return redirect(url_for('rotasecretaria.turmas'))
+
+@secretaria.route('/AlterarTodasTurmas', methods=['POST'])
+def alterar_todas_turmas():
+    ids = request.form.getlist('aluno_ids')
+    anos = request.form.getlist('lista_anos')
+    turmas = request.form.getlist('lista_turmas')
+
+    if len(ids) == len(anos) == len(turmas):
+        for i in range(len(ids)):
+            aluno_id = ids[i]
+            novo_ano = anos[i]
+            nova_turma = turmas[i]
+            anoseturmas = f"{novo_ano}°{nova_turma}"
+            
+            mudar_turma(aluno_id, novo_ano, nova_turma, anoseturmas)
+    return redirect(url_for('rotasecretaria.listar_alunos'))
+
 @secretaria.route('/Alunos', methods=['GET'])
 def listar_alunos():
     if "user_id" not in session:
@@ -305,7 +360,7 @@ def listar_alunos():
 
     if request.method == 'POST':
         querer = request.form.get('Olavo', 'Tudo')
-        return redirect(url_for('rotas.inicio', filtro=querer))
+        return redirect(url_for('rotasecretaria.listar_alunos', filtro=querer))
     
     alunos = listar_alunose(ano=ano, serie=serie)
 
@@ -314,7 +369,6 @@ def listar_alunos():
 
 # Adiciona denúncias totais e aprovadas a cada aluno
         alunos_processados = []
-
         for a in alunos:
             nome = a[0]
             total = list_reports(nome)
@@ -339,7 +393,7 @@ def listar_alunos():
     filtro_ano=ano,
     filtro_serie=serie,
     page=page,
-    total_pages=total_pages
+    total_pages=total_pages,turmas=mostrar_teams()
     )
 
     else:
@@ -358,5 +412,5 @@ def listar_alunos():
         filtro_ano=ano,
         filtro_serie=serie,
         alunose = alunos,
-        page=page,total_pages=total_pages
+        page=page,total_pages=total_pages,turmas=mostrar_teams()
         )

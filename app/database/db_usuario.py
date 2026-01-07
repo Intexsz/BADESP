@@ -7,7 +7,7 @@ def init_db():
         cursor = conn.cursor()
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS usuarios (
-                id TEXT PRIMARY KEY,
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
                 nome TEXT,
                 email TEXT,
                 foto TEXT,
@@ -89,6 +89,13 @@ def pegar_no_nome(id):
         resultado = cursor.fetchone()
         return resultado[0] if resultado else None
 
+def check_team(turma):
+    with sqlite3.connect("usuarios.db") as conn:
+        cursor = conn.cursor()
+        cursor.execute("SELECT nome FROM usuarios WHERE turmano = ?", (turma,))
+        resultado = cursor.fetchall()
+        return resultado if resultado else None
+
 def buscar_email(nome):
     with sqlite3.connect('usuarios.db') as conn:
         cursor = conn.cursor()
@@ -143,6 +150,15 @@ def cadastrar_pin(id, pin, escola, ano, turma, turmano):
         """, (pin, escola, ano, turma, turmano, id))
         conn.commit()
 
+def mudar_turma(id, ano, turma, turmano):
+    with sqlite3.connect("usuarios.db") as conn:
+        cursor = conn.cursor()
+        cursor.execute("""
+            UPDATE usuarios
+            SET ano = ?, turma = ?, turmano = ?
+            WHERE id = ?
+        """, (ano, turma, turmano, id))
+        conn.commit()
 
 def check_pin(user_id):
     with sqlite3.connect("usuarios.db") as conn:
@@ -173,7 +189,7 @@ def novo_pin_secretaria(pin, nome):
             conn.commit()
 
 def listar_alunose(ano=None, serie=None):
-    query = "SELECT nome, turma, email, ano FROM usuarios WHERE cargo = 'Aluno'"
+    query = "SELECT nome, turma, email, ano, id FROM usuarios WHERE cargo = 'Aluno'"
     params = []
 
     # Aplica filtros dinamicamente

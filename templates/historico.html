@@ -29,6 +29,7 @@
       <li><a href="/Inicio"><span class="material-icons">home</span> Início</a></li>
       <li><a href="/Ajuda"><span class="material-icons">help_outline</span> Ajuda</a></li>
       <li><a href="/MudarPIN"><span class="material-icons">pin</span> Mudar o PIN</a></li>
+      <li><a href="/Turmas"><span class="material-icons">pin</span> Turmas</a></li>
 
       <li><a class="logout" onclick="confirmarLogout()"><span class="material-icons">logout</span>
           Deslogar</a></li>
@@ -108,7 +109,7 @@
             <td>{{ d[15] }}°{{ d[14] }}</td>
             <td>{{ d[1] }}</td>
             <td>{{ d[2] }}</td>
-            <td style="color: {{ corr }};">{{ d[13] }}</td>
+            <td style="color: {{ corr }};"><b>{{ d[13] }}</b></td>
             <td>{{ d[4] }}</td>
             {% set partes = nome.split(' ') %}
             {% if not tipo == 'Abertas' %}

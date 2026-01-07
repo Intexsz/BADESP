@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icone.png') }}">
+  <title>B.A.D.E.S.P - Turmas</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='turmas.css') }}">
+</head>
+
+<body>
+    <form action="/Turmas" method="POST">
+        <input placeholder="Digite o Ano" type="text" name="ano" required maxlength="1" minlength="1" pattern="\d{1}"
+            oninput="this.value = this.value.replace(/\D/g, '')"><br> <br>
+        <input type="text" name="turma" placeholder="Digite a Turma" id="turma" maxlength="5"> <br> <br>
+        <button type="submit">Confirmar</button>
+    </form>
+
+    <h2>Turmas Atuais:</h2>
+    {% if mensagem %}
+        <script>
+            alert("{{ mensagem }}");
+        </script>
+    {% endif %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for categoria, mensagem in messages %}
+        <p style="background:none; border:none; font-size: 20px; font-family: Arial, Helvetica, sans-serif; color: red;">{{ mensagem }}</p>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+    <table>
+
+        <thead>
+            <tr>
+                <th>Turmas:</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for turma in turmas %}
+            {% if turma %}
+            <td style="font-size: 20px; padding: 10px;">{{ turma }}</td>
+            <form action="/RemoverTurma" method="POST">
+                <input type="hidden" name="nome_turma_input" value="{{ turma }}">
+                <td><button type="submit" style="color: red; text-decoration: none;">❌Remover Turma</button></td>
+            </form>
+            {% else %}
+            <td>Nenhuma turma cadastrada.</td>
+            {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+
+      <script>
+    const btn = document.querySelector('.menu-btn');
+    const sidebar = document.querySelector('.sidebar');
+
+    btn.addEventListener('click', () => sidebar.classList.toggle('ativo'));
+
+    function confirmarLogout() {
+      if (confirm("Deseja realmente sair?")) {
+        window.location.href = "Logout"
+        alert("Logout realizado com sucesso!");
+      }
+    }
+
+    // ===== FECHAR MENU CLICANDO FORA + REDIRECIONAR P/ INÍCIO =====
+    document.addEventListener("click", (e) => {
+      const clicouFora = !sidebar.contains(e.target) && !btn.contains(e.target);
+
+      if (sidebar.classList.contains("ativo") && clicouFora) {
+        sidebar.classList.remove("ativo");
+      }
+    });
+  </script>
+</body>
+
+</html>

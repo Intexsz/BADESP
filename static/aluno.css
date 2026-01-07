@@ -143,7 +143,7 @@ main {
   
 .container {
   width: 90%;
-  max-width: 1300px;
+  max-width: 1400px;
   background: #2a2a2a;
   padding: 25px;
   border-radius: 12px;
@@ -162,7 +162,8 @@ main {
   
 h2 {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  font-size: 30px;
 }
   
 table {
@@ -189,6 +190,7 @@ tr:nth-child(even) {
 
 td{
   text-align: center;
+  font-size: 16px;
 }
 
 tr:hover {
@@ -208,7 +210,7 @@ form {
   flex-direction: column;
 }
 
-form select {
+.Filtro select {
   background-color: #ffffff10;           
   border: 1px solid #ffffff30;           
   color: #f5f5f5;
@@ -220,22 +222,22 @@ form select {
   transition: 0.2s ease;
 }
 
-form select:hover {
+.Filtro  select:hover {
   border-color: #58d0ff;
 }
 
-form select:focus {
+.Filtro select:focus {
   outline: none;
   border-color: #58d0ff;
   box-shadow: 0 0 8px #58d0ff50;
 }
 
-form select:disabled {
+.Filtro select:disabled {
   opacity: 0.4;
   cursor: not-allowed;
 }
 
-form select option{
+.Filtro select option{
 color: black;
 }
 

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +10,10 @@
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=account_circle" />
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=account_circle" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
   <header class="Cabecalho">
@@ -22,129 +24,215 @@
         <img src="{{ usuario[3] }}" alt="Logado como: {{ usuario[1] }}">
       </div>
     </header>
-  
+
     <nav class="sidebar glass sobreposto">
       <ul>
         <li><a href="/Inicio"><span class="material-icons">home</span> Início</a></li>
         <li><a href="/Ajuda"><span class="material-icons">help_outline</span> Ajuda</a></li>
         <li><a href="/MudarPIN"><span class="material-icons">pin</span> Mudar o PIN</a></li>
-  
-        <li><a href="/Logout" class="logout" onclick="confirmarLogout()"><span class="material-icons">logout</span> Deslogar</a></li>
+        <li><a href="/Turmas"><span class="material-icons">pin</span> Turmas</a></li>
+
+        <li><a href="/Logout" class="logout" onclick="confirmarLogout()"><span class="material-icons">logout</span>
+            Deslogar</a></li>
       </ul>
     </nav>
 
-  <main>
-  <form method="get" action="{{ url_for('rotasecretaria.listar_alunos') }}">
-
-    <select name="Ano" onchange="this.form.submit()">
-        <option value="Todos" {% if filtro_ano=='Todos' %}selected{% endif %}>Todos</option>
-        <option value="6" {% if filtro_ano=='6' %}selected{% endif %}>6EF</option>
-        <option value="7" {% if filtro_ano=='7' %}selected{% endif %}>7EF</option>
-        <option value="8" {% if filtro_ano=='8' %}selected{% endif %}>8EF</option>
-        <option value="9" {% if filtro_ano=='9' %}selected{% endif %}>9EF</option>
-        <option value="1" {% if filtro_ano=='1' %}selected{% endif %}>1EM</option>
-        <option value="2" {% if filtro_ano=='2' %}selected{% endif %}>2EM</option>
-        <option value="3" {% if filtro_ano=='3' %}selected{% endif %}>3EM</option>
-    </select>
-  
-    <select name="Serie" {% if filtro_ano=='Todos' %}disabled{% endif %} onchange="this.form.submit()">
-        <option value="Todos" {% if filtro_serie=='Todos' %}selected{% endif %}>Todos</option>
-        <option value="A" {% if filtro_serie=='A' %}selected{% endif %}>A</option>
-        <option value="B" {% if filtro_serie=='B' %}selected{% endif %}>B</option>
-        <option value="C" {% if filtro_serie=='C' %}selected{% endif %}>C</option>
-        <option value="D" {% if filtro_serie=='D' %}selected{% endif %}>D</option>
-        <option value="E" {% if filtro_serie=='E' %}selected{% endif %}>E</option>
-        <option value="F" {% if filtro_serie=='F' %}selected{% endif %}>F</option>
-        <option value="G" {% if filtro_serie=='G' %}selected{% endif %}>G</option>
-        <option value="H" {% if filtro_serie=='H' %}selected{% endif %}>H</option>
-        <option value="I" {% if filtro_serie=='I' %}selected{% endif %}>I</option>
-    </select>
-  </form>
-  
-  
-  <div class="content">  
-  <div class="container">
-    <h2>Alunos Cadastrados</h2>
-    <table id="tabelaAlunos">
-      <div class="pagination" style="align-items: center; text-align: center;">
-        {% set current_page = page %}
-        {% if current_page < 1 %}{% set current_page = 1 %}
-        {% elif current_page > total_pages %}{% set current_page = total_pages %}{% endif %}
-      
-        {% if current_page > 1 %}
-          <a class="clicar" href="{{ url_for('rotasecretaria.listar_alunos', page=current_page-1) }}">&laquo; Anterior</a>
-        {% endif %}
-      
-        <span style="color: white; " class="Páginaa">Página {{ current_page }} de {{ total_pages }}</span>
-      
-        {% if current_page < total_pages %}
-          <a class="clicar" href="{{ url_for('rotasecretaria.listar_alunos', page=current_page+1) }}">Próxima &raquo;</a>
-        {% endif %}
-      </div>
-      <br>
-      <thead>
-        
-        <tr>
-          <th>Nome</th>
-          <th>Email</th>
-          <th>Ano e Série</th>
-          <th>Total Denúncias</th>
-          <th>Denúncias Aprovadas</th>
-        </tr>
-      </thead>
-      
-      <tbody>
-        {% for d in alunos_por_turma %}
-
-        
-        {% if nome != "📂Denúncia em aberto📂" %}
-        <tr onclick="verificarPin({{ d[0] }})"
-          style="cursor:pointer; color: {{ cor }}; font-family: Arial, sans-serif;">
-
-          <td>
-            {{d[0].split(' ')[0]}}
-
-            {% if not d[0].split(' ')[-1] == d[0].split(' ')[-2] %}
-            {{d[0].split(' ')[-2]}}
+    <main>
+      <form method="get" action="{{ url_for('rotasecretaria.listar_alunos') }}" class="Filtro">
+        <select name="Ano" onchange="this.form.submit()">
+          <option value="Todos" {% if filtro_ano=='Todos' %}selected{% endif %}>Todos</option>
+          {% for turma in turmas %}
+          {% set ano = turma.split('°')[0] %}
+          <option value="{{ ano }}" {% if filtro_ano==ano %}selected{% endif %}>
+            {{ ano }}
+            {% if ano in ['4','5','6', '7', '8', '9'] %}
+            EF
+            {% elif ano in ['1', '2', '3'] %}
+            EM
             {% endif %}
+          </option>
+          {% endfor %}
+        </select>
 
-            {% if not d[0].split(' ')[0] == d[0].split(' ')[-1] %}
-            {{d[0].split(' ')[-1]}}
-            {% endif %}</td>
-            
-          <td>{{ d[2] }}</td>
-          <td>{{ d[3] }}°{{ d[1] }}</td>
-          <td>{{ d[4] }}</td>
-          <td>{{ d[5] }}</td>
-        </tr>
-        {% endif %}
-        {% endfor %}
-    </tbody>
-    </table>
-   </div>
-  </div>
-</main>
+        <select name="Serie" {% if filtro_ano=='Todos' %}disabled{% endif %} onchange="this.form.submit()"
+          class="Filtro">
+          <option value="Todos" {% if filtro_serie=='Todos' %}selected{% endif %}>Todos</option>
 
-<script>
-  const btn = document.querySelector('.menu-btn');
-  const sidebar = document.querySelector('.sidebar');
+          {% set series_exibidas = [] %}
 
-  btn.addEventListener('click', () => sidebar.classList.toggle('ativo'));
+          {% for turma in turmas %}
+          {% set serie = turma.split('°')[1] %}
 
-  function confirmarLogout() {
-    if (confirm("Deseja realmente sair?")) {
-      alert("Logout realizado com sucesso!");
-    }
-  }
+          {# 2. Só cria a <option> se a letra ainda não estiver na lista #}
+            {% if serie not in series_exibidas %}
+          <option value="{{ serie }}" {% if filtro_serie==serie %}selected{% endif %}>{{ serie }}</option>
 
-  // ===== FECHAR MENU CLICANDO FORA + REDIRECIONAR P/ INÍCIO =====
-  document.addEventListener("click", (e) => {
-    const clicouFora = !sidebar.contains(e.target) && !btn.contains(e.target);
+          {# 3. Adicionamos a letra na lista para não repetir no próximo giro do loop #}
+          {% set _ = series_exibidas.append(serie) %}
+          {% endif %}
+          {% endfor %}
+        </select>
+      </form>
 
-    if (sidebar.classList.contains("ativo") && clicouFora) {
-      sidebar.classList.remove("ativo");
-    }
-  });
-</script>
+      <div class="content">
+        <div class="container">
+          <h2>Alunos Cadastrados</h2>
+
+          <form action="{{ url_for('rotasecretaria.alterar_todas_turmas') }}" method="POST">
+
+            <div style="display: flex; justify-content: flex-end; margin-bottom: 10px;">
+              <button onclick="alert('Alterações feitas com sucesso!')" type="submit" class="clicar"
+                style="background-color: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                <span class="material-icons" style="vertical-align: middle; font-size: 18px;">save</span> Salvar Todas
+                as Alterações
+              </button>
+            </div>
+
+            <table id="tabelaAlunos">
+              <div class="pagination" style="align-items: center; text-align: center;">
+                {% set current_page = page %}
+                {% if current_page < 1 %}{% set current_page=1 %} {% elif current_page> total_pages %}{% set
+                  current_page = total_pages %}{% endif %}
+
+                  {% if current_page > 1 %}
+                  <a class="clicar" href="{{ url_for('rotasecretaria.listar_alunos', page=current_page-1) }}">&laquo;
+                    Anterior</a>
+                  {% endif %}
+
+                  <span style="color: white; " class="Páginaa">Página {{ current_page }} de {{ total_pages }}</span>
+
+                  {% if current_page < total_pages %} <a class="clicar"
+                    href="{{ url_for('rotasecretaria.listar_alunos', page=current_page+1) }}">Próxima &raquo;</a>
+                    {% endif %}
+              </div>
+
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>Email</th>
+                  <th>Ano e Série</th>
+                  <th>Total Denúncias</th>
+                  <th>Denúncias Aprovadas</th>
+                  <th>Alterar Ano</th>
+                  <th>Alterar Turma</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {% for d in alunos_por_turma %}
+                {% if nome != "📂Denúncia em aberto📂" %}
+                <tr onclick="verificarPin({{ d[0] }})"
+                  style="cursor:pointer; color: {{ cor }}; font-family: Arial, sans-serif;">
+                  <td>
+                    {{d[0].split(' ')[0]}}
+                    {% if not d[0].split(' ')[-1] == d[0].split(' ')[-2] %} {{d[0].split(' ')[-2]}} {% endif %}
+                    {% if not d[0].split(' ')[0] == d[0].split(' ')[-1] %} {{d[0].split(' ')[-1]}} {% endif %}
+                  </td>
+                  <td>{{ d[2] }}</td>
+                  <td>{{ d[3] }}°{{ d[1] }}</td>
+                  <td>{{ d[5] }}</td>
+                  <td>{{ d[6] }}</td>
+
+                  <input type="hidden" name="aluno_ids" value="{{ d[4] }}">
+
+
+                  <td>
+                    <select name="lista_anos" class="select-ano" onchange="atualizarSeries(this)">
+                      <option value="{{ d[3] }}">{{ d[3] }} (Atual)</option>
+                      {% set anos_exibidos = [] %}
+                      {% for turma in turmas %}
+                      {% set ano_loop = turma.split('°')[0] %}
+                      {% if ano_loop not in anos_exibidos %}
+                      <option value="{{ ano_loop }}">{{ ano_loop }}</option>
+                      {% set _ = anos_exibidos.append(ano_loop) %}
+                      {% endif %}
+                      {% endfor %}
+                    </select>
+                  </td>
+
+                  <td>
+                    <select name="lista_turmas" class="select-serie">
+                      <option value="{{ d[1] }}">{{ d[1] }} (Atual)</option>
+                      {% for turma in turmas %}
+                      {% set ano_t = turma.split('°')[0] %}
+                      {% set serie_t = turma.split('°')[1] %}
+
+                      {# Criamos TODOS os options, mas colocamos o ANO numa classe secreta #}
+                      <option value="{{ serie_t }}" data-ano="{{ ano_t }}" style="display: none;">
+                        {{ serie_t }}
+                      </option>
+                      {% endfor %}
+                    </select>
+                  </td>
+
+                  <td><a onclick="alert('Usuario {{ d[0] }} Apagado')" href="/Alunos"
+                      style="color: red; text-decoration: none;">❌Remover Aluno</a></td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+              </tbody>
+            </table>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      const btn = document.querySelector('.menu-btn');
+      const sidebar = document.querySelector('.sidebar');
+
+      btn.addEventListener('click', () => sidebar.classList.toggle('ativo'));
+
+      function confirmarLogout() {
+        if (confirm("Deseja realmente sair?")) {
+          alert("Logout realizado com sucesso!");
+        }
+      }
+
+      // ===== FECHAR MENU CLICANDO FORA + REDIRECIONAR P/ INÍCIO =====
+      document.addEventListener("click", (e) => {
+        const clicouFora = !sidebar.contains(e.target) && !btn.contains(e.target);
+
+        if (sidebar.classList.contains("ativo") && clicouFora) {
+          sidebar.classList.remove("ativo");
+        }
+      });
+    </script>
+
+    <script>
+      function atualizarSeries(selectAno) {
+        // 1. Achar a linha (tr) onde o clique aconteceu
+        const linha = selectAno.closest('tr');
+
+        // 2. Achar o select de série desta mesma linha
+        const selectSerie = linha.querySelector('.select-serie');
+        const anoSelecionado = selectAno.value;
+
+        // 3. Pegar todas as opções de série
+        const options = selectSerie.querySelectorAll('option');
+
+        let encontrou = false;
+
+        options.forEach(opt => {
+          // O "Atual" a gente sempre deixa ou remove se quiser resetar
+          if (opt.textContent.includes("(Atual)")) {
+            opt.style.display = "block";
+            return;
+          }
+
+          // Se o dado do ano bater com o selecionado, mostra
+          if (opt.getAttribute('data-ano') === anoSelecionado) {
+            opt.style.display = "block";
+            encontrou = true;
+          } else {
+            opt.style.display = "none";
+          }
+        });
+
+        // Resetar o valor do select de série para a primeira opção visível
+        selectSerie.value = selectSerie.querySelector('option[style*="display: block"]').value;
+      }
+    </script>
 </body>
+
 </html>

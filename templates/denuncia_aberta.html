@@ -47,6 +47,7 @@
       </style>
 
       <li><a href="/MudarPIN"><span class="material-icons">pin</span> Mudar o PIN</a></li>
+      <li><a href="/Turmas"><span class="material-icons">pin</span> Turmas</a></li>
       {% endif %}
 
       <li><a href="/Logout" class="logout" onclick="confirmarLogout()"><span class="material-icons">logout</span>
@@ -184,6 +185,7 @@
       <form class="apagar-form" action="{{ url_for('rotas.excluir_denuncia', id=usuario['id']) }}" method="POST">
         <button type="submit" class="buttozito">Apagar</button>
       </form>
+      <br>
       {% endif %}
 
       {% if usuario['status'] == 'Expirada.' %}

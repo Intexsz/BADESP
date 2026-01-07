@@ -49,6 +49,7 @@
                 }
             </style>
             <li><a href="/MudarPIN"><span class="material-icons">pin</span> Mudar o PIN</a></li>
+            <li><a href="/Turmas"><span class="material-icons">pin</span> Turmas</a></li>
             {% endif %}
 
             <li><a href="/Logout" class="logout" onclick="confirmarLogout()"><span class="material-icons">logout</span>
@@ -65,7 +66,7 @@
         <button class="menu-btn"><span class="material-icons">menu</span></button>
         <h1 class="titulo">B.A.D.E.S.P</h1>
         <div class="perfil">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5wt2-sE3VgB3SwwpeW9QWKNvvN3JqOFlUSQ&s" >
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5wt2-sE3VgB3SwwpeW9QWKNvvN3JqOFlUSQ&s">
         </div>
     </header>
 
@@ -93,7 +94,8 @@
             </div>
             <div class="faq">
                 <h3>Posso apagar uma denúncia?</h3>
-                <p>Sim, você poderá apagar a denúncia, porém, antes dela ser aberta pelos professores ou pela secretária, após isso a denúncia NÃO PODERÁ MAIS SER APAGADA.</p>
+                <p>Sim, você poderá apagar a denúncia, porém, antes dela ser aberta pelos professores ou pela
+                    secretária, após isso a denúncia NÃO PODERÁ MAIS SER APAGADA.</p>
             </div>
             <div class="faq">
                 <h3>Posso logar com qualquer E-mail?</h3>
@@ -113,15 +115,17 @@
             </div>
             <div class="faq">
                 <h3>Minhas denúncias são anônimas?</h3>
-                <p>Sim e Não, ela é anônima entre os alunos porém a secretaria e os professores tem acesso total ao que foi enviado.</p>
+                <p>Sim e Não, ela é anônima entre os alunos porém a secretaria e os professores tem acesso total ao que
+                    foi enviado.</p>
             </div>
             <div class="faq">
                 <h3>Esqueci meu PIN o que devo fazer?</h3>
-                <p>Você deverá recorrer diretamente com a secretaria ou algum professor para fazer a alteração de seu PIN.</p>
+                <p>Você deverá recorrer diretamente com a secretaria ou algum professor para fazer a alteração de seu
+                    PIN.</p>
             </div>
         </div>
     </main>
-    
+
     {% endif %}
 
     {% if cargo == 'Secretaria' or cargo == 'Professor' %}
@@ -129,19 +133,31 @@
         <div class="painel">
             <div class="faq">
                 <h3>Como posso fazer a alteração do PIN de um aluno?</h3>
-                <p>Você deve ir até a opção no menu com o nome "MudarPIN", lá você escolhe o ano e a sére do aluno e após isso você altera para o PIN desejado.</p>
+                <p>Você deve ir até a opção no menu com o nome "MudarPIN", lá você escolhe o ano e a sére do aluno e
+                    após isso você altera para o PIN desejado.</p>
             </div>
             <div class="faq">
                 <h3>Como posso Aprovar/Recusar/Arquivar alguma denúncia?</h3>
-                <p>Você deve escolher e abrir a Denúncia do aluno desejado e la você pode escolher entre: Aprovar, Recusar ou Arquivar a Denúncia.</p>
+                <p>Você deve escolher e abrir a Denúncia do aluno desejado e la você pode escolher entre: Aprovar,
+                    Recusar ou Arquivar a Denúncia.</p>
             </div>
             <div class="faq">
                 <h3>Há algum tempo limite para as denúncias?</h3>
-                <p>Sim, após aberto qualquer denúncia, haverá um prazo de até 7 dias para haver alguma resposta, senão ela entrará automaticamente para o status: "Expirado"</p>
+                <p>Sim, após aberto qualquer denúncia, haverá um prazo de até 7 dias para haver alguma resposta, senão
+                    ela entrará automaticamente para o status: "Expirado"</p>
             </div>
             <div class="faq">
                 <h3>Posso fazer algum comentário falando com o Aluno sobre o ocorrido?</h3>
-                <p>Sim, logo embaixo das opções de denúncias, você tem a opção de deixar um comentario opcional para o aluno.</p>
+                <p>Sim, logo embaixo das opções de denúncias, você tem a opção de deixar um comentario opcional para o
+                    aluno.</p>
+            </div>
+            <div class="faq">
+                <h3>Como posso Criar/Deletar alguma Série?</h3>
+                <p>Você deve ir até a opção no menu com o nome "Turmas", lá você escreve a Série desejada e salva ou deletar clicando na opção de deletar.</p>
+            </div>
+                <div class="faq">
+                <h3>Como posso Alterar o ano ou a série de algum aluno?</h3>
+                <p>Você deve ir até a opção no inicio "Alunos Cadastrados" ao lado perto de "Remover Aluno" tem as caixas de texto com as séries existentes.</p>
             </div>
             <div class="faq">
                 <h3>Esqueci meu PIN o que posso fazer?</h3>
@@ -152,20 +168,22 @@
     {% endif %}
     {% else %}
     <main id="ajuda">
-    <div class="painel">
-        <div class="faq">
-            <h3>Como posso fazer Login?</h3>
-            <p>Você deve usar o E-mail Institucional do Gmail vinculado a seu RA, sendo nesse formato: 0000RAUF@al.educacao.sp.gov.br</p>
+        <div class="painel">
+            <div class="faq">
+                <h3>Como posso fazer Login?</h3>
+                <p>Você deve usar o E-mail Institucional do Gmail vinculado a seu RA, sendo nesse formato:
+                    0000RAUF@al.educacao.sp.gov.br</p>
+            </div>
+            <div class="faq">
+                <h3>Eu não sei a minha senha do Gmail Institucional/Esqueci a senha</h3>
+                <p>Você deverá redefinir a sua senha do google diretamente com a secretaria ou com algum professor na
+                    sed.</p>
+            </div>
+            <div class="faq">
+                <h3>É Obrigatório usar o E-mail Institucional?</h3>
+                <p>Sim, o E-mail Institucional é obrigatório para evitar denuncias onde não se sabe quem é o dono.</p>
+            </div>
         </div>
-        <div class="faq">
-            <h3>Eu não sei a minha senha do Gmail Institucional/Esqueci a senha</h3>
-            <p>Você deverá redefinir a sua senha do google diretamente com a secretaria ou com algum professor na sed.</p>
-        </div>
-        <div class="faq">
-            <h3>É Obrigatório usar o E-mail Institucional?</h3>
-            <p>Sim, o E-mail Institucional é obrigatório para evitar denuncias onde não se sabe quem é o dono.</p>
-        </div>
-    </div>
     </main>
     {% endif %}
 
