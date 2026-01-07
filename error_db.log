@@ -1357,7 +1357,7 @@
 2025-12-04 20:15:04,927 - INFO -  * Restarting with stat
 2025-12-04 20:15:05,990 - WARNING -  * Debugger is active!
 2025-12-04 20:15:05,992 - INFO -  * Debugger PIN: 674-560-654
-2025-12-04 20:15:13,401 - INFO - 127.0.0.1 - - [04/Dec/2025 20:15:13] "[33mGET /detalhe/³ HTTP/1.1[0m" 404 -
+2025-12-04 20:15:13,401 - INFO - 127.0.0.1 - - [04/Dec/2025 20:15:13] "[33mGET /detalhe/ï¿½ HTTP/1.1[0m" 404 -
 2025-12-04 20:16:22,488 - INFO - 127.0.0.1 - - [04/Dec/2025 20:16:22] "GET /detalhe/3 HTTP/1.1" 200 -
 2025-12-04 20:16:22,519 - INFO - 127.0.0.1 - - [04/Dec/2025 20:16:22] "[33mGET /static/js/inicio.js HTTP/1.1[0m" 404 -
 2025-12-04 20:16:22,580 - INFO - 127.0.0.1 - - [04/Dec/2025 20:16:22] "[36mGET /static/denuncia_aberta.css HTTP/1.1[0m" 304 -
@@ -3249,11 +3249,11 @@
 2026-01-06 20:12:00,069 - WARNING -  * Debugger is active!
 2026-01-06 20:12:00,080 - INFO -  * Debugger PIN: 369-653-580
 2026-01-06 20:12:57,393 - INFO - 127.0.0.1 - - [06/Jan/2026 20:12:57] "GET /Turmas HTTP/1.1" 200 -
-2026-01-06 20:12:58,532 - INFO - 127.0.0.1 - - [06/Jan/2026 20:12:58] "[35m[1mPOST /RemoverTurma/1°A HTTP/1.1[0m" 500 -
-2026-01-06 20:12:58,647 - INFO - 127.0.0.1 - - [06/Jan/2026 20:12:58] "GET /RemoverTurma/1°A?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
-2026-01-06 20:12:58,650 - INFO - 127.0.0.1 - - [06/Jan/2026 20:12:58] "GET /RemoverTurma/1°A?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
-2026-01-06 20:12:58,888 - INFO - 127.0.0.1 - - [06/Jan/2026 20:12:58] "GET /RemoverTurma/1°A?__debugger__=yes&cmd=resource&f=console.png&s=aimGoTo9ORed78azCT7s HTTP/1.1" 200 -
-2026-01-06 20:12:58,908 - INFO - 127.0.0.1 - - [06/Jan/2026 20:12:58] "GET /RemoverTurma/1°A?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2026-01-06 20:12:58,532 - INFO - 127.0.0.1 - - [06/Jan/2026 20:12:58] "[35m[1mPOST /RemoverTurma/1ï¿½A HTTP/1.1[0m" 500 -
+2026-01-06 20:12:58,647 - INFO - 127.0.0.1 - - [06/Jan/2026 20:12:58] "GET /RemoverTurma/1ï¿½A?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2026-01-06 20:12:58,650 - INFO - 127.0.0.1 - - [06/Jan/2026 20:12:58] "GET /RemoverTurma/1ï¿½A?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2026-01-06 20:12:58,888 - INFO - 127.0.0.1 - - [06/Jan/2026 20:12:58] "GET /RemoverTurma/1ï¿½A?__debugger__=yes&cmd=resource&f=console.png&s=aimGoTo9ORed78azCT7s HTTP/1.1" 200 -
+2026-01-06 20:12:58,908 - INFO - 127.0.0.1 - - [06/Jan/2026 20:12:58] "GET /RemoverTurma/1ï¿½A?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
 2026-01-06 20:13:23,992 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
 2026-01-06 20:13:24,190 - INFO -  * Restarting with stat
 2026-01-06 20:13:27,924 - WARNING -  * Debugger is active!
@@ -3267,22 +3267,22 @@
 2026-01-06 20:14:30,053 - WARNING -  * Debugger is active!
 2026-01-06 20:14:30,064 - INFO -  * Debugger PIN: 369-653-580
 2026-01-06 20:14:30,093 - INFO - 127.0.0.1 - - [06/Jan/2026 20:14:30] "GET /Turmas HTTP/1.1" 200 -
-2026-01-06 20:14:33,616 - INFO - 127.0.0.1 - - [06/Jan/2026 20:14:33] "[32mPOST /RemoverTurma/1°A HTTP/1.1[0m" 302 -
+2026-01-06 20:14:33,616 - INFO - 127.0.0.1 - - [06/Jan/2026 20:14:33] "[32mPOST /RemoverTurma/1ï¿½A HTTP/1.1[0m" 302 -
 2026-01-06 20:14:33,634 - INFO - 127.0.0.1 - - [06/Jan/2026 20:14:33] "GET /Turmas HTTP/1.1" 200 -
-2026-01-06 20:14:34,965 - INFO - 127.0.0.1 - - [06/Jan/2026 20:14:34] "[32mPOST /RemoverTurma/3°A HTTP/1.1[0m" 302 -
+2026-01-06 20:14:34,965 - INFO - 127.0.0.1 - - [06/Jan/2026 20:14:34] "[32mPOST /RemoverTurma/3ï¿½A HTTP/1.1[0m" 302 -
 2026-01-06 20:14:34,975 - INFO - 127.0.0.1 - - [06/Jan/2026 20:14:34] "GET /Turmas HTTP/1.1" 200 -
-2026-01-06 20:14:35,670 - INFO - 127.0.0.1 - - [06/Jan/2026 20:14:35] "[32mPOST /RemoverTurma/2°A HTTP/1.1[0m" 302 -
+2026-01-06 20:14:35,670 - INFO - 127.0.0.1 - - [06/Jan/2026 20:14:35] "[32mPOST /RemoverTurma/2ï¿½A HTTP/1.1[0m" 302 -
 2026-01-06 20:14:35,681 - INFO - 127.0.0.1 - - [06/Jan/2026 20:14:35] "GET /Turmas HTTP/1.1" 200 -
-2026-01-06 20:14:36,029 - INFO - 127.0.0.1 - - [06/Jan/2026 20:14:36] "[32mPOST /RemoverTurma/3°DS HTTP/1.1[0m" 302 -
+2026-01-06 20:14:36,029 - INFO - 127.0.0.1 - - [06/Jan/2026 20:14:36] "[32mPOST /RemoverTurma/3ï¿½DS HTTP/1.1[0m" 302 -
 2026-01-06 20:14:36,039 - INFO - 127.0.0.1 - - [06/Jan/2026 20:14:36] "GET /Turmas HTTP/1.1" 200 -
-2026-01-06 20:14:36,456 - INFO - 127.0.0.1 - - [06/Jan/2026 20:14:36] "[32mPOST /RemoverTurma/6°C HTTP/1.1[0m" 302 -
+2026-01-06 20:14:36,456 - INFO - 127.0.0.1 - - [06/Jan/2026 20:14:36] "[32mPOST /RemoverTurma/6ï¿½C HTTP/1.1[0m" 302 -
 2026-01-06 20:14:36,466 - INFO - 127.0.0.1 - - [06/Jan/2026 20:14:36] "GET /Turmas HTTP/1.1" 200 -
 2026-01-06 20:15:29,764 - INFO - 127.0.0.1 - - [06/Jan/2026 20:15:29] "GET /Turmas HTTP/1.1" 200 -
 2026-01-06 20:15:30,729 - INFO - 127.0.0.1 - - [06/Jan/2026 20:15:30] "GET /Turmas HTTP/1.1" 200 -
 2026-01-06 20:15:43,482 - INFO - 127.0.0.1 - - [06/Jan/2026 20:15:43] "GET /Turmas HTTP/1.1" 200 -
 2026-01-06 20:15:56,097 - INFO - 127.0.0.1 - - [06/Jan/2026 20:15:56] "[32mPOST /Turmas HTTP/1.1[0m" 302 -
 2026-01-06 20:15:56,112 - INFO - 127.0.0.1 - - [06/Jan/2026 20:15:56] "GET /Turmas HTTP/1.1" 200 -
-2026-01-06 20:16:08,124 - INFO - 127.0.0.1 - - [06/Jan/2026 20:16:08] "[32mPOST /RemoverTurma/3°A HTTP/1.1[0m" 302 -
+2026-01-06 20:16:08,124 - INFO - 127.0.0.1 - - [06/Jan/2026 20:16:08] "[32mPOST /RemoverTurma/3ï¿½A HTTP/1.1[0m" 302 -
 2026-01-06 20:16:08,142 - INFO - 127.0.0.1 - - [06/Jan/2026 20:16:08] "GET /Turmas HTTP/1.1" 200 -
 2026-01-06 20:16:12,018 - INFO - 127.0.0.1 - - [06/Jan/2026 20:16:12] "[32mPOST /Turmas HTTP/1.1[0m" 302 -
 2026-01-06 20:16:12,029 - INFO - 127.0.0.1 - - [06/Jan/2026 20:16:12] "GET /Turmas HTTP/1.1" 200 -
@@ -3290,19 +3290,19 @@
 2026-01-06 20:16:13,824 - INFO - 127.0.0.1 - - [06/Jan/2026 20:16:13] "GET /Turmas HTTP/1.1" 200 -
 2026-01-06 20:16:15,503 - INFO - 127.0.0.1 - - [06/Jan/2026 20:16:15] "[32mPOST /Turmas HTTP/1.1[0m" 302 -
 2026-01-06 20:16:15,514 - INFO - 127.0.0.1 - - [06/Jan/2026 20:16:15] "GET /Turmas HTTP/1.1" 200 -
-2026-01-06 20:21:13,374 - INFO - 127.0.0.1 - - [06/Jan/2026 20:21:13] "[32mPOST /RemoverTurma/1°A HTTP/1.1[0m" 302 -
+2026-01-06 20:21:13,374 - INFO - 127.0.0.1 - - [06/Jan/2026 20:21:13] "[32mPOST /RemoverTurma/1ï¿½A HTTP/1.1[0m" 302 -
 2026-01-06 20:21:13,386 - INFO - 127.0.0.1 - - [06/Jan/2026 20:21:13] "GET /Turmas HTTP/1.1" 200 -
-2026-01-06 20:21:14,396 - INFO - 127.0.0.1 - - [06/Jan/2026 20:21:14] "[32mPOST /RemoverTurma/3°A HTTP/1.1[0m" 302 -
+2026-01-06 20:21:14,396 - INFO - 127.0.0.1 - - [06/Jan/2026 20:21:14] "[32mPOST /RemoverTurma/3ï¿½A HTTP/1.1[0m" 302 -
 2026-01-06 20:21:14,405 - INFO - 127.0.0.1 - - [06/Jan/2026 20:21:14] "GET /Turmas HTTP/1.1" 200 -
-2026-01-06 20:21:14,844 - INFO - 127.0.0.1 - - [06/Jan/2026 20:21:14] "[32mPOST /RemoverTurma/2°A HTTP/1.1[0m" 302 -
+2026-01-06 20:21:14,844 - INFO - 127.0.0.1 - - [06/Jan/2026 20:21:14] "[32mPOST /RemoverTurma/2ï¿½A HTTP/1.1[0m" 302 -
 2026-01-06 20:21:14,853 - INFO - 127.0.0.1 - - [06/Jan/2026 20:21:14] "GET /Turmas HTTP/1.1" 200 -
 2026-01-06 21:11:04,978 - INFO - 127.0.0.1 - - [06/Jan/2026 21:11:04] "[32mPOST /Turmas HTTP/1.1[0m" 302 -
 2026-01-06 21:11:04,988 - INFO - 127.0.0.1 - - [06/Jan/2026 21:11:04] "GET /Turmas HTTP/1.1" 200 -
-2026-01-06 21:11:10,776 - INFO - 127.0.0.1 - - [06/Jan/2026 21:11:10] "[32mPOST /RemoverTurma/6°QA HTTP/1.1[0m" 302 -
+2026-01-06 21:11:10,776 - INFO - 127.0.0.1 - - [06/Jan/2026 21:11:10] "[32mPOST /RemoverTurma/6ï¿½QA HTTP/1.1[0m" 302 -
 2026-01-06 21:11:10,787 - INFO - 127.0.0.1 - - [06/Jan/2026 21:11:10] "GET /Turmas HTTP/1.1" 200 -
 2026-01-06 21:11:40,953 - INFO - 127.0.0.1 - - [06/Jan/2026 21:11:40] "[32mPOST /Turmas HTTP/1.1[0m" 302 -
 2026-01-06 21:11:40,964 - INFO - 127.0.0.1 - - [06/Jan/2026 21:11:40] "GET /Turmas HTTP/1.1" 200 -
-2026-01-06 21:11:43,827 - INFO - 127.0.0.1 - - [06/Jan/2026 21:11:43] "[32mPOST /RemoverTurma/5°A HTTP/1.1[0m" 302 -
+2026-01-06 21:11:43,827 - INFO - 127.0.0.1 - - [06/Jan/2026 21:11:43] "[32mPOST /RemoverTurma/5ï¿½A HTTP/1.1[0m" 302 -
 2026-01-06 21:11:43,836 - INFO - 127.0.0.1 - - [06/Jan/2026 21:11:43] "GET /Turmas HTTP/1.1" 200 -
 2026-01-06 21:19:18,956 - INFO - 127.0.0.1 - - [06/Jan/2026 21:19:18] "GET /Inicio?filtro= HTTP/1.1" 200 -
 2026-01-06 21:19:19,044 - INFO - 127.0.0.1 - - [06/Jan/2026 21:19:19] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
@@ -3339,11 +3339,11 @@
 2026-01-06 21:52:33,427 - INFO -  * Restarting with stat
 2026-01-06 21:52:37,580 - WARNING -  * Debugger is active!
 2026-01-06 21:52:37,591 - INFO -  * Debugger PIN: 369-653-580
-2026-01-06 21:52:42,030 - INFO - 127.0.0.1 - - [06/Jan/2026 21:52:42] "[32mPOST /RemoverTurma/3°A HTTP/1.1[0m" 302 -
+2026-01-06 21:52:42,030 - INFO - 127.0.0.1 - - [06/Jan/2026 21:52:42] "[32mPOST /RemoverTurma/3ï¿½A HTTP/1.1[0m" 302 -
 2026-01-06 21:52:42,057 - INFO - 127.0.0.1 - - [06/Jan/2026 21:52:42] "GET /Turmas HTTP/1.1" 200 -
 2026-01-06 21:52:48,228 - INFO - 127.0.0.1 - - [06/Jan/2026 21:52:48] "[32mPOST /Turmas HTTP/1.1[0m" 302 -
 2026-01-06 21:52:48,240 - INFO - 127.0.0.1 - - [06/Jan/2026 21:52:48] "GET /Turmas HTTP/1.1" 200 -
-2026-01-06 21:52:49,203 - INFO - 127.0.0.1 - - [06/Jan/2026 21:52:49] "[32mPOST /RemoverTurma/3°D HTTP/1.1[0m" 302 -
+2026-01-06 21:52:49,203 - INFO - 127.0.0.1 - - [06/Jan/2026 21:52:49] "[32mPOST /RemoverTurma/3ï¿½D HTTP/1.1[0m" 302 -
 2026-01-06 21:52:49,216 - INFO - 127.0.0.1 - - [06/Jan/2026 21:52:49] "GET /Turmas HTTP/1.1" 200 -
 2026-01-06 21:53:02,930 - INFO - 127.0.0.1 - - [06/Jan/2026 21:53:02] "[32mPOST /Turmas HTTP/1.1[0m" 302 -
 2026-01-06 21:53:02,943 - INFO - 127.0.0.1 - - [06/Jan/2026 21:53:02] "GET /Turmas HTTP/1.1" 200 -
@@ -3355,7 +3355,7 @@
 2026-01-06 21:53:28,766 - INFO -  * Restarting with stat
 2026-01-06 21:53:32,310 - WARNING -  * Debugger is active!
 2026-01-06 21:53:32,320 - INFO -  * Debugger PIN: 369-653-580
-2026-01-06 21:53:32,359 - INFO - 127.0.0.1 - - [06/Jan/2026 21:53:32] "[32mPOST /RemoverTurma/3°D HTTP/1.1[0m" 302 -
+2026-01-06 21:53:32,359 - INFO - 127.0.0.1 - - [06/Jan/2026 21:53:32] "[32mPOST /RemoverTurma/3ï¿½D HTTP/1.1[0m" 302 -
 2026-01-06 21:53:32,377 - INFO - 127.0.0.1 - - [06/Jan/2026 21:53:32] "GET /Turmas HTTP/1.1" 200 -
 2026-01-06 21:54:01,622 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\database\\db_usuario.py', reloading
 2026-01-06 21:54:01,807 - INFO -  * Restarting with stat
@@ -3363,7 +3363,7 @@
 2026-01-06 21:54:05,352 - INFO -  * Debugger PIN: 369-653-580
 2026-01-06 21:54:08,712 - INFO - 127.0.0.1 - - [06/Jan/2026 21:54:08] "[32mPOST /Turmas HTTP/1.1[0m" 302 -
 2026-01-06 21:54:08,732 - INFO - 127.0.0.1 - - [06/Jan/2026 21:54:08] "GET /Turmas HTTP/1.1" 200 -
-2026-01-06 21:54:09,345 - INFO - 127.0.0.1 - - [06/Jan/2026 21:54:09] "[32mPOST /RemoverTurma/3°D HTTP/1.1[0m" 302 -
+2026-01-06 21:54:09,345 - INFO - 127.0.0.1 - - [06/Jan/2026 21:54:09] "[32mPOST /RemoverTurma/3ï¿½D HTTP/1.1[0m" 302 -
 2026-01-06 21:54:09,357 - INFO - 127.0.0.1 - - [06/Jan/2026 21:54:09] "GET /Turmas HTTP/1.1" 200 -
 2026-01-06 21:57:09,133 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\database\\db_usuario.py', reloading
 2026-01-06 21:57:09,346 - INFO -  * Restarting with stat
@@ -3371,11 +3371,11 @@
 2026-01-06 21:57:12,807 - INFO -  * Debugger PIN: 369-653-580
 2026-01-06 21:57:12,869 - INFO - 127.0.0.1 - - [06/Jan/2026 21:57:12] "[32mPOST /Turmas HTTP/1.1[0m" 302 -
 2026-01-06 21:57:12,884 - INFO - 127.0.0.1 - - [06/Jan/2026 21:57:12] "GET /Turmas HTTP/1.1" 200 -
-2026-01-06 21:57:14,040 - INFO - 127.0.0.1 - - [06/Jan/2026 21:57:14] "[32mPOST /RemoverTurma/3°D HTTP/1.1[0m" 302 -
+2026-01-06 21:57:14,040 - INFO - 127.0.0.1 - - [06/Jan/2026 21:57:14] "[32mPOST /RemoverTurma/3ï¿½D HTTP/1.1[0m" 302 -
 2026-01-06 21:57:14,049 - INFO - 127.0.0.1 - - [06/Jan/2026 21:57:14] "GET /Turmas HTTP/1.1" 200 -
 2026-01-06 21:57:32,941 - INFO - 127.0.0.1 - - [06/Jan/2026 21:57:32] "[32mPOST /Turmas HTTP/1.1[0m" 302 -
 2026-01-06 21:57:32,950 - INFO - 127.0.0.1 - - [06/Jan/2026 21:57:32] "GET /Turmas HTTP/1.1" 200 -
-2026-01-06 21:57:38,987 - INFO - 127.0.0.1 - - [06/Jan/2026 21:57:38] "[32mPOST /RemoverTurma/3°A HTTP/1.1[0m" 302 -
+2026-01-06 21:57:38,987 - INFO - 127.0.0.1 - - [06/Jan/2026 21:57:38] "[32mPOST /RemoverTurma/3ï¿½A HTTP/1.1[0m" 302 -
 2026-01-06 21:57:38,997 - INFO - 127.0.0.1 - - [06/Jan/2026 21:57:38] "GET /Turmas HTTP/1.1" 200 -
 2026-01-06 21:58:06,478 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
 2026-01-06 21:58:06,665 - INFO -  * Restarting with stat
@@ -3398,24 +3398,24 @@
 2026-01-06 22:00:34,394 - INFO - 127.0.0.1 - - [06/Jan/2026 22:00:34] "GET /Turmas HTTP/1.1" 200 -
 2026-01-06 22:00:37,375 - INFO - 127.0.0.1 - - [06/Jan/2026 22:00:37] "[32mPOST /Turmas HTTP/1.1[0m" 302 -
 2026-01-06 22:00:37,385 - INFO - 127.0.0.1 - - [06/Jan/2026 22:00:37] "GET /Turmas HTTP/1.1" 200 -
-2026-01-06 22:00:38,562 - INFO - 127.0.0.1 - - [06/Jan/2026 22:00:38] "POST /RemoverTurma/3°D HTTP/1.1" 200 -
+2026-01-06 22:00:38,562 - INFO - 127.0.0.1 - - [06/Jan/2026 22:00:38] "POST /RemoverTurma/3ï¿½D HTTP/1.1" 200 -
 2026-01-06 22:00:40,476 - INFO - 127.0.0.1 - - [06/Jan/2026 22:00:40] "GET /Turmas HTTP/1.1" 200 -
-2026-01-06 22:00:41,794 - INFO - 127.0.0.1 - - [06/Jan/2026 22:00:41] "[32mPOST /RemoverTurma/3°A HTTP/1.1[0m" 302 -
+2026-01-06 22:00:41,794 - INFO - 127.0.0.1 - - [06/Jan/2026 22:00:41] "[32mPOST /RemoverTurma/3ï¿½A HTTP/1.1[0m" 302 -
 2026-01-06 22:00:41,805 - INFO - 127.0.0.1 - - [06/Jan/2026 22:00:41] "GET /Turmas HTTP/1.1" 200 -
 2026-01-06 22:02:04,522 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
 2026-01-06 22:02:05,080 - INFO -  * Restarting with stat
 2026-01-06 22:02:08,959 - WARNING -  * Debugger is active!
 2026-01-06 22:02:08,970 - INFO -  * Debugger PIN: 369-653-580
-2026-01-06 22:02:12,034 - INFO - 127.0.0.1 - - [06/Jan/2026 22:02:12] "[35m[1mPOST /RemoverTurma/3°D HTTP/1.1[0m" 500 -
-2026-01-06 22:02:12,205 - INFO - 127.0.0.1 - - [06/Jan/2026 22:02:12] "GET /RemoverTurma/3°D?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
-2026-01-06 22:02:12,210 - INFO - 127.0.0.1 - - [06/Jan/2026 22:02:12] "GET /RemoverTurma/3°D?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
-2026-01-06 22:02:12,614 - INFO - 127.0.0.1 - - [06/Jan/2026 22:02:12] "GET /RemoverTurma/3°D?__debugger__=yes&cmd=resource&f=console.png&s=vQx3dumDeYIUu82FXHlr HTTP/1.1" 200 -
-2026-01-06 22:02:12,637 - INFO - 127.0.0.1 - - [06/Jan/2026 22:02:12] "GET /RemoverTurma/3°D?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2026-01-06 22:02:12,034 - INFO - 127.0.0.1 - - [06/Jan/2026 22:02:12] "[35m[1mPOST /RemoverTurma/3ï¿½D HTTP/1.1[0m" 500 -
+2026-01-06 22:02:12,205 - INFO - 127.0.0.1 - - [06/Jan/2026 22:02:12] "GET /RemoverTurma/3ï¿½D?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2026-01-06 22:02:12,210 - INFO - 127.0.0.1 - - [06/Jan/2026 22:02:12] "GET /RemoverTurma/3ï¿½D?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2026-01-06 22:02:12,614 - INFO - 127.0.0.1 - - [06/Jan/2026 22:02:12] "GET /RemoverTurma/3ï¿½D?__debugger__=yes&cmd=resource&f=console.png&s=vQx3dumDeYIUu82FXHlr HTTP/1.1" 200 -
+2026-01-06 22:02:12,637 - INFO - 127.0.0.1 - - [06/Jan/2026 22:02:12] "GET /RemoverTurma/3ï¿½D?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
 2026-01-06 22:02:16,250 - INFO - 127.0.0.1 - - [06/Jan/2026 22:02:16] "GET /Turmas HTTP/1.1" 200 -
-2026-01-06 22:02:17,304 - INFO - 127.0.0.1 - - [06/Jan/2026 22:02:17] "[35m[1mPOST /RemoverTurma/3°D HTTP/1.1[0m" 500 -
-2026-01-06 22:02:17,328 - INFO - 127.0.0.1 - - [06/Jan/2026 22:02:17] "[36mGET /RemoverTurma/3°D?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
-2026-01-06 22:02:17,335 - INFO - 127.0.0.1 - - [06/Jan/2026 22:02:17] "[36mGET /RemoverTurma/3°D?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
-2026-01-06 22:02:17,349 - INFO - 127.0.0.1 - - [06/Jan/2026 22:02:17] "[36mGET /RemoverTurma/3°D?__debugger__=yes&cmd=resource&f=console.png&s=vQx3dumDeYIUu82FXHlr HTTP/1.1[0m" 304 -
+2026-01-06 22:02:17,304 - INFO - 127.0.0.1 - - [06/Jan/2026 22:02:17] "[35m[1mPOST /RemoverTurma/3ï¿½D HTTP/1.1[0m" 500 -
+2026-01-06 22:02:17,328 - INFO - 127.0.0.1 - - [06/Jan/2026 22:02:17] "[36mGET /RemoverTurma/3ï¿½D?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2026-01-06 22:02:17,335 - INFO - 127.0.0.1 - - [06/Jan/2026 22:02:17] "[36mGET /RemoverTurma/3ï¿½D?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2026-01-06 22:02:17,349 - INFO - 127.0.0.1 - - [06/Jan/2026 22:02:17] "[36mGET /RemoverTurma/3ï¿½D?__debugger__=yes&cmd=resource&f=console.png&s=vQx3dumDeYIUu82FXHlr HTTP/1.1[0m" 304 -
 2026-01-06 22:02:55,370 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
 2026-01-06 22:02:55,555 - INFO -  * Restarting with stat
 2026-01-06 22:02:58,891 - WARNING -  * Debugger is active!
@@ -3429,7 +3429,7 @@
 2026-01-06 22:03:19,125 - WARNING -  * Debugger is active!
 2026-01-06 22:03:19,136 - INFO -  * Debugger PIN: 369-653-580
 2026-01-06 22:03:19,164 - INFO - 127.0.0.1 - - [06/Jan/2026 22:03:19] "GET /Turmas HTTP/1.1" 200 -
-2026-01-06 22:03:20,609 - INFO - 127.0.0.1 - - [06/Jan/2026 22:03:20] "POST /RemoverTurma/3°D HTTP/1.1" 200 -
+2026-01-06 22:03:20,609 - INFO - 127.0.0.1 - - [06/Jan/2026 22:03:20] "POST /RemoverTurma/3ï¿½D HTTP/1.1" 200 -
 2026-01-06 22:03:22,433 - INFO - 127.0.0.1 - - [06/Jan/2026 22:03:22] "GET /Turmas HTTP/1.1" 200 -
 2026-01-06 22:03:50,414 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
 2026-01-06 22:03:50,638 - INFO -  * Restarting with stat
@@ -3452,8 +3452,8 @@
 2026-01-06 22:06:53,225 - WARNING -  * Debugger is active!
 2026-01-06 22:06:53,235 - INFO -  * Debugger PIN: 369-653-580
 2026-01-06 22:06:53,286 - INFO - 127.0.0.1 - - [06/Jan/2026 22:06:53] "GET /Turmas HTTP/1.1" 200 -
-2026-01-06 22:06:54,758 - INFO - 127.0.0.1 - - [06/Jan/2026 22:06:54] "[32mPOST /RemoverTurma/3°D HTTP/1.1[0m" 302 -
-2026-01-06 22:06:54,769 - INFO - 127.0.0.1 - - [06/Jan/2026 22:06:54] "GET /Turmas?mensagem=Não+é+possível+remover+a+turma+pois+há+{len(check_team(turma))}+alunos+associados+a+ela. HTTP/1.1" 200 -
+2026-01-06 22:06:54,758 - INFO - 127.0.0.1 - - [06/Jan/2026 22:06:54] "[32mPOST /RemoverTurma/3ï¿½D HTTP/1.1[0m" 302 -
+2026-01-06 22:06:54,769 - INFO - 127.0.0.1 - - [06/Jan/2026 22:06:54] "GET /Turmas?mensagem=Nï¿½o+ï¿½+possï¿½vel+remover+a+turma+pois+hï¿½+{len(check_team(turma))}+alunos+associados+a+ela. HTTP/1.1" 200 -
 2026-01-06 22:08:29,153 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
 2026-01-06 22:08:29,366 - INFO -  * Restarting with stat
 2026-01-06 22:08:33,744 - WARNING -  * Debugger is active!
@@ -3470,12 +3470,12 @@
 2026-01-06 22:08:49,422 - INFO -  * Restarting with stat
 2026-01-06 22:08:52,972 - WARNING -  * Debugger is active!
 2026-01-06 22:08:52,982 - INFO -  * Debugger PIN: 369-653-580
-2026-01-06 22:08:53,010 - INFO - 127.0.0.1 - - [06/Jan/2026 22:08:53] "GET /Turmas?mensagem=Não+é+possível+remover+a+turma+pois+há+{len(check_team(turma))}+alunos+associados+a+ela. HTTP/1.1" 200 -
-2026-01-06 22:08:54,719 - INFO - 127.0.0.1 - - [06/Jan/2026 22:08:54] "[32mPOST /RemoverTurma/3°D HTTP/1.1[0m" 302 -
+2026-01-06 22:08:53,010 - INFO - 127.0.0.1 - - [06/Jan/2026 22:08:53] "GET /Turmas?mensagem=Nï¿½o+ï¿½+possï¿½vel+remover+a+turma+pois+hï¿½+{len(check_team(turma))}+alunos+associados+a+ela. HTTP/1.1" 200 -
+2026-01-06 22:08:54,719 - INFO - 127.0.0.1 - - [06/Jan/2026 22:08:54] "[32mPOST /RemoverTurma/3ï¿½D HTTP/1.1[0m" 302 -
 2026-01-06 22:08:54,733 - INFO - 127.0.0.1 - - [06/Jan/2026 22:08:54] "GET /Turmas HTTP/1.1" 200 -
-2026-01-06 22:08:55,966 - INFO - 127.0.0.1 - - [06/Jan/2026 22:08:55] "[32mPOST /RemoverTurma/3°D HTTP/1.1[0m" 302 -
+2026-01-06 22:08:55,966 - INFO - 127.0.0.1 - - [06/Jan/2026 22:08:55] "[32mPOST /RemoverTurma/3ï¿½D HTTP/1.1[0m" 302 -
 2026-01-06 22:08:55,977 - INFO - 127.0.0.1 - - [06/Jan/2026 22:08:55] "GET /Turmas HTTP/1.1" 200 -
-2026-01-06 22:08:56,517 - INFO - 127.0.0.1 - - [06/Jan/2026 22:08:56] "[32mPOST /RemoverTurma/3°D HTTP/1.1[0m" 302 -
+2026-01-06 22:08:56,517 - INFO - 127.0.0.1 - - [06/Jan/2026 22:08:56] "[32mPOST /RemoverTurma/3ï¿½D HTTP/1.1[0m" 302 -
 2026-01-06 22:08:56,528 - INFO - 127.0.0.1 - - [06/Jan/2026 22:08:56] "GET /Turmas HTTP/1.1" 200 -
 2026-01-06 22:09:32,862 - INFO - 127.0.0.1 - - [06/Jan/2026 22:09:32] "GET /Turmas HTTP/1.1" 200 -
 2026-01-06 22:09:45,313 - INFO - 127.0.0.1 - - [06/Jan/2026 22:09:45] "GET /Turmas HTTP/1.1" 200 -
@@ -3483,20 +3483,20 @@
 2026-01-06 22:10:16,019 - INFO -  * Restarting with stat
 2026-01-06 22:10:19,254 - WARNING -  * Debugger is active!
 2026-01-06 22:10:19,265 - INFO -  * Debugger PIN: 369-653-580
-2026-01-06 22:10:19,289 - INFO - 127.0.0.1 - - [06/Jan/2026 22:10:19] "[32mPOST /RemoverTurma/3°D HTTP/1.1[0m" 302 -
+2026-01-06 22:10:19,289 - INFO - 127.0.0.1 - - [06/Jan/2026 22:10:19] "[32mPOST /RemoverTurma/3ï¿½D HTTP/1.1[0m" 302 -
 2026-01-06 22:10:19,306 - INFO - 127.0.0.1 - - [06/Jan/2026 22:10:19] "GET /Turmas HTTP/1.1" 200 -
 2026-01-06 22:10:34,258 - INFO - 127.0.0.1 - - [06/Jan/2026 22:10:34] "GET /Turmas HTTP/1.1" 200 -
 2026-01-06 22:11:13,526 - INFO - 127.0.0.1 - - [06/Jan/2026 22:11:13] "GET /Turmas HTTP/1.1" 200 -
-2026-01-06 22:11:14,628 - INFO - 127.0.0.1 - - [06/Jan/2026 22:11:14] "[32mPOST /RemoverTurma/3°D HTTP/1.1[0m" 302 -
+2026-01-06 22:11:14,628 - INFO - 127.0.0.1 - - [06/Jan/2026 22:11:14] "[32mPOST /RemoverTurma/3ï¿½D HTTP/1.1[0m" 302 -
 2026-01-06 22:11:14,639 - INFO - 127.0.0.1 - - [06/Jan/2026 22:11:14] "GET /Turmas HTTP/1.1" 200 -
 2026-01-06 22:11:25,764 - INFO - 127.0.0.1 - - [06/Jan/2026 22:11:25] "GET /Turmas HTTP/1.1" 200 -
 2026-01-06 22:12:12,047 - INFO - 127.0.0.1 - - [06/Jan/2026 22:12:12] "GET /Turmas HTTP/1.1" 200 -
-2026-01-06 22:12:12,987 - INFO - 127.0.0.1 - - [06/Jan/2026 22:12:12] "[32mPOST /RemoverTurma/3°D HTTP/1.1[0m" 302 -
+2026-01-06 22:12:12,987 - INFO - 127.0.0.1 - - [06/Jan/2026 22:12:12] "[32mPOST /RemoverTurma/3ï¿½D HTTP/1.1[0m" 302 -
 2026-01-06 22:12:13,000 - INFO - 127.0.0.1 - - [06/Jan/2026 22:12:13] "GET /Turmas HTTP/1.1" 200 -
-2026-01-06 22:12:22,227 - INFO - 127.0.0.1 - - [06/Jan/2026 22:12:22] "[32mPOST /RemoverTurma/3°D HTTP/1.1[0m" 302 -
+2026-01-06 22:12:22,227 - INFO - 127.0.0.1 - - [06/Jan/2026 22:12:22] "[32mPOST /RemoverTurma/3ï¿½D HTTP/1.1[0m" 302 -
 2026-01-06 22:12:22,264 - INFO - 127.0.0.1 - - [06/Jan/2026 22:12:22] "GET /Turmas HTTP/1.1" 200 -
 2026-01-06 22:12:53,948 - INFO - 127.0.0.1 - - [06/Jan/2026 22:12:53] "GET /Turmas HTTP/1.1" 200 -
-2026-01-06 22:12:55,035 - INFO - 127.0.0.1 - - [06/Jan/2026 22:12:55] "[32mPOST /RemoverTurma/3°D HTTP/1.1[0m" 302 -
+2026-01-06 22:12:55,035 - INFO - 127.0.0.1 - - [06/Jan/2026 22:12:55] "[32mPOST /RemoverTurma/3ï¿½D HTTP/1.1[0m" 302 -
 2026-01-06 22:12:55,046 - INFO - 127.0.0.1 - - [06/Jan/2026 22:12:55] "GET /Turmas HTTP/1.1" 200 -
 2026-01-06 22:14:08,063 - INFO - 127.0.0.1 - - [06/Jan/2026 22:14:08] "GET /Turmas HTTP/1.1" 200 -
 2026-01-06 22:14:08,177 - INFO - 127.0.0.1 - - [06/Jan/2026 22:14:08] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
@@ -3533,31 +3533,31 @@
 2026-01-06 22:21:29,010 - INFO - 127.0.0.1 - - [06/Jan/2026 22:21:29] "GET /Turmas HTTP/1.1" 200 -
 2026-01-06 22:21:29,044 - INFO - 127.0.0.1 - - [06/Jan/2026 22:21:29] "[36mGET /static/turmas.css HTTP/1.1[0m" 304 -
 2026-01-06 22:21:29,078 - INFO - 127.0.0.1 - - [06/Jan/2026 22:21:29] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
-2026-01-06 22:21:30,249 - INFO - 127.0.0.1 - - [06/Jan/2026 22:21:30] "[32mPOST /RemoverTurma/2°A HTTP/1.1[0m" 302 -
+2026-01-06 22:21:30,249 - INFO - 127.0.0.1 - - [06/Jan/2026 22:21:30] "[32mPOST /RemoverTurma/2ï¿½A HTTP/1.1[0m" 302 -
 2026-01-06 22:21:30,361 - INFO - 127.0.0.1 - - [06/Jan/2026 22:21:30] "GET /Turmas HTTP/1.1" 200 -
 2026-01-06 22:21:30,476 - INFO - 127.0.0.1 - - [06/Jan/2026 22:21:30] "[36mGET /static/turmas.css HTTP/1.1[0m" 304 -
-2026-01-06 22:21:31,511 - INFO - 127.0.0.1 - - [06/Jan/2026 22:21:31] "[32mPOST /RemoverTurma/3°D HTTP/1.1[0m" 302 -
+2026-01-06 22:21:31,511 - INFO - 127.0.0.1 - - [06/Jan/2026 22:21:31] "[32mPOST /RemoverTurma/3ï¿½D HTTP/1.1[0m" 302 -
 2026-01-06 22:21:31,522 - INFO - 127.0.0.1 - - [06/Jan/2026 22:21:31] "GET /Turmas HTTP/1.1" 200 -
 2026-01-06 22:21:31,545 - INFO - 127.0.0.1 - - [06/Jan/2026 22:21:31] "[36mGET /static/turmas.css HTTP/1.1[0m" 304 -
-2026-01-06 22:21:42,070 - INFO - 127.0.0.1 - - [06/Jan/2026 22:21:42] "[32mPOST /RemoverTurma/3°D HTTP/1.1[0m" 302 -
+2026-01-06 22:21:42,070 - INFO - 127.0.0.1 - - [06/Jan/2026 22:21:42] "[32mPOST /RemoverTurma/3ï¿½D HTTP/1.1[0m" 302 -
 2026-01-06 22:21:42,083 - INFO - 127.0.0.1 - - [06/Jan/2026 22:21:42] "GET /Turmas HTTP/1.1" 200 -
 2026-01-06 22:21:42,112 - INFO - 127.0.0.1 - - [06/Jan/2026 22:21:42] "[36mGET /static/turmas.css HTTP/1.1[0m" 304 -
 2026-01-06 22:21:45,467 - INFO - 127.0.0.1 - - [06/Jan/2026 22:21:45] "GET /Turmas HTTP/1.1" 200 -
-2026-01-06 22:21:46,287 - INFO - 127.0.0.1 - - [06/Jan/2026 22:21:46] "[32mPOST /RemoverTurma/3°D HTTP/1.1[0m" 302 -
+2026-01-06 22:21:46,287 - INFO - 127.0.0.1 - - [06/Jan/2026 22:21:46] "[32mPOST /RemoverTurma/3ï¿½D HTTP/1.1[0m" 302 -
 2026-01-06 22:21:46,298 - INFO - 127.0.0.1 - - [06/Jan/2026 22:21:46] "GET /Turmas HTTP/1.1" 200 -
 2026-01-06 22:21:46,318 - INFO - 127.0.0.1 - - [06/Jan/2026 22:21:46] "[36mGET /static/turmas.css HTTP/1.1[0m" 304 -
 2026-01-06 22:21:49,595 - INFO - 127.0.0.1 - - [06/Jan/2026 22:21:49] "GET /Turmas HTTP/1.1" 200 -
-2026-01-06 22:21:51,847 - INFO - 127.0.0.1 - - [06/Jan/2026 22:21:51] "[32mPOST /RemoverTurma/3°D HTTP/1.1[0m" 302 -
+2026-01-06 22:21:51,847 - INFO - 127.0.0.1 - - [06/Jan/2026 22:21:51] "[32mPOST /RemoverTurma/3ï¿½D HTTP/1.1[0m" 302 -
 2026-01-06 22:21:51,860 - INFO - 127.0.0.1 - - [06/Jan/2026 22:21:51] "GET /Turmas HTTP/1.1" 200 -
 2026-01-06 22:21:51,881 - INFO - 127.0.0.1 - - [06/Jan/2026 22:21:51] "[36mGET /static/turmas.css HTTP/1.1[0m" 304 -
 2026-01-06 22:21:55,396 - INFO - 127.0.0.1 - - [06/Jan/2026 22:21:55] "GET /Turmas HTTP/1.1" 200 -
 2026-01-06 22:22:17,605 - INFO - 127.0.0.1 - - [06/Jan/2026 22:22:17] "GET /Turmas HTTP/1.1" 200 -
 2026-01-06 22:22:17,625 - INFO - 127.0.0.1 - - [06/Jan/2026 22:22:17] "[36mGET /static/turmas.css HTTP/1.1[0m" 304 -
 2026-01-06 22:22:17,645 - INFO - 127.0.0.1 - - [06/Jan/2026 22:22:17] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
-2026-01-06 22:22:18,815 - INFO - 127.0.0.1 - - [06/Jan/2026 22:22:18] "[32mPOST /RemoverTurma/3°D HTTP/1.1[0m" 302 -
+2026-01-06 22:22:18,815 - INFO - 127.0.0.1 - - [06/Jan/2026 22:22:18] "[32mPOST /RemoverTurma/3ï¿½D HTTP/1.1[0m" 302 -
 2026-01-06 22:22:18,825 - INFO - 127.0.0.1 - - [06/Jan/2026 22:22:18] "GET /Turmas HTTP/1.1" 200 -
 2026-01-06 22:22:18,845 - INFO - 127.0.0.1 - - [06/Jan/2026 22:22:18] "[36mGET /static/turmas.css HTTP/1.1[0m" 304 -
-2026-01-06 22:22:26,597 - INFO - 127.0.0.1 - - [06/Jan/2026 22:22:26] "[32mPOST /RemoverTurma/3°D HTTP/1.1[0m" 302 -
+2026-01-06 22:22:26,597 - INFO - 127.0.0.1 - - [06/Jan/2026 22:22:26] "[32mPOST /RemoverTurma/3ï¿½D HTTP/1.1[0m" 302 -
 2026-01-06 22:22:26,606 - INFO - 127.0.0.1 - - [06/Jan/2026 22:22:26] "GET /Turmas HTTP/1.1" 200 -
 2026-01-06 22:22:26,631 - INFO - 127.0.0.1 - - [06/Jan/2026 22:22:26] "[36mGET /static/turmas.css HTTP/1.1[0m" 304 -
 2026-01-06 22:24:24,304 - INFO - 127.0.0.1 - - [06/Jan/2026 22:24:24] "GET /Turmas HTTP/1.1" 200 -
@@ -3584,8 +3584,8 @@
 2026-01-06 22:30:14,639 - INFO - 127.0.0.1 - - [06/Jan/2026 22:30:14] "[32mPOST /Turmas HTTP/1.1[0m" 302 -
 2026-01-06 22:30:14,649 - INFO - 127.0.0.1 - - [06/Jan/2026 22:30:14] "GET /Turmas HTTP/1.1" 200 -
 2026-01-06 22:30:14,671 - INFO - 127.0.0.1 - - [06/Jan/2026 22:30:14] "[36mGET /static/turmas.css HTTP/1.1[0m" 304 -
-2026-01-06 22:30:16,440 - INFO - 127.0.0.1 - - [06/Jan/2026 22:30:16] "[33mPOST /RemoverTurma/3°D HTTP/1.1[0m" 404 -
-2026-01-06 22:30:19,063 - INFO - 127.0.0.1 - - [06/Jan/2026 22:30:19] "[33mPOST /RemoverTurma/3°D HTTP/1.1[0m" 404 -
+2026-01-06 22:30:16,440 - INFO - 127.0.0.1 - - [06/Jan/2026 22:30:16] "[33mPOST /RemoverTurma/3ï¿½D HTTP/1.1[0m" 404 -
+2026-01-06 22:30:19,063 - INFO - 127.0.0.1 - - [06/Jan/2026 22:30:19] "[33mPOST /RemoverTurma/3ï¿½D HTTP/1.1[0m" 404 -
 2026-01-06 22:30:37,533 - INFO - 127.0.0.1 - - [06/Jan/2026 22:30:37] "GET /Turmas HTTP/1.1" 200 -
 2026-01-06 22:30:37,553 - INFO - 127.0.0.1 - - [06/Jan/2026 22:30:37] "[36mGET /static/turmas.css HTTP/1.1[0m" 304 -
 2026-01-06 22:30:37,573 - INFO - 127.0.0.1 - - [06/Jan/2026 22:30:37] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
@@ -4195,7 +4195,7 @@
 2026-01-06 23:29:10,208 - INFO - 127.0.0.1 - - [06/Jan/2026 23:29:10] "[32mGET /Turmas HTTP/1.1[0m" 302 -
 2026-01-06 23:29:10,230 - INFO - 127.0.0.1 - - [06/Jan/2026 23:29:10] "GET /Inicio HTTP/1.1" 200 -
 2026-01-06 23:29:10,270 - INFO - 127.0.0.1 - - [06/Jan/2026 23:29:10] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
-2026-01-06 23:29:15,865 - INFO - 127.0.0.1 - - [06/Jan/2026 23:29:15] "[32mGET /Turmas?mensagem=Não+é+possível+remover+a+turma+pois+há+{len(check_team(turma))}+alunos+associados+a+ela. HTTP/1.1[0m" 302 -
+2026-01-06 23:29:15,865 - INFO - 127.0.0.1 - - [06/Jan/2026 23:29:15] "[32mGET /Turmas?mensagem=Nï¿½o+ï¿½+possï¿½vel+remover+a+turma+pois+hï¿½+{len(check_team(turma))}+alunos+associados+a+ela. HTTP/1.1[0m" 302 -
 2026-01-06 23:29:15,883 - INFO - 127.0.0.1 - - [06/Jan/2026 23:29:15] "GET /Inicio HTTP/1.1" 200 -
 2026-01-06 23:29:15,909 - INFO - 127.0.0.1 - - [06/Jan/2026 23:29:15] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
 2026-01-06 23:29:19,983 - INFO - 127.0.0.1 - - [06/Jan/2026 23:29:19] "[32mGET /Alunos HTTP/1.1[0m" 302 -
