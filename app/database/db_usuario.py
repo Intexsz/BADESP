@@ -12,7 +12,7 @@ def init_db():
                 email TEXT,
                 foto TEXT,
                 cargo TEXT,
-                pin INTEGER,
+                pin TEXT,
                 escola TEXT, 
                 ano INTEGER,
                 turma TEXT,
@@ -174,7 +174,7 @@ def novo_pin(pin, nome, turma):
                 UPDATE usuarios
                 SET pin = ?
                 WHERE nome = ?
-                AND turma = ?
+                AND turmano = ?
             """, (pin,nome,turma))
             conn.commit()
 

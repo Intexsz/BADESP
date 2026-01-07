@@ -1,6 +1,6 @@
 from flask import Flask, session, redirect, url_for, Blueprint,render_template, request, flash
 from authlib.integrations.flask_client import OAuth
-from app.database.db_usuario import get_role, pegar_no_nome, usuario_tem_pin, buscar_nome_aluno, novo_pin_secretaria,buscar_usuario,listar_alunose, mudar_turma, check_team
+from app.database.db_usuario import get_role, pegar_no_nome, usuario_tem_pin, buscar_nome_aluno, novo_pin_secretaria,buscar_usuario,listar_alunose, mudar_turma, check_team, novo_pin
 from app.database.db_denuncia import get_report_status, open_report_db, get_report
 from app.database.db_denuncia import update_status, post_comment, check_coment,list_reports,list_approved
 from app.database.db_site import create_team, mostrar_teams, delete_team, check_teams
@@ -233,17 +233,19 @@ def alunos():
         alunos_por_turma = buscar_nome_aluno()
 
         if request.method == "POST":
-            gestao = pegar_no_nome(session['user_id'])
             pin = request.form.get("pin")
+            aluno = request.form.get("aluno")
+            turma = request.form.get("turma")
+
             if pin == '0' or pin == '000000':
                 return f"""
             <script>
                 alert("não pode ser somente 0");
-                window.location.href = "{url_for('rotasecretaria.gestao')}";
+                window.location.href = "{url_for('rotasecretaria.alunos')}";
             </script>
         """
             else:
-                novo_pin_secretaria(pin, gestao)
+                novo_pin(pin, aluno, turma)
                 return f"""
             <script>
                 alert("Pin atualizado com sucesso!");
@@ -299,7 +301,7 @@ def turmas():
             if check_teams(f'{ano}°{turma}') is None:
                 create_team(f'{ano}°{turma}')
                 return redirect(url_for('rotasecretaria.turmas'))
-            flash(f"Não é possivel criar turma {ano}°{turma}, Turma ja existente", "erro")
+            flash(f"Não é possivel criar a turma {ano}°{turma}, Turma ja existente", "erro")
             return redirect(url_for('rotasecretaria.turmas'))
         
         return render_template("turmas.html", turmas=mostrar_teams())
