@@ -5464,3 +5464,91 @@
 2026-01-08 15:45:45,448 - INFO - 127.0.0.1 - - [08/Jan/2026 15:45:45] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
 2026-01-08 15:46:15,024 - INFO - 127.0.0.1 - - [08/Jan/2026 15:46:15] "GET /Inicio HTTP/1.1" 200 -
 2026-01-08 15:46:15,047 - INFO - 127.0.0.1 - - [08/Jan/2026 15:46:15] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2026-01-08 15:49:06,353 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\database\\db_usuario.py', reloading
+2026-01-08 15:49:06,536 - INFO -  * Restarting with stat
+2026-01-08 15:49:09,803 - WARNING -  * Debugger is active!
+2026-01-08 15:49:09,812 - INFO -  * Debugger PIN: 369-653-580
+2026-01-08 15:50:07,397 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\rotas\\aluno.py', reloading
+2026-01-08 15:50:07,593 - INFO -  * Restarting with stat
+2026-01-08 15:52:07,083 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-01-08 15:52:07,083 - INFO - [33mPress CTRL+C to quit[0m
+2026-01-08 15:52:07,088 - INFO -  * Restarting with stat
+2026-01-08 15:52:10,092 - WARNING -  * Debugger is active!
+2026-01-08 15:52:10,101 - INFO -  * Debugger PIN: 369-653-580
+2026-01-08 15:52:10,123 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:10] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-08 15:52:10,142 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:10] "[32mPOST /allow_folder HTTP/1.1[0m" 302 -
+2026-01-08 15:52:10,183 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:10] "GET /Denuncias HTTP/1.1" 200 -
+2026-01-08 15:52:10,281 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:10] "[36mGET /static/secretaria.css HTTP/1.1[0m" 304 -
+2026-01-08 15:52:13,262 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:13] "GET /Inicio HTTP/1.1" 200 -
+2026-01-08 15:52:13,287 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:13] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2026-01-08 15:52:16,419 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:16] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-08 15:52:16,436 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:16] "[32mPOST /allow_folder HTTP/1.1[0m" 302 -
+2026-01-08 15:52:16,510 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:16] "GET /Abertas HTTP/1.1" 200 -
+2026-01-08 15:52:16,535 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:16] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2026-01-08 15:52:16,571 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:16] "GET /Abertas?page=0 HTTP/1.1" 200 -
+2026-01-08 15:52:16,792 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:16] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2026-01-08 15:52:18,941 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:18] "GET /Inicio HTTP/1.1" 200 -
+2026-01-08 15:52:18,969 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:18] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2026-01-08 15:52:22,707 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:22] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-08 15:52:22,723 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:22] "[32mPOST /allow_folder HTTP/1.1[0m" 302 -
+2026-01-08 15:52:22,740 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:22] "GET /Resolvidas HTTP/1.1" 200 -
+2026-01-08 15:52:22,761 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:22] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2026-01-08 15:52:22,786 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:22] "GET /Resolvidas?page=0 HTTP/1.1" 200 -
+2026-01-08 15:52:22,848 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:22] "[36mGET /static/historico.css HTTP/1.1[0m" 304 -
+2026-01-08 15:52:22,906 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:22] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-08 15:52:25,002 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:25] "GET /Inicio HTTP/1.1" 200 -
+2026-01-08 15:52:25,027 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:25] "[36mGET /static/iniciosecretaria.css HTTP/1.1[0m" 304 -
+2026-01-08 15:52:28,067 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:28] "POST /verificar_pin HTTP/1.1" 200 -
+2026-01-08 15:52:28,088 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:28] "[32mPOST /allow_folder HTTP/1.1[0m" 302 -
+2026-01-08 15:52:28,153 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:28] "GET /Alunos HTTP/1.1" 200 -
+2026-01-08 15:52:28,181 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:28] "[36mGET /static/aluno.css HTTP/1.1[0m" 304 -
+2026-01-08 15:52:31,294 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:31] "GET /Turmas HTTP/1.1" 200 -
+2026-01-08 15:52:31,322 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:31] "[36mGET /static/turmas.css HTTP/1.1[0m" 304 -
+2026-01-08 15:52:32,949 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:32] "[32mPOST /RemoverTurma HTTP/1.1[0m" 302 -
+2026-01-08 15:52:32,959 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:32] "GET /Turmas HTTP/1.1" 200 -
+2026-01-08 15:52:32,982 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:32] "[36mGET /static/turmas.css HTTP/1.1[0m" 304 -
+2026-01-08 15:52:33,619 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:33] "[32mPOST /RemoverTurma HTTP/1.1[0m" 302 -
+2026-01-08 15:52:33,629 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:33] "GET /Turmas HTTP/1.1" 200 -
+2026-01-08 15:52:33,652 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:33] "[36mGET /static/turmas.css HTTP/1.1[0m" 304 -
+2026-01-08 15:52:34,862 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:34] "[32mPOST /RemoverTurma HTTP/1.1[0m" 302 -
+2026-01-08 15:52:34,875 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:34] "GET /Turmas HTTP/1.1" 200 -
+2026-01-08 15:52:34,904 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:34] "[36mGET /static/turmas.css HTTP/1.1[0m" 304 -
+2026-01-08 15:52:35,939 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:35] "[32mPOST /RemoverTurma HTTP/1.1[0m" 302 -
+2026-01-08 15:52:35,950 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:35] "GET /Turmas HTTP/1.1" 200 -
+2026-01-08 15:52:35,969 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:35] "[36mGET /static/turmas.css HTTP/1.1[0m" 304 -
+2026-01-08 15:52:38,169 - INFO - 127.0.0.1 - - [08/Jan/2026 15:52:38] "GET /Turmas HTTP/1.1" 200 -
+2026-01-08 15:53:30,187 - INFO - 127.0.0.1 - - [08/Jan/2026 15:53:30] "GET /Turmas HTTP/1.1" 200 -
+2026-01-08 15:53:30,215 - INFO - 127.0.0.1 - - [08/Jan/2026 15:53:30] "[36mGET /static/turmas.css HTTP/1.1[0m" 304 -
+2026-01-08 15:53:39,941 - INFO - 127.0.0.1 - - [08/Jan/2026 15:53:39] "[32mPOST /AlterarTodasTurmas HTTP/1.1[0m" 302 -
+2026-01-08 15:53:39,961 - INFO - 127.0.0.1 - - [08/Jan/2026 15:53:39] "GET /Alunos HTTP/1.1" 200 -
+2026-01-08 15:53:39,987 - INFO - 127.0.0.1 - - [08/Jan/2026 15:53:39] "[36mGET /static/aluno.css HTTP/1.1[0m" 304 -
+2026-01-08 15:53:47,772 - INFO - 127.0.0.1 - - [08/Jan/2026 15:53:47] "[32mPOST /AlterarTodasTurmas HTTP/1.1[0m" 302 -
+2026-01-08 15:53:47,792 - INFO - 127.0.0.1 - - [08/Jan/2026 15:53:47] "GET /Alunos HTTP/1.1" 200 -
+2026-01-08 15:53:47,812 - INFO - 127.0.0.1 - - [08/Jan/2026 15:53:47] "[36mGET /static/aluno.css HTTP/1.1[0m" 304 -
+2026-01-08 15:54:09,212 - INFO - 127.0.0.1 - - [08/Jan/2026 15:54:09] "GET /Alunos HTTP/1.1" 200 -
+2026-01-08 15:54:09,234 - INFO - 127.0.0.1 - - [08/Jan/2026 15:54:09] "[36mGET /static/aluno.css HTTP/1.1[0m" 304 -
+2026-01-08 15:54:09,262 - INFO - 127.0.0.1 - - [08/Jan/2026 15:54:09] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-08 15:54:14,507 - INFO - 127.0.0.1 - - [08/Jan/2026 15:54:14] "[32mPOST /AlterarTodasTurmas HTTP/1.1[0m" 302 -
+2026-01-08 15:54:14,526 - INFO - 127.0.0.1 - - [08/Jan/2026 15:54:14] "GET /Alunos HTTP/1.1" 200 -
+2026-01-08 15:54:14,547 - INFO - 127.0.0.1 - - [08/Jan/2026 15:54:14] "[36mGET /static/aluno.css HTTP/1.1[0m" 304 -
+2026-01-08 15:54:38,461 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2026-01-08 15:54:38,644 - INFO -  * Restarting with stat
+2026-01-08 15:54:41,904 - WARNING -  * Debugger is active!
+2026-01-08 15:54:41,914 - INFO -  * Debugger PIN: 369-653-580
+2026-01-08 15:54:41,990 - INFO - 127.0.0.1 - - [08/Jan/2026 15:54:41] "GET /Alunos HTTP/1.1" 200 -
+2026-01-08 15:54:42,058 - INFO - 127.0.0.1 - - [08/Jan/2026 15:54:42] "[36mGET /static/aluno.css HTTP/1.1[0m" 304 -
+2026-01-08 15:54:42,496 - INFO - 127.0.0.1 - - [08/Jan/2026 15:54:42] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-08 15:54:49,104 - INFO - 127.0.0.1 - - [08/Jan/2026 15:54:49] "POST /AlterarTodasTurmas HTTP/1.1" 200 -
+2026-01-08 15:54:50,053 - INFO - 127.0.0.1 - - [08/Jan/2026 15:54:50] "GET /Alunos HTTP/1.1" 200 -
+2026-01-08 15:54:50,104 - INFO - 127.0.0.1 - - [08/Jan/2026 15:54:50] "[36mGET /static/aluno.css HTTP/1.1[0m" 304 -
+2026-01-08 15:55:06,198 - INFO -  * Detected change in 'c:\\Users\\manel\\Documents\\SNEP\\app\\rotas\\secretaria.py', reloading
+2026-01-08 15:55:06,408 - INFO -  * Restarting with stat
+2026-01-08 15:55:09,857 - WARNING -  * Debugger is active!
+2026-01-08 15:55:09,867 - INFO -  * Debugger PIN: 369-653-580
+2026-01-08 15:55:09,942 - INFO - 127.0.0.1 - - [08/Jan/2026 15:55:09] "GET /Alunos HTTP/1.1" 200 -
+2026-01-08 15:55:10,012 - INFO - 127.0.0.1 - - [08/Jan/2026 15:55:10] "[36mGET /static/aluno.css HTTP/1.1[0m" 304 -
+2026-01-08 15:55:10,245 - INFO - 127.0.0.1 - - [08/Jan/2026 15:55:10] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-01-08 15:55:15,886 - INFO - 127.0.0.1 - - [08/Jan/2026 15:55:15] "[32mPOST /AlterarTodasTurmas HTTP/1.1[0m" 302 -
+2026-01-08 15:55:15,905 - INFO - 127.0.0.1 - - [08/Jan/2026 15:55:15] "GET /Alunos HTTP/1.1" 200 -
+2026-01-08 15:55:15,926 - INFO - 127.0.0.1 - - [08/Jan/2026 15:55:15] "[36mGET /static/aluno.css HTTP/1.1[0m" 304 -

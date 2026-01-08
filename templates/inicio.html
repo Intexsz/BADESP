@@ -9,7 +9,8 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='inicio.css') }}">
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=release_alert" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=release_alert" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 
@@ -28,134 +29,135 @@
       <li><a href="/Ajuda"><span class="material-icons">help_outline</span> Ajuda</a></li>
       <li><a href="/Denuncia"><span class="material-icons">report</span> Fazer Denúncia</a></li>
 
-      <li><a href="/Logout" class="logout" onclick="confirmarLogout()"><span class="material-icons">logout</span> Deslogar</a></li>
+      <li><a href="/Logout" class="logout" onclick="confirmarLogout()"><span class="material-icons">logout</span>
+          Deslogar</a></li>
     </ul>
   </nav>
 
   <main>
-  <div class="painel-container has-select">
-    <h1>Painel de Denúncias</h1>
-    <br>
-    <form method="get" action="{{ url_for('rotas.inicio') }}">
+    <div class="painel-container has-select">
+      <h1>Painel de Denúncias</h1>
+      <br>
+      <form method="get" action="{{ url_for('rotas.inicio') }}">
         <div class="input-container has-select">
-         <select name="filtro" onchange="this.form.submit()">
-         <option value="Tudo" {% if filtro=="Tudo" %}selected{% endif %}>Tudo</option>
-         <option value="Esperando" {% if filtro=="Esperando" %}selected{% endif %}>Esperando Resposta</option>
-         <option value="Abertas" {% if filtro=="Abertas" %}selected{% endif %}>Abertas</option>
-         <option value="Aprovado" {% if filtro=="Aprovado" %}selected{% endif %}>Aprovado</option>
-         <option value="Recusado" {% if filtro=="Recusado" %}selected{% endif %}>Recusado</option>
-         <option value="Arquivado" {% if filtro=="Arquivado"  %}selected{% endif %}>Arquivado</option>
-         <option value="Expirada" {% if filtro=="Expirada" %}selected{% endif %}>Expirado</option>
-         </select>
-       </div>
-    </form>
-    <br>
-    <br>
-    <div id="denuncias-container">
-      {% if reports %}
-      {% for d in reports %}
-      <div class="denuncia-card" id="denuncia-{{ d[0] }}">
-        <h3>{{ d[1] }}</h3>
+          <select name="filtro" onchange="this.form.submit()">
+            <option value="Tudo" {% if filtro=="Tudo" %}selected{% endif %}>Tudo</option>
+            <option value="Esperando" {% if filtro=="Esperando" %}selected{% endif %}>Esperando Resposta</option>
+            <option value="Abertas" {% if filtro=="Abertas" %}selected{% endif %}>Abertas</option>
+            <option value="Aprovado" {% if filtro=="Aprovado" %}selected{% endif %}>Aprovado</option>
+            <option value="Recusado" {% if filtro=="Recusado" %}selected{% endif %}>Recusado</option>
+            <option value="Arquivado" {% if filtro=="Arquivado" %}selected{% endif %}>Arquivado</option>
+            <option value="Expirada" {% if filtro=="Expirada" %}selected{% endif %}>Expirado</option>
+          </select>
+        </div>
+      </form>
+      <br>
+      <br>
+      <div id="denuncias-container">
+        {% if reports %}
+        {% for d in reports %}
+        <div class="denuncia-card" id="denuncia-{{ d[0] }}">
+          <h3>{{ d[1] }}</h3>
+          <br>
+          <p>{{ d[2] }}</p>
+          {% if d[8] %}
+          <p>Respondido: Sim</p>
+          {% else %}
+          <p>Respondido: Não</p>
+          {% endif %}
+          <p>Data: {{ d[4] }}</p>
+          {% if d[5] == 'Aprovado.' %}
+          <p><span style="color: rgb(0, 255, 0);">✔️Situação: Aprovado por: {{ d[7] }}✔️</span></p>
+          {% elif d[5] == 'Recusado.' %}
+          <p><span style="color: red;">❌Situação: Recusado por: {{ d[7] }}❌</span></p>
+          {% elif d[5] == 'Arquivado.' %}
+          <p><span style="color: gray;">🗃️Situação: Arquivado por: {{ d[7] }}🗃️<span>
+                <p>
+                  {% elif d[5] == 'Visto.' %}
+                <p><span style="color: orange;">🔎Situação: Visualizado por: {{ d[7] }} ás {{ d[9] }}🔎<span>
+                      <p>
+                        {% elif d[5] == 'Expirada.' %}
+                      <p><span style="color: gray;">⏰Situação: Expirado.⏰<span>
+                            <p></p>
+                            {% else %}
+                            <p><span style="color: rgb(255, 255, 255);">Situação: ⏳Esperando Resposta...⏳</span></p>
+                            {% endif %}
+                            <form class="apagar-form" action="{{ url_for('rotasecretaria.detalhe_denuncia', id=d[0]) }}"
+                              method="POST">
+                              <button type="button" onclick="verificarPin({{ d[0] }})">Abrir Denúncia</button>
+                            </form>
+        </div>
         <br>
-        <p>{{ d[2] }}</p>
-        {% if d[8] %}
-        <p>Respondido: Sim</p>
+        {% endfor %}
         {% else %}
-        <p>Respondido: Não</p>
+        <p>Nenhuma denúncia encontrada.</p>
+        <br>
         {% endif %}
-        <p>Data: {{ d[4] }}</p>
-        {% if d[5] == 'Aprovado.' %}
-        <p><span style="color: rgb(0, 255, 0);">✔️Situação: Aprovado por: {{ d[7] }}✔️</span></p>
-        {% elif d[5] == 'Recusado.' %}
-        <p><span style="color: red;">❌Situação: Recusado por: {{ d[7] }}❌</span></p>
-        {% elif d[5] == 'Arquivado.' %}
-        <p><span style="color: gray;">🗃️Situação: Arquivado por: {{ d[7] }}🗃️<span>
-              <p>
-                {% elif d[5] == 'Visto.' %}
-              <p><span style="color: orange;">🔎Situação: Visualizado por: {{ d[7] }} ás {{ d[9] }}🔎<span>
-                    <p>
-                      {% elif d[5] == 'Expirada.' %}
-                    <p><span style="color: gray;">⏰Situação: Expirado.⏰<span>
-                          <p></p>
-                          {% else %}
-                          <p><span style="color: rgb(255, 255, 255);">Situação: ⏳Esperando Resposta...⏳</span></p>
-                          {% endif %}
-                          <form class="apagar-form" action="{{ url_for('rotasecretaria.detalhe_denuncia', id=d[0]) }}"
-                            method="POST">
-                            <button type="button" onclick="verificarPin({{ d[0] }})">Abrir Denúncia</button>
-                          </form>
       </div>
-      <br>
-      {% endfor %}
-      {% else %}
-      <p>Nenhuma denúncia encontrada.</p>
-      <br>
-      {% endif %}
     </div>
-  </div>
-</main>
+  </main>
 
-<script>
-  async function verificarPin(denunciaId) {
-    const pin = prompt("Digite seu PIN para abrir a denúncia:");
-    if (!pin) return;
+  <script>
+    async function verificarPin(denunciaId) {
+      const pin = prompt("Digite seu PIN para abrir a denúncia:");
+      if (!pin) return;
 
-    try {
-      const response = await fetch(`{{ url_for('rotas.verificar_pin') }}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ pin: pin })
-      });
+      try {
+        const response = await fetch(`{{ url_for('rotas.verificar_pin') }}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ pin: pin })
+        });
 
-      const result = await response.json();
+        const result = await response.json();
 
-      if (result.status === "ok") {
+        if (result.status === "ok") {
 
-        const form = document.createElement("form");
-        form.method = "POST";
-        form.action = `/allow_detail`;
-        document.body.appendChild(form);
+          const form = document.createElement("form");
+          form.method = "POST";
+          form.action = `/allow_detail`;
+          document.body.appendChild(form);
 
-        const inputIdzin = document.createElement("input");
-        inputIdzin.type = "hidden";
-        inputIdzin.name = "idzin"; 
-        inputIdzin.value = denunciaId
-        form.appendChild(inputIdzin);
-        document.body.appendChild(form);
-        form.submit();
-      } else {
-        alert(result.mensagem || "PIN incorreto. Tente novamente.");
+          const inputIdzin = document.createElement("input");
+          inputIdzin.type = "hidden";
+          inputIdzin.name = "idzin";
+          inputIdzin.value = denunciaId
+          form.appendChild(inputIdzin);
+          document.body.appendChild(form);
+          form.submit();
+        } else {
+          alert(result.mensagem || "PIN incorreto. Tente novamente.");
+        }
+      } catch (error) {
+        console.error("Erro ao verificar o PIN:", error);
+        alert("Erro no servidor. Tente novamente mais tarde.");
       }
-    } catch (error) {
-      console.error("Erro ao verificar o PIN:", error);
-      alert("Erro no servidor. Tente novamente mais tarde.");
     }
-  }
-</script>
+  </script>
 
-<script>
-  const btn = document.querySelector('.menu-btn');
-  const sidebar = document.querySelector('.sidebar');
+  <script>
+    const btn = document.querySelector('.menu-btn');
+    const sidebar = document.querySelector('.sidebar');
 
-  btn.addEventListener('click', () => sidebar.classList.toggle('ativo'));
+    btn.addEventListener('click', () => sidebar.classList.toggle('ativo'));
 
-  function confirmarLogout() {
-    if (confirm("Deseja realmente sair?")) {
-      alert("Logout realizado com sucesso!");
+    function confirmarLogout() {
+      if (confirm("Deseja realmente sair?")) {
+        alert("Logout realizado com sucesso!");
+      }
     }
-  }
 
-  // ===== FECHAR MENU CLICANDO FORA + REDIRECIONAR P/ INÍCIO =====
-  document.addEventListener("click", (e) => {
-    const clicouFora = !sidebar.contains(e.target) && !btn.contains(e.target);
+    // ===== FECHAR MENU CLICANDO FORA + REDIRECIONAR P/ INÍCIO =====
+    document.addEventListener("click", (e) => {
+      const clicouFora = !sidebar.contains(e.target) && !btn.contains(e.target);
 
-    if (sidebar.classList.contains("ativo") && clicouFora) {
-      sidebar.classList.remove("ativo");
-    }
-  });
-</script>
+      if (sidebar.classList.contains("ativo") && clicouFora) {
+        sidebar.classList.remove("ativo");
+      }
+    });
+  </script>
 
 </body>
 
