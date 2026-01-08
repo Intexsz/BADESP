@@ -150,15 +150,32 @@ def cadastrar_pin(id, pin, escola, ano, turma, turmano):
         """, (pin, escola, ano, turma, turmano, id))
         conn.commit()
 
+import sqlite3
+
 def mudar_turma(id, ano, turma, turmano):
-    with sqlite3.connect("usuarios.db") as conn:
-        cursor = conn.cursor()
-        cursor.execute("""
-            UPDATE usuarios
-            SET ano = ?, turma = ?, turmano = ?
-            WHERE id = ?
-        """, (ano, turma, turmano, id))
-        conn.commit()
+    try:
+        with sqlite3.connect("usuarios.db") as conn_user:
+            cursor_u = conn_user.cursor()
+            cursor_u.execute("""
+                UPDATE usuarios
+                SET ano = ?, turma = ?, turmano = ?
+                WHERE id = ?
+            """, (ano, turma, turmano, id))
+            conn_user.commit()
+            return "Sucesso: Turma atualizada com sucesso."
+    except sqlite3.Error as e:
+        return f"Erro ao atualizar banco de dados: {e}"
+
+def can_chance_team(turmano):
+    with sqlite3.connect("turmas.db") as conn_turma:
+        cursor_t = conn_turma.cursor()
+        cursor_t.execute("SELECT 1 FROM lista_turmas WHERE ano_serie = ?", (turmano,))
+        existe = cursor_t.fetchone()
+
+    if not existe:
+        return "Erro."
+    else:
+        return "Sucesso."
 
 def check_pin(user_id):
     with sqlite3.connect("usuarios.db") as conn:

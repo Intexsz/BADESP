@@ -152,12 +152,12 @@
 
                   <td>
                     <select name="lista_turmas" class="select-serie">
-                      <option value="{{ d[1] }}">{{ d[1] }} (Atual)</option>
+                      <option value="{{ d[1] }}" class="opcao-atual">{{ d[1] }} (Atual)</option>
+
                       {% for turma in turmas %}
                       {% set ano_t = turma.split('°')[0] %}
                       {% set serie_t = turma.split('°')[1] %}
 
-                      {# Criamos TODOS os options, mas colocamos o ANO numa classe secreta #}
                       <option value="{{ serie_t }}" data-ano="{{ ano_t }}" style="display: none;">
                         {{ serie_t }}
                       </option>
@@ -165,7 +165,7 @@
                     </select>
                   </td>
 
-                  <td><a onclick="alert('Usuario {{ d[0] }} Apagado')" href="/Alunos"
+                  <td><a onclick="alert('ai suspende o {{ d[0] }} ai')" href="/Alunos"
                       style="color: red; text-decoration: none;">❌Suspender Acesso do Aluno</a></td>
                 </tr>
                 {% endif %}
@@ -201,36 +201,38 @@
 
     <script>
       function atualizarSeries(selectAno) {
-        // 1. Achar a linha (tr) onde o clique aconteceu
         const linha = selectAno.closest('tr');
-
-        // 2. Achar o select de série desta mesma linha
         const selectSerie = linha.querySelector('.select-serie');
+        const optionAtual = selectSerie.querySelector('.opcao-atual');
+
         const anoSelecionado = selectAno.value;
+        const anoOriginal = selectAno.getAttribute('data-ano-original');
 
-        // 3. Pegar todas as opções de série
-        const options = selectSerie.querySelectorAll('option');
+        // 1. Lógica para mostrar/esconder a opção "(Atual)"
+        if (anoSelecionado === anoOriginal) {
+          optionAtual.style.display = "block";
+          selectSerie.value = optionAtual.value; // Volta para o atual se o ano for o mesmo
+        } else {
+          optionAtual.style.display = "none";
+        }
 
-        let encontrou = false;
+        // 2. Filtrar as outras séries baseadas no ano
+        const options = selectSerie.querySelectorAll('option:not(.opcao-atual)');
+        let primeiraOpcaoValida = null;
 
         options.forEach(opt => {
-          // O "Atual" a gente sempre deixa ou remove se quiser resetar
-          if (opt.textContent.includes("(Atual)")) {
-            opt.style.display = "block";
-            return;
-          }
-
-          // Se o dado do ano bater com o selecionado, mostra
           if (opt.getAttribute('data-ano') === anoSelecionado) {
             opt.style.display = "block";
-            encontrou = true;
+            if (!primeiraOpcaoValida) primeiraOpcaoValida = opt.value;
           } else {
             opt.style.display = "none";
           }
         });
 
-        // Resetar o valor do select de série para a primeira opção visível
-        selectSerie.value = selectSerie.querySelector('option[style*="display: block"]').value;
+        // 3. Se mudou o ano e escondeu o atual, seleciona a primeira série disponível do novo ano
+        if (anoSelecionado !== anoOriginal && primeiraOpcaoValida) {
+          selectSerie.value = primeiraOpcaoValida;
+        }
       }
     </script>
 </body>

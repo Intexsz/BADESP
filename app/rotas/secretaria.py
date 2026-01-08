@@ -1,6 +1,6 @@
 from flask import Flask, session, redirect, url_for, Blueprint,render_template, request, flash
 from authlib.integrations.flask_client import OAuth
-from app.database.db_usuario import get_role, pegar_no_nome, usuario_tem_pin, buscar_nome_aluno, novo_pin_secretaria,buscar_usuario,listar_alunose, mudar_turma, check_team, novo_pin
+from app.database.db_usuario import get_role, pegar_no_nome, usuario_tem_pin, buscar_nome_aluno, novo_pin_secretaria,buscar_usuario,listar_alunose, mudar_turma, check_team, novo_pin,can_chance_team
 from app.database.db_denuncia import get_report_status, open_report_db, get_report, checar_envolvidos
 from app.database.db_denuncia import update_status, post_comment, check_coment,list_reports,list_approved
 from app.database.db_site import create_team, mostrar_teams, delete_team, check_teams
@@ -339,7 +339,17 @@ def alterar_todas_turmas():
             nova_turma = turmas[i]
             anoseturmas = f"{novo_ano}°{nova_turma}"
             
-            mudar_turma(aluno_id, novo_ano, nova_turma, anoseturmas)
+            if can_chance_team(anoseturmas) == "Sucesso.":
+                mudar_turma(aluno_id, novo_ano, nova_turma, anoseturmas)
+                return redirect(url_for('rotasecretaria.listar_alunos'))
+            else:
+                return f"""
+            <script>
+                alert("Erro: A turma {anoseturmas} não existe.");
+                window.location.href = "{url_for('rotasecretaria.listar_alunos')}";
+            </script>
+        """
+
     return redirect(url_for('rotasecretaria.listar_alunos'))
 
 @secretaria.route('/Alunos', methods=['GET'])
