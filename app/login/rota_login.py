@@ -36,20 +36,17 @@ def processar_login(cargo):
             CLIENT_ID,
             clock_skew_in_seconds=300
         )
-
-        emaile = idinfo['email']
-        checks = emaile.split('@')
-        if checks[1] == 'al.educacao.sp.gov.br':
-            cargo = 'Aluno'
-        elif checks[1] == 'prof.educacao.sp.gov.br':
-            cargo = 'Professor'
         user_data = {
-            "id": idinfo["sub"],
+            "id": str(idinfo["sub"]),
             "email": idinfo["email"],
             "name": idinfo.get("name"),
             "picture": idinfo.get("picture"),
             "cargo": cargo
         }
+        save_user(user_data)
+        
+        session["user_id"] = user_data["id"]
+        session.permanent = True
 
         save_user(user_data)
         session["user_id"] = user_data["id"]

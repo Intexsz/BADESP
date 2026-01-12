@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Alunos Cadastrados</title>
+  <title>B.A.D.E.S.P - Alunos Cadastrados</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='aluno.css') }}">
   <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icone.png') }}">
 
@@ -21,7 +21,7 @@
       <button class="menu-btn"><span class="material-icons">menu</span></button>
       <h1 class="titulo">B.A.D.E.S.P</h1>
       <div class="perfil">
-        <img src="{{ usuario[3] }}" alt="Logado como: {{ usuario[1] }}">
+        <img src="{{ usuario['foto'] }}" alt="Logado como: {{ usuario['nome'] }}">
       </div>
     </header>
 
@@ -121,24 +121,23 @@
               <tbody>
                 {% for d in alunos_por_turma %}
                 {% if nome != "📂Denúncia em aberto📂" %}
-                <tr onclick="verificarPin({{ d[0] }})"
+                <tr onclick="verificarPin({{ d['id'] }})"
                   style="cursor:pointer; color: {{ cor }}; font-family: Arial, sans-serif;">
                   <td>
-                    {{d[0].split(' ')[0]}}
-                    {% if not d[0].split(' ')[-1] == d[0].split(' ')[-2] %} {{d[0].split(' ')[-2]}} {% endif %}
-                    {% if not d[0].split(' ')[0] == d[0].split(' ')[-1] %} {{d[0].split(' ')[-1]}} {% endif %}
+                    {{d['nome'].split(' ')[0]}}
+                    {% if not d['nome'].split(' ')[-1] == d['nome'].split(' ')[-2] %} {{d['nome'].split(' ')[-2]}} {% endif %}
+                    {% if not d['nome'].split(' ')[0] == d['nome'].split(' ')[-1] %} {{d['nome'].split(' ')[-1]}} {% endif %}
                   </td>
-                  <td>{{ d[2] }}</td>
-                  <td>{{ d[3] }}°{{ d[1] }}</td>
-                  <td>{{ d[5] }}</td>
-                  <td>{{ d[6] }}</td>
-
-                  <input type="hidden" name="aluno_ids" value="{{ d[4] }}">
-
+                  <td>{{ d['email'] }}</td>
+                  <td>{{ d['ano'] }}°{{ d['turma'] }}</td>
+                  <td>{{ d['total'] }}</td>
+                  <td>{{ d['aprov'] }}</td>
+                  
+                  <input type="hidden" name="aluno_ids" value="{{ d['id'] }}">
 
                   <td>
                     <select name="lista_anos" class="select-ano" onchange="atualizarSeries(this)">
-                      <option value="{{ d[3] }}">{{ d[3] }} (Atual)</option>
+                      <option value="{{ d['ano'] }}">{{ d['ano'] }} (Atual)</option>
                       {% set anos_exibidos = [] %}
                       {% for turma in turmas %}
                       {% set ano_loop = turma.split('°')[0] %}
@@ -152,7 +151,7 @@
 
                   <td>
                     <select name="lista_turmas" class="select-serie">
-                      <option value="{{ d[1] }}">{{ d[1] }} (Atual)</option>
+                      <option value="{{ d['turma'] }}">{{ d['turma'] }} (Atual)</option>
                       {% for turma in turmas %}
                       {% set ano_t = turma.split('°')[0] %}
                       {% set serie_t = turma.split('°')[1] %}
@@ -165,7 +164,7 @@
                     </select>
                   </td>
 
-                  <td><a onclick="alert('se suspende o {{ d[0] }} ai')" href="/Alunos"
+                  <td><a onclick="alert('se suspende o {{ d['id'] }} ai')" href="/Alunos"
                       style="color: red; text-decoration: none;">❌Suspender Acesso do Aluno</a></td>
                 </tr>
                 {% endif %}

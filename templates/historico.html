@@ -20,7 +20,7 @@
     <button class="menu-btn"><span class="material-icons">menu</span></button>
     <h1 class="titulo">B.A.D.E.S.P</h1>
     <div class="perfil">
-      <img src="{{ usuario[3] }}" alt="Logado como: {{ usuario[1] }}">
+      <img src="{{ usuario['foto'] }}" alt="Logado como: {{ usuario['nome'] }}">
     </div>
   </header>
 
@@ -72,45 +72,45 @@
           {% set cor = "white" %}
           {% set nome = "📂Denúncia em aberto 📂" %}
 
-          {% if d[5] == 'Aprovado.' %}
+          {% if d['status'] == 'Aprovado.' %}
           {% set cor = "rgb(0, 200, 0)" %}
-          {% set nome = "✔️Aprovado por " ~ d[7] ~ " ✔️" %}
-          {% elif d[5] == 'Recusado.' %}
+          {% set nome = "✔️Aprovado por " ~ d['visto'] ~ " ✔️" %}
+          {% elif d['status'] == 'Recusado.' %}
           {% set cor = "red" %}
-          {% set nome = "❌Recusado por " ~ d[7] ~ " ❌" %}
-          {% elif d[5] == 'Arquivado.' %}
+          {% set nome = "❌Recusado por " ~ d['visto'] ~ " ❌" %}
+          {% elif d['status'] == 'Arquivado.' %}
           {% set cor = "gray" %}
-          {% set nome = "🗃️Arquivado por " ~ d[7] ~ " 🗃️" %}
-          {% elif d[5] == 'Visto.' %}
+          {% set nome = "🗃️Arquivado por " ~ d['visto'] ~ " 🗃️" %}
+          {% elif d['status'] == 'Visto.' %}
           {% set cor = "rgb(255, 150, 0)" %}
-          {% set nome = "🔎Visualizado por " ~ d[7] ~ " às " ~ d[10] ~ " 🔎" %}
+          {% set nome = "🔎Visualizado por " ~ d['visto'] ~ " às " ~ d['datavisto'] ~ " 🔎" %}
           {% endif %}
 
-          {% if d[13] == 'Alta' %}
+          {% if d['gravidade'] == 'Alta' %}
           {% set corr = "red" %}
-          {% elif d[13] == 'Média' %}
+          {% elif d['gravidade'] == 'Média' %}
           {% set corr = "rgb(255, 170, 0)" %}
-          {% elif d[13] == 'Baixa' %}
+          {% elif d['gravidade'] == 'Baixa' %}
           {% set corr = "rgb(0, 255, 0)" %}
           {% else %}
           {% set corr = "gray" %}
           {% endif %}
 
           {% if nome != "📂Denúncia em aberto📂" %}
-          <tr onclick="verificarPin({{ d[0] }})"
+          <tr onclick="verificarPin({{ d['id'] }})"
             style="cursor:pointer; color: {{ cor }}; font-family: Arial, sans-serif;">
 
 
-            <td>{{ d[0] }}</td>
-            <td>{{ d[6].split(' ')[0]}}
-              {% if not d[6].split(' ')[0] == d[6].split(' ')[-1] %}
-              {{d[6].split(' ')[-1]}}
+            <td>{{ d['id'] }}</td>
+            <td>{{ d['nome'].split(' ')[0]}}
+              {% if not d['nome'].split(' ')[0] == d['nome'].split(' ')[-1] %}
+              {{d['nome'].split(' ')[-1]}}
               {% endif %}</td>
-            <td>{{ d[15] }}°{{ d[14] }}</td>
-            <td>{{ d[1] }}</td>
-            <td>{{ d[2] }}</td>
-            <td style="color: {{ corr }};"><b>{{ d[13] }}</b></td>
-            <td>{{ d[4] }}</td>
+            <td>{{ d['ano'] }}°{{ d['turma'] }}</td>
+            <td>{{ d['titulo'] }}</td>
+            <td>{{ d['tipo'] }}</td>
+            <td style="color: {{ corr }};"><b>{{ d['gravidade'] }}</b></td>
+            <td>{{ d['data'] }}</td>
             {% set partes = nome.split(' ') %}
             {% if not tipo == 'Abertas' %}
             <td>

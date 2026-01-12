@@ -374,12 +374,14 @@ def listar_alunos():
 # Adiciona denúncias totais e aprovadas a cada aluno
         alunos_processados = []
         for a in alunos:
-            nome = a[0]
+            nome = a['nome'] # Acessa pela chave, não pelo índice
             total = list_reports(nome)
             aprov = list_approved(nome)
 
-    # adiciona ao final da tupla (nome, turma, email, ano, total, aprobadas)
-            alunos_processados.append((*a, total, aprov))
+    # Para adicionar dados ao dicionário atual de forma limpa:
+            a['total'] = total
+            a['aprov'] = aprov
+            alunos_processados.append(a)
 
 # Paginação em cima da lista já processada
         page = int(request.args.get("page", 1))
