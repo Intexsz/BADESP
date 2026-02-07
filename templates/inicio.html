@@ -15,6 +15,34 @@
 </head>
 
 <body>
+
+  <div id="pinModal" style="
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#0008;
+  align-items:flex-start;
+  justify-content:center;
+  padding-top:30px;
+  z-index:9999;
+">
+    <div style="background:rgb(73, 73, 73); padding:20px; border-radius:8px; text-align:center;">
+      <p>Digite o PIN (6 caracteres)</p>
+      <input
+  id="pinInput"
+  maxlength="6"
+  inputmode="numeric"
+  pattern="[0-9]*"
+  autocomplete="off"
+  style="font-size:18px; text-align:center;"
+  oninput="this.value = this.value.replace(/\D/g,'').slice(0,6)"
+/>
+      <br><br>
+      <button type="button" onclick="fecharModal()">Cancelar</button>
+      <button type="button" onclick="confirmarPinModal()">OK</button>
+    </div>
+  </div>
+
   <header class="cabecalho glass">
     <button class="menu-btn"><span class="material-icons">menu</span></button>
     <h1 class="titulo">B.A.D.E.S.P</h1>
@@ -28,8 +56,9 @@
       <li><a href="/Inicio"><span class="material-icons">home</span> Início</a></li>
       <li><a href="/Ajuda"><span class="material-icons">help_outline</span> Ajuda</a></li>
       <li><a href="/Denuncia"><span class="material-icons">report</span> Fazer Denúncia</a></li>
+      <li><a href="/Feedback"><span class="material-icons">campaign</span> Feedback</a></li>
 
-      <li><a href="/Logout" class="logout" onclick="confirmarLogout()"><span class="material-icons">logout</span>
+      <li><a href="/Logout" class="logout" onclick="confirmarLogout(event)"><span class="material-icons">logout</span>
           Deslogar</a></li>
     </ul>
   </nav>
@@ -73,8 +102,9 @@
           {% elif d['status'] == 'Arquivado.' %}
           <p><span style="color: gray;">🗃️Situação: Arquivado por: {{ d['visto'] }}🗃️<span>
                 <p>
-                  {% elif d['status'] == 'Visto.' %} 
-                <p><span style="color: orange;">🔎Situação: Visualizado por: {{ d['visto'] }} ás {{ d['datavisto'] }}🔎<span>
+                  {% elif d['status'] == 'Visto.' %}
+                <p><span style="color: orange;">🔎Situação: Visualizado por: {{ d['visto'] }} ás {{ d['datavisto']
+                    }}🔎<span>
                       <p>
                         {% elif d['status'] == 'Expirada.' %}
                       <p><span style="color: gray;">⏰Situação: Expirado.⏰<span>
@@ -84,7 +114,7 @@
                             {% endif %}
                             <form class="apagar-form" action="{{ url_for('rotasecretaria.detalhe_denuncia', id=d.id) }}"
                               method="POST">
-                              <button type="button" onclick="verificarPin({{ d.id }})">Abrir Denúncia</button>
+                              <button type="button" onclick="abrirModalPin({{ d.id }})">Abrir Denúncia</button>
                             </form>
         </div>
         <br>
@@ -98,44 +128,65 @@
   </main>
 
   <script>
-    async function verificarPin(denunciaId) {
-      const pin = prompt("Digite seu PIN para abrir a denúncia:");
-      if (!pin) return;
+    let denunciaAtual = null;
+
+    function abrirModalPin(id) {
+      denunciaAtual = id;
+      const modal = document.getElementById("pinModal");
+      const input = document.getElementById("pinInput");
+
+      input.value = "";
+      modal.style.display = "flex";
+      input.focus();
+    }
+
+    function fecharModal() {
+      const modal = document.getElementById("pinModal");
+      const input = document.getElementById("pinInput");
+
+      modal.style.display = "none";
+      input.value = "";
+    }
+
+
+    async function confirmarPinModal() {
+      const pin = document.getElementById("pinInput").value;
+      if (pin.length < 6) return alert("PIN incompleto");
 
       try {
         const response = await fetch(`{{ url_for('rotas.verificar_pin') }}`, {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ pin: pin })
         });
 
         const result = await response.json();
 
         if (result.status === "ok") {
+          fecharModal();
 
           const form = document.createElement("form");
           form.method = "POST";
-          form.action = `/allow_detail`;
-          document.body.appendChild(form);
+          form.action = "/allow_detail";
 
-          const inputIdzin = document.createElement("input");
-          inputIdzin.type = "hidden";
-          inputIdzin.name = "idzin";
-          inputIdzin.value = denunciaId
-          form.appendChild(inputIdzin);
+          const inputId = document.createElement("input");
+          inputId.type = "hidden";
+          inputId.name = "idzin";
+          inputId.value = denunciaAtual;
+
+          form.appendChild(inputId);
           document.body.appendChild(form);
           form.submit();
         } else {
-          alert(result.mensagem || "PIN incorreto. Tente novamente.");
+          alert(result.mensagem || "PIN incorreto.");
         }
-      } catch (error) {
-        console.error("Erro ao verificar o PIN:", error);
-        alert("Erro no servidor. Tente novamente mais tarde.");
+
+      } catch (e) {
+        alert("Erro no servidor.");
       }
     }
   </script>
+
 
   <script>
     const btn = document.querySelector('.menu-btn');
@@ -143,11 +194,17 @@
 
     btn.addEventListener('click', () => sidebar.classList.toggle('ativo'));
 
-    function confirmarLogout() {
+    function confirmarLogout(e) {
+      e.preventDefault();          // trava o link
+      e.stopPropagation();        // trava qualquer outro evento
+
       if (confirm("Deseja realmente sair?")) {
-        alert("Logout realizado com sucesso!");
+        window.location.href = "/Logout";
       }
+
+      return false;
     }
+
 
     // ===== FECHAR MENU CLICANDO FORA + REDIRECIONAR P/ INÍCIO =====
     document.addEventListener("click", (e) => {
@@ -156,6 +213,11 @@
       if (sidebar.classList.contains("ativo") && clicouFora) {
         sidebar.classList.remove("ativo");
       }
+    });
+  </script>
+  <script>
+    window.addEventListener("pageshow", function () {
+      fecharModal(); // garante que o modal nunca volte aberto
     });
   </script>
 

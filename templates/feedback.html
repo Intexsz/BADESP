@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icone.png') }}">
+  <title>B.A.D.E.S.P - Feedback</title>
+</head>
+<body>
+    <form autocomplete="off" method="POST" style="text-align: center; align-items: center; justify-content: center; display: flex; flex-direction: column; font-size: 29px;">
+        <br>
+        <input type="text" name="titulo" id="titulo" placeholder="Título do Feedback" required><br>
+        <textarea name="feedback" id="feedback" placeholder="Feedback" required></textarea><br>
+        <select name="tipo" id="tipo">
+            <option value="Sugestões">Sugestão</option>
+            <option value="Instabilidades">Instabilidade</option>
+            <option value="Crítica">Crítica</option>
+            <option value="Desempenho">Desempenho</option>
+            <option value="Outro">Outro</option>
+        </select><br>
+        <input type="submit" name="butttttttttton" value="Enviar Feedback">
+    </form>
+    <script>
+        const elemento = document.getElementById('butttttttttton');
+        elemento.remove();
+    </script>
+</body>

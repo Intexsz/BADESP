@@ -1,5 +1,4 @@
 import pymysql
-import logging
 import re
 from datetime import datetime, timedelta, timezone
 from app.database.db_usuario import buscar_usuario, pegar_no_nome
@@ -116,7 +115,14 @@ def show_reports(user_id, cargo, tipo):
     conn = get_conn_denuncia()
     cursor = conn.cursor()
     nomezin = pegar_no_nome(user_id)
-
+    if cargo == 'Admin':
+            cursor.execute('''
+            SELECT id, titulo, tipo, descricao, data, status, nome, visto, cargo, comentario, datavisto, descricao_ia, gravidade, turma, ano
+            FROM denuncias
+            ORDER BY id DESC''')
+            denuncias = cursor.fetchall()
+            conn.close()
+            return denuncias
     if tipo != 'Tudo':
         if tipo == 'Resolvidas':
             if cargo == "Secretaria":

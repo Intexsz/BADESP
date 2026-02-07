@@ -129,6 +129,24 @@ def detalhe_denuncia(id):
         session.pop("allow_detail", None)
         session.pop("allow_folder", None)
         return render_template("denuncia_aberta.html", usuario=denuncia,tipo_usuario='Aluno',usuario2=buscar_usuario(session['user_id']), envolvidos = checar_envolvidos(id))
+    elif cargo == 'Admin':
+        denuncia = get_report(id)
+        nome = pegar_no_nome(session['user_id'])
+
+        if denuncia == 'no':
+            return "Denúncia não encontrada", 404
+
+        # só o dono da denúncia pode abrir
+        if denuncia['nome'] != nome:
+            return f"""
+        <script>
+            alert("Você não tem permissão para acessar esta denúncia.");
+            window.location.href = "{url_for('rotas.inicio')}";
+        </script>"""
+
+        session.pop("allow_detail", None)
+        session.pop("allow_folder", None)
+        return render_template("denuncia_aberta.html", usuario=denuncia,tipo_usuario='Aluno',usuario2=buscar_usuario(session['user_id']), envolvidos = checar_envolvidos(id))
     else:
         return redirect(url_for('rotas.inicio'))
 ######----------######

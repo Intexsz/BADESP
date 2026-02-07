@@ -16,6 +16,35 @@
 </head>
 
 <body>
+
+  <div id="pinModal" style="
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#0008;
+  align-items:flex-start;
+  justify-content:center;
+  padding-top:30px;
+  z-index:9999;
+">
+    <div style="background:rgb(73, 73, 73); padding:20px; border-radius:8px; text-align:center;">
+      <p>Digite o PIN (6 caracteres)</p>
+      <input
+  id="pinInput"
+  maxlength="6"
+  inputmode="numeric"
+  pattern="[0-9]*"
+  autocomplete="off"
+  style="font-size:18px; text-align:center;"
+  oninput="this.value = this.value.replace(/\D/g,'').slice(0,6)"
+/>
+
+      <br><br>
+      <button type="button" onclick="fecharModal()">Cancelar</button>
+      <button type="button" onclick="confirmarPinModal()">OK</button>
+    </div>
+  </div>
+
   <header class="cabecalho glass">
     <button class="menu-btn"><span class="material-icons">menu</span></button>
     <h1 class="titulo">B.A.D.E.S.P</h1>
@@ -30,7 +59,7 @@
       <li><a href="/Ajuda"><span class="material-icons">help_outline</span> Ajuda</a></li>
       <li><a href="/Denuncia"><span class="material-icons">report</span> Fazer Denúncia</a></li>
 
-      <li><a href="/Logout" class="logout" onclick="confirmarLogout()"><span class="material-icons">logout</span>
+      <li><a href="/Logout" class="logout" onclick="confirmarLogout(event)"><span class="material-icons">logout</span>
           Deslogar</a></li>
     </ul>
   </nav>
@@ -81,94 +110,130 @@
 
         <input type="hidden" name="lista_envolvidos_final" id="input-envolvidos-final">
 
-    <p>Deseja enviar para quem?</p>
-    <select required name="quem" id="quem" onchange="mostrarPessoas()">
-      <option value="">Escolha:</option>
-      <option value="Professor">Professor</option>
-      <option value="Secretaria">Secretaria</option>
-      <option value="Ambos">Todas as Autoridades</option>
-    </select>
+        <p>Deseja enviar para quem?</p>
+        <select required name="quem" id="quem" onchange="mostrarPessoas()">
+          <option value="">Escolha:</option>
+          <option value="Professor">Professor</option>
+          <option value="Secretaria">Secretaria</option>
+          <option value="Ambos">Todas as Autoridades</option>
+        </select>
 
-    <div id="pessoaDiv" style="display:none; margin-top:10px;">
-      <label for="pessoa">Escolha a pessoa:</label>
-      <select name="pessoa" id="pessoa">
-      </select>
-    </div>
+        <div id="pessoaDiv" style="display:none; margin-top:10px;">
+          <label for="pessoa">Escolha a pessoa:</label>
+          <select name="pessoa" id="pessoa">
+          </select>
+        </div>
 
-    <button type="submit" id="botãooo">Enviar Denúncia</button>
-    </form>
+        <button type="submit" id="botãooo">Enviar Denúncia</button>
+      </form>
     </div>
 
     <div id="dados" data-professores='{{ professor|tojson }}' data-secretarias='{{ secretaria|tojson }}'></div>
 
   </main>
 
-  <script>
-    const form = document.getElementById('form-denuncia');
-    const elemento = document.getElementById('botãooo');
+<script>
+const form = document.getElementById('form-denuncia');
+const elemento = document.getElementById('botãooo');
 
-    form.addEventListener('submit', async function (event) {
-      event.preventDefault();
-      const confirmado = confirm(
-        "Você tem certeza que quer enviar esta denúncia? " +
-        "A gestão escolar terá ACESSO ao seu nome e saberá que você enviou esta denúncia. " +
-        "Após enviar, você não poderá mais editar. " +
-        "Se enviar, só poderá APAGAR antes da Secretaria abrir sua denúncia. " +
-        "Caso seja visualizada, você NÃO PODERÁ MAIS APAGAR SUA DENÚNCIA."
-      );
+let aguardandoEnvio = false;
 
-      if (!confirmado) return;
+// ===== ABRE MODAL PARA ENVIO =====
+function abrirModalPinEnvio() {
+  aguardandoEnvio = true;
 
-      const pin = prompt("Digite seu PIN para confirmar o envio:");
+  const modal = document.getElementById("pinModal");
+  const input = document.getElementById("pinInput");
 
-      if (!pin) {
-        return;
-      }
+  input.value = "";
+  modal.style.display = "flex";
+  input.focus();
+}
 
-      try {
-        const response = await fetch(`{{ url_for('rotas.verificar_pin') }}`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ pin: pin })
-        });
+// ===== FECHA MODAL LIMPO =====
+function fecharModal() {
+  const modal = document.getElementById("pinModal");
+  const input = document.getElementById("pinInput");
 
-        const result = await response.json();
+  modal.style.display = "none";
+  input.value = "";
+}
 
-        if (result.status === "ok") {
-          alert("Denúncia enviada com sucesso!");
-          form.submit();
-          elemento.remove();
-        } else {
-          alert(result.mensagem || "PIN incorreto. Tente novamente.");
-        }
+// ===== CONFIRMA PIN (SERVE PARA ENVIO) =====
+async function confirmarPinModal() {
+  const pin = document.getElementById("pinInput").value;
+  if (pin.length < 6) return alert("PIN incompleto");
 
-      } catch (error) {
-        console.error("Erro ao verificar o PIN:", error);
-        alert("Erro no servidor. Tente novamente mais tarde.");
-      }
+  try {
+    const response = await fetch(`{{ url_for('rotas.verificar_pin') }}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ pin: pin })
     });
 
-    document.addEventListener('DOMContentLoaded', (event) => {
-      const mainCategorySelect = document.getElementById('main-category');
-      const outrosBox = document.getElementById('outros-box');
-      const otherCategoryInput = document.getElementById('other-category-input');
+    const result = await response.json();
 
-      if (mainCategorySelect) {
-        mainCategorySelect.addEventListener('change', function () {
-          if (this.value === 'Outros') {
-            outrosBox.style.display = 'block';
-            otherCategoryInput.setAttribute('required', 'required');
-          } else {
-            outrosBox.style.display = 'none';
-            otherCategoryInput.removeAttribute('required');
-            otherCategoryInput.value = '';
-          }
-        });
+    if (result.status !== "ok") {
+      return alert(result.mensagem || "PIN incorreto.");
+    }
+
+    fecharModal();
+
+    if (aguardandoEnvio) {
+      aguardandoEnvio = false;
+      alert("Denúncia enviada com sucesso!");
+      form.submit();
+      elemento.remove();
+    }
+
+  } catch (error) {
+    alert("Erro no servidor.");
+  }
+}
+
+// ===== GARANTE QUE O MODAL NÃO VOLTE ABERTO AO VOLTAR PÁGINA =====
+window.addEventListener("pageshow", function () {
+  fecharModal();
+});
+
+// ===== INTERCEPTA O SUBMIT =====
+form.addEventListener('submit', function (event) {
+  event.preventDefault();
+
+  const confirmado = confirm(
+    "Você tem certeza que quer enviar esta denúncia? " +
+    "A gestão escolar terá ACESSO ao seu nome e saberá que você enviou esta denúncia. " +
+    "Após enviar, você não poderá mais editar. " +
+    "Se enviar, só poderá APAGAR antes da Secretaria abrir sua denúncia. " +
+    "Caso seja visualizada, você NÃO PODERÁ MAIS APAGAR SUA DENÚNCIA."
+  );
+
+  if (!confirmado) return;
+
+  abrirModalPinEnvio();
+});
+
+// ===== LÓGICA DO SELECT OUTROS =====
+document.addEventListener('DOMContentLoaded', () => {
+  const mainCategorySelect = document.getElementById('main-category');
+  const outrosBox = document.getElementById('outros-box');
+  const otherCategoryInput = document.getElementById('other-category-input');
+
+  if (mainCategorySelect) {
+    mainCategorySelect.addEventListener('change', function () {
+      if (this.value === 'Outros') {
+        outrosBox.style.display = 'block';
+        otherCategoryInput.setAttribute('required', 'required');
+      } else {
+        outrosBox.style.display = 'none';
+        otherCategoryInput.removeAttribute('required');
+        otherCategoryInput.value = '';
       }
     });
+  }
+});
+</script>
 
-
-  </script>
 
 
   <script>
@@ -230,10 +295,15 @@
 
     btn.addEventListener('click', () => sidebar.classList.toggle('ativo'));
 
-    function confirmarLogout() {
+    function confirmarLogout(e) {
+      e.preventDefault();          // trava o link
+      e.stopPropagation();        // trava qualquer outro evento
+
       if (confirm("Deseja realmente sair?")) {
-        alert("Logout realizado com sucesso!");
+        window.location.href = "/Logout";
       }
+
+      return false;
     }
 
     // ===== FECHAR MENU CLICANDO FORA + REDIRECIONAR P/ INÍCIO =====
@@ -246,125 +316,126 @@
     });
   </script>
 
-<script>
+  <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // Dados do Python
-        const alunosPorTurma = {{ alunos_por_turma | tojson }};
-        
-        // Elementos do DOM
-        const selectTurma = document.getElementById("select-turma");
-        const selectAluno = document.getElementById("select-aluno");
-        const containerAluno = document.getElementById("container-aluno");
-        const btnAdd = document.getElementById("btn-add-aluno");
-        const listaContainer = document.getElementById("lista-envolvidos-container");
-        const inputHidden = document.getElementById("input-envolvidos-final");
-        const avisoVazio = document.getElementById("aviso-vazio");
+      // Dados do Python
+      const alunosPorTurma = {{ alunos_por_turma | tojson
+    }};
 
-        // Array para guardar os envolvidos
-        let listaEnvolvidos = [];
+    // Elementos do DOM
+    const selectTurma = document.getElementById("select-turma");
+    const selectAluno = document.getElementById("select-aluno");
+    const containerAluno = document.getElementById("container-aluno");
+    const btnAdd = document.getElementById("btn-add-aluno");
+    const listaContainer = document.getElementById("lista-envolvidos-container");
+    const inputHidden = document.getElementById("input-envolvidos-final");
+    const avisoVazio = document.getElementById("aviso-vazio");
 
-        // 1. Atualiza o Select de Alunos quando muda a Turma
-        function atualizarSelectAlunos() {
-            const turmaSelecionada = selectTurma.value;
-            selectAluno.innerHTML = '<option value="" disabled selected>Selecione um aluno</option>';
+    // Array para guardar os envolvidos
+    let listaEnvolvidos = [];
 
-            // Só mostra o select se tiver turma E se a lista não estiver cheia
-            if (turmaSelecionada && alunosPorTurma[turmaSelecionada] && listaEnvolvidos.length < 5) {
-                alunosPorTurma[turmaSelecionada].forEach(aluno => {
-                    if (!aluno) return;
-                    const option = document.createElement("option");
-                    option.value = aluno;
-                    option.textContent = aluno;
-                    selectAluno.appendChild(option);
-                });
-                containerAluno.style.display = "flex"; // Usamos flex para alinhar o botão
-            } else {
-                containerAluno.style.display = "none";
-            }
-        }
+    // 1. Atualiza o Select de Alunos quando muda a Turma
+    function atualizarSelectAlunos() {
+      const turmaSelecionada = selectTurma.value;
+      selectAluno.innerHTML = '<option value="" disabled selected>Selecione um aluno</option>';
 
-        // 2. Renderiza a lista visual (cria as tables/divs)
-        function renderizarLista() {
-            // Limpa a lista visual (mantendo o aviso se vazio)
-            listaContainer.innerHTML = '';
+      // Só mostra o select se tiver turma E se a lista não estiver cheia
+      if (turmaSelecionada && alunosPorTurma[turmaSelecionada] && listaEnvolvidos.length < 5) {
+        alunosPorTurma[turmaSelecionada].forEach(aluno => {
+          if (!aluno) return;
+          const option = document.createElement("option");
+          option.value = aluno;
+          option.textContent = aluno;
+          selectAluno.appendChild(option);
+        });
+        containerAluno.style.display = "flex"; // Usamos flex para alinhar o botão
+      } else {
+        containerAluno.style.display = "none";
+      }
+    }
 
-            if (listaEnvolvidos.length === 0) {
-                listaContainer.appendChild(avisoVazio);
-                avisoVazio.style.display = 'block';
-            } else {
-                avisoVazio.style.display = 'none';
-                
-                // Cria um item visual para cada aluno no array
-                listaEnvolvidos.forEach((item, index) => {
-                    const div = document.createElement('div');
-                    div.className = 'item-envolvido';
-                    div.innerHTML = `
+    // 2. Renderiza a lista visual (cria as tables/divs)
+    function renderizarLista() {
+      // Limpa a lista visual (mantendo o aviso se vazio)
+      listaContainer.innerHTML = '';
+
+      if (listaEnvolvidos.length === 0) {
+        listaContainer.appendChild(avisoVazio);
+        avisoVazio.style.display = 'block';
+      } else {
+        avisoVazio.style.display = 'none';
+
+        // Cria um item visual para cada aluno no array
+        listaEnvolvidos.forEach((item, index) => {
+          const div = document.createElement('div');
+          div.className = 'item-envolvido';
+          div.innerHTML = `
                         <span><strong>${item.nome}</strong> <small>(${item.turma})</small></span>
                         <button type="button" class="btn-remove" onclick="removerEnvolvido(${index})">&times;</button>
                     `;
-                    listaContainer.appendChild(div);
-                });
-            }
-
-            // Atualiza o INPUT OCULTO que vai pro Flask
-            // Enviaremos no formato: "Nome (Turma), Nome2 (Turma2)"
-            const textoFinal = listaEnvolvidos.map(i => `${i.nome} (${i.turma})`).join(', ');
-            inputHidden.value = textoFinal;
-
-            // Controle de visibilidade do campo de adicionar (Máximo 5)
-            if (listaEnvolvidos.length >= 5) {
-                containerAluno.style.display = "none";
-                selectTurma.disabled = true; // Opcional: trava a turma
-                alert("Limite máximo de 5 envolvidos atingido.");
-            } else {
-                selectTurma.disabled = false;
-                // Se tiver turma selecionada, mostra o campo de aluno de novo
-                if(selectTurma.value) {
-                    containerAluno.style.display = "flex";
-                }
-            }
-        }
-
-        // 3. Função de Adicionar
-        btnAdd.addEventListener('click', function() {
-            const nome = selectAluno.value;
-            const turma = selectTurma.value;
-
-            if (!nome || !turma) {
-                alert("Selecione uma turma e um aluno.");
-                return;
-            }
-
-            // Verifica duplicidade
-            const jaExiste = listaEnvolvidos.some(i => i.nome === nome && i.turma === turma);
-            if (jaExiste) {
-                alert("Este aluno já foi adicionado.");
-                return;
-            }
-
-            // Adiciona ao array
-            listaEnvolvidos.push({ nome: nome, turma: turma });
-            
-            // Limpa o select de aluno para facilitar a proxima
-            selectAluno.value = "";
-            
-            renderizarLista();
+          listaContainer.appendChild(div);
         });
+      }
 
-        // 4. Função Global para Remover (precisa ser global window para o onclick do HTML funcionar)
-        window.removerEnvolvido = function(index) {
-            listaEnvolvidos.splice(index, 1); // Remove do array
-            renderizarLista(); // Atualiza a tela
-            atualizarSelectAlunos(); // Garante que o input reapareça se baixou de 5
-        };
+      // Atualiza o INPUT OCULTO que vai pro Flask
+      // Enviaremos no formato: "Nome (Turma), Nome2 (Turma2)"
+      const textoFinal = listaEnvolvidos.map(i => `${i.nome} (${i.turma})`).join(', ');
+      inputHidden.value = textoFinal;
 
-        // Event Listeners
-        selectTurma.addEventListener('change', atualizarSelectAlunos);
+      // Controle de visibilidade do campo de adicionar (Máximo 5)
+      if (listaEnvolvidos.length >= 5) {
+        containerAluno.style.display = "none";
+        selectTurma.disabled = true; // Opcional: trava a turma
+        alert("Limite máximo de 5 envolvidos atingido.");
+      } else {
+        selectTurma.disabled = false;
+        // Se tiver turma selecionada, mostra o campo de aluno de novo
+        if (selectTurma.value) {
+          containerAluno.style.display = "flex";
+        }
+      }
+    }
 
-        // Inicialização
-        atualizarSelectAlunos();
+    // 3. Função de Adicionar
+    btnAdd.addEventListener('click', function () {
+      const nome = selectAluno.value;
+      const turma = selectTurma.value;
+
+      if (!nome || !turma) {
+        alert("Selecione uma turma e um aluno.");
+        return;
+      }
+
+      // Verifica duplicidade
+      const jaExiste = listaEnvolvidos.some(i => i.nome === nome && i.turma === turma);
+      if (jaExiste) {
+        alert("Este aluno já foi adicionado.");
+        return;
+      }
+
+      // Adiciona ao array
+      listaEnvolvidos.push({ nome: nome, turma: turma });
+
+      // Limpa o select de aluno para facilitar a proxima
+      selectAluno.value = "";
+
+      renderizarLista();
     });
-</script>
+
+    // 4. Função Global para Remover (precisa ser global window para o onclick do HTML funcionar)
+    window.removerEnvolvido = function (index) {
+      listaEnvolvidos.splice(index, 1); // Remove do array
+      renderizarLista(); // Atualiza a tela
+      atualizarSelectAlunos(); // Garante que o input reapareça se baixou de 5
+    };
+
+    // Event Listeners
+    selectTurma.addEventListener('change', atualizarSelectAlunos);
+
+    // Inicialização
+    atualizarSelectAlunos();
+    });
+  </script>
 </body>
 
 </html>

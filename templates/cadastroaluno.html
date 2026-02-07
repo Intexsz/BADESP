@@ -48,10 +48,10 @@
             {% endif %}
 
             <div class="input-container">
-                <input placeholder="PIN" type="text" name="pin" id="pin" required maxlength="6" minlength="6" oninput="this.value = this.value.replace(/\D/g, '')">
+                <input placeholder="PIN" type="text" name="pin" id="pin" inputmode="numeric" required maxlength="6" minlength="6" oninput="this.value = this.value.replace(/\D/g, '')">
             </div>
             <div class="input-container">
-                <input placeholder="Confirmar PIN" type="text" name="confirmar" id="confirmar" required maxlength="6" minlength="6" oninput="this.value = this.value.replace(/\D/g, '')">
+                <input placeholder="Confirmar PIN" type="text" name="confirmar" inputmode="numeric" id="confirmar" required maxlength="6" minlength="6" oninput="this.value = this.value.replace(/\D/g, '')">
             </div>
 
             <div class='Termos'>

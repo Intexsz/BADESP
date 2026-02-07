@@ -89,6 +89,16 @@ def login_secretaria():
 def callback_professor():
     return processar_login("Professor")
 
+@rota_login.route('/Login/adminsupersecretroutelogin/callback', methods=["POST", "GET"])
+def callback_admin():
+    return processar_login("Admin")
+
+@rota_login.route('/Login/adminsupersecretroutelogin', methods=['GET', 'POST'])
+def login_admin():
+    if "user_id" in session:
+        return redirect(url_for('rotas.inicio'))
+    return render_template('login.html',tipo='/Login/adminsupersecretroutelogin/callback')
+
 @rota_login.route('/Login/Professor', methods=['GET', 'POST'])
 def login_professor():
     if "user_id" in session:
