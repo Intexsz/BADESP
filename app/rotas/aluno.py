@@ -220,20 +220,31 @@ def Resolvidas():
 def feedback():
     if "user_id" not in session:
         return redirect(url_for('rotalogin.cadastro'))
-    
+
     if request.method == 'POST':
-        titulo = request.form.get('titulo')
-        tipo = request.form.get('tipo')
-        feedback = request.form.get('feedback')
+        titulo = request.form.get('titulo', '').strip()
+        tipo = request.form.get('tipo', '').strip()
+        mensagem = request.form.get('feedback', '').strip()
+
+        if not titulo or not tipo or not mensagem:
+            return redirect(url_for('rotas.feedback'))
+
         cargo = get_role(session["user_id"])
-        create_feedback(titulo, tipo, feedback, cargo)
+        create_feedback(titulo, tipo, mensagem, cargo)
+
         return redirect(url_for('rotas.inicio'))
-    
-    resp = make_response(render_template('feedback.html'))
+
+    resp = make_response(render_template(
+        'feedback.html',
+        usuario=buscar_usuario(session["user_id"])  # necessário pro header funcionar
+    ))
+
     resp.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0'
     resp.headers['Pragma'] = 'no-cache'
     resp.headers['Expires'] = '0'
+
     return resp
+
 
 ###### ADMIN ######
 

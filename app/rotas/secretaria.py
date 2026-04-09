@@ -239,7 +239,7 @@ def arquivar(id):
     return redirect(url_for('rotas.inicio'))
 ######----------######
 
-###### ROTA PARA MUDAR O PIN ######
+###### ROTA PARA Mudar PIN ######
 @secretaria.route('/MudarPIN', methods=['GET', 'POST'])
 def alunos():
     if "user_id" not in session:
@@ -324,7 +324,7 @@ def turmas():
             flash(f"Não é possivel criar a turma {ano}°{turma}, Turma ja existente", "erro")
             return redirect(url_for('rotasecretaria.turmas'))
         
-        return render_template("turmas.html", turmas=mostrar_teams())
+        return render_template("turmas.html", turmas=mostrar_teams(), usuario=buscar_usuario(session['user_id']))
     else:
         return redirect(url_for('rotas.inicio'))
     

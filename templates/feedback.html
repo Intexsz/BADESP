@@ -1,27 +1,108 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icone.png') }}">
-  <title>B.A.D.E.S.P - Feedback</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='pin.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icone.png') }}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <title>B.A.D.E.S.P - Feedback</title>
 </head>
+
 <body>
-    <form autocomplete="off" method="POST" style="text-align: center; align-items: center; justify-content: center; display: flex; flex-direction: column; font-size: 29px;">
-        <br>
-        <input type="text" name="titulo" id="titulo" placeholder="Título do Feedback" required><br>
-        <textarea name="feedback" id="feedback" placeholder="Feedback" required></textarea><br>
-        <select name="tipo" id="tipo">
-            <option value="Sugestões">Sugestão</option>
-            <option value="Instabilidades">Instabilidade</option>
-            <option value="Crítica">Crítica</option>
-            <option value="Desempenho">Desempenho</option>
-            <option value="Outro">Outro</option>
-        </select><br>
-        <input type="submit" name="butttttttttton" value="Enviar Feedback">
-    </form>
+
+    <header class="cabecalho glass">
+        <button class="menu-btn"><span class="material-icons">menu</span></button>
+        <h1 class="titulo">B.A.D.E.S.P</h1>
+        <div class="perfil">
+            <img src="{{ usuario['foto'] }}" alt="Logado como: {{ usuario['nome'] }}">
+        </div>
+    </header>
+
+    <nav class="sidebar glass sobreposto">
+        <ul>
+            <li><a href="/Inicio"><span class="material-icons">home</span> Início</a></li>
+            <li><a href="/Ajuda"><span class="material-icons">help_outline</span> Ajuda</a></li>
+            <li><a href="/MudarPIN"><span class="material-icons">pin</span> Mudar PIN</a></li>
+            <li><a href="/Turmas"><span class="material-icons">groups</span> Turmas</a></li>
+            <li><a href="/Feedback"><span class="material-icons">campaign</span> Feedback</a></li>
+      <li><a href="/Logout" class="logout" onclick="confirmarLogout()"><span class="material-icons">logout</span>
+          Deslogar</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="container">
+            <h2>Enviar Feedback</h2>
+            <br>
+
+            <form method="POST" id="feedback-form" autocomplete="off">
+
+                <div class="input-container">
+                    <input type="text" name="titulo" id="titulo"
+                        placeholder="Título do Feedback"
+                        required minlength="3" maxlength="100">
+                </div>
+
+                <div class="input-container">
+                    <textarea name="feedback" id="feedback"
+                        placeholder="Escreva seu feedback..."
+                        required minlength="10" maxlength="1000"
+                        style="resize: none; height: 120px;"></textarea>
+                </div>
+
+                <div class="input-container select-seta">
+                    <select name="tipo" id="tipo" required>
+                        <option value="" disabled selected>Selecione o tipo</option>
+                        <option value="Sugestões">Sugestão</option>
+                        <option value="Instabilidades">Instabilidade</option>
+                        <option value="Crítica">Crítica</option>
+                        <option value="Desempenho">Desempenho</option>
+                        <option value="Outro">Outro</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="submit-button">Enviar</button>
+            </form>
+        </div>
+    </main>
+
     <script>
-        const elemento = document.getElementById('butttttttttton');
-        elemento.remove();
+        const btn = document.querySelector('.menu-btn');
+        const sidebar = document.querySelector('.sidebar');
+
+        btn.addEventListener('click', () => sidebar.classList.toggle('ativo'));
+
+        function confirmarLogout(e) {
+            e.preventDefault();
+            if (confirm("Deseja realmente sair?")) {
+                window.location.href = "/Logout";
+            }
+        }
+
+        document.addEventListener("click", (e) => {
+            if (!sidebar.contains(e.target) && !btn.contains(e.target)) {
+                sidebar.classList.remove("ativo");
+            }
+        });
+
+        document.getElementById("feedback-form").addEventListener("submit", function (e) {
+            const titulo = document.getElementById("titulo").value.trim();
+            const feedback = document.getElementById("feedback").value.trim();
+
+            if (titulo.length < 3) {
+                alert("Título muito curto.");
+                e.preventDefault();
+            }
+
+            if (feedback.length < 10) {
+                alert("Feedback muito curto.");
+                e.preventDefault();
+            }
+        });
     </script>
+
 </body>
+</html>
