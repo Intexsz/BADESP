@@ -22,7 +22,7 @@ google = oauth.register(
 )
 
 ###### LOGIN ######
-def processar_login(cargo):
+def process_login(cargo):
     try:
         token = request.json.get("credential") if request.is_json else \
                 request.form.get("credential") or request.args.get("credential")
@@ -63,7 +63,7 @@ def processar_login(cargo):
 ###### ALUNO ######
 @rota_login.route('/Login/callback', methods=["POST", "GET"])
 def callback():
-    return processar_login("Aluno")
+    return process_login("Aluno")
 
 @rota_login.route('/Login', methods=['GET', 'POST'])
 def cadastro():
@@ -75,7 +75,7 @@ def cadastro():
 ###### SECRETARIA ######
 @rota_login.route('/Login/Secretaria/callback', methods=["POST", "GET"])
 def callback_secretaria():
-    return processar_login("Secretaria")
+    return process_login("Secretaria")
 
 @rota_login.route('/Login/Secretaria', methods=['GET', 'POST'])
 def login_secretaria():
@@ -87,11 +87,11 @@ def login_secretaria():
 ###### PROFESSOR ######
 @rota_login.route('/Login/Professor/callback', methods=["POST", "GET"])
 def callback_professor():
-    return processar_login("Professor")
+    return process_login("Professor")
 
 @rota_login.route('/Login/adminsupersecretroutelogin/callback', methods=["POST", "GET"])
 def callback_admin():
-    return processar_login("Admin")
+    return process_login("Admin")
 
 @rota_login.route('/Login/adminsupersecretroutelogin', methods=['GET', 'POST'])
 def login_admin():
