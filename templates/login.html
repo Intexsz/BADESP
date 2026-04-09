@@ -1,37 +1,38 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='OIP.jpg') }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icone.png') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='cadastro.css') }}">
-  <title>BADESP - Entrar</title>
+  <title>B.A.D.E.S.P - Entrar</title>
 
   <script src="https://accounts.google.com/gsi/client" async defer></script>
 
   <script>
 
     function handleCredentialResponse(response) {
-      fetch("/Login/callback", {
+      fetch("{{ tipo }}", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({ credential: response.credential })
       })
-      .then(res => res.json())
-      .then(data => {
-        if (data.status === "ok") {
-          window.location.href = "/Inicio";
-        } else {
-          alert("Erro no login Google.");
-        }
-      });
+        .then(res => res.json())
+        .then(data => {
+          if (data.status === "ok") {
+            window.location.href = "/Inicio";
+          } else {
+            alert("Erro no login Google.");
+          }
+        });
     }
 
     window.onload = function () {
       google.accounts.id.initialize({
-        client_id: "334998652961-rpf4gt64873gg0uoa64cmlqkcmj33q4b.apps.googleusercontent.com",
+        client_id: "177205671715-238eoh4gfa3qusnfuuaa9jmctiot8vno.apps.googleusercontent.com",
         callback: handleCredentialResponse
       });
 
@@ -42,10 +43,42 @@
     };
   </script>
 </head>
+
 <body>
   <div class="container">
+    {% if tipo == '/Login/Secretaria/callback' %}
+    <form action="{{ url_for('rotalogin.login_secretaria') }}" method="POST">
+
+      <br>
+
+      <h1>Entrar Secretaria</h1>
+
+      <br><br>
+
+      <div id="googleSignInBtn"></div>
+
+      <br>
+      <a href="/Ajuda" style="color:rgb(121, 132, 206);">Alguma Dúvida Referente ao site?</a>
+      <br><br>
+    </form>
+    {% elif tipo == '/Login/Professor/callback' %}
+    <form action="{{ url_for('rotalogin.login_professor') }}" method="POST">
+
+      <br>
+
+      <h1>Entrar Professor</h1>
+
+      <br><br>
+
+      <div id="googleSignInBtn"></div>
+
+      <br>
+      <a href="/Ajuda" style="color:rgb(121, 132, 206);">Alguma Dúvida Referente ao site?</a>
+      <br><br>
+    </form>
+    {% else %}
     <form action="{{ url_for('rotalogin.cadastro') }}" method="POST">
-      
+
       <br>
 
       <h1>Entrar</h1>
@@ -53,11 +86,13 @@
       <br><br>
 
       <div id="googleSignInBtn"></div>
-      
+
       <br>
-      <a href="/Ajuda" style="color:rgb(128, 40, 210);">Alguma Dúvida Referente ao site?</a>
+      <a href="/Ajuda" style="color:rgb(121, 132, 206);">Alguma Dúvida Referente ao site?</a>
       <br><br>
     </form>
+    {% endif %}
   </div>
 </body>
+
 </html>

@@ -5,7 +5,7 @@
 }
 
 body {
-  background: linear-gradient(90deg, #29387f, black);
+  background: linear-gradient(to bottom, #242458, #3d3d7e);
   background-size: contain;
   background-position: center;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -36,6 +36,7 @@ h1 {
   color: white;
 }
 
+
 .input-container {
   position: relative;
   width: 100%;
@@ -43,12 +44,33 @@ h1 {
   margin: 30px 0;
 }
 
+.input-container img {
+  position: absolute;
+  right: 24px;
+  top: 20%;
+  margin-top: 5px;
+  color: rgb(255, 255, 255);
+  display: block;
+  
+}
+
+.input-container a {
+  font-size: 16px;
+  margin-top: 5px;
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  display: block;
+}
+
+.input-container a:hover {
+  text-decoration: underline;
+}
+
 .input-container input,
 .input-container select {
   width: 100%;
   height: 50px; 
   background: transparent;
-  border: none;
   outline: none;
   border: 2px solid rgb(251, 250, 250);
   border-radius: 10px;
@@ -64,41 +86,34 @@ h1 {
 
 .input-container select::placeholder {
   color: rgb(242, 237, 237);
+  
 }
-
-.input-containe::after{
-  content: '▼';
-  position: absolute;
-  right: 24px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: white;
-  pointer-events: none;}
 
 .input-container select option {
   background-color: #29387f;
   color: rgb(255, 255, 255);
 }
 
-.input-container img {
+.input-container select{
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 40px !important;
+}
+
+.input-container select::after {
+  content: '▼';
+}
+
+.input-container.has-select::after{
+  content: '▼';
   position: absolute;
-  right: 24px;
-  top: 20%;
-  margin-top: 5px;
-  color: rgb(255, 255, 255);
-  display: block;
-}
-
-.input-container a {
+  right: 18px;   
+  top: 50%;
+  transform: translateY(-50%);
   font-size: 16px;
-  margin-top: 5px;
-  color: rgb(255, 255, 255);
-  text-decoration: none;
-  display: block;
-}
-
-.input-container a:hover {
-  text-decoration: underline;
+  color: white;
+  pointer-events: none;
 }
 
 .submit-button {

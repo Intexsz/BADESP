@@ -4,75 +4,111 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='OIP.jpg') }}">
-  <title>BADESP - Denunciar</title>
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icone.png') }}">
+  <title>B.A.D.E.S.P - Denunciar</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='denuncia.css') }}">
   <script src="{{ url_for('static', filename='js/denuncias.js') }}" defer></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=pin" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
 </head>
 
 <body>
-
-  <header class="Cabecalho">
-
-    <h1 class="nome">BADESP</h1>
-
-    <button class="menu-btn">☰</button>
-
-    <nav class="sidebar">
-      <ul>
-        <li><a href="/Inicio">Início</a></li>
-        <li><a href="/Ajuda">Ajuda</a></li>
-        <li><a href="/Denuncia">Fazer Denúncia</a></li>
-        <li><a href="/Logout" onclick="return confirmarLogout()"><i class="fas fa-user-circle"></i>Deslogar</a></li>
-         
-      </ul>
-    </nav>
+  <header class="cabecalho glass">
+    <button class="menu-btn"><span class="material-icons">menu</span></button>
+    <h1 class="titulo">B.A.D.E.S.P</h1>
+    <div class="perfil">
+      <img src="{{ usuario['foto'] }}" alt="Logado como: {{ usuario['nome'] }}">
+    </div>
   </header>
 
-  <div class="form-container">
-    <h1>Enviar Denúncia</h1>
-    <form id="form-denuncia" method="POST" autocomplete="off">
-      <input type="text" placeholder="Título da denúncia" required name="titulo" maxlength="50">
+  <nav class="sidebar glass sobreposto">
+    <ul>
+      <li><a href="/Inicio"><span class="material-icons">home</span> Início</a></li>
+      <li><a href="/Ajuda"><span class="material-icons">help_outline</span> Ajuda</a></li>
+      <li><a href="/Denuncia"><span class="material-icons">report</span> Fazer Denúncia</a></li>
 
-      <div class="select-seta">
-        <select required name="tipo">
-          <option value="">Ocorrido</option>
-          <option value="Agressão">Agressão (física, verbal, psicológica, moral e sexual)</option>
-          <option value="Destruição Patrimônial">Destruição Patrimônial </option>
-          <option value="Falta de Recursos">Falta de Recursos</option>
-          <option value="Atitudes Inadequadas">Atitudes Inadequadas</option>
-          <option value="Sugestão">Sugestão para a Escola</option>
-          <option value="Outros">Outros </option>
-        </select>
-      </div>
+      <li><a href="/Logout" class="logout" onclick="confirmarLogout()"><span class="material-icons">logout</span>
+          Deslogar</a></li>
+    </ul>
+  </nav>
 
-      <textarea placeholder="Denúncia:" required name="descricao"></textarea>
+  <main>
+    <div class="form-container">
+      <h1>Enviar Denúncia</h1>
+      <form id="form-denuncia" method="POST" autocomplete="off">
+        <input type="text" id='titulo' placeholder="Título da denúncia" required name="titulo" maxlength="60">
 
-      <p>Deseja enviar para quem?</p>
-      <select required name="quem" id="quem" onchange="mostrarPessoas()">
-        <option value="">Escolha:</option>
-        <option value="Professor">Professor</option>
-        <option value="Secretaria">Secretaria</option>
-        <option value="Ambos">Todas as Autoridades</option>
+        <div class="select-seta">
+          <select required name="tipo" id="tipo">
+            <option value="">Ocorrido</option>
+            <option value="Agressão">Agressão (física, verbal, psicológica, moral e sexual)</option>
+            <option value="Destruição Patrimônial">Destruição Patrimônial </option>
+            <option value="Falta de Recursos">Falta de Recursos</option>
+            <option value="Atitudes Inadequadas">Atitudes Inadequadas</option>
+            <option value="Outros">Outros </option>
+          </select>
+        </div>
+
+        <textarea id="denuncia" placeholder="Denúncia:" required name="descricao"></textarea>
+
+        <div>
+          <label for="select-turma" class="sr-only">Envolvidos</label>
+          <select id="select-turma" name="turma_temp">
+            <option value="" selected>Selecione a turma</option>
+            {% for turma in alunos_por_turma.keys() %}
+            {% if not turma == 'None°None' %}
+            <option value="{{ turma }}">{{ turma }}</option>
+            {% endif %}
+            {% endfor %}
+          </select>
+        </div>
+
+        <div id="container-aluno" style="display:none; gap: 10px; align-items: center;">
+          <select id="select-aluno" style="flex-grow: 1;">
+            <option value="" disabled selected>Selecione um aluno</option>
+          </select>
+          <button type="button" id="btn-add-aluno" style="width: auto; padding: 0 15px; background: #28a745;">
+            <span class="material-icons">add</span>
+          </button>
+        </div>
+
+        <div id="lista-envolvidos-container" class="lista-envolvidos">
+          <p id="aviso-vazio" style="font-size: 0.9em; color: #666;">Nenhum envolvido selecionado.</p>
+        </div>
+
+        <input type="hidden" name="lista_envolvidos_final" id="input-envolvidos-final">
+
+    <p>Deseja enviar para quem?</p>
+    <select required name="quem" id="quem" onchange="mostrarPessoas()">
+      <option value="">Escolha:</option>
+      <option value="Professor">Professor</option>
+      <option value="Secretaria">Secretaria</option>
+      <option value="Ambos">Todas as Autoridades</option>
+    </select>
+
+    <div id="pessoaDiv" style="display:none; margin-top:10px;">
+      <label for="pessoa">Escolha a pessoa:</label>
+      <select name="pessoa" id="pessoa">
       </select>
+    </div>
 
-      <div id="pessoaDiv" style="display:none; margin-top:10px;">
-        <label for="pessoa">Escolha a pessoa:</label>
-        <select name="pessoa" id="pessoa">
-        </select>
-      </div>
-
-      <button type="submit">Enviar Denúncia</button>
+    <button type="submit" id="botãooo">Enviar Denúncia</button>
     </form>
-  </div>
+    </div>
 
-  <div id="dados" data-professores='{{ professor|tojson }}' data-secretarias='{{ secretaria|tojson }}'></div>
+    <div id="dados" data-professores='{{ professor|tojson }}' data-secretarias='{{ secretaria|tojson }}'></div>
+
+  </main>
 
   <script>
     const form = document.getElementById('form-denuncia');
-  
+    const elemento = document.getElementById('botãooo');
+
     form.addEventListener('submit', async function (event) {
-      event.preventDefault(); 
+      event.preventDefault();
       const confirmado = confirm(
         "Você tem certeza que quer enviar esta denúncia? " +
         "A gestão escolar terá ACESSO ao seu nome e saberá que você enviou esta denúncia. " +
@@ -80,30 +116,32 @@
         "Se enviar, só poderá APAGAR antes da Secretaria abrir sua denúncia. " +
         "Caso seja visualizada, você NÃO PODERÁ MAIS APAGAR SUA DENÚNCIA."
       );
-  
+
       if (!confirmado) return;
-  
+
       const pin = prompt("Digite seu PIN para confirmar o envio:");
-  
+
       if (!pin) {
         return;
       }
-  
+
       try {
         const response = await fetch(`{{ url_for('rotas.verificar_pin') }}`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ pin: pin })
         });
-  
+
         const result = await response.json();
-  
+
         if (result.status === "ok") {
-          form.submit(); 
+          alert("Denúncia enviada com sucesso!");
+          form.submit();
+          elemento.remove();
         } else {
           alert(result.mensagem || "PIN incorreto. Tente novamente.");
         }
-  
+
       } catch (error) {
         console.error("Erro ao verificar o PIN:", error);
         alert("Erro no servidor. Tente novamente mais tarde.");
@@ -111,39 +149,39 @@
     });
 
     document.addEventListener('DOMContentLoaded', (event) => {
-    const mainCategorySelect = document.getElementById('main-category');
-    const outrosBox = document.getElementById('outros-box');
-    const otherCategoryInput = document.getElementById('other-category-input');
+      const mainCategorySelect = document.getElementById('main-category');
+      const outrosBox = document.getElementById('outros-box');
+      const otherCategoryInput = document.getElementById('other-category-input');
 
-    if (mainCategorySelect) {
-        mainCategorySelect.addEventListener('change', function() {
-            if (this.value === 'Outros') {
-                outrosBox.style.display = 'block';
-                otherCategoryInput.setAttribute('required', 'required');
-            } else {
-                outrosBox.style.display = 'none';
-                otherCategoryInput.removeAttribute('required');
-                otherCategoryInput.value = ''; 
-            }
+      if (mainCategorySelect) {
+        mainCategorySelect.addEventListener('change', function () {
+          if (this.value === 'Outros') {
+            outrosBox.style.display = 'block';
+            otherCategoryInput.setAttribute('required', 'required');
+          } else {
+            outrosBox.style.display = 'none';
+            otherCategoryInput.removeAttribute('required');
+            otherCategoryInput.value = '';
+          }
         });
       }
     });
 
 
   </script>
-  
 
-<script>
-  function verificarSelect() {
-    const select = document.getElementById("quem");
-    if (select && select.value !== "") {
-      mostrarPessoas();
+
+  <script>
+    function verificarSelect() {
+      const select = document.getElementById("quem");
+      if (select && select.value !== "") {
+        mostrarPessoas();
+      }
     }
-  }
 
-  window.addEventListener("pageshow", () => setTimeout(verificarSelect, 50));
-  window.addEventListener("load", () => setTimeout(verificarSelect, 50));
-</script>
+    window.addEventListener("pageshow", () => setTimeout(verificarSelect, 50));
+    window.addEventListener("load", () => setTimeout(verificarSelect, 50));
+  </script>
 
   <script>
     const professores = JSON.parse(document.getElementById('dados').dataset.professores);
@@ -186,15 +224,147 @@
       }
     }
   </script>
-      <script>
-        const menuBtn = document.querySelector('.menu-btn');
-        const sidebar = document.querySelector('.sidebar');
-        
-        menuBtn.addEventListener('click', () => {
-            sidebar.classList.toggle('active');
-        });
-    </script>
+  <script>
+    const btn = document.querySelector('.menu-btn');
+    const sidebar = document.querySelector('.sidebar');
 
+    btn.addEventListener('click', () => sidebar.classList.toggle('ativo'));
+
+    function confirmarLogout() {
+      if (confirm("Deseja realmente sair?")) {
+        alert("Logout realizado com sucesso!");
+      }
+    }
+
+    // ===== FECHAR MENU CLICANDO FORA + REDIRECIONAR P/ INÍCIO =====
+    document.addEventListener("click", (e) => {
+      const clicouFora = !sidebar.contains(e.target) && !btn.contains(e.target);
+
+      if (sidebar.classList.contains("ativo") && clicouFora) {
+        sidebar.classList.remove("ativo");
+      }
+    });
+  </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Dados do Python
+        const alunosPorTurma = {{ alunos_por_turma | tojson }};
+        
+        // Elementos do DOM
+        const selectTurma = document.getElementById("select-turma");
+        const selectAluno = document.getElementById("select-aluno");
+        const containerAluno = document.getElementById("container-aluno");
+        const btnAdd = document.getElementById("btn-add-aluno");
+        const listaContainer = document.getElementById("lista-envolvidos-container");
+        const inputHidden = document.getElementById("input-envolvidos-final");
+        const avisoVazio = document.getElementById("aviso-vazio");
+
+        // Array para guardar os envolvidos
+        let listaEnvolvidos = [];
+
+        // 1. Atualiza o Select de Alunos quando muda a Turma
+        function atualizarSelectAlunos() {
+            const turmaSelecionada = selectTurma.value;
+            selectAluno.innerHTML = '<option value="" disabled selected>Selecione um aluno</option>';
+
+            // Só mostra o select se tiver turma E se a lista não estiver cheia
+            if (turmaSelecionada && alunosPorTurma[turmaSelecionada] && listaEnvolvidos.length < 5) {
+                alunosPorTurma[turmaSelecionada].forEach(aluno => {
+                    if (!aluno) return;
+                    const option = document.createElement("option");
+                    option.value = aluno;
+                    option.textContent = aluno;
+                    selectAluno.appendChild(option);
+                });
+                containerAluno.style.display = "flex"; // Usamos flex para alinhar o botão
+            } else {
+                containerAluno.style.display = "none";
+            }
+        }
+
+        // 2. Renderiza a lista visual (cria as tables/divs)
+        function renderizarLista() {
+            // Limpa a lista visual (mantendo o aviso se vazio)
+            listaContainer.innerHTML = '';
+
+            if (listaEnvolvidos.length === 0) {
+                listaContainer.appendChild(avisoVazio);
+                avisoVazio.style.display = 'block';
+            } else {
+                avisoVazio.style.display = 'none';
+                
+                // Cria um item visual para cada aluno no array
+                listaEnvolvidos.forEach((item, index) => {
+                    const div = document.createElement('div');
+                    div.className = 'item-envolvido';
+                    div.innerHTML = `
+                        <span><strong>${item.nome}</strong> <small>(${item.turma})</small></span>
+                        <button type="button" class="btn-remove" onclick="removerEnvolvido(${index})">&times;</button>
+                    `;
+                    listaContainer.appendChild(div);
+                });
+            }
+
+            // Atualiza o INPUT OCULTO que vai pro Flask
+            // Enviaremos no formato: "Nome (Turma), Nome2 (Turma2)"
+            const textoFinal = listaEnvolvidos.map(i => `${i.nome} (${i.turma})`).join(', ');
+            inputHidden.value = textoFinal;
+
+            // Controle de visibilidade do campo de adicionar (Máximo 5)
+            if (listaEnvolvidos.length >= 5) {
+                containerAluno.style.display = "none";
+                selectTurma.disabled = true; // Opcional: trava a turma
+                alert("Limite máximo de 5 envolvidos atingido.");
+            } else {
+                selectTurma.disabled = false;
+                // Se tiver turma selecionada, mostra o campo de aluno de novo
+                if(selectTurma.value) {
+                    containerAluno.style.display = "flex";
+                }
+            }
+        }
+
+        // 3. Função de Adicionar
+        btnAdd.addEventListener('click', function() {
+            const nome = selectAluno.value;
+            const turma = selectTurma.value;
+
+            if (!nome || !turma) {
+                alert("Selecione uma turma e um aluno.");
+                return;
+            }
+
+            // Verifica duplicidade
+            const jaExiste = listaEnvolvidos.some(i => i.nome === nome && i.turma === turma);
+            if (jaExiste) {
+                alert("Este aluno já foi adicionado.");
+                return;
+            }
+
+            // Adiciona ao array
+            listaEnvolvidos.push({ nome: nome, turma: turma });
+            
+            // Limpa o select de aluno para facilitar a proxima
+            selectAluno.value = "";
+            
+            renderizarLista();
+        });
+
+        // 4. Função Global para Remover (precisa ser global window para o onclick do HTML funcionar)
+        window.removerEnvolvido = function(index) {
+            listaEnvolvidos.splice(index, 1); // Remove do array
+            renderizarLista(); // Atualiza a tela
+            atualizarSelectAlunos(); // Garante que o input reapareça se baixou de 5
+        };
+
+        // Event Listeners
+        selectTurma.addEventListener('change', atualizarSelectAlunos);
+
+        // Inicialização
+        atualizarSelectAlunos();
+    });
+</script>
 </body>
 
 </html>

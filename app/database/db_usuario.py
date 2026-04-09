@@ -1,171 +1,237 @@
-import sqlite3
+import pymysql
 import logging
 
-# Configura logging para produção
-logging.basicConfig(filename='error_db.log', level=logging.ERROR,
-                    format='%(asctime)s - %(levelname)s - %(message)s')
-# iniciar banco de dados de login
-def init_db():
-    with sqlite3.connect("usuarios.db") as conn:
+def get_db_connection():
+    return pymysql.connect(
+  charset="utf8mb4",
+  connect_timeout=10,
+  cursorclass=pymysql.cursors.DictCursor,
+  db="defaultdb",
+  host="sqldeliciahaha2-manelreidelas.e.aivencloud.com",
+  password="AVNS_8QxSpDvas-NUiG6m5CY",
+  read_timeout=10,
+  port=21948,
+  user="avnadmin",
+  write_timeout=10,
+)
+
+logging.basicConfig(
+    filename="error_db.log",
+    level=logging.ERROR,
+    format="%(asctime)s - %(levelname)s - %(message)s"
+)
+
+def save_user(user_data):
+    try:
+        conn = get_db_connection()
         cursor = conn.cursor()
+
+        if not user_data.get("id") or not user_data.get("email"):
+            logging.error("ID ou email ausente: %s", user_data)
+            return
+
+        cursor.execute("SELECT 1 FROM usuarios WHERE id = %s", (user_data["id"],))
+        if cursor.fetchone():
+            return
+
         cursor.execute("""
-            CREATE TABLE IF NOT EXISTS usuarios (
-                id TEXT PRIMARY KEY,
-                nome TEXT,
-                email TEXT,
-                foto TEXT,
-                cargo TEXT,
-                pin INTEGER,
-                escola TEXT, 
-                ano INTEGER, 
-                turma TEXT
-            )
-        """)
+            INSERT INTO usuarios (id, nome, email, foto, cargo)
+            VALUES (%s, %s, %s, %s, %s)
+        """, (
+            user_data.get("id"),
+            user_data.get("name"),
+            user_data.get("email"),
+            user_data.get("picture"),
+            user_data.get("cargo")
+        ))
+
         conn.commit()
 
-# salvar usuario aluno
-
-def salvar_usuario(user_data):
-    """
-    Salva um usuário no banco de dados SQLite.
-    Se o usuário já existir, ignora a inserção.
-    Logs detalhados em caso de erro.
-    """
-    try:
-        with sqlite3.connect("usuarios.db") as conn:
-            cursor = conn.cursor()
-
-            # Confere se os campos obrigatórios existem
-            if not user_data.get("id") or not user_data.get("email"):
-                logging.error("ID ou email ausente em user_data: %s", user_data)
-                return
-
-            # Verifica se o usuário já existe
-            cursor.execute("SELECT * FROM usuarios WHERE id = ?", (user_data["id"],))
-            if cursor.fetchone():
-                logging.info("Usuário já existe: %s", user_data["email"])
-                return
-
-            # Insere novo usuário
-            cursor.execute(
-                "INSERT INTO usuarios (id, nome, email, foto, cargo) VALUES (?, ?, ?, ?, ?)",
-                (
-                    user_data.get("id"),
-                    user_data.get("name"),
-                    user_data.get("email"),
-                    user_data.get("picture"),
-                    user_data.get("cargo")
-                )
-            )
-            conn.commit()
-            logging.info("Usuário salvo com sucesso: %s", user_data["email"])
-
-    except sqlite3.IntegrityError as e:
-        # ID duplicado ou outra violação de integridade
-        logging.warning("Tentativa de inserir usuário já existente: %s - %s", user_data, e)
-
-    except sqlite3.OperationalError as e:
-        # Problema com o banco (ex: locked)
-        logging.error("Erro operacional no SQLite: %s - %s", user_data, e, exc_info=True)
-
     except Exception as e:
-        # Qualquer outro erro
-        logging.error("Erro desconhecido ao salvar usuário: %s - %s", user_data, e, exc_info=True)
+        conn.rollback()
+        logging.error("Erro ao salvar usuário: %s", e, exc_info=True)
+    finally:
+        cursor.close()
+        conn.close()
 
-
-# aqui vai buscar usuario
 def buscar_usuario(user_id):
-    with sqlite3.connect("usuarios.db") as conn:
-        cursor = conn.cursor()
-        cursor.execute("SELECT * FROM usuarios WHERE id = ?", (user_id,))
-        return cursor.fetchone()
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM usuarios WHERE id = %s", (user_id,))
+    r = cursor.fetchone()
+    cursor.close()
+    conn.close()
+    return r
 
-# buscar os cargos e verificar qual é o cargo do usuario atual, se é aluno ou professor ou secretaria
-def buscar_cargo(user_id):
-    with sqlite3.connect("usuarios.db") as conn:
-        cursor = conn.cursor()
-        cursor.execute("SELECT cargo FROM usuarios WHERE id = ?", (user_id,))
-        resultado = cursor.fetchone()
-        return resultado[0] if resultado else None
+def get_role(user_id):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT cargo FROM usuarios WHERE id = %s", (user_id,))
+    r = cursor.fetchone()
+    cursor.close()
+    conn.close()
+    return r["cargo"] if r else None
 
 def pegar_no_nome(id):
-    with sqlite3.connect("usuarios.db") as conn:
-        cursor = conn.cursor()
-        cursor.execute("SELECT nome FROM usuarios WHERE id = ?", (id,))
-        resultado = cursor.fetchone()
-        return resultado[0] if resultado else None
-    
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT nome FROM usuarios WHERE id = %s", (id,))
+    r = cursor.fetchone()
+    cursor.close()
+    conn.close()
+    return r["nome"] if r else None
+
+def check_team(turma):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT nome FROM usuarios WHERE turmano = %s", (turma,))
+    r = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return r
+
+
+def buscar_email(nome):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT email FROM usuarios WHERE nome = %s", (nome,))
+    r = cursor.fetchone()
+    cursor.close()
+    conn.close()
+    return r["email"] if r else None
+
 def buscar_nome_secretaria():
-    with sqlite3.connect("usuarios.db") as conn:
-        cursor = conn.cursor()
-        cursor.execute("SELECT nome FROM usuarios WHERE cargo = 'Secretaria'")
-        rows = cursor.fetchall()
-        return [row[0] for row in rows]
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT nome FROM usuarios WHERE cargo = 'Secretaria'")
+    r = [x["nome"] for x in cursor.fetchall()]
+    cursor.close()
+    conn.close()
+    return r
+
     
 def buscar_nome_professor():
-    with sqlite3.connect("usuarios.db") as conn:
-        cursor = conn.cursor()
-        cursor.execute("SELECT nome FROM usuarios WHERE cargo = 'Professor'")
-        rows = cursor.fetchall()
-        return [row[0] for row in rows]
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT nome FROM usuarios WHERE cargo = 'Professor'")
+    r = [x["nome"] for x in cursor.fetchall()]
+    cursor.close()
+    conn.close()
+    return r
+
     
 def buscar_nome_aluno():
-    with sqlite3.connect("usuarios.db") as conn:
-        cursor = conn.cursor()
-        cursor.execute("SELECT turma, nome FROM usuarios")
-        rows = cursor.fetchall()
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT turmano, nome FROM usuarios")
+    rows = cursor.fetchall()
+    conn.close()
 
-    alunos_por_turma = {}
-    for turma, nome in rows:
-        if not turma or not nome:
-            continue
-        if turma not in alunos_por_turma:
-            alunos_por_turma[turma] = []
-        alunos_por_turma[turma].append(nome)
-    return alunos_por_turma
+    alunos = {}
+    for r in rows:
+        if r["turmano"] not in alunos:
+            alunos[r["turmano"]] = []
+        alunos[r["turmano"]].append(r["nome"])
+    return alunos
+
 
 def usuario_tem_pin(user_id):
-    with sqlite3.connect("usuarios.db") as conn:
-        cursor = conn.cursor()
-        cursor.execute("SELECT pin FROM usuarios WHERE id = ?", (user_id,))
-        resultado = cursor.fetchone()
-        # Retorna True se o usuário tiver um pin, False se não tiver
-        return bool(resultado and resultado[0] is not None)
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT pin FROM usuarios WHERE id = %s", (user_id,))
+    r = cursor.fetchone()
+    cursor.close()
+    conn.close()
+    return bool(r and r["pin"])
 
-def cadastrar_pin(id, pin, escola, ano, turma):
-    with sqlite3.connect("usuarios.db") as conn:
-            cursor = conn.cursor()
-            cursor.execute("""
-                UPDATE usuarios
-                SET pin = ?, escola = ?, ano = ?, turma = ?
-                WHERE id = ?
-            """, (pin, escola, ano, turma, id))
-            conn.commit()
+
+def cadastrar_pin(id, pin, escola, ano, turma, turmano):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+        UPDATE usuarios
+        SET pin=%s, escola=%s, ano=%s, turma=%s, turmano=%s
+        WHERE id=%s
+    """, (pin, escola, ano, turma, turmano, id))
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+def mudar_turma(id, ano, turma, turmano):
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute("""
+            UPDATE usuarios
+            SET ano=%s, turma=%s, turmano=%s
+            WHERE id=%s
+        """, (ano, turma, turmano, id))
+        conn.commit()
+        return "Sucesso"
+    except Exception as e:
+        return str(e)
+    finally:
+        cursor.close()
+        conn.close()
+
+def can_chance_team(turmano):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT 1 FROM lista_turmas WHERE ano_serie = %s", (turmano,))
+    r = cursor.fetchone()
+    cursor.close()
+    conn.close()
+    return "Sucesso" if r else "Erro"
+
 
 def check_pin(user_id):
-    with sqlite3.connect("usuarios.db") as conn:
-        cursor = conn.cursor()
-        cursor.execute("SELECT pin FROM usuarios WHERE id = ?", (user_id,))
-        resultado = cursor.fetchone()
-        return resultado[0] if resultado else None
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT pin FROM usuarios WHERE id=%s", (user_id,))
+    r = cursor.fetchone()
+    cursor.close()
+    conn.close()
+    return r["pin"] if r else None
     
 def novo_pin(pin, nome, turma):
-    with sqlite3.connect("usuarios.db") as conn:
-            cursor = conn.cursor()
-            cursor.execute("""
-                UPDATE usuarios
-                SET pin = ?
-                WHERE nome = ?
-                AND turma = ?
-            """, (pin,nome,turma))
-            conn.commit()
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+        UPDATE usuarios
+        SET pin=%s
+        WHERE nome=%s AND turmano=%s
+    """, (pin, nome, turma))
+    conn.commit()
+    cursor.close()
+    conn.close()
 
 def novo_pin_secretaria(pin, nome):
-    with sqlite3.connect("usuarios.db") as conn:
-            cursor = conn.cursor()
-            cursor.execute("""
-                UPDATE usuarios
-                SET pin = ?
-                WHERE nome = ?
-            """, (pin,nome))
-            conn.commit()
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("UPDATE usuarios SET pin=%s WHERE nome=%s", (pin, nome))
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+
+def listar_alunose(ano=None, serie=None):
+    query = "SELECT nome, turma, email, ano, id FROM usuarios WHERE cargo='Aluno'"
+    params = []
+
+    if ano and ano != "Todos":
+        query += " AND ano=%s"
+        params.append(ano)
+
+    if serie and serie != "Todos":
+        query += " AND turma=%s"
+        params.append(serie)
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute(query, params)
+    r = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return r
+
+
