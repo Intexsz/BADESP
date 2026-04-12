@@ -44,7 +44,7 @@ def show_feedback(cargo):
     cursor = conn.cursor()
     if cargo == 'Admin':
             cursor.execute('''
-            SELECT id, titulo, tipo, feedback, horario
+            SELECT *
             FROM feedback
             ORDER BY id DESC''')
             denuncias = cursor.fetchall()

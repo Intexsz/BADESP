@@ -92,7 +92,8 @@ def create_report(titulo, tipo, descricao, user_id, status, cargo, especifico, e
     except Exception as error:
         descricao_ia = f"❌Erro na IA.❌"
         gravidade = 'Desconhecido'
-        envio_email('00001103203009sp@al.educacao.sp.gov.br', 'Erro', error)
+        # envio_email('00001103203009sp@al.educacao.sp.gov.br', 'Erro', error)
+        # envio_email('zamproniomatheus4', 'Erro', error)
 
     cursor.execute("""
         INSERT INTO denuncias
