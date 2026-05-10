@@ -47,7 +47,7 @@
     <button class="menu-btn"><span class="material-icons">menu</span></button>
     <h1 class="titulo">B.A.D.E.S.P</h1>
     <div class="perfil">
-      <img src="{{ usuario['foto'] }}" alt="Logado como: {{ usuario['nome'] }}">
+      <p>Bem vindo: {{usuario['nome']}}!</p>
     </div>
   </header>
 
@@ -66,7 +66,6 @@
   <main>
     <div class="painel-container has-select">
       <h1>Painel de Denúncias</h1>
-      <br>
       <form method="get" action="{{ url_for('rotas.inicio') }}">
         <div class="input-container has-select">
           <select name="filtro" onchange="this.form.submit()">
@@ -80,19 +79,25 @@
           </select>
         </div>
       </form>
-      <br>
-      <br>
       <div id="denuncias-container">
         {% if reports %}
         {% for d in reports %}
         <div class="denuncia-card" id="denuncia-{{ d['id'] }}">
           <h3>{{ d['titulo'] }}</h3>
           <br>
-          <p>{{ d['gravidade'] }}</p>
-          {% if d['comentario'] %}
-          <p>Respondido: Sim</p>
+          {% if d['gravidade'] == 'Alta' %}
+          <p>Gravidade: <b style="color: rgb(255, 62, 62);">{{ d['gravidade'] }}</b></p>
+          {% elif d['gravidade'] == 'Média' %}
+          <p>Gravidade: <b style="color: rgb(255, 255, 49);">{{ d['gravidade'] }}</b></p>
+          {% elif d['gravidade'] == 'Baixa' %}
+          <p>Gravidade: <b style="color: rgb(43, 255, 43);">{{ d['gravidade'] }}</b></p>
           {% else %}
-          <p>Respondido: Não</p>
+          <p>Gravidade: <b style="color: white;">{{ d['gravidade'] }}</b></p>
+          {% endif %}
+          {% if d['comentario'] %}
+          <p>Respondido: <b style="color: rgb(43, 255, 43);">Sim</b></p>
+          {% else %}
+          <p>Respondido: <b style="color: rgb(255,62,62);">Não</b></p>
           {% endif %}
           <p>Data: {{ d['data'] }}</p>
           {% if d['status'] == 'Aprovado.' %}
@@ -100,18 +105,14 @@
           {% elif d['status'] == 'Recusado.' %}
           <p><span style="color: red;">❌Situação: Recusado por: {{ d['visto'] }}❌</span></p>
           {% elif d['status'] == 'Arquivado.' %}
-          <p><span style="color: gray;">🗃️Situação: Arquivado por: {{ d['visto'] }}🗃️<span>
-                <p>
-                  {% elif d['status'] == 'Visto.' %}
-                <p><span style="color: orange;">🔎Situação: Visualizado por: {{ d['visto'] }} ás {{ d['datavisto']
-                    }}🔎<span>
-                      <p>
-                        {% elif d['status'] == 'Expirada.' %}
-                      <p><span style="color: gray;">⏰Situação: Expirado.⏰<span>
-                            <p></p>
-                            {% else %}
-                            <p><span style="color: rgb(255, 255, 255);">Situação: ⏳Esperando Resposta...⏳</span></p>
-                            {% endif %}
+          <p><span style="color: gray;">🗃️Situação: Arquivado por: {{ d['visto'] }}🗃️</span></p>
+          {% elif d['status'] == 'Visto.' %}
+          <p><span style="color: orange;">🔎Situação: Visualizado por: {{ d['visto'] }} às {{ d['datavisto'] }}🔎</span></p>
+          {% elif d['status'] == 'Expirada.' %}
+          <p><span style="color: gray;">⏰Situação: Expirado.⏰</span></p>
+          {% else %}
+          <p><span style="color: rgb(255, 255, 255);">Situação: ⏳Esperando Resposta...⏳</span></p>
+          {% endif %}
                             <form class="apagar-form" action="{{ url_for('rotasecretaria.detalhe_denuncia', id=d.id) }}"
                               method="POST">
                               <button type="button" onclick="abrirModalPin({{ d.id }})">Abrir Denúncia</button>
@@ -221,6 +222,17 @@
     });
   </script>
 
+  <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+  </script>
+  
 </body>
 
 </html>

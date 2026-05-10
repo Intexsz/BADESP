@@ -125,3 +125,171 @@
 2026-02-19 12:52:55,424 - INFO - 127.0.0.1 - - [19/Feb/2026 12:52:55] "GET /Feedback HTTP/1.1" 200 -
 2026-02-19 12:52:55,442 - INFO - 127.0.0.1 - - [19/Feb/2026 12:52:55] "GET /static/pin.css HTTP/1.1" 200 -
 2026-02-19 12:52:55,472 - INFO - 127.0.0.1 - - [19/Feb/2026 12:52:55] "GET /static/icone.png HTTP/1.1" 200 -
+2026-05-09 23:28:46,224 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-05-09 23:28:46,224 - INFO - [33mPress CTRL+C to quit[0m
+2026-05-09 23:28:46,227 - INFO -  * Restarting with stat
+2026-05-09 23:28:50,608 - WARNING -  * Debugger is active!
+2026-05-09 23:28:50,615 - INFO -  * Debugger PIN: 314-076-525
+2026-05-09 23:28:57,745 - INFO - 127.0.0.1 - - [09/May/2026 23:28:57] "GET /Inicio HTTP/1.1" 200 -
+2026-05-09 23:28:57,922 - INFO - 127.0.0.1 - - [09/May/2026 23:28:57] "[36mGET /static/inicio.css HTTP/1.1[0m" 304 -
+2026-05-09 23:28:58,465 - INFO - 127.0.0.1 - - [09/May/2026 23:28:58] "[36mGET /static/icone.png HTTP/1.1[0m" 304 -
+2026-05-09 23:36:08,716 - INFO - 127.0.0.1 - - [09/May/2026 23:36:08] "GET /Inicio HTTP/1.1" 200 -
+2026-05-09 23:36:08,759 - INFO - 127.0.0.1 - - [09/May/2026 23:36:08] "GET /static/inicio.css HTTP/1.1" 200 -
+2026-05-09 23:36:09,273 - INFO - 127.0.0.1 - - [09/May/2026 23:36:09] "GET /static/icone.png HTTP/1.1" 200 -
+2026-05-09 23:37:29,985 - INFO - 127.0.0.1 - - [09/May/2026 23:37:29] "GET /Inicio HTTP/1.1" 200 -
+2026-05-09 23:37:30,049 - INFO - 127.0.0.1 - - [09/May/2026 23:37:30] "GET /static/inicio.css HTTP/1.1" 200 -
+2026-05-09 23:37:30,102 - INFO - 127.0.0.1 - - [09/May/2026 23:37:30] "GET /static/icone.png HTTP/1.1" 200 -
+2026-05-09 23:37:57,799 - INFO - 127.0.0.1 - - [09/May/2026 23:37:57] "GET /Inicio HTTP/1.1" 200 -
+2026-05-09 23:37:57,840 - INFO - 127.0.0.1 - - [09/May/2026 23:37:57] "GET /static/inicio.css HTTP/1.1" 200 -
+2026-05-09 23:37:58,159 - INFO - 127.0.0.1 - - [09/May/2026 23:37:58] "GET /static/icone.png HTTP/1.1" 200 -
+2026-05-09 23:39:14,472 - INFO - 127.0.0.1 - - [09/May/2026 23:39:14] "GET /Inicio HTTP/1.1" 200 -
+2026-05-09 23:39:14,534 - INFO - 127.0.0.1 - - [09/May/2026 23:39:14] "GET /static/inicio.css HTTP/1.1" 200 -
+2026-05-09 23:39:14,655 - INFO - 127.0.0.1 - - [09/May/2026 23:39:14] "GET /static/icone.png HTTP/1.1" 200 -
+2026-05-09 23:39:49,860 - INFO - 127.0.0.1 - - [09/May/2026 23:39:49] "GET /Inicio HTTP/1.1" 200 -
+2026-05-09 23:39:49,928 - INFO - 127.0.0.1 - - [09/May/2026 23:39:49] "GET /static/inicio.css HTTP/1.1" 200 -
+2026-05-09 23:39:50,414 - INFO - 127.0.0.1 - - [09/May/2026 23:39:50] "GET /static/icone.png HTTP/1.1" 200 -
+2026-05-09 23:41:00,802 - INFO - 127.0.0.1 - - [09/May/2026 23:41:00] "GET /Inicio HTTP/1.1" 200 -
+2026-05-09 23:41:00,911 - INFO - 127.0.0.1 - - [09/May/2026 23:41:00] "GET /static/inicio.css HTTP/1.1" 200 -
+2026-05-09 23:41:01,386 - INFO - 127.0.0.1 - - [09/May/2026 23:41:01] "GET /static/icone.png HTTP/1.1" 200 -
+2026-05-09 23:41:40,983 - INFO - 127.0.0.1 - - [09/May/2026 23:41:40] "GET /Inicio HTTP/1.1" 200 -
+2026-05-09 23:41:41,092 - INFO - 127.0.0.1 - - [09/May/2026 23:41:41] "GET /static/inicio.css HTTP/1.1" 200 -
+2026-05-09 23:41:41,552 - INFO - 127.0.0.1 - - [09/May/2026 23:41:41] "GET /static/icone.png HTTP/1.1" 200 -
+2026-05-09 23:43:26,752 - INFO - 127.0.0.1 - - [09/May/2026 23:43:26] "GET /Inicio HTTP/1.1" 200 -
+2026-05-09 23:43:26,866 - INFO - 127.0.0.1 - - [09/May/2026 23:43:26] "GET /static/inicio.css HTTP/1.1" 200 -
+2026-05-09 23:43:26,928 - INFO - 127.0.0.1 - - [09/May/2026 23:43:26] "GET /static/icone.png HTTP/1.1" 200 -
+2026-05-09 23:46:12,106 - INFO - 127.0.0.1 - - [09/May/2026 23:46:12] "GET /Inicio HTTP/1.1" 200 -
+2026-05-09 23:46:12,169 - INFO - 127.0.0.1 - - [09/May/2026 23:46:12] "GET /static/inicio.css HTTP/1.1" 200 -
+2026-05-09 23:46:12,295 - INFO - 127.0.0.1 - - [09/May/2026 23:46:12] "GET /static/icone.png HTTP/1.1" 200 -
+2026-05-09 23:46:37,352 - INFO - 127.0.0.1 - - [09/May/2026 23:46:37] "GET /Inicio HTTP/1.1" 200 -
+2026-05-09 23:46:37,392 - INFO - 127.0.0.1 - - [09/May/2026 23:46:37] "GET /static/inicio.css HTTP/1.1" 200 -
+2026-05-09 23:46:37,703 - INFO - 127.0.0.1 - - [09/May/2026 23:46:37] "GET /static/icone.png HTTP/1.1" 200 -
+2026-05-09 23:47:35,703 - INFO - 127.0.0.1 - - [09/May/2026 23:47:35] "GET /Inicio HTTP/1.1" 200 -
+2026-05-09 23:47:35,810 - INFO - 127.0.0.1 - - [09/May/2026 23:47:35] "GET /static/inicio.css HTTP/1.1" 200 -
+2026-05-09 23:47:36,276 - INFO - 127.0.0.1 - - [09/May/2026 23:47:36] "GET /static/icone.png HTTP/1.1" 200 -
+2026-05-09 23:47:55,210 - INFO - 127.0.0.1 - - [09/May/2026 23:47:55] "GET /Inicio HTTP/1.1" 200 -
+2026-05-09 23:47:55,298 - INFO - 127.0.0.1 - - [09/May/2026 23:47:55] "GET /static/inicio.css HTTP/1.1" 200 -
+2026-05-09 23:47:55,573 - INFO - 127.0.0.1 - - [09/May/2026 23:47:55] "GET /static/icone.png HTTP/1.1" 200 -
+2026-05-09 23:50:04,240 - INFO - 127.0.0.1 - - [09/May/2026 23:50:04] "GET /Inicio HTTP/1.1" 200 -
+2026-05-09 23:50:04,348 - INFO - 127.0.0.1 - - [09/May/2026 23:50:04] "GET /static/inicio.css HTTP/1.1" 200 -
+2026-05-09 23:50:04,827 - INFO - 127.0.0.1 - - [09/May/2026 23:50:04] "GET /static/icone.png HTTP/1.1" 200 -
+2026-05-09 23:50:30,483 - INFO - 127.0.0.1 - - [09/May/2026 23:50:30] "GET /Inicio HTTP/1.1" 200 -
+2026-05-09 23:50:30,591 - INFO - 127.0.0.1 - - [09/May/2026 23:50:30] "GET /static/inicio.css HTTP/1.1" 200 -
+2026-05-09 23:50:30,863 - INFO - 127.0.0.1 - - [09/May/2026 23:50:30] "GET /static/icone.png HTTP/1.1" 200 -
+2026-05-09 23:52:37,798 - INFO - 127.0.0.1 - - [09/May/2026 23:52:37] "GET /Inicio HTTP/1.1" 200 -
+2026-05-09 23:52:37,920 - INFO - 127.0.0.1 - - [09/May/2026 23:52:37] "GET /static/inicio.css HTTP/1.1" 200 -
+2026-05-09 23:52:38,412 - INFO - 127.0.0.1 - - [09/May/2026 23:52:38] "GET /static/icone.png HTTP/1.1" 200 -
+2026-05-09 23:53:58,877 - INFO - 127.0.0.1 - - [09/May/2026 23:53:58] "GET /Inicio HTTP/1.1" 200 -
+2026-05-09 23:53:59,002 - INFO - 127.0.0.1 - - [09/May/2026 23:53:59] "GET /static/inicio.css HTTP/1.1" 200 -
+2026-05-09 23:53:59,437 - INFO - 127.0.0.1 - - [09/May/2026 23:53:59] "GET /static/icone.png HTTP/1.1" 200 -
+2026-05-09 23:54:54,588 - INFO - 127.0.0.1 - - [09/May/2026 23:54:54] "GET /Inicio HTTP/1.1" 200 -
+2026-05-09 23:54:54,643 - INFO - 127.0.0.1 - - [09/May/2026 23:54:54] "GET /static/inicio.css HTTP/1.1" 200 -
+2026-05-09 23:54:55,119 - INFO - 127.0.0.1 - - [09/May/2026 23:54:55] "GET /static/icone.png HTTP/1.1" 200 -
+2026-05-09 23:55:20,400 - INFO - 127.0.0.1 - - [09/May/2026 23:55:20] "GET /Inicio HTTP/1.1" 200 -
+2026-05-09 23:55:20,434 - INFO - 127.0.0.1 - - [09/May/2026 23:55:20] "GET /static/inicio.css HTTP/1.1" 200 -
+2026-05-09 23:55:20,477 - INFO - 127.0.0.1 - - [09/May/2026 23:55:20] "GET /static/icone.png HTTP/1.1" 200 -
+2026-05-09 23:55:38,792 - INFO - 127.0.0.1 - - [09/May/2026 23:55:38] "GET /Inicio HTTP/1.1" 200 -
+2026-05-09 23:55:38,821 - INFO - 127.0.0.1 - - [09/May/2026 23:55:38] "GET /static/inicio.css HTTP/1.1" 200 -
+2026-05-09 23:55:38,866 - INFO - 127.0.0.1 - - [09/May/2026 23:55:38] "GET /static/icone.png HTTP/1.1" 200 -
+2026-05-09 23:57:17,249 - INFO - 127.0.0.1 - - [09/May/2026 23:57:17] "GET /Inicio HTTP/1.1" 200 -
+2026-05-09 23:57:17,349 - INFO - 127.0.0.1 - - [09/May/2026 23:57:17] "GET /static/inicio.css HTTP/1.1" 200 -
+2026-05-09 23:57:17,950 - INFO - 127.0.0.1 - - [09/May/2026 23:57:17] "GET /static/icone.png HTTP/1.1" 200 -
+2026-05-09 23:57:44,624 - INFO - 127.0.0.1 - - [09/May/2026 23:57:44] "GET /Inicio HTTP/1.1" 200 -
+2026-05-09 23:57:44,705 - INFO - 127.0.0.1 - - [09/May/2026 23:57:44] "GET /static/inicio.css HTTP/1.1" 200 -
+2026-05-09 23:57:44,959 - INFO - 127.0.0.1 - - [09/May/2026 23:57:44] "GET /static/icone.png HTTP/1.1" 200 -
+2026-05-09 23:58:17,010 - INFO - 127.0.0.1 - - [09/May/2026 23:58:17] "GET /Inicio HTTP/1.1" 200 -
+2026-05-09 23:58:17,120 - INFO - 127.0.0.1 - - [09/May/2026 23:58:17] "GET /static/inicio.css HTTP/1.1" 200 -
+2026-05-09 23:58:17,168 - INFO - 127.0.0.1 - - [09/May/2026 23:58:17] "GET /static/icone.png HTTP/1.1" 200 -
+2026-05-09 23:58:37,444 - INFO - 127.0.0.1 - - [09/May/2026 23:58:37] "GET /Inicio HTTP/1.1" 200 -
+2026-05-09 23:58:37,564 - INFO - 127.0.0.1 - - [09/May/2026 23:58:37] "GET /static/inicio.css HTTP/1.1" 200 -
+2026-05-09 23:58:37,875 - INFO - 127.0.0.1 - - [09/May/2026 23:58:37] "GET /static/icone.png HTTP/1.1" 200 -
+2026-05-09 23:59:06,263 - INFO - 127.0.0.1 - - [09/May/2026 23:59:06] "GET /Inicio HTTP/1.1" 200 -
+2026-05-09 23:59:06,345 - INFO - 127.0.0.1 - - [09/May/2026 23:59:06] "GET /static/inicio.css HTTP/1.1" 200 -
+2026-05-09 23:59:06,776 - INFO - 127.0.0.1 - - [09/May/2026 23:59:06] "GET /static/icone.png HTTP/1.1" 200 -
+2026-05-10 00:02:57,977 - INFO - 127.0.0.1 - - [10/May/2026 00:02:57] "GET /Inicio HTTP/1.1" 200 -
+2026-05-10 00:02:58,040 - INFO - 127.0.0.1 - - [10/May/2026 00:02:58] "GET /static/inicio.css HTTP/1.1" 200 -
+2026-05-10 00:02:58,546 - INFO - 127.0.0.1 - - [10/May/2026 00:02:58] "GET /static/icone.png HTTP/1.1" 200 -
+2026-05-10 00:03:19,709 - INFO - 127.0.0.1 - - [10/May/2026 00:03:19] "GET /Inicio HTTP/1.1" 200 -
+2026-05-10 00:03:19,761 - INFO - 127.0.0.1 - - [10/May/2026 00:03:19] "GET /static/inicio.css HTTP/1.1" 200 -
+2026-05-10 00:03:19,804 - INFO - 127.0.0.1 - - [10/May/2026 00:03:19] "GET /static/icone.png HTTP/1.1" 200 -
+2026-05-10 00:05:24,024 - INFO - 127.0.0.1 - - [10/May/2026 00:05:24] "GET /Inicio HTTP/1.1" 200 -
+2026-05-10 00:05:24,148 - INFO - 127.0.0.1 - - [10/May/2026 00:05:24] "GET /static/inicio.css HTTP/1.1" 200 -
+2026-05-10 00:05:24,268 - INFO - 127.0.0.1 - - [10/May/2026 00:05:24] "GET /static/icone.png HTTP/1.1" 200 -
+2026-05-10 00:06:02,784 - INFO - 127.0.0.1 - - [10/May/2026 00:06:02] "GET /static/inicio.css HTTP/1.1" 200 -
+2026-05-10 00:06:02,809 - INFO - 127.0.0.1 - - [10/May/2026 00:06:02] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-05-10 00:06:40,329 - INFO - 127.0.0.1 - - [10/May/2026 00:06:40] "[35m[1mGET /Inicio HTTP/1.1[0m" 500 -
+2026-05-10 00:06:40,659 - INFO - 127.0.0.1 - - [10/May/2026 00:06:40] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-05-10 00:06:40,708 - INFO - 127.0.0.1 - - [10/May/2026 00:06:40] "GET /Inicio?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2026-05-10 00:06:40,713 - INFO - 127.0.0.1 - - [10/May/2026 00:06:40] "GET /Inicio?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2026-05-10 00:06:41,386 - INFO - 127.0.0.1 - - [10/May/2026 00:06:41] "GET /Inicio?__debugger__=yes&cmd=resource&f=console.png&s=6jINZBH8pnS8TxaEGNwt HTTP/1.1" 200 -
+2026-05-10 00:06:41,500 - INFO - 127.0.0.1 - - [10/May/2026 00:06:41] "GET /Inicio?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2026-05-10 00:07:43,121 - INFO - 127.0.0.1 - - [10/May/2026 00:07:43] "GET /Inicio HTTP/1.1" 200 -
+2026-05-10 00:07:43,192 - INFO - 127.0.0.1 - - [10/May/2026 00:07:43] "GET /static/inicio.css HTTP/1.1" 200 -
+2026-05-10 00:07:43,193 - INFO - 127.0.0.1 - - [10/May/2026 00:07:43] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-05-10 00:07:43,851 - INFO - 127.0.0.1 - - [10/May/2026 00:07:43] "GET /static/icone.png HTTP/1.1" 200 -
+2026-05-10 00:12:18,051 - INFO - 127.0.0.1 - - [10/May/2026 00:12:18] "GET /Ajuda HTTP/1.1" 200 -
+2026-05-10 00:12:18,213 - INFO - 127.0.0.1 - - [10/May/2026 00:12:18] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-05-10 00:12:18,244 - INFO - 127.0.0.1 - - [10/May/2026 00:12:18] "GET /static/ajuda.css HTTP/1.1" 200 -
+2026-05-10 00:12:18,250 - INFO - 127.0.0.1 - - [10/May/2026 00:12:18] "[33mGET /static/js/Ajuda.js HTTP/1.1[0m" 404 -
+2026-05-10 00:16:06,870 - INFO - 127.0.0.1 - - [10/May/2026 00:16:06] "GET /Ajuda HTTP/1.1" 200 -
+2026-05-10 00:16:07,013 - INFO - 127.0.0.1 - - [10/May/2026 00:16:07] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-05-10 00:16:07,074 - INFO - 127.0.0.1 - - [10/May/2026 00:16:07] "GET /static/ajuda.css HTTP/1.1" 200 -
+2026-05-10 00:16:07,075 - INFO - 127.0.0.1 - - [10/May/2026 00:16:07] "[33mGET /static/js/Ajuda.js HTTP/1.1[0m" 404 -
+2026-05-10 00:16:07,235 - INFO - 127.0.0.1 - - [10/May/2026 00:16:07] "GET /static/icone.png HTTP/1.1" 200 -
+2026-05-10 00:18:26,726 - INFO - 127.0.0.1 - - [10/May/2026 00:18:26] "GET /Ajuda HTTP/1.1" 200 -
+2026-05-10 00:18:26,798 - INFO - 127.0.0.1 - - [10/May/2026 00:18:26] "[33mGET /static/js/Ajuda.js HTTP/1.1[0m" 404 -
+2026-05-10 00:18:26,819 - INFO - 127.0.0.1 - - [10/May/2026 00:18:26] "GET /static/ajuda.css HTTP/1.1" 200 -
+2026-05-10 00:18:26,959 - INFO - 127.0.0.1 - - [10/May/2026 00:18:26] "GET /static/icone.png HTTP/1.1" 200 -
+2026-05-10 00:20:38,298 - INFO - 127.0.0.1 - - [10/May/2026 00:20:38] "GET /Ajuda HTTP/1.1" 200 -
+2026-05-10 00:20:38,384 - INFO - 127.0.0.1 - - [10/May/2026 00:20:38] "[33mGET /static/js/Ajuda.js HTTP/1.1[0m" 404 -
+2026-05-10 00:20:38,404 - INFO - 127.0.0.1 - - [10/May/2026 00:20:38] "GET /static/ajuda.css HTTP/1.1" 200 -
+2026-05-10 00:20:38,871 - INFO - 127.0.0.1 - - [10/May/2026 00:20:38] "GET /static/icone.png HTTP/1.1" 200 -
+2026-05-10 00:20:50,306 - INFO - 127.0.0.1 - - [10/May/2026 00:20:50] "GET /static/ajuda.css HTTP/1.1" 200 -
+2026-05-10 00:20:50,350 - INFO - 127.0.0.1 - - [10/May/2026 00:20:50] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-05-10 00:23:06,697 - INFO - 127.0.0.1 - - [10/May/2026 00:23:06] "GET /Ajuda HTTP/1.1" 200 -
+2026-05-10 00:23:06,810 - INFO - 127.0.0.1 - - [10/May/2026 00:23:06] "[33mGET /static/js/Ajuda.js HTTP/1.1[0m" 404 -
+2026-05-10 00:23:06,848 - INFO - 127.0.0.1 - - [10/May/2026 00:23:06] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-05-10 00:23:06,858 - INFO - 127.0.0.1 - - [10/May/2026 00:23:06] "GET /static/ajuda.css HTTP/1.1" 200 -
+2026-05-10 00:23:07,426 - INFO - 127.0.0.1 - - [10/May/2026 00:23:07] "GET /static/icone.png HTTP/1.1" 200 -
+2026-05-10 00:23:34,594 - INFO - 127.0.0.1 - - [10/May/2026 00:23:34] "GET /static/ajuda.css HTTP/1.1" 200 -
+2026-05-10 00:23:34,629 - INFO - 127.0.0.1 - - [10/May/2026 00:23:34] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-05-10 00:25:44,439 - INFO - 127.0.0.1 - - [10/May/2026 00:25:44] "GET /Ajuda HTTP/1.1" 200 -
+2026-05-10 00:25:44,586 - INFO - 127.0.0.1 - - [10/May/2026 00:25:44] "[33mGET /static/js/Ajuda.js HTTP/1.1[0m" 404 -
+2026-05-10 00:25:44,590 - INFO - 127.0.0.1 - - [10/May/2026 00:25:44] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2026-05-10 00:25:44,594 - INFO - 127.0.0.1 - - [10/May/2026 00:25:44] "GET /static/ajuda.css HTTP/1.1" 200 -
+2026-05-10 00:25:45,169 - INFO - 127.0.0.1 - - [10/May/2026 00:25:45] "GET /static/icone.png HTTP/1.1" 200 -
+2026-05-10 00:38:13,577 - INFO -  * Detected change in 'c:\\Users\\Manoel\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2026-05-10 00:38:14,515 - INFO -  * Restarting with stat
+2026-05-10 00:58:27,977 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-05-10 00:58:27,977 - INFO - [33mPress CTRL+C to quit[0m
+2026-05-10 00:58:27,981 - INFO -  * Restarting with stat
+2026-05-10 00:58:32,771 - WARNING -  * Debugger is active!
+2026-05-10 00:58:32,776 - INFO -  * Debugger PIN: 314-076-525
+2026-05-10 00:58:34,951 - INFO - 127.0.0.1 - - [10/May/2026 00:58:34] "[35m[1mGET /Inicio HTTP/1.1[0m" 500 -
+2026-05-10 00:58:35,150 - INFO - 127.0.0.1 - - [10/May/2026 00:58:35] "[36mGET /Inicio?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2026-05-10 00:58:35,161 - INFO - 127.0.0.1 - - [10/May/2026 00:58:35] "[36mGET /Inicio?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2026-05-10 00:58:35,753 - INFO - 127.0.0.1 - - [10/May/2026 00:58:35] "GET /Inicio?__debugger__=yes&cmd=resource&f=console.png&s=aV6mavm62q4xPPKjVHm7 HTTP/1.1" 200 -
+2026-05-10 00:58:35,795 - INFO - 127.0.0.1 - - [10/May/2026 00:58:35] "[36mGET /Inicio?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2026-05-10 00:58:57,241 - INFO -  * Detected change in 'c:\\Users\\Manoel\\Documents\\SNEP\\app\\database\\db_denuncia.py', reloading
+2026-05-10 00:58:57,992 - INFO -  * Restarting with stat
+2026-05-10 00:59:01,554 - WARNING -  * Debugger is active!
+2026-05-10 00:59:01,558 - INFO -  * Debugger PIN: 314-076-525
+2026-05-10 00:59:09,319 - INFO - 127.0.0.1 - - [10/May/2026 00:59:09] "GET /Inicio HTTP/1.1" 200 -
+2026-05-10 00:59:09,471 - INFO - 127.0.0.1 - - [10/May/2026 00:59:09] "GET /static/inicio.css HTTP/1.1" 200 -
+2026-05-10 00:59:09,935 - INFO - 127.0.0.1 - - [10/May/2026 00:59:09] "GET /static/icone.png HTTP/1.1" 200 -
+2026-05-10 01:01:02,305 - INFO - 127.0.0.1 - - [10/May/2026 01:01:02] "GET /Inicio?filtro=Esperando HTTP/1.1" 200 -
+2026-05-10 01:01:02,406 - INFO - 127.0.0.1 - - [10/May/2026 01:01:02] "GET /static/inicio.css HTTP/1.1" 200 -
+2026-05-10 01:03:48,520 - INFO - 127.0.0.1 - - [10/May/2026 01:03:48] "GET /Inicio?filtro=Tudo HTTP/1.1" 200 -
+2026-05-10 01:03:48,610 - INFO - 127.0.0.1 - - [10/May/2026 01:03:48] "GET /static/inicio.css HTTP/1.1" 200 -
+2026-05-10 01:38:15,858 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-05-10 01:38:15,858 - INFO - [33mPress CTRL+C to quit[0m
+2026-05-10 01:38:15,861 - INFO -  * Restarting with stat
+2026-05-10 01:38:20,409 - WARNING -  * Debugger is active!
+2026-05-10 01:38:20,414 - INFO -  * Debugger PIN: 314-076-525
+2026-05-10 01:38:27,568 - INFO - 127.0.0.1 - - [10/May/2026 01:38:27] "GET /Denuncia HTTP/1.1" 200 -
+2026-05-10 01:38:27,653 - INFO - 127.0.0.1 - - [10/May/2026 01:38:27] "[33mGET /static/js/denuncias.js HTTP/1.1[0m" 404 -
+2026-05-10 01:38:27,764 - INFO - 127.0.0.1 - - [10/May/2026 01:38:27] "GET /static/denuncia.css HTTP/1.1" 200 -
+2026-05-10 01:38:39,230 - INFO - 127.0.0.1 - - [10/May/2026 01:38:39] "GET /Inicio HTTP/1.1" 200 -
+2026-05-10 01:38:39,296 - INFO - 127.0.0.1 - - [10/May/2026 01:38:39] "GET /static/inicio.css HTTP/1.1" 200 -

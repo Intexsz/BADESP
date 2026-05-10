@@ -15,31 +15,63 @@
   font-family: var(--fonte);
 }
 
-.titulo {
-  font-size: 1.8rem;
-  font-weight: 600;
-}
-
 .cabecalho {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 15px 25px;
+  padding: 20px 30px;
   position: sticky;
   top: 0;
   z-index: 1000;
   box-shadow: 0 4px 12px rgba(0,0,0,0.4);
 }
 
-.perfil img {
+/* botão na esquerda */
+.menu-btn {
+  z-index: 2;
+}
+
+/* título no meio real da tela */
+.titulo {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 0;
+
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* bem vindo na direita */
+.perfil {
+  margin-left: auto;
+}
+
+.perfil p {
+  margin: 0;
+}
+
+.perfil img,
+.perfil .avatar {
   width: 45px;
   height: 45px;
   border-radius: 50%;
   border: 2px solid var(--texto);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--texto);
+  background: rgba(255,255,255,0.06);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0 6px;
   transition: 0.3s;
 }
 
-.perfil img:hover {
+.perfil img:hover,
+.perfil .avatar:hover {
   transform: scale(1.08);
 }
 
@@ -346,7 +378,8 @@ button:hover {
 }
 
 .denuncia-card p {
-  margin-bottom: 6px;
+  margin-bottom: 8px;
+  size: 100px;
 }
 
 .denuncia-card a {
@@ -356,4 +389,53 @@ button:hover {
 @keyframes fadeIn {
   from {opacity: 0; transform: translateY(10px);}
   to {opacity: 1; transform: translateY(0);}
+}
+@media (max-width: 768px) {
+  .cabecalho {
+    padding: 12px 15px;
+  }
+
+  .titulo {
+    font-size: 1.2rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .perfil {
+    max-width: 35%;
+    overflow: hidden;
+  }
+
+  .perfil p {
+    font-size: 0.75rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .menu-btn {
+    font-size: 1.5rem;
+  }
+}
+
+/* Additional responsive adjustments */
+@media (max-width: 600px) {
+  *, *::before, *::after { box-sizing: border-box; }
+  .container, main, .painel-container { max-width: 100%; padding-left: 16px; padding-right: 16px; margin-left: auto; margin-right: auto; }
+  .painel-container { width: calc(100% - 32px); }
+  img, .avatar { max-width: 100%; height: auto; }
+  .denuncia-card p, .painel-container p, .painel-container h1, .perfil p, .denuncia-card h3 { word-break: break-word; overflow-wrap: break-word; }
+  .cabecalho .titulo { font-size: 1.1rem; }
+  .painel-container h1 { font-size: 1.25rem; margin: 8px 0; }
+  .denuncia-card h3 { font-size: 1rem; }
+  .perfil .avatar, .perfil img { width: 40px; height: 40px; font-size: 0.95rem; }
+  .denuncia-card, .painel-container { padding: 12px; }
+  button, .menu-btn, .apagar-form button { min-height: 44px; padding: 10px 14px; touch-action: manipulation; }
+  nav.sidebar { position: fixed; left: -100%; top: 0; width: 80%; max-width: 320px; height:100%; overflow:auto; transition:left .2s ease; }
+  nav.sidebar.ativo { left: 0; }
+  nav.sidebar ul li a { display: block; padding: 12px 16px; }
+  input, select, textarea { width: 100%; box-sizing: border-box; }
+  .modal, #pinModal > div { width: calc(100% - 32px); margin: 0 auto; }
+  .painel-container.has-select .input-container select { width: 100%; }
+  .perfil .avatar { max-width: 10ch; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 }

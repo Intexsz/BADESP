@@ -53,3 +53,4 @@ def check_teams(turma):
     cursor.close()
     conn.close()
     return r
+

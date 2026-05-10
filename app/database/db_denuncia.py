@@ -260,17 +260,49 @@ def get_report_status(id):
 def expire():
     conn = get_conn_denuncia()
     cursor = conn.cursor()
-    cursor.execute("SELECT id, datavisto, status FROM denuncias")
 
-    for d in cursor.fetchall():
-        if d["status"] == "Visto." and d["datavisto"]:
-            data = datetime.strptime(d["datavisto"], "%H:%M %d/%m/%Y")
-            if datetime.now() > data + timedelta(days=7):
-                cursor.execute("UPDATE denuncias SET status='Expirada.' WHERE id=%s", (d["id"],))
+    try:
+        cursor.execute("SELECT id, datavisto, status FROM denuncias")
+        denuncias = cursor.fetchall()
 
-    conn.commit()
-    cursor.close()
-    conn.close()
+        agora = datetime.now()
+
+        for d in denuncias:
+            status = d["status"]
+            datavisto = d["datavisto"]
+
+            if not datavisto:
+                continue
+
+            try:
+                data = datetime.strptime(datavisto, "%H:%M %d/%m/%Y")
+            except ValueError:
+                print(f"Data inválida na denúncia {d['id']}: {datavisto}")
+                continue
+
+            if status == "Visto.":
+                if agora > data + timedelta(days=7):
+                    cursor.execute(
+                        "UPDATE denuncias SET status = %s WHERE id = %s",
+                        ("Expirada.", d["id"])
+                    )
+
+            elif status in ("Aprovado.", "Recusado."):
+                if agora > data + timedelta(days=10):
+                    cursor.execute(
+                        "DELETE FROM denuncias WHERE id = %s",
+                        (d["id"],)
+                    )
+
+        conn.commit()
+
+    except Exception as e:
+        conn.rollback()
+        print("Erro ao expirar denúncias:", e)
+
+    finally:
+        cursor.close()
+        conn.close()
 
 
 # checa se o usuario ja criou uma denuncia a menos de 30 minutos -feito com ajuda de IA
