@@ -219,7 +219,7 @@
       {% endif %}
 
       {% else %}
-      {% if usuario['status'] in ['Em Análise.', 'Expirada.'] %}
+      {% if usuario['status'] in ['Em Análise.', 'Expirada.', 'Aprovado.', 'Recusado.'] %}
       <form class="apagar-form" action="{{ url_for('rotas.excluir_denuncia', id=usuario['id']) }}" method="POST">
         <button type="submit" class="buttozito">Apagar</button>
       </form>

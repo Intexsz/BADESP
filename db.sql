@@ -8,7 +8,18 @@ CREATE TABLE IF NOT EXISTS usuarios (
     escola VARCHAR(255),
     ano VARCHAR(50),
     turma VARCHAR(50),
-    turmano VARCHAR(100)
+    turmano VARCHAR(100),
+
+    suspenso TINYINT DEFAULT 0,
+    motivo_suspensao TEXT,
+    data_suspensao DATETIME,
+    fim_suspensao DATETIME,
+    tipo_suspensao VARCHAR(50),
+    suspenso_por_id VARCHAR(255),
+    suspenso_por_nome VARCHAR(255),
+    suspenso_por_email VARCHAR(255),
+    email_fim_suspensao_enviado TINYINT DEFAULT 0,
+    matricula_ativa TINYINT DEFAULT 1
 );
 
 CREATE TABLE IF NOT EXISTS lista_turmas (
@@ -34,7 +45,8 @@ CREATE TABLE IF NOT EXISTS denuncias (
     especifico TEXT,
     ano INT,
     turma TEXT,
-    envolvidos TEXT
+    envolvidos TEXT,
+    escola VARCHAR(255)
 );
 
 CREATE TABLE IF NOT EXISTS feedback (

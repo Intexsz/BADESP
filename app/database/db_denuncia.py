@@ -98,12 +98,12 @@ def create_report(titulo, tipo, descricao, user_id, status, cargo, especifico, e
     cursor.execute("""
         INSERT INTO denuncias
         (titulo, tipo, descricao, data, user_id, status, nome, visto, comentario, cargo,
-         especifico, descricao_ia, gravidade, turma, ano, envolvidos)
-        VALUES (%s,%s,%s,%s,%s,%s,%s,'Ninguém','',%s,%s,%s,%s,%s,%s,%s)
+         especifico, descricao_ia, gravidade, turma, ano, envolvidos, escola)
+        VALUES (%s,%s,%s,%s,%s,%s,%s,'Ninguém','',%s,%s,%s,%s,%s,%s,%s,%s)
     """, (
         titulo, tipo, descricao, data, user_id, status,
         usuario["nome"], cargo, especifico,
-        descricao_ia, gravidade, usuario["turma"], usuario["ano"], envolvidos
+        descricao_ia, gravidade, usuario["turma"], usuario["ano"], envolvidos, usuario["escola"]
     ))
 
     conn.commit()
@@ -116,9 +116,12 @@ def show_reports(user_id, cargo, tipo):
     conn = get_conn_denuncia()
     cursor = conn.cursor()
     nomezin = pegar_no_nome(user_id)
+    usuario = buscar_usuario(user_id)
+    escola_usuario = usuario.get("escola") if usuario else None
+    
     if cargo == 'Admin':
             cursor.execute('''
-            SELECT id, titulo, tipo, descricao, data, status, nome, visto, cargo, comentario, datavisto, descricao_ia, gravidade, turma, ano
+            SELECT id, titulo, tipo, descricao, data, status, nome, visto, cargo, comentario, datavisto, descricao_ia, gravidade, turma, ano, escola
             FROM denuncias
             ORDER BY id DESC''')
             denuncias = cursor.fetchall()
@@ -128,24 +131,26 @@ def show_reports(user_id, cargo, tipo):
         if tipo == 'Resolvidas':
             if cargo == "Secretaria":
                 cursor.execute('''
-            SELECT id, titulo, tipo, descricao, data, status, nome, visto, cargo, comentario, datavisto, especifico, descricao_ia, gravidade, turma, ano
+            SELECT id, titulo, tipo, descricao, data, status, nome, visto, cargo, comentario, datavisto, especifico, descricao_ia, gravidade, turma, ano, escola
             FROM denuncias
             WHERE status NOT IN ('Em Análise.', 'Expirado.', 'Visto.')
               AND (cargo = 'Secretaria' OR cargo = 'Ambos')
               AND especifico IN (%s, 'any')
+              AND escola = %s
             ORDER BY id DESC
-        ''', (nomezin,))
+        ''', (nomezin, escola_usuario))
             elif cargo == 'Aluno':
                 return
             elif cargo == 'Professor':
                 cursor.execute('''
-            SELECT id, titulo, tipo, descricao, data, status, nome, visto, cargo, comentario, datavisto, especifico, descricao_ia, gravidade, turma, ano
+            SELECT id, titulo, tipo, descricao, data, status, nome, visto, cargo, comentario, datavisto, especifico, descricao_ia, gravidade, turma, ano, escola
             FROM denuncias
             WHERE status NOT IN ('Em Análise.', 'Expirado.', 'Visto.')
               AND (cargo = 'Professor' OR cargo = 'Ambos')
               AND especifico IN (%s, 'any')
+              AND escola = %s
             ORDER BY id DESC
-        ''', (nomezin,))
+        ''', (nomezin, escola_usuario))
             denuncias = cursor.fetchall()
             conn.close()
             return denuncias
@@ -153,55 +158,59 @@ def show_reports(user_id, cargo, tipo):
         if tipo == 'Historico':
             if cargo == 'Secretaria':
                 cursor.execute('''
-            SELECT id, titulo, tipo, descricao, data, status, nome, visto, cargo, comentario, datavisto, especifico, descricao_ia, gravidade, turma, ano
+            SELECT id, titulo, tipo, descricao, data, status, nome, visto, cargo, comentario, datavisto, especifico, descricao_ia, gravidade, turma, ano, escola
             FROM denuncias
             WHERE status = 'Visto.'
               AND (cargo = 'Secretaria' OR cargo = 'Ambos')
               AND especifico IN (%s, 'any')
+              AND escola = %s
             ORDER BY id DESC
-        ''', (nomezin,))
+        ''', (nomezin, escola_usuario))
             elif cargo == 'Aluno':
                 return
             elif cargo == 'Professor':
                 cursor.execute('''
-            SELECT id, titulo, tipo, descricao, data, status, nome, visto, cargo, comentario, datavisto, especifico, descricao_ia, gravidade, turma, ano
+            SELECT id, titulo, tipo, descricao, data, status, nome, visto, cargo, comentario, datavisto, especifico, descricao_ia, gravidade, turma, ano, escola
             FROM denuncias
             WHERE status = 'Visto.'
               AND (cargo = 'Professor' OR cargo = 'Ambos')
               AND especifico IN (%s, 'any')
+              AND escola = %s
             ORDER BY id DESC
-        ''', (nomezin,))
+        ''', (nomezin, escola_usuario))
             denuncias = cursor.fetchall()
             conn.close()
             return denuncias
         
         if cargo == 'Secretaria':
             cursor.execute('''
-            SELECT id, titulo, tipo, descricao, data, status, nome, visto, cargo, comentario, datavisto, especifico, descricao_ia, gravidade, turma, ano
+            SELECT id, titulo, tipo, descricao, data, status, nome, visto, cargo, comentario, datavisto, especifico, descricao_ia, gravidade, turma, ano, escola
             FROM denuncias
             WHERE status != 'Expirada.'
               AND (cargo = 'Secretaria' OR cargo = 'Ambos')
               AND status = %s
               AND especifico IN (%s, 'any')
+              AND escola = %s
             ORDER BY id DESC
-        ''', (tipo,nomezin,))
+        ''', (tipo, nomezin, escola_usuario))
         elif cargo == 'Aluno':
             cursor.execute('''
-            SELECT id, titulo, tipo, descricao, data, status, nome, visto, comentario, datavisto, descricao_ia, gravidade, turma, ano
+            SELECT id, titulo, tipo, descricao, data, status, nome, visto, comentario, datavisto, descricao_ia, gravidade, turma, ano, escola
             FROM denuncias
-            WHERE user_id = %s AND status = %s
+            WHERE user_id = %s AND status = %s AND escola = %s
             ORDER BY id DESC
-        ''', (user_id,tipo,))
+        ''', (user_id, tipo, escola_usuario))
         elif cargo == 'Professor':
             cursor.execute('''
-            SELECT id, titulo, tipo, descricao, data, status, nome, visto, cargo, comentario, datavisto, especifico, descricao_ia, gravidade, turma, ano
+            SELECT id, titulo, tipo, descricao, data, status, nome, visto, cargo, comentario, datavisto, especifico, descricao_ia, gravidade, turma, ano, escola
             FROM denuncias
             WHERE status != 'Expirada.'
               AND (cargo = 'Professor' OR cargo = 'Ambos')
               AND status = %s
               AND especifico IN (%s, 'any')
+              AND escola = %s
             ORDER BY id DESC
-        ''', (tipo,nomezin,))
+        ''', (tipo, nomezin, escola_usuario))
         denuncias = cursor.fetchall()
         conn.close()
         return denuncias
@@ -209,29 +218,31 @@ def show_reports(user_id, cargo, tipo):
     elif tipo == 'Tudo':
         if cargo == 'Secretaria':
             cursor.execute('''
-            SELECT id, titulo, tipo, descricao, data, status, nome, visto, cargo, comentario, datavisto, descricao_ia, gravidade, turma, ano
+            SELECT id, titulo, tipo, descricao, data, status, nome, visto, cargo, comentario, datavisto, descricao_ia, gravidade, turma, ano, escola
             FROM denuncias
             WHERE status != 'Expirada.'
               AND (cargo = 'Secretaria' OR cargo = 'Ambos')
               AND especifico IN (%s, 'any')
+              AND escola = %s
             ORDER BY id DESC
-        ''', (nomezin,))
+        ''', (nomezin, escola_usuario))
         elif cargo == 'Aluno':
             cursor.execute('''
-            SELECT id, titulo, tipo, descricao, data, status, nome, visto, comentario, datavisto, descricao_ia, gravidade, turma, ano
+            SELECT id, titulo, tipo, descricao, data, status, nome, visto, comentario, datavisto, descricao_ia, gravidade, turma, ano, escola
             FROM denuncias
-            WHERE user_id = %s
+            WHERE user_id = %s AND escola = %s
             ORDER BY id DESC
-        ''', (user_id,))
+        ''', (user_id, escola_usuario))
         elif cargo == 'Professor':
             cursor.execute('''
-            SELECT id, titulo, tipo, descricao, data, status, nome, visto, cargo, comentario, datavisto, descricao_ia, gravidade, turma, ano
+            SELECT id, titulo, tipo, descricao, data, status, nome, visto, cargo, comentario, datavisto, descricao_ia, gravidade, turma, ano, escola
             FROM denuncias
             WHERE status != 'Expirada.'
               AND (cargo = 'Professor' OR cargo = 'Ambos')
               AND especifico IN (%s, 'any')
+              AND escola = %s
             ORDER BY id DESC
-        ''', (nomezin,))
+        ''', (nomezin, escola_usuario))
         denuncias = cursor.fetchall()
         conn.close()
         return denuncias
@@ -288,7 +299,7 @@ def expire():
                     )
 
             elif status in ("Aprovado.", "Recusado."):
-                if agora > data + timedelta(days=10):
+                if agora > data + timedelta(days=14):
                     cursor.execute(
                         "DELETE FROM denuncias WHERE id = %s",
                         (d["id"],)
@@ -322,8 +333,12 @@ def check_reports(user_id):
 ######----------######
 
 # aqui é quando ele abre a denuncia, deixando ela em Visto.
-def open_report_db(id, cargo, nome, id_user):
+def open_report_db(id, cargo, nome, id_user, escola_usuario=None):
     if cargo not in ("Secretaria", "Professor"):
+        return
+
+    # Verificar se a denúncia pertence à escola do usuário
+    if escola_usuario and not verificar_escola_denuncia(id, escola_usuario):
         return
 
     especifico = get_specific(id)
@@ -358,16 +373,22 @@ def open_report_db(id, cargo, nome, id_user):
     conn.close()
 
 
-def get_report(id):
+def get_report(id, escola_usuario=None):
     conn = get_conn_denuncia()
     cursor = conn.cursor()
 
-    cursor.execute("""
-        SELECT id, titulo, tipo, descricao, data, status, nome, visto, comentario, tipo, cargo, datavisto, especifico, descricao_ia, gravidade, turma, ano
+    query = """
+        SELECT id, titulo, tipo, descricao, data, status, nome, visto, comentario, tipo, cargo, datavisto, especifico, descricao_ia, gravidade, turma, ano, escola
         FROM denuncias
         WHERE id = %s
-    """, (id,))
-
+    """
+    params = [id]
+    
+    if escola_usuario:
+        query += " AND escola = %s"
+        params.append(escola_usuario)
+    
+    cursor.execute(query, params)
     row = cursor.fetchone()
     cursor.close()
     conn.close()
@@ -398,8 +419,12 @@ def check_coment(id):
     return r["comentario"] if r else None
 
 
-def update_status(id, cargo, novo, id_user):
+def update_status(id, cargo, novo, id_user, escola_usuario=None):
     if cargo not in ("Secretaria", "Professor"):
+        return
+
+    # Verificar se a denúncia pertence à escola do usuário
+    if escola_usuario and not verificar_escola_denuncia(id, escola_usuario):
         return
 
     especifico = get_specific(id)
@@ -422,8 +447,12 @@ def update_status(id, cargo, novo, id_user):
     conn.close()
 
 
-def post_comment(comentario, id, cargo, id_user):
+def post_comment(comentario, id, cargo, id_user, escola_usuario=None):
     if cargo not in ("Secretaria", "Professor"):
+        return
+
+    # Verificar se a denúncia pertence à escola do usuário
+    if escola_usuario and not verificar_escola_denuncia(id, escola_usuario):
         return
 
     especifico = get_specific(id)
@@ -452,6 +481,20 @@ def get_specific(id):
     cursor.close()
     conn.close()
     return r["especifico"] if r else None
+
+
+def verificar_escola_denuncia(id_denuncia, escola_usuario):
+    """Verifica se a denúncia pertence à escola do usuário"""
+    conn = get_conn_denuncia()
+    cursor = conn.cursor()
+    cursor.execute("SELECT escola FROM denuncias WHERE id=%s", (id_denuncia,))
+    r = cursor.fetchone()
+    cursor.close()
+    conn.close()
+    
+    if not r:
+        return False
+    return r["escola"] == escola_usuario
 
 
 def list_reports(nome):

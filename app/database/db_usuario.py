@@ -1,5 +1,6 @@
 import pymysql
 import logging
+from datetime import datetime, timedelta
 
 def get_db_connection():
     return pymysql.connect(
@@ -120,11 +121,20 @@ def buscar_nome_professor():
     return r
 
     
-def buscar_nome_aluno():
+def buscar_nome_aluno(escola=None):
     conn = get_db_connection()
     cursor = conn.cursor()
-    cursor.execute("SELECT turmano, nome FROM usuarios")
+    
+    query = "SELECT turmano, nome FROM usuarios WHERE cargo = 'Aluno'"
+    params = []
+    
+    if escola:
+        query += " AND escola = %s"
+        params.append(escola)
+    
+    cursor.execute(query, params)
     rows = cursor.fetchall()
+    cursor.close()
     conn.close()
 
     alunos = {}
@@ -144,6 +154,244 @@ def usuario_tem_pin(user_id):
     conn.close()
     return bool(r and r["pin"])
 
+def calcular_fim_suspensao(tempo):
+    agora = datetime.now()
+
+    if tempo == "3_dias":
+        return agora + timedelta(days=3), "temporaria"
+
+    if tempo == "5_dias":
+        return agora + timedelta(days=5), "temporaria"
+
+    if tempo == "10_dias":
+        return agora + timedelta(days=10), "temporaria"
+
+    if tempo == "1_mes":
+        return agora + timedelta(days=30), "temporaria"
+
+    if tempo == "permanente":
+        return None, "permanente"
+
+    return None, None
+
+def buscar_aluno_por_id(id):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT id, nome, email, ano, turma, turmano, cargo,
+               suspenso, motivo_suspensao, data_suspensao,
+               fim_suspensao, tipo_suspensao
+        FROM usuarios
+        WHERE id = %s AND cargo = 'Aluno'
+    """, (id,))
+
+    aluno = cursor.fetchone()
+
+    cursor.close()
+    conn.close()
+
+    return aluno
+
+
+def calcular_fim_suspensao(tempo):
+    agora = datetime.now()
+
+    if tempo == "3_dias":
+        return agora + timedelta(days=3), "temporaria"
+
+    if tempo == "5_dias":
+        return agora + timedelta(days=5), "temporaria"
+
+    if tempo == "10_dias":
+        return agora + timedelta(days=10), "temporaria"
+
+    if tempo == "1_mes":
+        return agora + timedelta(days=30), "temporaria"
+
+    if tempo == "permanente":
+        return None, "permanente"
+
+    return None, None
+
+
+def buscar_aluno_por_id(id):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT id, nome, email, ano, turma, turmano, cargo,
+               suspenso, motivo_suspensao, data_suspensao,
+               fim_suspensao, tipo_suspensao,
+               suspenso_por_id, suspenso_por_nome, suspenso_por_email,
+               matricula_ativa
+        FROM usuarios
+        WHERE id = %s AND cargo = 'Aluno'
+    """, (id,))
+
+    aluno = cursor.fetchone()
+
+    cursor.close()
+    conn.close()
+
+    return aluno
+
+
+def buscar_status_suspensao(user_id):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT id, nome, email, cargo, matricula_ativa,
+               suspenso, motivo_suspensao, data_suspensao,
+               fim_suspensao, tipo_suspensao,
+               suspenso_por_id, suspenso_por_nome, suspenso_por_email,
+               email_fim_suspensao_enviado
+        FROM usuarios
+        WHERE id = %s
+    """, (user_id,))
+
+    usuario = cursor.fetchone()
+
+    cursor.close()
+    conn.close()
+
+    return usuario
+
+
+def suspender_user(aluno_id, motivo, tempo, suspensor):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    agora = datetime.now()
+    fim_suspensao, tipo_suspensao = calcular_fim_suspensao(tempo)
+
+    if tipo_suspensao is None:
+        cursor.close()
+        conn.close()
+        return False
+
+    cursor.execute("""
+        UPDATE usuarios
+        SET suspenso = %s,
+            motivo_suspensao = %s,
+            data_suspensao = %s,
+            fim_suspensao = %s,
+            tipo_suspensao = %s,
+            suspenso_por_id = %s,
+            suspenso_por_nome = %s,
+            suspenso_por_email = %s,
+            email_fim_suspensao_enviado = 0
+        WHERE id = %s AND cargo = 'Aluno'
+    """, (
+        1,
+        motivo,
+        agora,
+        fim_suspensao,
+        tipo_suspensao,
+        suspensor["id"],
+        suspensor["nome"],
+        suspensor["email"],
+        aluno_id
+    ))
+
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+    return True
+
+
+def remover_suspensao_user(aluno_id):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        UPDATE usuarios
+        SET suspenso = 0,
+            motivo_suspensao = NULL,
+            data_suspensao = NULL,
+            fim_suspensao = NULL,
+            tipo_suspensao = NULL,
+            suspenso_por_id = NULL,
+            suspenso_por_nome = NULL,
+            suspenso_por_email = NULL,
+            email_fim_suspensao_enviado = 0
+        WHERE id = %s AND cargo = 'Aluno'
+    """, (aluno_id,))
+
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+
+def finalizar_suspensao_expirada(aluno_id):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        UPDATE usuarios
+        SET suspenso = 0,
+            motivo_suspensao = NULL,
+            data_suspensao = NULL,
+            fim_suspensao = NULL,
+            tipo_suspensao = NULL,
+            suspenso_por_id = NULL,
+            suspenso_por_nome = NULL,
+            suspenso_por_email = NULL,
+            email_fim_suspensao_enviado = 1
+        WHERE id = %s
+    """, (aluno_id,))
+
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+
+def alterar_matricula_ativa(aluno_id, ativo):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        UPDATE usuarios
+        SET matricula_ativa = %s
+        WHERE id = %s AND cargo = 'Aluno'
+    """, (1 if ativo else 0, aluno_id))
+
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+
+def listar_alunose(ano=None, serie=None, escola=None):
+    query = """
+        SELECT nome, turma, email, ano, id, suspenso, matricula_ativa, escola
+        FROM usuarios
+        WHERE cargo = 'Aluno'
+    """
+
+    params = []
+
+    if ano and ano != "Todos":
+        query += " AND ano = %s"
+        params.append(ano)
+
+    if serie and serie != "Todos":
+        query += " AND turma = %s"
+        params.append(serie)
+
+    if escola:
+        query += " AND escola = %s"
+        params.append(escola)
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute(query, params)
+    r = cursor.fetchall()
+    cursor.close()
+    conn.close()
+
+    return r
 
 def cadastrar_pin(id, pin, escola, ano, turma, turmano):
     conn = get_db_connection()
@@ -214,24 +462,20 @@ def novo_pin_secretaria(pin, nome):
     conn.close()
 
 
-def listar_alunose(ano=None, serie=None):
-    query = "SELECT nome, turma, email, ano, id FROM usuarios WHERE cargo='Aluno'"
-    params = []
-
-    if ano and ano != "Todos":
-        query += " AND ano=%s"
-        params.append(ano)
-
-    if serie and serie != "Todos":
-        query += " AND turma=%s"
-        params.append(serie)
-
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    cursor.execute(query, params)
-    r = cursor.fetchall()
-    cursor.close()
-    conn.close()
-    return r
-
+def alterar_escola_aluno(aluno_id, nova_escola):
+    """Altera a escola de um aluno. Deve ser validado em rota que apenas secretaria pode fazer."""
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute("""
+            UPDATE usuarios
+            SET escola=%s
+            WHERE id=%s AND cargo='Aluno'
+        """, (nova_escola, aluno_id))
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return True
+    except Exception as e:
+        return False
 

@@ -2,13 +2,15 @@ from flask import Flask, request, render_template, session, redirect, url_for, B
 from authlib.integrations.flask_client import OAuth
 from app.database.db_usuario import get_role, buscar_usuario, buscar_nome_secretaria, buscar_nome_professor
 from app.database.db_denuncia import get_report_status, show_reports, delete_reports, create_report, expire, check_reports
-from app.database.db_usuario import usuario_tem_pin, cadastrar_pin, check_pin, buscar_email, pegar_no_nome, buscar_nome_aluno
+from app.database.db_usuario import usuario_tem_pin, cadastrar_pin, check_pin, buscar_email, pegar_no_nome, buscar_nome_aluno, buscar_status_suspensao,finalizar_suspensao_expirada
 from app.database.db_feedback import create_feedback,show_feedback, delete_feedback
 from app.database.db_site import mostrar_teams
+from app.email.email_service import enviar_email_fim_suspensao
 from flask_cors import CORS
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import smtplib
+from datetime import datetime
 
 ######-E-Mail-######
 remetente = 'denunciasdehaytalo@gmail.com'
@@ -56,6 +58,46 @@ def envio_email(destinario, aluno, tipo, debug):
     server.quit()
 ######-TESTE-######
 
+@rotas_bp.before_app_request
+def bloquear_usuario_suspenso_ou_inativo():
+    rotas_livres = [
+        "static",
+        "rotalogin.cadastro",
+        "rotas.Termos"
+    ]
+
+    if request.endpoint in rotas_livres:
+        return
+
+    if "user_id" not in session:
+        return
+
+    usuario = buscar_status_suspensao(session["user_id"])
+
+    if not usuario:
+        session.clear()
+        return redirect(url_for("rotalogin.cadastro"))
+
+    if usuario["cargo"] == "Aluno" and usuario.get("matricula_ativa") == 0:
+        session.clear()
+        return render_template("acesso_encerrado.html")
+
+    if usuario.get("suspenso") == 1:
+        if usuario["tipo_suspensao"] == "permanente":
+            session.clear()
+            return render_template("aluno_suspenso.html", usuario=usuario)
+
+        if usuario["fim_suspensao"] and usuario["fim_suspensao"] > datetime.now():
+            session.clear()
+            return render_template("aluno_suspenso.html", usuario=usuario)
+
+        if usuario["fim_suspensao"] and usuario["fim_suspensao"] <= datetime.now():
+            if usuario.get("email_fim_suspensao_enviado") == 0:
+                enviar_email_fim_suspensao(usuario)
+
+            finalizar_suspensao_expirada(usuario["id"])
+            return
+        
 @rotas_bp.route('/Login2', methods=['GET', 'POST'])
 def cadastro2_pin():
     if not "user_id" in session:
@@ -100,6 +142,7 @@ def inicio():
     expire()
     cargo = get_role(session["user_id"])
     usuario = buscar_usuario(session["user_id"])
+    escola_usuario = usuario.get("escola")
     filtro = request.args.get('filtro', 'Tudo')
 
     if request.method == 'POST':
@@ -322,11 +365,12 @@ def denuncia():
     if cargo != 'Aluno' and cargo != 'Admin':
         return redirect(url_for('rotas.inicio'))
     
-    alunos_por_turma = buscar_nome_aluno()
+    usuario = buscar_usuario(session["user_id"])
+    # Alunos só veem colegas da mesma escola
+    alunos_por_turma = buscar_nome_aluno(escola=usuario.get("escola"))
 
     nomeprof = buscar_nome_professor()
     nomesecretaria = buscar_nome_secretaria()
-    usuario = buscar_usuario(session["user_id"])
 
     if request.method == 'POST':
         if not check_reports(session['user_id']):
@@ -372,7 +416,7 @@ def excluir_denuncia(id):
         return redirect(url_for('rotas.inicio'))
     
     status = get_report_status(id)
-    if status == 'Em Análise.' or status == 'Expirada.':
+    if status == 'Em Análise.' or status == 'Expirada.' or status == 'Aprovado.' or status == 'Recusado.':
         delete_reports(id, session["user_id"])
         return redirect(url_for('rotas.inicio'))
     else:
