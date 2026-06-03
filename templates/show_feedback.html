@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icone.png') }}">
+  <title>B.A.D.E.S.P - Feedback</title>
+</head>
+<body>
+    {% if feedback %}
+    {% for d in feedback %}
+    <form action="/Feedback/Admin/Delete/{{ d['id'] }}" method="POST">
+        <p>Titulo = {{ d['titulo'] }}</p>
+        <p>Feedback = {{ d['feedback'] }}</p>
+        <p>Tipo = {{ d['tipo'] }}</p>
+        <p>Cargo = {{ d['cargo'] }}</p>
+        <p>Hora = {{ d['horario'] }}</p>
+        <button type="submit" name="Button" value="excluir">Excluir</button>
+    </form>
+    <h5>--------------------------</h5>
+    <br>
+    {% endfor %}
+    {% else %}
+    <p>nada encontrado.</p>
+    {% endif %}
+
+      <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+  </script>
+  
+</body>
+</html>

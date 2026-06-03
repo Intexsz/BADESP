@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Suspender aluno</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: #111827;
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: auto;
+            background: rgba(255,255,255,0.08);
+            padding: 25px;
+            border-radius: 16px;
+        }
+
+        h1 {
+            color: #ff5b5b;
+        }
+
+        .info {
+            background: rgba(0,0,0,0.25);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        textarea, select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+        }
+
+        button {
+            margin-top: 20px;
+            background: #dc2626;
+            color: white;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .cancelar {
+            display: inline-block;
+            margin-left: 10px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .status-ativo {
+            color: #22c55e;
+            font-weight: bold;
+        }
+
+        .status-suspenso {
+            color: #f87171;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Suspender aluno</h1>
+
+        <div class="info">
+            <p><strong>Nome:</strong> {{ aluno['nome'] }}</p>
+            <p><strong>Email:</strong> {{ aluno['email'] }}</p>
+            <p><strong>Turma:</strong> {{ aluno['ano'] }}°{{ aluno['turma'] }}</p>
+
+            {% if aluno['suspenso'] %}
+                <p class="status-suspenso">Status: aluno já está suspenso</p>
+                <p><strong>Motivo atual:</strong> {{ aluno['motivo_suspensao'] }}</p>
+                <p><strong>Suspenso por:</strong> {{ aluno['suspenso_por_nome'] }}</p>
+            {% else %}
+                <p class="status-ativo">Status: aluno ativo</p>
+            {% endif %}
+        </div>
+
+        <form action="{{ url_for('rotasecretaria.suspender_acesso', id=aluno['id']) }}" method="POST"
+              onsubmit="return confirm('Tem certeza que deseja suspender este aluno?');">
+
+            <label for="motivo">Motivo da suspensão</label>
+            <textarea id="motivo" name="motivo" rows="5" required></textarea>
+
+            <label for="tempo">Tempo de suspensão</label>
+            <select id="tempo" name="tempo" required>
+                <option value="">Selecione</option>
+                <option value="3_dias">3 dias</option>
+                <option value="5_dias">5 dias</option>
+                <option value="10_dias">10 dias</option>
+                <option value="1_mes">1 mês</option>
+                <option value="permanente">Permanente</option>
+            </select>
+
+            <button type="submit">Confirmar suspensão</button>
+
+            <a class="cancelar" href="{{ url_for('rotasecretaria.listar_alunos') }}">
+                Cancelar
+            </a>
+        </form>
+    </div>
+
+</body>
+</html>

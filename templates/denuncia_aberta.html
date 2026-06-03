@@ -46,11 +46,11 @@
         }
       </style>
 
-      <li><a href="/MudarPIN"><span class="material-icons">pin</span> Mudar o PIN</a></li>
-      <li><a href="/Turmas"><span class="material-icons">pin</span> Turmas</a></li>
+      <li><a href="/MudarPIN"><span class="material-icons">pin</span> Mudar PIN</a></li>
+      <li><a href="/Turmas"><span class="material-icons">groups</span> Turmas</a></li>
       {% endif %}
-
-      <li><a href="/Logout" class="logout" onclick="confirmarLogout()"><span class="material-icons">logout</span>
+      <li><a href="/Feedback"><span class="material-icons">campaign</span> Feedback</a></li>
+      <li><a href="/Logout" class="logout" onclick="confirmarLogout(event)"><span class="material-icons">logout</span>
           Deslogar</a></li>
     </ul>
   </nav>
@@ -219,7 +219,7 @@
       {% endif %}
 
       {% else %}
-      {% if usuario['status'] in ['Em Análise.', 'Expirada.'] %}
+      {% if usuario['status'] in ['Em Análise.', 'Expirada.', 'Aprovado.', 'Recusado.'] %}
       <form class="apagar-form" action="{{ url_for('rotas.excluir_denuncia', id=usuario['id']) }}" method="POST">
         <button type="submit" class="buttozito">Apagar</button>
       </form>
@@ -258,10 +258,15 @@
 
     btn.addEventListener('click', () => sidebar.classList.toggle('ativo'));
 
-    function confirmarLogout() {
+    function confirmarLogout(e) {
+      e.preventDefault();          // trava o link
+      e.stopPropagation();        // trava qualquer outro evento
+
       if (confirm("Deseja realmente sair?")) {
-        alert("Logout realizado com sucesso!");
+        window.location.href = "/Logout";
       }
+
+      return false;
     }
 
     // ===== FECHAR MENU CLICANDO FORA + REDIRECIONAR P/ INÍCIO =====
@@ -274,6 +279,17 @@
     });
   </script>
 
+  <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+  </script>
+  
 </body>
 
 </html>

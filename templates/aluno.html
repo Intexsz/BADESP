@@ -29,10 +29,11 @@
       <ul>
         <li><a href="/Inicio"><span class="material-icons">home</span> Início</a></li>
         <li><a href="/Ajuda"><span class="material-icons">help_outline</span> Ajuda</a></li>
-        <li><a href="/MudarPIN"><span class="material-icons">pin</span> Mudar o PIN</a></li>
-        <li><a href="/Turmas"><span class="material-icons">pin</span> Turmas</a></li>
+        <li><a href="/MudarPIN"><span class="material-icons">pin</span> Mudar PIN</a></li>
+        <li><a href="/Turmas"><span class="material-icons">groups</span> Turmas</a></li>
+        <li><a href="/Feedback"><span class="material-icons">campaign</span> Feedback</a></li>
 
-        <li><a href="/Logout" class="logout" onclick="confirmarLogout()"><span class="material-icons">logout</span>
+        <li><a href="/Logout" class="logout" onclick="confirmarLogout(event)"><span class="material-icons">logout</span>
             Deslogar</a></li>
       </ul>
     </nav>
@@ -115,6 +116,7 @@
                   <th>Denúncias Aprovadas</th>
                   <th>Alterar Ano</th>
                   <th>Alterar Turma</th>
+                  <th>Ações</th>
                 </tr>
               </thead>
 
@@ -125,14 +127,16 @@
                   style="cursor:pointer; color: {{ cor }}; font-family: Arial, sans-serif;">
                   <td>
                     {{d['nome'].split(' ')[0]}}
-                    {% if not d['nome'].split(' ')[-1] == d['nome'].split(' ')[-2] %} {{d['nome'].split(' ')[-2]}} {% endif %}
-                    {% if not d['nome'].split(' ')[0] == d['nome'].split(' ')[-1] %} {{d['nome'].split(' ')[-1]}} {% endif %}
+                    {% if not d['nome'].split(' ')[-1] == d['nome'].split(' ')[-2] %} {{d['nome'].split(' ')[-2]}} {%
+                    endif %}
+                    {% if not d['nome'].split(' ')[0] == d['nome'].split(' ')[-1] %} {{d['nome'].split(' ')[-1]}} {%
+                    endif %}
                   </td>
                   <td>{{ d['email'] }}</td>
                   <td>{{ d['ano'] }}°{{ d['turma'] }}</td>
                   <td>{{ d['total'] }}</td>
                   <td>{{ d['aprov'] }}</td>
-                  
+
                   <input type="hidden" name="aluno_ids" value="{{ d['id'] }}">
 
                   <td>
@@ -164,8 +168,49 @@
                     </select>
                   </td>
 
-                  <td><a onclick="alert('se suspende o {{ d['id'] }} ai')" href="/Alunos"
-                      style="color: red; text-decoration: none;">❌Suspender Acesso do Aluno</a></td>
+<td onclick="event.stopPropagation();">
+  <div class="acoes-aluno">
+
+    {% if d['matricula_ativa'] == 0 %}
+
+      <button type="submit"
+        formaction="{{ url_for('rotasecretaria.reativar_matricula', id=d['id']) }}"
+        formmethod="POST"
+        onclick="event.stopPropagation(); return confirm('Deseja reativar a matrícula deste aluno?');"
+        class="btn-acao btn-reativar">
+        ✅ Reativar
+      </button>
+
+    {% elif d['suspenso'] %}
+
+      <button type="submit"
+        formaction="{{ url_for('rotasecretaria.remover_suspensao', id=d['id']) }}"
+        formmethod="POST"
+        onclick="event.stopPropagation(); return confirm('Deseja remover a suspensão deste aluno?');"
+        class="btn-acao btn-remover">
+        ✅ Remover
+      </button>
+
+    {% else %}
+
+      <a href="{{ url_for('rotasecretaria.pagina_suspender_aluno', id=d['id']) }}"
+        onclick="event.stopPropagation();"
+        class="btn-acao btn-suspender">
+        ❌ Suspender
+      </a>
+
+      <button type="submit"
+        formaction="{{ url_for('rotasecretaria.desativar_matricula', id=d['id']) }}"
+        formmethod="POST"
+        onclick="event.stopPropagation(); return confirm('Deseja encerrar o acesso deste aluno?');"
+        class="btn-acao btn-encerrar">
+        🚫 Encerrar
+      </button>
+
+    {% endif %}
+
+  </div>
+</td>
                 </tr>
                 {% endif %}
                 {% endfor %}
@@ -182,10 +227,15 @@
 
       btn.addEventListener('click', () => sidebar.classList.toggle('ativo'));
 
-      function confirmarLogout() {
+      function confirmarLogout(e) {
+        e.preventDefault();          // trava o link
+        e.stopPropagation();        // trava qualquer outro evento
+
         if (confirm("Deseja realmente sair?")) {
-          alert("Logout realizado com sucesso!");
+          window.location.href = "/Logout";
         }
+
+        return false;
       }
 
       // ===== FECHAR MENU CLICANDO FORA + REDIRECIONAR P/ INÍCIO =====
@@ -232,6 +282,18 @@
         selectSerie.value = selectSerie.querySelector('option[style*="display: block"]').value;
       }
     </script>
+
+    <div vw class="enabled">
+      <div vw-access-button class="active"></div>
+      <div vw-plugin-wrapper>
+        <div class="vw-plugin-top-wrapper"></div>
+      </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+      new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+
 </body>
 
 </html>

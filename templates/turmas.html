@@ -1,79 +1,162 @@
 <!DOCTYPE html>
-<html lang="PT-BR">
+<html lang="pt-br">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icone.png') }}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>B.A.D.E.S.P - Turmas</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='turmas.css') }}">
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='pin.css') }}">
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icone.png') }}">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <form action="/Turmas" method="POST">
-        <input placeholder="Digite o Ano" type="text" name="ano" required maxlength="1" minlength="1" pattern="\d{1}"
-            oninput="this.value = this.value.replace(/\D/g, '')"><br> <br>
-        <input type="text" name="turma" placeholder="Digite a Turma" id="turma" maxlength="5"> <br> <br>
-        <button type="submit">Confirmar</button>
-    </form>
 
-    <h2>Turmas Atuais:</h2>
-    {% if mensagem %}
-        <script>
-            alert("{{ mensagem }}");
-        </script>
-    {% endif %}
-    {% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-    {% for categoria, mensagem in messages %}
-        <p style="background:none; border:none; font-size: 20px; font-family: Arial, Helvetica, sans-serif; color: red;">{{ mensagem }}</p>
-    {% endfor %}
-  {% endif %}
-{% endwith %}
-    <table>
+  <!-- HEADER -->
+  <header class="cabecalho glass">
+    <button class="menu-btn">
+      <span class="material-icons">menu</span>
+    </button>
+    <h1 class="titulo">B.A.D.E.S.P</h1>
+    <div class="perfil">
+      <img src="{{ usuario['foto'] }}" alt="Logado como: {{ usuario['nome'] }}">
+    </div>
+  </header>
 
-        <thead>
-            <tr>
-                <th>Turmas:</th>
-            </tr>
-        </thead>
+  <!-- SIDEBAR -->
+  <nav class="sidebar glass sobreposto">
+    <ul>
+      <li><a href="/Inicio"><span class="material-icons">home</span> Início</a></li>
+      <li><a href="/Ajuda"><span class="material-icons">help_outline</span> Ajuda</a></li>
+      <li><a href="/MudarPIN"><span class="material-icons">pin</span> Mudar PIN</a></li>
+      <li><a href="/Turmas"><span class="material-icons">groups</span> Turmas</a></li>
+      <li><a href="/Feedback"><span class="material-icons">campaign</span> Feedback</a></li>
+      <li>
+      <li><a href="/Logout" class="logout" onclick="confirmarLogout()"><span class="material-icons">logout</span>
+          Deslogar</a></li>
+      </li>
+    </ul>
+  </nav>
 
-        <tbody>
-            {% for turma in turmas %}
-            {% if turma %}
-            <td style="font-size: 20px; padding: 10px;">{{ turma }}</td>
-            <form action="/RemoverTurma" method="POST">
-                <input type="hidden" name="nome_turma_input" value="{{ turma }}">
-                <td><button type="submit" style="color: red; text-decoration: none;">❌Remover Turma</button></td>
-            </form>
-            {% else %}
-            <td>Nenhuma turma cadastrada.</td>
-            {% endif %}
-            {% endfor %}
-        </tbody>
-    </table>
+  <!-- CONTEÚDO -->
+  <main>
+    <div class="container">
+      <h2>Gerenciar Turmas</h2>
+      <br>
 
-      <script>
+      <!-- FORM CADASTRO -->
+      <form method="POST" action="/Turmas" autocomplete="off">
+
+        <div class="input-container">
+          <input type="text" name="ano" placeholder="Ano" required maxlength="1" pattern="\d"
+            oninput="this.value = this.value.replace(/\D/g, '')">
+        </div>
+
+        <div class="input-container">
+          <input type="text" name="turma" placeholder="Sigla da Turma (ex: A, B, C...)" required maxlength="5"
+            style="text-transform: uppercase;">
+        </div>
+
+        <button type="submit" class="submit-button">
+          Confirmar
+        </button>
+      </form>
+
+      <br><br>
+
+      <!-- LISTA -->
+      <h3>Turmas Atuais</h3>
+      <br>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+      {% for categoria, mensagem in messages %}
+      <p style="color:red;">{{ mensagem }}</p>
+      <br>
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+
+      {% if turmas %}
+      {% for turma in turmas %}
+      <div class="input-container" style="display:flex; justify-content:space-between; align-items:center;">
+        <span>{{ turma }}</span>
+
+        <form action="/RemoverTurma" method="POST" style="margin:0;">
+          <input type="hidden" name="nome_turma_input" value="{{ turma }}">
+          <button type="submit" style="color:red; background:none; border:none; cursor:pointer;">
+            ❌ Remover
+          </button>
+        </form>
+      </div>
+      {% endfor %}
+      {% else %}
+      <p>Nenhuma turma cadastrada.</p>
+      {% endif %}
+
+    </div>
+  </main>
+
+  <!-- JS -->
+  <script>
     const btn = document.querySelector('.menu-btn');
     const sidebar = document.querySelector('.sidebar');
+    const turmaInput = document.getElementById("turma");
+
+    turmaInput.addEventListener("input", function () {
+      this.value = this.value.toUpperCase();
+    });
+
 
     btn.addEventListener('click', () => sidebar.classList.toggle('ativo'));
 
-    function confirmarLogout() {
+    function confirmarLogout(e) {
+      e.preventDefault();
       if (confirm("Deseja realmente sair?")) {
-        window.location.href = "Logout"
-        alert("Logout realizado com sucesso!");
+        window.location.href = "/Logout";
       }
     }
 
-    // ===== FECHAR MENU CLICANDO FORA + REDIRECIONAR P/ INÍCIO =====
     document.addEventListener("click", (e) => {
-      const clicouFora = !sidebar.contains(e.target) && !btn.contains(e.target);
-
-      if (sidebar.classList.contains("ativo") && clicouFora) {
+      if (!sidebar.contains(e.target) && !btn.contains(e.target)) {
         sidebar.classList.remove("ativo");
       }
     });
+  </script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const btn = document.querySelector('.menu-btn');
+    const sidebar = document.querySelector('.sidebar');
+
+    if (btn && sidebar) {
+        btn.addEventListener('click', function () {
+            sidebar.classList.toggle('ativo');
+        });
+
+        document.addEventListener("click", function (e) {
+            if (!sidebar.contains(e.target) && !btn.contains(e.target)) {
+                sidebar.classList.remove("ativo");
+            }
+        });
+    }
+
+});
+</script>
+
+
+  <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
   </script>
 </body>
 

@@ -48,10 +48,10 @@
             {% endif %}
 
             <div class="input-container">
-                <input placeholder="PIN" type="text" name="pin" id="pin" required maxlength="6" minlength="6" oninput="this.value = this.value.replace(/\D/g, '')">
+                <input placeholder="PIN" type="text" name="pin" id="pin" inputmode="numeric" required maxlength="6" minlength="6" oninput="this.value = this.value.replace(/\D/g, '')">
             </div>
             <div class="input-container">
-                <input placeholder="Confirmar PIN" type="text" name="confirmar" id="confirmar" required maxlength="6" minlength="6" oninput="this.value = this.value.replace(/\D/g, '')">
+                <input placeholder="Confirmar PIN" type="text" name="confirmar" inputmode="numeric" id="confirmar" required maxlength="6" minlength="6" oninput="this.value = this.value.replace(/\D/g, '')">
             </div>
 
             <div class='Termos'>
@@ -103,5 +103,17 @@
             return true;
         }
     </script>
+
+      <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+  </script>
+  
 </body>
 </html>

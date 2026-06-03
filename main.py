@@ -9,6 +9,13 @@ app.secret_key = "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"
 
 CLIENT_ID = "177205671715-238eoh4gfa3qusnfuuaa9jmctiot8vno.apps.googleusercontent.com"
 
+@app.after_request
+def add_no_cache_headers(response):
+    response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "0"
+    return response
+
 oauth = OAuth(app)
 google = oauth.register(
     name='google',

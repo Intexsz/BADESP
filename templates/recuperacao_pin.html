@@ -29,11 +29,11 @@
         <ul>
             <li><a href="/Inicio"><span class="material-icons">home</span> Início</a></li>
             <li><a href="/Ajuda"><span class="material-icons">help_outline</span> Ajuda</a></li>
-            <li><a href="/MudarPIN"><span class="material-icons">pin</span> Mudar o PIN</a></li>
-            <li><a href="/Turmas"><span class="material-icons">pin</span> Turmas</a></li>
+            <li><a href="/MudarPIN"><span class="material-icons">pin</span> Mudar PIN</a></li>
+            <li><a href="/Turmas"><span class="material-icons">groups</span> Turmas</a></li>
+            <li><a href="/Feedback"><span class="material-icons">campaign</span> Feedback</a></li>
 
-            <li><a href="/Logout" class="logout" onclick="confirmarLogout()"><span class="material-icons">logout</span>
-                    Deslogar</a></li>
+<li><a href="/Logout" class="logout" onclick="confirmarLogout(event)"><span class="material-icons">logout</span>
         </ul>
     </nav>
 
@@ -150,11 +150,16 @@
 
         btn.addEventListener('click', () => sidebar.classList.toggle('ativo'));
 
-        function confirmarLogout() {
-            if (confirm("Deseja realmente sair?")) {
-                alert("Logout realizado com sucesso!");
-            }
-        }
+    function confirmarLogout(e) {
+      e.preventDefault();          // trava o link
+      e.stopPropagation();        // trava qualquer outro evento
+
+      if (confirm("Deseja realmente sair?")) {
+        window.location.href = "/Logout";
+      }
+
+      return false;
+    }
 
         // ===== FECHAR MENU CLICANDO FORA + REDIRECIONAR P/ INÍCIO =====
         document.addEventListener("click", (e) => {
@@ -195,6 +200,18 @@
         });
     </script>
 
+
+  <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+  </script>
+  
 </body>
 
 </html>

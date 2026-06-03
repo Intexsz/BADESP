@@ -23,7 +23,7 @@
         <button class="menu-btn"><span class="material-icons">menu</span></button>
         <h1 class="titulo">B.A.D.E.S.P</h1>
         <div class="perfil">
-            <img src="{{ usuario['foto'] }}" alt="Logado como: {{ usuario['nome'] }}">
+            <p>Bem vindo: {{ usuario['nome'] }}!</p>
         </div>
     </header>
 
@@ -48,11 +48,11 @@
                     background: linear-gradient(135deg, #242424, #353535);
                 }
             </style>
-            <li><a href="/MudarPIN"><span class="material-icons">pin</span> Mudar o PIN</a></li>
-            <li><a href="/Turmas"><span class="material-icons">pin</span> Turmas</a></li>
+            <li><a href="/MudarPIN"><span class="material-icons">pin</span> Mudar PIN</a></li>
+            <li><a href="/Turmas"><span class="material-icons">groups</span> Turmas</a></li>
             {% endif %}
-
-            <li><a href="/Logout" class="logout" onclick="confirmarLogout()"><span class="material-icons">logout</span>
+            <li><a href="/Feedback"><span class="material-icons">campaign</span> Feedback</a></li>
+            <li><a href="/Logout" class="logout" onclick="confirmarLogout(event)"><span class="material-icons">logout</span>
                     Deslogar</a></li>
         </ul>
     </nav>
@@ -65,7 +65,7 @@
     <header class="cabecalho glass">
         <button class="menu-btn"><span class="material-icons">menu</span></button>
         <h1 class="titulo">B.A.D.E.S.P</h1>
-        <div class="perfil">
+       <div class="perfil">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5wt2-sE3VgB3SwwpeW9QWKNvvN3JqOFlUSQ&s">
         </div>
     </header>
@@ -214,11 +214,16 @@
 
         btn.addEventListener('click', () => sidebar.classList.toggle('ativo'));
 
-        function confirmarLogout() {
-            if (confirm("Deseja realmente sair?")) {
-                alert("Logout realizado com sucesso!");
-            }
-        }
+    function confirmarLogout(e) {
+      e.preventDefault();          // trava o link
+      e.stopPropagation();        // trava qualquer outro evento
+
+      if (confirm("Deseja realmente sair?")) {
+        window.location.href = "/Logout";
+      }
+
+      return false;
+    }
 
         // ===== FECHAR MENU CLICANDO FORA + REDIRECIONAR P/ INÍCIO =====
         document.addEventListener("click", (e) => {
@@ -232,4 +237,15 @@
 
 </body>
 
+      <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+  </script>
+  
 </html>

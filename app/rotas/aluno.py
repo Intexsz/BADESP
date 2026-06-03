@@ -2,12 +2,15 @@ from flask import Flask, request, render_template, session, redirect, url_for, B
 from authlib.integrations.flask_client import OAuth
 from app.database.db_usuario import get_role, buscar_usuario, buscar_nome_secretaria, buscar_nome_professor
 from app.database.db_denuncia import get_report_status, show_reports, delete_reports, create_report, expire, check_reports
-from app.database.db_usuario import usuario_tem_pin, cadastrar_pin, check_pin, buscar_email, pegar_no_nome, buscar_nome_aluno
+from app.database.db_usuario import usuario_tem_pin, cadastrar_pin, check_pin, buscar_email, pegar_no_nome, buscar_nome_aluno, buscar_status_suspensao,finalizar_suspensao_expirada
+from app.database.db_feedback import create_feedback,show_feedback, delete_feedback
 from app.database.db_site import mostrar_teams
+from app.email.email_service import enviar_email_fim_suspensao
 from flask_cors import CORS
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import smtplib
+from datetime import datetime
 
 ######-E-Mail-######
 remetente = 'denunciasdehaytalo@gmail.com'
@@ -55,6 +58,46 @@ def envio_email(destinario, aluno, tipo, debug):
     server.quit()
 ######-TESTE-######
 
+@rotas_bp.before_app_request
+def bloquear_usuario_suspenso_ou_inativo():
+    rotas_livres = [
+        "static",
+        "rotalogin.cadastro",
+        "rotas.Termos"
+    ]
+
+    if request.endpoint in rotas_livres:
+        return
+
+    if "user_id" not in session:
+        return
+
+    usuario = buscar_status_suspensao(session["user_id"])
+
+    if not usuario:
+        session.clear()
+        return redirect(url_for("rotalogin.cadastro"))
+
+    if usuario["cargo"] == "Aluno" and usuario.get("matricula_ativa") == 0:
+        session.clear()
+        return render_template("acesso_encerrado.html")
+
+    if usuario.get("suspenso") == 1:
+        if usuario["tipo_suspensao"] == "permanente":
+            session.clear()
+            return render_template("aluno_suspenso.html", usuario=usuario)
+
+        if usuario["fim_suspensao"] and usuario["fim_suspensao"] > datetime.now():
+            session.clear()
+            return render_template("aluno_suspenso.html", usuario=usuario)
+
+        if usuario["fim_suspensao"] and usuario["fim_suspensao"] <= datetime.now():
+            if usuario.get("email_fim_suspensao_enviado") == 0:
+                enviar_email_fim_suspensao(usuario)
+
+            finalizar_suspensao_expirada(usuario["id"])
+            return
+        
 @rotas_bp.route('/Login2', methods=['GET', 'POST'])
 def cadastro2_pin():
     if not "user_id" in session:
@@ -99,6 +142,7 @@ def inicio():
     expire()
     cargo = get_role(session["user_id"])
     usuario = buscar_usuario(session["user_id"])
+    escola_usuario = usuario.get("escola")
     filtro = request.args.get('filtro', 'Tudo')
 
     if request.method == 'POST':
@@ -126,6 +170,9 @@ def inicio():
         return render_template("inicio.html", reports=reports, usuario=usuario,filtro=filtro)
     elif cargo == 'Professor':
         return render_template("iniciosecretaria.html",usuario=usuario)
+    elif cargo == 'Admin':
+        # HTML Temporario, criar uma pagina para admin.
+        return render_template("inicio.html",usuario=usuario, reports=reports,filtro=filtro)
 
 @rotas_bp.route('/Abertas')
 def abertas():
@@ -209,6 +256,65 @@ def Resolvidas():
 
     return render_template('historico.html', reports=reports_paginadas, usuario=usuario,page=page,total_pages=total_pages,filtro=filtro,tipo='Resolvidas')
 
+######----------######
+
+###### FEEDBACK ######
+@rotas_bp.route('/Feedback', methods=['GET', 'POST'])
+def feedback():
+    if "user_id" not in session:
+        return redirect(url_for('rotalogin.cadastro'))
+
+    if request.method == 'POST':
+        titulo = request.form.get('titulo', '').strip()
+        tipo = request.form.get('tipo', '').strip()
+        mensagem = request.form.get('feedback', '').strip()
+
+        if not titulo or not tipo or not mensagem:
+            return redirect(url_for('rotas.feedback'))
+
+        cargo = get_role(session["user_id"])
+        create_feedback(titulo, tipo, mensagem, cargo)
+
+        return redirect(url_for('rotas.inicio'))
+
+    resp = make_response(render_template(
+        'feedback.html',
+        usuario=buscar_usuario(session["user_id"])  # necessário pro header funcionar
+    ))
+
+    resp.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0'
+    resp.headers['Pragma'] = 'no-cache'
+    resp.headers['Expires'] = '0'
+
+    return resp
+
+
+###### ADMIN ######
+
+@rotas_bp.route('/Feedback/Admin', methods=['GET', 'POST'])
+def feedback_show():
+    if "user_id" not in session:
+        return redirect(url_for('rotalogin.cadastro'))
+    if get_role(session["user_id"]) != 'Admin':
+        return redirect(url_for('rotas.inicio'))
+    
+    feedback = show_feedback(get_role(session["user_id"]))
+    return render_template('show_feedback.html', feedback=feedback)
+
+@rotas_bp.route('/Feedback/Admin/Delete/<int:id>', methods=['POST'])
+def excluir_feedback(id):
+    if "user_id" not in session:
+        return redirect(url_for('rotalogin.cadastro'))
+    if not usuario_tem_pin(session["user_id"]):
+        return redirect(url_for("rotas.cadastro2_pin"))
+    if get_role(session["user_id"]) != 'Admin':
+        return redirect(url_for('rotas.inicio'))
+    delete_feedback(id)
+    return redirect(url_for('rotas.feedback_show'))
+    
+######----------######
+
+###### MOSTRAR DENUNCIAS #######
 @rotas_bp.route('/Denuncias')
 def reports():
     if "user_id" not in session:
@@ -235,6 +341,9 @@ def reports():
     
     return render_template("secretaria.html", reports=reports_paginadas, usuario=usuario,page=page,total_pages=total_pages,filtro='Esperando')
 
+######----------######
+
+###### AJUDA ######
 @rotas_bp.route('/Ajuda')
 def ajuda():
     if "user_id" not in session:
@@ -253,13 +362,15 @@ def denuncia():
     if not usuario_tem_pin(session["user_id"]):
         return redirect(url_for("rotas.cadastro2_pin"))
     cargo = get_role(session["user_id"])
-    if cargo != 'Aluno':
+    if cargo != 'Aluno' and cargo != 'Admin':
         return redirect(url_for('rotas.inicio'))
-    alunos_por_turma = buscar_nome_aluno()
+    
+    usuario = buscar_usuario(session["user_id"])
+    # Alunos só veem colegas da mesma escola
+    alunos_por_turma = buscar_nome_aluno(escola=usuario.get("escola"))
 
     nomeprof = buscar_nome_professor()
     nomesecretaria = buscar_nome_secretaria()
-    usuario = buscar_usuario(session["user_id"])
 
     if request.method == 'POST':
         if not check_reports(session['user_id']):
@@ -294,21 +405,24 @@ def denuncia():
 
 
 ###### DELETAR DENUNCIA SE ESTIVER EM ANALISE OU EXPIRADA ######
-@rotas_bp.route('/Inicio/delete/<int:id>', methods=['POST' , 'GET'])
+@rotas_bp.route('/Inicio/delete/<int:id>', methods=['POST'])
 def excluir_denuncia(id):
     if "user_id" not in session:
         return redirect(url_for('rotalogin.cadastro'))
     if not usuario_tem_pin(session["user_id"]):
         return redirect(url_for("rotas.cadastro2_pin"))
-
+    cargo = get_role(session["user_id"])
+    if cargo != 'Aluno':
+        return redirect(url_for('rotas.inicio'))
+    
     status = get_report_status(id)
-    if status == 'Em Análise.' or status == 'Expirada.':
+    if status == 'Em Análise.' or status == 'Expirada.' or status == 'Aprovado.' or status == 'Recusado.':
         delete_reports(id, session["user_id"])
         return redirect(url_for('rotas.inicio'))
     else:
         return f"""
             <script>
-                alert("Não é mais possível deletar denúncia.");
+                alert("Não é mais possível deletar a denúncia.");
                 window.location.href = "{url_for('rotas.inicio')}";
             </script>
         """
