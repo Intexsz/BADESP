@@ -1,25 +1,11 @@
-import pymysql
 import re
 from datetime import datetime, timedelta, timezone
 from app.database.db_usuario import buscar_usuario, pegar_no_nome
 from openai import OpenAI
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from app.database.db_site import get_conn as get_conn_denuncia
 import smtplib
-
-def get_conn_denuncia():
-    return pymysql.connect(
-  charset="utf8mb4",
-  connect_timeout=10,
-  cursorclass=pymysql.cursors.DictCursor,
-  db="defaultdb",
-  host="sqldeliciahaha2-manelreidelas.e.aivencloud.com",
-  password="AVNS_8QxSpDvas-NUiG6m5CY",
-  read_timeout=10,
-  port=21948,
-  user="avnadmin",
-  write_timeout=10,
-)
 
 ######-E-Mail-######
 remetente = 'denunciasdehaytalo@gmail.com'
@@ -71,7 +57,7 @@ def create_report(titulo, tipo, descricao, user_id, status, cargo, especifico, e
     data_utc = datetime.now(timezone.utc)
     data = data_utc.strftime("%H:%M %d/%m/%Y")
     conn = get_conn_denuncia()
-    cursor = conn.cursor()
+    cursor = conn.cursor(dictionary=True)
 
     usuario = buscar_usuario(user_id)
 
@@ -114,7 +100,7 @@ def create_report(titulo, tipo, descricao, user_id, status, cargo, especifico, e
 # aqui vai pegar as denuncias e retornar
 def show_reports(user_id, cargo, tipo):
     conn = get_conn_denuncia()
-    cursor = conn.cursor()
+    cursor = conn.cursor(dictionary=True)
     nomezin = pegar_no_nome(user_id)
     usuario = buscar_usuario(user_id)
     escola_usuario = usuario.get("escola") if usuario else None
@@ -250,7 +236,7 @@ def show_reports(user_id, cargo, tipo):
 # aqui é apagar as denuncias
 def delete_reports(id, user_id):
     conn = get_conn_denuncia()
-    cursor = conn.cursor()
+    cursor = conn.cursor(dictionary=True)
     cursor.execute("DELETE FROM denuncias WHERE id=%s AND user_id=%s", (id, user_id))
     conn.commit()
     cursor.close()
@@ -259,7 +245,7 @@ def delete_reports(id, user_id):
 # aqui vai buscar o status da denuncia
 def get_report_status(id):
     conn = get_conn_denuncia()
-    cursor = conn.cursor()
+    cursor = conn.cursor(dictionary=True)
     cursor.execute("SELECT status FROM denuncias WHERE id=%s", (id,))
     r = cursor.fetchone()
     cursor.close()
@@ -270,7 +256,7 @@ def get_report_status(id):
 # aqui vai ser aonde o status vai expire quaso a denuncia fique parada durante 7 dias
 def expire():
     conn = get_conn_denuncia()
-    cursor = conn.cursor()
+    cursor = conn.cursor(dictionary=True)
 
     try:
         cursor.execute("SELECT id, datavisto, status FROM denuncias")
@@ -319,7 +305,7 @@ def expire():
 # checa se o usuario ja criou uma denuncia a menos de 30 minutos -feito com ajuda de IA
 def check_reports(user_id):
     conn = get_conn_denuncia()
-    cursor = conn.cursor()
+    cursor = conn.cursor(dictionary=True)
     cursor.execute("SELECT data FROM denuncias WHERE user_id=%s ORDER BY id DESC LIMIT 1", (user_id,))
     r = cursor.fetchone()
     conn.close()
@@ -350,7 +336,7 @@ def open_report_db(id, cargo, nome, id_user, escola_usuario=None):
     data = datetime.now().strftime("%H:%M %d/%m/%Y")
 
     conn = get_conn_denuncia()
-    cursor = conn.cursor()
+    cursor = conn.cursor(dictionary=True)
 
     cursor.execute("SELECT datavisto FROM denuncias WHERE id=%s", (id,))
     row = cursor.fetchone()
@@ -375,7 +361,7 @@ def open_report_db(id, cargo, nome, id_user, escola_usuario=None):
 
 def get_report(id, escola_usuario=None):
     conn = get_conn_denuncia()
-    cursor = conn.cursor()
+    cursor = conn.cursor(dictionary=True)
 
     query = """
         SELECT id, titulo, tipo, descricao, data, status, nome, visto, comentario, tipo, cargo, datavisto, especifico, descricao_ia, gravidade, turma, ano, escola
@@ -401,7 +387,7 @@ def get_report(id, escola_usuario=None):
     
 def get_open(id):
     conn = get_conn_denuncia()
-    cursor = conn.cursor()
+    cursor = conn.cursor(dictionary=True)
     cursor.execute("SELECT visto FROM denuncias WHERE id=%s", (id,))
     r = cursor.fetchone()
     cursor.close()
@@ -411,7 +397,7 @@ def get_open(id):
 
 def check_coment(id):
     conn = get_conn_denuncia()
-    cursor = conn.cursor()
+    cursor = conn.cursor(dictionary=True)
     cursor.execute("SELECT comentario FROM denuncias WHERE id=%s", (id,))
     r = cursor.fetchone()
     cursor.close()
@@ -434,7 +420,7 @@ def update_status(id, cargo, novo, id_user, escola_usuario=None):
         return
 
     conn = get_conn_denuncia()
-    cursor = conn.cursor()
+    cursor = conn.cursor(dictionary=True)
 
     cursor.execute("""
         UPDATE denuncias
@@ -462,7 +448,7 @@ def post_comment(comentario, id, cargo, id_user, escola_usuario=None):
         return
 
     conn = get_conn_denuncia()
-    cursor = conn.cursor()
+    cursor = conn.cursor(dictionary=True)
 
     cursor.execute(
         "UPDATE denuncias SET comentario=%s WHERE id=%s", (comentario, id)
@@ -475,7 +461,7 @@ def post_comment(comentario, id, cargo, id_user, escola_usuario=None):
 
 def get_specific(id):
     conn = get_conn_denuncia()
-    cursor = conn.cursor()
+    cursor = conn.cursor(dictionary=True)
     cursor.execute("SELECT especifico FROM denuncias WHERE id=%s", (id,))
     r = cursor.fetchone()
     cursor.close()
@@ -486,7 +472,7 @@ def get_specific(id):
 def verificar_escola_denuncia(id_denuncia, escola_usuario):
     """Verifica se a denúncia pertence à escola do usuário"""
     conn = get_conn_denuncia()
-    cursor = conn.cursor()
+    cursor = conn.cursor(dictionary=True)
     cursor.execute("SELECT escola FROM denuncias WHERE id=%s", (id_denuncia,))
     r = cursor.fetchone()
     cursor.close()
@@ -499,7 +485,7 @@ def verificar_escola_denuncia(id_denuncia, escola_usuario):
 
 def list_reports(nome):
     conn = get_conn_denuncia()
-    cursor = conn.cursor()
+    cursor = conn.cursor(dictionary=True)
     cursor.execute("SELECT COUNT(*) AS total FROM denuncias WHERE nome=%s", (nome,))
     r = cursor.fetchone()
     cursor.close()
@@ -509,7 +495,7 @@ def list_reports(nome):
 
 def list_approved(nome):
     conn = get_conn_denuncia()
-    cursor = conn.cursor()
+    cursor = conn.cursor(dictionary=True)
     cursor.execute("""
         SELECT COUNT(*) AS total
         FROM denuncias
@@ -523,7 +509,7 @@ def list_approved(nome):
 
 def checar_envolvidos(id_denuncia):
     conn = get_conn_denuncia()
-    cursor = conn.cursor()
+    cursor = conn.cursor(dictionary=True)
 
     cursor.execute("SELECT envolvidos FROM denuncias WHERE id=%s", (id_denuncia,))
     r = cursor.fetchone()
