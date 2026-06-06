@@ -39,33 +39,45 @@ O BADESP (Base de Atendimento e Denúncias Escolares de São Paulo) é uma plata
 
 ## Instalação
 
-1. Baixe o projeto
-
-Baixe o arquivo ZIP do repositório e extraia-o em uma pasta de sua preferência.
-
-2. Entre na pasta:
+1. Baixe o projeto, extraia-o e entre na pasta:
 
 ```bash
 cd SNEP
 ```
 
-3. No terminal rodando **python** instale as dependências digitando:
+2. No terminal rodando **python** instale as dependências digitando:
 
 ```bash
 pip install -r requirements.txt
 ```
 **Observação:** É necessário possuir o Python e o pip instalados corretamente.
 
-4. Entre no arquivo abaixo e execute-o:
+3. Inicie o servidor:
 
-```bash
-python main.py
-```
+   Modo Desenvolvimento:
+   Entre no arquivo e execute-o:
+   ```bash
+   main.py
+   ```
 
-5. Com o código sendo executado, acesse no navegador:
+   Modo Produção:
+   No terminal execute:
+   ```bash
+   # No Windows:
+   python -m waitress --port=5000 main:app
+
+   # No Linux/Mac:
+   gunicorn main:app
+   ```
+
+4. Com o código sendo executado, acesse no navegador:
 
 ```text
 http://127.0.0.1:5000
+```
+ou
+```text
+http://localhost:8080/login
 ```
 **Atenção:** Para fazer Login no site, requer uma conta institucional google(preferência estadual)
 
