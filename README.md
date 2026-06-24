@@ -77,7 +77,7 @@ http://127.0.0.1:5000
 ```
 ou
 ```text
-http://localhost:8080/login
+http://localhost:5000/login
 ```
 **Atenção:** Para fazer Login no site, requer uma conta institucional google(preferência estadual)
 
