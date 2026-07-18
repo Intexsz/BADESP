@@ -1,19 +1,24 @@
 from mysql.connector import pooling, Error
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 db_pool = pooling.MySQLConnectionPool(
     pool_name="mypool",
     pool_size=10,
     pool_reset_session=True,
 
-    host="sqldeliciahaha2-manelreidelas.e.aivencloud.com",
     port=21948,
-    user="avnadmin",
-    password="AVNS_8QxSpDvas-NUiG6m5CY",
-    database="defaultdb",
+    host=os.getenv("DB_HOST"),
+    user=os.getenv("DB_USER"),
+    password=os.getenv("DB_PASSWORD"),
+    database=os.getenv("DB_NAME"), # Removeu-se o "defaultdb" duplicado aqui
 
     charset="utf8mb4",
     connection_timeout=10,
 )
+
 
 def get_conn():
     try:
