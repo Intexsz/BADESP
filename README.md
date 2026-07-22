@@ -48,7 +48,7 @@ cd SNEP
 2. No terminal rodando **python** instale as dependências digitando:
 
 ```bash
-pip install -r requirements.txt
+pip install -r requeriments.txt
 ```
 **Observação:** É necessário possuir o Python e o pip instalados corretamente.
 
