@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from authlib.integrations.flask_client import OAuth
 from app.rotas.aluno import rotas_bp
 from app.rotas.secretaria import secretaria
@@ -34,6 +34,15 @@ google = oauth.register(
 app.register_blueprint(rotas_bp)
 app.register_blueprint(rota_login)
 app.register_blueprint(secretaria)
+
+@app.errorhandler(404)
+def error_404(error):
+    return render_template("404.html"), 404
+
+@app.errorhandler(500)
+def error_500(error):
+    return render_template("500.html"), 500
+
 
 if __name__ == '__main__':
     app.run(debug=True)
