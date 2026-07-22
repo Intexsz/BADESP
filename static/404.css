@@ -1,0 +1,632 @@
+:root {
+    --cinza-fundo: #1f1f1f;
+    --cinza-card: rgba(255, 255, 255, 0.06);
+    --cinza-borda: rgba(255, 255, 255, 0.12);
+    --texto: #f5f5f5;
+    --destaque: #58d0ff;
+    --fonte: "Inter", sans-serif;
+}
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--fonte);
+}
+
+.cabecalho {
+    display: flex;
+    align-items: center;
+    padding: 20px 30px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+/* botão na esquerda */
+.menu-btn {
+    z-index: 2;
+}
+
+/* título no meio real da tela */
+.titulo {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* bem vindo na direita */
+.perfil {
+    margin-left: auto;
+}
+
+    .perfil p {
+        margin: 0;
+    }
+
+    .perfil img,
+    .perfil .avatar {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        border: 2px solid var(--texto);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        font-size: 0.85rem;
+        color: var(--texto);
+        background: rgba(255,255,255,0.06);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        padding: 0 6px;
+        transition: 0.3s;
+    }
+
+        .perfil img:hover,
+        .perfil .avatar:hover {
+            transform: scale(1.08);
+        }
+
+.nome {
+    font-family: Segoe UI;
+    font-style: normal;
+    font-size: 40px;
+    color: white;
+    margin: 0 auto;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.menu-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--texto);
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    transition: 0.2s;
+}
+
+.denuncia_icon {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24
+}
+
+.login {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24
+}
+
+.menu-btn:hover {
+    transform: scale(1.15);
+    color: var(--destaque);
+    background: none;
+    color: var(--destaque);
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -260px;
+    height: 100vh;
+    width: 240px;
+    padding-top: 80px;
+    transition: 0.4s ease;
+    z-index: 2000;
+}
+
+    .sidebar.ativo {
+        left: 0;
+    }
+
+    .sidebar ul {
+        list-style: none;
+    }
+
+    /* ===== NOVO MENU ESTILIZADO ===== */
+    .sidebar a {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 16px 24px;
+        margin-bottom: 8px;
+        color: var(--texto);
+        font-weight: 500;
+        text-decoration: none;
+        transition: 0.3s;
+        position: relative;
+        border-radius: 8px;
+    }
+
+        /* Linha + sombra abaixo dos itens */
+        .sidebar a::after {
+            content: "";
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+        }
+
+        /* Hover padrão */
+        .sidebar a:hover {
+            background: rgba(255,255,255,0.1);
+            color: var(--destaque);
+        }
+
+        /* ===== DESLOGAR VERMELHO ===== */
+        .sidebar a.logout {
+            color: #ff6b6b;
+            font-weight: 600;
+        }
+
+            .sidebar a.logout:hover {
+                background: rgba(255,80,80,0.15);
+                color: #ff3b3b;
+            }
+
+body {
+    background: linear-gradient(to bottom, #242458, #3d3d7e);
+    color: var(--texto);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+main {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background: linear-gradient(to bottom, #242458, #3d3d7e);
+    min-height: 100vh;
+    color: #f5f4f4;
+    overflow-x: hidden;
+}
+
+.glass {
+    backdrop-filter: blur(12px);
+    background: var(--cinza-card);
+    border: 1px solid var(--cinza-borda);
+}
+
+/* ESSA PORRA É DA SETA DO FILTRO, NÃO MEXER NO QUE ESTA FUNCIONADO */
+.painel-container {
+    width: 90%;
+    max-width: 800px;
+    background: #2e2e61;
+    padding: 30px;
+    border-radius: 20px;
+    margin-top: 80px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid white;
+    background: rgba(251, 249, 249, 0.15);
+    color: #ffffff;
+    -webkit-appearance: menulist;
+    -moz-appearance: menulist;
+    appearance: menulist;
+    background-image: none;
+}
+
+.input-container {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+}
+
+    .input-container img {
+        position: absolute;
+        right: 24px;
+        top: 20%;
+        margin-top: 5px;
+        display: block;
+    }
+
+    .input-container a {
+        font-size: 16px;
+        margin-top: 5px;
+        color: rgb(255, 255, 255);
+        text-decoration: none;
+        display: block;
+    }
+
+        .input-container a:hover {
+            text-decoration: underline;
+        }
+
+    .input-container input,
+    .input-container select {
+        width: 100%;
+        height: 50px;
+        background: transparent;
+        outline: none;
+        border: 2px solid rgb(251, 250, 250);
+        border-radius: 10px;
+        font-size: 16px;
+        color: rgb(239, 236, 236);
+        padding: 0 45px 0 20px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+
+        .input-container input::placeholder {
+            line-height: 50px;
+            color: rgb(242, 237, 237);
+        }
+
+        .input-container select::placeholder {
+            color: rgb(242, 237, 237);
+        }
+
+        .input-container select option {
+            background-color: #29387f;
+            color: rgb(255, 255, 255);
+        }
+
+    .input-container.has-select::after {
+        content: '▼';
+        position: absolute;
+        right: 18px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 16px;
+        color: white;
+        pointer-events: none;
+    }
+
+
+textarea {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid white;
+    background: rgb(246, 239, 239, 0.15);
+    color: #ADD8E6;
+}
+
+    textarea::placeholder {
+        color: #4682B4;
+    }
+
+
+main button {
+    padding: 12px;
+    border: 1px solid;
+    border-radius: 8px;
+    background: #59618d;
+    color: #ADD8E6;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.dic button {
+    padding: 12px;
+    border: 1px solid;
+    border-radius: 8px;
+    background: #29387f;
+    color: #ADD8E6;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    align-items: center;
+    text-align: center;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    padding: 12px;
+    border: 1px solid;
+    border-radius: 8px;
+    background: #29387f;
+    color: #ADD8E6;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+button:hover {
+    background: #394cac;
+}
+
+.denuncia-card {
+    background: rgba(255, 255, 255, 0.057);
+    border-left: 6px solid white;
+    border-radius: 15px;
+    padding: 15px;
+    margin-bottom: 12px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+    .denuncia-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .denuncia-card h3 {
+        margin-bottom: 8px;
+    }
+
+    .denuncia-card p {
+        margin-bottom: 8px;
+        size: 100px;
+    }
+
+    .denuncia-card a {
+        margin-bottom: 6px;
+    }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .cabecalho {
+        padding: 12px 15px;
+    }
+
+    .titulo {
+        font-size: 1.2rem;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .perfil {
+        max-width: 35%;
+        overflow: hidden;
+    }
+
+        .perfil p {
+            font-size: 0.75rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+    .menu-btn {
+        font-size: 1.5rem;
+    }
+}
+
+/* Additional responsive adjustments */
+@media (max-width: 600px) {
+    *, *::before, *::after {
+        box-sizing: border-box;
+    }
+
+    .container, main, .painel-container {
+        max-width: 100%;
+        padding-left: 16px;
+        padding-right: 16px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .painel-container {
+        width: calc(100% - 32px);
+    }
+
+    img, .avatar {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .denuncia-card p, .painel-container p, .painel-container h1, .perfil p, .denuncia-card h3 {
+        word-break: break-word;
+        overflow-wrap: break-word;
+    }
+
+    .cabecalho .titulo {
+        font-size: 1.1rem;
+    }
+
+    .painel-container h1 {
+        font-size: 1.25rem;
+        margin: 8px 0;
+    }
+
+    .denuncia-card h3 {
+        font-size: 1rem;
+    }
+
+    .perfil .avatar, .perfil img {
+        width: 40px;
+        height: 40px;
+        font-size: 0.95rem;
+    }
+
+    .denuncia-card, .painel-container {
+        padding: 12px;
+    }
+
+    button, .menu-btn, .apagar-form button {
+        min-height: 44px;
+        padding: 10px 14px;
+        touch-action: manipulation;
+    }
+
+    nav.sidebar {
+        position: fixed;
+        left: -100%;
+        top: 0;
+        width: 80%;
+        max-width: 320px;
+        height: 100%;
+        overflow: auto;
+        transition: left .2s ease;
+    }
+
+        nav.sidebar.ativo {
+            left: 0;
+        }
+
+        nav.sidebar ul li a {
+            display: block;
+            padding: 12px 16px;
+        }
+
+    input, select, textarea {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .modal, #pinModal > div {
+        width: calc(100% - 32px);
+        margin: 0 auto;
+    }
+
+    .painel-container.has-select .input-container select {
+        width: 100%;
+    }
+
+    .perfil .avatar {
+        max-width: 10ch;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+.erro-container {
+    width: 90%;
+    max-width: 700px;
+    margin: 80px auto;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.erro-face {
+    width: 180px;
+    height: 180px;
+    border: 7px solid white;
+    border-radius: 50%;
+    margin: 0 auto 35px;
+    position: relative;
+}
+
+    .erro-face .olho {
+        width: 18px;
+        height: 18px;
+        background: white;
+        border-radius: 50%;
+        position: absolute;
+        top: 55px;
+    }
+
+    .erro-face .esquerdo {
+        left: 48px;
+    }
+
+    .erro-face .direito {
+        right: 48px;
+    }
+
+    .erro-face .boca {
+        width: 80px;
+        height: 40px;
+        border: 7px solid white;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-radius: 0 0 80px 80px;
+        position: absolute;
+        left: 50%;
+        bottom: 38px;
+        transform: translateX(-50%) rotate(180deg);
+    }
+
+.erro-container h1 {
+    font-size: 120px;
+    font-weight: 300;
+    color: white;
+    line-height: 1;
+}
+
+.erro-container h2 {
+    font-size: 34px;
+    font-weight: 400;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.erro-container p {
+    font-size: 18px;
+    color: #d9d9d9;
+    line-height: 1.7;
+    max-width: 500px;
+    margin: 0 auto 35px;
+}
+
+.botoes {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+    .btn-voltar,
+    .botoes button {
+        text-decoration: none;
+        border: none;
+        padding: 14px 28px;
+        border-radius: 10px;
+        background: #29387f;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        transition: .3s;
+    }
+
+        .btn-voltar:hover,
+        .botoes button:hover {
+            background: #3f53b8;
+            transform: translateY(-2px);
+        }
+
+.erro-face {
+    animation: flutuar 3s ease-in-out infinite;
+}
+
+@keyframes flutuar {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}

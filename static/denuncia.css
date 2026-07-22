@@ -361,3 +361,27 @@ button:hover {
 .btn-remove:hover {
     color: #a71d2a;
 }
+
+/* PERFIL: evita que o nome empurre o título */
+.perfil {
+    margin-left: auto;
+    max-width: 35%;
+    overflow: hidden;
+}
+
+    .perfil p {
+        margin: 0;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        font-size: 0.95rem;
+        color: var(--texto);
+    }
+
+/* Garante que o título permaneça centralizado */
+.titulo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+}

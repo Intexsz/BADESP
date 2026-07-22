@@ -3,18 +3,19 @@ from google.oauth2 import id_token
 from google.auth.transport import requests
 from authlib.integrations.flask_client import OAuth
 from app.database.db_usuario import save_user
+import os
 
 app = Flask(__name__)
 rota_login = Blueprint('rotalogin', __name__)
-app.secret_key = "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"
+app.secret_key = os.getenv("CLIENT_SECRET")
 
-CLIENT_ID = "177205671715-238eoh4gfa3qusnfuuaa9jmctiot8vno.apps.googleusercontent.com"
+CLIENT_ID = os.getenv("CLIENT_ID")
 
 oauth = OAuth(app)
 google = oauth.register(
     name='google',
     client_id=CLIENT_ID,
-    client_secret="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",
+    client_secret=os.getenv("CLIENT_SECRET"),
     access_token_url='https://oauth2.googleapis.com/token',
     authorize_url='https://accounts.google.com/o/oauth2/auth',
     api_base_url='https://www.googleapis.com/oauth2/v1/',

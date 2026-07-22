@@ -13,7 +13,7 @@ db_pool = pooling.MySQLConnectionPool(
     host=os.getenv("DB_HOST"),
     user=os.getenv("DB_USER"),
     password=os.getenv("DB_PASSWORD"),
-    database=os.getenv("DB_NAME"), # Removeu-se o "defaultdb" duplicado aqui
+    database=os.getenv("DB_NAME"),
 
     charset="utf8mb4",
     connection_timeout=10,

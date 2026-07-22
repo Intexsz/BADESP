@@ -6,16 +6,18 @@ from app.database.db_denuncia import update_status, post_comment, check_coment,l
 from app.database.db_site import create_team, mostrar_teams, delete_team, check_teams
 from app.database.db_usuario import suspender_user, buscar_aluno_por_id, alterar_matricula_ativa, buscar_status_suspensao, remover_suspensao_user
 from app.email.email_service import  enviar_email_suspensao, enviar_email_suspensao_removida_aluno, enviar_email_suspensao_removida_suspensor, enviar_email_acesso_encerrado
+import os
+
 app = Flask(__name__)
 secretaria = Blueprint('rotasecretaria', __name__)
 
-CLIENT_ID = "177205671715-238eoh4gfa3qusnfuuaa9jmctiot8vno.apps.googleusercontent.com"
+CLIENT_ID = os.getenv("CLIENT_ID")
 
 oauth = OAuth(app)
 google = oauth.register(
     name='google',
     client_id=CLIENT_ID,
-    client_secret='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',
+    client_secret=os.getenv("CLIENT_SECRET"),
     access_token_url='https://oauth2.googleapis.com/token',
     authorize_url='https://accounts.google.com/o/oauth2/auth',
     api_base_url='https://www.googleapis.com/oauth2/v1/',

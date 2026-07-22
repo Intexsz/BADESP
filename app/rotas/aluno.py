@@ -11,22 +11,23 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import smtplib
 from datetime import datetime
+import os
+
+CLIENT_ID = os.getenv("CLIENT_ID")
 
 ######-E-Mail-######
-remetente = 'denunciasdehaytalo@gmail.com'
-senha = 'fpui zjlf ammk kpym'
+remetente = os.getenv("EMAIL_SENDER")
+senha = os.getenv("EMAIL_PASSWORD")
 
 app = Flask(__name__)
 rotas_bp = Blueprint('rotas', __name__)
 CORS(app)
 
-CLIENT_ID = "177205671715-238eoh4gfa3qusnfuuaa9jmctiot8vno.apps.googleusercontent.com"
-
 oauth = OAuth(app)
 google = oauth.register(
     name='google',
     client_id=CLIENT_ID,
-    client_secret='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',
+    client_secret=os.getenv("CLIENT_SECRET"),
     access_token_url='https://oauth2.googleapis.com/token',
     authorize_url='https://accounts.google.com/o/oauth2/auth',
     api_base_url='https://www.googleapis.com/oauth2/v1/',
@@ -279,7 +280,7 @@ def feedback():
 
     resp = make_response(render_template(
         'feedback.html',
-        usuario=buscar_usuario(session["user_id"])  # necessário pro header funcionar
+        usuario=buscar_usuario(session["user_id"]), cargo=get_role(session["user_id"])
     ))
 
     resp.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0'
@@ -382,7 +383,11 @@ def denuncia():
     """
         
         titulo = request.form.get('titulo')
-        tipo = request.form.get('tipo')
+        if request.form.get('tipo') == "Outros":
+            tipo = request.form.get('outro_especificar')
+        else:
+            tipo = request.form.get('tipo')
+
         descricao = request.form.get('descricao')
         quem = request.form.get('quem')
         pessoa = request.form.get('pessoa')
