@@ -6,10 +6,11 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from app.database.db_site import get_conn as get_conn_denuncia
 import smtplib
+import os
 
 ######-E-Mail-######
-remetente = 'denunciasdehaytalo@gmail.com'
-senha = 'fpui zjlf ammk kpym'
+remetente = os.getenv("EMAIL_SENDER")
+senha = os.getenv("EMAIL_PASSWORD")
 
 def envio_email(destinario, tipo, debug):
     # Criando a mensagem    
@@ -30,7 +31,7 @@ def envio_email(destinario, tipo, debug):
     server.quit()
 ######----------######
 
-client = OpenAI(api_key='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')
+client = OpenAI(api_key=os.getenv("GPT_API"))
 
 def IA(frase):
     response = client.responses.create(

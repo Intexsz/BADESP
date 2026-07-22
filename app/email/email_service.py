@@ -1,9 +1,10 @@
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+import os
 
-remetente = 'denunciasdehaytalo@gmail.com'
-senha = 'fpui zjlf ammk kpym'
+remetente = os.getenv("EMAIL_SENDER")
+senha = os.getenv("EMAIL_PASSWORD")
 
 
 def enviar_email_simples(destinatario, assunto, corpo):
