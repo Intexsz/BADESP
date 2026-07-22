@@ -16,7 +16,7 @@ import os
 CLIENT_ID = os.getenv("CLIENT_ID")
 
 ######-E-Mail-######
-remetente = os.getend("EMAIL_SENDER")
+remetente = os.getenv("EMAIL_SENDER")
 senha = os.getenv("EMAIL_PASSWORD")
 
 app = Flask(__name__)
