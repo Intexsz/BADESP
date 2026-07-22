@@ -280,7 +280,7 @@ def feedback():
 
     resp = make_response(render_template(
         'feedback.html',
-        usuario=buscar_usuario(session["user_id"])  # necessário pro header funcionar
+        usuario=buscar_usuario(session["user_id"]), cargo=get_role(session["user_id"])
     ))
 
     resp.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0'
