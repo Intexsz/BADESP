@@ -23,7 +23,15 @@
         <button class="menu-btn"><span class="material-icons">menu</span></button>
         <h1 class="titulo">B.A.D.E.S.P</h1>
         <div class="perfil">
+            {% if usuario %}
             <p>Bem vindo: {{ usuario['nome'] }}!</p>
+            {% elif usuario2 %}
+            <p>Bem vindo: {{ usuario2['nome'] }}!</p>
+            {% elif nome %}
+            <p>Bem vindo: {{ nome }}!</p>
+            {% else %}
+            <p>Bem vindo: Convidado!</p>
+            {% endif %}
         </div>
     </header>
 
@@ -65,8 +73,8 @@
     <header class="cabecalho glass">
         <button class="menu-btn"><span class="material-icons">menu</span></button>
         <h1 class="titulo">B.A.D.E.S.P</h1>
-       <div class="perfil">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5wt2-sE3VgB3SwwpeW9QWKNvvN3JqOFlUSQ&s">
+        <div class="perfil">
+            <p>Bem vindo: Convidado!</p>
         </div>
     </header>
 

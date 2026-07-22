@@ -21,7 +21,15 @@
         <button class="menu-btn"><span class="material-icons">menu</span></button>
         <h1 class="titulo">B.A.D.E.S.P</h1>
         <div class="perfil">
-            <img src="{{ usuario['foto'] }}" alt="Logado como: {{ usuario['nome'] }}">
+            {% if usuario %}
+            <p>Bem vindo: {{ usuario['nome'] }}!</p>
+            {% elif usuario2 %}
+            <p>Bem vindo: {{ usuario2['nome'] }}!</p>
+            {% elif nome %}
+            <p>Bem vindo: {{ nome }}!</p>
+            {% else %}
+            <p>Bem vindo: Convidado!</p>
+            {% endif %}
         </div>
     </header>
 
@@ -33,8 +41,7 @@
             <li><a href="/Turmas"><span class="material-icons">groups</span> Turmas</a></li>
             <li><a href="/Feedback"><span class="material-icons">campaign</span> Feedback</a></li>
 
-<li><a href="/Logout" class="logout" onclick="confirmarLogout(event)"><span class="material-icons">logout</span>
-        </ul>
+            <li><a href="/Logout" class="logout" onclick="confirmarLogout(event)"><span class="material-icons">logout</span> Deslogar</a></li>        </ul>
     </nav>
 
     {% if tipo == 'Aluno' %}
@@ -110,9 +117,9 @@
     {% endif %}
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const alunosPorTurma = {{ alunos_por_turma | tojson
-        }};
+                document.addEventListener('DOMContentLoaded', function () {
+                    const alunosPorTurma = {{( alunos_por_turma | tojson
+                    )}};
         const selectTurma = document.getElementById("select-turma");
         const selectAluno = document.getElementById("select-aluno");
         const containerAluno = document.getElementById("container-aluno");
