@@ -383,7 +383,11 @@ def denuncia():
     """
         
         titulo = request.form.get('titulo')
-        tipo = request.form.get('tipo')
+        if request.form.get('tipo') == "Outros":
+            tipo = request.form.get('outro_especificar')
+        else:
+            tipo = request.form.get('tipo')
+
         descricao = request.form.get('descricao')
         quem = request.form.get('quem')
         pessoa = request.form.get('pessoa')
