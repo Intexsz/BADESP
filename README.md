@@ -48,7 +48,7 @@ cd BADESP
 2. No terminal rodando **python** instale as dependências digitando:
 
 ```
-pip install -r requeriments.txt
+pip install -r requirements.txt
 ```
 **Observação:** É necessário possuir o Python e o pip instalados corretamente.
 
