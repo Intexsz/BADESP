@@ -4,10 +4,11 @@ gunicorn==23.0.0
 waitress
 Flask-SQLAlchemy==3.1.1
 mysql-connector-python
-openai              
-transformers           
-torch                 
+openai
+transformers
+torch
 numpy
-Authlib                
+Authlib
 google-auth
 cryptography
+python-dotenv
