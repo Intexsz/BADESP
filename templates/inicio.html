@@ -36,6 +36,7 @@
   autocomplete="off"
   style="font-size:18px; text-align:center;"
   oninput="this.value = this.value.replace(/\D/g,'').slice(0,6)"
+  onkeydown="if(event.code === 'Enter') { event.preventDefault(); confirmarPinModal(); }"
 />
       <br><br>
       <button type="button" onclick="fecharModal()">Cancelar</button>

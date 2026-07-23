@@ -315,7 +315,8 @@ def check_reports(user_id):
         return True
 
     ultima = datetime.strptime(r["data"], "%H:%M %d/%m/%Y")
-    return datetime.now() > ultima + timedelta(minutes=5)
+    #return datetime.now() > ultima + timedelta(minutes=5)
+    return True
 
 ######----------######
 

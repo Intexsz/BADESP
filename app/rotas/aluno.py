@@ -280,7 +280,7 @@ def feedback():
 
     resp = make_response(render_template(
         'feedback.html',
-        usuario=buscar_usuario(session["user_id"])  # necessário pro header funcionar
+        usuario=buscar_usuario(session["user_id"]), cargo=get_role(session["user_id"])
     ))
 
     resp.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0'
@@ -383,7 +383,11 @@ def denuncia():
     """
         
         titulo = request.form.get('titulo')
-        tipo = request.form.get('tipo')
+        if request.form.get('tipo') == "Outros":
+            tipo = request.form.get('outro_especificar')
+        else:
+            tipo = request.form.get('tipo')
+
         descricao = request.form.get('descricao')
         quem = request.form.get('quem')
         pessoa = request.form.get('pessoa')

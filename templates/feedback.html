@@ -4,15 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='pin.css') }}">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icone.png') }}">
+    <title>B.A.D.E.S.P - Feedback</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='pin.css') }}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-    <title>B.A.D.E.S.P - Feedback</title>
 </head>
 
 <body>
 
+    {% if usuario %}
     <header class="cabecalho glass">
         <button class="menu-btn"><span class="material-icons">menu</span></button>
         <h1 class="titulo">B.A.D.E.S.P</h1>
@@ -33,14 +34,64 @@
         <ul>
             <li><a href="/Inicio"><span class="material-icons">home</span> Início</a></li>
             <li><a href="/Ajuda"><span class="material-icons">help_outline</span> Ajuda</a></li>
+            {% if cargo == 'Aluno' %}
+            <style>
+                body {
+                    background: linear-gradient(90deg, #242458, #3e3e74);
+                }
+
+                .painel-container {
+                    background: rgba(25, 25, 60, 0.9);
+                }
+            </style>
+            <li><a href="/Denuncia"><span class="material-icons">report</span> Fazer Denúncia</a></li>
+            {% elif cargo == 'Secretaria' or cargo == 'Professor' %}
+            <style>
+                body {
+                    background: linear-gradient(135deg, #242424, #353535);
+                }
+            </style>
             <li><a href="/MudarPIN"><span class="material-icons">pin</span> Mudar PIN</a></li>
             <li><a href="/Turmas"><span class="material-icons">groups</span> Turmas</a></li>
+            {% endif %}
             <li><a href="/Feedback"><span class="material-icons">campaign</span> Feedback</a></li>
-      <li><a href="/Logout" class="logout" onclick="confirmarLogout()"><span class="material-icons">logout</span>
-          Deslogar</a></li>
+            <li>
+                <a href="/Logout" class="logout" onclick="confirmarLogout(event)">
+                    <span class="material-icons">logout</span>
+                    Deslogar
+                </a>
+            </li>
         </ul>
     </nav>
+    {% else %}
+    <style>
+        body {
+            background: linear-gradient(90deg, #242458, #3e3e74);
+        }
+    </style>
+    <header class="cabecalho glass">
+        <button class="menu-btn"><span class="material-icons">menu</span></button>
+        <h1 class="titulo">B.A.D.E.S.P</h1>
+        <div class="perfil">
+            <p>Bem vindo: Convidado!</p>
+        </div>
+    </header>
 
+    <nav class="sidebar glass sobreposto">
+        <ul>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <li><a href="/Login" class="inicio"><span class="material-icons">login</span> Fazer Login</a></li>
+        </ul>
+    </nav>
+    {% endif %}
+
+    {% if usuario %}
     <main>
         <div class="container">
             <h2>Enviar Feedback</h2>
@@ -50,15 +101,15 @@
 
                 <div class="input-container">
                     <input type="text" name="titulo" id="titulo"
-                        placeholder="Título do Feedback"
-                        required minlength="3" maxlength="100">
+                           placeholder="Título do Feedback"
+                           required minlength="3" maxlength="100">
                 </div>
 
                 <div class="input-container">
                     <textarea name="feedback" id="feedback"
-                        placeholder="Escreva seu feedback..."
-                        required minlength="10" maxlength="1000"
-                        style="resize: none; height: 120px;"></textarea>
+                              placeholder="Escreva seu feedback..."
+                              required minlength="10" maxlength="1000"
+                              style="resize: none; height: 120px;"></textarea>
                 </div>
 
                 <div class="input-container select-seta">
@@ -76,6 +127,7 @@
             </form>
         </div>
     </main>
+    {% endif %}
 
     <script>
         const btn = document.querySelector('.menu-btn');
@@ -112,16 +164,16 @@
         });
     </script>
 
-  <div vw class="enabled">
-    <div vw-access-button class="active"></div>
-    <div vw-plugin-wrapper>
-      <div class="vw-plugin-top-wrapper"></div>
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
     </div>
-  </div>
-  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-  <script>
-    new window.VLibras.Widget('https://vlibras.gov.br/app');
-  </script>
-  
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+
 </body>
 </html>

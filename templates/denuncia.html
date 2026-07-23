@@ -36,6 +36,7 @@
   autocomplete="off"
   style="font-size:18px; text-align:center;"
   oninput="this.value = this.value.replace(/\D/g,'').slice(0,6)"
+  onkeydown="if(event.code === 'Enter') { event.preventDefault(); confirmarPinModal(); }"
 />
 
       <br><br>
@@ -78,14 +79,20 @@
         <input type="text" id='titulo' placeholder="Título da denúncia" required name="titulo" maxlength="60">
 
         <div class="select-seta">
-          <select required name="tipo" id="tipo">
+          <select required name="tipo" id="tipo" onchange="alternarCampoOutros()">
             <option value="">Ocorrido</option>
             <option value="Agressão">Agressão (física, verbal, psicológica, moral e sexual)</option>
             <option value="Destruição Patrimônial">Destruição Patrimônial </option>
             <option value="Falta de Recursos">Falta de Recursos</option>
             <option value="Atitudes Inadequadas">Atitudes Inadequadas</option>
-            <option value="Outros">Outros </option>
+            <option value="Outros">Outros</option>
           </select>
+        </div>
+
+        <div id="container-outros" style="display: none; margin-top: 10px;">
+          <label for="outro-especificar">Especifique o tipo de ocorrência:</label>
+          <input type="text" id="outro-especificar" name="outro_especificar" placeholder="Digite aqui..." maxlength="150">
+          <small style="color: #ffffff; display: block; margin-top: 5px;">Máximo de 150 caracteres</small>
         </div>
 
         <textarea id="denuncia" placeholder="Denúncia:" required name="descricao"></textarea>
@@ -207,6 +214,11 @@ window.addEventListener("pageshow", function () {
 form.addEventListener('submit', function (event) {
   event.preventDefault();
 
+  // Valida o campo de Outros antes de tudo
+  if (!validarFormularioCompleto()) {
+    return;
+  }
+
   const confirmado = confirm(
     "Você tem certeza que quer enviar esta denúncia? " +
     "A gestão escolar terá ACESSO ao seu nome e saberá que você enviou esta denúncia. " +
@@ -220,23 +232,108 @@ form.addEventListener('submit', function (event) {
   abrirModalPinEnvio();
 });
 
-// ===== LÓGICA DO SELECT OUTROS =====
-document.addEventListener('DOMContentLoaded', () => {
-  const mainCategorySelect = document.getElementById('main-category');
-  const outrosBox = document.getElementById('outros-box');
-  const otherCategoryInput = document.getElementById('other-category-input');
+// ===== LÓGICA DO SELECT OUTROS COM SEGURANÇA =====
+function sanitizarTexto(texto) {
+  // Remove espaços extras
+  texto = texto.trim();
 
-  if (mainCategorySelect) {
-    mainCategorySelect.addEventListener('change', function () {
-      if (this.value === 'Outros') {
-        outrosBox.style.display = 'block';
-        otherCategoryInput.setAttribute('required', 'required');
-      } else {
-        outrosBox.style.display = 'none';
-        otherCategoryInput.removeAttribute('required');
-        otherCategoryInput.value = '';
+  // Remove caracteres perigosos que podem quebrar o backend
+  const caracteresProibidos = /<|>|{|}|\||;|'|"|`|\\|\/\\|eval|script|onclick|onerror|onload/gi;
+  texto = texto.replace(caracteresProibidos, '');
+
+  // Limita espaços múltiplos
+  texto = texto.replace(/\s+/g, ' ');
+
+  return texto;
+}
+
+function validarCampoOutros(valor) {
+  // Verifica se está vazio
+  if (!valor || valor.trim().length === 0) {
+    return false;
+  }
+
+  // Verifica se tem pelo menos 3 caracteres
+  if (valor.length < 3) {
+    return false;
+  }
+
+  // Verifica caracteres suspeitos
+  const caracteresSuspeitos = /<script|javascript:|onerror|onclick|<\/|eval|alert|fetch|XMLHttpRequest/gi;
+  if (caracteresSuspeitos.test(valor)) {
+    return false;
+  }
+
+  return true;
+}
+
+function alternarCampoOutros() {
+  const tipoSelect = document.getElementById('tipo');
+  const containerOutros = document.getElementById('container-outros');
+  const inputOutros = document.getElementById('outro-especificar');
+
+  if (tipoSelect.value === 'Outros') {
+    containerOutros.style.display = 'block';
+    inputOutros.focus();
+    inputOutros.setAttribute('required', 'required');
+  } else {
+    containerOutros.style.display = 'none';
+    inputOutros.removeAttribute('required');
+    inputOutros.value = '';
+  }
+}
+
+// Event listener para sanitizar em tempo real
+document.addEventListener('DOMContentLoaded', function() {
+  const inputOutros = document.getElementById('outro-especificar');
+
+  if (inputOutros) {
+    inputOutros.addEventListener('input', function(e) {
+      // Sanitiza enquanto o usuário digita
+      const valorSanitizado = sanitizarTexto(e.target.value);
+      e.target.value = valorSanitizado;
+    });
+
+    inputOutros.addEventListener('blur', function(e) {
+      // Validação ao sair do campo
+      const valor = e.target.value;
+      if (valor && !validarCampoOutros(valor)) {
+        alert('Por favor, insira um texto válido com pelo menos 3 caracteres.');
+        e.target.value = '';
+        e.target.focus();
       }
     });
+  }
+});
+
+// Função para validar o formulário antes de enviar
+function validarFormularioCompleto() {
+  const tipoSelect = document.getElementById('tipo');
+  const inputOutros = document.getElementById('outro-especificar');
+
+  if (tipoSelect.value === 'Outros') {
+    const valor = inputOutros.value.trim();
+
+    if (!valor) {
+      alert('Por favor, especifique o tipo de ocorrência.');
+      inputOutros.focus();
+      return false;
+    }
+
+    if (!validarCampoOutros(valor)) {
+      alert('O texto especificado é inválido. Verifique e tente novamente.');
+      inputOutros.focus();
+      return false;
+    }
+  }
+
+  return true;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const mainCategorySelect = document.getElementById('tipo');
+  if (mainCategorySelect) {
+    mainCategorySelect.addEventListener('change', alternarCampoOutros);
   }
 });
 </script>

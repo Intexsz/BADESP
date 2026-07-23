@@ -16,30 +16,6 @@
 
 <body>
 
-    <div id="pinModal" style="
-  display:none;
-  position:fixed;
-  inset:0;
-  background:#0008;
-  align-items:flex-start;
-  justify-content:center;
-  padding-top:30px;
-  z-index:9999;
-">
-        <p>Digite o PIN (6 caracteres)</p>
-        <input id="pinInput"
-               maxlength="6"
-               inputmode="numeric"
-               pattern="[0-9]*"
-               autocomplete="off"
-               style="font-size:18px; text-align:center;"
-               oninput="this.value = this.value.replace(/\D/g,'').slice(0,6)" />
-        <br><br>
-        <button type="button" onclick="fecharModal()">Cancelar</button>
-        <button type="button" onclick="confirmarPinModal()">OK</button>
-    </div>
-    </div>
-
     <header class="cabecalho glass">
         <button class="menu-btn"><span class="material-icons">menu</span></button>
         <h1 class="titulo">B.A.D.E.S.P</h1>
