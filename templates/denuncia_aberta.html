@@ -86,116 +86,118 @@
       {% endif %}
 
       <div class="denuncia-card" id="denuncia-{{ usuario['id'] }}">
-        {% if tipo_usuario == 'secretaria' %}
-        <h3>{{ usuario['titulo'] }}</h3>
-        <br>
-        {% endif %}
-        <p>Ocorrido: {{ usuario['tipo'] }}</p>
-        <br>
-        <div class="envolvidos-container">
-          <strong>Envolvidos:</strong>
-
-          {% if envolvidos and envolvidos != '[]' and envolvidos|length > 0 %}
-
-          <div class="lista-tags">
-            {% set lista = envolvidos.split(',') if envolvidos is string else envolvidos %}
-
-            {% for pessoa in lista %}
-            {# Remove espaços extras que podem vir do split #}
-            {% set p = pessoa.strip() %}
-
-            {% if loop.last and loop.index > 1 %}
-            {# Se for o último e não for o único, coloca o 'e' antes #}
-            <span class="tag-aluno"> e <b>{{ p }}</b>.</span>
-
-            {% elif loop.last %}
-            {# Se for o único da lista #}
-            <span class="tag-aluno"><b>{{ p }}</b>.</span>
-
-            {% elif loop.revindex0 == 1 %}
-            {# Se for o penúltimo, não coloca vírgula agora, pois o próximo terá o 'e' #}
-            <span class="tag-aluno"><b>{{ p }}</b></span>
-
-            {% else %}
-            {# Para todos os outros casos, coloca vírgula #}
-            <span class="tag-aluno"><b>{{ p }}</b>,</span>
-            {% endif %}
-            {% endfor %}
-          </div>
-
-          {% else %}
-          {# 4. Caso contrário, mostra o aviso #}
-          <span class="aviso-vazio">Não foi identificado nenhum envolvido.</span>
+          {% if tipo_usuario == 'secretaria' %}
+          <h3>{{ usuario['titulo'] }}</h3>
+          <br>
           {% endif %}
-        </div>
-        <br>
-        <p style="color: {{ corr }};">Gravidade:⚠️{{ usuario['gravidade'] }}⚠️</p>
-        <br>
+          <p>Ocorrido: {{ usuario['tipo'] }}</p>
+          <br>
+          <div class="envolvidos-container">
+              <strong>Envolvidos:</strong>
 
-        <p>Denúncia:</p>
-        <textarea disabled style="
-    width: 100%; 
-    height: 100px; 
-    resize: none; 
-    text-align: start; 
-    vertical-align: top; 
-    padding: 5px;  
-    box-sizing: border-box;  
+              {% if envolvidos and envolvidos != '[]' and envolvidos|length > 0 %}
+
+              <div class="lista-tags">
+                  {% set lista = envolvidos.split(',') if envolvidos is string else envolvidos %}
+
+                  {% for pessoa in lista %}
+                  {# Remove espaços extras que podem vir do split #}
+                  {% set p = pessoa.strip() %}
+
+                  {% if loop.last and loop.index > 1 %}
+                  {# Se for o último e não for o único, coloca o 'e' antes #}
+                  <span class="tag-aluno"> e <b>{{ p }}</b>.</span>
+
+                  {% elif loop.last %}
+                  {# Se for o único da lista #}
+                  <span class="tag-aluno"><b>{{ p }}</b>.</span>
+
+                  {% elif loop.revindex0 == 1 %}
+                  {# Se for o penúltimo, não coloca vírgula agora, pois o próximo terá o 'e' #}
+                  <span class="tag-aluno"><b>{{ p }}</b></span>
+
+                  {% else %}
+                  {# Para todos os outros casos, coloca vírgula #}
+                  <span class="tag-aluno"><b>{{ p }}</b>,</span>
+                  {% endif %}
+                  {% endfor %}
+              </div>
+
+              {% else %}
+              {# 4. Caso contrário, mostra o aviso #}
+              <span class="aviso-vazio">Não foi identificado nenhum envolvido.</span>
+              {% endif %}
+          </div>
+          <br>
+          <p style="color: {{ corr }};">Gravidade:⚠️{{ usuario['gravidade'] }}⚠️</p>
+          <br>
+
+          <p>Denúncia:</p>
+          <textarea disabled style="
+    width: 100%;
+    height: 100px;
+    resize: none;
+    text-align: start;
+    vertical-align: top;
+    padding: 5px;
+    box-sizing: border-box;
     overflow-y: auto;   /* permite scroll vertical */
     cursor: pointer;
 ">{{ usuario['descricao_ia'] }}</textarea>
-        <br>
-        <br>
-        <br>
+          <br>
+          <br>
+          <br>
 
-        <p>Denúncia sem correção:</p>
-        <textarea disabled style="
-    width: 100%; 
-    height: 100px; 
-    resize: none; 
-    text-align: start; 
-    vertical-align: top; 
-    padding: 5px;  
-    box-sizing: border-box;  
+          <p>Denúncia sem correção:</p>
+          <textarea disabled style="
+    width: 100%;
+    height: 100px;
+    resize: none;
+    text-align: start;
+    vertical-align: top;
+    padding: 5px;
+    box-sizing: border-box;
     overflow-y: auto;   /* permite scroll vertical */
     cursor: pointer;
 ">{{ usuario['descricao'] }}</textarea>
-        <br>
-        <br>
-        <p>Data: {{ usuario['data'] }}</p>
-        <br>
-        {% if usuario['status'] == 'Aprovado.' %}
-        <p style="color: rgb(0,255,0);">✔️Aprovado por: {{ usuario['visto'] }}✔️</p>
-        {% elif usuario['status'] == 'Recusado.' %}
-        <p style="color: red;">❌Recusado por: {{ usuario['visto'] }}❌</p>
-        {% elif usuario['status'] == 'Arquivado.' %}
-        <p style="color: gray;">🗃️Arquivado por: {{ usuario['visto'] }}🗃️</p>
-        {% elif usuario['status'] == 'Visto.' %}
-        <p style="color: orange;">🔎Visualizado por: {{ usuario['visto'] }} às {{ usuario['datavisto'] }}🔎</p>
-        {% elif usuario['status'] == 'Em Análise.' %}
-        <p style="color: white;">⏳Esperando resposta...⏳</p>
-        {% elif usuario['status'] == 'Expirada.' %}
-        <p style="color: gray;">⏰Expirada⏰</p>
-        <br>
-        {% else %}
-        <p>Erro de status.</p>
-        {% endif %}
+          <br>
+          <br>
+          <p>Data: {{ usuario['data'] }}</p>
+          <br>
+          {% if usuario['status'] == 'Aprovado.' %}
+          <p style="color: rgb(0,255,0);">✔️Aprovado por: {{ usuario['visto'] }}✔️</p>
+          {% elif usuario['status'] == 'Recusado.' %}
+          <p style="color: red;">❌Recusado por: {{ usuario['visto'] }}❌</p>
+          {% elif usuario['status'] == 'Arquivado.' %}
+          <p style="color: gray;">🗃️Arquivado por: {{ usuario['visto'] }}🗃️</p>
+          {% elif usuario['status'] == 'Visto.' %}
+          <p style="color: orange;">🔎Visualizado por: {{ usuario['visto'] }} às {{ usuario['datavisto'] }}🔎</p>
+          {% elif usuario['status'] == 'Em Análise.' %}
+          <p style="color: white;">⏳Esperando resposta...⏳</p>
+          {% elif usuario['status'] == 'Expirada.' %}
+          <p style="color: gray;">⏰Expirada⏰</p>
+          <br>
+          {% else %}
+          <p>Erro de status.</p>
+          {% endif %}
 
-        {% if usuario['cargo'] == 'Professor' and usuario['especifico'] != 'any' %}
-        <p><b>Destinado ao Professor:</b> {{ usuario['especifico'] }}</p>
-        {% elif usuario['cargo'] == 'Secretaria' and usuario['especifico'] != 'any' %}
-        <p><b>Destinado ao Secretário(a):</b> {{ usuario['especifico'] }}</p>
-        {% elif usuario['cargo'] == 'Professor' and usuario['especifico'] == 'any' %}
-        <p><b>Destinado a todos os Professores.</b></p>
-        {% elif usuario['cargo'] == 'Secretaria' and usuario['especifico'] == 'any' %}
-        <p><b>Destinado a toda a Gestão.</b></p>
-        {% endif %}
-        <br>
-        {% if usuario['comentario'] %}
-        <p><b>Comentário de {{ usuario['visto'] }}:</b> {{ usuario['comentario'] }}</p>
-        {% else %}
-        <p>Ainda não há comentário vinculado.</p>
-        {% endif %}
+          {% if usuario['cargo'] == 'Professor' and usuario['especifico'] != 'any' %}
+          <p><b>Destinado ao Professor:</b> {{ usuario['especifico'] }}</p>
+          {% elif usuario['cargo'] == 'Secretaria' and usuario['especifico'] != 'any' %}
+          <p><b>Destinado ao Secretário(a):</b> {{ usuario['especifico'] }}</p>
+          {% elif usuario['cargo'] == 'Professor' and usuario['especifico'] == 'any' %}
+          <p><b>Destinado a todos os Professores.</b></p>
+          {% elif usuario['cargo'] == 'Secretaria' and usuario['especifico'] == 'any' %}
+          <p><b>Destinado a toda a Gestão.</b></p>
+          {% endif %}
+          <br>
+          {% if usuario['comentario'] %}
+          <p><b>Comentário de {{ usuario['visto'] }}:</b></p>
+          <textarea name="comentario" maxlength="255"
+                    style="text-align: center;">{{ usuario['comentario'] }}</textarea>
+          {% else %}
+          <p>Ainda não há comentário vinculado.</p>
+          {% endif %}
       </div>
 
       {% if tipo_usuario == 'secretaria' %}
