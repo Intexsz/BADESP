@@ -55,6 +55,23 @@ def IA(frase):
 
 # aqui ira criar a denuncia
 def create_report(titulo, tipo, descricao, user_id, status, cargo, especifico, envolvidos):
+
+    if (
+        titulo is None or
+        tipo is None or
+        descricao is None or
+        user_id is None or
+        status is None or
+        cargo is None or
+        especifico is None or
+        envolvidos is None
+    ) or not all([titulo, tipo, descricao, user_id, status, cargo, especifico, envolvidos]):
+        return """
+        <script>
+            alert("Erro: dados inválidos.");
+            window.location.href = "/Inicio";
+        </script>
+        """
     data_utc = datetime.now(timezone.utc)
     data = data_utc.strftime("%H:%M %d/%m/%Y")
     conn = get_conn_denuncia()

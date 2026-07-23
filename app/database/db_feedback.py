@@ -9,6 +9,18 @@ logging.basicConfig(
 )
 
 def create_feedback(titulo, tipo, feedback, cargo):
+    if (
+        titulo is None or
+        tipo is None or
+        feedback is None or
+        cargo is None
+    ) or not all([titulo, tipo, feedback, cargo]):
+        return """
+        <script>
+            alert("Erro: dados inválidos.");
+            window.location.href = "/Inicio";
+        </script>
+        """
     data_utc = datetime.now(timezone.utc)
     data = data_utc.strftime("%H:%M %d/%m/%Y")
     conn = get_conn_denuncia()
