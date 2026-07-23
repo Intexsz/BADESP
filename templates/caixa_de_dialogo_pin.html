@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <link rel="stylesheet" href="../static/caixa_de_dialogo.css">
+</head>
+<body>
+
+<button type="submit" class="abrir-btn" onclick="abrir()">Aprovar</button>
+
+<div id="fundo" class="fundo"></div>
+
+<div id="janela" class="modal">
+    <h3>Digite seu PIN</h3>
+
+    <input 
+       type="password"
+       id="pin"
+       placeholder="Digite seu PIN"
+       autocomplete="off"
+       spellcheck="false"
+    >
+
+    <div class="botoes">
+        <button onclick="verificar()">
+            Confirmar
+        </button>
+    </div>
+</div>
+
+<script>
+function abrir() {
+    document.getElementById("fundo").style.display = "block";
+    document.getElementById("janela").style.display = "block";
+
+    document.getElementById("pin").value = "";
+    document.getElementById("pin").focus();
+}
+
+function verificar() {
+    const pin = document.getElementById("pin").value;
+
+    if (pin === "1234") {
+        alert("PIN correto!");
+    } else {
+        alert("PIN incorreto!");
+    }
+
+    document.getElementById("pin").value = "";
+
+    document.getElementById("fundo").style.display = "none";
+    document.getElementById("janela").style.display = "none";
+}
+
+const campoPin = document.getElementById("pin");
+
+campoPin.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        verificar();
+    }
+});
+</script>
+
+</body>
+</html>
