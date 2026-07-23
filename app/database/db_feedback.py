@@ -42,7 +42,7 @@ def show_feedback(cargo):
 def delete_feedback(id):
     conn = get_conn_denuncia()
     cursor = conn.cursor(dictionary=True)
-    cursor.execute("DELETE FROM feedback WHERE id=%s", (id))
+    cursor.execute("DELETE FROM feedback WHERE id=%s", (id,))
     conn.commit()
     cursor.close()
     conn.close()

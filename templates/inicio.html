@@ -56,6 +56,9 @@
             <li><a href="/Ajuda"><span class="material-icons">help_outline</span> Ajuda</a></li>
             <li><a href="/Denuncia"><span class="material-icons">report</span> Fazer Denúncia</a></li>
             <li><a href="/Feedback"><span class="material-icons">campaign</span> Feedback</a></li>
+            {% if usuario['cargo'] == 'Admin' %}
+            <li><a href="/Feedback/Admin"><span class="material-icons">campaign</span> Ver Feedbacks</a></li>
+            {% endif %}
             <li>
                 <a href="/Logout" class="logout" onclick="confirmarLogout(event)">
                     <span class="material-icons">logout</span> Deslogar
