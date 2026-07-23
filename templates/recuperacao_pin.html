@@ -85,7 +85,10 @@
                 </div>
 
                 <button type="submit" class="submit-button">Confirmar</button>
+
             </form>
+            <br>
+            <a style="color:deepskyblue;" href="/MudarPIN/GestaoAlterar">Clique aqui para alterar o seu próprio PIN</a>
         </div>
     </main>
     {% elif tipo == 'Gestão' %}
@@ -98,18 +101,20 @@
 
                 <div class="input-container">
                     <input placeholder="PIN" type="text" name="pin" id="pin" required maxlength="6" minlength="6"
-                        pattern="\d{6}" title="O PIN deve ter 6 números"
-                        oninput="this.value = this.value.replace(/\D/g, '')">
+                           pattern="\d{6}" title="O PIN deve ter 6 números"
+                           oninput="this.value = this.value.replace(/\D/g, '')">
                 </div>
 
                 <div class="input-container">
                     <input placeholder="Confirmar PIN" type="text" name="confirmar" id="confirmar" required
-                        maxlength="6" minlength="6" pattern="\d{6}" title="O PIN deve ter 6 números"
-                        oninput="this.value = this.value.replace(/\D/g, '')">
+                           maxlength="6" minlength="6" pattern="\d{6}" title="O PIN deve ter 6 números"
+                           oninput="this.value = this.value.replace(/\D/g, '')">
                 </div>
 
                 <button type="submit" class="submit-button">Confirmar</button>
             </form>
+            <br>
+            <a style="color:deepskyblue;" href="/MudarPIN">Clique aqui para alterar o PIN de alunos</a>
         </div>
     </main>
     {% else %}

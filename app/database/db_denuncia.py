@@ -147,7 +147,7 @@ def show_reports(user_id, cargo, tipo):
                 cursor.execute('''
             SELECT id, titulo, tipo, descricao, data, status, nome, visto, cargo, comentario, datavisto, especifico, descricao_ia, gravidade, turma, ano, escola
             FROM denuncias
-            WHERE status = 'Visto.'
+            WHERE status IN ('Em Análise.', 'Visto.')
               AND (cargo = 'Secretaria' OR cargo = 'Ambos')
               AND especifico IN (%s, 'any')
               AND escola = %s
@@ -159,7 +159,7 @@ def show_reports(user_id, cargo, tipo):
                 cursor.execute('''
             SELECT id, titulo, tipo, descricao, data, status, nome, visto, cargo, comentario, datavisto, especifico, descricao_ia, gravidade, turma, ano, escola
             FROM denuncias
-            WHERE status = 'Visto.'
+            WHERE status IN ('Em Análise.', 'Visto.')
               AND (cargo = 'Professor' OR cargo = 'Ambos')
               AND especifico IN (%s, 'any')
               AND escola = %s

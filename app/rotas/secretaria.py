@@ -1,6 +1,5 @@
 from flask import Flask, session, redirect, url_for, Blueprint,render_template, request, flash
 from authlib.integrations.flask_client import OAuth
-from datetime import datetime, timedelta
 from app.database.db_usuario import get_role, pegar_no_nome, usuario_tem_pin, buscar_nome_aluno, novo_pin_secretaria,buscar_usuario,listar_alunose, mudar_turma, check_team, novo_pin, alterar_escola_aluno
 from app.database.db_denuncia import get_report_status, open_report_db, get_report, checar_envolvidos
 from app.database.db_denuncia import update_status, post_comment, check_coment,list_reports,list_approved
@@ -25,27 +24,6 @@ google = oauth.register(
     client_kwargs={'scope': 'openid email profile'},
 )
 
-def liberar_acesso():
-    """Libera acesso ao painel por 5 minutos."""
-    session["pin_autorizado_ate"] = (
-        datetime.now() + timedelta(minutes=5)
-    ).timestamp()
-
-
-def acesso_liberado():
-    """Verifica se a autorização ainda está válida."""
-
-    tempo = session.get("pin_autorizado_ate")
-
-    if tempo is None:
-        return False
-
-    if datetime.now().timestamp() > tempo:
-        session.pop("pin_autorizado_ate", None)
-        return False
-
-    return True
-
 def checar_stats(id):
     status = get_report_status(id)
     if status == None:
@@ -65,33 +43,25 @@ def checar_stats(id):
 
 @secretaria.route('/allow_detail', methods=['POST'])
 def allow_detail():
-
-    id = request.form.get("idzin")
-
-    liberar_acesso()
-
-    return redirect(url_for("rotasecretaria.detalhe_denuncia", id=id))
+    if request.method == 'POST':
+        id = request.form.get('idzin')
+        session["allow_detail"] = True
+        session["allow_folder"] = True
+        return redirect(url_for(f"rotasecretaria.detalhe_denuncia", id=id))
 
 @secretaria.route('/allow_folder', methods=['POST'])
 def autoria_entrar():
-
-    nome = request.form.get("nome")
-
-    liberar_acesso()
-
-    if nome == "Alunos":
-        return redirect(url_for("rotasecretaria.listar_alunos"))
-
-    elif nome == "Resolvidas":
-        return redirect(url_for("rotas.Resolvidas"))
-
-    elif nome == "Abertas":
-        return redirect(url_for("rotas.abertas"))
-
-    elif nome == "Novas":
-        return redirect(url_for("rotas.reports"))
-
-    return redirect(url_for("rotas.inicio"))
+    if request.method == 'POST':
+        nome = request.form.get('nome')
+        session["allow_folder"] = True
+        if nome == 'Alunos':
+            return redirect(url_for(f"rotasecretaria.listar_alunos"))
+        elif nome == 'Resolvidas':
+            return redirect(url_for(f"rotas.Resolvidas"))
+        elif nome == 'Abertas':
+            return redirect(url_for(f"rotas.abertas"))
+        elif nome == 'Novas':
+            return redirect(url_for(f"rotas.reports"))
 
 ###### ABRIR DENUNCIA SE NÃO ESTIVER EXPIRADA ######
 @secretaria.route('/Inicio/abrir/<int:id>', methods=['POST'])
@@ -128,7 +98,7 @@ def detalhe_denuncia(id):
         return redirect(url_for("rotalogin.cadastro"))
     if not usuario_tem_pin(session["user_id"]):
         return redirect(url_for("rotas.cadastro2_pin"))
-    if not acesso_liberado():
+    if not session.get("allow_detail") or not session.get("allow_folder"):
         return redirect(url_for("rotas.inicio"))
 
     usuario_logado = buscar_usuario(session['user_id'])
@@ -143,6 +113,8 @@ def detalhe_denuncia(id):
         if denuncia == 'no':
             return "Denúncia não encontrada ou fora da sua escola", 404
         
+        session.pop("allow_folder", None)
+        session.pop("allow_detail", None)
         return render_template("denuncia_aberta.html", usuario=denuncia,tipo_usuario='secretaria',usuario2=usuario_logado, envolvidos = checar_envolvidos(id))
     
     elif cargo == 'Aluno':
@@ -190,9 +162,6 @@ def detalhe_denuncia(id):
 ###### ROTA PARA OS COMENTARIOS ######
 @secretaria.route('/Comentar/<int:id>', methods=['POST'])
 def comentar(id):
-    if not acesso_liberado():
-        return redirect(url_for("rotas.inicio"))
-
     comentario = request.form.get('comentario')
     checagem = check_coment(id)
     
@@ -216,6 +185,8 @@ def comentar(id):
     if checar_stats(id) and checagem == '':
         cargo = get_role(session['user_id'])
         usuario = buscar_usuario(session['user_id'])
+        session["allow_detail"] = True
+        session["allow_folder"] = True
         post_comment(comentario, id, cargo, session['user_id'], escola_usuario=usuario.get("escola"))
     else:
         return f"""
@@ -229,96 +200,54 @@ def comentar(id):
 ######----------######
 
 ###### ROTAS PARA MUDAR STATUS DA DENUNCIA ######
-@secretaria.route('/Inicio/Recusar/<int:id>', methods=['POST'])
+@secretaria.route('/Inicio/Recusar/<int:id>', methods=['POST', 'GET'])
 def recusar(id):
-
-    if not acesso_liberado():
-        return redirect(url_for("rotas.inicio"))
-
     if checar_stats(id) == 'Expirou':
         return f"""
-        <script>
-            alert("A denúncia expirou.");
-            window.location.href="{url_for('rotas.inicio')}";
-        </script>
+            <script>
+                alert("A denuncia expirou.");
+                window.location.href = "{url_for('rotas.inicio')}";
+            </script>
         """
-
     if checar_stats(id):
         cargo = get_role(session['user_id'])
         usuario = buscar_usuario(session['user_id'])
-
-        update_status(
-            id,
-            cargo,
-            'Recusado.',
-            session['user_id'],
-            escola_usuario=usuario.get("escola")
-        )
-
-    return redirect(
-        url_for("rotasecretaria.detalhe_denuncia", id=id)
-    )
-@secretaria.route('/Inicio/Aprovar/<int:id>', methods=['POST'])
+        update_status(id, cargo, 'Recusado.', session['user_id'], escola_usuario=usuario.get("escola"))
+    
+    return redirect(url_for('rotas.inicio'))
+    
+@secretaria.route('/Inicio/Aprovar/<int:id>', methods=['POST', 'GET'])
 def aprovar(id):
-
-    if not acesso_liberado():
-        return redirect(url_for("rotas.inicio"))
-
     if checar_stats(id) == 'Expirou':
         return f"""
-        <script>
-            alert("A denúncia expirou.");
-            window.location.href="{url_for('rotas.inicio')}";
-        </script>
+            <script>
+                alert("A denuncia expirou.");
+                window.location.href = "{url_for('rotas.inicio')}";
+            </script>
         """
-
     if checar_stats(id):
         cargo = get_role(session['user_id'])
         usuario = buscar_usuario(session['user_id'])
+        update_status(id, cargo, 'Aprovado.', session['user_id'], escola_usuario=usuario.get("escola"))
 
-        update_status(
-            id,
-            cargo,
-            'Aprovado.',
-            session['user_id'],
-            escola_usuario=usuario.get("escola")
-        )
-
-    return redirect(
-        url_for("rotasecretaria.detalhe_denuncia", id=id)
-    )
+    return redirect(url_for('rotas.inicio'))
 ######----------######
 
 ###### ROTAS PARA ARQUIVAR A DENUNCIA ######
-@secretaria.route('/Inicio/Arquivar/<int:id>', methods=['POST'])
+@secretaria.route('/Inicio/Arquivar/<int:id>', methods=['POST', 'GET'])
 def arquivar(id):
-
-    if not acesso_liberado():
-        return redirect(url_for("rotas.inicio"))
-
     if checar_stats(id) == 'Expirou':
         return f"""
-        <script>
-            alert("A denúncia expirou.");
-            window.location.href="{url_for('rotas.inicio')}";
-        </script>
+            <script>
+                alert("A denuncia expirou.");
+                window.location.href = "{url_for('rotas.inicio')}";
+            </script>
         """
-
     if checar_stats(id):
         cargo = get_role(session['user_id'])
-        usuario = buscar_usuario(session['user_id'])
+        update_status(id, cargo, 'Arquivado.', session['user_id'])
 
-        update_status(
-            id,
-            cargo,
-            'Arquivado.',
-            session['user_id'],
-            escola_usuario=usuario.get("escola")
-        )
-
-    return redirect(
-        url_for("rotasecretaria.detalhe_denuncia", id=id)
-    )
+    return redirect(url_for('rotas.inicio'))
 ######----------######
 
 ###### ROTA PARA Mudar PIN ######
@@ -361,7 +290,7 @@ def alunos():
         return redirect(url_for('rotas.inicio'))
 ######----------######
 
-@secretaria.route('/MudarPIN/gestaomudanças', methods=['GET', 'POST'])
+@secretaria.route('/MudarPIN/GestaoAlterar', methods=['GET', 'POST'])
 def gestao():
     if "user_id" not in session:
         return redirect(url_for('rotalogin.cadastro'))
@@ -451,7 +380,7 @@ def listar_alunos():
 
     if not usuario_tem_pin(session["user_id"]):
         return redirect(url_for("rotas.cadastro2_pin"))
-    if not acesso_liberado():
+    if not session.get("allow_folder"):
         return redirect(url_for("rotas.inicio"))
     
     usuario = buscar_usuario(session["user_id"])
@@ -533,7 +462,7 @@ def pagina_suspender_aluno(id):
     if not usuario_tem_pin(session["user_id"]):
         return redirect(url_for("rotas.cadastro2_pin"))
 
-    if not acesso_liberado():
+    if not session.get("allow_folder"):
         return redirect(url_for("rotas.inicio"))
 
     cargo = get_role(session["user_id"])
@@ -562,7 +491,7 @@ def suspender_acesso(id):
     if not usuario_tem_pin(session["user_id"]):
         return redirect(url_for("rotas.cadastro2_pin"))
 
-    if not acesso_liberado():
+    if not session.get("allow_folder"):
         return redirect(url_for("rotas.inicio"))
 
     cargo = get_role(session["user_id"])
@@ -598,7 +527,7 @@ def remover_suspensao(id):
     if not usuario_tem_pin(session["user_id"]):
         return redirect(url_for("rotas.cadastro2_pin"))
 
-    if not acesso_liberado():
+    if not session.get("allow_folder"):
         return redirect(url_for("rotas.inicio"))
 
     cargo = get_role(session["user_id"])
@@ -636,7 +565,7 @@ def desativar_matricula(id):
     if not usuario_tem_pin(session["user_id"]):
         return redirect(url_for("rotas.cadastro2_pin"))
 
-    if not acesso_liberado():
+    if not session.get("allow_folder"):
         return redirect(url_for("rotas.inicio"))
 
     cargo = get_role(session["user_id"])
@@ -664,7 +593,7 @@ def reativar_matricula(id):
     if not usuario_tem_pin(session["user_id"]):
         return redirect(url_for("rotas.cadastro2_pin"))
 
-    if not acesso_liberado():
+    if not session.get("allow_folder"):
         return redirect(url_for("rotas.inicio"))
 
     cargo = get_role(session["user_id"])
@@ -685,7 +614,7 @@ def alterar_escola_aluno_rota(id):
     if not usuario_tem_pin(session["user_id"]):
         return redirect(url_for("rotas.cadastro2_pin"))
 
-    if not acesso_liberado():
+    if not session.get("allow_folder"):
         return redirect(url_for("rotas.inicio"))
 
     cargo = get_role(session["user_id"])

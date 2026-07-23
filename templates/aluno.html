@@ -168,7 +168,6 @@
                       {% set ano_t = turma.split('°')[0] %}
                       {% set serie_t = turma.split('°')[1] %}
 
-                      {# Criamos TODOS os options, mas colocamos o ANO numa classe secreta #}
                       <option value="{{ serie_t }}" data-ano="{{ ano_t }}" style="display: none;">
                         {{ serie_t }}
                       </option>

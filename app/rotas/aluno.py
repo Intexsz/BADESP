@@ -384,6 +384,13 @@ def denuncia():
         
         titulo = request.form.get('titulo')
         if request.form.get('tipo') == "Outros":
+            if request.form.get('outro_especificar') == "":
+                return f"""
+    <script>
+        window.location.href = "{url_for('rotas.denuncia')}";
+        alert("Campo de texto outros vazio. Tente novamente.");
+    </script>
+    """
             tipo = request.form.get('outro_especificar')
         else:
             tipo = request.form.get('tipo')
@@ -421,13 +428,13 @@ def excluir_denuncia(id):
         return redirect(url_for('rotas.inicio'))
     
     status = get_report_status(id)
-    if status == 'Em Análise.' or status == 'Expirada.' or status == 'Aprovado.' or status == 'Recusado.':
+    if status in ('Em Análise.', 'Expirada.', 'Aprovado.', 'Recusado.'):
         delete_reports(id, session["user_id"])
         return redirect(url_for('rotas.inicio'))
     else:
         return f"""
             <script>
-                alert("Não é mais possível deletar a denúncia.");
+                alert("Não é possível deletar esta denúncia.");
                 window.location.href = "{url_for('rotas.inicio')}";
             </script>
         """
@@ -479,8 +486,3 @@ def verificar_pin():
         return jsonify({'status': 'ok'})
     else:
         return jsonify({'status': 'erro', 'mensagem': 'PIN incorreto'})
-
-
-@rotas_bp.route('/Termos')
-def Termos():
-    return render_template('termos.html')
