@@ -44,7 +44,9 @@ O BADESP (Base de Atendimento e Denúncias Escolares de São Paulo) é uma plata
 ```
 cd BADESP
 ```
+**Observação:** Para o projeto funcionar, você precisa renomear ".env.example" para ".env" e colocar suas credenciais, como banco MySQL, CLIENT_ID ou a chave de API do GPT.
 
+##
 2. No terminal rodando **python** instale as dependências digitando:
 
 ```
@@ -52,6 +54,7 @@ pip install -r requirements.txt
 ```
 **Observação:** É necessário possuir o Python e o pip instalados corretamente.
 
+##
 3. Inicie o servidor:
 
 Modo Desenvolvimento:
@@ -70,6 +73,7 @@ python -m waitress --port=5000 main:app
 gunicorn main:app
 ```
 
+##
 4. Com o código sendo executado, acesse no navegador:
 
 ```
