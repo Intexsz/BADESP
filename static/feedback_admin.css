@@ -1,0 +1,113 @@
+:root {
+    --cinza-fundo: #1f1f1f;
+    --cinza-card: rgba(255, 255, 255, 0.06);
+    --cinza-borda: rgba(255, 255, 255, 0.12);
+    --texto: #f5f5f5;
+    --destaque: #58d0ff;
+    --vermelho: #ff5b5b;
+    --fonte: "Inter", sans-serif;
+}
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--fonte);
+}
+
+body {
+    background: linear-gradient(135deg,#242424,#353535);
+    color: var(--texto);
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+/* TÍTULO */
+h1 {
+    text-align: center;
+    color: var(--destaque);
+    margin-bottom: 35px;
+    font-size: 2rem;
+}
+
+/* Container */
+.container {
+    max-width: 900px;
+    margin: auto;
+}
+
+/* Card de feedback */
+form {
+    background: var(--cinza-card);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--cinza-borda);
+    border-radius: 14px;
+    padding: 22px;
+    margin-bottom: 20px;
+    transition: .3s;
+}
+
+    form:hover {
+        transform: translateY(-5px);
+        background: rgba(255,255,255,.1);
+    }
+
+    /* Informações */
+    form p {
+        margin: 8px 0;
+        color: #ddd;
+        line-height: 1.5;
+    }
+
+        form p strong {
+            color: var(--destaque);
+        }
+
+/* Botão */
+button {
+    margin-top: 18px;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    background: var(--vermelho);
+    color: white;
+    font-size: .95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .25s;
+}
+
+    button:hover {
+        background: #ff2d2d;
+        transform: scale(1.05);
+    }
+
+/* Separador */
+h5 {
+    display: none;
+}
+
+/* Mensagem sem feedback */
+.vazio {
+    text-align: center;
+    margin-top: 60px;
+    font-size: 1.1rem;
+    color: #bbb;
+}
+
+/* Responsividade */
+@media(max-width:768px) {
+
+    body {
+        padding: 20px 15px;
+    }
+
+    form {
+        padding: 18px;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+}
