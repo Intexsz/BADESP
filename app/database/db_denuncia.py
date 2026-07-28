@@ -289,7 +289,6 @@ def expire():
             try:
                 data = datetime.strptime(datavisto, "%H:%M %d/%m/%Y")
             except ValueError:
-                print(f"Data inválida na denúncia {d['id']}: {datavisto}")
                 continue
 
             if status == "Visto.":
@@ -310,7 +309,6 @@ def expire():
 
     except Exception as e:
         conn.rollback()
-        print("Erro ao expirar denúncias:", e)
 
     finally:
         cursor.close()

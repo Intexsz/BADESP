@@ -24,7 +24,6 @@ def get_conn():
     try:
         return db_pool.get_connection()
     except Error as e:
-        print("[DB] Erro ao pegar conexão:", e)
         raise
 
 def create_team(nome_turma):

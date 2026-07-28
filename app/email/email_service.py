@@ -29,7 +29,6 @@ def enviar_email_simples(destinatario, assunto, corpo):
         return True
 
     except Exception as e:
-        print("[EMAIL] Erro ao enviar email:", e)
         return False
 
 
