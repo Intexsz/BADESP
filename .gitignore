@@ -1,6 +1,5 @@
 ﻿/.env
 /.sql
-/.env
 /db.sql
 /error_db.log
 **/__pycache__/
