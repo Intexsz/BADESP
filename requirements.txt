@@ -12,3 +12,4 @@ Authlib
 google-auth
 cryptography
 python-dotenv
+Flask-Limiter
