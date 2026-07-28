@@ -8,7 +8,6 @@
 
     <link rel="stylesheet" href="{{ url_for('static', filename='style/pin.css') }}">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/icone.png') }}">
-    <!-- O script agora carrega externamente via static respeitando o CSP -->
     <script src="{{ url_for('static', filename='js/turmas.js') }}" defer></script>
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -45,7 +44,6 @@
             <li><a href="/Turmas"><span class="material-icons">groups</span> Turmas</a></li>
             <li><a href="/Feedback"><span class="material-icons">campaign</span> Feedback</a></li>
             <li>
-                <!-- CORREÇÃO: Removido o onclick inline e adicionado o ID único para capturar o clique -->
                 <a href="/Logout" class="logout" id="btn-logout">
                     <span class="material-icons">logout</span> Deslogar
                 </a>
@@ -63,12 +61,10 @@
             <form method="POST" action="/Turmas" autocomplete="off">
 
                 <div class="input-container">
-                    <!-- CORREÇÃO: Adicionado id="input-ano" e removido o oninput inline -->
                     <input type="text" id="input-ano" name="ano" placeholder="Ano" required maxlength="1" pattern="\d">
                 </div>
 
                 <div class="input-container">
-                    <!-- CORREÇÃO: Adicionado id="input-turma" para o script conseguir localizar o campo -->
                     <input type="text" id="input-turma" name="turma" placeholder="Sigla da Turma (ex: A, B, C...)" required maxlength="5" style="text-transform: uppercase;">
                 </div>
 

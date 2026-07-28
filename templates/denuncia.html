@@ -7,7 +7,6 @@
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/icone.png') }}">
     <title>B.A.D.E.S.P - Denunciar</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style/denuncia.css') }}">
-    <!-- O script com defer vai carregar após a montagem do DOM e gerenciar os eventos com segurança -->
     <script src="{{ url_for('static', filename='js/denuncia.js') }}" defer></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=pin" />
@@ -18,7 +17,6 @@
 
     <div id="fundoModal" class="fundo-modal" style="display: none;"></div>
 
-    <!-- Modal PIN original (Eventos inline removidos) -->
     <div id="pinModal" class="modal-pin" style="display: none;">
         <h3>Digite seu PIN</h3>
         <input id="pinInput"
@@ -34,7 +32,6 @@
         </div>
     </div>
 
-    <!-- Modal Customizado para substituir o prompt() (Eventos inline removidos) -->
     <div id="promptModal" class="modal-pin" style="display: none;">
         <h3 id="promptMensagem">Título</h3>
         <input id="promptInput"
@@ -85,7 +82,6 @@
     <main>
         <div class="form-container">
             <h1>Enviar Denúncia</h1>
-            <!-- Injetada a URL de verificação de PIN no formulário para manter o arquivo .js totalmente livre de Jinja2 -->
             <form id="form-denuncia" data-pin-url="{{ url_for('rotas.verificar_pin') }}" method="POST" autocomplete="off">
                 <input type="text" id='titulo' placeholder="Título da denúncia" required name="titulo" maxlength="60">
 
