@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icone.png') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='feedback_admin.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/icone.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/feedback_admin.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
     <title>B.A.D.E.S.P - Feedback</title>
@@ -41,18 +41,6 @@
         {% endif %}
 
     </div>
-
-    <div vw class="enabled">
-        <div vw-access-button class="active"></div>
-        <div vw-plugin-wrapper>
-            <div class="vw-plugin-top-wrapper"></div>
-        </div>
-    </div>
-
-    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-    <script>
-        new window.VLibras.Widget('https://vlibras.gov.br/app');
-    </script>
 
 </body>
 </html>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Acesso encerrado</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/icone.png') }}">
     <style>
         body {
             margin: 0;
@@ -55,14 +55,14 @@
         <h1>Acesso encerrado</h1>
 
         <p>
-            Este sistema é exclusivo para alunos que ainda estão cursando na escola.
+            Seu acesso a este site foi encerrado.
         </p>
 
         <p>
             Mesmo que seu e-mail institucional continue ativo, seu acesso ao B.A.D.E.S.P foi encerrado porque sua matrícula não está mais ativa.
         </p>
 
-        <a href="{{ url_for('rotalogin.cadastro') }}">Voltar</a>
+        <a href="/Logout">Deslogar</a>
     </div>
 
 </body>

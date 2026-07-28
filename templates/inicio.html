@@ -4,25 +4,25 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icone.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/icone.png') }}">
     <title>B.A.D.E.S.P - Início</title>
 
+    <script src="{{ url_for('static', filename='js/inicio.js') }}" defer></script>
     <!-- CSS Principal -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='inicio.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/inicio.css') }}">
 
     <!-- Fontes e Ícones -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=release_alert" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=release_alert" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-    <!-- Overlay do Fundo Escurecido -->
-    <div id="fundoModal" class="fundo-modal"></div>
+    <!-- URL do PIN mapeada de forma segura para leitura do fetch -->
+    <div id="fundoModal" class="fundo-modal" data-pin-url="{{ url_for('rotas.verificar_pin') }}"></div>
 
-    <!-- Nova Caixa de Diálogo (Modal PIN) -->
+    <!-- Modal PIN original com estrutura idêntica -->
     <div id="pinModal" class="modal-pin">
         <h3>Digite seu PIN</h3>
 
@@ -32,13 +32,11 @@
                inputmode="numeric"
                autocomplete="off"
                spellcheck="false"
-               placeholder="Digite seu PIN"
-               oninput="this.value = this.value.replace(/\D/g, '').slice(0, 6)"
-               onkeydown="if(event.key === 'Enter'){ event.preventDefault(); confirmarPinModal(); }">
+               placeholder="Digite seu PIN">
 
         <div class="botoes-modal">
-            <button type="button" class="btn-cancelar" onmousedown="fecharModal()">Cancelar</button>
-            <button type="button" class="btn-confirmar" onmousedown="confirmarPinModal()">OK</button>
+            <button type="button" class="btn-cancelar" id="btn-pin-cancelar">Cancelar</button>
+            <button type="button" class="btn-confirmar" id="btn-pin-confirmar">OK</button>
         </div>
     </div>
 
@@ -60,7 +58,7 @@
             <li><a href="/Feedback/Admin"><span class="material-icons">campaign</span> Ver Feedbacks</a></li>
             {% endif %}
             <li>
-                <a href="/Logout" class="logout" onclick="confirmarLogout(event)">
+                <a href="/Logout" class="logout" id="btn-logout">
                     <span class="material-icons">logout</span> Deslogar
                 </a>
             </li>
@@ -71,9 +69,9 @@
         <div class="painel-container has-select">
             <h1>Painel de Denúncias</h1>
 
-            <form method="get" action="{{ url_for('rotas.inicio') }}">
+            <form method="get" action="{{ url_for('rotas.inicio') }}" id="filtro-form">
                 <div class="input-container has-select">
-                    <select name="filtro" onchange="this.form.submit()">
+                    <select name="filtro" id="filtro-select">
                         <option value="Tudo" {% if filtro=="Tudo" %}selected{% endif %}>Tudo</option>
                         <option value="Esperando" {% if filtro=="Esperando" %}selected{% endif %}>Esperando Resposta</option>
                         <option value="Abertas" {% if filtro=="Abertas" %}selected{% endif %}>Abertas</option>
@@ -124,8 +122,9 @@
                     <p><span style="color: rgb(255, 255, 255);">Situação: ⏳Esperando Resposta...⏳</span></p>
                     {% endif %}
 
+                    <!-- RESTAURADO: A tag form voltou exatamente com a mesma classe antiga mantendo o tamanho original do botão -->
                     <form class="apagar-form" action="{{ url_for('rotasecretaria.detalhe_denuncia', id=d.id) }}" method="POST">
-                        <button type="button" onclick="abrirModalPin({{ d.id }})">Abrir Denúncia</button>
+                        <button type="button" class="btn-abrir" data-id="{{ d.id }}">Abrir Denúncia</button>
                     </form>
                 </div>
                 <br>
@@ -138,111 +137,5 @@
         </div>
     </main>
 
-    <script>
-    let denunciaAtual = null;
-
-    function abrirModalPin(id) {
-      denunciaAtual = id;
-      const fundo = document.getElementById("fundoModal");
-      const modal = document.getElementById("pinModal");
-      const input = document.getElementById("pinInput");
-
-      input.value = "";
-      fundo.style.display = "block";
-      modal.classList.add("ativo");
-      input.focus();
-    }
-
-    function fecharModal() {
-      const fundo = document.getElementById("fundoModal");
-      const modal = document.getElementById("pinModal");
-      const input = document.getElementById("pinInput");
-
-      fundo.style.display = "none";
-      modal.classList.remove("ativo");
-      input.value = "";
-    }
-
-    async function confirmarPinModal() {
-      const pin = document.getElementById("pinInput").value;
-      if (pin.length < 6) return alert("PIN incompleto");
-
-      try {
-        const response = await fetch(`{{ url_for('rotas.verificar_pin') }}`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ pin: pin })
-        });
-
-        const result = await response.json();
-
-        if (result.status === "ok") {
-          fecharModal();
-
-          const form = document.createElement("form");
-          form.method = "POST";
-          form.action = "/allow_detail";
-
-          const inputId = document.createElement("input");
-          inputId.type = "hidden";
-          inputId.name = "idzin";
-          inputId.value = denunciaAtual;
-
-          form.appendChild(inputId);
-          document.body.appendChild(form);
-          form.submit();
-        } else {
-          alert(result.mensagem || "PIN incorreto.");
-        }
-
-      } catch (e) {
-        alert("Erro no servidor.");
-      }
-    }
-
-    // Fechar ao clicar fora do modal
-    document.getElementById("fundoModal").addEventListener("click", fecharModal);
-
-    // Controle do Menu Lateral (Sidebar)
-    const btn = document.querySelector('.menu-btn');
-    const sidebar = document.querySelector('.sidebar');
-
-    btn.addEventListener('click', () => sidebar.classList.toggle('ativo'));
-
-    function confirmarLogout(e) {
-      e.preventDefault();
-      e.stopPropagation();
-
-      if (confirm("Deseja realmente sair?")) {
-        window.location.href = "/Logout";
-      }
-      return false;
-    }
-
-    document.addEventListener("click", (e) => {
-      const clicouFora = !sidebar.contains(e.target) && !btn.contains(e.target);
-      if (sidebar.classList.contains("ativo") && clicouFora) {
-        sidebar.classList.remove("ativo");
-      }
-    });
-
-    window.addEventListener("pageshow", function () {
-      fecharModal();
-    });
-    </script>
-
-    <!-- VLibras -->
-    <div vw class="enabled">
-        <div vw-access-button class="active"></div>
-        <div vw-plugin-wrapper>
-            <div class="vw-plugin-top-wrapper"></div>
-        </div>
-    </div>
-    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-    <script>
-        new window.VLibras.Widget('https://vlibras.gov.br/app');
-    </script>
-
 </body>
-
 </html>

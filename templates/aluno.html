@@ -5,8 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>B.A.D.E.S.P - Alunos Cadastrados</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='aluno.css') }}">
-  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icone.png') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style/aluno.css') }}">
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/icone.png') }}">
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet"
@@ -16,7 +16,6 @@
 
 <body>
 
-  <header class="Cabecalho">
     <header class="cabecalho glass">
       <button class="menu-btn"><span class="material-icons">menu</span></button>
       <h1 class="titulo">B.A.D.E.S.P</h1>
@@ -203,7 +202,7 @@
       <a href="{{ url_for('rotasecretaria.pagina_suspender_aluno', id=d['id']) }}"
         onclick="event.stopPropagation();"
         class="btn-acao btn-suspender">
-        ❌ Suspender
+        ❌ Suspender/Bloquear
       </a>
 
       <button type="submit"
@@ -211,7 +210,7 @@
         formmethod="POST"
         onclick="event.stopPropagation(); return confirm('Deseja encerrar o acesso deste aluno?');"
         class="btn-acao btn-encerrar">
-        🚫 Encerrar
+        🚫 Encerrar acesso
       </button>
 
     {% endif %}
@@ -228,78 +227,6 @@
       </div>
     </main>
 
-    <script>
-      const btn = document.querySelector('.menu-btn');
-      const sidebar = document.querySelector('.sidebar');
-
-      btn.addEventListener('click', () => sidebar.classList.toggle('ativo'));
-
-      function confirmarLogout(e) {
-        e.preventDefault();          // trava o link
-        e.stopPropagation();        // trava qualquer outro evento
-
-        if (confirm("Deseja realmente sair?")) {
-          window.location.href = "/Logout";
-        }
-
-        return false;
-      }
-
-      // ===== FECHAR MENU CLICANDO FORA + REDIRECIONAR P/ INÍCIO =====
-      document.addEventListener("click", (e) => {
-        const clicouFora = !sidebar.contains(e.target) && !btn.contains(e.target);
-
-        if (sidebar.classList.contains("ativo") && clicouFora) {
-          sidebar.classList.remove("ativo");
-        }
-      });
-    </script>
-
-    <script>
-      function atualizarSeries(selectAno) {
-        // 1. Achar a linha (tr) onde o clique aconteceu
-        const linha = selectAno.closest('tr');
-
-        // 2. Achar o select de série desta mesma linha
-        const selectSerie = linha.querySelector('.select-serie');
-        const anoSelecionado = selectAno.value;
-
-        // 3. Pegar todas as opções de série
-        const options = selectSerie.querySelectorAll('option');
-
-        let encontrou = false;
-
-        options.forEach(opt => {
-          // O "Atual" a gente sempre deixa ou remove se quiser resetar
-          if (opt.textContent.includes("(Atual)")) {
-            opt.style.display = "block";
-            return;
-          }
-
-          // Se o dado do ano bater com o selecionado, mostra
-          if (opt.getAttribute('data-ano') === anoSelecionado) {
-            opt.style.display = "block";
-            encontrou = true;
-          } else {
-            opt.style.display = "none";
-          }
-        });
-
-        // Resetar o valor do select de série para a primeira opção visível
-        selectSerie.value = selectSerie.querySelector('option[style*="display: block"]').value;
-      }
-    </script>
-
-    <div vw class="enabled">
-      <div vw-access-button class="active"></div>
-      <div vw-plugin-wrapper>
-        <div class="vw-plugin-top-wrapper"></div>
-      </div>
-    </div>
-    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-    <script>
-      new window.VLibras.Widget('https://vlibras.gov.br/app');
-    </script>
 
 </body>
 

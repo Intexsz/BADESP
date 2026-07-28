@@ -4,16 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='pin.css') }}">
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=pin" />
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icone.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/pin.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/icone.png') }}">
     <title>B.A.D.E.S.P - AlterarPIN</title>
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=pin" />
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=pin" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=groups" />
+
 </head>
 
 <body>
@@ -41,12 +41,24 @@
             <li><a href="/Turmas"><span class="material-icons">groups</span> Turmas</a></li>
             <li><a href="/Feedback"><span class="material-icons">campaign</span> Feedback</a></li>
 
-            <li><a href="/Logout" class="logout" onclick="confirmarLogout(event)"><span class="material-icons">logout</span> Deslogar</a></li>        </ul>
+            <li><a href="/Logout" class="logout" id="linkLogout"><span class="material-icons">logout</span> Deslogar</a></li>
+        </ul>
     </nav>
 
     {% if tipo == 'Aluno' %}
-    <main>
+    <main id="conteudo-principal" data-alunos='{{ alunos_por_turma | tojson if alunos_por_turma is defined else "{}" }}'>
         <div class="container">
+            {% with mensagens = get_flashed_messages(with_categories=true) %}
+            {% if mensagens %}
+            <div class="container-alertas" style="padding: 10px; text-align: center;">
+                {% for categoria, mensagem in mensagens %}
+                <div class="alerta alerta-{{ categoria }}" style="background: rgba(0,0,0,0.2); border-radius: 5px; padding: 10px; margin-bottom: 10px; color: {% if categoria == 'erro' %}red{% else %}lightgreen{% endif %}; font-weight: bold;">
+                    {{ mensagem }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
             <h2>Alterar PIN</h2>
             <p>Turmas disponiveis:</p>
             <br>
@@ -56,7 +68,7 @@
                     <select id="select-turma" name="turma" required>
                         <option value="" disabled selected>Selecione a turma</option>
                         {% for turma in alunos_por_turma.keys() %}
-                        {% if not turma == 'None°None' %}                        
+                        {% if not turma == 'None°None' %}
                         <option value="{{ turma }}">{{ turma }}</option>
                         {% endif %}
                         {% endfor %}
@@ -72,16 +84,12 @@
 
                 <div class="input-container">
                     <label for="pin" class="sr-only">PIN</label>
-                    <input placeholder="PIN" type="text" name="pin" id="pin" required maxlength="6" minlength="6"
-                        pattern="\d{6}" title="O PIN deve ter 6 números"
-                        oninput="this.value = this.value.replace(/\D/g, '')">
+                    <input placeholder="PIN" type="text" name="pin" id="pin" required maxlength="6" minlength="6" pattern="\d{6}" title="O PIN deve ter 6 números">
                 </div>
 
                 <div class="input-container">
                     <label for="confirmar" class="sr-only">Confirmar PIN</label>
-                    <input placeholder="Confirmar PIN" type="text" name="confirmar" id="confirmar" required
-                        maxlength="6" minlength="6" pattern="\d{6}" title="O PIN deve ter 6 números"
-                        oninput="this.value = this.value.replace(/\D/g, '')">
+                    <input placeholder="Confirmar PIN" type="text" name="confirmar" id="confirmar" required maxlength="6" minlength="6" pattern="\d{6}" title="O PIN deve ter 6 números">
                 </div>
 
                 <button type="submit" class="submit-button">Confirmar</button>
@@ -92,7 +100,7 @@
         </div>
     </main>
     {% elif tipo == 'Gestão' %}
-    <main>
+    <main id="conteudo-principal" data-alunos='{}'>
         <div class="container">
             <h1>Alterar PIN</h1>
             <br>
@@ -100,15 +108,11 @@
             <form method="POST" id="alterar-pin-form" autocomplete="off">
 
                 <div class="input-container">
-                    <input placeholder="PIN" type="text" name="pin" id="pin" required maxlength="6" minlength="6"
-                           pattern="\d{6}" title="O PIN deve ter 6 números"
-                           oninput="this.value = this.value.replace(/\D/g, '')">
+                    <input placeholder="PIN" type="text" name="pin" id="pin" required maxlength="6" minlength="6" pattern="\d{6}" title="O PIN deve ter 6 números">
                 </div>
 
                 <div class="input-container">
-                    <input placeholder="Confirmar PIN" type="text" name="confirmar" id="confirmar" required
-                           maxlength="6" minlength="6" pattern="\d{6}" title="O PIN deve ter 6 números"
-                           oninput="this.value = this.value.replace(/\D/g, '')">
+                    <input placeholder="Confirmar PIN" type="text" name="confirmar" id="confirmar" required maxlength="6" minlength="6" pattern="\d{6}" title="O PIN deve ter 6 números">
                 </div>
 
                 <button type="submit" class="submit-button">Confirmar</button>
@@ -118,112 +122,13 @@
         </div>
     </main>
     {% else %}
-    <p>Erro.</p>
+    <main id="conteudo-principal" data-alunos='{}'>
+        <p>Erro.</p>
+    </main>
     {% endif %}
 
-    <script>
-                document.addEventListener('DOMContentLoaded', function () {
-                    const alunosPorTurma = {{( alunos_por_turma | tojson
-                    )}};
-        const selectTurma = document.getElementById("select-turma");
-        const selectAluno = document.getElementById("select-aluno");
-        const containerAluno = document.getElementById("container-aluno");
-        const form = document.getElementById("alterar-pin-form");
-        const pinInput = document.getElementById("pin");
-        const confirmarInput = document.getElementById("confirmar");
-
-        function atualizarAlunos() {
-            const turmaSelecionada = selectTurma.value;
-            selectAluno.innerHTML = '<option value="" disabled selected>Selecione um aluno</option>';
-
-            if (turmaSelecionada && alunosPorTurma[turmaSelecionada]) {
-                alunosPorTurma[turmaSelecionada].forEach(aluno => {
-                    if (!aluno) return;
-                    const option = document.createElement("option");
-                    option.value = aluno;
-                    option.textContent = aluno;
-                    selectAluno.appendChild(option);
-                });
-                containerAluno.style.display = "block";
-            } else {
-                containerAluno.style.display = "none";
-            }
-        }
-
-        selectTurma.addEventListener('change', atualizarAlunos);
-
-        atualizarAlunos();
-        });
-    </script>
-
-    <script>
-        const btn = document.querySelector('.menu-btn');
-        const sidebar = document.querySelector('.sidebar');
-
-        btn.addEventListener('click', () => sidebar.classList.toggle('ativo'));
-
-    function confirmarLogout(e) {
-      e.preventDefault();          // trava o link
-      e.stopPropagation();        // trava qualquer outro evento
-
-      if (confirm("Deseja realmente sair?")) {
-        window.location.href = "/Logout";
-      }
-
-      return false;
-    }
-
-        // ===== FECHAR MENU CLICANDO FORA + REDIRECIONAR P/ INÍCIO =====
-        document.addEventListener("click", (e) => {
-            const clicouFora = !sidebar.contains(e.target) && !btn.contains(e.target);
-
-            if (sidebar.classList.contains("ativo") && clicouFora) {
-                sidebar.classList.remove("ativo");
-            }
-        });
-    </script>
-
-    <script>
-        function validarPin() {
-            const pin = document.getElementById("pin").value;
-            const confirmar = document.getElementById("confirmar").value;
-
-            if (pin !== confirmar) {
-                alert("Os PINs não coincidem!");
-                return false;
-            }
-
-            if (pin === "000000") {
-                alert("PIN inválido! Não pode ser 000000.");
-                return false;
-            }
-
-            return true;
-        }
-
-        document.addEventListener('DOMContentLoaded', function () {
-            const form = document.getElementById("alterar-pin-form");
-
-            form.addEventListener('submit', function (event) {
-                if (!validarPin()) {
-                    event.preventDefault();
-                }
-            });
-        });
-    </script>
-
-
-  <div vw class="enabled">
-    <div vw-access-button class="active"></div>
-    <div vw-plugin-wrapper>
-      <div class="vw-plugin-top-wrapper"></div>
-    </div>
-  </div>
-  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-  <script>
-    new window.VLibras.Widget('https://vlibras.gov.br/app');
-  </script>
-  
+    <!-- O ÚNICO SCRIPT DA PÁGINA: Chamar o arquivo externo (Permitido pela CSP) -->
+    <script src="{{ url_for('static', filename='js/recuperacao_pin.js') }}" defer></script>
 </body>
 
 </html>

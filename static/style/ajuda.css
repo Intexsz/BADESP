@@ -7,6 +7,21 @@
   --fonte: "Inter", sans-serif;
 }
 
+/* Fundo padrão para Aluno ou quando não houver cargo definido */
+body[data-theme="aluno"], body[data-theme="convidado"] {
+    background: linear-gradient(90deg, #242458, #3e3e74);
+}
+
+    body[data-theme="aluno"] .painel-container {
+        background: rgba(25, 25, 60, 0.9);
+    }
+
+/* Fundo para Secretaria ou Professor */
+body[data-theme="gestao"] {
+    background: linear-gradient(135deg, #242424, #353535);
+}
+
+
 /* RESET */
 * {
   margin: 0;
