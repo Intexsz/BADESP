@@ -7,7 +7,7 @@
     --fonte: "Inter", sans-serif;
 }
 
-/* RESET */
+
 * {
     margin: 0;
     padding: 0;
@@ -15,7 +15,7 @@
     font-family: var(--fonte);
 }
 
-/* Fundo escurecido com Blur */
+
 .fundo-modal {
     display: none;
     position: fixed;
@@ -26,10 +26,10 @@
     z-index: 9998;
 }
 
-/* Modal Estilizado Azul */
+
 .modal-pin {
     display: none;
-    flex-direction: column; /* ESSA É A CORREÇÃO! Empilha os itens */
+    flex-direction: column;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -46,7 +46,7 @@
     z-index: 9999;
 }
 
-    /* Animação de Entrada */
+
     .modal-pin.ativo {
         display: block;
         animation: aparecerModal 0.25s ease forwards;
@@ -64,7 +64,7 @@
     }
 }
 
-/* Título do Modal */
+
 .modal-pin h3 {
     color: #ffffff;
     font-size: 22px;
@@ -72,11 +72,9 @@
     margin-bottom: 18px;
 }
 
-/* =========================================
-   AJUSTE: Separação de estilos do Input
-   ========================================= */
 
-/* 1. Campo de Entrada do PIN (Senha) */
+
+
 .modal-pin input[type="password"] {
     width: 100%;
     height: 48px;
@@ -87,12 +85,12 @@
     color: #ffffff;
     font-size: 18px;
     text-align: center;
-    letter-spacing: 4px; /* Espaçamento largo para o PIN */
+    letter-spacing: 4px;
     outline: none;
     transition: all 0.25s ease;
 }
 
-/* 2. Campo de Entrada de Texto Normal (Prompt Customizado) */
+
 .modal-pin input[type="text"] {
     width: 100%;
     height: 48px;
@@ -102,13 +100,13 @@
     border-radius: 12px;
     color: #ffffff;
     font-size: 16px;
-    text-align: left; /* Texto alinhado à esquerda para leitura normal */
-    letter-spacing: normal; /* Espaçamento normal de texto */
+    text-align: left;
+    letter-spacing: normal;
     outline: none;
     transition: all 0.25s ease;
 }
 
-/* Foco e Placeholder para ambos */
+
 .modal-pin input:focus {
     border-color: #58d0ff;
     box-shadow: 0 0 15px rgba(88, 208, 255, 0.45);
@@ -120,7 +118,7 @@
     letter-spacing: normal;
 }
 
-/* Grupo de Botões */
+
 .botoes-modal {
     display: flex;
     justify-content: center;
@@ -139,7 +137,7 @@
         transition: all 0.25s ease;
     }
 
-    /* Botão OK */
+
     .botoes-modal .btn-confirmar {
         background: linear-gradient(180deg, #43b8ff, #2499f8);
         color: #ffffff;
@@ -150,7 +148,7 @@
             box-shadow: 0 0 18px rgba(88, 208, 255, 0.55);
         }
 
-    /* Botão Cancelar */
+
     .botoes-modal .btn-cancelar {
         background: rgba(255, 255, 255, 0.1);
         color: #ffffff;
@@ -175,14 +173,14 @@ body {
     overflow-x: hidden;
 }
 
-/* GLASS EFFECT */
+
 .glass {
     backdrop-filter: blur(12px);
     background: var(--cinza-card);
     border: 1px solid var(--cinza-borda);
 }
 
-/* HEADER */
+
 .cabecalho {
     display: flex;
     justify-content: space-between;
@@ -431,7 +429,7 @@ button:hover {
         list-style: none;
     }
 
-    /* ===== NOVO MENU ESTILIZADO ===== */
+
     .sidebar a {
         display: flex;
         align-items: center;
@@ -446,7 +444,7 @@ button:hover {
         border-radius: 8px;
     }
 
-        /* Linha + sombra abaixo dos itens */
+
         .sidebar a::after {
             content: "";
             position: absolute;
@@ -458,13 +456,13 @@ button:hover {
             box-shadow: 0 2px 5px rgba(0,0,0,0.4);
         }
 
-        /* Hover padrão */
+
         .sidebar a:hover {
             background: rgba(255,255,255,0.1);
             color: var(--destaque);
         }
 
-        /* ===== DESLOGAR VERMELHO ===== */
+
         .sidebar a.logout {
             color: #ff6b6b;
             font-weight: 600;
@@ -475,7 +473,7 @@ button:hover {
                 color: #ff3b3b;
             }
 
-/* Estilo da caixa onde ficam os nomes */
+
 .lista-envolvidos {
     margin-top: 15px;
     background: rgba(255, 255, 255, 0.5);
@@ -484,7 +482,7 @@ button:hover {
     border: 1px solid #ddd;
 }
 
-/* Cada linha de aluno (item da lista) */
+
 .item-envolvido {
     display: flex;
     justify-content: space-between;
@@ -497,7 +495,7 @@ button:hover {
     font-size: 0.95rem;
 }
 
-/* Botão de remover (X) */
+
 .btn-remove {
     background: transparent;
     border: none;
@@ -513,7 +511,7 @@ button:hover {
         color: #a71d2a;
     }
 
-/* PERFIL: evita que o nome empurre o título */
+
 .perfil {
     margin-left: auto;
     max-width: 35%;
@@ -529,10 +527,16 @@ button:hover {
         color: var(--texto);
     }
 
-/* Garante que o título permaneça centralizado */
+
 .titulo {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     z-index: 2;
+}
+
+@media (max-width: 768px){
+  .container, main{max-width:100%;padding:16px;}
+  table{display:block;overflow-x:auto;}
+  img{max-width:100%;height:auto;}
 }

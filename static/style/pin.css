@@ -7,7 +7,7 @@
     --fonte: "Inter", sans-serif;
 }
 
-/* RESET */
+
 * {
     margin: 0;
     padding: 0;
@@ -24,14 +24,14 @@ body {
     overflow-x: hidden;
 }
 
-/* GLASS EFFECT */
+
 .glass {
     backdrop-filter: blur(12px);
     background: var(--cinza-card);
     border: 1px solid var(--cinza-borda);
 }
 
-/* HEADER */
+
 .cabecalho {
     display: flex;
     justify-content: space-between;
@@ -73,14 +73,14 @@ body {
     align-items: center;
     transition: 0.2s;
   }
-  
+
   .menu-btn:hover {
     transform: scale(1.15);
     color: var(--destaque);
   }
 
 
-/* ===== NOVO MENU ESTILIZADO ===== */
+
 .sidebar a {
     display: flex;
     align-items: center;
@@ -95,7 +95,7 @@ body {
     border-radius: 8px;
 }
 
-/* Linha + sombra abaixo dos itens */
+
 .sidebar a::after {
     content: "";
     position: absolute;
@@ -107,13 +107,13 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
 }
 
-/* Hover padrão */
+
 .sidebar a:hover {
     background: rgba(255, 255, 255, 0.1);
     color: var(--destaque);
 }
 
-/* ===== DESLOGAR VERMELHO ===== */
+
 .sidebar a.logout {
     color: #ff6b6b;
     font-weight: 600;
@@ -310,7 +310,7 @@ h2 {
     white-space: nowrap;
     border-width: 0;
 }
-/* PERFIL: evita que o nome empurre o título */
+
 .perfil {
     margin-left: auto;
     max-width: 35%;
@@ -326,10 +326,15 @@ h2 {
         color: var(--texto);
     }
 
-/* Garante que o título permaneça centralizado */
+
 .titulo {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     z-index: 2;
+}
+@media (max-width: 768px){
+  .container, main{max-width:100%;padding:16px;}
+  table{display:block;overflow-x:auto;}
+  img{max-width:100%;height:auto;}
 }

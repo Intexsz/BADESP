@@ -4,3 +4,9 @@ body{
     text-align: center;
 }
 
+
+@media (max-width: 768px){
+  .container, main{max-width:100%;padding:16px;}
+  table{display:block;overflow-x:auto;}
+  img{max-width:100%;height:auto;}
+}

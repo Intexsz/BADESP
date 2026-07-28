@@ -7,7 +7,7 @@
   --fonte: "Inter", sans-serif;
 }
 
-/* Fundo padrão para Aluno ou quando não houver cargo definido */
+
 body[data-theme="aluno"], body[data-theme="convidado"] {
     background: linear-gradient(90deg, #242458, #3e3e74);
 }
@@ -16,13 +16,13 @@ body[data-theme="aluno"], body[data-theme="convidado"] {
         background: rgba(25, 25, 60, 0.9);
     }
 
-/* Fundo para Secretaria ou Professor */
+
 body[data-theme="gestao"] {
     background: linear-gradient(135deg, #242424, #353535);
 }
 
 
-/* RESET */
+
 * {
   margin: 0;
   padding: 0;
@@ -122,7 +122,7 @@ body {
   list-style: none;
 }
 
-/* ===== NOVO MENU ESTILIZADO ===== */
+
 .sidebar a {
   display: flex;
   align-items: center;
@@ -137,7 +137,7 @@ body {
   border-radius: 8px;
 }
 
-/* Linha + sombra abaixo dos itens */
+
 .sidebar a::after {
   content: "";
   position: absolute;
@@ -149,13 +149,13 @@ body {
   box-shadow: 0 2px 5px rgba(0,0,0,0.4);
 }
 
-/* Hover padrão */
+
 .sidebar a:hover {
   background: rgba(255,255,255,0.1);
   color: var(--destaque);
 }
 
-/* ===== DESLOGAR VERMELHO ===== */
+
 .sidebar a.logout {
   color: #ff6b6b;
   font-weight: 600;
@@ -166,7 +166,7 @@ body {
   color: #ff3b3b;
 }
 
-/* Cabeçalho */
+
 .cabecalho {
   display: flex;
   align-items: center;
@@ -177,12 +177,12 @@ body {
   box-shadow: 0 4px 12px rgba(0,0,0,0.4);
 }
 
-/* botão na esquerda */
+
 .menu-btn {
   z-index: 2;
 }
 
-/* título no meio real da tela */
+
 .titulo {
   font-size: 1.8rem;
   font-weight: 600;
@@ -200,7 +200,7 @@ body {
   margin: 0;
 }
 
-/* Main */
+
 main {
   text-align: center;
   color: white;
@@ -208,7 +208,7 @@ main {
   padding-bottom: 80px;
 }
 
-/* Página de ajuda */
+
 #ajuda {
   text-align: center;
   display: flex;
@@ -218,7 +218,7 @@ main {
   padding: 40px 20px;
 }
 
-/* Painel centralizado */
+
 #ajuda .painel {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
@@ -232,7 +232,7 @@ main {
   gap: 20px;
 }
 
-/* Título da página */
+
 #ajuda .nome {
   color: white;
   font-size: 35px;
@@ -240,7 +240,7 @@ main {
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-/* Sessões FAQ */
+
 #ajuda .faq {
   background: rgba(255, 255, 255, 0.05);
   padding: 15px 20px;
@@ -256,7 +256,7 @@ main {
   background: rgba(255, 255, 255, 0.1);
 }
 
-/* Perguntas e respostas */
+
 #ajuda .faq h3 {
   color: #bfcbd1;
   color: #bfcbd1;
@@ -281,7 +281,7 @@ main {
   padding: 10px 0;
 }
 
-/* Botões de ação */
+
 #ajuda button {
   color: #ffffff;
   border: none;
@@ -342,7 +342,7 @@ main {
   }
 }
 
-/* Mobile responsive tweaks */
+
 @media (max-width: 600px) {
   *, *::before, *::after { box-sizing: border-box; }
   .container, main, .painel-container { max-width: 100%; padding-left: 16px; padding-right: 16px; margin-left: auto; margin-right: auto; }
@@ -352,7 +352,7 @@ main {
   nav.sidebar { width: 80%; max-width: 320px; }
 }
 
-/* PERFIL: evita que o nome empurre o título */
+
 .perfil {
     margin-left: auto;
     max-width: 35%;
@@ -368,7 +368,7 @@ main {
         color: var(--texto);
     }
 
-/* Garante que o título permaneça centralizado */
+
 .titulo {
     position: absolute;
     left: 50%;
