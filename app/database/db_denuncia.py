@@ -1,4 +1,5 @@
 import re
+from flask import redirect,url_for
 from datetime import datetime, timedelta, timezone
 from app.database.db_usuario import buscar_usuario, pegar_no_nome
 from openai import OpenAI
@@ -66,12 +67,8 @@ def create_report(titulo, tipo, descricao, user_id, status, cargo, especifico, e
         especifico is None or
         envolvidos is None
     ) or not all([titulo, tipo, descricao, user_id, status, cargo, especifico, envolvidos]):
-        return """
-        <script>
-            alert("Erro: dados inválidos.");
-            window.location.href = "/Inicio";
-        </script>
-        """
+        return redirect(url_for("rotas.inicio"))
+
     data_utc = datetime.now(timezone.utc)
     data = data_utc.strftime("%H:%M %d/%m/%Y")
     conn = get_conn_denuncia()

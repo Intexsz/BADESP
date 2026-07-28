@@ -81,12 +81,7 @@ def abrir_denuncia(id):
             open_report_db(id, cargo, nome, session['user_id'], escola_usuario=usuario.get("escola"))
             return redirect(url_for('rotas.inicio'))
         else:
-            return f"""
-            <script>
-                alert("A denuncia expirou.");
-                window.location.href = "{url_for('rotas.inicio')}";
-            </script>
-        """
+            return redirect(url_for("rotas.inicio"))
     else:
         return redirect(url_for('rotas.inicio'))
 ######----------######
@@ -127,11 +122,7 @@ def detalhe_denuncia(id):
 
         # só o dono da denúncia pode abrir
         if denuncia['nome'] != nome:
-            return f"""
-        <script>
-            alert("Você não tem permissão para acessar esta denúncia.");
-            window.location.href = "{url_for('rotas.inicio')}";
-        </script>"""
+            return redirect(url_for("rotas.inicio"))
 
         session.pop("allow_detail", None)
         session.pop("allow_folder", None)
@@ -146,11 +137,7 @@ def detalhe_denuncia(id):
 
         # só o dono da denúncia pode abrir
         if denuncia['nome'] != nome:
-            return f"""
-        <script>
-            alert("Você não tem permissão para acessar esta denúncia.");
-            window.location.href = "{url_for('rotas.inicio')}";
-        </script>"""
+            return redirect(url_for("rotas.inicio"))
 
         session.pop("allow_detail", None)
         session.pop("allow_folder", None)
@@ -169,19 +156,11 @@ def comentar(id):
         return redirect(url_for('rotas.inicio'))
     
     if checar_stats(id) == 'Erro':
-        return f"""
-            <script>
-                alert("Erro.");
-                window.location.href = "{url_for('rotas.inicio')}";
-            </script>
-        """
+        return redirect(url_for("rotas.inicio"))
+
     elif checar_stats(id) == 'Expirou':
-        return f"""
-            <script>
-                alert("A denuncia expirou.");
-                window.location.href = "{url_for('rotas.inicio')}";
-            </script>
-        """
+        return redirect(url_for("rotas.inicio"))
+
     if checar_stats(id) and checagem == '':
         cargo = get_role(session['user_id'])
         usuario = buscar_usuario(session['user_id'])
@@ -189,12 +168,7 @@ def comentar(id):
         session["allow_folder"] = True
         post_comment(comentario, id, cargo, session['user_id'], escola_usuario=usuario.get("escola"))
     else:
-        return f"""
-            <script>
-                alert("Comentario ja feito.");
-                window.location.href = "{url_for('rotas.inicio')}";
-            </script>
-        """
+        return redirect(url_for("rotas.inicio"))
     
     return redirect(url_for('rotasecretaria.detalhe_denuncia', id=id))
 ######----------######
@@ -203,12 +177,8 @@ def comentar(id):
 @secretaria.route('/Inicio/Recusar/<int:id>', methods=['POST', 'GET'])
 def recusar(id):
     if checar_stats(id) == 'Expirou':
-        return f"""
-            <script>
-                alert("A denuncia expirou.");
-                window.location.href = "{url_for('rotas.inicio')}";
-            </script>
-        """
+        return redirect(url_for("rotas.inicio"))
+
     if checar_stats(id):
         cargo = get_role(session['user_id'])
         usuario = buscar_usuario(session['user_id'])
@@ -219,12 +189,7 @@ def recusar(id):
 @secretaria.route('/Inicio/Aprovar/<int:id>', methods=['POST', 'GET'])
 def aprovar(id):
     if checar_stats(id) == 'Expirou':
-        return f"""
-            <script>
-                alert("A denuncia expirou.");
-                window.location.href = "{url_for('rotas.inicio')}";
-            </script>
-        """
+        return redirect(url_for("rotas.inicio"))
     if checar_stats(id):
         cargo = get_role(session['user_id'])
         usuario = buscar_usuario(session['user_id'])
@@ -237,12 +202,7 @@ def aprovar(id):
 @secretaria.route('/Inicio/Arquivar/<int:id>', methods=['POST', 'GET'])
 def arquivar(id):
     if checar_stats(id) == 'Expirou':
-        return f"""
-            <script>
-                alert("A denuncia expirou.");
-                window.location.href = "{url_for('rotas.inicio')}";
-            </script>
-        """
+        return redirect(url_for("rotas.inicio"))
     if checar_stats(id):
         cargo = get_role(session['user_id'])
         update_status(id, cargo, 'Arquivado.', session['user_id'])
@@ -260,8 +220,9 @@ def alunos():
 
     usuario = buscar_usuario(session["user_id"])
     cargo = get_role(session['user_id'])
+    
     if cargo in ('Secretaria', 'Professor'):
-    # pega alunos da mesma escola
+        # pega alunos da mesma escola
         alunos_por_turma = buscar_nome_aluno(escola=usuario.get("escola"))
 
         if request.method == "POST":
@@ -270,26 +231,19 @@ def alunos():
             turma = request.form.get("turma")
 
             if pin == '0' or pin == '000000':
-                return f"""
-            <script>
-                alert("não pode ser somente 0");
-                window.location.href = "{url_for('rotasecretaria.alunos')}";
-            </script>
-        """
+                flash("Não pode ser somente 0", "erro")
+                return redirect(url_for('rotasecretaria.alunos'))
             else:
                 novo_pin(pin, aluno, turma)
-                return f"""
-            <script>
-                alert("Pin atualizado com sucesso!");
-                window.location.href = "{url_for('rotas.inicio')}";
-            </script>
-        """
+                flash("Pin atualizado com sucesso!", "sucesso")
+                return render_template("recuperacao_pin.html", alunos_por_turma=alunos_por_turma, tipo='Aluno', usuario=usuario)
         
-        return render_template("recuperacao_pin.html", alunos_por_turma=alunos_por_turma, tipo='Aluno',usuario=buscar_usuario(session['user_id']))
+        return render_template("recuperacao_pin.html", alunos_por_turma=alunos_por_turma, tipo='Aluno', usuario=usuario)
     else:
         return redirect(url_for('rotas.inicio'))
-######----------######
 
+
+###### ROTA PARA Gestao Alterar PIN ######
 @secretaria.route('/MudarPIN/GestaoAlterar', methods=['GET', 'POST'])
 def gestao():
     if "user_id" not in session:
@@ -299,25 +253,21 @@ def gestao():
 
     usuario = buscar_usuario(session["user_id"])
     cargo = get_role(session['user_id'])
+    
     if cargo in ('Secretaria', 'Professor'):
         alunos_por_turma = buscar_nome_aluno(escola=usuario.get("escola"))
         
         if request.method == "POST":
-            gestao = pegar_no_nome(session['user_id'])
+            gestao_nome = pegar_no_nome(session['user_id'])
             pin = request.form.get("pin")
 
-            novo_pin_secretaria(pin, gestao)
-            return f"""
-            <script>
-                alert("Pin de {gestao} atualizado com sucesso!");
-                window.location.href = "{url_for('rotas.inicio')}";
-            </script>
-        """
+            novo_pin_secretaria(pin, gestao_nome)
+            flash(f"Pin de {gestao_nome} atualizado com sucesso!", "sucesso")
+            return render_template("recuperacao_pin.html", alunos_por_turma=alunos_por_turma, tipo='Gestão', usuario=usuario)
         
-        return render_template("recuperacao_pin.html", alunos_por_turma=alunos_por_turma, tipo='Gestão',usuario=usuario)
+        return render_template("recuperacao_pin.html", alunos_por_turma=alunos_por_turma, tipo='Gestão', usuario=usuario)
     else:
         return redirect(url_for('rotas.inicio'))
-######----------######
 
 @secretaria.route('/Turmas', methods=['GET', 'POST'])
 def turmas():

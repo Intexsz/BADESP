@@ -363,7 +363,7 @@ def denuncia():
     if not usuario_tem_pin(session["user_id"]):
         return redirect(url_for("rotas.cadastro2_pin"))
     cargo = get_role(session["user_id"])
-    if cargo != 'Aluno' and cargo != 'Admin':
+    if cargo not in ('Admin','Aluno'):
         return redirect(url_for('rotas.inicio'))
     
     usuario = buscar_usuario(session["user_id"])
@@ -375,22 +375,12 @@ def denuncia():
 
     if request.method == 'POST':
         if not check_reports(session['user_id']):
-            return f"""
-    <script>
-        window.location.href = "{url_for('rotas.inicio')}";
-        alert("Você precisa esperar 5 minutos antes de criar outra denúncia.");
-    </script>
-    """
+            return redirect(url_for("rotas.inicio"))
         
         titulo = request.form.get('titulo')
         if request.form.get('tipo') == "Outros":
             if request.form.get('outro_especificar') == "":
-                return f"""
-    <script>
-        window.location.href = "{url_for('rotas.denuncia')}";
-        alert("Campo de texto outros vazio. Tente novamente.");
-    </script>
-    """
+                return redirect(url_for("rotas.inicio"))
             tipo = request.form.get('outro_especificar')
         else:
             tipo = request.form.get('tipo')
@@ -432,12 +422,7 @@ def excluir_denuncia(id):
         delete_reports(id, session["user_id"])
         return redirect(url_for('rotas.inicio'))
     else:
-        return f"""
-            <script>
-                alert("Não é possível deletar esta denúncia.");
-                window.location.href = "{url_for('rotas.inicio')}";
-            </script>
-        """
+        return redirect(url_for("rotas.inicio"))
 ######----------######
 
 
@@ -461,12 +446,7 @@ def reenviar_denuncia(id):
         delete_reports(id, session["user_id"])
         return redirect(url_for('rotas.inicio'))
     else:
-        return f"""
-            <script>
-                alert("Não é possível reenviar denúncia.");
-                window.location.href = "{url_for('rotas.inicio')}";
-            </script>
-        """
+        return redirect(url_for("rotas.inicio"))
 ######----------######
 
 @rotas_bp.route('/verificar_pin', methods=['POST'])
