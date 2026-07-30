@@ -340,69 +340,52 @@ def listar_alunos():
 
     ano = request.args.get("Ano", "Todos")
     serie = request.args.get("Serie", "Todos")
+    # 1. CAPTURA SE A CHECKBOX ESTÁ MARCADA
+    incluir_inativos = request.args.get("incluir_inativos") == "1"
 
     if ano == "Todos":
         serie = "Todos"
 
-    if request.method == 'POST':
-        querer = request.form.get('Olavo', 'Tudo')
-        return redirect(url_for('rotasecretaria.listar_alunos', filtro=querer))
-    
-    # Filtrar por escola do usuário logado
-    alunos = listar_alunose(ano=ano, serie=serie, escola=usuario.get("escola"))
+    # Busca alunos da escola
+    alunos = listar_alunose(ano=ano, serie=serie, escola=usuario.get("escola")) or []
 
-    if alunos:
-        alunos = listar_alunose(ano=ano, serie=serie, escola=usuario.get("escola"))
+    # 2. FILTRA INATIVOS SE A CHECKBOX NÃO ESTIVER MARCADA
+    if not incluir_inativos:
+        alunos = [a for a in alunos if a.get('matricula_ativa', 1) == 1 and not a.get('suspenso')]
 
-# Adiciona denúncias totais e aprovadas a cada aluno
-        alunos_processados = []
-        for a in alunos:
-            nome = a['nome'] # Acessa pela chave, não pelo índice
-            total = list_reports(nome)
-            aprov = list_approved(nome)
+    # Processa denúncias totais e aprovadas para cada aluno
+    alunos_processados = []
+    for a in alunos:
+        nome = a['nome']
+        a['total'] = list_reports(nome)
+        a['aprov'] = list_approved(nome)
+        alunos_processados.append(a)
 
-    # Para adicionar dados ao dicionário atual de forma limpa:
-            a['total'] = total
-            a['aprov'] = aprov
-            alunos_processados.append(a)
+    # 3. PAGINAÇÃO LIMPA E ÚNICA
+    page = int(request.args.get("page", 1))
+    per_page = 10
+    total_pages = max(1, (len(alunos_processados) + per_page - 1) // per_page)
 
-# Paginação em cima da lista já processada
-        page = int(request.args.get("page", 1))
-        per_page = 10
-        start = (page - 1) * per_page
-        end = start + per_page
+    if page < 1:
+        page = 1
+    elif page > total_pages:
+        page = total_pages
 
-        reports_paginadas = alunos_processados[start:end]
-        total_pages = (len(alunos_processados) + per_page - 1) // per_page
+    start = (page - 1) * per_page
+    end = start + per_page
+    reports_paginadas = alunos_processados[start:end]
 
-        return render_template(
-    "aluno.html",
-    alunos_por_turma=reports_paginadas,
-    usuario=usuario,
-    filtro_ano=ano,
-    filtro_serie=serie,
-    page=page,
-    total_pages=total_pages,turmas=mostrar_teams()
-    )
-
-    else:
-        page = int(request.args.get("page", 1))
-        per_page = 10
-        start = (page - 1) * per_page 
-        end = start + per_page
-
-        reports_paginadas = alunos[start:end]
-        total_pages = (len(alunos) + per_page - 1) // per_page
-    
-        return render_template(
+    return render_template(
         "aluno.html",
         alunos_por_turma=reports_paginadas,
         usuario=usuario,
         filtro_ano=ano,
         filtro_serie=serie,
-        alunose = alunos,
-        page=page,total_pages=total_pages,turmas=mostrar_teams()
-        )
+        incluir_inativos=incluir_inativos,  # Envia a variável para manter a checkbox marcada no HTML
+        page=page,
+        total_pages=total_pages,
+        turmas=mostrar_teams()
+    )
 
 @secretaria.route('/Alunos/Suspender/<id>', methods=['GET'])
 def pagina_suspender_aluno(id):
@@ -431,7 +414,6 @@ def pagina_suspender_aluno(id):
         aluno=aluno,
         usuario=usuario
     )
-
 
 @secretaria.route('/Alunos/Suspender/<id>', methods=['POST'])
 def suspender_acesso(id):
@@ -467,7 +449,6 @@ def suspender_acesso(id):
     enviar_email_suspensao(aluno_atualizado)
 
     return redirect(url_for("rotasecretaria.listar_alunos"))
-
 
 @secretaria.route('/Alunos/RemoverSuspensao/<id>', methods=['POST'])
 def remover_suspensao(id):
@@ -506,7 +487,6 @@ def remover_suspensao(id):
 
     return redirect(url_for("rotasecretaria.listar_alunos"))
 
-
 @secretaria.route('/Alunos/DesativarMatricula/<id>', methods=['POST'])
 def desativar_matricula(id):
     if "user_id" not in session:
@@ -534,7 +514,6 @@ def desativar_matricula(id):
 
     return redirect(url_for("rotasecretaria.listar_alunos"))
 
-
 @secretaria.route('/Alunos/ReativarMatricula/<id>', methods=['POST'])
 def reativar_matricula(id):
     if "user_id" not in session:
@@ -554,7 +533,6 @@ def reativar_matricula(id):
     alterar_matricula_ativa(id, True)
 
     return redirect(url_for("rotasecretaria.listar_alunos"))
-
 
 @secretaria.route('/Alunos/AlterarEscola/<id>', methods=['POST'])
 def alterar_escola_aluno_rota(id):

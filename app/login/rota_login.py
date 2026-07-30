@@ -13,8 +13,7 @@ from app.database.db_usuario import save_user
 import logging
 import os
 
-from extensions import limiter 
-
+from extensions import limiter, csrf
 
 # Define estritamente o Blueprint (sem recriar o objeto Flask 'app')
 rota_login = Blueprint("rotalogin", __name__)
@@ -92,7 +91,7 @@ def process_login(cargo):
 # ==========================
 # ROTAS DO ALUNO
 # ==========================
-
+@csrf.exempt
 @rota_login.route("/Login/callback", methods=["POST", "GET"])
 @limiter.limit("5 per minute")  # Protege o endpoint contra spam de requisições
 def callback():
@@ -113,7 +112,7 @@ def cadastro():
 # ==========================
 # ROTAS DA SECRETARIA
 # ==========================
-
+@csrf.exempt
 @rota_login.route("/Login/Secretaria/callback", methods=["POST", "GET"])
 @limiter.limit("5 per minute")
 def callback_secretaria():
@@ -134,7 +133,7 @@ def login_secretaria():
 # ==========================
 # ROTAS DO PROFESSOR
 # ==========================
-
+@csrf.exempt
 @rota_login.route("/Login/Professor/callback", methods=["POST", "GET"])
 @limiter.limit("5 per minute")
 def callback_professor():
