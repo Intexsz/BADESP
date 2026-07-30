@@ -15,7 +15,7 @@ app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET")
 
 app.config["SESSION_COOKIE_HTTPONLY"] = True
-app.config["SESSION_COOKIE_SECURE"] = False  # True quando publicar em HTTPS
+app.config["SESSION_COOKIE_SECURE"] = os.getenv("FLASK_DEBUG") == "0"
 app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
 app.config["SESSION_COOKIE_NAME"] = "badesp_session"
 app.config["SESSION_REFRESH_EACH_REQUEST"] = True
