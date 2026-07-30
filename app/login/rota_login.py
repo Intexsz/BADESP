@@ -6,6 +6,7 @@ from flask import (
     session,
     redirect,
     url_for,
+    flash
 )
 from google.oauth2 import id_token
 from google.auth.transport import requests
@@ -93,7 +94,7 @@ def process_login(cargo):
 # ==========================
 @csrf.exempt
 @rota_login.route("/Login/callback", methods=["POST", "GET"])
-@limiter.limit("5 per minute")  # Protege o endpoint contra spam de requisições
+@limiter.limit("5 per minute") 
 def callback():
     return process_login("Aluno")
 
@@ -101,7 +102,8 @@ def callback():
 @rota_login.route("/Login", methods=["GET", "POST"])
 def cadastro():
     if "user_id" in session:
-        return redirect(url_for("rotas.inicio"))  # Altere para o nome correto do seu blueprint de início
+        flash("Você já possui Login.", "info")
+        return redirect(url_for("rotas.inicio"))
 
     return render_template(
         "login.html",

@@ -9,7 +9,8 @@ db_pool = pooling.MySQLConnectionPool(
     pool_size=10,
     pool_reset_session=True,
 
-    port=21948,
+    # port=21948,
+    port=3306,
     host=os.getenv("DB_HOST"),
     user=os.getenv("DB_USER"),
     password=os.getenv("DB_PASSWORD"),

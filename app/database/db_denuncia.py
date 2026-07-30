@@ -1,5 +1,5 @@
 import re
-from flask import redirect,url_for
+from flask import redirect,url_for, flash
 from datetime import datetime, timedelta, timezone
 from app.database.db_usuario import buscar_usuario, pegar_no_nome
 from openai import OpenAI
@@ -66,6 +66,7 @@ def create_report(titulo, tipo, descricao, user_id, status, cargo, especifico, e
         cargo is None or
         especifico is None
     ) or not all([titulo, tipo, descricao, user_id, status, cargo, especifico]):
+        flash("Erro ao fazer denuncia, Tente novamente.", "error")
         return redirect(url_for("rotas.inicio"))
 
     data_utc = datetime.now(timezone.utc)

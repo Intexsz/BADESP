@@ -63,12 +63,12 @@ def autoria_entrar():
         elif nome == 'Novas':
             return redirect(url_for(f"rotas.reports"))
 
-###### ABRIR DENUNCIA SE NÃO ESTIVER EXPIRADA ######
+###### ABRIR DENUNCIA SE NÃO ESTIVER EXPIRADA(acho que não está sendo utilizada) ######
 @secretaria.route('/Inicio/abrir/<int:id>', methods=['POST'])
 def abrir_denuncia(id):
     if "user_id" not in session:
         return redirect(url_for('rotalogin.cadastro'))
-    
+
     if not usuario_tem_pin(session["user_id"]):
         return redirect(url_for("rotas.cadastro2_pin"))
 
@@ -81,8 +81,10 @@ def abrir_denuncia(id):
             open_report_db(id, cargo, nome, session['user_id'], escola_usuario=usuario.get("escola"))
             return redirect(url_for('rotas.inicio'))
         else:
+            flash("Denuncia expirada.", "warning")
             return redirect(url_for("rotas.inicio"))
     else:
+        flash("Você não tem permissão para abrir esta denuncia.", "error")
         return redirect(url_for('rotas.inicio'))
 ######----------######
 
@@ -94,6 +96,7 @@ def detalhe_denuncia(id):
     if not usuario_tem_pin(session["user_id"]):
         return redirect(url_for("rotas.cadastro2_pin"))
     if not session.get("allow_detail") or not session.get("allow_folder"):
+        flash("Erro: Você não tem permissão para abrir esta denuncia. Por favor, Navegue até ela normalmente.", "error")
         return redirect(url_for("rotas.inicio"))
 
     usuario_logado = buscar_usuario(session['user_id'])
@@ -106,7 +109,8 @@ def detalhe_denuncia(id):
         denuncia = get_report(id, escola_usuario=usuario_logado.get("escola"))
         
         if denuncia == 'no':
-            return "Denúncia não encontrada ou fora da sua escola", 404
+            flash("Erro: Denuncia não encontrada.", "error")
+            return redirect(url_for("rotas.inicio"))
         
         session.pop("allow_folder", None)
         session.pop("allow_detail", None)
@@ -118,10 +122,12 @@ def detalhe_denuncia(id):
         nome = pegar_no_nome(session['user_id'])
 
         if denuncia == 'no':
-            return "Denúncia não encontrada ou fora da sua escola", 404
+            flash("Erro: Denuncia não encontrada.", "error")
+            return redirect(url_for("rotas.inicio"))
 
         # só o dono da denúncia pode abrir
         if denuncia['nome'] != nome:
+            flash("Erro: Somente o dono da denuncia pode abri-la.", "error")
             return redirect(url_for("rotas.inicio"))
 
         session.pop("allow_detail", None)
@@ -133,7 +139,8 @@ def detalhe_denuncia(id):
         nome = pegar_no_nome(session['user_id'])
 
         if denuncia == 'no':
-            return "Denúncia não encontrada", 404
+            flash("Erro: Denuncia não encontrada.", "error")
+            return redirect(url_for("rotas.inicio"))
 
         # só o dono da denúncia pode abrir
         if denuncia['nome'] != nome:
@@ -153,12 +160,15 @@ def comentar(id):
     checagem = check_coment(id)
     
     if not comentario:
+        flash("Você não pode comentar aqui.", "error")
         return redirect(url_for('rotas.inicio'))
     
     if checar_stats(id) == 'Erro':
+        flash("Erro em checar dados.", "error")
         return redirect(url_for("rotas.inicio"))
 
     elif checar_stats(id) == 'Expirou':
+        flash("Erro: Denuncia expirada.", "error")
         return redirect(url_for("rotas.inicio"))
 
     if checar_stats(id) and checagem == '':
@@ -168,6 +178,7 @@ def comentar(id):
         session["allow_folder"] = True
         post_comment(comentario, id, cargo, session['user_id'], escola_usuario=usuario.get("escola"))
     else:
+        flash("Erro: Você não pode comentar.", "error")
         return redirect(url_for("rotas.inicio"))
     
     return redirect(url_for('rotasecretaria.detalhe_denuncia', id=id))
@@ -177,23 +188,28 @@ def comentar(id):
 @secretaria.route('/Inicio/Recusar/<int:id>', methods=['POST', 'GET'])
 def recusar(id):
     if checar_stats(id) == 'Expirou':
+        flash("Erro: Denuncia expirada.", "error")
         return redirect(url_for("rotas.inicio"))
 
     if checar_stats(id):
         cargo = get_role(session['user_id'])
         usuario = buscar_usuario(session['user_id'])
         update_status(id, cargo, 'Recusado.', session['user_id'], escola_usuario=usuario.get("escola"))
-    
+        flash("Denuncia recusada com sucesso!", "sucess")
+
     return redirect(url_for('rotas.inicio'))
     
 @secretaria.route('/Inicio/Aprovar/<int:id>', methods=['POST', 'GET'])
 def aprovar(id):
     if checar_stats(id) == 'Expirou':
+        flash("Erro: Denuncia expirada.", "error")
         return redirect(url_for("rotas.inicio"))
+
     if checar_stats(id):
         cargo = get_role(session['user_id'])
         usuario = buscar_usuario(session['user_id'])
         update_status(id, cargo, 'Aprovado.', session['user_id'], escola_usuario=usuario.get("escola"))
+        flash("Denuncia aprovada com sucesso!", "sucess")
 
     return redirect(url_for('rotas.inicio'))
 ######----------######
@@ -206,6 +222,7 @@ def arquivar(id):
     if checar_stats(id):
         cargo = get_role(session['user_id'])
         update_status(id, cargo, 'Arquivado.', session['user_id'])
+        flash("Denuncia arquivada com sucesso!", "sucess")
 
     return redirect(url_for('rotas.inicio'))
 ######----------######
@@ -240,6 +257,7 @@ def alunos():
         
         return render_template("recuperacao_pin.html", alunos_por_turma=alunos_por_turma, tipo='Aluno', usuario=usuario)
     else:
+        flash("Erro: Você não tem permissão para acessar isso. Consulte a secretaria se deseja alterar seu PIN.", "error")
         return redirect(url_for('rotas.inicio'))
 
 
@@ -267,6 +285,7 @@ def gestao():
         
         return render_template("recuperacao_pin.html", alunos_por_turma=alunos_por_turma, tipo='Gestão', usuario=usuario)
     else:
+        flash("Erro: Você não tem permissão para acessar isso. Consulte a secretaria se deseja alterar seu PIN.", "error")
         return redirect(url_for('rotas.inicio'))
 
 @secretaria.route('/Turmas', methods=['GET', 'POST'])
@@ -289,6 +308,7 @@ def turmas():
         
         return render_template("turmas.html", turmas=mostrar_teams(), usuario=buscar_usuario(session['user_id']))
     else:
+        flash("Erro: Você não tem permissão para acessar isso. Consulte a secretaria se deseja alterar seu PIN.", "error")
         return redirect(url_for('rotas.inicio'))
     
 @secretaria.route('/RemoverTurma', methods=['POST'])
@@ -331,11 +351,13 @@ def listar_alunos():
     if not usuario_tem_pin(session["user_id"]):
         return redirect(url_for("rotas.cadastro2_pin"))
     if not session.get("allow_folder"):
+        flash("Erro: Você não tem permissão para acessar esta pagina.", "error")
         return redirect(url_for("rotas.inicio"))
     
     usuario = buscar_usuario(session["user_id"])
     cargo = get_role(session['user_id'])
     if cargo not in ('Secretaria', 'Professor'):
+        flash("Erro: Você não tem permissão para acessar esta pagina.", "error")
         return redirect(url_for('rotas.inicio'))
 
     ano = request.args.get("Ano", "Todos")
@@ -396,11 +418,13 @@ def pagina_suspender_aluno(id):
         return redirect(url_for("rotas.cadastro2_pin"))
 
     if not session.get("allow_folder"):
+        flash("Erro: Você não tem permissão para acessar esta pagina.", "error")
         return redirect(url_for("rotas.inicio"))
 
     cargo = get_role(session["user_id"])
 
     if cargo not in ("Secretaria", "Professor"):
+        flash("Erro: Você não tem permissão para acessar esta pagina.", "error")
         return redirect(url_for("rotas.inicio"))
 
     aluno = buscar_aluno_por_id(id)
@@ -424,11 +448,13 @@ def suspender_acesso(id):
         return redirect(url_for("rotas.cadastro2_pin"))
 
     if not session.get("allow_folder"):
+        flash("Erro: Você não tem permissão para acessar esta pagina.", "error")
         return redirect(url_for("rotas.inicio"))
 
     cargo = get_role(session["user_id"])
 
     if cargo not in ("Secretaria", "Professor"):
+        flash("Erro: Você não tem permissão para acessar esta pagina.", "error")
         return redirect(url_for("rotas.inicio"))
 
     motivo = request.form.get("motivo")
@@ -459,11 +485,13 @@ def remover_suspensao(id):
         return redirect(url_for("rotas.cadastro2_pin"))
 
     if not session.get("allow_folder"):
+        flash("Erro: Você não tem permissão para acessar esta pagina.", "error")
         return redirect(url_for("rotas.inicio"))
 
     cargo = get_role(session["user_id"])
 
     if cargo not in ("Secretaria", "Professor"):
+        flash("Erro: Você não tem permissão para acessar esta pagina.", "error")
         return redirect(url_for("rotas.inicio"))
 
     aluno = buscar_status_suspensao(id)
@@ -496,11 +524,13 @@ def desativar_matricula(id):
         return redirect(url_for("rotas.cadastro2_pin"))
 
     if not session.get("allow_folder"):
+        flash("Erro: Você não tem permissão para acessar esta pagina.", "error")
         return redirect(url_for("rotas.inicio"))
 
     cargo = get_role(session["user_id"])
 
     if cargo not in ("Secretaria", "Professor"):
+        flash("Erro: Você não tem permissão para acessar esta pagina.", "error")
         return redirect(url_for("rotas.inicio"))
 
     aluno = buscar_usuario(id)
@@ -523,11 +553,13 @@ def reativar_matricula(id):
         return redirect(url_for("rotas.cadastro2_pin"))
 
     if not session.get("allow_folder"):
+        flash("Erro: Você não tem permissão para acessar esta pagina.", "error")
         return redirect(url_for("rotas.inicio"))
 
     cargo = get_role(session["user_id"])
 
     if cargo not in ("Secretaria", "Professor"):
+        flash("Erro: Você não tem permissão para acessar esta pagina.", "error")
         return redirect(url_for("rotas.inicio"))
 
     alterar_matricula_ativa(id, True)
@@ -543,12 +575,14 @@ def alterar_escola_aluno_rota(id):
         return redirect(url_for("rotas.cadastro2_pin"))
 
     if not session.get("allow_folder"):
+        flash("Erro: Você não tem permissão para acessar esta pagina.", "error")
         return redirect(url_for("rotas.inicio"))
 
     cargo = get_role(session["user_id"])
 
     # APENAS secretaria pode alterar escola de aluno
     if cargo != "Secretaria":
+        flash("Erro: Você não tem permissão para acessar esta pagina.", "error")
         return redirect(url_for("rotas.inicio"))
 
     aluno = buscar_usuario(id)

@@ -172,3 +172,14 @@ document.addEventListener("click", (e) => {
 window.addEventListener("pageshow", function () {
     fecharModal();
 });
+document.addEventListener('DOMContentLoaded', function () {
+    const flashContainer = document.getElementById('flash-container');
+    if (flashContainer) {
+        flashContainer.addEventListener('click', function (e) {
+            if (e.target.classList.contains('flash-btn-close')) {
+                const alertBox = e.target.closest('.flash-alert');
+                if (alertBox) alertBox.remove();
+            }
+        });
+    }
+});

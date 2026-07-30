@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -14,7 +13,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=release_alert" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
     <div id="fundoModal" class="fundo-modal" data-pin-url="{{ url_for('rotas.verificar_pin') }}"></div>
@@ -79,6 +77,28 @@
                 </div>
             </form>
 
+            <!-- BLOCAMENTO DE MENSAGENS FLASH (Feedback para o usuário) -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <div class="flash-messages-container" id="flash-container">
+                {% for category, message in messages %}
+                <div class="flash-alert flash-{{ category }}">
+                    <div class="flash-content">
+                        <span class="material-icons">
+                            {% if category in ['success', 'sucesso'] %}check_circle
+                            {% elif category in ['error', 'danger', 'erro'] %}error
+                            {% elif category in ['warning', 'aviso'] %}warning
+                            {% else %}info{% endif %}
+                        </span>
+                        <span>{{ message }}</span>
+                    </div>
+                    <button type="button" class="flash-btn-close">&times;</button>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
+
             <div id="denuncias-container">
                 {% if reports %}
                 {% for d in reports %}
@@ -132,6 +152,5 @@
             </div>
         </div>
     </main>
-
 </body>
 </html>
