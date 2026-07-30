@@ -4,3 +4,4 @@
 /error_db.log
 **/__pycache__/
 /.vs
+/.env.local
