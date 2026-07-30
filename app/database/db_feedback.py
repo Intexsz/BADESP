@@ -17,6 +17,7 @@ def create_feedback(titulo, tipo, feedback, cargo):
         cargo is None
     ) or not all([titulo, tipo, feedback, cargo]):
         return redirect(url_for("rotas.inicio"))
+
     data_utc = datetime.now(timezone.utc)
     data = data_utc.strftime("%H:%M %d/%m/%Y")
     conn = get_conn_denuncia()

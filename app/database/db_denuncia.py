@@ -64,9 +64,8 @@ def create_report(titulo, tipo, descricao, user_id, status, cargo, especifico, e
         user_id is None or
         status is None or
         cargo is None or
-        especifico is None or
-        envolvidos is None
-    ) or not all([titulo, tipo, descricao, user_id, status, cargo, especifico, envolvidos]):
+        especifico is None
+    ) or not all([titulo, tipo, descricao, user_id, status, cargo, especifico]):
         return redirect(url_for("rotas.inicio"))
 
     data_utc = datetime.now(timezone.utc)
@@ -289,6 +288,7 @@ def expire():
             try:
                 data = datetime.strptime(datavisto, "%H:%M %d/%m/%Y")
             except ValueError:
+                print(f"Data inválida na denúncia {d['id']}: {datavisto}")
                 continue
 
             if status == "Visto.":
@@ -309,6 +309,7 @@ def expire():
 
     except Exception as e:
         conn.rollback()
+        print("Erro ao expirar denúncias:", e)
 
     finally:
         cursor.close()
