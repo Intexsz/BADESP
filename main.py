@@ -20,6 +20,7 @@ app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
 app.config["SESSION_COOKIE_NAME"] = "badesp_session"
 app.config["SESSION_REFRESH_EACH_REQUEST"] = True
 app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(hours=2)
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 limiter.init_app(app)
 csrf.init_app(app)
@@ -54,8 +55,9 @@ def add_no_cache_headers(response):
     "frame-src 'self' "
     "https://accounts.google.com;"
 )
+    if os.getenv("FLASK_DEBUG") == "0":
+        response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
 
-    # response.headers["Strict-Transport-Security"] = "max-age=31536000"
     return response
 
 # Google
