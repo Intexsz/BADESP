@@ -219,7 +219,6 @@ def error_504(error):
     ), 504
 ######---------######
 
-# Nota: Colocar Flash no inicio da secretaria e no inicio do aluno
 #---Iniciar aplicativo--#
 if __name__ == '__main__':
     app.run(debug=os.getenv("FLASK_DEBUG") == "1")
