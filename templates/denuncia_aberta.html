@@ -195,6 +195,7 @@
             <br>
             <br>
             <form action="{{ url_for('rotasecretaria.comentar', id=usuario['id']) }}" method="POST" class="form-confirmar-texto">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <textarea name="comentario" maxlength="255" placeholder="Adicionar comentário..." style="text-align: center;"></textarea>
                 <button type="submit" class="abrir-btn">Enviar</button>
             </form>
@@ -203,6 +204,7 @@
             {% else %}
             {% if usuario['status'] in ['Em Análise.', 'Expirada.', 'Aprovado.', 'Recusado.'] %}
             <form class="apagar-form" action="{{ url_for('rotas.excluir_denuncia', id=usuario['id']) }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <button type="submit" class="buttozito">Apagar</button>
             </form>
             <br>
@@ -210,6 +212,7 @@
 
             {% if usuario['status'] == 'Expirada.' %}
             <form class="reenviar-form" action="{{ url_for('rotas.reenviar_denuncia', id=usuario['id']) }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="titulo" value="{{ usuario['titulo'] }}">
                 <input type="hidden" name="tipo" value="{{ usuario['tipo'] }}">
                 <input type="hidden" name="descricao" value="{{ usuario['descricao'] }}">

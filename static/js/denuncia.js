@@ -1,6 +1,9 @@
 // =========================================================================
 // 1. CONFIGURAÇÃO GLOBAIS E ELEMENTOS BASE
 // =========================================================================
+const csrfToken = document
+    .querySelector('meta[name="csrf-token"]')
+    ?.getAttribute("content");
 const form = document.getElementById('form-denuncia');
 const elemento = document.getElementById('botãooo');
 const btn = document.querySelector('.menu-btn');
@@ -89,8 +92,13 @@ async function confirmarPinModal() {
     try {
         const response = await fetch(urlVerificarPin, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ pin: pin })
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": csrfToken
+            },
+            body: JSON.stringify({
+                pin: pin
+            })
         });
 
         const result = await response.json();

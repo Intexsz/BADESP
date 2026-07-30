@@ -1,4 +1,7 @@
 let denunciaAtual = null;
+const csrfToken = document
+    .querySelector('meta[name="csrf-token"]')
+    ?.getAttribute("content");
 
 // Controle do Menu Lateral (Sidebar)
 const btn = document.querySelector('.menu-btn');
@@ -47,8 +50,13 @@ async function confirmarPinModal() {
     try {
         const response = await fetch(urlVerificarPin, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ pin: pin })
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": csrfToken
+            },
+            body: JSON.stringify({
+                pin: pin
+            })
         });
 
         const result = await response.json();
@@ -59,6 +67,12 @@ async function confirmarPinModal() {
             const form = document.createElement("form");
             form.method = "POST";
             form.action = "/allow_detail";
+
+            const csrf = document.createElement("input");
+            csrf.type = "hidden";
+            csrf.name = "csrf_token";
+            csrf.value = csrfToken;
+            form.appendChild(csrf);
 
             const inputId = document.createElement("input");
             inputId.type = "hidden";

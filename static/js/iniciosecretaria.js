@@ -1,3 +1,7 @@
+const csrfToken = document
+    .querySelector('meta[name="csrf-token"]')
+    ?.getAttribute("content");
+
 document.addEventListener('DOMContentLoaded', function () {
     const btn = document.querySelector('.menu-btn');
     const sidebar = document.querySelector('.sidebar');
@@ -125,7 +129,8 @@ document.addEventListener('DOMContentLoaded', function () {
             const response = await fetch("/verificar_pin", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": csrfToken
                 },
                 body: JSON.stringify({ pin: pin })
             });
@@ -138,6 +143,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 const form = document.createElement("form");
                 form.method = "POST";
                 form.action = "/allow_folder";
+
+                const csrf = document.createElement("input");
+                csrf.type = "hidden";
+                csrf.name = "csrf_token";
+                csrf.value = csrfToken;
+                form.appendChild(csrf);
 
                 const input = document.createElement("input");
                 input.type = "hidden";

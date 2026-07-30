@@ -1,5 +1,8 @@
+const csrfToken = document
+    .querySelector('meta[name="csrf-token"]')
+    ?.getAttribute("content");
+
 document.addEventListener('DOMContentLoaded', function () {
-    // ===== PAGINAÇÃO SEGURA =====
     const totalPages = parseInt(document.body.getAttribute('data-total-pages')) || 1;
     const url = new URL(window.location.href);
     let page = parseInt(url.searchParams.get('page')) || 1;
@@ -73,6 +76,12 @@ document.addEventListener('DOMContentLoaded', function () {
         const form = document.createElement("form");
         form.method = "POST";
         form.action = `/allow_detail`;
+
+        const csrf = document.createElement("input");
+        csrf.type = "hidden";
+        csrf.name = "csrf_token";
+        csrf.value = csrfToken;
+        form.appendChild(csrf);
 
         const inputIdzin = document.createElement("input");
         inputIdzin.type = "hidden";

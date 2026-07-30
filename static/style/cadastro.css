@@ -4,6 +4,63 @@
   box-sizing: border-box;
 }
 
+.termos-bloco {
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.termos-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 5px 5px 0 0;
+    transition: background-color 0.3s ease;
+}
+
+    .termos-header:hover {
+        background-color: #e0e0e0;
+    }
+
+.termos-titulo {
+    font-weight: bold;
+    font-size: 16px;
+    color: #333;
+}
+
+.termos-icon {
+    font-size: 14px;
+    color: #666;
+    transition: transform 0.3s ease;
+}
+
+.termos-content {
+    padding: 15px;
+    max-height: 400px;
+    overflow-y: auto;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #333;
+}
+
+    .termos-content h3 {
+        margin-top: 15px;
+        margin-bottom: 8px;
+        font-size: 15px;
+        color: #000;
+    }
+
+    .termos-content p {
+        margin-bottom: 10px;
+        text-align: justify;
+    }
+
 body {
   background: linear-gradient(to bottom, #242458, #3d3d7e);
   background-size: contain;

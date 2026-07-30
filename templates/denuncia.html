@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/icone.png') }}">
     <title>B.A.D.E.S.P - Denunciar</title>
@@ -83,6 +84,7 @@
         <div class="form-container">
             <h1>Enviar Denúncia</h1>
             <form id="form-denuncia" data-pin-url="{{ url_for('rotas.verificar_pin') }}" method="POST" autocomplete="off">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <input type="text" id='titulo' placeholder="Título da denúncia" required name="titulo" maxlength="60">
 
                 <div class="select-seta">

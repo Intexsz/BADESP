@@ -59,6 +59,7 @@
 
             <!-- FORM CADASTRO -->
             <form method="POST" action="/Turmas" autocomplete="off">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
                 <div class="input-container">
                     <input type="text" id="input-ano" name="ano" placeholder="Ano" required maxlength="1" pattern="\d">
@@ -95,6 +96,7 @@
 
                 <form action="/RemoverTurma" method="POST" style="margin:0;">
                     <input type="hidden" name="nome_turma_input" value="{{ turma }}">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                     <button type="submit" style="color:red; background:none; border:none; cursor:pointer;">
                         ❌ Remover
                     </button>

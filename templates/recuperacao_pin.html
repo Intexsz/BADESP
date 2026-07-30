@@ -63,6 +63,7 @@
             <p>Turmas disponiveis:</p>
             <br>
             <form id="alterar-pin-form" method="POST" autocomplete="off">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <div class="input-container select-seta">
                     <label for="select-turma" class="sr-only">Selecione a turma</label>
                     <select id="select-turma" name="turma" required>
@@ -106,7 +107,7 @@
             <br>
 
             <form method="POST" id="alterar-pin-form" autocomplete="off">
-
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <div class="input-container">
                     <input placeholder="PIN" type="text" name="pin" id="pin" required maxlength="6" minlength="6" pattern="\d{6}" title="O PIN deve ter 6 números">
                 </div>
