@@ -411,7 +411,7 @@ def denuncia():
         envolvidos = request.form.get('lista_envolvidos_final')
 
         if pessoa != 'any':
-            envio_email(buscar_email(pessoa), pegar_no_nome(session['user_id']), 'Marcar', None)
+            envio_email(pessoa, pegar_no_nome(session['user_id']), 'Marcar', None)
 
         create_report(titulo, tipo, descricao, session["user_id"], 'Em Análise.', quem, pessoa, envolvidos)
         

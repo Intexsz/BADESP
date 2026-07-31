@@ -202,29 +202,6 @@ def check_team(turma):
     finally:
         close(cursor, conn)
 
-
-def buscar_email(nome):
-    conn = None
-    cursor = None
-
-    try:
-        conn = get_db_connection()
-        cursor = conn.cursor(dictionary=True)
-
-        cursor.execute("""
-            SELECT email
-            FROM usuarios
-            WHERE nome = %s
-            LIMIT 1
-        """, (nome,))
-
-        r = cursor.fetchone()
-        return r["email"] if r else None
-
-    finally:
-        close(cursor, conn)
-
-
 def buscar_nome_secretaria():
     conn = None
     cursor = None
@@ -234,7 +211,7 @@ def buscar_nome_secretaria():
         cursor = conn.cursor(dictionary=True)
 
         cursor.execute("""
-            SELECT nome
+            SELECT nome, email
             FROM usuarios
             WHERE cargo = %s
             ORDER BY nome
@@ -255,7 +232,7 @@ def buscar_nome_professor():
         cursor = conn.cursor(dictionary=True)
 
         cursor.execute("""
-            SELECT nome
+            SELECT nome, email
             FROM usuarios
             WHERE cargo = %s
             ORDER BY nome
@@ -273,7 +250,7 @@ def buscar_nome_aluno(escola=None):
 
     try:
         query = """
-            SELECT turmano, nome
+            SELECT turmano, nome, email
             FROM usuarios
             WHERE cargo = %s
         """
@@ -299,7 +276,7 @@ def buscar_nome_aluno(escola=None):
             if turmano not in alunos:
                 alunos[turmano] = []
 
-            alunos[turmano].append(r["nome"])
+            alunos[turmano].append({"nome": r["nome"], "email": r["email"]})
 
         return alunos
 
@@ -688,7 +665,7 @@ def check_pin(user_id):
         close(cursor, conn)
 
 
-def novo_pin(pin, nome, turma):
+def novo_pin(pin, email, turma):
     conn = None
     cursor = None
 
@@ -699,8 +676,8 @@ def novo_pin(pin, nome, turma):
         cursor.execute("""
             UPDATE usuarios
             SET pin = %s
-            WHERE nome = %s AND turmano = %s
-        """, (pin, nome, turma))
+            WHERE email = %s AND turmano = %s
+        """, (pin, email, turma))
 
         conn.commit()
         return cursor.rowcount > 0
@@ -715,7 +692,7 @@ def novo_pin(pin, nome, turma):
         close(cursor, conn)
 
 
-def novo_pin_secretaria(pin, nome):
+def novo_pin_secretaria(pin, user_id):
     conn = None
     cursor = None
 
@@ -726,8 +703,8 @@ def novo_pin_secretaria(pin, nome):
         cursor.execute("""
             UPDATE usuarios
             SET pin = %s
-            WHERE nome = %s
-        """, (pin, nome))
+            WHERE id = %s
+        """, (pin, user_id))
 
         conn.commit()
         return cursor.rowcount > 0

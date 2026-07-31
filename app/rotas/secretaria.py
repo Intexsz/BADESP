@@ -275,14 +275,14 @@ def alunos():
 
         if request.method == "POST":
             pin = request.form.get("pin")
-            aluno = request.form.get("aluno")
             turma = request.form.get("turma")
+            email = request.form.get("email_aluno")
 
             if pin == '0' or pin == '000000':
                 flash("Não pode ser somente 0", "erro")
                 return redirect(url_for('rotasecretaria.alunos'))
             else:
-                novo_pin(pin, aluno, turma)
+                novo_pin(pin, email, turma)
                 flash("Pin atualizado com sucesso!", "sucesso")
                 return render_template("recuperacao_pin.html", alunos_por_turma=alunos_por_turma, tipo='Aluno', usuario=usuario)
         
@@ -307,11 +307,11 @@ def gestao():
         alunos_por_turma = buscar_nome_aluno(escola=usuario.get("escola"))
         
         if request.method == "POST":
-            gestao_nome = pegar_no_nome(session['user_id'])
+            gestão_id = session['user_id']
             pin = request.form.get("pin")
 
-            novo_pin_secretaria(pin, gestao_nome)
-            flash(f"Pin de {gestao_nome} atualizado com sucesso!", "sucesso")
+            novo_pin_secretaria(pin, gestão_id)
+            flash(f"Seu PIN foi atualizado com sucesso!", "sucesso")
             return render_template("recuperacao_pin.html", alunos_por_turma=alunos_por_turma, tipo='Gestão', usuario=usuario)
         
         return render_template("recuperacao_pin.html", alunos_por_turma=alunos_por_turma, tipo='Gestão', usuario=usuario)

@@ -241,19 +241,19 @@ function mostrarPessoas() {
     if (quem === "Professor") {
         pessoaDiv.style.display = "block";
         adicionarOpcao(pessoaSelect, "any", "Qualquer Professor");
-        professores.forEach(nome => adicionarOpcao(pessoaSelect, nome, nome));
+        // 'p' agora é um objeto {nome, email}
+        professores.forEach(p => adicionarOpcao(pessoaSelect, p.email, p.nome));
     }
     else if (quem === "Secretaria") {
         pessoaDiv.style.display = "block";
-        // CORRIGIDO: mudado de 'select' para 'pessoaSelect'
         adicionarOpcao(pessoaSelect, "any", "Qualquer Gestão");
-        secretarias.forEach(nome => adicionarOpcao(pessoaSelect, nome, nome));
+        secretarias.forEach(s => adicionarOpcao(pessoaSelect, s.email, s.nome));
     }
     else if (quem === "Ambos") {
         pessoaDiv.style.display = "none";
         adicionarOpcao(pessoaSelect, "any", "Qualquer Pessoa");
-        professores.forEach(nome => adicionarOpcao(pessoaSelect, nome, nome));
-        secretarias.forEach(nome => adicionarOpcao(pessoaSelect, nome, nome));
+        professores.forEach(p => adicionarOpcao(pessoaSelect, p.email, p.nome));
+        secretarias.forEach(s => adicionarOpcao(pessoaSelect, s.email, s.nome));
     }
     else {
         pessoaDiv.style.display = "none";
