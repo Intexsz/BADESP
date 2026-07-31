@@ -1,3 +1,7 @@
+const csrfToken = document
+    .querySelector('meta[name="csrf-token"]')
+    ?.getAttribute("content");
+
 document.addEventListener('DOMContentLoaded', () => {
     const btn = document.querySelector('.menu-btn');
     const sidebar = document.querySelector('.sidebar');
@@ -48,6 +52,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 const form = document.createElement("form");
                 form.method = "POST";
                 form.action = `/allow_detail`;
+
+                const csrf = document.createElement("input");
+                csrf.type = "hidden";
+                csrf.name = "csrf_token";
+                csrf.value = csrfToken;
+                form.appendChild(csrf);
 
                 const inputIdzin = document.createElement("input");
                 inputIdzin.type = "hidden";
