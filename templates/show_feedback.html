@@ -22,7 +22,7 @@
 
         {% for d in feedback %}
         <form action="/Feedback/Admin/Delete/{{ d['id'] }}" method="POST">
-
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <p><strong>Título:</strong> {{ d['titulo'] }}</p>
             <p><strong>Feedback:</strong> {{ d['feedback'] }}</p>
             <p><strong>Tipo:</strong> {{ d['tipo'] }}</p>

@@ -4,16 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='style/cadastro.css') }}">
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/icone.png') }}">
-    <script src="{{ url_for('static', filename='js/cadastroaluno.js') }}" defer></script>
     <title>B.A.D.E.S.P - Cadastro</title>
 </head>
+
 <body>
     <div class="container">
         <h1>Cadastro</h1>
 
         <form id="form-cadastro" method="POST" action="{{ url_for('rotas.cadastro2_pin') }}" autocomplete="off">
-
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <div class="input-container has-select">
                 <select name="escola" id="select-escola" required>
                     <option value="" disabled selected>Selecione a escola</option>
@@ -36,7 +35,7 @@
                 </select>
             </div>
 
-            <div class="input-container has-select oculto" id="container-turma">
+            <div class="input-container has-select container-turma-escondido" id="container-turma">
                 <select name="turma" id="select-turma" required>
                     <option value="" disabled selected>Selecione a turma</option>
                     {% for turma in turmas %}
@@ -52,21 +51,19 @@
                 <input placeholder="PIN" type="text" name="pin" id="pin" inputmode="numeric" required maxlength="6" minlength="6">
             </div>
             <div class="input-container">
-                <input placeholder="Confirmar PIN" type="text" name="confirmar" id="confirmar" inputmode="numeric" required maxlength="6" minlength="6">
+                <input placeholder="Confirmar PIN" type="text" name="confirmar" inputmode="numeric" id="confirmar" required maxlength="6" minlength="6">
             </div>
 
             <div class="Termos">
                 <input type="checkbox" id="checkbox-termos" required>
-                <p>
-                    Ao criar uma conta você concorda com os
-                    <button type="button" id="btn-abrir-termos" class="btn-link-termos">Termos e Condições</button>
-                </p>
+                <p>Ao criar uma conta você concorda com os <a href="javascript:void(0);" id="link-termos">Termos de Condições</a></p>
             </div>
 
-            <div id="termosBloco" class="termos-bloco oculto">
-                <div class="termos-header" id="header-termos">
+            <!-- Bloco expansível de Termos -->
+            <div id="termosBloco" class="termos-bloco termos-escondido" style="display: none;">
+                <div class="termos-header" id="termosHeader">
                     <span class="termos-titulo">Termos e Condições de Uso e Política de Privacidade</span>
-                    <span class="termos-icon" id="termos-icon">▼</span>
+                    <span class="termos-icon" id="termosIcon">▼</span>
                 </div>
                 <div class="termos-content">
                     <p>Bem-vindo ao B.A.D.E.S.P da Escola Estadual Francisco Pereira de Souza Filho</p>
@@ -136,5 +133,7 @@
             <button type="submit" class="submit-button">Confirmar</button>
         </form>
     </div>
+
+    <script src="{{ url_for('static', filename='js/cadastroaluno.js') }}"></script>
 </body>
 </html>
