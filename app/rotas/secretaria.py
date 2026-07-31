@@ -4,9 +4,13 @@ from app.database.db_usuario import get_role, pegar_no_nome, usuario_tem_pin, bu
 from app.database.db_denuncia import get_report_status, open_report_db, get_report, checar_envolvidos
 from app.database.db_denuncia import update_status, post_comment, check_coment,list_reports,list_approved
 from app.database.db_site import create_team, mostrar_teams, delete_team, check_teams
-from app.database.db_usuario import suspender_user, buscar_aluno_por_id, alterar_matricula_ativa, buscar_status_suspensao, remover_suspensao_user
+from app.database.db_usuario import suspender_user, buscar_aluno_por_id, alterar_matricula_ativa, buscar_status_suspensao, remover_suspensao_user, salvar_segredo_2fa, ativar_2fa_usuario
 from app.email.email_service import  enviar_email_suspensao, enviar_email_suspensao_removida_aluno, enviar_email_suspensao_removida_suspensor, enviar_email_acesso_encerrado
+import qrcode
+from datetime import datetime
+import pyotp
 import os
+import io
 
 app = Flask(__name__)
 secretaria = Blueprint('rotasecretaria', __name__)
@@ -40,6 +44,33 @@ def checar_stats(id):
             return 'Expirou'
     else:
         return False
+
+@secretaria.before_request
+def check_2af():
+    # Se o usuário já tem user_id (inclui Alunos e staff que já terminaram o 2FA), deixa passar
+    if "user_id" in session:
+        return
+
+    rotas_permitidas_2fa = [
+        "rotasecretaria.configurar_2fa",
+        "rotasecretaria.configurar_2fa2",
+        "rotasecretaria.qrcode_route",
+        "rotasecretaria.ativar_2fa_post",
+        "rotasecretaria.login_challenge",
+        "rotalogin.logout"
+    ]
+
+    # Se tem pre_user_id, significa que é Secretaria ou Professor no fluxo de 2FA
+    if "pre_user_id" in session:
+        if request.endpoint not in rotas_permitidas_2fa:
+            user_id = session.get("pre_user_id")
+            usuario = buscar_usuario(user_id)
+            
+            if usuario and usuario.get("two_factor_enabled") == 1:
+                return redirect(url_for("rotasecretaria.login_challenge"))
+            else:
+                return redirect(url_for("rotasecretaria.configurar_2fa"))
+
 
 @secretaria.route('/allow_detail', methods=['POST'])
 def allow_detail():
@@ -601,3 +632,125 @@ def alterar_escola_aluno_rota(id):
         return redirect(url_for("rotasecretaria.listar_alunos"))
     else:
         return "Erro ao alterar escola do aluno", 400
+
+@secretaria.route('/2fa/configurar', methods=['GET'])
+def configurar_2fa():
+    if "user_id" in session:
+        return redirect(url_for('rotas.inicio'))
+    if "pre_user_id" not in session:
+        return redirect(url_for("rotalogin.cadastro"))
+    
+    user_id = session.get("pre_user_id")
+
+    cargo = get_role(user_id)
+    if cargo == "Aluno":
+        session["user_id"] = user_id
+        session.pop("pre_user_id", None)
+        return redirect(url_for("rotas.inicio"))
+
+    usuario = buscar_usuario(user_id)
+
+    agora = datetime.now()
+    tempo_criacao = session.get('2fa_criacao')
+
+    need_new_secret = False
+
+    if not usuario.get('otp_secret') or not tempo_criacao:
+        need_new_secret = True
+    else:
+        diferenca = (agora - datetime.fromisoformat(tempo_criacao)).total_seconds()
+    if diferenca > 300:
+        need_new_secret = True
+
+    if need_new_secret:
+      new_secret = pyotp.random_base32()
+      salvar_segredo_2fa(user_id, new_secret)
+      usuario['otp_secret'] = new_secret
+      session['2fa_criacao'] = agora.isoformat()
+
+    return render_template('configurar_2fa.html', usuario=usuario)
+
+
+@secretaria.route('/2fa/qrcode')
+def qrcode_route():
+    if "user_id" in session:
+        return redirect(url_for('rotas.inicio'))
+    if "pre_user_id" not in session:
+        return redirect(url_for("rotalogin.cadastro"))
+    
+    user_id = session.get("pre_user_id")
+
+    cargo = get_role(user_id)
+    if cargo == "Aluno":
+        return redirect(url_for("rotas.inicio"))
+
+    usuario = buscar_usuario(user_id)
+    if not usuario or not usuario.get("otp_secret"):
+        return redirect(url_for('rotalogin.cadastro'))
+        
+    totp = pyotp.TOTP(usuario["otp_secret"])
+    uri = totp.provisioning_uri(name=usuario["email"], issuer_name="BADESP")
+    
+    img = qrcode.make(uri)
+    buf = io.BytesIO()
+    img.save(buf, format="PNG")
+    buf.seek(0)
+    
+    return buf.getvalue(), 200, {"Content-Type": "image/png"}
+
+@secretaria.route("/2fa/ativar", methods=["POST"])
+def ativar_2fa_post():
+  user_id = session.get("pre_user_id") or session.get("user_id")
+  if not user_id:
+    return redirect(url_for("rotalogin.cadastro"))
+
+  codigo_digitado = request.form.get("codigo")
+
+  usuario = buscar_usuario(user_id)
+  if not usuario or not usuario.get("otp_secret"):
+    return redirect(url_for("rotasecretaria.configurar_2fa"))
+
+  totp = pyotp.TOTP(usuario["otp_secret"])
+
+  if totp.verify(codigo_digitado):
+    ativar_2fa_usuario(user_id)
+
+    session["user_id"] = user_id
+    session.pop("pre_user_id", None)
+
+    return redirect(url_for("rotas.inicio"))
+  else:
+    print("Código 2FA inválido inserido pelo usuário.")
+    return redirect(url_for("rotasecretaria.configurar_2fa"))
+
+@secretaria.route('/login-challenge', methods=["GET", "POST"])
+def login_challenge():
+    if "user_id" in session:
+        return redirect(url_for('rotas.inicio'))
+    if "pre_user_id" not in session:
+        return redirect(url_for("rotalogin.cadastro"))
+    
+    user_id = session.get("pre_user_id")
+
+    cargo = get_role(user_id)
+    if cargo == "Aluno":
+        return redirect(url_for("rotas.inicio"))
+        
+    if request.method == "POST":
+        code = request.form.get("code")
+        usuario = buscar_usuario(user_id)
+        
+        if not usuario or not usuario.get("otp_secret"):
+            return redirect(url_for('rotalogin.cadastro'))
+            
+        totp = pyotp.TOTP(usuario["otp_secret"])
+        
+        if totp.verify(code):
+            session["user_id"] = user_id
+            session.pop("pre_user_id", None)
+            return redirect(url_for("rotas.inicio"))
+            
+        flash("Código incorreto. Tente novamente.", "erro")
+        return redirect(url_for('rotasecretaria.login_challenge'))
+        
+    return render_template("login_challenge.html")

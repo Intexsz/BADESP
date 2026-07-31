@@ -10,7 +10,7 @@ from flask import (
 )
 from google.oauth2 import id_token
 from google.auth.transport import requests
-from app.database.db_usuario import save_user
+from app.database.db_usuario import save_user, get_role
 import logging
 import os
 
@@ -71,8 +71,15 @@ def process_login(cargo):
 
         # Limpa qualquer sessão anterior e gera uma nova e segura
         session.clear()
-        session["user_id"] = user_data["id"]
         session["cargo"] = cargo
+
+        if get_role(user_data['id']) == "Aluno":
+            # sem 2 etapas
+            session["user_id"] = user_data["id"]
+        else:
+            # com 2 etapas
+            session["pre_user_id"] = user_data["id"]
+
         session.permanent = True
 
         return jsonify(

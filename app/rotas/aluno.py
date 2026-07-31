@@ -135,10 +135,12 @@ def cadastro2_pin():
 @rotas_bp.route('/')
 @rotas_bp.route('/Inicio', methods=['POST', 'GET'])
 def inicio():
-    if "user_id" not in session:
-        return redirect(url_for("rotalogin.cadastro"))
+    if "pre_user_id" in session and "user_id" not in session:
+        return redirect(url_for("rotasecretaria.configurar_2fa"))
 
-    if not usuario_tem_pin(session["user_id"]):
+    user_id = session.get("user_id") or session.get("pre_user_id")
+
+    if not usuario_tem_pin(user_id):
         return redirect(url_for("rotas.cadastro2_pin"))
     
     expire()

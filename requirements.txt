@@ -13,3 +13,7 @@ google-auth
 cryptography
 python-dotenv
 Flask-Limiter
+qrcode
+pyotp
+pillow
+io

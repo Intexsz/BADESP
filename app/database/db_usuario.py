@@ -65,6 +65,58 @@ def save_user(user_data):
     finally:
         close(cursor, conn)
 
+def salvar_segredo_2fa(user_id, otp_secret):
+    conn = None
+    cursor = None
+
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor(dictionary=True)
+
+        cursor.execute("""
+            UPDATE usuarios
+            SET otp_secret = %s
+            WHERE id = %s
+        """, (otp_secret, user_id))
+
+        conn.commit()
+        return cursor.rowcount > 0
+
+    except Exception as e:
+        if conn:
+            conn.rollback()
+        logging.error("Erro ao salvar segredo 2FA: %s", e, exc_info=True)
+        return False
+
+    finally:
+        close(cursor, conn)
+
+
+def ativar_2fa_usuario(user_id):
+    conn = None
+    cursor = None
+
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor(dictionary=True)
+
+        cursor.execute("""
+            UPDATE usuarios
+            SET two_factor_enabled = 1
+            WHERE id = %s
+        """, (user_id,))
+
+        conn.commit()
+        return cursor.rowcount > 0
+
+    except Exception as e:
+        if conn:
+            conn.rollback()
+        logging.error("Erro ao ativar 2FA: %s", e, exc_info=True)
+        return False
+
+    finally:
+        close(cursor, conn)
 
 def buscar_usuario(user_id):
     conn = None
@@ -75,13 +127,7 @@ def buscar_usuario(user_id):
         cursor = conn.cursor(dictionary=True)
 
         cursor.execute("""
-            SELECT id, nome, email, foto, cargo, pin,
-                   escola, ano, turma, turmano,
-                   matricula_ativa, suspenso, tipo_suspensao,
-                   motivo_suspensao, data_suspensao, fim_suspensao,
-                   suspenso_por_id, suspenso_por_nome, suspenso_por_email,
-                   email_fim_suspensao_enviado
-            FROM usuarios
+            SELECT * FROM usuarios
             WHERE id = %s
             LIMIT 1
         """, (user_id,))
@@ -90,7 +136,6 @@ def buscar_usuario(user_id):
 
     finally:
         close(cursor, conn)
-
 
 def get_role(user_id):
     conn = None
