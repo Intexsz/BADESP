@@ -13,8 +13,7 @@ from google.auth.transport import requests
 from app.database.db_usuario import save_user, get_role
 import logging
 import os
-
-from extensions import limiter, csrf
+from app.misc.extensions import limiter, csrf
 
 # Define estritamente o Blueprint (sem recriar o objeto Flask 'app')
 rota_login = Blueprint("rotalogin", __name__)

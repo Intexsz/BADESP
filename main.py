@@ -4,7 +4,7 @@ from app.rotas.aluno import rotas_bp
 from app.rotas.secretaria import secretaria
 from app.login.rota_login import rota_login 
 from dotenv import load_dotenv
-from extensions import limiter, csrf
+from app.misc.extensions import limiter, csrf
 from datetime import timedelta
 import os
 from flask_wtf.csrf import CSRFError

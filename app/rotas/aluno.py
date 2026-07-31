@@ -5,6 +5,7 @@ from app.database.db_denuncia import get_report_status, show_reports, delete_rep
 from app.database.db_usuario import usuario_tem_pin, cadastrar_pin, check_pin, buscar_email, pegar_no_nome, buscar_nome_aluno, buscar_status_suspensao, finalizar_suspensao_expirada
 from app.database.db_feedback import create_feedback, show_feedback, delete_feedback
 from app.database.db_site import mostrar_teams
+from app.misc.terms import termos
 from app.email.email_service import enviar_email_fim_suspensao
 from flask_cors import CORS
 from email.mime.text import MIMEText
@@ -129,7 +130,7 @@ def cadastro2_pin():
         flash("PIN e dados cadastrados com sucesso!", "success")
         return redirect(url_for('rotas.inicio'))
 
-    return render_template("cadastroaluno.html", cargo=cargo, turmas=mostrar_teams())
+    return render_template("cadastroaluno.html", cargo=cargo, turmas=mostrar_teams(), termos=termos())
 
 
 @rotas_bp.route('/')
