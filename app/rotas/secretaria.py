@@ -597,42 +597,6 @@ def reativar_matricula(id):
 
     return redirect(url_for("rotasecretaria.listar_alunos"))
 
-@secretaria.route('/Alunos/AlterarEscola/<id>', methods=['POST'])
-def alterar_escola_aluno_rota(id):
-    if "user_id" not in session:
-        return redirect(url_for('rotalogin.cadastro'))
-
-    if not usuario_tem_pin(session["user_id"]):
-        return redirect(url_for("rotas.cadastro2_pin"))
-
-    if not session.get("allow_folder"):
-        flash("Erro: Você não tem permissão para acessar esta pagina.", "error")
-        return redirect(url_for("rotas.inicio"))
-
-    cargo = get_role(session["user_id"])
-
-    # APENAS secretaria pode alterar escola de aluno
-    if cargo != "Secretaria":
-        flash("Erro: Você não tem permissão para acessar esta pagina.", "error")
-        return redirect(url_for("rotas.inicio"))
-
-    aluno = buscar_usuario(id)
-
-    if not aluno:
-        return "Aluno não encontrado", 404
-
-    nova_escola = request.form.get("nova_escola")
-
-    if not nova_escola:
-        return redirect(url_for("rotasecretaria.listar_alunos"))
-
-    sucesso = alterar_escola_aluno(id, nova_escola)
-
-    if sucesso:
-        return redirect(url_for("rotasecretaria.listar_alunos"))
-    else:
-        return "Erro ao alterar escola do aluno", 400
-
 @secretaria.route('/2fa/configurar', methods=['GET'])
 def configurar_2fa():
     if "user_id" in session:
@@ -754,3 +718,43 @@ def login_challenge():
         return redirect(url_for('rotasecretaria.login_challenge'))
         
     return render_template("login_challenge.html")
+
+
+# Não tenho certeza se está sendo usada
+"""
+@secretaria.route('/Alunos/AlterarEscola/<id>', methods=['POST'])
+def alterar_escola_aluno_rota(id):
+    if "user_id" not in session:
+        return redirect(url_for('rotalogin.cadastro'))
+
+    if not usuario_tem_pin(session["user_id"]):
+        return redirect(url_for("rotas.cadastro2_pin"))
+
+    if not session.get("allow_folder"):
+        flash("Erro: Você não tem permissão para acessar esta pagina.", "error")
+        return redirect(url_for("rotas.inicio"))
+
+    cargo = get_role(session["user_id"])
+
+    # APENAS secretaria pode alterar escola de aluno
+    if cargo != "Secretaria":
+        flash("Erro: Você não tem permissão para acessar esta pagina.", "error")
+        return redirect(url_for("rotas.inicio"))
+
+    aluno = buscar_usuario(id)
+
+    if not aluno:
+        return "Aluno não encontrado", 404
+
+    nova_escola = request.form.get("nova_escola")
+
+    if not nova_escola:
+        return redirect(url_for("rotasecretaria.listar_alunos"))
+
+    sucesso = alterar_escola_aluno(id, nova_escola)
+
+    if sucesso:
+        return redirect(url_for("rotasecretaria.listar_alunos"))
+    else:
+        return "Erro ao alterar escola do aluno", 400
+"""
