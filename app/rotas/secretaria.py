@@ -1,11 +1,12 @@
 from flask import Flask, session, redirect, url_for, Blueprint,render_template, request, flash
 from authlib.integrations.flask_client import OAuth
-from app.database.db_usuario import get_role, pegar_no_nome, usuario_tem_pin, buscar_nome_aluno, novo_pin_secretaria,buscar_usuario,listar_alunose, mudar_turma, check_team, novo_pin, alterar_escola_aluno
-from app.database.db_denuncia import get_report_status, open_report_db, get_report, checar_envolvidos
+from app.database.db_usuario import get_role, pegar_no_nome, usuario_tem_pin, buscar_nome_aluno, novo_pin_secretaria,buscar_usuario,listar_alunose, mudar_turma, check_team, novo_pin, contar_alunos_cadastrados, desativar_e_limpar_2fa
+from app.database.db_denuncia import get_report_status, open_report_db, get_report, checar_envolvidos, contar_denuncias_abertas, contar_denuncias_novas, contar_denuncias_resolvidas
 from app.database.db_denuncia import update_status, post_comment, check_coment,list_reports,list_approved
-from app.database.db_site import create_team, mostrar_teams, delete_team, check_teams
+from app.database.db_site import create_team, mostrar_teams, delete_team, check_teams, get_conn as expire_get_conn
 from app.database.db_usuario import suspender_user, buscar_aluno_por_id, alterar_matricula_ativa, buscar_status_suspensao, remover_suspensao_user, salvar_segredo_2fa, ativar_2fa_usuario
 from app.email.email_service import  enviar_email_suspensao, enviar_email_suspensao_removida_aluno, enviar_email_suspensao_removida_suspensor, enviar_email_acesso_encerrado
+from app.database.db_denuncia import expire
 import qrcode
 from datetime import datetime
 import pyotp
@@ -47,29 +48,28 @@ def checar_stats(id):
 
 @secretaria.before_request
 def check_2af():
-    # Se o usuário já tem user_id (inclui Alunos e staff que já terminaram o 2FA), deixa passar
-    if "user_id" in session:
-        return
+  if 'user_id' in session:
+    return
 
-    rotas_permitidas_2fa = [
-        "rotasecretaria.configurar_2fa",
-        "rotasecretaria.configurar_2fa2",
-        "rotasecretaria.qrcode_route",
-        "rotasecretaria.ativar_2fa_post",
-        "rotasecretaria.login_challenge",
-        "rotalogin.logout"
-    ]
+  rotas_permitidas_2fa = [
+      'rotasecretaria.configurar_2fa',
+      'rotasecretaria.configurar_2fa2',
+      'rotasecretaria.reconfigurar_2fa',
+      'rotasecretaria.qrcode_route',
+      'rotasecretaria.ativar_2fa_post',
+      'rotasecretaria.login_challenge',
+      'rotalogin.logout',
+  ]
 
-    # Se tem pre_user_id, significa que é Secretaria ou Professor no fluxo de 2FA
-    if "pre_user_id" in session:
-        if request.endpoint not in rotas_permitidas_2fa:
-            user_id = session.get("pre_user_id")
-            usuario = buscar_usuario(user_id)
-            
-            if usuario and usuario.get("two_factor_enabled") == 1:
-                return redirect(url_for("rotasecretaria.login_challenge"))
-            else:
-                return redirect(url_for("rotasecretaria.configurar_2fa"))
+  if 'pre_user_id' in session:
+    if request.endpoint not in rotas_permitidas_2fa:
+      user_id = session.get('pre_user_id')
+      usuario = buscar_usuario(user_id)
+
+      if usuario and usuario.get('two_factor_enabled') == 1:
+        return redirect(url_for('rotasecretaria.login_challenge'))
+      else:
+        return redirect(url_for('rotasecretaria.configurar_2fa'))
 
 
 @secretaria.route('/allow_detail', methods=['POST'])
@@ -599,41 +599,89 @@ def reativar_matricula(id):
 
 @secretaria.route('/2fa/configurar', methods=['GET'])
 def configurar_2fa():
-    if "user_id" in session:
+    if 'user_id' in session:
         return redirect(url_for('rotas.inicio'))
-    if "pre_user_id" not in session:
-        return redirect(url_for("rotalogin.cadastro"))
+    if 'pre_user_id' not in session:
+        return redirect(url_for('rotalogin.cadastro'))
     
-    user_id = session.get("pre_user_id")
-
+    user_id = session.get('pre_user_id')
     cargo = get_role(user_id)
-    if cargo == "Aluno":
-        session["user_id"] = user_id
-        session.pop("pre_user_id", None)
-        return redirect(url_for("rotas.inicio"))
+    if cargo == 'Aluno':
+        session['user_id'] = user_id
+        session.pop('pre_user_id', None)
+        return redirect(url_for('rotas.inicio'))
 
     usuario = buscar_usuario(user_id)
+    if not usuario:
+        return redirect(url_for('rotalogin.cadastro'))
 
-    agora = datetime.now()
-    tempo_criacao = session.get('2fa_criacao')
+    val_2fa = usuario.get('two_factor_enabled')
+    is_ativo = False
+    if val_2fa is not None:
+        if isinstance(val_2fa, bytes):
+            is_ativo = val_2fa != b'\x00'
+        else:
+            is_ativo = bool(val_2fa) and val_2fa not in (0, '0', 'False', 'false')
 
-    need_new_secret = False
+    if is_ativo:
+        if not session.get('permitir_reconfiguracao'):
+            return redirect(url_for('rotasecretaria.login_challenge'))
 
-    if not usuario.get('otp_secret') or not tempo_criacao:
-        need_new_secret = True
-    else:
-        diferenca = (agora - datetime.fromisoformat(tempo_criacao)).total_seconds()
-    if diferenca > 300:
-        need_new_secret = True
+    session.pop('permitir_reconfiguracao', None)
 
-    if need_new_secret:
-      new_secret = pyotp.random_base32()
-      salvar_segredo_2fa(user_id, new_secret)
-      usuario['otp_secret'] = new_secret
-      session['2fa_criacao'] = agora.isoformat()
+    if not usuario.get('otp_secret'):
+        new_secret = pyotp.random_base32()
+        salvar_segredo_2fa(user_id, new_secret)
+        usuario['otp_secret'] = new_secret
 
     return render_template('configurar_2fa.html', usuario=usuario)
 
+
+@secretaria.route('/2fa/reconfigurar', methods=['GET'])
+def reconfigurar_2fa():
+  user_id = session.get('pre_user_id') or session.get('user_id')
+
+  if not user_id:
+    return redirect(url_for('rotalogin.cadastro'))
+
+  desativar_e_limpar_2fa(user_id)
+
+  session['permitir_reconfiguracao'] = True
+  session['pre_user_id'] = user_id
+
+  return redirect(url_for('rotasecretaria.configurar_2fa'))
+
+
+@secretaria.route('/login-challenge', methods=['GET', 'POST'])
+def login_challenge():
+  if 'user_id' in session:
+    return redirect(url_for('rotas.inicio'))
+  if 'pre_user_id' not in session:
+    return redirect(url_for('rotalogin.cadastro'))
+
+  user_id = session.get('pre_user_id')
+
+  cargo = get_role(user_id)
+  if cargo == 'Aluno':
+    return redirect(url_for('rotas.inicio'))
+
+  usuario = buscar_usuario(user_id)
+  if not usuario or not usuario.get('otp_secret'):
+    return redirect(url_for('rotalogin.cadastro'))
+
+  if request.method == 'POST':
+    code = request.form.get('code')
+    totp = pyotp.TOTP(usuario['otp_secret'])
+
+    if totp.verify(code):
+      session['user_id'] = user_id
+      session.pop('pre_user_id', None)
+      return redirect(url_for('rotas.inicio'))
+
+    flash('Código incorreto. Tente novamente.', 'erro')
+    return redirect(url_for('rotasecretaria.login_challenge'))
+
+  return render_template('login_challenge.html')
 
 @secretaria.route('/2fa/qrcode')
 def qrcode_route():
@@ -681,46 +729,15 @@ def ativar_2fa_post():
 
     session["user_id"] = user_id
     session.pop("pre_user_id", None)
+    flash("Verificação de 2 etapas concluida com sucesso!", "sucesso")
 
     return redirect(url_for("rotas.inicio"))
   else:
-    print("Código 2FA inválido inserido pelo usuário.")
+    flash("Código 2FA inválido inserido pelo usuário.", "erro")
     return redirect(url_for("rotasecretaria.configurar_2fa"))
 
-@secretaria.route('/login-challenge', methods=["GET", "POST"])
-def login_challenge():
-    if "user_id" in session:
-        return redirect(url_for('rotas.inicio'))
-    if "pre_user_id" not in session:
-        return redirect(url_for("rotalogin.cadastro"))
-    
-    user_id = session.get("pre_user_id")
 
-    cargo = get_role(user_id)
-    if cargo == "Aluno":
-        return redirect(url_for("rotas.inicio"))
-        
-    if request.method == "POST":
-        code = request.form.get("code")
-        usuario = buscar_usuario(user_id)
-        
-        if not usuario or not usuario.get("otp_secret"):
-            return redirect(url_for('rotalogin.cadastro'))
-            
-        totp = pyotp.TOTP(usuario["otp_secret"])
-        
-        if totp.verify(code):
-            session["user_id"] = user_id
-            session.pop("pre_user_id", None)
-            return redirect(url_for("rotas.inicio"))
-            
-        flash("Código incorreto. Tente novamente.", "erro")
-        return redirect(url_for('rotasecretaria.login_challenge'))
-        
-    return render_template("login_challenge.html")
-
-
-# Não tenho certeza se está sendo usada
+# Não tenho certeza se está sendo usada ou se será usado
 """
 @secretaria.route('/Alunos/AlterarEscola/<id>', methods=['POST'])
 def alterar_escola_aluno_rota(id):

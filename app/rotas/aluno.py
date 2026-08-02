@@ -1,7 +1,7 @@
 from flask import Flask, request, render_template, session, redirect, url_for, Blueprint, make_response, jsonify, flash
 from authlib.integrations.flask_client import OAuth
-from app.database.db_usuario import get_role, buscar_usuario, buscar_nome_secretaria, buscar_nome_professor
-from app.database.db_denuncia import get_report_status, show_reports, delete_reports, create_report, expire, check_reports
+from app.database.db_usuario import get_role, buscar_usuario, buscar_nome_secretaria, buscar_nome_professor, contar_alunos_cadastrados
+from app.database.db_denuncia import get_report_status, show_reports, delete_reports, create_report, expire, check_reports, contar_denuncias_abertas, contar_denuncias_novas, contar_denuncias_resolvidas
 from app.database.db_usuario import usuario_tem_pin, cadastrar_pin, check_pin, pegar_no_nome, buscar_nome_aluno, buscar_status_suspensao, finalizar_suspensao_expirada
 from app.database.db_feedback import create_feedback, show_feedback, delete_feedback
 from app.database.db_site import mostrar_teams
@@ -169,7 +169,14 @@ def inicio():
         reports = show_reports(session["user_id"], cargo, 'Tudo')
 
     if cargo in ("Secretaria", "Professor"):
-        return render_template("iniciosecretaria.html", usuario=usuario)
+        escola = usuario.get("escola", "")
+        stats = {
+            'abertas': contar_denuncias_abertas(escola),
+            'novas': contar_denuncias_novas(escola),
+            'resolvidas': contar_denuncias_resolvidas(escola),
+            'alunos': contar_alunos_cadastrados(escola)
+        }
+        return render_template("iniciosecretaria.html", usuario=usuario, stats=stats)
     elif cargo in ('Aluno', 'Admin'):
         return render_template("inicio.html", reports=reports, usuario=usuario, filtro=filtro)
 

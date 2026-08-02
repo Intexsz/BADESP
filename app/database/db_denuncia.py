@@ -92,7 +92,7 @@ def IA(frase):
 
 # aqui ira criar a denuncia
 def create_report(titulo, tipo, descricao, user_id, status, cargo, especifico, envolvidos):
-    campos_obrigatorios = [titulo, tipo, descricao, user_id, status, cargo, especifico]
+    campos_obrigatorios = [titulo, tipo, descricao, user_id, status, cargo]
     
     if any(c is None for c in campos_obrigatorios) or not all(str(c).strip() for c in campos_obrigatorios):
         flash("Erro ao fazer denúncia. Preencha todos os campos obrigatórios.", "error")
@@ -369,12 +369,15 @@ def check_reports(user_id):
     r = cursor.fetchone()
     conn.close()
 
+    
     if not r:
         return True
-
-    ultima = datetime.strptime(r["data"], "%H:%M %d/%m/%Y")
-    #return datetime.now() > ultima + timedelta(minutes=5)
-    return True
+    # Se for desenvolvimento ele ja retorna true se não ele retorna os 5 minutos de cada denuncia
+    if os.getenv("FLASK_DEBUG") == "1":
+        return True
+    else:
+        ultima = datetime.strptime(r["data"], "%H:%M %d/%m/%Y")
+        return datetime.now() > ultima + timedelta(minutes=5)
 
 ######----------######
 
@@ -582,4 +585,83 @@ def checar_envolvidos(id_denuncia):
 
     return [x.strip() for x in r["envolvidos"].split(",")]
 
-        
+
+def contar_denuncias_abertas(escola):
+    conn = None
+    cursor = None
+
+    try:
+        conn = get_conn_denuncia()
+        cursor = conn.cursor(dictionary=True)
+
+        cursor.execute("""
+            SELECT COUNT(*) as total 
+            FROM denuncias 
+            WHERE status = 'Visto.' AND escola = %s
+        """, (escola,))
+
+        resultado = cursor.fetchone()
+        return resultado['total'] if resultado else 0
+
+    except Exception:
+        return 0
+
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
+
+
+def contar_denuncias_novas(escola):
+    conn = None
+    cursor = None
+
+    try:
+        conn = get_conn_denuncia()
+        cursor = conn.cursor(dictionary=True)
+
+        cursor.execute("""
+            SELECT COUNT(*) as total 
+            FROM denuncias 
+            WHERE status = 'Em Análise.' AND escola = %s
+        """, (escola,))
+
+        resultado = cursor.fetchone()
+        return resultado['total'] if resultado else 0
+
+    except Exception:
+        return 0
+
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
+
+
+def contar_denuncias_resolvidas(escola):
+    conn = None
+    cursor = None
+
+    try:
+        conn = get_conn_denuncia()
+        cursor = conn.cursor(dictionary=True)
+
+        cursor.execute("""
+            SELECT COUNT(*) as total 
+            FROM denuncias 
+            WHERE (status = 'Aprovado.' OR status = 'Arquivado.' OR status = 'Recusado.') AND escola = %s
+        """, (escola,))
+
+        resultado = cursor.fetchone()
+        return resultado['total'] if resultado else 0
+
+    except Exception:
+        return 0
+
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()

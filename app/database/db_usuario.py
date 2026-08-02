@@ -747,10 +747,6 @@ def alterar_escola_aluno(aluno_id, nova_escola):
 
 
 def buscar_dados_basicos_usuario(user_id):
-    """
-    Use esta função quando precisar de vários dados do usuário de uma vez,
-    em vez de chamar get_role(), pegar_no_nome(), check_pin() separadamente.
-    """
     conn = None
     cursor = None
 
@@ -771,3 +767,61 @@ def buscar_dados_basicos_usuario(user_id):
 
     finally:
         close(cursor, conn)
+
+# Conta quantos alunos estão cadastrado e com matricula ativa
+def contar_alunos_cadastrados(escola=None):
+    conn = None
+    cursor = None
+
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor(dictionary=True)
+
+        if escola:
+            cursor.execute("""
+                SELECT COUNT(*) as total 
+                FROM usuarios 
+                WHERE cargo = 'Aluno' AND escola = %s AND matricula_ativa = 1
+            """, (escola,))
+        else:
+            cursor.execute("""
+                SELECT COUNT(*) as total 
+                FROM usuarios 
+                WHERE cargo = 'Aluno' AND matricula_ativa = 1
+            """)
+
+        resultado = cursor.fetchone()
+        return resultado['total'] if resultado else 0
+
+    except Exception:
+        return 0
+
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
+
+def desativar_e_limpar_2fa(user_id):
+  conn = None
+  cursor = None
+  try:
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute(
+        """
+            UPDATE usuarios
+            SET two_factor_enabled = 0, otp_secret = NULL
+            WHERE id = %s
+        """,
+        (user_id,),
+    )
+    conn.commit()
+    return cursor.rowcount > 0
+  except Exception as e:
+    if conn:
+      conn.rollback()
+    logging.error("Erro ao limpar 2FA: %s", e, exc_info=True)
+    return False
+  finally:
+    close(cursor, conn)

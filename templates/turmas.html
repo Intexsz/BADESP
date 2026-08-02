@@ -83,7 +83,7 @@
             {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
             {% for categoria, mensagem in messages %}
-            <p style="color:red;">{{ mensagem }}</p>
+            <p style="color:white;">{{ mensagem }}</p>
             <br>
             {% endfor %}
             {% endif %}
@@ -97,8 +97,8 @@
                 <form action="/RemoverTurma" method="POST" style="margin:0;">
                     <input type="hidden" name="nome_turma_input" value="{{ turma }}">
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                    <button type="submit" style="color:red; background:none; border:none; cursor:pointer;">
-                        ❌ Remover
+                    <button type="submit" style="color:black; font-size:15px; background:white; border:none; padding:5px; border-radius:10px; cursor:pointer;">
+                        <b>❌ Remover</b>
                     </button>
                 </form>
             </div>
