@@ -16,7 +16,6 @@ O BADESP (Base de Atendimento e Denúncias Escolares de São Paulo) é uma plata
 
 # Alunos
 - Cadastro de denúncias
-- Upload de anexo
 - Consulta de denúncias
 - Histórico de ocorrências
 - Enviar para alguém em especifico
@@ -84,7 +83,3 @@ ou
 http://localhost:5000/login
 ```
 **Atenção:** Para fazer Login no site, requer uma conta institucional google(preferência estadual)
-
-## Status do Projeto
-
-Em desenvolvimento.
