@@ -60,9 +60,6 @@ Sua conta foi suspensa no sistema B.A.D.E.S.P.
 Motivo:
 {aluno["motivo_suspensao"]}
 
-Quem suspendeu:
-{aluno["suspenso_por_nome"]}
-
 Horário da suspensão:
 {formatar_data(aluno["data_suspensao"])}
 

@@ -6,8 +6,8 @@ from app.login.rota_login import rota_login
 from dotenv import load_dotenv
 from app.misc.extensions import limiter, csrf
 from datetime import timedelta
-import os
 from flask_wtf.csrf import CSRFError
+import os
 
 load_dotenv()
 
