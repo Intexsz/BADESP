@@ -2,306 +2,250 @@
 <html lang="pt-br">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>B.A.D.E.S.P - Alunos Cadastrados</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='aluno.css') }}">
-  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icone.png') }}">
+    <meta charset="UTF-8" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>B.A.D.E.S.P - Alunos Cadastrados</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/aluno.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/icone.png') }}">
 
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=account_circle" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=account_circle" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-  <header class="Cabecalho">
     <header class="cabecalho glass">
-      <button class="menu-btn"><span class="material-icons">menu</span></button>
-      <h1 class="titulo">B.A.D.E.S.P</h1>
-      <div class="perfil">
-          {% if usuario %}
-          <p>Bem vindo: {{ usuario['nome'] }}!</p>
-          {% elif usuario2 %}
-          <p>Bem vindo: {{ usuario2['nome'] }}!</p>
-          {% elif nome %}
-          <p>Bem vindo: {{ nome }}!</p>
-          {% else %}
-          <p>Bem vindo: Convidado!</p>
-          {% endif %}
-      </div>
+        <button class="menu-btn"><span class="material-icons">menu</span></button>
+        <h1 class="titulo">B.A.D.E.S.P</h1>
+        <div class="perfil">
+            {% if usuario %}
+            <p>Bem vindo: {{ usuario['nome'] }}!</p>
+            {% elif usuario2 %}
+            <p>Bem vindo: {{ usuario2['nome'] }}!</p>
+            {% elif nome %}
+            <p>Bem vindo: {{ nome }}!</p>
+            {% else %}
+            <p>Bem vindo: Convidado!</p>
+            {% endif %}
+        </div>
     </header>
 
     <nav class="sidebar glass sobreposto">
-      <ul>
-        <li><a href="/Inicio"><span class="material-icons">home</span> Início</a></li>
-        <li><a href="/Ajuda"><span class="material-icons">help_outline</span> Ajuda</a></li>
-        <li><a href="/MudarPIN"><span class="material-icons">pin</span> Mudar PIN</a></li>
-        <li><a href="/Turmas"><span class="material-icons">groups</span> Turmas</a></li>
-        <li><a href="/Feedback"><span class="material-icons">campaign</span> Feedback</a></li>
-
-        <li><a href="/Logout" class="logout" onclick="confirmarLogout(event)"><span class="material-icons">logout</span>
-            Deslogar</a></li>
-      </ul>
+        <ul>
+            <li><a href="/Inicio"><span class="material-icons">home</span> Início</a></li>
+            <li><a href="/Ajuda"><span class="material-icons">help_outline</span> Ajuda</a></li>
+            <li><a href="/MudarPIN"><span class="material-icons">pin</span> Mudar PIN</a></li>
+            <li><a href="/Turmas"><span class="material-icons">groups</span> Turmas</a></li>
+            <li><a href="/Feedback"><span class="material-icons">campaign</span> Feedback</a></li>
+            <li>
+                <a href="/Logout" class="logout" id="btn-logout">
+                    <span class="material-icons">logout</span>
+                    Deslogar
+                </a>
+            </li>
+        </ul>
     </nav>
 
     <main>
-      <form method="get" action="{{ url_for('rotasecretaria.listar_alunos') }}" class="Filtro">
-        <select name="Ano" onchange="this.form.submit()">
-          <option value="Todos" {% if filtro_ano=='Todos' %}selected{% endif %}>Todos</option>
-          {% for turma in turmas %}
-          {% set ano = turma.split('°')[0] %}
-          <option value="{{ ano }}" {% if filtro_ano==ano %}selected{% endif %}>
-            {{ ano }}
-            {% if ano in ['4','5','6', '7', '8', '9'] %}
-            EF
-            {% elif ano in ['1', '2', '3'] %}
-            EM
-            {% endif %}
-          </option>
-          {% endfor %}
-        </select>
+        <form method="get" action="{{ url_for('rotasecretaria.listar_alunos') }}" class="Filtro">
+            <div class="filtros-selects">
+                <select name="Ano" class="auto-submit">
+                    <option value="Todos" {% if filtro_ano=='Todos' %}selected{% endif %}>Todos</option>
+                    {% for turma in turmas %}
+                    {% set ano = turma.split('°')[0] %}
+                    <option value="{{ ano }}" {% if filtro_ano==ano %}selected{% endif %}>
+                        {{ ano }}
+                        {% if ano in ['4','5','6', '7', '8', '9'] %}
+                        EF
+                        {% elif ano in ['1', '2', '3'] %}
+                        EM
+                        {% endif %}
+                    </option>
+                    {% endfor %}
+                </select>
 
-        <select name="Serie" {% if filtro_ano=='Todos' %}disabled{% endif %} onchange="this.form.submit()"
-          class="Filtro">
-          <option value="Todos" {% if filtro_serie=='Todos' %}selected{% endif %}>Todos</option>
+                <select name="Serie" {% if filtro_ano=='Todos' %}disabled{% endif %} class="Filtro auto-submit">
+                    <option value="Todos" {% if filtro_serie=='Todos' %}selected{% endif %}>Todos</option>
 
-          {% set series_exibidas = [] %}
+                    {% set series_exibidas = [] %}
 
-          {% for turma in turmas %}
-          {% set serie = turma.split('°')[1] %}
+                    {% for turma in turmas %}
+                    {% set serie = turma.split('°')[1] %}
 
-          {# 2. Só cria a <option> se a letra ainda não estiver na lista #}
-            {% if serie not in series_exibidas %}
-          <option value="{{ serie }}" {% if filtro_serie==serie %}selected{% endif %}>{{ serie }}</option>
+                    {% if serie not in series_exibidas %}
+                    <option value="{{ serie }}" {% if filtro_serie==serie %}selected{% endif %}>{{ serie }}</option>
 
-          {# 3. Adicionamos a letra na lista para não repetir no próximo giro do loop #}
-          {% set _ = series_exibidas.append(serie) %}
-          {% endif %}
-          {% endfor %}
-        </select>
-      </form>
-
-      <div class="content">
-        <div class="container">
-          <h2>Alunos Cadastrados</h2>
-
-          <form action="{{ url_for('rotasecretaria.alterar_todas_turmas') }}" method="POST">
-
-            <div style="display: flex; justify-content: flex-end; margin-bottom: 10px;">
-              <button onclick="alert('Alterações feitas com sucesso!')" type="submit" class="clicar"
-                style="background-color: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
-                <span class="material-icons" style="vertical-align: middle; font-size: 18px;">save</span> Salvar Todas
-                as Alterações
-              </button>
+                    {% set _ = series_exibidas.append(serie) %}
+                    {% endif %}
+                    {% endfor %}
+                </select>
             </div>
 
-            <table id="tabelaAlunos">
-              <div class="pagination" style="align-items: center; text-align: center;">
-                {% set current_page = page %}
-                {% if current_page < 1 %}{% set current_page=1 %} {% elif current_page> total_pages %}{% set
-                  current_page = total_pages %}{% endif %}
+            <!-- CHECKBOX DE INCLUIR SUSPENSOS/ENCERRADOS -->
+            <div class="filtro-checkbox" style="margin-top: 12px; display: flex; align-items: center; gap: 8px;">
+                <input type="checkbox"
+                       id="incluir_inativos"
+                       name="incluir_inativos"
+                       value="1"
+                       class="auto-submit"
+                       {% if incluir_inativos %}checked{% endif %}
+                       style="cursor: pointer; width: 16px; height: 16px;">
+                <label for="incluir_inativos" style="cursor: pointer; color: white; font-size: 14px; user-select: none;">
+                    Incluir alunos suspensos/encerrados
+                </label>
+            </div>
+        </form>
 
-                  {% if current_page > 1 %}
-                  <a class="clicar" href="{{ url_for('rotasecretaria.listar_alunos', page=current_page-1) }}">&laquo;
-                    Anterior</a>
-                  {% endif %}
+        <div class="content">
+            <div class="container">
+                <h2>Alunos Cadastrados</h2>
 
-                  <span style="color: white; " class="Páginaa">Página {{ current_page }} de {{ total_pages }}</span>
+                <form action="{{ url_for('rotasecretaria.alterar_todas_turmas') }}" method="POST">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
-                  {% if current_page < total_pages %} <a class="clicar"
-                    href="{{ url_for('rotasecretaria.listar_alunos', page=current_page+1) }}">Próxima &raquo;</a>
-                    {% endif %}
-              </div>
+                    <div style="display: flex; justify-content: flex-end; margin-bottom: 10px;">
+                        <button type="submit" id="btn-salvar-todas" class="clicar"
+                                style="background-color: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                            <span class="material-icons" style="vertical-align: middle; font-size: 18px;">save</span> Salvar Todas as Alterações
+                        </button>
+                    </div>
 
-              <thead>
-                <tr>
-                  <th>Nome</th>
-                  <th>Email</th>
-                  <th>Ano e Série</th>
-                  <th>Total Denúncias</th>
-                  <th>Denúncias Aprovadas</th>
-                  <th>Alterar Ano</th>
-                  <th>Alterar Turma</th>
-                  <th>Ações</th>
-                </tr>
-              </thead>
+                    <table id="tabelaAlunos">
+                        <div class="pagination" style="align-items: center; text-align: center;">
+                            {% set current_page = page %}
+                            {% if current_page < 1 %}{% set current_page=1 %} {% elif current_page> total_pages %}{% set
+                            current_page = total_pages %}{% endif %}
 
-              <tbody>
-                {% for d in alunos_por_turma %}
-                {% if nome != "📂Denúncia em aberto📂" %}
-                <tr onclick="verificarPin({{ d['id'] }})"
-                  style="cursor:pointer; color: {{ cor }}; font-family: Arial, sans-serif;">
-                  <td>
-                    {{d['nome'].split(' ')[0]}}
-                    {% if not d['nome'].split(' ')[-1] == d['nome'].split(' ')[-2] %} {{d['nome'].split(' ')[-2]}} {%
-                    endif %}
-                    {% if not d['nome'].split(' ')[0] == d['nome'].split(' ')[-1] %} {{d['nome'].split(' ')[-1]}} {%
-                    endif %}
-                  </td>
-                  <td>{{ d['email'] }}</td>
-                  <td>{{ d['ano'] }}°{{ d['turma'] }}</td>
-                  <td>{{ d['total'] }}</td>
-                  <td>{{ d['aprov'] }}</td>
+                            {% if current_page > 1 %}
+                            <a class="clicar" href="{{ url_for('rotasecretaria.listar_alunos', page=current_page-1, incluir_inativos=request.args.get('incluir_inativos', '')) }}">
+                                &laquo; Anterior
+                            </a>
+                            {% endif %}
 
-                  <input type="hidden" name="aluno_ids" value="{{ d['id'] }}">
+                            <span style="color: white; " class="Páginaa">Página {{ current_page }} de {{ total_pages }}</span>
 
-                  <td>
-                    <select name="lista_anos" class="select-ano" onchange="atualizarSeries(this)">
-                      <option value="{{ d['ano'] }}">{{ d['ano'] }} (Atual)</option>
-                      {% set anos_exibidos = [] %}
-                      {% for turma in turmas %}
-                      {% set ano_loop = turma.split('°')[0] %}
-                      {% if ano_loop not in anos_exibidos %}
-                      <option value="{{ ano_loop }}">{{ ano_loop }}</option>
-                      {% set _ = anos_exibidos.append(ano_loop) %}
-                      {% endif %}
-                      {% endfor %}
-                    </select>
-                  </td>
+                            {% if current_page < total_pages %}
+                            <a class="clicar" href="{{ url_for('rotasecretaria.listar_alunos', page=current_page+1, incluir_inativos=request.args.get('incluir_inativos', '')) }}">Próxima &raquo;</a>
+                            {% endif %}
+                        </div>
 
-                  <td>
-                    <select name="lista_turmas" class="select-serie">
-                      <option value="{{ d['turma'] }}">{{ d['turma'] }} (Atual)</option>
-                      {% for turma in turmas %}
-                      {% set ano_t = turma.split('°')[0] %}
-                      {% set serie_t = turma.split('°')[1] %}
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>Ano e Série</th>
+                                <th>Total Denúncias</th>
+                                <th>Denúncias Aprovadas</th>
+                                <th>Alterar Ano</th>
+                                <th>Alterar Turma</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
 
-                      {# Criamos TODOS os options, mas colocamos o ANO numa classe secreta #}
-                      <option value="{{ serie_t }}" data-ano="{{ ano_t }}" style="display: none;">
-                        {{ serie_t }}
-                      </option>
-                      {% endfor %}
-                    </select>
-                  </td>
+                        <tbody>
+                            {% for d in alunos_por_turma %}
+                            {% if nome != "📂Denúncia em aberto📂" %}
 
-<td onclick="event.stopPropagation();">
-  <div class="acoes-aluno">
+                            <!-- Verifica se o aluno está suspenso ou com matrícula inativa -->
+                            {% set is_inativo = (d['matricula_ativa'] == 0 or d['suspenso']) %}
 
-    {% if d['matricula_ativa'] == 0 %}
+                            <tr class="{% if is_inativo %}aluno-inativo{% endif %}" style="cursor:pointer; font-family: Arial, sans-serif;">
+                                <td>
+                                    {{d['nome'].split(' ')[0]}}
+                                    {% if not d['nome'].split(' ')[-1] == d['nome'].split(' ')[-2] %} {{d['nome'].split(' ')[-2]}} {% endif %}
+                                    {% if not d['nome'].split(' ')[0] == d['nome'].split(' ')[-1] %} {{d['nome'].split(' ')[-1]}} {% endif %}
+                                </td>
+                                <td>{{ d['email'] }}</td>
+                                <td>{{ d['ano'] }}°{{ d['turma'] }}</td>
+                                <td>{{ d['total'] }}</td>
+                                <td>{{ d['aprov'] }}</td>
 
-      <button type="submit"
-        formaction="{{ url_for('rotasecretaria.reativar_matricula', id=d['id']) }}"
-        formmethod="POST"
-        onclick="event.stopPropagation(); return confirm('Deseja reativar a matrícula deste aluno?');"
-        class="btn-acao btn-reativar">
-        ✅ Reativar
-      </button>
+                                <input type="hidden" name="aluno_ids" value="{{ d['id'] }}">
 
-    {% elif d['suspenso'] %}
+                                <td>
+                                    <select name="lista_anos" class="select-ano">
+                                        <option value="{{ d['ano'] }}">{{ d['ano'] }} (Atual)</option>
+                                        {% set anos_exibidos = [] %}
+                                        {% for turma in turmas %}
+                                        {% set ano_loop = turma.split('°')[0] %}
+                                        {% if ano_loop not in anos_exibidos %}
+                                        <option value="{{ ano_loop }}">{{ ano_loop }}</option>
+                                        {% set _ = anos_exibidos.append(ano_loop) %}
+                                        {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                </td>
 
-      <button type="submit"
-        formaction="{{ url_for('rotasecretaria.remover_suspensao', id=d['id']) }}"
-        formmethod="POST"
-        onclick="event.stopPropagation(); return confirm('Deseja remover a suspensão deste aluno?');"
-        class="btn-acao btn-remover">
-        ✅ Remover
-      </button>
+                                <td>
+                                    <select name="lista_turmas" class="select-serie">
+                                        <option value="{{ d['turma'] }}">{{ d['turma'] }} (Atual)</option>
+                                        {% for turma in turmas %}
+                                        {% set ano_t = turma.split('°')[0] %}
+                                        {% set serie_t = turma.split('°')[1] %}
 
-    {% else %}
+                                        <option value="{{ serie_t }}" data-ano="{{ ano_t }}" style="display: none;">
+                                            {{ serie_t }}
+                                        </option>
+                                        {% endfor %}
+                                    </select>
+                                </td>
 
-      <a href="{{ url_for('rotasecretaria.pagina_suspender_aluno', id=d['id']) }}"
-        onclick="event.stopPropagation();"
-        class="btn-acao btn-suspender">
-        ❌ Suspender
-      </a>
+                                <td class="coluna-acoes">
+                                    <div class="acoes-aluno">
 
-      <button type="submit"
-        formaction="{{ url_for('rotasecretaria.desativar_matricula', id=d['id']) }}"
-        formmethod="POST"
-        onclick="event.stopPropagation(); return confirm('Deseja encerrar o acesso deste aluno?');"
-        class="btn-acao btn-encerrar">
-        🚫 Encerrar
-      </button>
+                                        {% if d['matricula_ativa'] == 0 %}
 
-    {% endif %}
+                                        <button type="submit"
+                                                formaction="{{ url_for('rotasecretaria.reativar_matricula', id=d['id']) }}"
+                                                formmethod="POST"
+                                                data-msg="Deseja reativar a matrícula deste aluno?"
+                                                class="btn-acao btn-reativar btn-confirmar">
+                                            ✅ Reativar
+                                        </button>
 
-  </div>
-</td>
-                </tr>
-                {% endif %}
-                {% endfor %}
-              </tbody>
-            </table>
-          </form>
+                                        {% elif d['suspenso'] %}
+
+                                        <button type="submit"
+                                                formaction="{{ url_for('rotasecretaria.remover_suspensao', id=d['id']) }}"
+                                                formmethod="POST"
+                                                data-msg="Deseja remover a suspensão deste aluno?"
+                                                class="btn-acao btn-remover btn-confirmar">
+                                            ✅ Remover
+                                        </button>
+
+                                        {% else %}
+
+                                        <a href="{{ url_for('rotasecretaria.pagina_suspender_aluno', id=d['id']) }}"
+                                           class="btn-acao btn-suspender parar-propagacao">
+                                            ❌ Suspender/Bloquear
+                                        </a>
+
+                                        <button type="submit"
+                                                formaction="{{ url_for('rotasecretaria.desativar_matricula', id=d['id']) }}"
+                                                formmethod="POST"
+                                                data-msg="Deseja encerrar o acesso deste aluno?"
+                                                class="btn-acao btn-encerrar btn-confirmar">
+                                            🚫 Encerrar acesso
+                                        </button>
+
+                                        {% endif %}
+
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endif %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </form>
+            </div>
         </div>
-      </div>
     </main>
 
-    <script>
-      const btn = document.querySelector('.menu-btn');
-      const sidebar = document.querySelector('.sidebar');
-
-      btn.addEventListener('click', () => sidebar.classList.toggle('ativo'));
-
-      function confirmarLogout(e) {
-        e.preventDefault();          // trava o link
-        e.stopPropagation();        // trava qualquer outro evento
-
-        if (confirm("Deseja realmente sair?")) {
-          window.location.href = "/Logout";
-        }
-
-        return false;
-      }
-
-      // ===== FECHAR MENU CLICANDO FORA + REDIRECIONAR P/ INÍCIO =====
-      document.addEventListener("click", (e) => {
-        const clicouFora = !sidebar.contains(e.target) && !btn.contains(e.target);
-
-        if (sidebar.classList.contains("ativo") && clicouFora) {
-          sidebar.classList.remove("ativo");
-        }
-      });
-    </script>
-
-    <script>
-      function atualizarSeries(selectAno) {
-        // 1. Achar a linha (tr) onde o clique aconteceu
-        const linha = selectAno.closest('tr');
-
-        // 2. Achar o select de série desta mesma linha
-        const selectSerie = linha.querySelector('.select-serie');
-        const anoSelecionado = selectAno.value;
-
-        // 3. Pegar todas as opções de série
-        const options = selectSerie.querySelectorAll('option');
-
-        let encontrou = false;
-
-        options.forEach(opt => {
-          // O "Atual" a gente sempre deixa ou remove se quiser resetar
-          if (opt.textContent.includes("(Atual)")) {
-            opt.style.display = "block";
-            return;
-          }
-
-          // Se o dado do ano bater com o selecionado, mostra
-          if (opt.getAttribute('data-ano') === anoSelecionado) {
-            opt.style.display = "block";
-            encontrou = true;
-          } else {
-            opt.style.display = "none";
-          }
-        });
-
-        // Resetar o valor do select de série para a primeira opção visível
-        selectSerie.value = selectSerie.querySelector('option[style*="display: block"]').value;
-      }
-    </script>
-
-    <div vw class="enabled">
-      <div vw-access-button class="active"></div>
-      <div vw-plugin-wrapper>
-        <div class="vw-plugin-top-wrapper"></div>
-      </div>
-    </div>
-    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-    <script>
-      new window.VLibras.Widget('https://vlibras.gov.br/app');
-    </script>
-
+    <script src="{{ url_for('static', filename='js/aluno.js') }}"></script>
 </body>
 
 </html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurar 2FA</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/configurar_2fa.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Autenticação em 2 Etapas</h2>
+        <p>Escaneie o QR Code abaixo usando seu aplicativo autenticador (Google Authenticator ou Microsoft Authenticator):</p>
+
+        <div class="qrcode-container">
+            <img src="{{ url_for('rotasecretaria.qrcode_route') }}" alt="QR Code 2FA">
+        </div>
+
+        <p>Se não puder ler o qr code, copie a chave abaixo:</p>
+        <div style="background: #eee; padding: 10px; font-family: monospace; margin-bottom: 10px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; gap: 10px; width: 100%; box-sizing: border-box;">
+            <span id="secretKey" style="word-break: break-all; font-size: 14px;">{{ usuario.otp_secret }}</span>
+            <button type="button" id="btnCopiar" style="background: #28a745; padding: 5px 15px; font-size: 14px; color: white; border: none; border-radius: 4px; cursor: pointer; flex-shrink: 0;">Copiar</button>
+
+        </div>
+
+        <p>Após escanear ou colar o código, digite o código de 6 dígitos gerado pelo app:</p>
+
+        <!-- Mensagens de Flash -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <ul class="flashes">
+            {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+
+        <form action="{{ url_for('rotasecretaria.ativar_2fa_post') }}" method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <div class="form-group">
+                <input type="text" name="codigo" placeholder="000000" maxlength="6" autocomplete="one-time-code" required autofocus>
+            </div>
+            <button type="submit" class="btn">Ativar e Entrar</button>
+        </form>
+    </div>
+    <script src="{{ url_for('static', filename='js/configurar_2fa.js') }}" defer></script>
+</body>
+</html>

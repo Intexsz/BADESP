@@ -2,170 +2,113 @@
 <html lang="pt-br">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>B.A.D.E.S.P - Turmas</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B.A.D.E.S.P - Turmas</title>
 
-  <link rel="stylesheet" href="{{ url_for('static', filename='pin.css') }}">
-  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icone.png') }}">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/pin.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/icone.png') }}">
+    <script src="{{ url_for('static', filename='js/turmas.js') }}" defer></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <header class="cabecalho glass">
-    <button class="menu-btn">
-      <span class="material-icons">menu</span>
-    </button>
-    <h1 class="titulo">B.A.D.E.S.P</h1>
-    <div class="perfil">
-        {% if usuario %}
-        <p>Bem vindo: {{ usuario['nome'] }}!</p>
-        {% elif usuario2 %}
-        <p>Bem vindo: {{ usuario2['nome'] }}!</p>
-        {% elif nome %}
-        <p>Bem vindo: {{ nome }}!</p>
-        {% else %}
-        <p>Bem vindo: Convidado!</p>
-        {% endif %}
-    </div>
-  </header>
-
-  <!-- SIDEBAR -->
-  <nav class="sidebar glass sobreposto">
-    <ul>
-      <li><a href="/Inicio"><span class="material-icons">home</span> Início</a></li>
-      <li><a href="/Ajuda"><span class="material-icons">help_outline</span> Ajuda</a></li>
-      <li><a href="/MudarPIN"><span class="material-icons">pin</span> Mudar PIN</a></li>
-      <li><a href="/Turmas"><span class="material-icons">groups</span> Turmas</a></li>
-      <li><a href="/Feedback"><span class="material-icons">campaign</span> Feedback</a></li>
-      <li>
-      <li><a href="/Logout" class="logout" onclick="confirmarLogout()"><span class="material-icons">logout</span>
-          Deslogar</a></li>
-      </li>
-    </ul>
-  </nav>
-
-  <!-- CONTEÚDO -->
-  <main>
-    <div class="container">
-      <h2>Gerenciar Turmas</h2>
-      <br>
-
-      <!-- FORM CADASTRO -->
-      <form method="POST" action="/Turmas" autocomplete="off">
-
-        <div class="input-container">
-          <input type="text" name="ano" placeholder="Ano" required maxlength="1" pattern="\d"
-            oninput="this.value = this.value.replace(/\D/g, '')">
-        </div>
-
-        <div class="input-container">
-          <input type="text" name="turma" placeholder="Sigla da Turma (ex: A, B, C...)" required maxlength="5"
-            style="text-transform: uppercase;">
-        </div>
-
-        <button type="submit" class="submit-button">
-          Confirmar
+    <!-- HEADER -->
+    <header class="cabecalho glass">
+        <button class="menu-btn">
+            <span class="material-icons">menu</span>
         </button>
-      </form>
+        <h1 class="titulo">B.A.D.E.S.P</h1>
+        <div class="perfil">
+            {% if usuario %}
+            <p>Bem vindo: {{ usuario['nome'] }}!</p>
+            {% elif usuario2 %}
+            <p>Bem vindo: {{ usuario2['nome'] }}!</p>
+            {% elif nome %}
+            <p>Bem vindo: {{ nome }}!</p>
+            {% else %}
+            <p>Bem vindo: Convidado!</p>
+            {% endif %}
+        </div>
+    </header>
 
-      <br><br>
+    <!-- SIDEBAR -->
+    <nav class="sidebar glass sobreposto">
+        <ul>
+            <li><a href="/Inicio"><span class="material-icons">home</span> Início</a></li>
+            <li><a href="/Ajuda"><span class="material-icons">help_outline</span> Ajuda</a></li>
+            <li><a href="/MudarPIN"><span class="material-icons">pin</span> Mudar PIN</a></li>
+            <li><a href="/Turmas"><span class="material-icons">groups</span> Turmas</a></li>
+            <li><a href="/Feedback"><span class="material-icons">campaign</span> Feedback</a></li>
+            <li>
+                <a href="/Logout" class="logout" id="btn-logout">
+                    <span class="material-icons">logout</span> Deslogar
+                </a>
+            </li>
+        </ul>
+    </nav>
 
-      <!-- LISTA -->
-      <h3>Turmas Atuais</h3>
-      <br>
+    <!-- CONTEÚDO -->
+    <main>
+        <div class="container">
+            <h2>Gerenciar Turmas</h2>
+            <br>
 
-      {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-      {% for categoria, mensagem in messages %}
-      <p style="color:red;">{{ mensagem }}</p>
-      <br>
-      {% endfor %}
-      {% endif %}
-      {% endwith %}
+            <!-- FORM CADASTRO -->
+            <form method="POST" action="/Turmas" autocomplete="off">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
-      {% if turmas %}
-      {% for turma in turmas %}
-      <div class="input-container" style="display:flex; justify-content:space-between; align-items:center;">
-        <span>{{ turma }}</span>
+                <div class="input-container">
+                    <input type="text" id="input-ano" name="ano" placeholder="Ano" required maxlength="1" pattern="\d">
+                </div>
 
-        <form action="/RemoverTurma" method="POST" style="margin:0;">
-          <input type="hidden" name="nome_turma_input" value="{{ turma }}">
-          <button type="submit" style="color:red; background:none; border:none; cursor:pointer;">
-            ❌ Remover
-          </button>
-        </form>
-      </div>
-      {% endfor %}
-      {% else %}
-      <p>Nenhuma turma cadastrada.</p>
-      {% endif %}
+                <div class="input-container">
+                    <input type="text" id="input-turma" name="turma" placeholder="Sigla da Turma (ex: A, B, C...)" required maxlength="5" style="text-transform: uppercase;">
+                </div>
 
-    </div>
-  </main>
+                <button type="submit" class="submit-button">
+                    Confirmar
+                </button>
+            </form>
 
-  <!-- JS -->
-  <script>
-    const btn = document.querySelector('.menu-btn');
-    const sidebar = document.querySelector('.sidebar');
-    const turmaInput = document.getElementById("turma");
+            <br><br>
 
-    turmaInput.addEventListener("input", function () {
-      this.value = this.value.toUpperCase();
-    });
+            <!-- LISTA -->
+            <h3>Turmas Atuais</h3>
+            <br>
 
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for categoria, mensagem in messages %}
+            <p style="color:white;">{{ mensagem }}</p>
+            <br>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
 
-    btn.addEventListener('click', () => sidebar.classList.toggle('ativo'));
+            {% if turmas %}
+            {% for turma in turmas %}
+            <div class="input-container" style="display:flex; justify-content:space-between; align-items:center;">
+                <span>{{ turma }}</span>
 
-    function confirmarLogout(e) {
-      e.preventDefault();
-      if (confirm("Deseja realmente sair?")) {
-        window.location.href = "/Logout";
-      }
-    }
+                <form action="/RemoverTurma" method="POST" style="margin:0;">
+                    <input type="hidden" name="nome_turma_input" value="{{ turma }}">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" style="color:black; font-size:15px; background:white; border:none; padding:5px; border-radius:10px; cursor:pointer;">
+                        <b>❌ Remover</b>
+                    </button>
+                </form>
+            </div>
+            {% endfor %}
+            {% else %}
+            <p>Nenhuma turma cadastrada.</p>
+            {% endif %}
 
-    document.addEventListener("click", (e) => {
-      if (!sidebar.contains(e.target) && !btn.contains(e.target)) {
-        sidebar.classList.remove("ativo");
-      }
-    });
-  </script>
+        </div>
+    </main>
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-
-    const btn = document.querySelector('.menu-btn');
-    const sidebar = document.querySelector('.sidebar');
-
-    if (btn && sidebar) {
-        btn.addEventListener('click', function () {
-            sidebar.classList.toggle('ativo');
-        });
-
-        document.addEventListener("click", function (e) {
-            if (!sidebar.contains(e.target) && !btn.contains(e.target)) {
-                sidebar.classList.remove("ativo");
-            }
-        });
-    }
-
-});
-</script>
-
-
-  <div vw class="enabled">
-    <div vw-access-button class="active"></div>
-    <div vw-plugin-wrapper>
-      <div class="vw-plugin-top-wrapper"></div>
-    </div>
-  </div>
-  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-  <script>
-    new window.VLibras.Widget('https://vlibras.gov.br/app');
-  </script>
 </body>
-
 </html>

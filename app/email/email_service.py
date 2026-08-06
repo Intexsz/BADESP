@@ -29,7 +29,6 @@ def enviar_email_simples(destinatario, assunto, corpo):
         return True
 
     except Exception as e:
-        print("[EMAIL] Erro ao enviar email:", e)
         return False
 
 
@@ -60,9 +59,6 @@ Sua conta foi suspensa no sistema B.A.D.E.S.P.
 
 Motivo:
 {aluno["motivo_suspensao"]}
-
-Quem suspendeu:
-{aluno["suspenso_por_nome"]}
 
 Horário da suspensão:
 {formatar_data(aluno["data_suspensao"])}

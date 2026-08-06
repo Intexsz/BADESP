@@ -10,6 +10,7 @@ db_pool = pooling.MySQLConnectionPool(
     pool_reset_session=True,
 
     port=21948,
+    #port=3306,
     host=os.getenv("DB_HOST"),
     user=os.getenv("DB_USER"),
     password=os.getenv("DB_PASSWORD"),
@@ -24,7 +25,6 @@ def get_conn():
     try:
         return db_pool.get_connection()
     except Error as e:
-        print("[DB] Erro ao pegar conexão:", e)
         raise
 
 def create_team(nome_turma):

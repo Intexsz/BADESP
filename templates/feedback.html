@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icone.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/icone.png') }}">
     <title>B.A.D.E.S.P - Feedback</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='pin.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/pin.css') }}">
+    <script src="{{ url_for('static', filename='js/feedback.js') }}" defer></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
@@ -34,7 +35,7 @@
         <ul>
             <li><a href="/Inicio"><span class="material-icons">home</span> Início</a></li>
             <li><a href="/Ajuda"><span class="material-icons">help_outline</span> Ajuda</a></li>
-            {% if cargo == 'Aluno' %}
+            {% if cargo == 'Aluno' or cargo == 'Admin' %}
             <style>
                 body {
                     background: linear-gradient(90deg, #242458, #3e3e74);
@@ -55,6 +56,9 @@
             <li><a href="/Turmas"><span class="material-icons">groups</span> Turmas</a></li>
             {% endif %}
             <li><a href="/Feedback"><span class="material-icons">campaign</span> Feedback</a></li>
+            {% if usuario['cargo'] == 'Admin' %}
+            <li><a href="/Feedback/Admin"><span class="material-icons">campaign</span> Ver Feedbacks</a></li>
+            {% endif %}
             <li>
                 <a href="/Logout" class="logout" onclick="confirmarLogout(event)">
                     <span class="material-icons">logout</span>
@@ -98,7 +102,7 @@
             <br>
 
             <form method="POST" id="feedback-form" autocomplete="off">
-
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <div class="input-container">
                     <input type="text" name="titulo" id="titulo"
                            placeholder="Título do Feedback"
@@ -128,52 +132,5 @@
         </div>
     </main>
     {% endif %}
-
-    <script>
-        const btn = document.querySelector('.menu-btn');
-        const sidebar = document.querySelector('.sidebar');
-
-        btn.addEventListener('click', () => sidebar.classList.toggle('ativo'));
-
-        function confirmarLogout(e) {
-            e.preventDefault();
-            if (confirm("Deseja realmente sair?")) {
-                window.location.href = "/Logout";
-            }
-        }
-
-        document.addEventListener("click", (e) => {
-            if (!sidebar.contains(e.target) && !btn.contains(e.target)) {
-                sidebar.classList.remove("ativo");
-            }
-        });
-
-        document.getElementById("feedback-form").addEventListener("submit", function (e) {
-            const titulo = document.getElementById("titulo").value.trim();
-            const feedback = document.getElementById("feedback").value.trim();
-
-            if (titulo.length < 3) {
-                alert("Título muito curto.");
-                e.preventDefault();
-            }
-
-            if (feedback.length < 10) {
-                alert("Feedback muito curto.");
-                e.preventDefault();
-            }
-        });
-    </script>
-
-    <div vw class="enabled">
-        <div vw-access-button class="active"></div>
-        <div vw-plugin-wrapper>
-            <div class="vw-plugin-top-wrapper"></div>
-        </div>
-    </div>
-    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-    <script>
-        new window.VLibras.Widget('https://vlibras.gov.br/app');
-    </script>
-
 </body>
 </html>

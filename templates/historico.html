@@ -2,273 +2,182 @@
 <html lang="pt-br">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>B.A.D.E.S.P - Lista de Denúncias</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='historico.css') }}">
-  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icone.png') }}">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=pin" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=groups" />
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>B.A.D.E.S.P - Lista de Denúncias</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/historico.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/icone.png') }}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=pin" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=groups" />
 </head>
 
-<body>
+<body data-total-pages="{{ total_pages if total_pages is defined else 1 }}">
 
-  <header class="cabecalho glass">
-    <button class="menu-btn"><span class="material-icons">menu</span></button>
-    <h1 class="titulo">B.A.D.E.S.P</h1>
-    <div class="perfil">
-        {% if usuario %}
-        <p>Bem vindo: {{ usuario['nome'] }}!</p>
-        {% elif usuario2 %}
-        <p>Bem vindo: {{ usuario2['nome'] }}!</p>
-        {% elif nome %}
-        <p>Bem vindo: {{ nome }}!</p>
-        {% else %}
-        <p>Bem vindo: Convidado!</p>
-        {% endif %}
-    </div>
-  </header>
-
-  <nav class="sidebar glass sobreposto">
-    <ul>
-      <li><a href="/Inicio"><span class="material-icons">home</span> Início</a></li>
-      <li><a href="/Ajuda"><span class="material-icons">help_outline</span> Ajuda</a></li>
-      <li><a href="/MudarPIN"><span class="material-icons">pin</span> Mudar PIN</a></li>
-      <li><a href="/Turmas"><span class="material-icons">groups</span> Turmas</a></li>
-      <li><a href="/Feedback"><span class="material-icons">campaign</span> Feedback</a></li>
-
-      <li><a class="logout" onclick="confirmarLogout(event)"><span class="material-icons">logout</span>
-          Deslogar</a></li>
-    </ul>
-  </nav>
-
-  {% if tipo == 'Resolvidas' %}
-  <form method="get" action="{{ url_for('rotas.Resolvidas') }}">
-    <select name="filtro" onchange="this.form.submit()">
-      <option value="Tudo" {% if filtro=="Tudo" %}selected{% endif %}>Tudo</option>
-      <option value="Aprovado" {% if filtro=="Aprovado" %}selected{% endif %}>Aprovado</option>
-      <option value="Recusado" {% if filtro=="Recusado" %}selected{% endif %}>Recusado</option>
-      <option value="Arquivado" {% if filtro=="Arquivado" %}selected{% endif %}>Arquivado</option>
-    </select>
-  </form>
-  {% endif %}
-
-  <div class="main-content">
-
-    <div class="container">
-      <h1 class="page-title">Denuncias {{ tipo }}</h1>
-
-      <table class="denuncias-table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Ano e Série</th>
-            <th>Título</th>
-            <th>Tipo</th>
-            <th>Gravidade</th>
-            <th>Data</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-
-
-        <tbody>
-          {% for d in reports %}
-          {% set cor = "white" %}
-          {% set nome = "📂Denúncia em aberto 📂" %}
-
-          {% if d['status'] == 'Aprovado.' %}
-          {% set cor = "rgb(0, 200, 0)" %}
-          {% set nome = "✔️Aprovado por " ~ d['visto'] ~ " ✔️" %}
-          {% elif d['status'] == 'Recusado.' %}
-          {% set cor = "red" %}
-          {% set nome = "❌Recusado por " ~ d['visto'] ~ " ❌" %}
-          {% elif d['status'] == 'Arquivado.' %}
-          {% set cor = "gray" %}
-          {% set nome = "🗃️Arquivado por " ~ d['visto'] ~ " 🗃️" %}
-          {% elif d['status'] == 'Visto.' %}
-          {% set cor = "rgb(255, 150, 0)" %}
-          {% set nome = "🔎Visualizado por " ~ d['visto'] ~ " às " ~ d['datavisto'] ~ " 🔎" %}
-          {% endif %}
-
-          {% if d['gravidade'] == 'Alta' %}
-          {% set corr = "red" %}
-          {% elif d['gravidade'] == 'Média' %}
-          {% set corr = "rgb(255, 170, 0)" %}
-          {% elif d['gravidade'] == 'Baixa' %}
-          {% set corr = "rgb(0, 255, 0)" %}
-          {% else %}
-          {% set corr = "gray" %}
-          {% endif %}
-
-          {% if nome != "📂Denúncia em aberto📂" %}
-          <tr onclick="verificarPin({{ d['id'] }})"
-            style="cursor:pointer; color: {{ cor }}; font-family: Arial, sans-serif;">
-
-
-            <td>{{ d['id'] }}</td>
-            <td>{{ d['nome'].split(' ')[0]}}
-              {% if not d['nome'].split(' ')[0] == d['nome'].split(' ')[-1] %}
-              {{d['nome'].split(' ')[-1]}}
-              {% endif %}</td>
-            <td>{{ d['ano'] }}°{{ d['turma'] }}</td>
-            <td>{{ d['titulo'] }}</td>
-            <td>{{ d['tipo'] }}</td>
-            <td style="color: {{ corr }};"><b>{{ d['gravidade'] }}</b></td>
-            <td>{{ d['data'] }}</td>
-            {% set partes = nome.split(' ') %}
-            {% if not tipo == 'Abertas' %}
-            <td>
-              {{ partes[0] }} {{ partes[1] }} {{ partes[2] }}
-              {{ partes[-2] }}{{ partes[-1] }}
-            </td>
+    <header class="cabecalho glass">
+        <button class="menu-btn"><span class="material-icons">menu</span></button>
+        <h1 class="titulo">B.A.D.E.S.P</h1>
+        <div class="perfil">
+            {% if usuario %}
+            <p>Bem vindo: {{ usuario['nome'] }}!</p>
+            {% elif usuario2 %}
+            <p>Bem vindo: {{ usuario2['nome'] }}!</p>
+            {% elif nome %}
+            <p>Bem vindo: {{ nome }}!</p>
             {% else %}
-            <td>
-              {{ partes[0] }} {{ partes[1] }} {{ partes[2] }}
-              {{ partes[-5] }}{{ partes[-1] }}
-              {% endif %}
-            </td>
-          </tr>
-          {% endif %}
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
-  </div>
+            <p>Bem vindo: Convidado!</p>
+            {% endif %}
+        </div>
+    </header>
 
-  <main>
-    {% if tipo == 'Abertas' %}
-    <div class="pagination">
-      {% set current_page = page %}
-      {% if current_page < 1 %}{% set current_page=1 %} {% elif current_page> total_pages %}{% set current_page =
-        total_pages %}{% endif %}
+    <nav class="sidebar glass sobreposto">
+        <ul>
+            <li><a href="/Inicio"><span class="material-icons">home</span> Início</a></li>
+            <li><a href="/Ajuda"><span class="material-icons">help_outline</span> Ajuda</a></li>
+            <li><a href="/MudarPIN"><span class="material-icons">pin</span> Mudar PIN</a></li>
+            <li><a href="/Turmas"><span class="material-icons">groups</span> Turmas</a></li>
+            <li><a href="/Feedback"><span class="material-icons">campaign</span> Feedback</a></li>
 
-        {% if current_page > 1 %}
-        <a class="clicar" href="{{ url_for('rotas.abertas', page=current_page-1) }}">&laquo; Anterior</a>
-        {% endif %}
+            <li><a class="logout" id="linkLogout"><span class="material-icons">logout</span> Deslogar</a></li>
+        </ul>
+    </nav>
 
-        <span style="color: white; " class="Páginaa">Página {{ current_page }} de {{ total_pages }}</span>
-
-        {% if current_page < total_pages %} <a class="clicar"
-          href="{{ url_for('rotas.abertas', page=current_page+1) }}">Próxima &raquo;</a>
-          {% endif %}
-    </div>
-
-    {% elif tipo == 'Resolvidas' %}
-    <div class="pagination">
-      {% set current_page = page %}
-      {% if current_page < 1 %}{% set current_page=1 %} {% elif current_page> total_pages %}{% set current_page =
-        total_pages %}{% endif %}
-
-        {% if current_page > 1 %}
-        <a class="clicar" href="{{ url_for('rotas.Resolvidas', page=current_page-1) }}">&laquo; Anterior</a>
-        {% endif %}
-
-        <span style="color: white;" class="Páginaa">Página {{ current_page }} de {{ total_pages }}</span>
-
-        {% if current_page < total_pages %} <a class="clicar"
-          href="{{ url_for('rotas.Resolvidas', page=current_page+1) }}">Próxima &raquo;</a>
-          {% endif %}
-    </div>
+    {% if tipo == 'Resolvidas' %}
+    <form method="get" action="{{ url_for('rotas.Resolvidas') }}" id="formFiltro">
+        <select name="filtro" id="selectFiltro">
+            <option value="Tudo" {% if filtro=="Tudo" %}selected{% endif %}>Tudo</option>
+            <option value="Aprovado" {% if filtro=="Aprovado" %}selected{% endif %}>Aprovado</option>
+            <option value="Recusado" {% if filtro=="Recusado" %}selected{% endif %}>Recusado</option>
+            <option value="Arquivado" {% if filtro=="Arquivado" %}selected{% endif %}>Arquivado</option>
+        </select>
+    </form>
     {% endif %}
 
-  </main>
+    <div class="main-content">
 
-  <script>
-    const totalPages = {{ total_pages }};  // passado do Flask
-    const url = new URL(window.location.href);
-    let page = parseInt(url.searchParams.get('page')) || 1;
+        <div class="container">
+            <h1 class="page-title">Denuncias {{ tipo }}</h1>
 
-    if (page < 1) page = 1;
-    else if (page > totalPages) page = totalPages;
+            <table class="denuncias-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Ano e Série</th>
+                        <th>Título</th>
+                        <th>Tipo</th>
+                        <th>Gravidade</th>
+                        <th>Data</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
 
-    if (parseInt(url.searchParams.get('page')) !== page) {
-      url.searchParams.set('page', page);
-      window.location.replace(url); // redireciona para a URL corrigida
-    }
-  </script>
-  <script>
-    // Toggle menu lateral
+                <tbody>
+                    {% for d in reports %}
+                    {% set cor = "white" %}
+                    {% set nome = "📂Denúncia em aberto 📂" %}
 
-    function confirmarLogout(e) {
-      e.preventDefault();          // trava o link
-      e.stopPropagation();        // trava qualquer outro evento
+                    {% if d['status'] == 'Aprovado.' %}
+                    {% set cor = "rgb(0, 200, 0)" %}
+                    {% set nome = "✔️Aprovado por " ~ d['visto'] ~ " ✔️" %}
+                    {% elif d['status'] == 'Recusado.' %}
+                    {% set cor = "red" %}
+                    {% set nome = "❌Recusado por " ~ d['visto'] ~ " ❌" %}
+                    {% elif d['status'] == 'Arquivado.' %}
+                    {% set cor = "gray" %}
+                    {% set nome = "🗃️Arquivado por " ~ d['visto'] ~ " 🗃️" %}
+                    {% elif d['status'] == 'Visto.' %}
+                    {% set cor = "rgb(255, 150, 0)" %}
+                    {% set nome = "🔎Visualizado por " ~ d['visto'] ~ " às " ~ d['datavisto'] ~ " 🔎" %}
+                    {% elif d['status'] == 'Em Análise.' %}
+                    {% set cor = "rgb(255, 150, 0)" %}
+                    {% set nome = "📂Denúncia em aberto 📂" %}
+                    {% endif %}
 
-      if (confirm("Deseja realmente sair?")) {
-        window.location.href = "/Logout";
-      }
+                    {% if d['gravidade'] == 'Alta' %}
+                    {% set corr = "red" %}
+                    {% elif d['gravidade'] == 'Média' %}
+                    {% set corr = "rgb(255, 170, 0)" %}
+                    {% elif d['gravidade'] == 'Baixa' %}
+                    {% set corr = "rgb(0, 255, 0)" %}
+                    {% else %}
+                    {% set corr = "gray" %}
+                    {% endif %}
 
-      return false;
-    }
+                    {% if nome != "📂Denúncia em aberto📂" %}
+                    <!-- data-id mapeia dinamicamente os cliques para verificação -->
+                    <tr class="linha-denuncia" data-id="{{ d['id'] }}" style="cursor:pointer; color: {{ cor }}; font-family: Arial, sans-serif;">
 
-    function confirmarAbrir() {
-      return confirm("Você tem certeza que deseja abrir? Após aberto não poderá mais ser deletado e o usuario SABERÁ que foi você quem abriu");
-    }
-
-    function toggleProfileMenu() {
-      var menu = document.getElementById("profile-menu");
-      menu.classList.toggle("show");
-    }
-
-  </script>
-
-  <script>
-    async function verificarPin(denunciaId) {
-
-          const form = document.createElement("form");
-          form.method = "POST";
-          form.action = `/allow_detail`;
-          document.body.appendChild(form);
-
-          const inputIdzin = document.createElement("input");
-          inputIdzin.type = "hidden";
-          inputIdzin.name = "idzin";
-          inputIdzin.value = denunciaId
-          form.appendChild(inputIdzin);
-          document.body.appendChild(form);
-          form.submit();
-    }
-  </script>
-
-  <script>
-    const btn = document.querySelector('.menu-btn');
-    const sidebar = document.querySelector('.sidebar');
-
-    btn.addEventListener('click', () => sidebar.classList.toggle('ativo'));
-
-    function confirmarLogout() {
-      if (confirm("Deseja realmente sair?")) {
-        window.location.href = "Logout"
-        alert("Logout realizado com sucesso!");
-      }
-    }
-
-    // ===== FECHAR MENU CLICANDO FORA + REDIRECIONAR P/ INÍCIO =====
-    document.addEventListener("click", (e) => {
-      const clicouFora = !sidebar.contains(e.target) && !btn.contains(e.target);
-
-      if (sidebar.classList.contains("ativo") && clicouFora) {
-        sidebar.classList.remove("ativo");
-      }
-    });
-  </script>
-
-    <div vw class="enabled">
-    <div vw-access-button class="active"></div>
-    <div vw-plugin-wrapper>
-      <div class="vw-plugin-top-wrapper"></div>
+                        <td>{{ d['id'] }}</td>
+                        <td>
+                            {{ d['nome'].split(' ')[0]}}
+                            {% if not d['nome'].split(' ')[0] == d['nome'].split(' ')[-1] %}
+                            {{d['nome'].split(' ')[-1]}}
+                            {% endif %}
+                        </td>
+                        <td>{{ d['ano'] }}°{{ d['turma'] }}</td>
+                        <td>{{ d['titulo'] }}</td>
+                        <td>{{ d['tipo'] }}</td>
+                        <td style="color: {{ corr }};"><b>{{ d['gravidade'] }}</b></td>
+                        <td>{{ d['data'] }}</td>
+                        {% set partes = nome.split(' ') %}
+                        {% if not tipo == 'Abertas' %}
+                        <td>
+                            {{ partes[0] }} {{ partes[1] }} {{ partes[2] }}
+                            {{ partes[-2] }}{{ partes[-1] }}
+                        </td>
+                        {% else %}
+                        <td>
+                            {{ partes[0] }} {{ partes[1] }} {{ partes[2] }}
+                            {{ partes[-5] }}{{ partes[-1] }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
-  </div>
-  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-  <script>
-    new window.VLibras.Widget('https://vlibras.gov.br/app');
-  </script>
-  
+
+    <main>
+        {% if tipo == 'Abertas' %}
+        <div class="pagination">
+            {% set current_page = page %}
+            {% if current_page < 1 %}{% set current_page=1 %} {% elif current_page> total_pages %}{% set current_page = total_pages %}{% endif %}
+
+            {% if current_page > 1 %}
+            <a class="clicar" href="{{ url_for('rotas.abertas', page=current_page-1) }}">&laquo; Anterior</a>
+            {% endif %}
+
+            <span style="color: white; " class="Páginaa">Página {{ current_page }} de {{ total_pages }}</span>
+
+            {% if current_page < total_pages %} <a class="clicar" href="{{ url_for('rotas.abertas', page=current_page+1) }}">Próxima &raquo;</a>
+            {% endif %}
+        </div>
+
+        {% elif tipo == 'Resolvidas' %}
+        <div class="pagination">
+            {% set current_page = page %}
+            {% if current_page < 1 %}{% set current_page=1 %} {% elif current_page> total_pages %}{% set current_page = total_pages %}{% endif %}
+
+            {% if current_page > 1 %}
+            <a class="clicar" href="{{ url_for('rotas.Resolvidas', page=current_page-1) }}">&laquo; Anterior</a>
+            {% endif %}
+
+            <span style="color: white;" class="Páginaa">Página {{ current_page }} de {{ total_pages }}</span>
+
+            {% if current_page < total_pages %} <a class="clicar" href="{{ url_for('rotas.Resolvidas', page=current_page+1) }}">Próxima &raquo;</a>
+            {% endif %}
+        </div>
+        {% endif %}
+    </main>
+
+    <!-- Script externo limpo que obedece à CSP -->
+    <script src="{{ url_for('static', filename='js/historico.js') }}" defer></script>
 </body>
 
 </html>

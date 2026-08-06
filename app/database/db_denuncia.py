@@ -1,4 +1,6 @@
 import re
+import json
+from flask import redirect,url_for, flash
 from datetime import datetime, timedelta, timezone
 from app.database.db_usuario import buscar_usuario, pegar_no_nome
 from openai import OpenAI
@@ -31,72 +33,128 @@ def envio_email(destinario, tipo, debug):
     server.quit()
 ######----------######
 
-client = OpenAI(api_key=os.getenv("GPT_API"))
-
+client = OpenAI(
+    api_key=os.getenv("GPT_API"),
+    timeout=7.0
+)
 def IA(frase):
-    response = client.responses.create(
-    model="gpt-4o-mini",
-    input=[
-        {
-            "role": "system",
-            "content": (
-                "Reforme e resuma a frase para que fique mais formal e profissional, "
-                "independentemente do contexto, e avalie qual o tipo de gravidade: "
-                "Baixa, Média ou Alta. "
-                "Responda exatamente neste formato:\n\n"
-                "Frase reformulada: <frase>\n"
-                "Tipo de gravidade: <gravidade>"
-            )
-        },
-        {"role": "user", "content": frase}
-    ])
-    texto_resposta = response.output[0].content[0].text.strip()
-    return texto_resposta
+    frase_sanitizada = frase[:1200] if frase else ""
+    try:
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {
+                    "role": "system",
+                    "content": (
+                        "Você é um assistente de moderação escolar. "
+                        "Reforme a frase fornecida para torna-la formal, concisa e profissional. "
+                        "Classifique a gravidade estritamente como 'Baixa', 'Média' ou 'Alta'."
+                    )
+                },
+                {"role": "user", "content": frase_sanitizada}
+            ],
+            response_format={
+                "type": "json_schema",
+                "json_schema": {
+                    "name": "analise_denuncia",
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "frase_reformulada": {"type": "string"},
+                            "gravidade": {
+                                "type": "string",
+                                "enum": ["Baixa", "Média", "Alta"]
+                            }
+                        },
+                        "required": ["frase_reformulada", "gravidade"],
+                        "additionalProperties": False
+                    }
+                }
+            },
+            max_tokens=250,
+            temperature=0.2
+        )
+
+        conteudo = response.choices[0].message.content
+        dados = json.loads(conteudo)
+
+        return {
+            "descricao_ia": dados.get("frase_reformulada", "").strip(),
+            "gravidade": dados.get("gravidade", "Desconhecido")
+        }
+
+    except Exception as error:
+        print(f"[LOG ERRO IA]: {error}")
+        return {
+            "descricao_ia": "❌ Não foi possível gerar a análise automática no momento. ❌",
+            "gravidade": "Desconhecido"
+        }
 
 # aqui ira criar a denuncia
 def create_report(titulo, tipo, descricao, user_id, status, cargo, especifico, envolvidos):
+    campos_obrigatorios = [titulo, tipo, descricao, user_id, status, cargo]
+    
+    if any(c is None for c in campos_obrigatorios) or not all(str(c).strip() for c in campos_obrigatorios):
+        flash("Erro ao fazer denúncia. Preencha todos os campos obrigatórios.", "error")
+        return redirect(url_for("rotas.inicio"))
+
+    usuario = buscar_usuario(user_id)
+    if not usuario:
+        flash("Usuário não encontrado. Faça login novamente.", "error")
+        return redirect(url_for("login.login"))
+
     data_utc = datetime.now(timezone.utc)
     data = data_utc.strftime("%H:%M %d/%m/%Y")
+
+    try:
+        resultado_ia = IA(descricao)
+        descricao_ia = resultado_ia.get("descricao_ia", "Análise indisponível.")
+        gravidade = resultado_ia.get("gravidade", "Desconhecido")
+    except Exception as error:
+        print(f"[ERRO IA]: {error}")
+        descricao_ia = "❌ Não foi possível gerar a análise automática no momento. ❌"
+        gravidade = "Desconhecido"
+
     conn = get_conn_denuncia()
     cursor = conn.cursor(dictionary=True)
 
-    usuario = buscar_usuario(user_id)
-
     try:
-        texto_resposta = IA(descricao)
-        match = re.search(
-        r"Frase reformulada[:\-–]?\s*[\"']?(.*?)[\"']?\s*(?:\.|\n|$).*?Tipo de gravidade[:\-–]?\s*[\"']?(Baixa|M[eé]dia|Alta)[\"']?",
-        texto_resposta,
-        re.IGNORECASE | re.DOTALL)
-    
-        if match:
-            descricao_ia = match.group(1).strip()
-            gravidade = match.group(2).capitalize()
-        else:
-            descricao_ia = f"❌Erro na IA.❌ \n\n {texto_resposta}"
-            gravidade = 'Desconhecido'
+        cursor.execute("""
+            INSERT INTO denuncias
+            (titulo, tipo, descricao, data, user_id, status, nome, visto, comentario, cargo,
+             especifico, descricao_ia, gravidade, turma, ano, envolvidos, escola)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, 'Ninguém', '', %s, %s, %s, %s, %s, %s, %s, %s)
+        """, (
+            titulo.strip(),
+            tipo.strip(),
+            descricao.strip(),
+            data,
+            user_id,
+            status.strip(),
+            usuario.get("nome", ""),
+            cargo.strip(),
+            especifico.strip(),
+            descricao_ia,
+            gravidade,
+            usuario.get("turma", ""),
+            usuario.get("ano", ""),
+            envolvidos.strip() if envolvidos else "",
+            usuario.get("escola", "")
+        ))
 
-    except Exception as error:
-        descricao_ia = f"❌Erro na IA.❌"
-        gravidade = 'Desconhecido'
-        # envio_email('00001103203009sp@al.educacao.sp.gov.br', 'Erro', error)
-        # envio_email('zamproniomatheus4', 'Erro', error)
+        conn.commit()
+        flash("Denúncia enviada com sucesso!", "success")
 
-    cursor.execute("""
-        INSERT INTO denuncias
-        (titulo, tipo, descricao, data, user_id, status, nome, visto, comentario, cargo,
-         especifico, descricao_ia, gravidade, turma, ano, envolvidos, escola)
-        VALUES (%s,%s,%s,%s,%s,%s,%s,'Ninguém','',%s,%s,%s,%s,%s,%s,%s,%s)
-    """, (
-        titulo, tipo, descricao, data, user_id, status,
-        usuario["nome"], cargo, especifico,
-        descricao_ia, gravidade, usuario["turma"], usuario["ano"], envolvidos, usuario["escola"]
-    ))
+    except Exception as db_error:
+        conn.rollback()
+        print(f"[ERRO BANCO DE DADOS]: {db_error}")
+        flash("Ocorreu um erro interno ao salvar sua denúncia. Tente novamente.", "error")
 
-    conn.commit()
-    cursor.close()
-    conn.close()
+    finally:
+        cursor.close()
+        conn.close()
 
+    return redirect(url_for("rotas.inicio"))
 
 # aqui vai pegar as denuncias e retornar
 def show_reports(user_id, cargo, tipo):
@@ -147,7 +205,7 @@ def show_reports(user_id, cargo, tipo):
                 cursor.execute('''
             SELECT id, titulo, tipo, descricao, data, status, nome, visto, cargo, comentario, datavisto, especifico, descricao_ia, gravidade, turma, ano, escola
             FROM denuncias
-            WHERE status = 'Visto.'
+            WHERE status IN ('Em Análise.', 'Visto.')
               AND (cargo = 'Secretaria' OR cargo = 'Ambos')
               AND especifico IN (%s, 'any')
               AND escola = %s
@@ -159,7 +217,7 @@ def show_reports(user_id, cargo, tipo):
                 cursor.execute('''
             SELECT id, titulo, tipo, descricao, data, status, nome, visto, cargo, comentario, datavisto, especifico, descricao_ia, gravidade, turma, ano, escola
             FROM denuncias
-            WHERE status = 'Visto.'
+            WHERE status IN ('Em Análise.', 'Visto.')
               AND (cargo = 'Professor' OR cargo = 'Ambos')
               AND especifico IN (%s, 'any')
               AND escola = %s
@@ -311,12 +369,15 @@ def check_reports(user_id):
     r = cursor.fetchone()
     conn.close()
 
+    
     if not r:
         return True
-
-    ultima = datetime.strptime(r["data"], "%H:%M %d/%m/%Y")
-    #return datetime.now() > ultima + timedelta(minutes=5)
-    return True
+    # Se for desenvolvimento ele ja retorna true se não ele retorna os 5 minutos de cada denuncia
+    if os.getenv("FLASK_DEBUG") == "1":
+        return True
+    else:
+        ultima = datetime.strptime(r["data"], "%H:%M %d/%m/%Y")
+        return datetime.now() > ultima + timedelta(minutes=5)
 
 ######----------######
 
@@ -524,4 +585,83 @@ def checar_envolvidos(id_denuncia):
 
     return [x.strip() for x in r["envolvidos"].split(",")]
 
-        
+
+def contar_denuncias_abertas(escola):
+    conn = None
+    cursor = None
+
+    try:
+        conn = get_conn_denuncia()
+        cursor = conn.cursor(dictionary=True)
+
+        cursor.execute("""
+            SELECT COUNT(*) as total 
+            FROM denuncias 
+            WHERE status = 'Visto.' AND escola = %s
+        """, (escola,))
+
+        resultado = cursor.fetchone()
+        return resultado['total'] if resultado else 0
+
+    except Exception:
+        return 0
+
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
+
+
+def contar_denuncias_novas(escola):
+    conn = None
+    cursor = None
+
+    try:
+        conn = get_conn_denuncia()
+        cursor = conn.cursor(dictionary=True)
+
+        cursor.execute("""
+            SELECT COUNT(*) as total 
+            FROM denuncias 
+            WHERE status = 'Em Análise.' AND escola = %s
+        """, (escola,))
+
+        resultado = cursor.fetchone()
+        return resultado['total'] if resultado else 0
+
+    except Exception:
+        return 0
+
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
+
+
+def contar_denuncias_resolvidas(escola):
+    conn = None
+    cursor = None
+
+    try:
+        conn = get_conn_denuncia()
+        cursor = conn.cursor(dictionary=True)
+
+        cursor.execute("""
+            SELECT COUNT(*) as total 
+            FROM denuncias 
+            WHERE (status = 'Aprovado.' OR status = 'Arquivado.' OR status = 'Recusado.') AND escola = %s
+        """, (escola,))
+
+        resultado = cursor.fetchone()
+        return resultado['total'] if resultado else 0
+
+    except Exception:
+        return 0
+
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()

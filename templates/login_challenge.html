@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificação em 2 Etapas - Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/configurar_2fa.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Verificação em 2 Etapas</h2>
+        <p>Digite o código de 6 dígitos gerado pelo seu aplicativo autenticador para continuar:</p>
+
+        <!-- Mensagens de Flash (Erros de validação) -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <ul class="flashes">
+            {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+
+        <form action="{{ url_for('rotasecretaria.login_challenge') }}" method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <div class="form-group">
+                <input type="text" name="code" placeholder="000000" maxlength="6" autocomplete="one-time-code" required autofocus>
+            </div>
+            <button type="submit" class="btn">Verificar e Entrar</button>
+        </form>
+
+        <div style="margin-top: 20px; text-align: center;">
+            <p style="font-size: 14px; color: #666;">
+                Perdeu o acesso ao seu aplicativo? 
+                <a href="{{ url_for('rotasecretaria.reconfigurar_2fa') }}" style="color: #28a745; text-decoration: none; font-weight: bold;">Reconfigurar 2FA</a>
+            </p>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/configurar_2fa.js') }}" defer></script>
+</body>
+</html>
